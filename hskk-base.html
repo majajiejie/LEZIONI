@@ -1,0 +1,247 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HSKK Base con Maja Jiejie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;600&family=Figtree:wght@400;600;700&display=swap">
+<style>
+/* Layout: un "foglio d'esame" centrale, schede per le 3 parti, ogni frase è una riga da ascoltare-ripetere-verificare */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --fg:#1D2421; --muted:#5E6A64; --line:#DCE2DD;
+  --seal:#B8382A; --seal-soft:#F6E3DF; --jade:#2F7A63; --jade-soft:#DFF0E9;
+  --hanzi:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --brush:"Ma Shan Zheng","KaiTi","STKaiti",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A18; --surface:#1E2522; --fg:#E8EDEA; --muted:#9AA8A1; --line:#2F3934;
+  --seal:#E2705F; --seal-soft:#3A2420; --jade:#6CC3A5; --jade-soft:#1C3329; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151A18; --surface:#1E2522; --fg:#E8EDEA; --muted:#9AA8A1; --line:#2F3934;
+  --seal:#E2705F; --seal-soft:#3A2420; --jade:#6CC3A5; --jade-soft:#1C3329; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.seal{flex:none;width:68px;height:68px;border-radius:10px;background:var(--seal);color:#fff;display:grid;place-items:center;font-family:var(--brush);font-size:38px;line-height:1;transform:rotate(-4deg)}
+header h1{margin:0;font-size:1.75rem;line-height:1.15;text-wrap:balance}
+header p{margin:2px 0 0;color:var(--muted)}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--seal);font-weight:700}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 18px;border-bottom:1px solid var(--line)}
+nav button{font:inherit;font-weight:600;border:0;background:none;color:var(--muted);padding:10px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav button[aria-selected="true"]{color:var(--fg);border-color:var(--seal)}
+nav button:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.zh{font-family:var(--hanzi)}
+h2{font-size:1.3rem;margin:0 0 4px}
+.lead{color:var(--muted);margin:0 0 18px;max-width:65ch}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-size:.9rem;color:var(--muted)}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;background:var(--jade-soft);color:var(--jade);font-weight:600;font-size:.85rem;font-variant-numeric:tabular-nums}
+.list{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.item.done{border-color:var(--jade)}
+.num{grid-row:span 3;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;min-width:1.6em}
+.item .ctrl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.btn.play{background:var(--seal);border-color:var(--seal);color:#fff}
+.btn.ok[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.reveal{min-width:0}
+.reveal .h{font-family:var(--hanzi);font-size:1.35rem;line-height:1.4}
+.reveal .py{color:var(--jade);font-size:.95rem}
+.reveal .it{color:var(--muted);font-size:.9rem}
+.model{margin-top:6px;padding:8px 12px;border-radius:8px;background:var(--jade-soft)}
+.hidden-text{filter:blur(6px);user-select:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.timer{font-variant-numeric:tabular-nums;font-size:2.6rem;font-weight:700;line-height:1}
+.timer.prep{color:var(--muted)} .timer.speak{color:var(--seal)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:10px 0 14px}
+.bar i{display:block;height:100%;background:var(--seal);width:0;transition:width .3s linear}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.phr{display:flex;flex-wrap:wrap;gap:8px}
+.phr button{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 10px;cursor:pointer;text-align:left}
+.phr button small{display:block;color:var(--muted);font-size:.78rem}
+.note{font-size:.85rem;color:var(--muted)}
+.warn{background:var(--seal-soft);color:var(--fg);padding:8px 12px;border-radius:8px;font-size:.88rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="seal" aria-hidden="true">说</div>
+    <div>
+      <div class="eyebrow">HSKK 初级 · Livello base</div>
+      <h1>Esame orale HSKK base con Maja Jiejie</h1>
+      <p>Ascolta, ripeti ad alta voce, controlla. Tre parti, come all'esame.</p>
+    </div>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" data-tab="intro" aria-selected="true">L'esame</button>
+    <button role="tab" data-tab="p1" aria-selected="false">1 · Ripeti</button>
+    <button role="tab" data-tab="p2" aria-selected="false">2 · Rispondi</button>
+    <button role="tab" data-tab="p3" aria-selected="false">3 · Parla</button>
+  </nav>
+
+  <div class="toolbar">
+    <label for="rate">Velocità audio</label>
+    <input id="rate" type="range" min="0.6" max="1.1" step="0.1" value="0.85">
+    <span id="rateLbl">0.85×</span>
+    <span class="chip" id="score">0 / 25 completate</span>
+  </div>
+  <p class="warn" id="noVoice" hidden>Il tuo dispositivo non ha una voce cinese installata: puoi leggere il testo e pronunciarlo tu. Su telefono, aggiungi la voce "Cinese (Mandarino)" nelle impostazioni di sintesi vocale.</p>
+
+  <!-- INTRO -->
+  <section id="intro" role="tabpanel">
+    <h2>Com'è fatto l'HSKK 初级</h2>
+    <p class="lead">L'esame dura circa 17 minuti, con 7 minuti di preparazione per la terza parte. Viene registrato e valutato su 100 punti; si supera con 60.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Parte</th><th>Cosa si fa</th><th>Domande</th><th>Tempo</th></tr></thead>
+      <tbody>
+        <tr><td><b class="zh">听后重复</b><br>Ascolta e ripeti</td><td>Senti una frase breve e la ripeti uguale.</td><td>15</td><td>~6 min</td></tr>
+        <tr><td><b class="zh">听后回答</b><br>Ascolta e rispondi</td><td>Senti una domanda e rispondi con una frase.</td><td>10</td><td>~4 min</td></tr>
+        <tr><td><b class="zh">回答问题</b><br>Rispondi alle domande</td><td>Leggi due domande e parli 1,5 minuti per ciascuna.</td><td>2</td><td>~3 min</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card"><b>Come usare questa lezione</b><p class="note" style="margin:6px 0 0">Premi ▶ per ascoltare. Ripeti ad alta voce prima di guardare il testo. Poi premi "Mostra" e segna ✓ quando ti è riuscita bene.</p></div>
+      <div class="card"><b>Consiglio di Maja</b><p class="note" style="margin:6px 0 0">All'esame conta parlare con fluidità. Meglio una frase semplice e completa che una frase lunga piena di pause.</p></div>
+    </div>
+  </section>
+
+  <!-- PARTE 1 -->
+  <section id="p1" role="tabpanel" hidden>
+    <h2 class="zh">第一部分 · 听后重复</h2>
+    <p class="lead">Ascolta la frase una sola volta, come all'esame, e ripetila subito. Poi controlla il testo.</p>
+    <div class="list" id="list1"></div>
+  </section>
+
+  <!-- PARTE 2 -->
+  <section id="p2" role="tabpanel" hidden>
+    <h2 class="zh">第二部分 · 听后回答</h2>
+    <p class="lead">Ascolta la domanda e rispondi con una frase completa: riprendi le parole della domanda. Poi confronta con la risposta modello.</p>
+    <div class="list" id="list2"></div>
+  </section>
+
+  <!-- PARTE 3 -->
+  <section id="p3" role="tabpanel" hidden>
+    <h2 class="zh">第三部分 · 回答问题</h2>
+    <p class="lead">Scegli una domanda, prepara la risposta, poi parla per 1 minuto e mezzo senza fermarti. Il cronometro segue i tempi dell'esame.</p>
+    <div class="grid2" id="q3"></div>
+    <div class="card" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+        <div><div class="eyebrow" id="phase">Pronta?</div><div class="zh" id="curQ" style="font-size:1.2rem">Scegli una domanda qui sopra</div></div>
+        <div class="timer prep" id="clock">1:30</div>
+      </div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="prepBtn">Preparazione (1:30)</button>
+        <button class="btn play" id="speakBtn">Parla ora (1:30)</button>
+        <button class="btn" id="stopBtn">Ferma</button>
+      </div>
+    </div>
+    <h2 style="margin-top:22px;font-size:1.05rem">Frasi utili per allungare il discorso</h2>
+    <p class="note">Tocca una frase per ascoltarla.</p>
+    <div class="phr" id="phr"></div>
+  </section>
+</div>
+
+<script>
+const P1=[
+ ["我叫王明。","Wǒ jiào Wáng Míng.","Mi chiamo Wang Ming."],
+ ["我是意大利人。","Wǒ shì Yìdàlì rén.","Sono italiano/a."],
+ ["今天星期二。","Jīntiān xīngqī'èr.","Oggi è martedì."],
+ ["我每天七点起床。","Wǒ měitiān qī diǎn qǐchuáng.","Mi alzo ogni giorno alle sette."],
+ ["我很喜欢喝茶。","Wǒ hěn xǐhuan hē chá.","Mi piace molto bere il tè."],
+ ["这个苹果很好吃。","Zhège píngguǒ hěn hǎochī.","Questa mela è molto buona."],
+ ["我家有四口人。","Wǒ jiā yǒu sì kǒu rén.","Nella mia famiglia siamo in quattro."],
+ ["明天我们去北京。","Míngtiān wǒmen qù Běijīng.","Domani andiamo a Pechino."],
+ ["你的手机在桌子上。","Nǐ de shǒujī zài zhuōzi shang.","Il tuo cellulare è sul tavolo."],
+ ["我在学校学习汉语。","Wǒ zài xuéxiào xuéxí Hànyǔ.","Studio cinese a scuola."],
+ ["外面下雨了。","Wàimiàn xià yǔ le.","Fuori piove."],
+ ["我想买一件衣服。","Wǒ xiǎng mǎi yí jiàn yīfu.","Vorrei comprare un vestito."],
+ ["他是我的好朋友。","Tā shì wǒ de hǎo péngyou.","Lui è un mio caro amico."],
+ ["我们坐出租车去吧。","Wǒmen zuò chūzūchē qù ba.","Andiamoci in taxi."],
+ ["医院在商店的后面。","Yīyuàn zài shāngdiàn de hòumiàn.","L'ospedale è dietro al negozio."]
+];
+const P2=[
+ ["你叫什么名字？","Nǐ jiào shénme míngzi?","Come ti chiami?","我叫玛雅。","Wǒ jiào Mǎyǎ."],
+ ["你是哪国人？","Nǐ shì nǎ guó rén?","Di che paese sei?","我是意大利人。","Wǒ shì Yìdàlì rén."],
+ ["你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Quante persone ci sono nella tua famiglia?","我家有三口人：爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén: bàba, māma hé wǒ."],
+ ["今天几月几号？","Jīntiān jǐ yuè jǐ hào?","Che giorno è oggi?","今天十月十三号。","Jīntiān shí yuè shísān hào."],
+ ["你喜欢吃什么？","Nǐ xǐhuan chī shénme?","Che cosa ti piace mangiare?","我喜欢吃米饭和面条。","Wǒ xǐhuan chī mǐfàn hé miàntiáo."],
+ ["你每天几点睡觉？","Nǐ měitiān jǐ diǎn shuìjiào?","A che ora vai a dormire ogni giorno?","我每天晚上十一点睡觉。","Wǒ měitiān wǎnshang shíyī diǎn shuìjiào."],
+ ["你会说汉语吗？","Nǐ huì shuō Hànyǔ ma?","Sai parlare cinese?","我会说一点儿汉语。","Wǒ huì shuō yìdiǎnr Hànyǔ."],
+ ["你住在哪儿？","Nǐ zhù zài nǎr?","Dove abiti?","我住在佛罗伦萨。","Wǒ zhù zài Fóluólúnsà."],
+ ["你怎么去学校？","Nǐ zěnme qù xuéxiào?","Come vai a scuola?","我坐公共汽车去学校。","Wǒ zuò gōnggòng qìchē qù xuéxiào."],
+ ["周末你做什么？","Zhōumò nǐ zuò shénme?","Che cosa fai nel fine settimana?","周末我常常看电影。","Zhōumò wǒ chángcháng kàn diànyǐng."]
+];
+const P3=[
+ {q:"请介绍一下你的家人。",py:"Qǐng jièshào yíxià nǐ de jiārén.",it:"Presenta la tua famiglia.",
+  m:"我家有四口人：爸爸、妈妈、哥哥和我。我爸爸是医生，他每天工作很忙。我妈妈是老师，她很喜欢看书。我哥哥二十五岁，他在北京工作。我很爱我的家人。周末我们常常一起吃饭、看电影。",
+  mi:"Siamo in quattro: papà, mamma, mio fratello maggiore e io. Papà è medico e lavora molto. Mamma è insegnante e ama leggere. Mio fratello ha 25 anni e lavora a Pechino. Voglio molto bene alla mia famiglia. Nel weekend spesso mangiamo insieme e guardiamo film."},
+ {q:"你喜欢做什么？为什么？",py:"Nǐ xǐhuan zuò shénme? Wèishénme?",it:"Che cosa ti piace fare? Perché?",
+  m:"我喜欢跑步。我每天早上七点去公园跑步，跑半个小时。因为跑步对身体很好，所以我觉得很快乐。我也喜欢和朋友一起跑步，我们一边跑一边说话。你喜欢跑步吗？",
+  mi:"Mi piace correre. Ogni mattina alle sette vado al parco a correre per mezz'ora. Poiché correre fa bene, mi sento felice. Mi piace anche correre con gli amici: corriamo e chiacchieriamo. A te piace correre?"}
+];
+const PHR=[["首先……","shǒuxiān","prima di tutto"],["然后……","ránhòu","poi"],["因为……所以……","yīnwèi… suǒyǐ…","poiché… quindi…"],["我觉得……","wǒ juéde","penso che"],["比如说……","bǐrú shuō","per esempio"],["还有……","hái yǒu","inoltre"],["我常常……","wǒ chángcháng","spesso io…"],["这就是我的……","zhè jiù shì wǒ de…","ecco il mio…"]];
+
+let done={};try{done=JSON.parse(localStorage.getItem("hskk-done")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("hskk-done",JSON.stringify(done))}catch(e){};updScore()}
+function updScore(){const n=Object.values(done).filter(Boolean).length;document.getElementById("score").textContent=n+" / 25 completate"}
+
+let zhVoice=null;
+function pickVoice(){if(!("speechSynthesis" in window))return;const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function speak(t){
+  if(!("speechSynthesis" in window)){document.getElementById("noVoice").hidden=false;return}
+  pickVoice();if(!zhVoice&&speechSynthesis.getVoices().length)document.getElementById("noVoice").hidden=false;
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;
+  u.rate=parseFloat(document.getElementById("rate").value);speechSynthesis.speak(u)}
+const rate=document.getElementById("rate");rate.oninput=()=>document.getElementById("rateLbl").textContent=rate.value+"×";
+
+function buildList(el,data,part){
+  data.forEach((d,i)=>{
+    const key=part+"-"+i, it=document.createElement("div");it.className="item"+(done[key]?" done":"");
+    const ans=part==="p2"?`<div class="model"><div class="h" style="font-size:1.15rem">${d[3]}</div><div class="py">${d[4]}</div></div>`:"";
+    it.innerHTML=`<div class="num">${i+1}</div>
+      <div class="ctrl"><button class="btn play">▶ Ascolta</button><button class="btn sh">Mostra</button><button class="btn ok" aria-pressed="${!!done[key]}">✓ Fatto</button>${part==="p2"?'<button class="btn ma">▶ Risposta</button>':""}</div>
+      <div class="reveal hidden-text" aria-hidden="true"><div class="h">${d[0]}</div><div class="py">${d[1]}</div><div class="it">${d[2]}</div>${ans}</div>`;
+    const rv=it.querySelector(".reveal"),sh=it.querySelector(".sh");
+    it.querySelector(".play").onclick=()=>speak(d[0]);
+    sh.onclick=()=>{const h=rv.classList.toggle("hidden-text");rv.setAttribute("aria-hidden",h);sh.textContent=h?"Mostra":"Nascondi"};
+    if(part==="p2")it.querySelector(".ma").onclick=()=>speak(d[3]);
+    const ok=it.querySelector(".ok");ok.onclick=()=>{done[key]=!done[key];ok.setAttribute("aria-pressed",done[key]);it.classList.toggle("done",done[key]);save()};
+    el.appendChild(it)})
+}
+buildList(document.getElementById("list1"),P1,"p1");buildList(document.getElementById("list2"),P2,"p2");updScore();
+
+let cur=null;const q3=document.getElementById("q3");
+P3.forEach((d,i)=>{const c=document.createElement("div");c.className="card";
+  c.innerHTML=`<div class="eyebrow">Domanda ${i+1}</div><div class="zh" style="font-size:1.25rem;margin:4px 0">${d.q}</div><div class="py" style="color:var(--jade)">${d.py}</div><div class="note">${d.it}</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn play sel">Scegli</button><button class="btn sm">Risposta modello</button></div>
+  <div class="model" hidden><div class="zh" style="font-size:1.05rem;line-height:1.7">${d.m}</div><p class="note" style="margin:6px 0">${d.mi}</p><button class="btn lm">▶ Ascolta il modello</button></div>`;
+  c.querySelector(".sel").onclick=()=>{cur=d;document.getElementById("curQ").textContent=d.q;speak(d.q)};
+  const m=c.querySelector(".model");c.querySelector(".sm").onclick=()=>m.hidden=!m.hidden;
+  c.querySelector(".lm").onclick=()=>speak(d.m);q3.appendChild(c)});
+
+const phr=document.getElementById("phr");
+PHR.forEach(p=>{const b=document.createElement("button");b.innerHTML=`<span class="zh">${p[0]}</span><small>${p[1]} · ${p[2]}</small>`;b.onclick=()=>speak(p[0].replace(/……/g,""));phr.appendChild(b)});
+
+let tid=null;const clock=document.getElementById("clock"),fill=document.getElementById("barFill"),phase=document.getElementById("phase");
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function run(total,label,cls){clearInterval(tid);let left=total;phase.textContent=label;clock.className="timer "+cls;clock.textContent=fmt(left);fill.style.width="0";
+  tid=setInterval(()=>{left--;clock.textContent=fmt(Math.max(left,0));fill.style.width=((total-left)/total*100)+"%";
+    if(left<=0){clearInterval(tid);phase.textContent=cls==="prep"?"Tempo di preparazione finito":"Tempo scaduto · 好！";if(cls==="prep")run(90,"Parla adesso","speak")}},1000)}
+document.getElementById("prepBtn").onclick=()=>run(90,"Preparazione","prep");
+document.getElementById("speakBtn").onclick=()=>run(90,"Parla adesso","speak");
+document.getElementById("stopBtn").onclick=()=>{clearInterval(tid);phase.textContent="Fermato";};
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  document.querySelectorAll("[role=tabpanel]").forEach(s=>s.hidden=s.id!==b.dataset.tab);
+  try{speechSynthesis.cancel()}catch(e){}});
+</script>
+
+</body></html>
