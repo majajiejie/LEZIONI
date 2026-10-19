@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>他是谁？ Lezione 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<style>
+:root{
+  --teal:#20a99a; --teal-d:#137a6f; --red:#e8434f; --yellow:#ffd23f; --purple:#7b5cd6;
+  --pink:#ff7aa8; --ink:#2b2140; --paper:#fff8e7; --card:#ffffff; --soft:#f1ecff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);background:var(--paper);overflow:hidden;
+  background-image:radial-gradient(circle at 10% 20%,#ffe9b0 0 60px,transparent 61px),radial-gradient(circle at 90% 80%,#d6f5ef 0 90px,transparent 91px),radial-gradient(circle at 80% 10%,#ffd9e5 0 50px,transparent 51px);}
+.zh{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* top bar */
+#top{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:center;gap:10px;padding:0 14px;background:var(--teal);color:#fff;z-index:20;box-shadow:0 3px 0 var(--teal-d)}
+#brand{font-weight:800;font-size:20px;white-space:nowrap}
+#brand span{color:var(--yellow)}
+#score{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+.pchip{display:flex;align-items:center;gap:4px;background:#fff;color:var(--ink);border-radius:30px;padding:2px 4px 2px 10px;font-weight:700;white-space:nowrap;font-size:16px}
+.pchip b{background:var(--yellow);border-radius:20px;min-width:30px;text-align:center;padding:0 6px}
+.pchip button{background:var(--red);color:#fff;border-radius:50%;width:26px;height:26px;font-weight:800;font-size:16px;line-height:1}
+.pchip button.m{background:#bbb;width:20px;height:20px;font-size:13px}
+.tbtn{background:rgba(255,255,255,.18);color:#fff;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px;white-space:nowrap}
+.tbtn.on{background:var(--yellow);color:var(--ink)}
+#clock{font-variant-numeric:tabular-nums;background:var(--ink);border-radius:12px;padding:4px 10px;font-weight:800;min-width:74px;text-align:center}
+#clock.warn{background:var(--red);animation:pulse 1s infinite}
+
+/* slides */
+#deck{position:fixed;top:58px;bottom:62px;left:0;right:0}
+.slide{position:absolute;inset:0;padding:18px 28px;display:none;flex-direction:column;align-items:center;overflow-y:auto}
+.slide.active{display:flex;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@keyframes wob{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes shake{0%,100%{transform:translate(0)}25%{transform:translate(-6px,3px) rotate(-2deg)}75%{transform:translate(6px,-3px) rotate(2deg)}}
+.stitle{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;margin:4px 0 12px}
+.stitle h2{margin:0;font-size:34px;line-height:1.1;background:var(--purple);color:#fff;padding:4px 22px;border-radius:40px;box-shadow:0 4px 0 #563bb0}
+.mins{background:var(--yellow);border-radius:20px;padding:3px 12px;font-weight:800;font-size:17px;box-shadow:0 3px 0 #d6a800}
+.mins:hover{transform:scale(1.06)}
+.sub{font-size:19px;text-align:center;margin:0 0 12px;max-width:820px}
+.big-btn{background:var(--red);color:#fff;font-weight:800;font-size:22px;padding:10px 26px;border-radius:40px;box-shadow:0 5px 0 #a52632;transition:transform .1s}
+.big-btn:active{transform:translateY(4px);box-shadow:0 1px 0 #a52632}
+.big-btn.t{background:var(--teal);box-shadow:0 5px 0 var(--teal-d)}
+.big-btn.p{background:var(--purple);box-shadow:0 5px 0 #563bb0}
+.big-btn.y{background:var(--yellow);color:var(--ink);box-shadow:0 5px 0 #d6a800}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
+.say{background:var(--teal);color:#fff;border-radius:50%;width:44px;height:44px;font-size:22px;box-shadow:0 3px 0 var(--teal-d);flex:none}
+
+/* nav */
+#nav{position:fixed;bottom:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border-top:3px solid #eee;z-index:20}
+#nav .arrow{background:var(--purple);color:#fff;width:48px;height:44px;border-radius:14px;font-size:24px;font-weight:800;box-shadow:0 4px 0 #563bb0}
+#dots{display:flex;gap:6px;overflow-x:auto;max-width:70vw;scrollbar-width:none}
+.dot{background:var(--soft);border-radius:12px;padding:4px 8px;font-size:20px;opacity:.6}
+.dot.on{background:var(--yellow);opacity:1;transform:scale(1.12)}
+
+/* cover */
+.cover-title{font-size:min(17vw,150px);margin:0;color:var(--red);text-shadow:5px 5px 0 var(--yellow);animation:wob 3s infinite;line-height:1.1}
+.pin{font-size:30px;margin:-6px 0 4px;color:var(--teal-d);font-weight:700}
+.setup{background:#fff;border-radius:24px;padding:14px 18px;box-shadow:0 6px 0 #eadfc5;max-width:640px;width:100%}
+.prow{display:flex;gap:8px;align-items:center;margin:6px 0}
+.prow input{flex:1;font:inherit;font-size:20px;padding:6px 12px;border:3px solid var(--soft);border-radius:14px;min-width:0}
+.prow .g{background:var(--soft);border-radius:14px;padding:6px 10px;font-size:18px;font-weight:700;min-width:84px}
+.prow .av{font-size:30px;background:none}
+.prow .x{background:#eee;border-radius:50%;width:32px;height:32px}
+.agenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;max-width:860px;width:100%;margin-top:12px}
+.agenda div{background:#fff;border-radius:16px;padding:8px 10px;font-weight:700;text-align:center;box-shadow:0 4px 0 #eadfc5;font-size:16px}
+.agenda span{display:block;font-size:26px}
+
+/* mystery */
+.mystery{width:300px;height:300px;border-radius:50%;background:conic-gradient(var(--yellow),var(--pink),var(--purple),var(--teal),var(--yellow));display:grid;place-items:center;position:relative;box-shadow:0 10px 0 rgba(0,0,0,.08)}
+.mystery .face{width:250px;height:250px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:150px;transition:filter .6s}
+.qbig{font-size:54px;font-weight:700;margin:14px 0 4px}
+.answer{font-size:44px;font-weight:700;color:var(--teal-d);min-height:64px}
+.pinyin{font-family:'Baloo 2';color:var(--purple);font-size:.55em;display:block;font-weight:600}
+
+/* flashcards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;width:100%;max-width:1100px}
+.fc{perspective:900px;height:220px;cursor:pointer}
+.fc .in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .f,.fc .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;box-shadow:0 6px 0 rgba(0,0,0,.1)}
+.fc .f{background:#fff;border:4px solid var(--yellow)}
+.fc .b{background:var(--teal);color:#fff;transform:rotateY(180deg);text-align:center}
+.fc .ch{font-size:80px;line-height:1}
+.fc .ch.long{font-size:52px}
+.fc .py{font-size:26px;color:var(--purple);font-weight:700}
+.fc .b .em{font-size:52px}
+.fc .b .it{font-size:24px;font-weight:800}
+.fc .b .ex{font-size:20px}
+.fc.dragon .f{border-color:var(--red);background:#fff4f4}
+.dragon-only{display:none !important}
+body.dragon .dragon-only{display:flex !important}
+body.dragon .fc.dragon-only{display:block !important}
+#flash{position:fixed;inset:0;display:none;place-items:center;background:rgba(43,33,64,.92);z-index:50;color:#fff;font-size:200px}
+#flash.on{display:grid}
+
+/* shout whisper */
+#swStage{width:100%;max-width:900px;height:330px;background:#fff;border-radius:30px;display:grid;place-items:center;box-shadow:0 8px 0 #eadfc5;position:relative;overflow:hidden}
+#swWord{transition:all .3s;text-align:center}
+#swWord.shout{font-size:190px;color:var(--red);animation:shake .25s 4;font-weight:700}
+#swWord.whisper{font-size:46px;color:#aaa}
+#swMode{font-size:28px;font-weight:800;margin:10px 0}
+
+/* museum scene */
+.scene{width:100%;max-width:980px;height:380px;border-radius:30px;position:relative;overflow:hidden;
+  background:linear-gradient(#f3e4ff 0 68%,#bfe9e3 68%);box-shadow:0 8px 0 #eadfc5}
+.scene .wall{position:absolute;right:6%;top:6%;width:44%;height:60%;background:var(--red);border-radius:12px;opacity:.85}
+.scene .wall:after{content:'🐉';position:absolute;font-size:120px;right:10%;top:8%;opacity:.55}
+.actor{position:absolute;bottom:8%;font-size:120px;transition:transform .3s;line-height:1}
+.actor.talk{animation:bounce .5s 2}
+.statue{position:absolute;bottom:8%;left:42%;text-align:center}
+.statue .fig{font-size:190px;filter:grayscale(.2) sepia(.4);line-height:1}
+.statue .ped{width:180px;height:30px;background:#e8434f;border-radius:50%;margin:-12px auto 0}
+.statue .plate{background:var(--yellow);border-radius:10px;font-size:22px;font-weight:700;padding:2px 10px;display:inline-block;margin-top:6px;transition:.4s}
+.bubble{position:absolute;background:#fff;border-radius:22px;padding:8px 16px;font-size:34px;box-shadow:0 4px 0 rgba(0,0,0,.12);opacity:0;transform:scale(.6);transition:.3s;max-width:46%;text-align:center}
+.bubble.show{opacity:1;transform:scale(1)}
+.bubble .pinyin{font-size:18px}
+.karaoke{display:none;margin-top:8px;font-size:26px;font-weight:800;color:var(--red)}
+.karaoke.on{display:block;animation:pulse .8s infinite}
+.bar{height:10px;background:var(--soft);border-radius:10px;width:300px;overflow:hidden;margin:6px auto}
+.bar i{display:block;height:100%;background:var(--red);width:0}
+.rec{background:#fff;border-radius:22px;padding:10px 16px;margin-top:12px;box-shadow:0 5px 0 #eadfc5;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+.rec.recording #recBtn{animation:pulse .8s infinite;background:var(--red)}
+
+/* nations */
+.flags{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.flag{background:#fff;border-radius:20px;padding:10px 12px;text-align:center;box-shadow:0 5px 0 #eadfc5;transition:.15s;min-width:150px}
+.flag:hover{transform:translateY(-4px)}
+.flag svg{width:120px;height:80px;border-radius:8px;box-shadow:0 0 0 2px #eee;display:block;margin:0 auto 4px}
+.flag .zh{font-size:30px;font-weight:700}
+.flag .py{color:var(--purple);font-weight:700;font-size:18px}
+.flag.good{background:#d3f9d8;animation:pulse .5s 2}
+.flag.bad{background:#ffe3e3;animation:shake .3s 2}
+.who{display:flex;align-items:center;gap:20px;background:#fff;border-radius:26px;padding:10px 24px;margin:10px 0 14px;box-shadow:0 6px 0 #eadfc5}
+.who .em{font-size:90px}
+.who .q{font-size:42px;font-weight:700}
+.who .hint{font-size:19px;color:#6b5f80}
+
+/* wheel */
+.wheelWrap{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center}
+.wheelBox{position:relative;width:360px;height:360px}
+#wheel{width:360px;height:360px;transition:transform 4.2s cubic-bezier(.12,.8,.18,1);border-radius:50%;box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.pointer{position:absolute;left:50%;top:-14px;transform:translateX(-50%);font-size:44px;z-index:2}
+.wres{background:#fff;border-radius:26px;padding:16px 22px;min-width:320px;max-width:440px;box-shadow:0 6px 0 #eadfc5;text-align:center}
+.wres .em{font-size:90px;line-height:1}
+.wres .l{font-size:30px;font-weight:700;margin:6px 0;display:flex;gap:8px;align-items:center;justify-content:center}
+.wres .l.a{color:var(--teal-d)}
+
+/* writing */
+.wtabs{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;justify-content:center}
+.wtab{background:#fff;font-size:44px;width:80px;height:80px;border-radius:20px;box-shadow:0 5px 0 #eadfc5;font-family:'Noto Sans SC'}
+.wtab.on{background:var(--yellow);box-shadow:0 5px 0 #d6a800}
+.wtab.dragon-only{display:none}
+body.dragon .wtab.dragon-only{display:inline-block !important}
+.wbox{display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center}
+#hw{width:320px;height:320px;background:#fff;border-radius:20px;border:4px solid var(--red);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cg stroke='%23f3b0b5' stroke-width='2' stroke-dasharray='8 8'%3E%3Cline x1='0' y1='0' x2='320' y2='320'/%3E%3Cline x1='320' y1='0' x2='0' y2='320'/%3E%3Cline x1='160' y1='0' x2='160' y2='320'/%3E%3Cline x1='0' y1='160' x2='320' y2='160'/%3E%3C/g%3E%3C/svg%3E")}
+.winfo{background:#fff;border-radius:24px;padding:14px 20px;max-width:380px;box-shadow:0 6px 0 #eadfc5}
+.winfo .ch{font-size:70px;line-height:1}
+.winfo p{font-size:20px;margin:6px 0}
+.winfo .btns{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+#wmsg{font-weight:800;color:var(--teal-d);font-size:22px;min-height:30px}
+
+/* comic */
+.comic{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:1100px}
+.panel{background:#fff;border:4px solid #9bd36a;border-radius:20px;padding:8px 10px;position:relative;cursor:pointer;transition:.2s;min-height:170px}
+.panel.now{border-color:var(--red);transform:scale(1.03);box-shadow:0 0 0 6px #ffd6d9}
+.panel .n{position:absolute;top:-12px;left:-10px;background:var(--purple);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800}
+.panel .ems{font-size:52px;text-align:center;line-height:1.1}
+.panel .ln{font-size:22px;margin:4px 0;border-radius:10px;padding:2px 6px}
+.panel .ln small{display:block;color:var(--purple);font-family:'Baloo 2';font-size:15px}
+.panel .ln.on{background:var(--yellow)}
+#shutter{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:60;transition:opacity .5s}
+
+/* quiz */
+.qcard{background:#fff;border-radius:30px;padding:18px 26px;width:100%;max-width:860px;box-shadow:0 8px 0 #eadfc5;text-align:center}
+.qnum{font-weight:800;color:var(--purple);font-size:20px}
+.qtext{font-size:36px;font-weight:700;margin:6px 0 14px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.opt{background:var(--soft);border-radius:20px;font-size:32px;padding:16px 8px;font-weight:700;box-shadow:0 5px 0 #d4c8f5}
+.opt.good{background:#8ce99a;box-shadow:0 5px 0 #40c057}
+.opt.bad{background:#ffa8a8;box-shadow:0 5px 0 #fa5252;animation:shake .3s 2}
+.tring{height:14px;background:var(--soft);border-radius:10px;overflow:hidden;margin:12px 0 4px}
+.tring i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--yellow),var(--red));width:100%}
+
+/* end */
+.podium{display:flex;align-items:flex-end;gap:14px;margin:20px 0}
+.podium div{background:var(--yellow);border-radius:18px 18px 0 0;width:130px;text-align:center;font-weight:800;font-size:20px;padding-top:8px;box-shadow:0 6px 0 #d6a800}
+.podium .e{font-size:60px;display:block}
+
+/* notes */
+.notes{display:none;position:fixed;right:14px;bottom:72px;max-width:380px;background:#2b2140;color:#fff;border-radius:18px;padding:12px 16px;font-size:16px;z-index:30;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+body.shownotes .slide.active .notes{display:block}
+.notes b{color:var(--yellow)}
+
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:70}
+
+@media (max-width:700px){
+  #brand{display:none}
+  .slide{padding:12px 16px}
+  .stitle h2{font-size:26px}
+  .comic{grid-template-columns:1fr 1fr}
+  .opts{grid-template-columns:1fr}
+  .qbig{font-size:38px}
+  .mystery{width:230px;height:230px}.mystery .face{width:190px;height:190px;font-size:110px}
+  .wheelBox,#wheel{width:290px;height:290px}
+  #hw{width:280px;height:280px}
+  .actor{font-size:80px}.statue .fig{font-size:130px}.bubble{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div id="top">
+  <div id="brand">Maja <span>Jiejie</span> 🐼</div>
+  <div id="score"></div>
+  <button class="tbtn" id="dragonBtn" title="Parole e sfide extra per chi conosce già la lezione">🐉 Livello Drago</button>
+  <button class="tbtn" id="slowBtn" title="Voce più lenta">🐢 Lento</button>
+  <div id="clock" title="Clicca per fermare">⏱ --:--</div>
+  <button class="tbtn" id="notesBtn" title="Note per la maestra (tasto N)">📝</button>
+  <button class="tbtn" id="fsBtn" title="Schermo intero">⛶</button>
+</div>
+
+<div id="deck">
+
+<!-- 0 COPERTINA -->
+<section class="slide" data-icon="🏠">
+  <h1 class="cover-title zh">他是谁？</h1>
+  <div class="pin">Tā shì shéi? — Chi è lui?</div>
+  <div class="setup">
+    <div style="font-weight:800;font-size:20px">👋 Chi gioca oggi? <small style="font-weight:500">(scrivi i nomi, scegli 他 o 她)</small></div>
+    <div id="plist"></div>
+    <button class="big-btn t" id="addP" style="font-size:18px;padding:6px 18px;margin-top:6px">+ Aggiungi</button>
+  </div>
+  <div class="agenda">
+    <div><span>🕵️</span>Chi si nasconde? · 4'</div>
+    <div><span>🃏</span>Parole nuove · 6'</div>
+    <div><span>📢</span>Grida e sussurra · 4'</div>
+    <div><span>🎬</span>Al museo · 6'</div>
+    <div><span>🌍</span>Nazioni e ruota · 7'</div>
+    <div><span>✍️</span>Scriviamo! · 8'</div>
+    <div><span>📸</span>Mini storia · 5'</div>
+    <div><span>🏆</span>Sfida finale · 5'</div>
+  </div>
+  <aside class="notes"><b>Copertina.</b> Scrivi i nomi dei bambini: compaiono nel punteggio in alto e nei giochi (ruota, chi si nasconde). Clicca il bollino giallo dei minuti in ogni slide per far partire il timer. <b>🐉 Livello Drago</b>: attiva parole e sfide extra (她, 他们, 都, 认识, 漂亮) per chi ha già fatto la lezione — puoi anche nominarlo "assistente della maestra" e fargli fare le domande agli altri.</aside>
+</section>
+
+<!-- 1 CHI SI NASCONDE -->
+<section class="slide" data-icon="🕵️">
+  <div class="stitle"><h2>🕵️ Chi si nasconde?</h2><button class="mins" data-m="4">⏱ 4'</button></div>
+  <p class="sub">Prima di svelare, tutti chiedono in coro: <b class="zh">他是谁？/ 她是谁？</b></p>
+  <div class="mystery"><div class="face" id="mFace">❓</div></div>
+  <div class="qbig zh" id="mQ"><span class="pinyin">Tā shì shéi?</span>他是谁？</div>
+  <div class="answer zh" id="mA"></div>
+  <div class="row">
+    <button class="say" id="mSayQ">🔊</button>
+    <button class="big-btn p" id="mReveal">👀 Svela un po'</button>
+    <button class="big-btn" id="mNext">🎲 Nuovo mistero</button>
+  </div>
+  <aside class="notes"><b>Riscaldamento.</b> Il volto è sfocato: ad ogni click si vede un po' di più. I bambini gridano 他是谁？ e chi indovina risponde con la frase intera "他是 Edo！" → punto. Ci sono anche ospiti a sorpresa (il panda, Maja 姐姐…).</aside>
+</section>
+
+<!-- 2 PAROLE -->
+<section class="slide" data-icon="🃏">
+  <div class="stitle"><h2>🃏 Parole nuove</h2><button class="mins" data-m="6">⏱ 6'</button></div>
+  <p class="sub">Tocca una carta per girarla e sentire la parola. Poi gioca a <b>⚡ Lampo</b>: la carta appare per 1 secondo… chi la dice per primo?</p>
+  <div class="cards" id="cards"></div>
+  <div class="row" style="margin-top:14px">
+    <button class="big-btn y" id="flashBtn">⚡ Lampo!</button>
+    <button class="big-btn t" id="flipAll">🔄 Gira tutte</button>
+  </div>
+  <aside class="notes"><b>Parole.</b> Fai ripetere ogni parola 3 volte: normale, da robot 🤖, da topolino 🐭. Il gioco ⚡ Lampo mostra una parola a caso per un attimo: il primo che la legge ad alta voce vince un punto.</aside>
+</section>
+
+<!-- 3 GRIDA E SUSSURRA -->
+<section class="slide" data-icon="📢">
+  <div class="stitle"><h2>📢 Grida e sussurra 🤫</h2><button class="mins" data-m="4">⏱ 4'</button></div>
+  <p class="sub">Regola al contrario! Se la parola è <b style="color:var(--red)">GRANDE</b> → voi <b>sussurrate</b>. Se è <span style="color:#aaa">piccolina</span> → voi <b>GRIDATE!</b></p>
+  <div id="swStage"><div id="swWord" class="zh">谁</div></div>
+  <div id="swMode">Pronti?</div>
+  <div class="row"><button class="big-btn" id="swNext">▶️ Via!</button><button class="say" id="swSay">🔊</button></div>
+  <aside class="notes"><b>Shout and whisper</b> dal libro. Puoi anche fare tu la voce (grande = gridi, piccola = sussurri) e loro fanno il contrario. Chi sbaglia… fa il verso del panda 🐼.</aside>
+</section>
+
+<!-- 4 AL MUSEO -->
+<section class="slide" data-icon="🎬">
+  <div class="stitle"><h2>🎬 Al museo delle statue</h2><button class="mins" data-m="6">⏱ 6'</button></div>
+  <div class="row" style="margin-bottom:10px">
+    <button class="big-btn p" data-scene="1">🎬 Scena 1</button>
+    <button class="big-btn p" data-scene="2">🎬 Scena 2</button>
+    <button class="big-btn y" id="karaBtn">🎤 Modalità karaoke: OFF</button>
+  </div>
+  <div class="scene" id="scene">
+    <div class="wall"></div>
+    <div class="actor" id="aGirl" style="left:8%">👧</div>
+    <div class="statue"><div class="fig">🧍‍♂️</div><div class="ped"></div><div class="plate zh" id="plate">？？？</div></div>
+    <div class="actor" id="aMum" style="right:6%">👩</div>
+    <div class="bubble zh" id="bub1" style="left:4%;top:8%"></div>
+    <div class="bubble zh" id="bub2" style="right:4%;top:8%"></div>
+  </div>
+  <div class="karaoke" id="karaMsg">🎤 Ripeti tu!<div class="bar"><i id="karaBar"></i></div></div>
+  <div class="rec" id="recBox">
+    <b>🎙️ Registra la tua voce:</b>
+    <button class="big-btn" id="recBtn" style="font-size:18px;padding:6px 16px">● Registra</button>
+    <button class="big-btn t" id="playBtn" style="font-size:18px;padding:6px 16px" disabled>▶ Riascolta</button>
+    <span id="recMsg" style="font-size:16px"></span>
+  </div>
+  <aside class="notes"><b>Il "video".</b> Premi Scena 1 e 2: i personaggi parlano. Con il karaoke ON dopo ogni battuta c'è una pausa per ripetere. Poi dividete i ruoli (bimba / mamma) e recitate; con 🎙️ registrano e si riascoltano (fa sempre ridere!). Il microfono funziona se la pagina è aperta sul loro dispositivo oppure con la tua voce.</aside>
+</section>
+
+<!-- 5 NAZIONI -->
+<section class="slide" data-icon="🌍">
+  <div class="stitle"><h2>🌍 哪国人？ Di che paese è?</h2><button class="mins" data-m="3">⏱ 3'</button></div>
+  <div class="who" id="who">
+    <div class="em" id="whoEm">🧑</div>
+    <div><div class="q zh" id="whoQ"></div><div class="hint" id="whoHint"></div></div>
+    <button class="say" id="whoSay">🔊</button>
+  </div>
+  <div class="flags" id="flags"></div>
+  <div class="answer zh" id="whoA" style="margin-top:10px"></div>
+  <div class="row"><button class="big-btn" id="whoNext">➡️ Prossimo</button></div>
+  <aside class="notes"><b>Nazioni.</b> Prima tocca le bandiere per sentirle tutte. Poi gioca: leggi l'indizio, i bambini scelgono la bandiera e devono dire la frase intera "他是意大利人" per avere il punto.</aside>
+</section>
+
+<!-- 6 RUOTA -->
+<section class="slide" data-icon="🎡">
+  <div class="stitle"><h2>🎡 La ruota delle domande</h2><button class="mins" data-m="4">⏱ 4'</button></div>
+  <div class="wheelWrap">
+    <div class="wheelBox"><div class="pointer">🔻</div><canvas id="wheel" width="720" height="720"></canvas></div>
+    <div class="wres" id="wres">
+      <div class="em">🎡</div>
+      <div class="l">Gira la ruota!</div>
+      <p style="font-size:18px">La ruota sceglie una persona: tutti chiedono, lei/lui risponde!</p>
+    </div>
+  </div>
+  <div class="row" style="margin-top:14px"><button class="big-btn" id="spinBtn">🌀 Gira!</button></div>
+  <aside class="notes"><b>Parlato.</b> Dove si ferma la ruota: gli altri chiedono 他/她是谁？ e 他/她是哪国人？ e un compagno risponde. Lo spicchio ⭐ vale doppio punto. Livello Drago: aggiunge "你认识他吗？".</aside>
+</section>
+
+<!-- 7 SCRITTURA -->
+<section class="slide" data-icon="✍️">
+  <div class="stitle"><h2>✍️ Scriviamo!</h2><button class="mins" data-m="8">⏱ 8'</button></div>
+  <div class="wtabs" id="wtabs"></div>
+  <div class="wbox">
+    <div id="hw"></div>
+    <div class="winfo">
+      <div class="row" style="justify-content:flex-start"><span class="ch zh" id="wch">人</span><div><div style="font-size:26px;font-weight:800;color:var(--purple)" id="wpy"></div><div id="wn" style="font-size:18px"></div></div></div>
+      <p id="wtip"></p>
+      <div class="btns">
+        <button class="big-btn p" id="wAnim">👀 Guarda i tratti</button>
+        <button class="big-btn y" id="wAir">☁️ Scriviamo nell'aria</button>
+        <button class="big-btn" id="wQuiz">✏️ Tocca a te!</button>
+      </div>
+      <div id="wmsg"></div>
+    </div>
+  </div>
+  <aside class="notes"><b>Scrittura.</b> 1) Guardate l'animazione contando i tratti in cinese (一、二、三…). 2) "Nell'aria": il carattere si scrive lento e i bambini lo seguono col dito nell'aria. 3) "Tocca a te": si traccia col mouse/dito nel quadrato (o su carta e lo mostrano alla webcam). Inizia da 人 (facilissimo), poi 他 e 是.</aside>
+</section>
+
+<!-- 8 MINI STORIA -->
+<section class="slide" data-icon="📸">
+  <div class="stitle"><h2>📸 Mini storia: al museo con la mamma</h2><button class="mins" data-m="5">⏱ 5'</button></div>
+  <div class="comic" id="comic"></div>
+  <div class="row" style="margin-top:12px"><button class="big-btn p" id="storyPlay">▶️ Ascolta tutta la storia</button><button class="big-btn y" id="storyStop">⏹ Stop</button></div>
+  <aside class="notes"><b>Mini storia</b> (pag. 12). Ascoltate tutta la storia, poi assegna i ruoli e recitate: tocca una vignetta per sentirla. All'ultima vignetta tutti si mettono in posa per la foto: 一、二、三，茄子！ 📸</aside>
+</section>
+
+<!-- 9 SFIDA FINALE -->
+<section class="slide" data-icon="🏆">
+  <div class="stitle"><h2>🏆 La sfida del drago</h2><button class="mins" data-m="5">⏱ 5'</button></div>
+  <div class="qcard" id="qcard">
+    <div class="qnum" id="qnum"></div>
+    <div class="qtext zh" id="qtext"></div>
+    <div class="row" id="qlisten" style="margin-bottom:12px"></div>
+    <div class="opts" id="opts"></div>
+    <div class="tring"><i id="qtime"></i></div>
+  </div>
+  <div class="row" style="margin-top:14px"><button class="big-btn" id="qStart">🚀 Inizia la sfida</button><button class="big-btn t" id="qNext">➡️ Domanda dopo</button></div>
+  <aside class="notes"><b>Quiz veloce</b>: 15 secondi a domanda. Chi risponde giusto per primo prende il punto (clicca + accanto al nome). Con Livello Drago ci sono domande più difficili.</aside>
+</section>
+
+<!-- 10 FINE -->
+<section class="slide" data-icon="🎉">
+  <h1 class="cover-title zh" style="font-size:min(14vw,120px)">再见！</h1>
+  <div class="pin">Zàijiàn! — Bravissimi!</div>
+  <div class="podium" id="podium"></div>
+  <button class="big-btn y" id="photoBtn">📸 一、二、三，茄子！</button>
+  <aside class="notes"><b>Fine.</b> Il podio usa i punti della barra in alto. Foto di gruppo finale con 茄子！</aside>
+</section>
+
+</div>
+
+<div id="nav"><button class="arrow" id="prev">‹</button><div id="dots"></div><button class="arrow" id="next">›</button></div>
+<div id="flash" class="zh"></div>
+<div id="shutter"></div>
+<canvas id="confetti"></canvas>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------- SOUND ---------- */
+let AC=null;
+function beep(f=600,d=.12,type='sine',v=.15,when=0){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(AC.destination);const t=AC.currentTime+when;o.start(t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.stop(t+d+.02)}catch(e){}}
+const sGood=()=>{beep(660,.12,'triangle');beep(880,.12,'triangle',.15,.1);beep(1320,.2,'triangle',.15,.2)};
+const sBad=()=>{beep(220,.25,'sawtooth',.08)};
+const sPop=()=>beep(900,.07,'square',.06);
+const sTick=()=>beep(1200,.03,'square',.03);
+
+/* ---------- SPEECH ---------- */
+let zhVoice=null, slow=false;
+function pickVoice(){try{const vs=speechSynthesis.getVoices();zhVoice=vs.find(v=>/zh[-_]CN/i.test(v.lang)&&/female|xiaoxiao|ting|google/i.test(v.name))||vs.find(v=>/zh[-_]CN/i.test(v.lang))||vs.find(v=>/^zh/i.test(v.lang))||null}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pickVoice;pickVoice()}catch(e){}
+function say(t,o={}){return new Promise(res=>{let done=false;const fin=()=>{if(!done){done=true;res()}};
+  try{if(!o.queue)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;
+  u.rate=(o.rate||1)*(slow?.6:.85);u.pitch=o.pitch||1;u.volume=(o.volume==null?1:o.volume);u.onend=fin;u.onerror=fin;speechSynthesis.speak(u);
+  setTimeout(fin,1500+t.length*(slow?650:420))}catch(e){fin()}})}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- PLAYERS ---------- */
+const AV=['🦊','🐯','🐸','🐵','🦁','🐨','🐰','🐙','🦄','🐧'];
+let players=[];
+try{players=JSON.parse(localStorage.getItem('mj_l3_players')||'null')||[]}catch(e){}
+if(!players.length)players=[{name:'',g:'m',av:'🦊',pts:0},{name:'',g:'f',av:'🐰',pts:0}];
+const save=()=>{try{localStorage.setItem('mj_l3_players',JSON.stringify(players))}catch(e){}};
+const pname=(p,i)=>p.name.trim()||('Giocatore '+(i+1));
+const pron=p=>p.g==='f'?'她':'他';
+function renderPlist(){
+  $('#plist').innerHTML=players.map((p,i)=>`<div class="prow"><button class="av" data-i="${i}">${p.av}</button><input data-i="${i}" value="${p.name.replace(/"/g,'&quot;')}" placeholder="Nome bambino ${i+1}"><button class="g" data-i="${i}">${p.g==='f'?'👧 她':'👦 他'}</button><button class="x" data-i="${i}">✕</button></div>`).join('');
+  $$('#plist input').forEach(el=>el.oninput=()=>{players[el.dataset.i].name=el.value;save();renderScore();buildWheel()});
+  $$('#plist .g').forEach(el=>el.onclick=()=>{const p=players[el.dataset.i];p.g=p.g==='f'?'m':'f';save();renderPlist()});
+  $$('#plist .av').forEach(el=>el.onclick=()=>{const p=players[el.dataset.i];p.av=AV[(AV.indexOf(p.av)+1)%AV.length];save();renderPlist();renderScore();buildWheel()});
+  $$('#plist .x').forEach(el=>el.onclick=()=>{if(players.length>1){players.splice(el.dataset.i,1);save();renderPlist();renderScore();buildWheel()}});
+}
+$('#addP').onclick=()=>{if(players.length<8){players.push({name:'',g:'m',av:AV[players.length%AV.length],pts:0});save();renderPlist();renderScore();buildWheel()}};
+function renderScore(){
+  $('#score').innerHTML=players.map((p,i)=>`<div class="pchip">${p.av} ${pname(p,i)} <b>${p.pts}</b><button class="m" data-i="${i}">−</button><button data-i="${i}">+</button></div>`).join('');
+  $$('#score button').forEach(b=>b.onclick=()=>{const p=players[b.dataset.i];if(b.classList.contains('m'))p.pts=Math.max(0,p.pts-1);else{p.pts++;sGood();confetti(40)}save();renderScore();renderPodium()});
+}
+
+/* ---------- NAV ---------- */
+const slides=$$('.slide');let cur=0;
+$('#dots').innerHTML=slides.map((s,i)=>`<button class="dot" data-i="${i}">${s.dataset.icon}</button>`).join('');
+$$('.dot').forEach(d=>d.onclick=()=>go(+d.dataset.i));
+function go(i){if(i<0||i>=slides.length)return;try{speechSynthesis.cancel()}catch(e){}storyRun=false;
+  slides[cur].classList.remove('active');cur=i;slides[cur].classList.add('active');
+  $$('.dot').forEach((d,k)=>d.classList.toggle('on',k===cur));$$('.dot')[cur].scrollIntoView({inline:'center',block:'nearest'});
+  sPop();if(slides[cur].dataset.icon==='✍️')setTimeout(()=>loadChar(wIdx),60);if(slides[cur].dataset.icon==='🎉')renderPodium();
+  if(slides[cur].dataset.icon==='🎡')buildWheel();}
+$('#prev').onclick=()=>go(cur-1);$('#next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight')go(cur+1);else if(e.key==='ArrowLeft')go(cur-1);else if(e.key.toLowerCase()==='n')toggleNotes()});
+function toggleNotes(){document.body.classList.toggle('shownotes');$('#notesBtn').classList.toggle('on')}
+$('#notesBtn').onclick=toggleNotes;
+$('#fsBtn').onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};
+$('#dragonBtn').onclick=()=>{document.body.classList.toggle('dragon');$('#dragonBtn').classList.toggle('on');sGood();buildQuiz()};
+$('#slowBtn').onclick=()=>{slow=!slow;$('#slowBtn').classList.toggle('on',slow)};
+
+/* ---------- TIMER ---------- */
+let tEnd=0,tInt=null;
+$$('.mins').forEach(b=>b.onclick=()=>{tEnd=Date.now()+(+b.dataset.m)*60000;clearInterval(tInt);tInt=setInterval(tick,250);tick();sPop()});
+function tick(){const left=Math.max(0,tEnd-Date.now()),s=Math.ceil(left/1000);$('#clock').textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');$('#clock').classList.toggle('warn',s<=30&&s>0);if(left<=0){clearInterval(tInt);$('#clock').textContent='⏰ Fine!';beep(523,.3,'triangle');beep(659,.3,'triangle',.15,.3);beep(784,.5,'triangle',.15,.6)}}
+$('#clock').onclick=()=>{clearInterval(tInt);$('#clock').textContent='⏱ --:--';$('#clock').classList.remove('warn')};
+
+/* ---------- CONFETTI ---------- */
+const cv=$('#confetti'),cx=cv.getContext('2d');let parts=[],cRun=false;
+function confetti(n=120){cv.width=innerWidth;cv.height=innerHeight;const cols=['#e8434f','#ffd23f','#20a99a','#7b5cd6','#ff7aa8'];
+  for(let i=0;i<n;i++)parts.push({x:innerWidth/2+(Math.random()-.5)*200,y:innerHeight/2,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,c:rnd(cols),s:6+Math.random()*8,r:Math.random()*6,l:120});
+  if(!cRun){cRun=true;requestAnimationFrame(cStep)}}
+function cStep(){cx.clearRect(0,0,cv.width,cv.height);parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=.2;p.l--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cx.restore()});parts=parts.filter(p=>p.l>0&&p.y<cv.height+40);if(parts.length)requestAnimationFrame(cStep);else{cRun=false;cx.clearRect(0,0,cv.width,cv.height)}}
+
+/* ---------- 1 MYSTERY ---------- */
+const GUESTS=[{av:'🐼',g:'m',zh:'熊猫',py:'xióngmāo',it:'il panda!'},{av:'👩‍🏫',g:'f',zh:'Maja 姐姐',py:'Maja jiějie',it:'la maestra!'},{av:'🐉',g:'m',zh:'小龙',py:'Xiǎolóng',it:'il draghetto Xiaolong'},{av:'🧑‍🚀',g:'m',zh:'马可',py:'Mǎkě',it:'Marco l’astronauta'}];
+let mCur=null,mBlur=0;
+function newMystery(){const pool=[...players.map((p,i)=>({av:p.av,g:p.g,zh:pname(p,i),py:'',it:''})),...GUESTS];let m;do{m=rnd(pool)}while(pool.length>1&&mCur&&m.zh===mCur.zh);mCur=m;mBlur=3;
+  $('#mFace').textContent=m.av;$('#mFace').style.filter='blur(26px)';const p=m.g==='f'?'她':'他';$('#mQ').innerHTML=`<span class="pinyin">Tā shì shéi?</span>${p}是谁？`;$('#mA').innerHTML='';beep(300,.1);beep(400,.1,'sine',.15,.1)}
+$('#mNext').onclick=newMystery;
+$('#mSayQ').onclick=()=>mCur&&say((mCur.g==='f'?'她':'他')+'是谁？');
+$('#mReveal').onclick=()=>{if(!mCur)return newMystery();mBlur--;const b=[0,8,16,26][Math.max(0,mBlur)];$('#mFace').style.filter=`blur(${b}px)`;sPop();
+  if(mBlur<=0){const p=mCur.g==='f'?'她':'他';$('#mA').innerHTML=`<span class="pinyin">Tā shì ${mCur.py||mCur.zh}${mCur.it?' — '+mCur.it:''}</span>${p}是${mCur.zh}！`;say(p+'是'+mCur.zh);confetti(70);sGood()}};
+
+/* ---------- 2 CARDS ---------- */
+const WORDS=[
+ {c:'他',p:'tā',it:'lui',e:'👦',x:'他是成龙。'},
+ {c:'是',p:'shì',it:'essere (è, sono)',e:'🟰',x:'他是成龙。'},
+ {c:'谁',p:'shéi',it:'chi?',e:'🕵️',x:'他是谁？'},
+ {c:'哪',p:'nǎ',it:'quale?',e:'🤔',x:'哪国人？'},
+ {c:'国',p:'guó',it:'paese, nazione',e:'🗺️',x:'中国'},
+ {c:'人',p:'rén',it:'persona',e:'🧍',x:'中国人'},
+ {c:'中国人',p:'Zhōngguó rén',it:'cinese (persona)',e:'🇨🇳',x:'他是中国人。'},
+ {c:'她',p:'tā',it:'lei',e:'👧',x:'她是谁？',d:1},
+ {c:'他们',p:'tāmen',it:'loro',e:'👨‍👩‍👧',x:'他们是中国人。',d:1},
+ {c:'都',p:'dōu',it:'tutti',e:'🙌',x:'他们都是中国人。',d:1},
+ {c:'认识',p:'rènshi',it:'conoscere',e:'🤝',x:'我认识他。',d:1},
+ {c:'漂亮',p:'piàoliang',it:'bello/a',e:'✨',x:'真漂亮！',d:1}];
+$('#cards').innerHTML=WORDS.map((w,i)=>`<div class="fc ${w.d?'dragon dragon-only':''}" data-i="${i}"><div class="in"><div class="f"><div class="ch zh ${w.c.length>1?'long':''}">${w.c}</div><div class="py">${w.p}</div>${w.d?'<div>🐉</div>':''}</div><div class="b"><div class="em">${w.e}</div><div class="it">${w.it}</div><div class="ex zh">${w.x}</div></div></div></div>`).join('');
+$$('.fc').forEach(f=>f.onclick=()=>{f.classList.toggle('flip');const w=WORDS[f.dataset.i];if(f.classList.contains('flip'))say(w.c).then(()=>say(w.x,{queue:1}));else say(w.c)});
+$('#flipAll').onclick=()=>{const any=$$('.fc.flip').length;$$('.fc').forEach(f=>f.classList.toggle('flip',!any))};
+$('#flashBtn').onclick=async()=>{const pool=WORDS.filter(w=>!w.d||document.body.classList.contains('dragon'));const w=rnd(pool);for(let i=3;i>0;i--){$('#flash').textContent=i;$('#flash').classList.add('on');sTick();await wait(500)}$('#flash').textContent=w.c;beep(1000,.1);await wait(900);$('#flash').classList.remove('on');await wait(1600);say(w.c)};
+
+/* ---------- 3 SHOUT/WHISPER ---------- */
+const SW=['他','是','谁','哪','国','人','中国','中国人','他是谁？','哪国人？'];let swCur='谁',swShout=false;
+$('#swNext').onclick=()=>{let w;do{w=rnd(SW)}while(w===swCur);swCur=w;swShout=Math.random()<.5;const el=$('#swWord');el.className='zh';void el.offsetWidth;el.classList.add(swShout?'shout':'whisper');el.textContent=w;
+  $('#swMode').innerHTML=swShout?'📢 Maja GRIDA → voi sussurrate 🤫':'🤫 Maja sussurra → voi GRIDATE 📢';$('#swNext').textContent='▶️ Ancora!';
+  say(w,{volume:swShout?1:.25,pitch:swShout?1.2:.9,rate:swShout?1.05:.8})};
+$('#swSay').onclick=()=>say(swCur,{volume:swShout?1:.25});
+
+/* ---------- 4 SCENE ---------- */
+const SCENES={
+ 1:[{who:'g',zh:'他是谁？',py:'Tā shì shéi?'},{who:'m',zh:'他是成龙。',py:'Tā shì Chéng Lóng.',plate:'成龙'}],
+ 2:[{who:'g',zh:'成龙是哪国人？',py:'Chéng Lóng shì nǎ guó rén?'},{who:'m',zh:'中国人。',py:'Zhōngguó rén.',plate:'成龙 🇨🇳'}]};
+let kara=false,sceneBusy=false;
+$('#karaBtn').onclick=()=>{kara=!kara;$('#karaBtn').textContent='🎤 Modalità karaoke: '+(kara?'ON':'OFF');$('#karaBtn').classList.toggle('t',kara)};
+$$('[data-scene]').forEach(b=>b.onclick=()=>playScene(b.dataset.scene));
+async function playScene(n){if(sceneBusy)return;sceneBusy=true;const L=SCENES[n];$('#bub1').classList.remove('show');$('#bub2').classList.remove('show');$('#plate').textContent='？？？';
+  for(const l of L){const bub=l.who==='g'?$('#bub1'):$('#bub2'),act=l.who==='g'?$('#aGirl'):$('#aMum');bub.innerHTML=`<span class="pinyin">${l.py}</span>${l.zh}`;bub.classList.add('show');act.classList.remove('talk');void act.offsetWidth;act.classList.add('talk');
+    await say(l.zh,{pitch:l.who==='g'?1.5:1});if(l.plate){$('#plate').textContent=l.plate;sGood()}
+    if(kara){$('#karaMsg').classList.add('on');const bar=$('#karaBar');bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;bar.style.transition='width 3.5s linear';bar.style.width='100%';await wait(3600);$('#karaMsg').classList.remove('on')}else await wait(700)}
+  sceneBusy=false}
+let mediaRec=null,chunks=[],audioURL=null;
+$('#recBtn').onclick=async()=>{if(mediaRec&&mediaRec.state==='recording'){mediaRec.stop();return}
+  try{const st=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];mediaRec=new MediaRecorder(st);mediaRec.ondataavailable=e=>chunks.push(e.data);
+    mediaRec.onstop=()=>{st.getTracks().forEach(t=>t.stop());if(audioURL)URL.revokeObjectURL(audioURL);audioURL=URL.createObjectURL(new Blob(chunks));$('#playBtn').disabled=false;$('#recBox').classList.remove('recording');$('#recBtn').textContent='● Registra';$('#recMsg').textContent='Fatto! Riascoltati 😄'};
+    mediaRec.start();$('#recBox').classList.add('recording');$('#recBtn').textContent='■ Stop';$('#recMsg').textContent='Parla adesso: 他是谁？…'}
+  catch(e){$('#recMsg').textContent='Microfono non disponibile qui 🙈'}};
+$('#playBtn').onclick=()=>{if(audioURL)new Audio(audioURL).play()};
+
+/* ---------- 5 NATIONS ---------- */
+const FLAGS={
+ cn:{zh:'中国',py:'Zhōngguó',it:'Cina',svg:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#de2910"/><polygon points="5,2 6.2,5.6 10,5.6 6.9,7.8 8.1,11.4 5,9.2 1.9,11.4 3.1,7.8 0,5.6 3.8,5.6" fill="#ffde00"/><circle cx="11.5" cy="2.5" r=".9" fill="#ffde00"/><circle cx="13" cy="4.5" r=".9" fill="#ffde00"/><circle cx="13" cy="7.3" r=".9" fill="#ffde00"/><circle cx="11.5" cy="9.3" r=".9" fill="#ffde00"/></svg>'},
+ it:{zh:'意大利',py:'Yìdàlì',it:'Italia',svg:'<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>'},
+ fr:{zh:'法国',py:'Fǎguó',it:'Francia',svg:'<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg>'},
+ jp:{zh:'日本',py:'Rìběn',it:'Giappone',svg:'<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r=".6" fill="#bc002d"/></svg>'},
+ de:{zh:'德国',py:'Déguó',it:'Germania',svg:'<svg viewBox="0 0 5 3"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#dd0000"/><rect y="2" width="5" height="1" fill="#ffce00"/></svg>'}};
+const PEOPLE=[
+ {n:'马可',np:'Mǎkě',em:'🧔',g:'m',f:'it',h:'Si chiama Marco, vive a Venezia e mangia la pizza 🍕'},
+ {n:'小龙',np:'Xiǎolóng',em:'🧒',g:'m',f:'cn',h:'Vive a Pechino e mangia con le bacchette 🥢'},
+ {n:'Yuki',np:'Yuki',em:'👧',g:'f',f:'jp',h:'Ama il sushi 🍣 e il monte Fuji 🗻'},
+ {n:'Pierre',np:'Pierre',em:'👨‍🍳',g:'m',f:'fr',h:'Fa i croissant 🥐 a Parigi, vicino alla Torre Eiffel'},
+ {n:'Anna',np:'Anna',em:'👩',g:'f',f:'de',h:'Vive a Berlino e mangia i würstel 🌭'},
+ {n:'熊猫',np:'xióngmāo',em:'🐼',g:'m',f:'cn',h:'Mangia bambù 🎋 tutto il giorno!'},
+ {n:'Giulia',np:'Giulia',em:'👩‍🦱',g:'f',f:'it',h:'Vive a Roma, vicino al Colosseo 🏟️'},
+ {n:'小美',np:'Xiǎoměi',em:'👩‍🎤',g:'f',f:'cn',h:'Balla la danza del drago 🐉 a Shanghai'}];
+let pq=shuffle(PEOPLE),pIdx=-1,pAns=false;
+$('#flags').innerHTML=Object.entries(FLAGS).map(([k,f])=>`<button class="flag" data-k="${k}">${f.svg}<div class="zh">${f.zh}</div><div class="py">${f.py}</div><div style="font-size:15px">${f.it}</div></button>`).join('');
+$$('.flag').forEach(b=>b.onclick=()=>{const k=b.dataset.k,f=FLAGS[k];if(pIdx<0||pAns){say(f.zh+'人');return}
+  const P=pq[pIdx%pq.length];if(k===P.f){pAns=true;b.classList.add('good');sGood();confetti(80);const pr=P.g==='f'?'她':'他';$('#whoA').innerHTML=`<span class="pinyin">Tā shì ${FLAGS[k].py} rén</span>${pr}是${f.zh}人！ 👏`;say(pr+'是'+f.zh+'人')}else{b.classList.add('bad');sBad();setTimeout(()=>b.classList.remove('bad'),700)}});
+function nextPerson(){pIdx++;pAns=false;$$('.flag').forEach(b=>b.classList.remove('good','bad'));const P=pq[pIdx%pq.length];const pr=P.g==='f'?'她':'他';
+  $('#whoEm').textContent=P.em;$('#whoQ').innerHTML=`<span class="pinyin">${P.np} shì nǎ guó rén?</span>${P.n}是哪国人？`;$('#whoHint').textContent='💡 '+P.h;$('#whoA').innerHTML='';say(P.n+'是哪国人？')}
+$('#whoNext').onclick=nextPerson;$('#whoSay').onclick=()=>{if(pIdx<0)return nextPerson();const P=pq[pIdx%pq.length];say(P.n+'是哪国人？')};
+$('#whoQ').innerHTML='<span class="pinyin">Nǎ guó rén?</span>哪国人？';$('#whoHint').textContent='💡 Tocca le bandiere per ascoltarle, poi premi Prossimo!';
+
+/* ---------- 6 WHEEL ---------- */
+let wheelItems=[],wRot=0,spinning=false;
+function buildWheel(){wheelItems=[...players.map((p,i)=>({av:p.av,name:pname(p,i),g:p.g,f:'it'})),{av:'🐼',name:'熊猫',g:'m',f:'cn'},{av:'⭐',name:'Doppio!',star:1}];
+  if(wheelItems.length<4)wheelItems.push({av:'🧔',name:'马可',g:'m',f:'it'});
+  const c=$('#wheel'),x=c.getContext('2d'),n=wheelItems.length,R=360,seg=2*Math.PI/n,cols=['#e8434f','#ffd23f','#20a99a','#7b5cd6','#ff7aa8','#4dabf7','#ff922b','#51cf66','#cc5de8','#fcc419'];
+  x.clearRect(0,0,720,720);wheelItems.forEach((it,i)=>{x.beginPath();x.moveTo(R,R);x.arc(R,R,R-6,i*seg,(i+1)*seg);x.closePath();x.fillStyle=cols[i%cols.length];x.fill();x.lineWidth=6;x.strokeStyle='#fff';x.stroke();
+    x.save();x.translate(R,R);x.rotate(i*seg+seg/2);x.textAlign='right';x.textBaseline='middle';x.font='64px sans-serif';x.fillText(it.av,R-28,0);x.font='bold 34px "Baloo 2",sans-serif';x.fillStyle='#fff';x.fillText(it.name.slice(0,9),R-110,4);x.restore()});
+  x.beginPath();x.arc(R,R,46,0,7);x.fillStyle='#fff';x.fill();x.font='54px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('🐼',R,R+4)}
+$('#spinBtn').onclick=()=>{if(spinning)return;spinning=true;const n=wheelItems.length;wRot+=1800+Math.random()*360;$('#wheel').style.transform=`rotate(${wRot}deg)`;
+  let t=0;const ti=setInterval(()=>{sTick();t++;if(t>30)clearInterval(ti)},130);
+  setTimeout(()=>{spinning=false;const a=((270-wRot)%360+360)%360;const it=wheelItems[Math.floor(a/(360/n))];showWheel(it)},4300)};
+function showWheel(it){sGood();confetti(60);
+  if(it.star){$('#wres').innerHTML=`<div class="em">⭐</div><div class="l">Doppio punto!</div><p style="font-size:19px">Il prossimo che risponde bene prende <b>2 punti</b>. Gira ancora!</p>`;return}
+  const pr=it.g==='f'?'她':'他',F=FLAGS[it.f];
+  $('#wres').innerHTML=`<div class="em">${it.av}</div>
+   <div class="l zh">❓ ${pr}是谁？ <button class="say" onclick="say('${pr}是谁？')">🔊</button></div>
+   <div class="l a zh">💬 ${pr}是 ${it.name}。</div>
+   <div class="l zh">❓ ${pr}是哪国人？ <button class="say" onclick="say('${pr}是哪国人？')">🔊</button></div>
+   <div class="l a zh">💬 ${pr}是${F.zh}人。 <span style="display:inline-block;width:46px">${F.svg}</span></div>
+   <div class="l zh dragon-only" style="color:var(--red)">🐉 你认识${pr}吗？ → 我认识${pr}！</div>`}
+
+/* ---------- 7 WRITING ---------- */
+const CH=[{c:'人',p:'rén',n:2,t:'È una persona che cammina 🚶: due gambe! Il primo tratto scende a sinistra, il secondo a destra.'},
+ {c:'他',p:'tā',n:5,t:'A sinistra c’è 亻 (la "persona in piedi"), a destra 也. Lui è una persona! 👦'},
+ {c:'是',p:'shì',n:9,t:'In alto c’è 日, il sole ☀️. Sotto, una persona che cammina sotto il sole.'},
+ {c:'国',p:'guó',n:8,t:'Una grande scatola 囗 (i confini del paese) con dentro 玉, un tesoro 💎. Si chiude per ultima!',d:1},
+ {c:'谁',p:'shéi',n:10,t:'A sinistra 讠 (parlare 💬), a destra 隹 (un uccellino 🐦). Chi parla? 谁？',d:1}];
+let wIdx=0,writer=null;
+$('#wtabs').innerHTML=CH.map((c,i)=>`<button class="wtab zh ${c.d?'dragon-only':''}" data-i="${i}">${c.c}</button>`).join('');
+$$('.wtab').forEach(b=>b.onclick=()=>loadChar(+b.dataset.i));
+function loadChar(i){wIdx=i;const C=CH[i];$$('.wtab').forEach((b,k)=>b.classList.toggle('on',k===i));$('#wch').textContent=C.c;$('#wpy').textContent=C.p;$('#wn').textContent=C.n+' tratti';$('#wtip').textContent=C.t;$('#wmsg').textContent='';
+  const box=$('#hw');box.innerHTML='';const size=box.clientWidth||300;
+  if(!window.HanziWriter){box.innerHTML='<p style="padding:20px;font-size:18px">Serve la connessione internet per l’animazione dei tratti 🌐</p>';return}
+  writer=HanziWriter.create(box,C.c,{width:size,height:size,padding:22,showOutline:true,strokeColor:'#2b2140',radicalColor:'#e8434f',outlineColor:'#f1d9dc',strokeAnimationSpeed:1,delayBetweenStrokes:350,drawingColor:'#7b5cd6',drawingWidth:22,highlightColor:'#20a99a'})}
+$('#wAnim').onclick=()=>{if(!writer)return;say(CH[wIdx].c);writer.animateCharacter();$('#wmsg').textContent='Contate i tratti: 一、二、三…'};
+$('#wAir').onclick=async()=>{if(!writer)return;const n=CH[wIdx].n,nums=['一','二','三','四','五','六','七','八','九','十'];writer.hideCharacter();$('#wmsg').textContent='☁️ Alzate il dito e scrivete con me!';
+  for(let s=0;s<n;s++){if(slides[cur].dataset.icon!=='✍️')return;$('#wmsg').textContent='☁️ Tratto '+nums[s]+'!';say(nums[s]);await writer.animateStroke(s);await wait(900)}$('#wmsg').textContent='Bravissimi! 👏';say(CH[wIdx].c);sGood()};
+$('#wQuiz').onclick=()=>{if(!writer)return;$('#wmsg').textContent='✏️ Traccia nel quadrato, tratto dopo tratto';writer.quiz({showHintAfterMisses:2,onCorrectStroke:()=>sPop(),onMistake:()=>sBad(),onComplete:d=>{$('#wmsg').textContent=d.totalMistakes<2?'🌟 Perfetto! Campione dei caratteri!':'👍 Fatto! Riproviamo ancora più bello?';sGood();confetti(120);say(CH[wIdx].c)}})};
+
+/* ---------- 8 STORY ---------- */
+const STORY=[
+ {em:'👧 💃 👩',l:[['g','妈妈，她是谁？','Māma, tā shì shéi?'],['m','她是章子怡。','Tā shì Zhāng Zǐyí.']]},
+ {em:'👧 🏀 👩',l:[['g','他呢？','Tā ne?'],['m','他是姚明。','Tā shì Yáo Míng.'],['m','他们都是中国人。','Tāmen dōu shì Zhōngguó rén.']]},
+ {em:'👧 🕺 👩',l:[['g','我认识他，他是迈克尔·杰克逊。','Wǒ rènshi tā, tā shì Màikè’ěr · Jiékèxùn.']]},
+ {em:'👧 👗 👩',l:[['g','她是谁？','Tā shì shéi?'],['g','真漂亮！','Zhēn piàoliang!']]},
+ {em:'👩🏽 👋 👧',l:[['e','你好，我是艾玛。','Nǐ hǎo, wǒ shì Àimǎ.'],['g','你好！','Nǐ hǎo!'],['m','你好！','Nǐ hǎo!']]},
+ {em:'📸 👩👧👩🏽',l:[['all','一、二、三，茄子！','Yī, èr, sān, qiézi!']],photo:1}];
+const PITCH={g:1.55,m:1,e:.85,all:1.2};
+$('#comic').innerHTML=STORY.map((p,i)=>`<div class="panel" data-i="${i}"><div class="n">${i+1}</div><div class="ems">${p.em}</div>${p.l.map(l=>`<div class="ln zh"><small>${l[2]}</small>${({g:'👧',m:'👩',e:'👩🏽',all:'🎉'})[l[0]]} ${l[1]}</div>`).join('')}</div>`).join('');
+let storyRun=false;
+async function playPanel(i){const P=STORY[i],el=$$('.panel')[i];$$('.panel').forEach(p=>p.classList.remove('now'));el.classList.add('now');const lns=el.querySelectorAll('.ln');
+  for(let k=0;k<P.l.length;k++){lns.forEach(x=>x.classList.remove('on'));lns[k].classList.add('on');await say(P.l[k][1],{pitch:PITCH[P.l[k][0]]});await wait(350)}
+  lns.forEach(x=>x.classList.remove('on'));if(P.photo)photo()}
+$$('.panel').forEach(p=>p.onclick=()=>{storyRun=false;playPanel(+p.dataset.i)});
+$('#storyPlay').onclick=async()=>{storyRun=true;for(let i=0;i<STORY.length;i++){if(!storyRun)break;await playPanel(i);await wait(500)}storyRun=false};
+$('#storyStop').onclick=()=>{storyRun=false;try{speechSynthesis.cancel()}catch(e){}};
+function photo(){const s=$('#shutter');beep(2000,.04,'square',.1);beep(1400,.06,'square',.1,.05);s.style.transition='none';s.style.opacity=1;setTimeout(()=>{s.style.transition='opacity .6s';s.style.opacity=0},80);confetti(100)}
+$('#photoBtn').onclick=()=>{say('一、二、三，茄子！',{pitch:1.2});setTimeout(photo,1800)};
+
+/* ---------- 9 QUIZ ---------- */
+const QBASE=[
+ {q:'🔊 Ascolta! Che cosa dice?',a:'tā shì shéi',listen:'他是谁？',o:['他是谁？','他是人。','哪国人？'],k:0},
+ {q:'"谁" vuol dire…',o:['chi?','quale?','persona'],k:0},
+ {q:'Quale carattere vuol dire "persona"?',o:['人','大','个'],k:0},
+ {q:'成龙是哪国人？',o:['中国人','意大利人','法国人'],k:0},
+ {q:'🔊 Ascolta! Quale paese?',listen:'意大利人',o:['日本人','意大利人','德国人'],k:1},
+ {q:'他是 ___ 国人？ (di quale paese?)',o:['谁','哪','是'],k:1},
+ {q:'Come si legge 是 ?',o:['shì','shéi','nǎ'],k:0},
+ {q:'Marco Polo 是哪国人？',o:['中国人','日本人','意大利人'],k:2},
+ {q:'🔊 Ascolta! Chi è?',listen:'他是姚明。',o:['🏀 姚明','🕺 Michael','💃 章子怡'],k:0}];
+const QDRAGON=[
+ {q:'🐉 "他们都是中国人" vuol dire…',o:['Sono tutti cinesi','Lui è cinese','Chi sono loro?'],k:0},
+ {q:'🐉 "我认识他" vuol dire…',o:['Io lo conosco','Io sono lui','Lui è bello'],k:0},
+ {q:'🐉 Completa: 她真 ___！ ✨',o:['漂亮','中国','哪国'],k:0}];
+let QS=[],qi=-1,qT=null,qLocked=false;
+function buildQuiz(){QS=shuffle(QBASE).slice(0,7);if(document.body.classList.contains('dragon'))QS=QS.slice(0,5).concat(QDRAGON);qi=-1;$('#qnum').textContent='Pronti per la sfida?';$('#qtext').innerHTML='🐉 他是谁？ 🐉';$('#opts').innerHTML='';$('#qlisten').innerHTML=''}
+function showQ(){qi++;if(qi>=QS.length){$('#qnum').textContent='Fine della sfida!';$('#qtext').innerHTML='🎉 太棒了！ Tài bàng le!';$('#opts').innerHTML='';$('#qlisten').innerHTML='';confetti(200);sGood();return}
+  qLocked=false;const Q=QS[qi];$('#qnum').textContent=`Domanda ${qi+1} di ${QS.length}`;$('#qtext').textContent=Q.q;
+  $('#qlisten').innerHTML=Q.listen?'<button class="big-btn t" id="qL">🔊 Ascolta</button>':'';if(Q.listen){$('#qL').onclick=()=>say(Q.listen);setTimeout(()=>say(Q.listen),400)}
+  const order=shuffle(Q.o.map((o,i)=>i));$('#opts').innerHTML=order.map(i=>`<button class="opt zh" data-i="${i}">${Q.o[i]}</button>`).join('');
+  $$('.opt').forEach(b=>b.onclick=()=>{if(qLocked)return;const ok=+b.dataset.i===Q.k;if(ok){qLocked=true;b.classList.add('good');sGood();confetti(90);clearInterval(qT)}else{b.classList.add('bad');sBad()}});
+  const bar=$('#qtime');bar.style.transition='none';bar.style.width='100%';void bar.offsetWidth;bar.style.transition='width 15s linear';bar.style.width='0';
+  clearInterval(qT);let s=15;qT=setInterval(()=>{s--;if(s<=3&&s>0)sTick();if(s<=0){clearInterval(qT);if(!qLocked){qLocked=true;$$('.opt').forEach(b=>{if(+b.dataset.i===Q.k)b.classList.add('good')});beep(300,.3,'triangle')}}},1000)}
+$('#qStart').onclick=()=>{buildQuiz();showQ()};$('#qNext').onclick=showQ;
+
+/* ---------- 10 PODIUM ---------- */
+function renderPodium(){const top=players.map((p,i)=>({...p,nm:pname(p,i)})).sort((a,b)=>b.pts-a.pts).slice(0,3);const order=[1,0,2].filter(i=>top[i]),h=[180,140,110],med=['🥇','🥈','🥉'];
+  $('#podium').innerHTML=order.map(i=>`<div style="height:${h[i]}px"><span class="e">${top[i].av}</span>${med[i]} ${top[i].nm}<br>${top[i].pts} ⭐</div>`).join('')}
+
+/* ---------- INIT ---------- */
+renderPlist();renderScore();buildQuiz();
+go(0);
+</script>
+</body>
+</html>
