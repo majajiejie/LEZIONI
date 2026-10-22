@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione 5 · 我6岁</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script>
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2a20; --soft:#8a7566;
+  --red:#e2453c; --orange:#f39a2b; --yellow:#ffd45c; --green:#3fb37f; --blue:#3d8bd9; --purple:#8a5cc7;
+  --line:#f0e2d0; --shadow:0 6px 0 rgba(58,42,32,.08), 0 12px 30px rgba(58,42,32,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;overflow:hidden}
+.zh{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+.py{color:var(--blue);font-weight:700}
+.it{color:var(--soft)}
+
+/* top bar */
+.top{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;z-index:10}
+.brand{font-weight:800;color:var(--red);font-size:18px}
+.brand span{color:var(--soft);font-weight:500}
+.stars{background:var(--card);border-radius:30px;padding:4px 16px;font-weight:800;font-size:20px;box-shadow:var(--shadow)}
+.stars.pop{animation:pop .5s}
+@keyframes pop{50%{transform:scale(1.35)}}
+.progress{position:fixed;top:0;left:0;height:5px;background:linear-gradient(90deg,var(--red),var(--orange));transition:width .3s;z-index:11}
+
+/* slides */
+.slide{position:absolute;inset:56px 0 70px 0;display:none;flex-direction:column;align-items:center;justify-content:safe center;padding:10px 24px;overflow:auto}
+.slide.active{display:flex;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1}}
+h1{font-size:clamp(34px,5vw,58px);margin:0;line-height:1.1;text-align:center}
+h2{font-size:clamp(26px,3.4vw,40px);margin:0 0 14px;text-align:center}
+.sub{font-size:clamp(18px,2vw,24px);color:var(--soft);text-align:center;margin:4px 0}
+.time{position:absolute;top:8px;right:20px;background:var(--yellow);border-radius:20px;padding:2px 12px;font-weight:700;font-size:15px}
+.tag{display:inline-block;background:var(--red);color:#fff;border-radius:20px;padding:2px 14px;font-weight:700;font-size:16px;margin-bottom:8px}
+
+/* nav */
+.nav{position:fixed;bottom:12px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:16px;z-index:10}
+.nav button{border:0;background:var(--red);color:#fff;font:800 22px 'Baloo 2';width:56px;height:46px;border-radius:14px;cursor:pointer;box-shadow:0 4px 0 #a92d26}
+.nav button:active{transform:translateY(3px);box-shadow:0 1px 0 #a92d26}
+.nav .count{font-weight:700;color:var(--soft);min-width:70px;text-align:center}
+
+/* generic */
+.btn{border:0;cursor:pointer;font:700 18px 'Baloo 2';padding:8px 18px;border-radius:14px;background:var(--orange);color:#fff;box-shadow:0 4px 0 #c47414;margin:4px}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #c47414}
+.btn.blue{background:var(--blue);box-shadow:0 4px 0 #2a65a3}
+.btn.green{background:var(--green);box-shadow:0 4px 0 #2a8059}
+.btn.purple{background:var(--purple);box-shadow:0 4px 0 #613f92}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 4px 0 var(--line)}
+.speak{border:0;background:#fff3dd;border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer;vertical-align:middle}
+.card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:20px 26px}
+.grid{display:grid;gap:14px;width:100%;max-width:1000px}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.hidden{visibility:hidden}
+
+/* cover */
+.cover-zh{font-size:clamp(70px,11vw,140px);color:var(--red);font-weight:700;letter-spacing:8px}
+.emoji-big{font-size:clamp(60px,9vw,110px)}
+.plan{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px;max-width:900px}
+.plan span{background:#fff;border-radius:20px;padding:4px 14px;box-shadow:var(--shadow);font-size:16px}
+
+/* mood / choices */
+.choice{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:16px;text-align:center;cursor:pointer;transition:transform .15s;border:4px solid transparent}
+.choice:hover{transform:translateY(-4px)}
+.choice .e{font-size:58px}
+.choice .h{font-size:30px}
+.choice.ok{border-color:var(--green);background:#e9f8f0}
+.choice.no{border-color:var(--red);background:#fdecea}
+
+/* flip cards */
+.flip{perspective:800px;cursor:pointer;height:170px}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff}
+.face.back{transform:rotateY(180deg);background:#fff3dd}
+.face .e{font-size:70px}
+.face .h{font-size:40px}
+
+/* vocab */
+.vocab{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;width:100%;max-width:1080px;align-items:center}
+.vocab .word{font-size:clamp(70px,9vw,120px);line-height:1;color:var(--red)}
+.vocab .pin{font-size:clamp(28px,3vw,40px)}
+.vocab .mean{font-size:clamp(22px,2.4vw,30px);font-weight:700}
+.vocab .ex{margin-top:14px;font-size:clamp(22px,2.4vw,30px)}
+.tip{margin-top:14px;background:#eef6ff;border-left:6px solid var(--blue);border-radius:12px;padding:8px 14px;font-size:18px}
+.writers{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.writer{background:#fff;border-radius:18px;box-shadow:var(--shadow);position:relative;
+  background-image:linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line));
+  background-size:100% 2px,2px 100%;background-position:center;background-repeat:no-repeat}
+.wbtns{text-align:center;margin-top:12px}
+
+/* mime */
+.mime{width:340px;height:300px;font-size:30px}
+.mime .face .h{font-size:62px}
+
+/* grammar */
+.gram{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1050px;width:100%}
+.gram .card{padding:14px 20px}
+.gram h3{margin:0 0 4px;color:var(--purple);font-size:22px}
+.formula{font-size:24px;margin:4px 0}
+.formula b{background:#fff3dd;border-radius:8px;padding:0 6px}
+
+/* builder */
+.answer{min-height:76px;width:100%;max-width:800px;border:3px dashed var(--orange);border-radius:20px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:10px;background:#fff}
+.tiles{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0;min-height:70px}
+.tile{font-size:34px;background:var(--yellow);border-radius:14px;padding:4px 18px;cursor:pointer;box-shadow:0 4px 0 #d9a92b;user-select:none}
+.answer .tile{background:#ffe9a8}
+
+/* dialogue */
+.dlg{width:100%;max-width:900px;display:flex;flex-direction:column;gap:8px}
+.line{display:flex;gap:12px;align-items:flex-start}
+.line.r{flex-direction:row-reverse}
+.av{font-size:40px;flex:none;text-align:center;line-height:1}
+.av small{display:block;font-size:13px;color:var(--soft)}
+.bub{background:#fff;border-radius:18px;padding:6px 16px;box-shadow:var(--shadow);max-width:78%}
+.line.r .bub{background:#e9f8f0}
+.bub .zh{font-size:25px}
+.bub .py{font-size:16px}
+.bub .it{font-size:16px}
+.hide-py .bub .py,.hide-it .bub .it{display:none}
+
+/* match */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:14px 60px;max-width:950px;width:100%}
+.mitem{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:10px 16px;font-size:26px;cursor:pointer;border:4px solid transparent;text-align:center}
+.mitem small{display:block;font-size:15px;color:var(--blue);font-family:'Baloo 2'}
+.mitem.sel{border-color:var(--orange);background:#fff3dd}
+.mitem.done{border-color:var(--green);background:#e9f8f0;cursor:default}
+
+/* listen */
+.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:760px;width:100%}
+.lgrid .choice .e{font-size:64px}
+.feedback{font-size:26px;min-height:40px;text-align:center;margin-top:10px}
+
+@media (max-width:760px){
+  .vocab,.gram,.match{grid-template-columns:1fr}
+  .lgrid{grid-template-columns:repeat(2,1fr)}
+}
+/* extra lezione 5 */
+.dlg{gap:4px}.dlg .av{font-size:30px}.dlg .bub{padding:3px 14px}.dlg .bub .zh{font-size:21px}.dlg .bub .py,.dlg .bub .it{font-size:14px}.dlg .speak{width:28px!important;height:28px!important;font-size:14px!important}
+.nums10{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:900px;width:100%}
+.ncard{background:#fff;border-radius:20px;box-shadow:var(--shadow);text-align:center;padding:10px;cursor:pointer;border:4px solid transparent;transition:transform .15s}
+.ncard:hover{transform:translateY(-4px)}
+.ncard .a{font-size:30px;font-weight:800;color:var(--soft)}
+.ncard .h{font-size:44px;color:var(--red)}
+.ncard.on{border-color:var(--orange);background:#fff3dd}
+.g100{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:900px;width:100%}
+.g100 div{background:#d8f1e4;border-radius:8px;text-align:center;padding:3px 0;cursor:pointer;font-weight:800;font-size:18px;line-height:1.15;min-height:46px;user-select:none}
+.g100 div small{display:block;font-size:12px;font-weight:400;color:var(--red);font-family:'Noto Sans SC',sans-serif}
+.g100 div.mid{background:#e3e3f6;color:#9a96c9}
+.g100 div.open{background:#fff3dd;color:var(--ink)}
+.bigq{font-size:clamp(60px,9vw,110px);font-weight:800;color:var(--red);line-height:1}
+.album{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:950px;width:100%}
+.photo{background:#fff;padding:10px 10px 8px;border-radius:6px;box-shadow:var(--shadow);text-align:center;cursor:pointer;transform:rotate(-1.5deg);transition:transform .2s}
+.photo:nth-child(even){transform:rotate(1.5deg)}
+.photo:hover{transform:rotate(0) scale(1.04)}
+.photo .pic{background:linear-gradient(135deg,#dff0ff,#fff3dd);border-radius:4px;font-size:64px;padding:8px 0}
+.photo .cap{font-size:22px;margin-top:6px;min-height:34px}
+.photo .age{font-size:15px;color:var(--soft)}
+.guess{font:800 40px 'Baloo 2';width:150px;text-align:center;border:4px solid var(--orange);border-radius:16px;padding:4px;color:var(--ink)}
+.ball{font-size:80px;display:inline-block}
+.ball.spin{animation:spin .7s}
+@keyframes spin{to{transform:rotate(720deg) scale(1.1)}}
+@media (max-width:760px){.nums10{grid-template-columns:repeat(5,1fr)}.album{grid-template-columns:repeat(2,1fr)}.g100 div small{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="top">
+  <div class="brand">Maja Jiejie <span>· YCT · Lezione 5</span></div>
+  <div class="stars" id="stars">⭐ 0</div>
+</div>
+
+<main id="deck">
+
+<!-- COPERTINA -->
+<section class="slide">
+  <div class="tag">Lezione 5 · 第五课</div>
+  <div class="cover-zh zh">我6岁</div>
+  <div class="sub"><span class="py" style="font-size:30px">Wǒ liù suì.</span> &nbsp;— Ho 6 anni! 🎂</div>
+  <div class="plan">
+    <span>🔁 Ripasso lezione 4</span><span>🔢 Numeri 1–100</span><span>📚 3 parole nuove</span><span>🧩 Grammatica</span>
+    <span>👨‍👩‍👧 La famiglia</span><span>💬 Dialogo</span><span>📸 Album di famiglia</span><span>🏀 Lancia la palla</span><span>🐼 Indovina l'età</span>
+  </div>
+  <p class="sub" style="margin-top:20px">Raccogli più ⭐ che puoi!</p>
+</section>
+
+<!-- RIPASSO L4 -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>🔁 Ripasso lampo: lezione 4</h2>
+  <p class="sub">Guarda l'emoji e scegli la parola giusta!</p>
+  <div class="grid" id="revGrid" style="max-width:950px;margin-top:10px"></div>
+</section>
+
+<!-- NUMERI 1-10 -->
+<section class="slide">
+  <span class="time">⏱ 2 min</span>
+  <h2>🔢 I numeri da 1 a 10</h2>
+  <p class="sub">Clicca e ascolta. Poi contiamo insieme… anche con le mani, alla cinese! ✋</p>
+  <div class="nums10 zh" id="nums10" style="margin-top:10px"></div>
+  <div class="tip" style="max-width:900px">💡 In Cina si conta da 1 a 10 con <b>una mano sola</b>! La maestra ti fa vedere i gesti per 6, 7, 8, 9 e 10.</div>
+</section>
+
+<!-- COME SI FORMANO -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>🧮 Come si costruiscono i numeri?</h2>
+  <div class="gram">
+    <div class="card"><h3>10 + numero</h3><div class="formula zh">十 + 一 = <b>十一</b> <span class="py" style="font-size:16px">shíyī</span> = 11</div><div class="formula zh">十 + 五 = <b>十五</b> = 15</div></div>
+    <div class="card"><h3>numero × 10</h3><div class="formula zh">二 × 十 = <b>二十</b> <span class="py" style="font-size:16px">èrshí</span> = 20</div><div class="formula zh">五 × 十 = <b>五十</b> = 50</div></div>
+    <div class="card"><h3>decine + unità</h3><div class="formula zh">二十 + 一 = <b>二十一</b> = 21</div><div class="formula zh">九十 + 九 = <b>九十九</b> = 99</div></div>
+    <div class="card"><h3>100 = 一百</h3><div class="formula zh"><b>一百</b> <span class="py" style="font-size:16px">yìbǎi</span> = 100</div><div class="it">Facilissimo: con solo 11 caratteri sai contare fino a 99! 🤩</div></div>
+  </div>
+  <div style="text-align:center;margin-top:16px">
+    <span class="bigq" id="mkN">?</span>
+    <span class="zh hidden" id="mkZ" style="font-size:50px;margin-left:16px;color:var(--blue)">…</span><br>
+    <button class="btn purple" onclick="mkNew()">🎲 Nuovo numero</button>
+    <button class="btn ghost" onclick="mkShow()">👀 Soluzione +⭐</button>
+  </div>
+</section>
+
+<!-- TABELLA 100 -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>📋 Completa la tabella!</h2>
+  <p class="sub">Dici il numero in cinese, poi clicca la casella <b>?</b> per controllare.</p>
+  <div class="g100" id="g100" style="margin-top:8px"></div>
+  <div style="margin-top:10px">
+    <button class="btn blue" onclick="count100()">▶️ Contiamo da 1 a 100</button>
+    <button class="btn ghost" onclick="stopCount()">⏹ Stop</button>
+    <button class="btn" onclick="openAll()">👀 Mostra tutto</button>
+  </div>
+</section>
+
+<!-- ASCOLTA IL NUMERO -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>👂 Che numero è?</h2>
+  <div style="margin-bottom:12px">
+    <button class="btn blue" onclick="nPlay()">🔊 Ascolta</button>
+    <span class="sub" id="nRound" style="margin-left:10px"></span>
+  </div>
+  <div class="lgrid" id="nGrid" style="grid-template-columns:repeat(4,1fr);max-width:820px"></div>
+  <div class="feedback" id="nFb"></div>
+  <button class="btn green" id="nNextBtn" onclick="nNext()" style="display:none">➡️ Avanti</button>
+</section>
+
+<!-- FRASI CHIAVE -->
+<section class="slide">
+  <span class="time">⏱ 2 min</span>
+  <h2>Frasi chiave 🔑</h2>
+  <div class="grid" id="keyGrid" style="max-width:900px"></div>
+  <p class="sub" style="margin-top:12px">Clicca 👀 per vedere il significato.</p>
+</section>
+
+<div id="vocabSlot"></div>
+
+<!-- GRAMMATICA -->
+<section class="slide">
+  <span class="time">⏱ 4 min</span>
+  <h2>🧩 Come funziona?</h2>
+  <div class="gram">
+    <div class="card">
+      <h3>1. 几岁 o 多大?</h3>
+      <div class="formula zh">👶 你弟弟<b>几岁</b>？</div>
+      <div class="formula zh">🧑 你哥哥<b>多大</b>？</div>
+      <div class="it"><span class="zh">几岁</span> per i bambini piccoli (meno di 10 anni). <span class="zh">多大</span> per ragazzi e adulti… e per te, che hai 11 anni!</div>
+    </div>
+    <div class="card">
+      <h3>2. Niente 是 con l'età!</h3>
+      <div class="formula zh">✅ 我十一岁。 &nbsp; ❌ 我<s>是</s>十一岁。</div>
+      <div class="formula zh">Ma per dire "no": 我<b>不是</b>八岁。</div>
+      <div class="it">Nella frase normale basta <span class="zh">chi + numero + 岁</span>.</div>
+    </div>
+    <div class="card">
+      <h3>3. 也 = anche</h3>
+      <div class="formula zh">我十一岁，他<b>也</b>十一岁。</div>
+      <div class="it">Ordine: <span class="zh">chi + 也 + …</span> &nbsp;Mai <s class="zh">也他</s>!</div>
+    </div>
+    <div class="card">
+      <h3>4. Attenzione a 2 anni!</h3>
+      <div class="formula zh">我妹妹<b>两</b>岁。 <span class="py" style="font-size:16px">liǎng suì</span></div>
+      <div class="it">Per "2 anni" si dice <span class="zh">两岁</span>, non <s class="zh">二岁</s>. Però 12 = <span class="zh">十二岁</span> e 22 = <span class="zh">二十二岁</span>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAMIGLIA -->
+<section class="slide">
+  <span class="time">⏱ 2 min</span>
+  <h2>👨‍👩‍👧‍👦 Ripasso: la famiglia</h2>
+  <p class="sub">Clicca la carta per girarla e sentire la parola.</p>
+  <div class="grid" id="famGrid" style="grid-template-columns:repeat(4,1fr);margin-top:12px"></div>
+</section>
+
+<!-- DIALOGO -->
+<section class="slide">
+  <span class="time">⏱ 4 min</span>
+  <h2>💬 小乐 incontra 月月</h2>
+  <div style="margin-bottom:10px">
+    <button class="btn blue" onclick="toggleD('hide-py')">pinyin on/off</button>
+    <button class="btn purple" onclick="toggleD('hide-it')">italiano on/off</button>
+    <button class="btn" onclick="playDialog()">▶️ Ascolta tutto</button>
+  </div>
+  <div class="dlg hide-it" id="dlg"></div>
+  <p class="sub" style="margin-top:10px">Poi leggiamo a ruoli: tu sei 小乐, io sono 月月. E poi cambiamo! 🔄</p>
+</section>
+
+<!-- DOMANDE -->
+<section class="slide">
+  <span class="time">⏱ 2 min</span>
+  <h2>❓ Hai capito?</h2>
+  <div class="grid" id="qGrid" style="max-width:950px"></div>
+</section>
+
+<!-- ALBUM -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2 class="zh">📸 我家的相册 <span class="it" style="font-family:'Baloo 2';font-size:22px">L'album di famiglia</span></h2>
+  <p class="sub">Guarda la foto e dì la frase: <b class="zh">___ + numero + 岁</b>. Poi clicca per controllare!</p>
+  <div class="album" id="album" style="margin-top:10px"></div>
+</section>
+
+<!-- COSTRUISCI -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>🧱 Costruisci la frase</h2>
+  <p class="sub" id="bIt">…</p>
+  <div class="answer zh" id="bAns"></div>
+  <div class="tiles zh" id="bTiles"></div>
+  <div>
+    <button class="btn ghost" onclick="bReset()">↩️ Ricomincia</button>
+    <button class="btn green" onclick="bCheck()">✔️ Controlla</button>
+    <button class="btn blue" onclick="bNext()">➡️ Prossima</button>
+  </div>
+  <div class="feedback" id="bFb"></div>
+</section>
+
+<!-- ABBINA -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>🔗 Abbina domanda e risposta</h2>
+  <p class="sub">Clicca una frase a sinistra, poi la risposta giusta a destra.</p>
+  <div class="match zh" id="match" style="margin-top:10px"></div>
+</section>
+
+<!-- PALLA -->
+<section class="slide">
+  <span class="time">⏱ 4 min</span>
+  <h2>🏀 Lancia la palla!</h2>
+  <p class="sub">Lancia: chi riceve la palla fa la <b>domanda</b> giusta (几岁 o 多大?) e l'altro risponde!</p>
+  <div class="card" style="text-align:center;min-width:320px;margin-top:10px">
+    <div class="ball" id="ball">🏀</div>
+    <div style="font-size:70px" id="pE">❔</div>
+    <div class="zh" style="font-size:36px" id="pN"></div>
+    <div style="font-size:34px;font-weight:800;color:var(--soft)" id="pA"></div>
+    <div class="zh hidden" id="pSol" style="font-size:26px;margin-top:8px"></div>
+  </div>
+  <div style="margin-top:14px">
+    <button class="btn" onclick="throwBall()">🏀 Lancia!</button>
+    <button class="btn ghost" onclick="ballSol()">👀 Soluzione +⭐</button>
+  </div>
+</section>
+
+<!-- INDOVINA -->
+<section class="slide">
+  <span class="time">⏱ 2 min</span>
+  <h2>🐼 Quanti anni ha Nonno Panda?</h2>
+  <p class="sub zh" style="font-size:28px">熊猫爷爷多大？ <button class="speak" onclick="say('熊猫爷爷多大？')">🔊</button></p>
+  <p class="sub">Dì il numero in cinese, poi scrivilo qui. Ti dico se è di più ⬆️ o di meno ⬇️!</p>
+  <div style="margin-top:10px;text-align:center">
+    <div style="font-size:90px">🐼👴</div>
+    <input class="guess" id="gIn" type="number" min="1" max="100" onkeydown="if(event.key==='Enter')gTry()">
+    <button class="btn green" onclick="gTry()">✔️ Prova</button>
+    <button class="btn ghost" onclick="gNew()">🔄 Nuova partita</button>
+  </div>
+  <div class="feedback" id="gFb"></div>
+  <div class="sub" id="gTries"></div>
+</section>
+
+<!-- LIBRO -->
+<section class="slide">
+  <span class="time">⏱ 3 min</span>
+  <h2>📖 Ora sul libro!</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr 1fr;max-width:1000px">
+    <div class="card" style="text-align:center"><div class="emoji-big">👧👩</div><h3 style="margin:6px 0">Leggiamo</h3><div>Libro <b>pag. 20</b> · traccia <b>05-02</b></div><div class="it">月月几岁？她哥哥多大？</div></div>
+    <div class="card" style="text-align:center"><div class="emoji-big">📸</div><h3 style="margin:6px 0">Mini storia</h3><div>Libro <b>pag. 22</b> · traccia <b>05-04</b></div><div class="it">Quanti anni hanno tutti nell'album?</div></div>
+    <div class="card" style="text-align:center"><div class="emoji-big">✏️</div><h3 style="margin:6px 0">Test</h3><div>Libro <b>pag. 23</b> · traccia <b>05-05</b></div><div class="it">Ascolta, leggi e completa!</div></div>
+  </div>
+</section>
+
+<!-- FINE -->
+<section class="slide">
+  <div class="emoji-big">🎉</div>
+  <h1 class="zh" style="color:var(--red)">太棒了！</h1>
+  <p class="sub"><span class="py">Tài bàng le!</span> — Bravissimo!</p>
+  <div class="card" style="margin-top:14px;text-align:center;font-size:24px">Oggi hai raccolto <b id="finalStars">0</b> ⭐</div>
+  <div class="card" style="margin-top:14px;max-width:720px">
+    <b>📝 Compiti</b>
+    <ul style="margin:6px 0;font-size:19px">
+      <li>Libro pag. 23: finisci il <b>Test</b></li>
+      <li>Scrivi 5 volte: <span class="zh">岁 · 多大 · 也</span></li>
+      <li>Disegna la tua vita in <b>4 immagini</b> (da piccolo, oggi, da grande, da nonno!) e scrivi l'età in cinese su ognuna 🎨</li>
+    </ul>
+  </div>
+  <p class="sub zh" style="font-size:34px;margin-top:10px">再见！<button class="speak" onclick="say('再见！下次见！')">🔊</button></p>
+</section>
+
+</main>
+
+<nav class="nav">
+  <button onclick="go(-1)" aria-label="indietro">◀</button>
+  <span class="count" id="count">1 / 1</span>
+  <button onclick="go(1)" aria-label="avanti">▶</button>
+</nav>
+
+<script>
+/* ---------- voce ---------- */
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null;}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice;}
+function say(t,cb){
+  if(!('speechSynthesis' in window)){cb&&cb();return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.rate=.8;if(zhVoice)u.voice=zhVoice;
+  if(cb)u.onend=cb;speechSynthesis.speak(u);
+}
+
+/* ---------- stelle ---------- */
+let stars=0;
+function addStar(n=1){stars+=n;const s=document.getElementById('stars');s.textContent='⭐ '+stars;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');document.getElementById('finalStars').textContent=stars;}
+const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+
+/* ---------- numeri ---------- */
+const D='零一二三四五六七八九',DP=['líng','yī','èr','sān','sì','wǔ','liù','qī','bā','jiǔ'];
+function cn(n,age){if(n===100)return'一百';if(age&&n===2)return'两';const t=Math.floor(n/10),u=n%10;
+  if(n<10)return D[n];return(t>1?D[t]:'')+'十'+(u?D[u]:'');}
+function py(n,age){if(n===100)return'yìbǎi';if(age&&n===2)return'liǎng';if(age&&n===1)return'yí';const t=Math.floor(n/10),u=n%10;
+  if(n<10)return DP[n];return(t>1?DP[t]:'')+'shí'+(u?DP[u]:'');}
+function ageZh(n){return cn(n,true)+'岁';}
+function agePy(n){return py(n,true)+' suì';}
+
+/* ---------- dati ---------- */
+const VOCAB=[
+ {h:'岁',p:'suì',it:'anni (di età)',e:'🎂',ex:'我十一岁。',exp:'Wǒ shíyī suì.',exit:'Ho 11 anni.',tip:'Trucco: 岁 = 山 (montagna) + 夕 (sera). Ogni anno è una montagna di sere passate! 🏔️🌙'},
+ {h:'多大',p:'duō dà',it:'quanti anni? (lett. "quanto grande?")',e:'🤔',ex:'你爸爸多大？',exp:'Nǐ bàba duō dà?',exit:'Quanti anni ha tuo papà?',tip:'多 = due 夕 (sere) una sopra l\'altra = tante. 大 = una persona con le braccia aperte = grande. Quanto sei grande? 🙆'},
+ {h:'也',p:'yě',it:'anche',e:'🤝',ex:'我也十一岁！',exp:'Wǒ yě shíyī suì!',exit:'Anch\'io ho 11 anni!',tip:'也 va sempre DOPO la persona: 我也…, 他也…. Mai 也我!'}
+];
+const FAM=[['👴','爷爷','yéye'],['👵','奶奶','nǎinai'],['👨','爸爸','bàba'],['👩','妈妈','māma'],['🧑','哥哥','gēge'],['👱‍♀️','姐姐','jiějie'],['👦','弟弟','dìdi'],['👧','妹妹','mèimei']];
+
+/* ---------- ripasso L4 ---------- */
+const REV=[{e:'🤧',o:['感冒','休息','身体'],a:0},{e:'💊',o:['疼','药','舒服'],a:1},{e:'😴',o:['生病','一点儿','休息'],a:2},{e:'🤕',o:['疼','药','感冒'],a:0}];
+const rg=document.getElementById('revGrid');
+REV.forEach(q=>{const d=document.createElement('div');d.className='card';d.style.cssText='padding:8px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap';
+  d.innerHTML=`<span style="font-size:54px">${q.e}</span>`+q.o.map((o,k)=>`<div class="choice zh" style="padding:6px 18px;font-size:26px" data-k="${k}">${o}</div>`).join('');
+  let done=false;d.querySelectorAll('.choice').forEach(c=>c.onclick=()=>{if(done)return;if(+c.dataset.k===q.a){c.classList.add('ok');done=true;addStar();say(c.textContent);}else{c.classList.add('no');setTimeout(()=>c.classList.remove('no'),700);}});
+  rg.appendChild(d);});
+
+/* ---------- 1-10 ---------- */
+const n10=document.getElementById('nums10');
+for(let i=1;i<=10;i++){const c=document.createElement('div');c.className='ncard';c.innerHTML=`<div class="a">${i}</div><div class="h">${cn(i)}</div><div class="py">${py(i)}</div>`;
+  c.onclick=()=>{c.classList.add('on');say(cn(i));};n10.appendChild(c);}
+
+/* ---------- costruisci numero ---------- */
+let mkCur=0;
+function mkNew(){mkCur=rnd(11,99);mkN.textContent=mkCur;mkZ.textContent=cn(mkCur)+'  '+py(mkCur);mkZ.classList.add('hidden');}
+function mkShow(){if(!mkCur)return;mkZ.classList.remove('hidden');say(cn(mkCur));addStar();}
+
+/* ---------- tabella 100 ---------- */
+const g=document.getElementById('g100');const cells=[];
+for(let n=1;n<=100;n++){const c=document.createElement('div');const r=Math.ceil(n/10),col=(n-1)%10;
+  const mid=r>=3&&r<=9&&col>=1&&col<=8;c.dataset.n=n;
+  if(mid){c.className='mid';c.textContent='?';}else{c.textContent=n;}
+  c.onclick=()=>openCell(c,true);g.appendChild(c);cells.push(c);}
+function openCell(c,speak){const n=+c.dataset.n;if(!c.classList.contains('open')){c.classList.add('open');c.innerHTML=`${n}<small>${cn(n)}</small>`;}if(speak)say(cn(n));}
+let counting=false;
+function count100(){counting=true;let n=1;const step=()=>{if(!counting||n>100)return;const c=cells[n-1];openCell(c,false);c.scrollIntoView({block:'nearest'});say(cn(n),()=>{n++;setTimeout(step,80);});};step();}
+function stopCount(){counting=false;speechSynthesis&&speechSynthesis.cancel();}
+function openAll(){cells.forEach(c=>openCell(c,false));}
+
+/* ---------- ascolta numero ---------- */
+let nOrder=[],nr=0,nDone=false;const NROUNDS=8;
+function nMake(){nOrder=[];while(nOrder.length<NROUNDS){const n=rnd(11,99);if(!nOrder.includes(n))nOrder.push(n);}nr=0;}
+function nOptions(n){const t=Math.floor(n/10),u=n%10;let c=[];
+  if(u&&u!==t)c.push(u*10+t);c.push(n+10,n-10,n+1,n-1,t*10,u?u*10:n+2);
+  c=[...new Set(c.filter(x=>x>=1&&x<=99&&x!==n))];c=shuffle(c).slice(0,3);return shuffle([n,...c]);}
+const ng=document.getElementById('nGrid');
+function nShow(){const want=nOrder[nr];nRound.textContent=`Turno ${nr+1} / ${NROUNDS}`;nFb.textContent='';nDone=false;nNextBtn.style.display='none';ng.innerHTML='';
+  nOptions(want).forEach(o=>{const c=document.createElement('div');c.className='choice';c.innerHTML=`<div style="font-size:52px;font-weight:800">${o}</div>`;
+    c.onclick=()=>{if(nDone)return;if(o===want){c.classList.add('ok');nDone=true;addStar();nFb.innerHTML=`🎉 <span class="zh">${cn(want)}</span> <span class="py">${py(want)}</span>`;nNextBtn.style.display='inline-block';}
+      else{c.classList.add('no');setTimeout(()=>c.classList.remove('no'),700);nFb.textContent='Ascolta ancora… 👂';}};ng.appendChild(c);});}
+function nPlay(){say(cn(nOrder[nr]));}
+function nNext(){nr++;if(nr>=NROUNDS){nFb.innerHTML='🏆 Finito! 太棒了！';nNextBtn.style.display='none';setTimeout(()=>{nMake();nShow();},2500);return;}nShow();nPlay();}
+nMake();nShow();
+
+/* ---------- frasi chiave ---------- */
+const KEY=[['你几岁？','Nǐ jǐ suì?','Quanti anni hai? (a un bambino piccolo)'],
+ ['我六岁。','Wǒ liù suì.','Ho 6 anni.'],
+ ['你哥哥多大？','Nǐ gēge duō dà?','Quanti anni ha tuo fratello maggiore?'],
+ ['他也六岁。','Tā yě liù suì.','Anche lui ha 6 anni.']];
+const kg=document.getElementById('keyGrid');
+KEY.forEach(([h,p,it])=>{const d=document.createElement('div');d.className='card';d.style.padding='10px 20px';
+  d.innerHTML=`<span class="zh" style="font-size:30px">${h}</span> <button class="speak" onclick="say('${h}')">🔊</button> <button class="speak" onclick="this.parentNode.querySelector('.it').classList.toggle('hidden')">👀</button>
+  <div class="py" style="font-size:18px">${p}</div><div class="it hidden" style="font-size:19px">${it}</div>`;kg.appendChild(d);});
+
+/* ---------- slide parole ---------- */
+const slot=document.getElementById('vocabSlot');
+VOCAB.forEach((v,i)=>{
+  const s=document.createElement('section');s.className='slide';s.dataset.vocab=i;
+  s.innerHTML=`<span class="time">⏱ 2 min</span>
+  <div class="vocab">
+    <div>
+      <div class="tag">Parola nuova ${i+1}/${VOCAB.length} ${v.e}</div>
+      <div class="word zh">${v.h}</div>
+      <div class="pin py">${v.p} <button class="speak" onclick="say('${v.h}')">🔊</button></div>
+      <div class="mean">${v.it}</div>
+      <div class="ex card" style="padding:10px 16px"><span class="zh">${v.ex}</span> <button class="speak" onclick="say('${v.ex}')">🔊</button>
+        <div class="py" style="font-size:17px">${v.exp}</div><div class="it" style="font-size:17px">${v.exit}</div></div>
+      <div class="tip">💡 ${v.tip}</div>
+    </div>
+    <div>
+      <div class="writers" id="w${i}"></div>
+      <div class="wbtns">
+        <button class="btn" onclick="animW(${i})">▶️ Ordine dei tratti</button>
+        <button class="btn purple" onclick="quizW(${i})">✍️ Prova tu!</button>
+      </div>
+    </div>
+  </div>`;
+  slot.before(s);
+});
+slot.remove();
+const writers={};
+function buildW(i){
+  if(writers[i]||typeof HanziWriter==='undefined')return;
+  const chars=[...VOCAB[i].h];const box=document.getElementById('w'+i);
+  const size=Math.min(chars.length===1?280:220,Math.floor((window.innerWidth*0.42)/chars.length)-14);
+  writers[i]=chars.map(c=>{const d=document.createElement('div');d.className='writer';d.style.width=d.style.height=size+'px';box.appendChild(d);
+    return HanziWriter.create(d,c,{width:size,height:size,padding:12,strokeColor:'#e2453c',radicalColor:'#3d8bd9',outlineColor:'#f0e2d0',strokeAnimationSpeed:1,delayBetweenStrokes:250,showCharacter:true,showOutline:true,drawingWidth:22});});
+}
+async function animW(i){buildW(i);for(const w of writers[i]){await w.animateCharacter();}}
+function quizW(i){buildW(i);let done=0;writers[i].forEach(w=>w.quiz({onComplete:()=>{done++;if(done===writers[i].length)addStar();}}));}
+
+/* ---------- famiglia ---------- */
+const fg=document.getElementById('famGrid');
+FAM.forEach(([e,h,p])=>{const d=document.createElement('div');d.className='flip';d.style.height='150px';
+  d.innerHTML=`<div class="flip-in"><div class="face"><div class="e">${e}</div></div><div class="face back"><div class="h zh">${h}</div><div class="py">${p}</div></div></div>`;
+  d.onclick=()=>{d.classList.toggle('on');if(d.classList.contains('on'))say(h);};fg.appendChild(d);});
+
+/* ---------- dialogo ---------- */
+const DLG=[
+ ['a','你好！我叫小乐。你叫什么名字？','Nǐ hǎo! Wǒ jiào Xiǎo Lè. Nǐ jiào shénme míngzi?','Ciao! Mi chiamo Xiao Le. Tu come ti chiami?'],
+ ['b','我叫月月。你多大？','Wǒ jiào Yuèyue. Nǐ duō dà?','Mi chiamo Yueyue. Quanti anni hai?'],
+ ['a','我十一岁。你呢？','Wǒ shíyī suì. Nǐ ne?','Ho 11 anni. E tu?'],
+ ['b','我也十一岁！你看，这是我的家。','Wǒ yě shíyī suì! Nǐ kàn, zhè shì wǒ de jiā.','Anch\'io ho 11 anni! Guarda, questa è la mia famiglia.'],
+ ['a','你家有几口人？','Nǐ jiā yǒu jǐ kǒu rén?','Quante persone ci sono nella tua famiglia?'],
+ ['b','五口人：爸爸、妈妈、哥哥、妹妹和我。','Wǔ kǒu rén: bàba, māma, gēge, mèimei hé wǒ.','Cinque: papà, mamma, fratello maggiore, sorellina e io.'],
+ ['a','你哥哥多大？','Nǐ gēge duō dà?','Quanti anni ha tuo fratello?'],
+ ['b','他十五岁。','Tā shíwǔ suì.','Ha 15 anni.'],
+ ['a','你妹妹几岁？','Nǐ mèimei jǐ suì?','E la tua sorellina quanti anni ha?'],
+ ['b','她两岁！','Tā liǎng suì!','Ha 2 anni!']];
+const dlg=document.getElementById('dlg');
+DLG.forEach(([who,h,p,it])=>{const d=document.createElement('div');d.className='line'+(who==='b'?' r':'');
+  d.innerHTML=`<div class="av">${who==='a'?'🧒<small>小乐</small>':'👧<small>月月</small>'}</div>
+  <div class="bub"><span class="zh">${h}</span> <button class="speak" style="width:34px;height:34px;font-size:17px" onclick="say('${h}')">🔊</button><div class="py">${p}</div><div class="it">${it}</div></div>`;dlg.appendChild(d);});
+function toggleD(c){dlg.classList.toggle(c);}
+function playDialog(){let k=0;const next=()=>{if(k<DLG.length)say(DLG[k++][1],next);};next();}
+
+/* ---------- domande ---------- */
+const QS=[
+ {q:'月月多大？',p:'Yuèyue duō dà?',o:['她十岁。','她十一岁。','她十五岁。'],a:1},
+ {q:'小乐也十一岁吗？',p:'Xiǎo Lè yě shíyī suì ma?',o:['对，他也十一岁。','不，他两岁。'],a:0},
+ {q:'月月的哥哥多大？',p:'Yuèyue de gēge duō dà?',o:['五十岁','十五岁','十一岁'],a:1},
+ {q:'她妹妹几岁？',p:'Tā mèimei jǐ suì?',o:['两岁','二十岁','十二岁'],a:0},
+ {q:'月月家有几口人？',p:'Yuèyue jiā yǒu jǐ kǒu rén?',o:['四口人','五口人','三口人'],a:1}];
+const qg=document.getElementById('qGrid');
+QS.forEach((q,qi)=>{const d=document.createElement('div');d.className='card';d.style.padding='8px 20px';
+  d.innerHTML=`<div><span class="zh" style="font-size:25px">${qi+1}. ${q.q}</span> <button class="speak" onclick="say('${q.q}')">🔊</button> <span class="py" style="font-size:16px">${q.p}</span></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">${q.o.map((o,k)=>`<div class="choice zh" style="padding:5px 16px;font-size:22px" data-k="${k}">${o}</div>`).join('')}</div>`;
+  let done=false;
+  d.querySelectorAll('.choice').forEach(c=>c.onclick=()=>{if(done)return;if(+c.dataset.k===q.a){c.classList.add('ok');done=true;addStar();say(c.textContent);}else{c.classList.add('no');setTimeout(()=>c.classList.remove('no'),700);}});
+  qg.appendChild(d);});
+
+/* ---------- album ---------- */
+const ALB=[['👴','爷爷',72],['👵','奶奶',70],['👨','爸爸',45],['👩','妈妈',45],['👱‍♀️','姐姐',16],['👶','弟弟',2]];
+const al=document.getElementById('album');
+ALB.forEach(([e,h,n],i)=>{const d=document.createElement('div');d.className='photo';
+  const same=i>0&&ALB[i-1][2]===n;const sent=h+(same?'也':'')+ageZh(n)+'。';
+  d.innerHTML=`<div class="pic">${e}</div><div class="age">${h} · ${n}</div><div class="cap zh hidden">${sent}</div>`;
+  let shown=false;d.onclick=()=>{d.querySelector('.cap').classList.remove('hidden');say(sent);if(!shown){shown=true;addStar();}};al.appendChild(d);});
+
+/* ---------- costruisci frase ---------- */
+const BUILD=[
+ {w:['我','十一','岁'],it:'🎂 Ho 11 anni.'},
+ {w:['你','哥哥','多大'],it:'🧑 Quanti anni ha tuo fratello maggiore?'},
+ {w:['我','也','十一岁'],it:'🤝 Anch\'io ho 11 anni.'},
+ {w:['他','不是','八岁'],it:'🙅 Lui non ha 8 anni.'},
+ {w:['我弟弟','两','岁'],it:'👶 Il mio fratellino ha 2 anni.'},
+ {w:['爸爸','四十五岁','妈妈','也','四十五岁'],it:'👨👩 Papà ha 45 anni, anche la mamma ha 45 anni.'}];
+let bi=0;
+function bLoad(){const s=BUILD[bi];bIt.textContent=`(${bi+1}/${BUILD.length}) ${s.it}`;bAns.innerHTML='';bTiles.innerHTML='';bFb.textContent='';
+  let order;do{order=shuffle(s.w)}while(order.join()===s.w.join());
+  order.forEach(w=>{const t=document.createElement('span');t.className='tile';t.textContent=w;
+    t.onclick=()=>{(t.parentNode===bTiles?bAns:bTiles).appendChild(t);};bTiles.appendChild(t);});}
+function bReset(){bLoad();}
+function bCheck(){const got=[...bAns.children].map(t=>t.textContent).join('');const want=BUILD[bi].w.join('');
+  if(got===want){bFb.innerHTML='🎉 <b>对了！</b> Giusto! +⭐';addStar();say(want);}
+  else{bFb.textContent='🤔 Quasi… riprova!';bAns.classList.remove('shake');void bAns.offsetWidth;bAns.classList.add('shake');}}
+function bNext(){bi=(bi+1)%BUILD.length;bLoad();}
+bLoad();
+
+/* ---------- abbina ---------- */
+const PAIRS=[
+ ['你几岁？','Nǐ jǐ suì?','我六岁。','Wǒ liù suì.'],
+ ['你妈妈多大？','Nǐ māma duō dà?','她四十岁。','Tā sìshí suì.'],
+ ['你家有几口人？','Nǐ jiā yǒu jǐ kǒu rén?','四口人。','Sì kǒu rén.'],
+ ['你是哪国人？','Nǐ shì nǎ guó rén?','我是意大利人。','Wǒ shì Yìdàlì rén.'],
+ ['你八岁吗？','Nǐ bā suì ma?','不，我九岁。','Bù, wǒ jiǔ suì.']];
+const mt=document.getElementById('match');let mSel=null;
+const rightOrder=shuffle(PAIRS.map((_,i)=>i));
+PAIRS.forEach((pr,i)=>{
+  const L=document.createElement('div');L.className='mitem';L.dataset.i=i;L.innerHTML=`${pr[0]}<small>${pr[1]}</small>`;
+  const j=rightOrder[i];const R=document.createElement('div');R.className='mitem';R.dataset.i=j;R.innerHTML=`${PAIRS[j][2]}<small>${PAIRS[j][3]}</small>`;
+  L.onclick=()=>{if(L.classList.contains('done'))return;mt.querySelectorAll('.sel').forEach(x=>x.classList.remove('sel'));L.classList.add('sel');mSel=L;say(pr[0]);};
+  R.onclick=()=>{if(R.classList.contains('done')||!mSel)return;
+    if(mSel.dataset.i===R.dataset.i){mSel.classList.remove('sel');mSel.classList.add('done');R.classList.add('done');addStar();say(PAIRS[j][2]);mSel=null;}
+    else{R.classList.remove('shake');void R.offsetWidth;R.classList.add('shake');}};
+  mt.appendChild(L);mt.appendChild(R);});
+
+/* ---------- palla ---------- */
+const PEOPLE=[['👴','爷爷',[60,90],'他'],['👵','奶奶',[58,88],'她'],['👨','爸爸',[35,55],'他'],['👩','妈妈',[33,52],'她'],['🧑','哥哥',[12,25],'他'],['👱‍♀️','姐姐',[12,25],'她'],['👦','弟弟',[2,9],'他'],['👧','妹妹',[2,9],'她']];
+let ballCur=null;
+function throwBall(){const b=document.getElementById('ball');b.classList.remove('spin');void b.offsetWidth;b.classList.add('spin');
+  const [e,h,[lo,hi],pr]=PEOPLE[rnd(0,PEOPLE.length-1)];const n=rnd(lo,hi);ballCur={h,n,pr};
+  pE.textContent=e;pN.textContent=h;pA.textContent=n+' 🎂';pSol.classList.add('hidden');
+  const q='你'+h+(n<10?'几岁':'多大')+'？';const a='我'+h+ageZh(n)+'。';
+  pSol.innerHTML=`❓ ${q}<br>💬 ${a}`;ballCur.text=q+a;}
+function ballSol(){if(!ballCur)return;pSol.classList.remove('hidden');say(ballCur.text);addStar();}
+
+/* ---------- indovina ---------- */
+let gSecret=0,gCount=0,gWon=false;
+function gNew(){gSecret=rnd(50,100);gCount=0;gWon=false;gFb.textContent='';gTries.textContent='';gIn.value='';}
+function gTry(){if(gWon)return;const v=parseInt(gIn.value,10);if(!(v>=1&&v<=100)){gFb.textContent='Scrivi un numero da 1 a 100 🙂';return;}
+  gCount++;gTries.textContent='Tentativi: '+gCount;
+  if(v===gSecret){gWon=true;gFb.innerHTML=`🎉 <span class="zh">对了！熊猫爷爷${ageZh(v)}！</span>`;say('对了！熊猫爷爷'+ageZh(v));addStar(gCount<=5?3:1);}
+  else{const up=v<gSecret;gFb.innerHTML=`<span class="zh">不是${ageZh(v)}！</span> ${up?'⬆️ Di più!':'⬇️ Di meno!'}`;say('不是'+ageZh(v));}
+  gIn.select();}
+gNew();
+
+/* ---------- navigazione ---------- */
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+function show(n){cur=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  document.getElementById('count').textContent=`${cur+1} / ${slides.length}`;
+  document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
+  const v=slides[cur].dataset.vocab;if(v!==undefined)buildW(+v);
+  counting=false;if('speechSynthesis' in window)speechSynthesis.cancel();}
+function go(d){show(cur+d);}
+document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'||e.key==='PageDown')go(1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);});
+show(0);
+</script>
+</body>
+</html>
