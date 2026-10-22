@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Archivio lezioni · Maja Jiejie</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#e8558f;--pink2:#f78fb3;--bg:#fff8f4;--ink:#3a2e2a;--soft:#7a6a62;--line:#f3dbe5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans',Arial,sans-serif;font-size:20px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff;text-align:center;padding:28px 16px}
+header h1{margin:0;font-size:40px}
+header p{margin:6px 0 0;opacity:.95}
+main{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+.search{width:100%;font:inherit;padding:14px 18px;border-radius:18px;border:2px solid var(--line);margin-bottom:22px}
+.course{margin-bottom:26px}
+.course h2{font-size:26px;margin:0 0 10px;color:var(--pink)}
+.item{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:14px 18px;margin:10px 0;text-decoration:none;color:inherit}
+.item:hover{border-color:var(--pink)}
+.item .t{font-weight:700;flex:1}
+.item .d{color:var(--soft);font-size:16px;white-space:nowrap}
+.copy{border:0;background:#ffe3ee;border-radius:12px;padding:8px 12px;font:inherit;font-size:16px;cursor:pointer}
+.empty{color:var(--soft);text-align:center}
+</style>
+</head>
+<body>
+<header><h1>Le mie lezioni 📚</h1><p>Maja Jiejie · Chinese Academy</p></header>
+<main>
+<input class="search" id="q" placeholder="🔍 Cerca una lezione (es. YCT, Melissa, 在哪儿)…" oninput="draw()">
+<div id="list"></div>
+</main>
+<script>
+/* ELENCO LEZIONI: per aggiungerne una, aggiungere una riga qui */
+const LEZIONI=[
+ {corso:'YCT 2',titolo:'Lezione 3 · 你的铅笔呢？ (Melissa)',file:'yct2/lezione3-melissa.html',data:'2026-10-22'},
+ {corso:'YCT',titolo:'Lezione 3 · 他是谁？',file:'yct-lezione3-ta-shi-shei.html',data:''},
+ {corso:'HSKK',titolo:'HSKK Base',file:'hskk-base.html',data:''},
+ {corso:'Grammatica',titolo:'I pronomi in cinese',file:'pronomi-cinese.html',data:''},
+ {corso:'Scrittura',titolo:'Tratti di 大小长短',file:'tratti-da-xiao-chang-duan.html',data:''},
+];
+const ORDINE=['YCT','YCT 2','YCT 3','HSK 3','HSK 4','HSKK','Grammatica','Scrittura'];
+function fmt(d){if(!d)return'';const[y,m,g]=d.split('-');return g+'/'+m+'/'+y}
+function draw(){
+ const q=document.getElementById('q').value.toLowerCase().trim();
+ const rows=LEZIONI.filter(l=>!q||(l.corso+' '+l.titolo).toLowerCase().includes(q));
+ const corsi=[...new Set(rows.map(l=>l.corso))].sort((a,b)=>(ORDINE.indexOf(a)+99)%99-(ORDINE.indexOf(b)+99)%99||a.localeCompare(b));
+ document.getElementById('list').innerHTML=corsi.length?corsi.map(c=>`<div class="course"><h2>${c}</h2>${
+   rows.filter(l=>l.corso===c).sort((a,b)=>b.data.localeCompare(a.data)).map(l=>`
+   <a class="item" href="${l.file}" target="_blank"><span class="t zh">${l.titolo}</span><span class="d">${fmt(l.data)}</span>
+   <button class="copy" onclick="event.preventDefault();copia('${l.file}',this)">🔗 Copia link</button></a>`).join('')}</div>`).join('')
+  :'<p class="empty">Nessuna lezione trovata.</p>';
+}
+function copia(f,b){const u=new URL(f,location.href).href;navigator.clipboard.writeText(u).then(()=>{b.textContent='✓ Copiato';setTimeout(()=>b.textContent='🔗 Copia link',1500)})}
+draw();
+</script>
+</body>
+</html>
