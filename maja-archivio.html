@@ -36,7 +36,7 @@ main{max-width:900px;margin:0 auto;padding:24px 16px 60px}
 /* ELENCO LEZIONI: per aggiungerne una, aggiungere una riga qui */
 const LEZIONI=[
  {corso:'YCT 2',titolo:'Lezione 3 · 你的铅笔呢？ (Melissa)',file:'yct2/lezione3-melissa.html',data:'2026-10-22'},
- {corso:'YCT',titolo:'Lezione 3 · 他是谁？',file:'yct-lezione3-ta-shi-shei.html',data:''},
+ {corso:'YCT 1',titolo:'Lezione 3 · 他是谁？',file:'yct1/lezione3-ta-shi-shei.html',data:''},
  {corso:'HSKK',titolo:'HSKK Base',file:'hskk-base.html',data:''},
  {corso:'Grammatica',titolo:'I pronomi in cinese',file:'pronomi-cinese.html',data:''},
  {corso:'Scrittura',titolo:'Tratti di 大小长短',file:'tratti-da-xiao-chang-duan.html',data:''},
@@ -47,7 +47,7 @@ const LEZIONI=[
  {corso:'Lessico',titolo:'Le emozioni 情感',file:'lessico/emozioni-qinggan.html',data:'2026-10-22'},
  {corso:'Lessico',titolo:'Le Emozioni 我很高兴',file:'lessico/emozioni-wo-hen-gaoxing.html',data:'2026-10-22'},
 ];
-const ORDINE=['YCT','YCT 2','YCT 3','HSK 3','HSK 4','HSKK','Lessico','Cultura','Grammatica','Scrittura'];
+const ORDINE=['YCT 1','YCT 2','YCT 3','HSK 3','HSK 4','HSKK','Lessico','Cultura','Grammatica','Scrittura'];
 function fmt(d){if(!d)return'';const[y,m,g]=d.split('-');return g+'/'+m+'/'+y}
 function draw(){
  const q=document.getElementById('q').value.toLowerCase().trim();
