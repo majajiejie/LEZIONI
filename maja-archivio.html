@@ -40,8 +40,14 @@ const LEZIONI=[
  {corso:'HSKK',titolo:'HSKK Base',file:'hskk-base.html',data:''},
  {corso:'Grammatica',titolo:'I pronomi in cinese',file:'pronomi-cinese.html',data:''},
  {corso:'Scrittura',titolo:'Tratti di 大小长短',file:'tratti-da-xiao-chang-duan.html',data:''},
+ {corso:'Cultura',titolo:'Il Panda 熊猫',file:'cultura/panda.html',data:'2026-10-22'},
+ {corso:'Lessico',titolo:'Grande e piccolo 大小长短',file:'lessico/grande-e-piccolo.html',data:'2026-10-22'},
+ {corso:'Lessico',titolo:'I Pronomi 我 你 他',file:'lessico/pronomi.html',data:'2026-10-22'},
+ {corso:'Lessico',titolo:'Giochi dei pronomi',file:'lessico/giochi-dei-pronomi.html',data:'2026-10-22'},
+ {corso:'Lessico',titolo:'Le emozioni 情感',file:'lessico/emozioni-qinggan.html',data:'2026-10-22'},
+ {corso:'Lessico',titolo:'Le Emozioni 我很高兴',file:'lessico/emozioni-wo-hen-gaoxing.html',data:'2026-10-22'},
 ];
-const ORDINE=['YCT','YCT 2','YCT 3','HSK 3','HSK 4','HSKK','Grammatica','Scrittura'];
+const ORDINE=['YCT','YCT 2','YCT 3','HSK 3','HSK 4','HSKK','Lessico','Cultura','Grammatica','Scrittura'];
 function fmt(d){if(!d)return'';const[y,m,g]=d.split('-');return g+'/'+m+'/'+y}
 function draw(){
  const q=document.getElementById('q').value.toLowerCase().trim();

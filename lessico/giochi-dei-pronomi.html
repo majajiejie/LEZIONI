@@ -1,0 +1,381 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Giochi dei pronomi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400..800&family=Noto+Sans+SC:wght@500;700&display=swap">
+<style>
+/* Layout: una "lavagnetta" kawaii — testata con stelline, fila di schede-gioco grosse, un unico tavolo di gioco al centro. Mondo pastello unico, chiaro per scelta. */
+:root{
+  --bg:#FFF6EC; --card:#FFFDFB; --ink:#3D2C3E; --soft:#6B5566; --line:#EBDCE1;
+  --pink:#FF7FA8; --pink-l:#FFD9E5; --mint:#3FBF98; --mint-l:#CFF1E5; --yellow:#F5B416; --yellow-l:#FFEDB8;
+  --ok:#2E9E7C; --no:#D9467A;
+  --f-head:"Fredoka","Trebuchet MS",sans-serif; --f-body:"Nunito",Arial,sans-serif; --f-han:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px;
+  background-image:radial-gradient(circle at 8% 12%,var(--pink-l) 0 60px,transparent 61px),radial-gradient(circle at 94% 6%,var(--mint-l) 0 80px,transparent 81px),radial-gradient(circle at 90% 92%,var(--yellow-l) 0 70px,transparent 71px);
+  background-attachment:fixed}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+h1{font-family:var(--f-head);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;margin:0;text-wrap:balance}
+h1 .han{font-family:var(--f-han);color:var(--pink)}
+.sub{margin:4px 0 0;color:var(--soft);font-size:17px}
+.stars{display:flex;align-items:center;gap:12px;background:var(--card);border:3px solid var(--ink);border-radius:999px;padding:8px 10px 8px 18px;box-shadow:0 5px 0 var(--ink)}
+.stars b{font-family:var(--f-head);font-size:30px;font-variant-numeric:tabular-nums;min-width:2ch;text-align:center}
+.stars svg{width:34px;height:34px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:4px solid var(--mint);outline-offset:3px}
+.small{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700;color:var(--soft)}
+nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.tab{background:var(--card);border:3px solid var(--ink);border-radius:22px;padding:12px 8px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 6px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.tab .t-han{font-family:var(--f-han);font-weight:700;font-size:30px;line-height:1}
+.tab .t-name{font-family:var(--f-head);font-weight:600;font-size:18px;line-height:1.15;text-align:center}
+.tab:hover{transform:translateY(-2px)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--card);box-shadow:0 2px 0 var(--ink);transform:translateY(4px)}
+.table{background:var(--card);border:3px solid var(--ink);border-radius:32px;padding:clamp(16px,3vw,32px);box-shadow:0 10px 0 var(--pink-l);min-height:520px;display:flex;flex-direction:column;gap:18px}
+.g-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px}
+.g-head h2{font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.4vw,34px);margin:0;line-height:1.1}
+.g-head p{margin:2px 0 0;color:var(--soft);max-width:60ch}
+.big{font-family:var(--f-head);font-weight:600;font-size:22px;border:3px solid var(--ink);border-radius:999px;padding:10px 26px;background:var(--yellow);box-shadow:0 5px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.big:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.big.alt{background:var(--card)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.han{font-family:var(--f-han);font-weight:700}
+.py{font-family:var(--f-han);font-weight:700}
+/* memory */
+.mem{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.mc{display:block;width:100%;aspect-ratio:3/4;max-width:100%;perspective:800px;border:0;background:none;padding:0;cursor:pointer}
+.mc .in{display:block;position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d;pointer-events:none}
+.mc.up .in,.mc.done .in{transform:rotateY(180deg)}
+.mc .fa{position:absolute;inset:0;border:3px solid var(--ink);border-radius:18px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.mc .back{background:repeating-linear-gradient(45deg,var(--pink-l) 0 12px,#FFE9F0 12px 24px)}
+.mc .back span{font-family:var(--f-head);font-weight:700;font-size:40px;color:var(--pink);background:var(--card);border:3px solid var(--ink);border-radius:50%;width:62px;height:62px;display:flex;align-items:center;justify-content:center}
+.mc .front{transform:rotateY(180deg);background:var(--card);padding:6px}
+.mc .front svg{width:92%;height:auto}
+.mc .front .han{font-size:clamp(40px,7vw,76px);line-height:1}
+.mc.done .front{background:var(--mint-l)}
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tile{border:3px solid var(--ink);border-radius:24px;background:var(--card);padding:14px 8px;box-shadow:0 6px 0 var(--ink);display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .1s}
+.tile .han{font-size:clamp(52px,9vw,96px);line-height:1.05}
+.tile .py{font-size:22px;color:var(--soft);min-height:1.3em}
+.tile.ok{background:var(--mint-l);animation:hop .5s}
+.tile.no{animation:shake .4s}
+@keyframes hop{30%{transform:translateY(-14px) scale(1.04)}60%{transform:translateY(0)}}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.msg{font-family:var(--f-head);font-weight:600;font-size:26px;min-height:1.4em;margin:0}
+.msg.good{color:var(--ok)} .msg.bad{color:var(--no)}
+.speaker{display:flex;align-items:center;gap:10px}
+.speaker svg{width:28px;height:28px}
+.hint{color:var(--soft);font-size:16px}
+/* chi e */
+.who{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px;align-items:center}
+.who .pic{background:var(--yellow-l);border:3px solid var(--ink);border-radius:28px;aspect-ratio:1;max-width:100%;display:flex;align-items:center;justify-content:center;padding:12px}
+.who .pic svg{width:100%;height:auto}
+.opts{display:flex;flex-direction:column;gap:14px}
+.opt{display:flex;align-items:center;gap:18px;border:3px solid var(--ink);border-radius:22px;background:var(--card);padding:10px 20px;box-shadow:0 5px 0 var(--ink);text-align:left}
+.opt .han{font-size:56px;line-height:1.1}
+.opt .py{font-size:22px;color:var(--soft)}
+.opt.ok{background:var(--mint-l);animation:hop .5s} .opt.no{animation:shake .4s;background:#FBE3EA}
+.progress{display:flex;gap:6px}
+.progress i{width:16px;height:16px;border-radius:50%;border:2px solid var(--ink);background:var(--card)}
+.progress i.on{background:var(--yellow)}
+/* ruota */
+.wheel-box{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.wheel{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:0 auto}
+.wheel canvas{width:100%;height:100%;display:block}
+.wheel .pin{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-top:38px solid var(--ink)}
+.result{border:3px solid var(--ink);border-radius:28px;padding:24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:300px;justify-content:center;background:var(--pink-l)}
+.result .han{font-size:clamp(90px,14vw,150px);line-height:1}
+.result .py{font-size:34px}
+.result .it{font-family:var(--f-head);font-size:24px;color:var(--soft)}
+.result .gest{font-family:var(--f-head);font-weight:600;font-size:26px;background:var(--card);border:3px solid var(--ink);border-radius:999px;padding:6px 20px;margin-top:6px}
+/* traccia */
+.trace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.pad{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:0 auto;border:3px solid var(--ink);border-radius:24px;overflow:hidden;background:#FFFFFF;touch-action:none}
+.pad canvas{position:absolute;inset:0;width:100%;height:100%}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:3px solid var(--ink);border-radius:18px;background:var(--card);padding:6px 14px;display:flex;align-items:baseline;gap:8px;box-shadow:0 4px 0 var(--ink)}
+.chip .han{font-size:34px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+.count{font-family:var(--f-head);font-weight:600;font-size:22px}
+/* confetti */
+.cf{position:fixed;width:14px;height:14px;border-radius:4px;pointer-events:none;z-index:50}
+@media (max-width:760px){
+  nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mem{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .who,.wheel-box,.trace{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:440px){
+  nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mem{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Giochi dei pronomi <span class="han">我你他</span></h1>
+      <p class="sub">Con Maja Jiejie · 我 你 他 她 它 们</p>
+    </div>
+    <div class="stars" aria-live="polite">
+      <svg viewBox="-20 -20 40 40" aria-hidden="true"><path d="M0 -17 Q5 -5 17 0 Q5 5 0 17 Q-5 5 -17 0 Q-5 -5 0 -17Z" fill="#FFD86B" stroke="#3D2C3E" stroke-width="3" stroke-linejoin="round"/></svg>
+      <b id="score">0</b>
+      <button class="small" id="reset" type="button">Azzera</button>
+    </div>
+  </header>
+
+  <nav role="tablist" aria-label="Scegli il gioco">
+    <button class="tab" role="tab" data-g="memory" aria-selected="true" type="button"><span class="t-han">记</span><span class="t-name">Memory</span></button>
+    <button class="tab" role="tab" data-g="ascolta" aria-selected="false" type="button"><span class="t-han">听</span><span class="t-name">Ascolta e trova</span></button>
+    <button class="tab" role="tab" data-g="chi" aria-selected="false" type="button"><span class="t-han">谁</span><span class="t-name">Chi è?</span></button>
+    <button class="tab" role="tab" data-g="ruota" aria-selected="false" type="button"><span class="t-han">转</span><span class="t-name">La ruota</span></button>
+    <button class="tab" role="tab" data-g="traccia" aria-selected="false" type="button"><span class="t-han">写</span><span class="t-name">Traccia il carattere</span></button>
+  </nav>
+
+  <section class="table" id="stage" aria-live="polite"></section>
+</div>
+
+<script>
+const D = {"ch": ["我", "你", "他", "她", "它", "们"], "info": {"我": {"py": "wǒ", "it": "io", "gest": "Indica te stesso!", "col": "#FF7FA8", "light": "#FFD9E5"}, "你": {"py": "nǐ", "it": "tu", "gest": "Indica lo schermo!", "col": "#3FBF98", "light": "#CFF1E5"}, "他": {"py": "tā", "it": "lui", "gest": "Indica un bambino!", "col": "#5B9BFF", "light": "#D8E7FF"}, "她": {"py": "tā", "it": "lei", "gest": "Indica una bambina!", "col": "#FF9361", "light": "#FFE0CF"}, "它": {"py": "tā", "it": "esso (animali, cose)", "gest": "Fai il panda!", "col": "#9C7BFF", "light": "#E5DCFF"}, "们": {"py": "men", "it": "tanti (plurale)", "gest": "Abbraccia tutti!", "col": "#F5B416", "light": "#FFEDB8"}}, "ill": {"我": "<svg viewBox=\"0 0 400 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><circle cx=\"110\" cy=\"84\" r=\"36\" fill=\"#4A3346\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><circle cx=\"290\" cy=\"84\" r=\"36\" fill=\"#4A3346\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#FF8FB1\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><path d=\"M152 296 Q166 334 194 318\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M152 296 Q166 334 194 318\" fill=\"none\" stroke=\"#E8739A\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"196\" cy=\"316\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><path d=\"M250 296 Q266 326 258 350\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M250 296 Q266 326 258 350\" fill=\"none\" stroke=\"#E8739A\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"258\" cy=\"352\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M97 166 Q98 68 200 64 Q302 68 303 166 Q282 118 238 110 Q222 134 200 112 Q178 134 162 110 Q118 118 97 166 Z\" fill=\"#4A3346\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M186 210 Q200 234 214 210 Z\" fill=\"#E8607F\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/><path transform=\"translate(330 40) scale(1.0)\" d=\"M0 10 C-6 -6 -30 -4 -30 14 C-30 30 -10 40 0 50 C10 40 30 30 30 14 C30 -4 6 -6 0 10 Z\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/><path d=\"M64 222 Q67.92 232.08 78 236 Q67.92 239.92 64 250 Q60.08 239.92 50 236 Q60.08 232.08 64 222 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M348 150 Q350.8 157.2 358 160 Q350.8 162.8 348 170 Q345.2 162.8 338 160 Q345.2 157.2 348 150 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/></svg>", "你": "<svg viewBox=\"0 0 400 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#7ED9C3\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><path d=\"M252 294 Q300 286 334 254\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M252 294 Q300 286 334 254\" fill=\"none\" stroke=\"#55B99A\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"340\" cy=\"250\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><path d=\"M350 240 L372 220\" stroke=\"#5A3D4E\" stroke-width=\"22\" stroke-linecap=\"round\"/><path d=\"M350 240 L372 220\" stroke=\"#FFE5D4\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M150 296 Q134 326 142 350\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M150 296 Q134 326 142 350\" fill=\"none\" stroke=\"#55B99A\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"142\" cy=\"352\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M96 196 Q88 64 200 62 Q312 64 304 196 L290 196 Q288 132 260 120 Q200 138 140 120 Q112 132 110 196 Z\" fill=\"#8B5A3C\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M188 212 Q200 226 212 212\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M366 152 Q370.48 163.52 382 168 Q370.48 172.48 366 184 Q361.52 172.48 350 168 Q361.52 163.52 366 152 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M384 274 Q386.8 281.2 394 284 Q386.8 286.8 384 294 Q381.2 286.8 374 284 Q381.2 281.2 384 274 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M52 108 Q55.36 116.64 64 120 Q55.36 123.36 52 132 Q48.64 123.36 40 120 Q48.64 116.64 52 108 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/></svg>", "他": "<svg viewBox=\"0 0 400 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#8EC1FF\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><path d=\"M252 292 Q292 264 302 222\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M252 292 Q292 264 302 222\" fill=\"none\" stroke=\"#6E9FE0\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"304\" cy=\"214\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><path d=\"M332 186 Q346 204 338 224 M352 176 Q372 204 360 236\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M150 296 Q134 326 142 350\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M150 296 Q134 326 142 350\" fill=\"none\" stroke=\"#6E9FE0\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"142\" cy=\"352\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M98 168 Q92 64 200 62 Q308 64 302 168 Q290 122 262 112 L246 130 L236 104 Q204 122 166 104 L152 128 Q120 122 98 168 Z\" fill=\"#3B3550\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M204 64 Q192 28 226 22\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M204 64 Q192 28 226 22\" fill=\"none\" stroke=\"#3B3550\" stroke-width=\"6\" stroke-linecap=\"round\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M186 210 Q200 234 214 210 Z\" fill=\"#E8607F\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/><path d=\"M56 98 Q59.36 106.64 68 110 Q59.36 113.36 56 122 Q52.64 113.36 44 110 Q52.64 106.64 56 98 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/></svg>", "她": "<svg viewBox=\"0 0 400 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><path d=\"M94 170 Q78 300 112 344 L288 344 Q322 300 306 170 Z\" fill=\"#5B3A2E\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#FFB38A\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><path d=\"M152 296 Q172 332 192 330\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M152 296 Q172 332 192 330\" fill=\"none\" stroke=\"#F0946A\" stroke-width=\"22\" stroke-linecap=\"round\"/><path d=\"M248 296 Q228 332 208 330\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"32\" stroke-linecap=\"round\"/><path d=\"M248 296 Q228 332 208 330\" fill=\"none\" stroke=\"#F0946A\" stroke-width=\"22\" stroke-linecap=\"round\"/><circle cx=\"200\" cy=\"330\" r=\"17\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M97 176 Q96 66 200 64 Q304 66 303 176 Q286 120 240 108 Q200 130 160 108 Q114 120 97 176 Z\" fill=\"#5B3A2E\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M268 74 L238 52 L240 98 Z M268 74 L298 52 L296 98 Z\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linejoin=\"round\"/><circle cx=\"268\" cy=\"75\" r=\"10\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M188 212 Q200 226 212 212\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M344 128 Q347.36 136.64 356 140 Q347.36 143.36 344 152 Q340.64 143.36 332 140 Q340.64 136.64 344 128 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M60 240 Q62.8 247.2 70 250 Q62.8 252.8 60 260 Q57.2 252.8 50 250 Q57.2 247.2 60 240 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M200 316 L200 286\" stroke=\"#6CBF73\" stroke-width=\"6\" stroke-linecap=\"round\"/><circle cx=\"200\" cy=\"262\" r=\"11\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"4\"/><circle cx=\"213\" cy=\"272\" r=\"11\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"4\"/><circle cx=\"208\" cy=\"288\" r=\"11\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"4\"/><circle cx=\"192\" cy=\"288\" r=\"11\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"4\"/><circle cx=\"187\" cy=\"272\" r=\"11\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"4\"/><circle cx=\"200\" cy=\"276\" r=\"8\" fill=\"#FF8FB1\" stroke=\"#5A3D4E\" stroke-width=\"4\"/></svg>", "它": "<svg viewBox=\"0 0 400 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><ellipse cx=\"200\" cy=\"384\" rx=\"124\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><ellipse cx=\"200\" cy=\"304\" rx=\"108\" ry=\"82\" fill=\"#FFFDFB\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><ellipse cx=\"138\" cy=\"368\" rx=\"34\" ry=\"20\" fill=\"#3A3340\"/><ellipse cx=\"262\" cy=\"368\" rx=\"34\" ry=\"20\" fill=\"#3A3340\"/><rect x=\"268\" y=\"196\" width=\"22\" height=\"170\" rx=\"10\" fill=\"#8FD18B\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><path d=\"M290 226 Q330 206 344 222 Q322 236 290 236 Z\" fill=\"#8FD18B\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/><path d=\"M268 286 L268 290 M268 250 L290 250 M268 320 L290 320\" stroke=\"#5A3D4E\" stroke-width=\"4\"/><ellipse cx=\"124\" cy=\"290\" rx=\"28\" ry=\"40\" fill=\"#3A3340\" transform=\"rotate(25 124 290)\"/><ellipse cx=\"270\" cy=\"282\" rx=\"28\" ry=\"36\" fill=\"#3A3340\" transform=\"rotate(-20 270 282)\"/><circle cx=\"116\" cy=\"84\" r=\"34\" fill=\"#3A3340\"/><circle cx=\"284\" cy=\"84\" r=\"34\" fill=\"#3A3340\"/><circle cx=\"200\" cy=\"166\" r=\"102\" fill=\"#FFFDFB\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><ellipse cx=\"158\" cy=\"178\" rx=\"26\" ry=\"34\" fill=\"#3A3340\" transform=\"rotate(-28 158 178)\"/><ellipse cx=\"242\" cy=\"178\" rx=\"26\" ry=\"34\" fill=\"#3A3340\" transform=\"rotate(28 242 178)\"/><circle cx=\"162\" cy=\"176\" r=\"11\" fill=\"#FFFFFF\"/><circle cx=\"238\" cy=\"176\" r=\"11\" fill=\"#FFFFFF\"/><circle cx=\"164\" cy=\"177\" r=\"6\" fill=\"#3D2C3E\"/><circle cx=\"236\" cy=\"177\" r=\"6\" fill=\"#3D2C3E\"/><ellipse cx=\"200\" cy=\"206\" rx=\"13\" ry=\"9\" fill=\"#3A3340\"/><path d=\"M186 220 Q193 230 200 220 Q207 230 214 220\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linecap=\"round\"/><ellipse cx=\"128\" cy=\"214\" rx=\"16\" ry=\"9\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"272\" cy=\"214\" rx=\"16\" ry=\"9\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M60 106 Q63.92 116.08 74 120 Q63.92 123.92 60 134 Q56.08 123.92 46 120 Q56.08 116.08 60 106 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M352 320 Q354.8 327.2 362 330 Q354.8 332.8 352 340 Q349.2 332.8 342 330 Q349.2 327.2 352 320 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path transform=\"translate(352 70) scale(0.7)\" d=\"M0 10 C-6 -6 -30 -4 -30 14 C-30 30 -10 40 0 50 C10 40 30 30 30 14 C30 -4 6 -6 0 10 Z\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/></svg>", "他们": "<svg viewBox=\"0 0 400 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><g transform=\"translate(-14 150) scale(0.6)\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#8EC1FF\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M98 168 Q92 64 200 62 Q308 64 302 168 Q290 122 262 112 L246 130 L236 104 Q204 122 166 104 L152 128 Q120 122 98 168 Z\" fill=\"#3B3550\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M204 64 Q192 28 226 22\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M204 64 Q192 28 226 22\" fill=\"none\" stroke=\"#3B3550\" stroke-width=\"6\" stroke-linecap=\"round\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M186 210 Q200 234 214 210 Z\" fill=\"#E8607F\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g><g transform=\"translate(174 150) scale(0.6)\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><path d=\"M94 170 Q78 300 112 344 L288 344 Q322 300 306 170 Z\" fill=\"#5B3A2E\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#FFB38A\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M97 176 Q96 66 200 64 Q304 66 303 176 Q286 120 240 108 Q200 130 160 108 Q114 120 97 176 Z\" fill=\"#5B3A2E\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M268 74 L238 52 L240 98 Z M268 74 L298 52 L296 98 Z\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linejoin=\"round\"/><circle cx=\"268\" cy=\"75\" r=\"10\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"5\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M188 212 Q200 226 212 212\" fill=\"none\" stroke=\"#5A3D4E\" stroke-width=\"5\" stroke-linecap=\"round\"/></g><g transform=\"translate(80 112) scale(0.66)\"><ellipse cx=\"200\" cy=\"384\" rx=\"120\" ry=\"12\" fill=\"#3D2C3E\" opacity=\"0.08\"/><circle cx=\"110\" cy=\"84\" r=\"36\" fill=\"#4A3346\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><circle cx=\"290\" cy=\"84\" r=\"36\" fill=\"#4A3346\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M126 376 Q126 262 200 262 Q274 262 274 376 Z\" fill=\"#FF8FB1\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"168\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><ellipse cx=\"232\" cy=\"378\" rx=\"24\" ry=\"12\" fill=\"#5A3D4E\"/><circle cx=\"200\" cy=\"168\" r=\"104\" fill=\"#FFE5D4\" stroke=\"#5A3D4E\" stroke-width=\"6\"/><path d=\"M97 166 Q98 68 200 64 Q302 68 303 166 Q282 118 238 110 Q222 134 200 112 Q178 134 162 110 Q118 118 97 166 Z\" fill=\"#4A3346\" stroke=\"#5A3D4E\" stroke-width=\"6\" stroke-linejoin=\"round\"/><ellipse cx=\"160\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><ellipse cx=\"240\" cy=\"184\" rx=\"12\" ry=\"16\" fill=\"#3D2C3E\"/><circle cx=\"164\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><circle cx=\"244\" cy=\"178\" r=\"5\" fill=\"#FFFFFF\"/><ellipse cx=\"136\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><ellipse cx=\"264\" cy=\"210\" rx=\"18\" ry=\"10\" fill=\"#FF9EB5\" opacity=\"0.75\"/><path d=\"M186 210 Q200 234 214 210 Z\" fill=\"#E8607F\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/></g><path d=\"M40 56 Q43.92 66.08 54 70 Q43.92 73.92 40 84 Q36.08 73.92 26 70 Q36.08 66.08 40 56 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path d=\"M360 48 Q363.36 56.64 372 60 Q363.36 63.36 360 72 Q356.64 63.36 348 60 Q356.64 56.64 360 48 Z\" fill=\"#FFD86B\" stroke=\"#5A3D4E\" stroke-width=\"3\" stroke-linejoin=\"round\"/><path transform=\"translate(200 20) scale(0.8)\" d=\"M0 10 C-6 -6 -30 -4 -30 14 C-30 30 -10 40 0 50 C10 40 30 30 30 14 C30 -4 6 -6 0 10 Z\" fill=\"#FF6F9C\" stroke=\"#5A3D4E\" stroke-width=\"4\" stroke-linejoin=\"round\"/></svg>"}, "strokes": {"我": {"strokes": ["M 350 571 Q 380 593 449 614 Q 465 615 468 623 Q 471 633 458 643 Q 439 656 396 668 Q 381 674 370 672 Q 363 668 363 657 Q 364 621 200 527 Q 196 518 201 516 Q 213 516 290 546 Q 303 550 316 556 L 350 571 Z", "M 584 466 Q 666 485 734 497 Q 746 496 754 511 Q 755 524 729 533 Q 693 554 622 527 Q 598 520 575 511 L 537 499 Q 518 495 500 488 Q 442 472 386 457 L 337 446 Q 327 446 179 416 Q 148 409 173 392 Q 212 365 241 376 Q 287 389 339 404 L 387 416 Q 460 438 545 457 L 584 466 Z", "M 386 457 Q 387 493 398 517 Q 405 535 390 548 Q 371 564 350 571 C 323 583 303 583 316 556 Q 315 556 316 555 Q 338 519 337 478 Q 337 462 337 446 L 339 404 Q 340 343 339 289 L 338 241 Q 337 180 334 133 Q 333 115 323 109 Q 317 105 250 119 Q 238 122 239 114 Q 240 108 249 100 Q 309 42 328 6 Q 341 -10 357 3 Q 390 36 390 126 Q 387 169 387 265 L 387 306 Q 387 355 387 416 L 386 457 Z", "M 339 289 Q 254 261 161 229 Q 139 222 101 221 Q 86 220 85 207 Q 84 192 94 184 Q 119 166 157 147 Q 169 144 182 154 Q 239 199 338 241 L 387 265 Q 477 314 484 318 Q 499 327 498 337 Q 492 343 479 340 Q 434 324 387 306 L 339 289 Z", "M 635 195 Q 690 75 797 -14 Q 876 -62 898 -47 Q 920 -37 914 3 Q 905 34 899 152 Q 900 174 894 178 Q 890 179 884 160 Q 857 75 838 60 Q 823 56 785 88 Q 710 155 670 226 L 644 279 Q 599 381 584 466 L 575 511 Q 547 659 576 752 Q 586 779 543 805 Q 509 827 489 825 Q 470 824 479 795 Q 503 752 507 707 Q 517 601 537 499 L 545 457 Q 573 334 612 245 L 635 195 Z", "M 612 245 Q 558 197 452 138 Q 442 132 448 128 Q 455 124 468 126 Q 523 135 574 160 Q 608 175 635 195 L 670 226 Q 706 260 747 317 Q 762 336 778 354 Q 788 361 785 374 Q 781 386 753 410 Q 734 428 723 428 Q 708 427 707 411 Q 701 354 644 279 L 612 245 Z", "M 687 669 Q 718 648 754 623 Q 770 613 786 615 Q 798 618 801 632 Q 802 648 789 678 Q 780 697 746 708 Q 665 726 651 715 Q 647 711 651 697 Q 655 687 687 669 Z"], "medians": [[[458, 627], [392, 631], [336, 588], [274, 552], [258, 550], [253, 542], [220, 530], [212, 532], [203, 522]], [[174, 404], [215, 398], [241, 402], [672, 514], [742, 512]], [[323, 556], [351, 542], [365, 522], [361, 116], [340, 67], [246, 113]], [[100, 206], [124, 195], [163, 189], [492, 334]], [[492, 807], [537, 760], [538, 627], [569, 435], [612, 299], [676, 170], [717, 112], [779, 48], [817, 22], [859, 12], [880, 78], [891, 140], [886, 147], [894, 173]], [[723, 412], [737, 365], [664, 259], [594, 198], [489, 142], [454, 132]], [[657, 710], [750, 668], [781, 634]]], "radStrokes": [1, 4, 5, 6]}, "你": {"strokes": ["M 272 567 Q 306 613 342 669 Q 370 718 395 743 Q 405 753 400 769 Q 396 782 365 808 Q 337 827 316 828 Q 297 827 305 802 Q 318 769 306 741 Q 267 647 207 560 Q 150 476 72 385 Q 60 375 58 367 Q 54 355 70 358 Q 82 359 109 384 Q 155 421 213 493 Q 226 509 241 527 L 272 567 Z", "M 241 527 Q 262 506 258 375 Q 258 374 258 370 Q 254 253 221 135 Q 215 114 224 80 Q 236 44 248 32 Q 267 16 279 44 Q 294 86 294 134 Q 303 420 314 485 Q 321 515 295 543 Q 289 549 272 567 C 251 589 227 553 241 527 Z", "M 521 560 Q 561 621 602 708 Q 620 751 638 773 Q 645 786 639 799 Q 633 811 602 830 Q 572 846 554 843 Q 535 839 546 817 Q 561 795 552 757 Q 513 619 407 448 Q 398 436 397 430 Q 394 418 409 423 Q 439 432 503 532 L 521 560 Z", "M 503 532 Q 527 510 555 520 Q 795 608 782 549 Q 783 543 743 468 Q 736 458 741 453 Q 745 447 756 459 Q 852 532 894 549 Q 904 552 905 561 Q 906 574 876 592 Q 852 605 828 621 Q 800 637 783 630 Q 686 590 521 560 C 492 555 479 550 503 532 Z", "M 568 72 Q 531 81 494 91 Q 482 94 483 86 Q 484 79 494 71 Q 569 7 596 -33 Q 611 -49 626 -36 Q 659 -3 661 82 Q 655 149 655 345 Q 656 382 667 407 Q 676 426 659 439 Q 634 461 604 470 Q 585 477 577 469 Q 571 462 582 447 Q 619 384 603 127 Q 597 82 589 74 Q 582 67 568 72 Z", "M 444 320 Q 419 262 385 208 Q 364 180 381 144 Q 388 128 409 139 Q 460 181 468 264 Q 472 295 467 319 Q 463 328 456 328 Q 449 327 444 320 Z", "M 738 307 Q 789 249 847 168 Q 860 146 876 139 Q 885 138 893 146 Q 908 159 900 204 Q 891 264 743 338 Q 734 345 731 332 Q 728 319 738 307 Z"], "medians": [[[317, 812], [342, 786], [353, 759], [303, 663], [249, 577], [181, 485], [93, 386], [68, 367]], [[273, 558], [274, 525], [285, 495], [284, 441], [273, 243], [256, 123], [260, 41]], [[556, 828], [574, 817], [595, 783], [584, 746], [539, 640], [481, 531], [428, 453], [406, 431]], [[513, 532], [704, 585], [796, 597], [813, 585], [827, 563], [798, 519], [746, 460]], [[586, 463], [615, 438], [632, 412], [627, 73], [616, 41], [604, 30], [558, 47], [490, 85]], [[455, 316], [437, 243], [397, 151]], [[742, 326], [812, 265], [856, 216], [871, 190], [878, 154]]], "radStrokes": [0, 1]}, "他": {"strokes": ["M 250 530 Q 287 585 330 658 Q 354 707 377 731 Q 386 743 381 756 Q 377 769 346 791 Q 318 809 299 808 Q 280 805 289 783 Q 305 752 293 724 Q 236 568 86 372 Q 76 362 74 354 Q 71 344 85 346 Q 118 355 224 495 L 250 530 Z", "M 224 495 Q 243 435 245 429 Q 244 428 245 425 Q 251 260 220 131 Q 208 80 242 41 Q 243 38 246 36 Q 262 20 274 46 Q 289 86 288 131 Q 284 393 292 451 Q 299 478 290 488 Q 266 513 250 530 C 229 552 215 524 224 495 Z", "M 468 401 Q 507 423 573 456 L 618 479 Q 672 507 742 542 Q 760 549 765 539 Q 772 526 760 488 Q 745 436 725 372 Q 715 330 687 344 Q 668 353 650 360 Q 637 364 638 356 Q 642 344 698 279 Q 717 251 737 272 Q 777 312 791 377 Q 806 434 820 491 Q 830 527 860 557 Q 873 573 858 585 Q 839 598 789 608 Q 770 612 756 599 Q 726 571 668 540 Q 646 528 621 515 L 576 493 Q 477 451 475 448 L 423 426 Q 368 405 333 393 Q 320 392 319 381 Q 318 374 361 362 Q 385 355 422 376 L 468 401 Z", "M 573 456 Q 567 368 560 302 Q 560 274 567 252 Q 573 240 582 246 Q 600 261 610 381 Q 613 432 618 479 L 621 515 Q 633 689 644 729 Q 654 748 641 761 Q 626 777 598 791 Q 576 801 552 792 Q 540 785 554 767 Q 581 713 581 592 Q 580 547 576 493 L 573 456 Z", "M 960 171 Q 944 223 938 313 Q 937 329 930 334 Q 921 340 917 319 Q 898 210 880 191 Q 838 143 661 143 Q 564 147 523 164 Q 487 183 480 207 Q 453 273 468 401 L 475 448 Q 479 479 489 498 Q 501 529 482 546 Q 431 583 416 579 Q 401 573 408 556 Q 427 519 424 463 Q 423 444 423 426 L 422 376 Q 421 240 432 203 Q 444 157 478 133 Q 548 82 789 95 Q 898 102 941 126 Q 972 139 960 171 Z"], "medians": [[[300, 793], [317, 780], [338, 747], [308, 679], [201, 496], [136, 410], [83, 355]], [[250, 521], [267, 436], [266, 292], [252, 106], [258, 46]], [[326, 383], [378, 384], [429, 404], [756, 569], [782, 572], [804, 560], [768, 406], [739, 327], [715, 309], [677, 329], [645, 356]], [[562, 780], [583, 769], [606, 740], [603, 552], [576, 254]], [[420, 566], [442, 543], [457, 515], [441, 364], [444, 266], [453, 212], [473, 171], [509, 143], [601, 121], [710, 117], [817, 126], [895, 150], [916, 163], [927, 326]]], "radStrokes": [0, 1]}, "她": {"strokes": ["M 272 447 Q 296 538 315 631 Q 322 676 340 700 Q 352 722 344 733 Q 331 751 285 776 Q 266 786 250 778 Q 238 771 248 756 Q 284 708 230 436 L 221 393 Q 211 329 184 282 Q 175 260 196 244 Q 239 223 277 195 L 314 167 Q 342 145 379 112 Q 395 99 404 98 Q 411 99 417 109 Q 423 119 416 149 Q 409 183 340 213 L 298 232 Q 276 244 245 256 Q 226 265 226 283 Q 245 344 262 408 L 272 447 Z", "M 277 195 Q 267 182 258 167 Q 231 130 182 95 Q 170 86 154 76 Q 139 66 124 55 Q 111 46 123 44 Q 136 43 170 55 Q 221 76 259 109 Q 293 137 314 167 L 340 213 Q 374 283 383 327 Q 398 411 416 445 Q 426 461 410 471 Q 367 507 340 498 Q 327 494 333 480 Q 337 473 339 464 L 343 437 Q 343 332 298 232 L 277 195 Z", "M 339 464 Q 306 457 272 447 L 230 436 Q 170 423 106 408 Q 87 404 56 406 Q 44 405 42 396 Q 39 384 47 376 Q 68 360 96 341 Q 106 338 117 345 Q 174 381 221 393 L 262 408 Q 298 421 336 435 Q 337 436 343 437 C 372 446 368 470 339 464 Z", "M 533 363 Q 564 381 621 408 L 667 432 Q 712 456 770 483 Q 789 490 795 478 Q 801 468 762 304 Q 755 270 732 281 Q 713 293 693 303 Q 680 307 682 300 Q 685 288 735 215 Q 754 187 774 208 Q 814 248 828 312 Q 841 372 852 432 Q 862 469 891 500 Q 904 516 887 528 Q 868 540 817 549 Q 798 553 784 539 Q 759 515 707 489 Q 689 482 672 471 L 626 449 Q 545 415 542 412 L 486 390 Q 443 374 414 365 Q 401 364 399 353 Q 398 346 441 333 Q 463 327 484 335 L 533 363 Z", "M 621 408 Q 614 338 605 285 Q 604 254 611 233 Q 615 220 626 226 Q 650 247 655 326 Q 661 380 667 432 L 672 471 Q 688 664 707 730 Q 717 749 705 763 Q 690 779 661 795 Q 639 805 614 798 Q 601 791 615 773 Q 636 727 638 678 Q 639 581 626 449 L 621 408 Z", "M 960 105 Q 941 162 931 257 Q 930 273 921 278 Q 914 282 910 263 Q 897 143 880 122 Q 844 83 693 85 Q 611 89 576 105 Q 546 121 540 143 Q 513 212 533 363 L 542 412 Q 545 431 552 446 Q 565 476 546 493 Q 495 532 480 528 Q 465 522 472 505 Q 484 480 486 390 L 484 335 Q 480 178 492 140 Q 502 100 531 76 Q 591 30 805 34 Q 902 37 941 57 Q 972 73 960 105 Z"], "medians": [[[257, 766], [281, 749], [302, 717], [265, 505], [205, 268], [225, 247], [373, 159], [392, 136], [402, 110]], [[342, 487], [363, 473], [378, 449], [361, 342], [343, 278], [317, 218], [283, 163], [242, 119], [185, 77], [127, 49]], [[55, 393], [104, 375], [166, 399], [327, 446], [334, 456]], [[406, 354], [434, 351], [478, 360], [784, 509], [810, 513], [834, 500], [800, 326], [777, 263], [757, 244], [735, 256], [688, 300]], [[622, 786], [637, 779], [661, 754], [669, 742], [669, 726], [653, 484], [620, 233]], [[484, 515], [519, 465], [504, 323], [510, 162], [527, 116], [548, 93], [600, 72], [690, 60], [834, 65], [893, 82], [916, 95], [920, 270]]], "radStrokes": [0, 1, 2]}, "它": {"strokes": ["M 468 784 Q 499 757 533 726 Q 549 711 567 712 Q 579 713 584 728 Q 590 746 579 779 Q 567 815 461 839 Q 443 843 436 839 Q 430 835 432 820 Q 436 807 468 784 Z", "M 254 613 L 254 614 Q 241 638 228 646 Q 209 661 208 633 Q 214 594 155 514 Q 128 505 159 434 Q 160 431 163 427 Q 179 400 199 430 Q 217 458 229 502 Q 241 547 252 576 C 261 599 261 599 254 613 Z", "M 252 576 Q 274 567 328 582 Q 427 612 644 646 Q 720 658 740 655 Q 761 645 760 636 Q 760 635 717 543 Q 710 530 717 525 Q 724 521 741 533 Q 801 581 851 599 Q 893 615 891 625 Q 890 635 813 690 Q 788 708 714 692 Q 555 668 254 613 C 224 608 222 580 252 576 Z", "M 397 261 Q 448 279 646 361 Q 671 373 699 376 Q 724 380 719 401 Q 710 423 688 446 Q 667 468 653 469 Q 640 472 639 456 Q 636 420 513 350 Q 458 319 398 285 C 372 270 369 251 397 261 Z", "M 374 69 Q 398 35 445 19 Q 503 0 633 3 Q 831 12 852 46 Q 859 59 849 80 Q 827 134 811 217 Q 805 236 796 240 Q 789 244 784 223 Q 754 105 739 94 Q 730 84 697 76 Q 589 54 521 57 Q 440 63 407 109 Q 391 139 397 261 L 398 285 Q 404 379 416 426 Q 423 448 399 464 Q 353 498 340 491 Q 327 484 337 466 Q 353 427 350 355 Q 349 300 348 236 Q 345 116 374 69 Z"], "medians": [[[443, 830], [544, 767], [564, 732]], [[218, 639], [231, 608], [229, 596], [183, 486], [179, 431]], [[259, 582], [274, 595], [433, 628], [746, 677], [784, 665], [808, 634], [722, 532]], [[650, 459], [664, 412], [544, 341], [409, 279], [399, 267]], [[345, 479], [382, 433], [371, 225], [378, 124], [398, 79], [424, 58], [477, 37], [582, 30], [695, 40], [771, 61], [793, 75], [795, 231]]], "radStrokes": [0, 1, 2]}, "们": {"strokes": ["M 207 513 Q 259 577 317 669 Q 342 718 367 741 Q 377 751 372 766 Q 368 779 337 803 Q 309 822 290 822 Q 271 821 279 797 Q 292 766 281 739 Q 244 648 188 563 Q 133 481 59 392 Q 49 382 46 375 Q 42 363 57 366 Q 91 370 187 488 L 207 513 Z", "M 187 488 L 188 486 Q 192 470 199 458 Q 229 395 206 220 Q 199 169 185 115 Q 170 66 207 18 Q 208 15 212 12 Q 231 -4 243 24 Q 258 66 258 114 Q 261 361 270 417 Q 277 445 267 456 Q 249 478 235 492 Q 223 505 207 513 C 181 529 178 516 187 488 Z", "M 448 683 Q 499 613 528 609 Q 541 608 549 627 Q 550 640 542 662 Q 532 680 508 690 Q 469 709 453 712 Q 443 713 442 702 Q 441 693 448 683 Z", "M 354 604 Q 376 553 377 491 Q 383 263 346 141 Q 330 84 364 45 Q 376 30 386 45 Q 419 84 419 234 Q 419 495 432 571 Q 433 590 417 600 Q 395 619 366 628 Q 356 631 350 622 Q 346 615 354 604 Z", "M 592 673 Q 576 674 580 664 Q 586 651 607 641 Q 620 632 643 636 Q 685 649 735 662 Q 757 663 767 650 Q 780 643 785 580 Q 798 369 786 129 Q 786 95 772 84 Q 756 71 669 91 Q 653 92 654 83 Q 655 76 669 71 Q 745 26 786 -10 Q 808 -29 820 -26 Q 833 -23 843 6 Q 858 52 855 117 Q 839 445 840 567 Q 841 606 853 629 Q 866 650 856 661 Q 846 677 800 701 Q 782 711 711 692 Q 603 674 592 673 Z"], "medians": [[[290, 807], [307, 792], [326, 757], [279, 662], [165, 491], [112, 427], [55, 375]], [[209, 505], [212, 483], [241, 428], [236, 241], [218, 74], [224, 21]], [[455, 699], [510, 655], [528, 627]], [[361, 617], [399, 572], [401, 523], [396, 269], [391, 199], [374, 104], [375, 49]], [[589, 664], [644, 658], [746, 682], [787, 674], [816, 645], [812, 594], [821, 127], [815, 75], [801, 43], [752, 51], [662, 83]]], "radStrokes": [0, 1]}}};
+const $ = (s, r = document) => r.querySelector(s);
+const stage = $("#stage");
+let score = 0;
+try { score = +localStorage.getItem("pron-score") || 0; } catch (e) {}
+const scoreEl = $("#score"); scoreEl.textContent = score;
+function addStar(n = 1) { score += n; scoreEl.textContent = score; try { localStorage.setItem("pron-score", score); } catch (e) {} }
+$("#reset").onclick = () => { score = 0; scoreEl.textContent = 0; try { localStorage.setItem("pron-score", 0); } catch (e) {} };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function confetti(x, y) {
+  if (reduce) return;
+  const cols = ["#FF7FA8", "#3FBF98", "#F5B416", "#9C7BFF", "#5B9BFF", "#FF9361"];
+  for (let i = 0; i < 28; i++) {
+    const c = document.createElement("i"); c.className = "cf";
+    c.style.background = cols[i % cols.length]; c.style.left = x + "px"; c.style.top = y + "px";
+    document.body.appendChild(c);
+    const a = Math.random() * Math.PI * 2, v = 120 + Math.random() * 220;
+    c.animate([{ transform: "translate(0,0) rotate(0)", opacity: 1 },
+      { transform: `translate(${Math.cos(a) * v}px,${Math.sin(a) * v + 160}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }],
+      { duration: 900 + Math.random() * 500, easing: "cubic-bezier(.2,.7,.4,1)" }).onfinish = () => c.remove();
+  }
+}
+function burst(el) { const r = el.getBoundingClientRect(); confetti(r.left + r.width / 2, r.top + r.height / 2); }
+
+/* ---------- voce ---------- */
+let zhVoice = null;
+function pickVoice() { try { zhVoice = speechSynthesis.getVoices().find(v => /^zh(-|_)?(CN|Hans)?/i.test(v.lang)) || null; } catch (e) {} }
+try { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; } catch (e) {}
+function say(text) {
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = "zh-CN"; u.rate = 0.75;
+    if (zhVoice) u.voice = zhVoice;
+    speechSynthesis.speak(u); return true;
+  } catch (e) { return false; }
+}
+const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+
+/* ---------- giochi ---------- */
+const GAMES = {};
+
+GAMES.memory = () => {
+  const pairs = ["我", "你", "他", "她", "它", "他们"];
+  const cards = shuffle(pairs.flatMap(k => [{ k, t: "han" }, { k, t: "pic" }]));
+  stage.innerHTML = `<div class="g-head"><div><h2>Memory: carattere e disegno</h2><p>Gira due carte: trova il carattere che va con il suo disegno. Ogni coppia vale una stellina!</p></div>
+    <div class="row"><span class="count" id="pairs">0 / 6 coppie</span><button class="big alt" id="again" type="button">Rimescola</button></div></div>
+    <div class="mem">${cards.map((c, i) => `<button class="mc" type="button" data-i="${i}" aria-label="Carta ${i + 1}"><span class="in"><span class="fa back"><span>?</span></span>
+    <span class="fa front">${c.t === "han" ? `<span class="han">${c.k}</span><span class="py" style="font-size:18px;color:var(--soft)">${c.k === "他们" ? "tāmen" : D.info[c.k].py}</span>` : D.ill[c.k]}</span></span></button>`).join("")}</div>
+    <p class="msg good" id="m"></p>`;
+  let open = [], lock = false, found = 0;
+  $("#again").onclick = GAMES.memory;
+  stage.querySelectorAll(".mc").forEach(b => b.onclick = () => {
+    if (lock || b.classList.contains("up") || b.classList.contains("done")) return;
+    b.classList.add("up"); open.push(b);
+    if (open.length === 2) {
+      lock = true;
+      const [a, c] = open, ka = cards[a.dataset.i], kc = cards[c.dataset.i];
+      if (ka.k === kc.k && ka.t !== kc.t) {
+        setTimeout(() => { a.classList.add("done"); c.classList.add("done"); found++; addStar(); burst(c);
+          $("#pairs").textContent = found + " / 6 coppie"; say(ka.k);
+          if (found === 6) $("#m").textContent = "Bravissimi! 太棒了! tài bàng le!";
+          open = []; lock = false; }, 450);
+      } else setTimeout(() => { a.classList.remove("up"); c.classList.remove("up"); open = []; lock = false; }, 1100);
+    }
+  });
+};
+
+GAMES.ascolta = () => {
+  let target = null, tries = 0;
+  stage.innerHTML = `<div class="g-head"><div><h2>Ascolta e trova</h2><p>Premi «Ascolta»: la voce dice un pronome in cinese. Tocca il carattere giusto! (Se non senti la voce, Maja lo dice a voce alta.)</p></div>
+    <div class="row"><button class="big speaker" id="play" type="button">${SPK} Ascolta</button><button class="big alt" id="help" type="button">Aiuto: pinyin</button></div></div>
+    <div class="tiles">${D.ch.map(c => `<button class="tile" type="button" data-c="${c}"><span class="han">${c}</span><span class="py"></span></button>`).join("")}</div>
+    <p class="msg" id="m">Premi «Ascolta» per cominciare!</p>`;
+  const msg = $("#m");
+  const pool = ["我", "你", "们", "它", "他"]; // 他/她 si leggono uguali: in ascolto accettiamo entrambi
+  function next() {
+    target = pool[Math.random() * pool.length | 0]; tries = 0;
+    stage.querySelectorAll(".tile").forEach(t => { t.classList.remove("ok", "no"); t.querySelector(".py").textContent = ""; });
+    msg.className = "msg"; msg.textContent = "Ascolta bene… quale carattere è?";
+    say(target);
+  }
+  $("#play").onclick = () => { if (!target) next(); else say(target); };
+  $("#help").onclick = () => stage.querySelectorAll(".tile").forEach(t => t.querySelector(".py").textContent = D.info[t.dataset.c].py);
+  stage.querySelectorAll(".tile").forEach(t => t.onclick = () => {
+    if (!target) { msg.textContent = "Prima premi «Ascolta»!"; return; }
+    const c = t.dataset.c, ok = c === target || (target === "他" && (c === "她" || c === "它"));
+    if (ok) {
+      t.classList.add("ok"); burst(t); if (tries === 0) addStar();
+      msg.className = "msg good";
+      msg.textContent = target === "他" ? `Sì! tā può essere 他, 她 o 它: si leggono uguali!` : `Sì! ${target} ${D.info[target].py} = ${D.info[target].it}`;
+      target = null; setTimeout(() => { msg.textContent += "  Premi «Ascolta» per la prossima!"; }, 900);
+    } else { tries++; t.classList.remove("no"); void t.offsetWidth; t.classList.add("no"); msg.className = "msg bad"; msg.textContent = "Quasi! Ascolta ancora e riprova."; }
+  });
+};
+
+GAMES.chi = () => {
+  const items = [{ k: "我", a: "我" }, { k: "你", a: "你" }, { k: "他", a: "他" }, { k: "她", a: "她" }, { k: "它", a: "它" }, { k: "他们", a: "他们" }];
+  const qs = shuffle(items); let n = 0, tries = 0;
+  const PY = { "我": "wǒ", "你": "nǐ", "他": "tā", "她": "tā", "它": "tā", "他们": "tāmen", "我们": "wǒmen" };
+  const IT = { "我": "io (indica se stesso)", "你": "tu (indica te!)", "他": "lui", "她": "lei", "它": "esso (animale)", "他们": "loro" };
+  function q() {
+    if (n >= qs.length) {
+      stage.innerHTML = `<div class="result" style="background:var(--mint-l)"><span class="han">太棒了!</span><span class="py">tài bàng le!</span><span class="it">Fantastico! Hai indovinato tutti i personaggi.</span><button class="big" id="again" type="button">Gioca ancora</button></div>`;
+      $("#again").onclick = GAMES.chi; burst($(".result")); return;
+    }
+    const it = qs[n]; tries = 0;
+    const wrong = shuffle(Object.keys(PY).filter(k => k !== it.a)).slice(0, 2);
+    const opts = shuffle([it.a, ...wrong]);
+    stage.innerHTML = `<div class="g-head"><div><h2>Chi è?</h2><p>Guarda il disegno e scegli il pronome giusto.</p></div>
+      <div class="progress" aria-label="Domanda ${n + 1} di ${qs.length}">${qs.map((_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div></div>
+      <div class="who"><div class="pic">${D.ill[it.k]}</div>
+      <div class="opts">${opts.map(o => `<button class="opt" type="button" data-o="${o}"><span class="han">${o}</span><span class="py">${PY[o]}</span></button>`).join("")}</div></div>
+      <p class="msg" id="m"></p>`;
+    stage.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (b.dataset.o === it.a) {
+        b.classList.add("ok"); burst(b); if (tries === 0) addStar(); say(it.a);
+        $("#m").className = "msg good"; $("#m").textContent = `Sì! ${it.a} ${PY[it.a]} = ${IT[it.k]}`;
+        n++; setTimeout(q, 1600);
+      } else { tries++; b.classList.add("no"); $("#m").className = "msg bad"; $("#m").textContent = "Guarda bene il disegno e riprova!"; }
+    });
+  }
+  q();
+};
+
+GAMES.ruota = () => {
+  const segs = ["我", "你", "他", "她", "它", "我们", "你们", "他们"];
+  const EX = { "我们": { py: "wǒmen", it: "noi", gest: "Braccia larghe!", col: "#FF7FA8" }, "你们": { py: "nǐmen", it: "voi", gest: "Indica tutti!", col: "#3FBF98" }, "他们": { py: "tāmen", it: "loro", gest: "Indica lontano!", col: "#5B9BFF" } };
+  const inf = k => D.info[k] || EX[k];
+  const COLS = ["#FFD9E5", "#CFF1E5", "#D8E7FF", "#FFE0CF", "#E5DCFF", "#FFEDB8", "#FFC7D8", "#BFE9DA"];
+  stage.innerHTML = `<div class="g-head"><div><h2>La ruota dei pronomi</h2><p>Gira la ruota: dove si ferma? Leggi il pronome in cinese e fai il gesto!</p></div>
+    <button class="big" id="spin" type="button">Gira la ruota!</button></div>
+    <div class="wheel-box"><div class="wheel"><canvas id="wc" width="880" height="880" aria-label="Ruota con i pronomi"></canvas><span class="pin"></span></div>
+    <div class="result" id="res"><span class="it">Premi «Gira la ruota!»</span><span class="han" style="color:var(--pink)">?</span></div></div>`;
+  const cv = $("#wc"), x = cv.getContext("2d"), N = segs.length, R = 420;
+  let rot = 0, spinning = false;
+  function draw() {
+    x.clearRect(0, 0, 880, 880); x.save(); x.translate(440, 440); x.rotate(rot);
+    for (let i = 0; i < N; i++) {
+      const a0 = -Math.PI / 2 + i * 2 * Math.PI / N - Math.PI / N, a1 = a0 + 2 * Math.PI / N;
+      x.beginPath(); x.moveTo(0, 0); x.arc(0, 0, R, a0, a1); x.closePath();
+      x.fillStyle = COLS[i]; x.fill(); x.lineWidth = 8; x.strokeStyle = "#3D2C3E"; x.stroke();
+      x.save(); x.rotate((a0 + a1) / 2); x.translate(R * 0.64, 0); x.rotate(Math.PI / 2);
+      x.fillStyle = "#3D2C3E"; x.textAlign = "center"; x.textBaseline = "middle";
+      x.font = `700 ${segs[i].length > 1 ? 76 : 110}px "Noto Sans SC","PingFang SC",sans-serif`; x.fillText(segs[i], 0, 0); x.restore();
+    }
+    x.beginPath(); x.arc(0, 0, 60, 0, Math.PI * 2); x.fillStyle = "#FFFDFB"; x.fill(); x.lineWidth = 8; x.stroke();
+    x.restore();
+  }
+  draw();
+  $("#spin").onclick = () => {
+    if (spinning) return; spinning = true;
+    const pick = Math.random() * N | 0, start = rot;
+    const target = Math.ceil(start / (2 * Math.PI)) * 2 * Math.PI + 4 * 2 * Math.PI - pick * 2 * Math.PI / N + (Math.random() - .5) * (Math.PI / N) * .7;
+    const T = reduce ? 10 : 3600, t0 = performance.now();
+    $("#res").innerHTML = `<span class="it">Gira, gira…</span><span class="han" style="color:var(--pink)">?</span>`;
+    (function f(t) {
+      const p = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - p, 4);
+      rot = start + (target - start) * e; draw();
+      if (p < 1) return requestAnimationFrame(f);
+      spinning = false; const k = segs[pick], i = inf(k);
+      $("#res").style.background = COLS[pick];
+      $("#res").innerHTML = `<span class="han">${k}</span><span class="py">${i.py}</span><span class="it">${i.it}</span><span class="gest">${i.gest}</span>`;
+      say(k); burst($("#res")); addStar();
+    })(t0);
+  };
+};
+
+GAMES.traccia = () => {
+  let cur = "我", anim = null;
+  stage.innerHTML = `<div class="g-head"><div><h2>Traccia il carattere</h2><p>Scegli un carattere, premi «Guarda» per vedere l'ordine dei tratti, poi scrivilo tu con il dito o con il mouse sopra il carattere grigio.</p></div></div>
+    <div class="trace"><div class="pad"><canvas id="gc" width="880" height="880"></canvas><canvas id="dc" width="880" height="880" aria-label="Area per scrivere"></canvas></div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="chips">${D.ch.map(c => `<button class="chip" type="button" data-c="${c}" aria-pressed="${c === cur}"><span class="han">${c}</span><span class="py">${D.info[c].py}</span></button>`).join("")}</div>
+      <p class="count" id="cnt"></p>
+      <div class="row"><button class="big" id="watch" type="button">Guarda i tratti</button><button class="big alt" id="clear" type="button">Cancella</button><button class="big alt" id="done" type="button">Fatto!</button></div>
+      <p class="hint">Conta i tratti in cinese mentre scrivi: 一 yī, 二 èr, 三 sān, 四 sì, 五 wǔ, 六 liù, 七 qī.</p>
+    </div></div>`;
+  const gc = $("#gc"), g = gc.getContext("2d"), dc = $("#dc"), d = dc.getContext("2d");
+  const S = 860 / 1024;
+  const T = () => g.setTransform(S, 0, 0, -S, 10, 10 + 900 * S);
+  function gridDraw() {
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 880, 880);
+    g.strokeStyle = D.info[cur].light; g.lineWidth = 4; g.setLineDash([18, 16]);
+    g.beginPath(); g.moveTo(440, 0); g.lineTo(440, 880); g.moveTo(0, 440); g.lineTo(880, 440); g.moveTo(0, 0); g.lineTo(880, 880); g.moveTo(880, 0); g.lineTo(0, 880); g.stroke(); g.setLineDash([]);
+  }
+  function paths() { return D.strokes[cur].strokes.map(s => new Path2D(s)); }
+  function base(k) { // k = tratti completati
+    gridDraw(); T(); const ps = paths();
+    ps.forEach((p, i) => { g.fillStyle = i < k ? "#3D2C3E" : "#EFE6EA"; g.fill(p); });
+    $("#cnt").textContent = `${cur} ${D.info[cur].py} · ${ps.length} tratti`;
+  }
+  function len(m) { let L = 0; for (let i = 1; i < m.length; i++) L += Math.hypot(m[i][0] - m[i - 1][0], m[i][1] - m[i - 1][1]); return L; }
+  function partial(m, l) { g.beginPath(); g.moveTo(m[0][0], m[0][1]); let acc = 0;
+    for (let i = 1; i < m.length; i++) { const sl = Math.hypot(m[i][0] - m[i - 1][0], m[i][1] - m[i - 1][1]);
+      if (acc + sl >= l) { const r = (l - acc) / sl; g.lineTo(m[i - 1][0] + (m[i][0] - m[i - 1][0]) * r, m[i - 1][1] + (m[i][1] - m[i - 1][1]) * r); break; }
+      g.lineTo(m[i][0], m[i][1]); acc += sl; } g.stroke(); }
+  function watch() {
+    if (anim) cancelAnimationFrame(anim);
+    const ps = paths(), ms = D.strokes[cur].medians, col = D.info[cur].col; let i = 0, t0 = null;
+    function f(t) {
+      if (t0 === null) t0 = t; const L = len(ms[i]), dur = reduce ? 1 : Math.max(450, L * 0.9), p = Math.min(1, (t - t0) / dur);
+      base(i); g.save(); g.clip(ps[i]); g.strokeStyle = col; g.lineWidth = 160; g.lineCap = "round"; g.lineJoin = "round"; partial(ms[i], L * p); g.restore();
+      $("#cnt").textContent = `Tratto ${i + 1} di ${ps.length}`;
+      if (p >= 1) { i++; t0 = null; if (i >= ps.length) { base(ps.length); $("#cnt").textContent = `${cur} ${D.info[cur].py} · ${ps.length} tratti. Ora tocca a te!`; setTimeout(() => base(0), 1400); anim = null; return; }
+        anim = setTimeout(() => { anim = requestAnimationFrame(f); }, 260); return; }
+      anim = requestAnimationFrame(f);
+    }
+    anim = requestAnimationFrame(f);
+  }
+  base(0);
+  stage.querySelectorAll(".chip").forEach(b => b.onclick = () => { cur = b.dataset.c; stage.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b)); d.clearRect(0, 0, 880, 880); base(0); say(cur); });
+  $("#watch").onclick = watch;
+  $("#clear").onclick = () => d.clearRect(0, 0, 880, 880);
+  $("#done").onclick = e => { addStar(); burst(e.currentTarget); say(cur); };
+  let drawing = false, last = null;
+  const pos = e => { const r = dc.getBoundingClientRect(); return [(e.clientX - r.left) * 880 / r.width, (e.clientY - r.top) * 880 / r.height]; };
+  dc.addEventListener("pointerdown", e => { drawing = true; last = pos(e); dc.setPointerCapture(e.pointerId); });
+  dc.addEventListener("pointermove", e => { if (!drawing) return; const p = pos(e);
+    d.strokeStyle = D.info[cur].col; d.lineWidth = 34; d.lineCap = "round"; d.lineJoin = "round";
+    d.beginPath(); d.moveTo(last[0], last[1]); d.lineTo(p[0], p[1]); d.stroke(); last = p; });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(ev => dc.addEventListener(ev, () => drawing = false));
+};
+
+function show(name) {
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.g === name));
+  try { speechSynthesis.cancel(); } catch (e) {}
+  GAMES[name]();
+  try { localStorage.setItem("pron-tab", name); } catch (e) {}
+}
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => show(t.dataset.g));
+let start = location.hash.slice(1);
+if (!GAMES[start]) { try { start = localStorage.getItem("pron-tab"); } catch (e) {} }
+show(GAMES[start] ? start : "memory");
+</script>
+
+</body></html>
