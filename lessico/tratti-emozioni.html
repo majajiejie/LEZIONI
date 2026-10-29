@@ -1,0 +1,318 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Tratti delle emozioni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&text=%E4%BC%A4%E5%85%B4%E5%8D%A7%E5%AD%97%E5%AE%B3%E5%BE%88%E5%BF%83%E6%80%95%E6%83%B0%E6%87%92%E6%8A%98%E6%8D%BA%E6%8F%90%E6%92%87%E6%96%9C%E6%A0%BC%E6%A8%AA%E6%B0%94%E7%82%B9%E7%94%9F%E7%94%B0%E7%AB%96%E9%92%A9%E9%AB%98&display=swap">
+<style>
+/* Layout: lavagna 16:9 scalata come le altre lezioni Maja Jiejie; a sinistra il 田字格 dove il pennello scrive un tratto alla volta, a destra parola, tratto e comandi */
+[hidden]{display:none!important}
+:root{
+  --crema:#FBF3E4; --carta:#FFFDF7; --rosso:#C8102E; --rosso-chiaro:#F6D5CF;
+  --oro:#E9B949; --oro-chiaro:#FBEBC0; --verde:#3F8A2A; --verde-chiaro:#CDE8BC; --azzurro:#2F7FB8; --azzurro-chiaro:#D6E8F5;
+  --viola:#7A4FB0; --ink:#2B1B17; --grigio:#6A5A55; --fondo:#E8D9C4; --guida:#E3CFC0; --ombra:#EADFD3;
+  --f-body:'Fredoka','Trebuchet MS',Arial,sans-serif;
+  --f-han:'Noto Sans SC','PingFang SC','Microsoft YaHei','Heiti SC',sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{margin:0;background:var(--fondo);color:var(--ink);font-family:var(--f-body);overflow:hidden;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--azzurro);outline-offset:3px}
+
+.viewport{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;transform:translate(-50%,-50%) scale(.5);background:var(--crema);border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(90,40,20,.25)}
+.cornice{position:absolute;inset:18px;border:4px solid var(--rosso);border-radius:10px;pointer-events:none;box-shadow:inset 0 0 0 8px var(--crema),inset 0 0 0 11px var(--oro)}
+.lanterna{position:absolute;top:0;width:110px;height:184px;pointer-events:none}
+.slide{position:absolute;inset:0;display:none}
+.slide.on{display:block;animation:entra .45s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;padding:0 16px env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:center;gap:14px;background:var(--fondo)}
+.nav button{border:3px solid var(--ink);background:var(--carta);border-radius:999px;height:44px;min-width:44px;padding:0 16px;font-weight:600;font-size:17px;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.nav button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.nav .conta{font-weight:600;font-size:17px;min-width:90px;text-align:center;font-variant-numeric:tabular-nums}
+.nav .titolo-slide{font-size:15px;color:var(--grigio);max-width:30vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.nav .titolo-slide{display:none}}
+
+.abs{position:absolute}
+.han{font-family:var(--f-han);line-height:1.05;font-weight:500}
+.btn{border:4px solid var(--ink);background:var(--carta);border-radius:999px;padding:12px 28px;font-size:30px;font-weight:600;cursor:pointer;box-shadow:0 6px 0 var(--ink);transition:transform .08s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.btn.oro{background:var(--oro)}
+.btn.attivo{background:var(--verde-chiaro)}
+.cornice-han{background:var(--carta);border:5px solid var(--rosso);border-radius:14px;box-shadow:inset 0 0 0 7px var(--carta),inset 0 0 0 10px var(--oro)}
+.carta-c{border:4px solid var(--ink);border-radius:22px;background:var(--carta);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 0 var(--ink);transition:transform .15s;padding:12px}
+.slide.car .btn{padding:12px 14px;white-space:nowrap;font-size:28px}
+.carta-c:hover{transform:translateY(-4px)}
+
+/* parola con il carattere attuale evidenziato */
+.parola{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.parola .pc{border:3px solid var(--ink);border-radius:14px;background:var(--carta);font-size:46px;width:72px;height:72px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 4px 0 var(--ink)}
+.parola .pc.qui{color:var(--carta)}
+.parola .pc:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+
+/* 田字格 */
+.griglia{display:block;background:var(--carta);border-radius:10px}
+.griglia .linea{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.griglia .num{font-family:var(--f-body);font-weight:700;font-size:60px}
+.traccia{touch-action:none;cursor:crosshair}
+
+/* tratti mostrati a destra */
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:56px;height:56px;border-radius:14px;border:3px solid var(--ink);background:var(--carta);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;box-sizing:border-box}
+.chip.fatto{background:var(--oro)}
+.chip.ora{background:var(--rosso);color:var(--carta);transform:scale(1.1)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="lanterna" viewBox="0 0 90 150"><line x1="45" y1="0" x2="45" y2="30" stroke="#8A1C1C" stroke-width="4"/><rect x="25" y="26" width="40" height="10" rx="3" fill="#E9B949"/><ellipse cx="45" cy="75" rx="40" ry="40" fill="#D7262E"/><path d="M45 35 V115 M25 42 Q15 75 25 108 M65 42 Q75 75 65 108" stroke="#A3121F" stroke-width="3" fill="none"/><rect x="25" y="112" width="40" height="10" rx="3" fill="#E9B949"/><path d="M38 122 V148 M45 122 V150 M52 122 V148" stroke="#D7262E" stroke-width="4"/></symbol>
+</defs></svg>
+
+<div class="viewport" id="viewport">
+<div class="stage" id="stage" role="region" aria-label="Animazioni dell'ordine dei tratti delle emozioni">
+
+<!-- 1 INTRO -->
+<section class="slide" data-titolo="Come si scrivono le emozioni?">
+  <div class="cornice"></div>
+  <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg><svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
+  <h1 class="abs" style="left:0;right:0;top:50px;margin:0;text-align:center;font-size:84px;color:var(--rosso)">Come si scrivono le emozioni?</h1>
+  <p class="abs" style="left:0;right:0;top:160px;margin:0;text-align:center;font-size:34px;font-weight:600">Guardate il pennello: un tratto alla volta, sempre nello stesso ordine!</p>
+  <div class="abs" id="intro-carte" style="left:120px;top:230px;width:1360px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px"></div>
+</section>
+
+<!-- slide dei caratteri: create dallo script -->
+
+</div>
+</div>
+
+<nav class="nav" aria-label="Navigazione">
+  <button id="prec" aria-label="Slide precedente">◀</button>
+  <span class="conta" id="conta">1 / 1</span>
+  <button id="succ" aria-label="Slide successiva">▶</button>
+  <span class="titolo-slide" id="titolo-slide"></span>
+  <button id="schermo" aria-label="Schermo intero">⛶</button>
+</nav>
+
+<script>
+(function(){
+const stage=document.getElementById('stage');
+const riduci=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// nomi dei tratti
+const T={
+  dian:{han:'点',py:'diǎn',it:'punto'},
+  heng:{han:'横',py:'héng',it:'orizzontale →'},
+  shu:{han:'竖',py:'shù',it:'verticale ↓'},
+  pie:{han:'撇',py:'piě',it:'scende a sinistra ↙'},
+  na:{han:'捺',py:'nà',it:'scende a destra ↘'},
+  hengzhe:{han:'横折',py:'héngzhé',it:'orizzontale che piega giù'},
+  hengzhegou:{han:'横折钩',py:'héngzhégōu',it:'piega giù con gancio'},
+  henggou:{han:'横钩',py:'hénggōu',it:'orizzontale con gancio'},
+  hengpie:{han:'横撇',py:'héngpiě',it:'orizzontale e poi ↙'},
+  hengxiegou:{han:'横斜钩',py:'héngxiégōu',it:'orizzontale, poi giù curvo con gancio'},
+  wogou:{han:'卧钩',py:'wògōu',it:'gancio sdraiato'},
+  shuti:{han:'竖提',py:'shùtí',it:'verticale che risale'},
+  shupie:{han:'竖撇',py:'shùpiě',it:'verticale che piega a sinistra'}
+};
+// parole e caratteri: s = forma dei tratti, m = percorso del pennello (riquadro 1024)
+const PAROLE=[{"han":"高兴","py":"gāoxìng","it":"felice","emo":"😄","col":"#E07000","car":[{"han":"高","py":"gāo","t":["dian","heng","shu","hengzhe","heng","shu","hengzhegou","shu","hengzhe","heng"],"s":["M 446 821 Q 491 776 531 760 Q 547 759 555 772 Q 559 785 556 803 Q 540 845 479 856 Q 439 865 429 860 Q 422 859 426 846 Q 429 834 446 821 Z","M 220 681 Q 201 680 215 663 Q 228 650 246 644 Q 265 640 282 643 Q 465 694 799 693 Q 818 693 823 702 Q 827 712 812 726 Q 763 765 726 756 Q 611 732 220 681 Z","M 374 605 Q 367 608 360 608 Q 348 612 345 606 Q 338 600 347 584 Q 369 545 384 480 Q 388 461 400 447 Q 418 425 423 441 Q 424 448 426 456 L 424 487 Q 415 562 414 580 C 413 592 402 595 374 605 Z","M 615 517 Q 636 571 660 585 Q 675 601 662 618 Q 593 672 548 645 Q 469 618 374 605 C 344 601 385 572 414 580 Q 420 583 552 608 Q 568 612 575 605 Q 582 599 580 585 Q 574 549 567 518 C 561 489 604 489 615 517 Z","M 426 456 Q 432 456 440 457 Q 500 470 629 484 Q 639 485 640 493 Q 640 500 615 517 C 602 526 596 525 567 518 Q 488 499 424 487 C 395 481 396 455 426 456 Z","M 247 356 Q 246 357 242 359 Q 209 372 191 371 Q 176 367 183 353 Q 231 266 193 120 Q 166 68 208 17 Q 217 4 227 10 Q 258 35 260 132 Q 260 283 263 318 C 265 347 265 347 247 356 Z","M 263 318 Q 389 358 757 377 Q 773 377 778 369 Q 785 365 788 329 Q 801 182 787 97 Q 778 55 743 59 Q 704 65 669 68 Q 653 72 653 65 Q 653 58 666 45 Q 748 -16 770 -48 Q 780 -63 789 -60 Q 802 -59 815 -34 Q 845 21 858 186 Q 861 336 876 361 Q 895 385 879 390 Q 863 408 821 425 Q 796 441 768 430 Q 735 421 653 414 Q 499 401 395 381 Q 319 365 247 356 C 217 352 234 310 263 318 Z","M 394 272 Q 384 276 357 280 Q 345 283 343 277 Q 337 271 345 257 Q 370 212 387 139 Q 391 117 404 102 Q 422 83 426 97 Q 429 107 428 122 L 424 155 Q 412 219 410 242 C 407 268 407 268 394 272 Z","M 621 168 Q 645 226 671 245 Q 687 261 674 278 Q 658 291 611 314 Q 595 321 575 314 Q 502 287 394 272 C 364 268 381 237 410 242 Q 447 249 561 268 Q 577 272 584 265 Q 594 255 577 181 C 570 152 609 140 621 168 Z","M 428 122 Q 435 121 447 122 Q 504 132 627 138 Q 637 139 639 147 Q 639 154 621 168 C 603 183 603 183 577 181 Q 570 181 563 179 Q 487 163 424 155 C 394 151 398 124 428 122 Z"],"m":[[[435,851],[506,813],[536,782]],[[218,672],[265,664],[449,695],[736,725],[775,720],[812,707]],[[354,598],[387,563],[412,446]],[[382,603],[416,597],[562,630],[588,628],[619,601],[598,542],[573,523]],[[432,464],[447,476],[548,495],[609,500],[631,492]],[[192,360],[228,325],[235,276],[235,190],[219,81],[221,22]],[[255,352],[274,341],[529,382],[770,403],[799,397],[829,370],[825,157],[807,55],[794,31],[776,15],[683,49],[660,63]],[[352,270],[377,250],[384,235],[416,103]],[[403,271],[412,262],[431,261],[576,292],[598,289],[628,259],[606,198],[617,181]],[[433,128],[443,140],[573,158],[629,148]]]},{"han":"兴","py":"xìng","t":["dian","dian","pie","heng","pie","dian"],"s":["M 234 578 Q 271 544 313 502 Q 326 487 343 487 Q 355 487 361 501 Q 367 516 359 548 Q 349 593 231 629 Q 215 633 208 631 Q 202 627 204 614 Q 207 602 234 578 Z","M 405 686 Q 444 646 486 600 Q 498 587 512 585 Q 522 585 529 597 Q 535 610 529 640 Q 525 668 488 693 Q 449 714 405 732 Q 390 736 384 735 Q 380 732 379 719 Q 380 709 405 686 Z","M 586 416 Q 620 456 698 597 Q 717 634 754 682 Q 773 697 762 710 Q 752 731 716 756 Q 700 769 678 763 Q 665 759 672 744 Q 679 707 666 668 Q 635 577 564 450 Q 554 428 552 412 C 546 383 567 393 586 416 Z","M 504 364 Q 768 385 841 377 Q 941 374 943 374 Q 943 377 945 377 Q 954 390 941 403 Q 868 469 803 447 Q 728 435 586 416 L 552 412 Q 480 409 282 385 Q 209 375 98 374 Q 83 374 82 362 Q 81 349 100 334 Q 145 301 183 313 Q 202 320 276 331 Q 378 353 504 364 Z","M 348 265 Q 338 192 173 50 Q 151 32 180 37 Q 250 41 378 173 Q 384 188 429 227 Q 441 240 438 251 Q 434 266 405 274 Q 372 286 359 281 Q 350 280 348 265 Z","M 585 266 Q 669 181 766 58 Q 782 33 801 26 Q 811 23 821 35 Q 837 50 826 103 Q 814 175 590 304 Q 580 311 576 296 Q 573 280 585 266 Z"],"m":[[[213,623],[315,551],[342,506]],[[388,729],[399,715],[490,647],[511,604]],[[681,752],[698,738],[716,700],[625,513],[579,437],[557,417]],[[95,361],[121,349],[170,343],[451,382],[819,415],[890,406],[933,390],[942,377]],[[420,246],[383,240],[347,185],[282,116],[217,65],[183,47]],[[584,297],[757,136],[786,97],[805,45]]]}]},{"han":"生气","py":"shēngqì","it":"arrabbiato","emo":"😡","col":"#C8102E","car":[{"han":"生","py":"shēng","t":["pie","heng","heng","shu","heng"],"s":["M 324 495 Q 328 502 332 509 Q 357 558 382 599 Q 392 615 375 630 Q 318 663 296 657 Q 283 654 287 638 Q 308 536 204 397 Q 200 396 160 342 Q 153 324 169 330 Q 188 334 213 357 Q 273 409 311 471 L 324 495 Z","M 556 479 Q 748 518 754 521 Q 764 530 759 539 Q 752 552 721 561 Q 688 568 656 557 Q 607 544 558 529 L 500 516 Q 418 501 324 495 C 294 493 284 484 311 471 L 312 471 Q 351 447 432 459 Q 463 465 499 469 L 556 479 Z","M 549 276 Q 702 307 710 313 Q 720 322 715 331 Q 708 344 676 353 Q 649 359 551 329 L 495 315 Q 428 303 347 295 Q 308 291 336 271 Q 378 244 484 265 Q 488 266 495 267 L 549 276 Z","M 543 92 Q 546 186 549 276 L 551 329 Q 552 405 556 479 L 558 529 Q 567 718 580 760 Q 593 782 578 797 Q 538 828 506 838 Q 490 842 473 829 Q 467 820 474 808 Q 507 751 504 688 Q 503 604 500 516 L 499 469 Q 498 394 495 315 L 495 267 Q 492 179 492 86 C 492 56 542 62 543 92 Z","M 492 86 Q 330 70 144 51 Q 119 48 137 27 Q 173 -9 220 1 Q 520 73 900 54 Q 901 54 904 54 Q 929 53 935 63 Q 942 78 922 95 Q 856 144 785 129 Q 688 113 543 92 L 492 86 Z"],"m":[[[299,644],[334,603],[309,529],[279,467],[247,420],[219,385],[171,341]],[[320,474],[402,478],[502,492],[690,536],[750,531]],[[338,285],[366,278],[417,279],[558,302],[664,328],[703,325]],[[486,820],[518,796],[535,776],[538,759],[518,115],[498,94]],[[141,39],[198,27],[411,58],[811,95],[886,85],[923,70]]]},{"han":"气","py":"qì","t":["pie","heng","heng","hengxiegou"],"s":["M 359 685 Q 431 787 431 794 Q 428 810 383 837 Q 368 844 353 843 Q 341 842 343 826 Q 349 717 220 586 Q 202 577 158 529 Q 148 513 165 517 Q 186 518 215 540 Q 294 595 346 666 L 359 685 Z","M 346 666 Q 355 657 390 649 Q 412 645 550 672 Q 692 703 703 711 Q 712 718 707 728 Q 700 740 670 747 Q 643 753 544 720 Q 451 696 362 686 Q 359 686 359 685 C 329 680 326 679 346 666 Z","M 319 558 Q 286 552 310 537 Q 349 519 411 533 Q 487 551 567 570 Q 606 580 612 586 Q 619 593 615 601 Q 608 611 581 618 Q 553 622 527 610 Q 484 594 435 580 Q 381 567 319 558 Z","M 191 406 Q 176 405 182 390 Q 186 377 211 368 Q 235 358 259 365 Q 407 405 551 444 Q 593 454 601 449 Q 611 442 603 421 Q 573 205 633 105 Q 685 -4 840 -20 Q 909 -26 936 -13 Q 955 -4 946 21 Q 930 97 926 183 Q 925 216 917 224 Q 910 231 904 214 Q 876 84 849 55 Q 828 42 802 50 Q 757 57 717 90 Q 656 141 645 265 Q 636 380 692 450 Q 708 463 701 473 Q 692 486 635 508 Q 619 514 604 503 Q 540 466 381 432 Q 278 407 191 406 Z"],"m":[[[354,831],[368,817],[381,789],[346,710],[268,608],[169,527]],[[354,668],[453,676],[652,722],[696,722]],[[312,549],[356,545],[399,550],[562,595],[604,595]],[[190,396],[223,386],[261,388],[402,419],[589,472],[624,475],[632,470],[645,453],[631,406],[618,310],[620,244],[637,164],[668,100],[692,72],[732,42],[788,21],[835,14],[893,29],[914,192],[912,216]]]}]},{"han":"伤心","py":"shāngxīn","it":"triste","emo":"😢","col":"#2F7FB8","car":[{"han":"伤","py":"shāng","t":["pie","shu","pie","heng","hengzhegou","pie"],"s":["M 224 479 Q 276 543 334 635 Q 362 684 386 709 Q 396 719 392 734 Q 388 747 358 772 Q 330 791 310 791 Q 291 790 299 766 Q 312 732 300 705 Q 234 543 67 348 Q 57 338 54 331 Q 50 319 65 322 Q 101 326 198 447 L 224 479 Z","M 198 447 Q 217 384 218 352 Q 218 214 192 111 Q 180 60 214 21 Q 215 18 218 16 Q 234 0 246 26 Q 261 66 260 111 Q 260 346 268 399 Q 275 426 266 436 Q 229 476 224 479 C 202 499 190 476 198 447 Z","M 507 624 Q 528 652 549 687 Q 568 721 585 738 Q 594 748 589 760 Q 585 772 559 792 Q 534 808 517 807 Q 501 806 508 786 Q 518 764 511 744 Q 487 678 449 617 Q 412 557 362 492 Q 352 482 351 477 Q 348 467 360 469 Q 388 478 490 600 L 507 624 Z","M 490 600 Q 506 591 532 585 Q 559 582 607 593 Q 808 638 815 645 Q 825 655 820 663 Q 811 676 780 683 Q 752 689 634 649 Q 513 625 507 624 C 478 618 463 613 490 600 Z","M 536 386 Q 457 373 387 369 Q 366 368 363 358 Q 362 349 388 336 Q 415 317 438 325 Q 483 338 525 347 L 586 360 Q 653 376 711 382 Q 736 385 741 377 Q 753 356 742 307 Q 720 169 683 110 Q 664 77 634 83 Q 603 93 576 105 Q 551 114 568 88 Q 617 39 641 2 Q 663 -23 686 -3 Q 722 22 748 68 Q 779 122 802 287 Q 809 345 831 374 Q 846 389 839 400 Q 829 413 773 439 Q 751 449 729 435 Q 701 420 597 398 L 536 386 Z","M 525 347 Q 468 169 367 56 Q 342 25 315 -4 Q 309 -8 306 -15 Q 302 -25 312 -24 Q 330 -25 370 12 Q 505 111 586 360 L 597 398 Q 621 471 626 477 Q 636 490 632 504 Q 619 523 592 542 Q 576 555 562 554 Q 549 550 553 534 Q 568 500 536 386 L 525 347 Z"],"m":[[[310,776],[327,761],[347,727],[305,643],[245,545],[176,449],[92,353],[63,331]],[[222,472],[227,441],[239,419],[241,375],[235,191],[224,86],[230,26]],[[517,794],[539,775],[550,753],[529,709],[467,603],[403,521],[359,477]],[[499,603],[616,618],[770,658],[807,657]],[[371,357],[427,347],[737,409],[757,408],[783,388],[783,357],[748,172],[727,112],[702,69],[684,50],[666,42],[623,62],[569,98]],[[566,541],[594,493],[552,340],[512,239],[476,167],[426,95],[384,46],[315,-16]]]},{"han":"心","py":"xīn","t":["dian","wogou","dian","dian"],"s":["M 171 459 Q 147 381 112 311 Q 91 269 117 230 Q 129 209 152 227 Q 177 249 190 289 Q 211 344 208 392 Q 211 432 199 462 Q 192 472 185 472 Q 175 469 171 459 Z","M 863 228 Q 859 243 834 262 Q 797 290 698 391 Q 691 398 685 398 Q 682 397 684 389 Q 708 338 732 281 Q 742 257 728 241 Q 689 208 550 226 Q 441 244 397 323 Q 370 377 355 435 Q 348 463 324 476 Q 306 486 299 478 Q 295 474 302 454 Q 312 429 335 363 Q 372 224 476 178 Q 495 171 521 163 Q 710 115 851 212 Q 866 221 863 228 Z","M 441 617 Q 475 578 511 531 Q 524 515 541 513 Q 553 512 561 525 Q 568 541 564 574 Q 560 619 444 670 Q 428 677 420 675 Q 414 672 414 658 Q 415 645 441 617 Z","M 760 585 Q 814 536 877 465 Q 896 441 914 437 Q 924 436 933 447 Q 948 463 932 514 Q 922 563 840 592 Q 789 613 761 621 Q 751 627 748 612 Q 747 596 760 585 Z"],"m":[[[185,462],[176,372],[133,236]],[[306,473],[333,435],[369,327],[400,274],[429,244],[471,215],[538,193],[634,183],[693,187],[748,205],[784,234],[773,267],[691,393]],[[425,667],[520,581],[542,534]],[[761,607],[838,558],[886,518],[915,457]]]}]},{"han":"害怕","py":"hàipà","it":"avere paura","emo":"😱","col":"#7A4FB0","car":[{"han":"害","py":"hài","t":["dian","dian","henggou","heng","heng","heng","shu","shu","hengzhe","heng"],"s":["M 485 819 Q 530 767 565 753 Q 581 750 591 765 Q 597 778 594 796 Q 587 821 567 835 Q 515 868 473 862 Q 470 862 469 861 Q 462 860 466 846 Q 467 833 485 819 Z","M 277 674 Q 264 699 252 708 Q 231 723 230 695 Q 234 662 200 615 Q 154 564 178 510 Q 179 506 183 499 Q 199 471 220 501 Q 238 526 250 566 Q 263 609 274 634 C 285 660 285 660 277 674 Z","M 274 634 Q 292 628 326 635 Q 446 671 692 699 Q 743 705 760 701 Q 779 689 776 681 Q 776 677 753 612 Q 746 597 753 593 Q 760 589 779 601 Q 834 637 879 648 Q 916 658 915 667 Q 914 677 836 734 Q 811 755 713 736 Q 592 721 375 687 Q 326 680 277 674 C 247 670 244 638 274 634 Z","M 547 531 Q 682 555 690 560 Q 697 566 694 574 Q 688 584 664 592 Q 639 599 612 589 Q 582 582 551 573 L 492 560 Q 432 551 365 547 Q 334 544 355 528 Q 386 509 457 517 Q 475 520 495 522 L 547 531 Z","M 540 423 Q 561 427 670 440 Q 680 439 689 451 Q 690 461 668 472 Q 638 494 552 467 Q 546 467 543 465 L 498 455 Q 468 451 348 435 Q 321 432 342 415 Q 372 390 400 397 Q 443 407 498 415 L 540 423 Z","M 533 302 Q 635 314 873 314 Q 894 314 899 323 Q 905 335 888 349 Q 833 391 768 376 Q 675 360 534 337 L 495 332 Q 351 314 189 295 Q 167 294 183 275 Q 198 260 216 255 Q 238 249 255 254 Q 414 296 493 297 L 533 302 Z","M 534 337 Q 537 382 540 423 L 543 465 Q 544 481 545 497 Q 545 516 547 531 L 551 573 Q 552 580 554 585 Q 563 603 551 613 Q 538 626 511 639 Q 492 646 470 638 Q 460 631 472 616 Q 488 586 492 560 L 495 522 Q 496 492 498 455 L 498 415 Q 498 391 495 332 L 493 297 Q 493 261 500 239 Q 506 229 514 234 Q 529 249 533 302 L 534 337 Z","M 364 198 Q 351 205 318 209 Q 305 212 301 206 Q 294 199 304 182 Q 335 121 356 19 Q 360 -12 378 -32 Q 397 -56 404 -38 Q 408 -26 407 -9 L 402 29 Q 384 128 381 161 C 378 191 378 192 364 198 Z","M 701 62 Q 731 143 767 165 Q 788 184 772 206 Q 753 222 696 252 Q 677 262 652 253 Q 535 213 364 198 C 334 195 352 155 381 161 Q 426 170 622 200 Q 650 206 662 193 Q 671 184 668 166 Q 656 109 642 64 C 633 35 690 34 701 62 Z","M 407 -9 Q 414 -9 425 -8 Q 519 8 720 18 Q 733 19 734 29 Q 735 38 702 62 L 701 62 L 642 64 Q 509 39 402 29 C 372 26 377 -10 407 -9 Z"],"m":[[[473,852],[550,804],[570,777]],[[241,701],[253,669],[246,639],[210,565],[200,503]],[[281,640],[301,654],[444,682],[727,722],[769,723],[807,707],[825,681],[758,600]],[[358,539],[385,532],[446,534],[557,551],[644,573],[685,569]],[[343,426],[391,418],[618,458],[679,453]],[[186,285],[227,276],[259,278],[446,311],[794,347],[830,345],[887,329]],[[479,628],[507,611],[520,593],[521,460],[509,243]],[[310,198],[341,174],[350,154],[392,-32]],[[373,195],[396,183],[562,207],[640,225],[679,223],[716,186],[685,102],[650,69]],[[409,24],[423,12],[638,39],[699,40],[724,29]]]},{"han":"怕","py":"pà","t":["dian","dian","shu","pie","shu","hengzhe","heng","heng"],"s":["M 148 511 Q 133 444 106 381 Q 93 345 115 315 Q 125 299 144 314 Q 163 333 172 367 Q 187 418 183 458 Q 183 492 172 515 Q 165 522 159 523 Q 152 520 148 511 Z","M 321 592 Q 351 571 398 527 Q 410 515 424 516 Q 433 517 437 529 Q 441 542 433 567 Q 427 586 396 602 Q 332 626 321 623 C 291 622 297 609 321 592 Z","M 321 623 Q 322 701 339 756 Q 348 772 345 785 Q 338 795 282 829 Q 258 845 237 830 Q 233 826 239 809 Q 273 760 274 709 Q 275 634 278 550 Q 275 403 272 242 Q 268 163 248 88 Q 236 49 263 -14 Q 270 -32 278 -35 Q 285 -42 292 -33 Q 299 -29 310 -8 Q 320 17 318 49 Q 317 101 321 588 Q 321 591 321 592 L 321 623 Z","M 587 530 Q 632 588 657 629 Q 712 722 739 745 Q 758 764 740 779 Q 719 792 685 799 Q 654 805 641 797 Q 628 790 637 777 Q 655 743 608 638 Q 584 586 560 526 C 549 498 569 506 587 530 Z","M 529 521 Q 520 530 501 536 Q 491 540 480 537 Q 473 533 479 520 Q 480 511 485 502 Q 509 451 495 243 Q 477 138 491 109 Q 497 97 506 85 Q 516 72 527 85 Q 539 101 539 127 L 542 167 Q 542 248 544 321 L 544 356 Q 544 476 549 487 C 552 505 552 505 529 521 Z","M 744 144 Q 775 104 799 65 Q 809 46 820 47 Q 838 48 854 84 Q 873 124 869 173 Q 860 270 853 453 Q 852 487 869 510 Q 879 523 869 535 Q 848 556 792 580 Q 773 590 757 580 Q 715 561 587 530 L 560 526 Q 541 525 529 521 C 499 516 519 482 549 487 Q 564 488 740 524 Q 767 530 780 519 Q 810 492 793 175 Q 790 165 781 162 C 765 137 730 162 744 144 Z","M 544 321 Q 547 321 552 320 Q 570 317 683 334 Q 744 344 750 349 Q 759 356 755 364 Q 748 376 720 384 Q 696 390 618 367 Q 614 367 544 356 C 514 351 514 324 544 321 Z","M 539 127 Q 545 127 553 128 Q 614 140 744 144 C 774 145 792 146 781 162 Q 777 172 750 190 Q 732 200 697 193 Q 612 177 542 167 C 512 163 509 126 539 127 Z"],"m":[[[162,513],[154,425],[132,351],[130,324]],[[324,615],[389,574],[421,532]],[[248,824],[293,783],[303,760],[297,289],[281,70],[283,-21]],[[645,786],[660,780],[686,752],[615,601],[583,545],[566,532]],[[486,529],[512,503],[520,479],[524,369],[512,144],[517,90]],[[537,518],[559,507],[576,509],[776,554],[806,539],[824,520],[831,163],[817,127],[753,142]],[[549,327],[564,340],[698,361],[743,360]],[[546,133],[561,150],[611,158],[721,170],[773,162]]]}]},{"han":"懒惰","py":"lǎnduò","it":"pigro","emo":"🦥","col":"#3F8A2A","car":[{"han":"懒","py":"lǎn","t":["dian","dian","shu","heng","shu","hengzhe","heng","shu","pie","dian","pie","hengpie","shu","hengzhe","pie","dian"],"s":["M 121 567 Q 106 497 79 430 Q 66 394 87 366 Q 97 351 115 366 Q 134 385 142 417 Q 158 472 155 517 Q 154 548 144 571 Q 137 578 132 578 Q 125 577 121 567 Z","M 258 625 Q 315 574 333 576 Q 343 576 347 591 Q 347 601 337 616 Q 319 638 261 645 Q 258 645 259 644 C 243 638 243 638 258 625 Z","M 259 644 Q 262 707 276 751 Q 283 764 281 777 Q 275 786 224 817 Q 203 833 184 819 Q 180 815 185 800 Q 215 754 217 681 Q 217 275 200 186 Q 196 164 189 140 Q 179 104 202 48 Q 209 32 216 29 Q 222 23 228 30 Q 235 34 244 54 Q 254 76 253 105 Q 252 153 258 597 Q 258 612 258 625 L 259 644 Z","M 476 643 Q 507 653 544 662 Q 569 669 573 673 Q 580 680 575 687 Q 568 696 545 700 Q 512 703 479 684 L 436 670 Q 402 661 365 655 Q 335 648 358 636 Q 391 618 437 633 L 476 643 Z","M 346 536 Q 339 540 317 543 Q 308 546 306 542 Q 302 538 308 525 Q 330 480 344 406 Q 347 384 360 368 Q 373 352 377 364 Q 381 377 378 399 L 373 425 Q 360 489 358 512 C 356 532 356 532 346 536 Z","M 563 455 Q 581 515 604 530 Q 617 545 605 558 Q 592 568 552 585 Q 540 591 474 564 L 438 555 Q 392 545 346 536 C 317 530 328 509 358 512 Q 368 512 380 516 Q 408 523 438 528 L 474 537 Q 490 541 509 545 Q 525 549 532 543 Q 539 536 538 522 Q 534 491 526 463 C 518 434 554 426 563 455 Z","M 474 414 Q 514 421 571 429 Q 580 430 581 438 Q 581 444 563 455 C 546 466 546 466 526 463 Q 502 460 474 448 L 437 438 Q 403 431 373 425 C 344 419 349 405 378 399 Q 379 399 381 398 Q 390 397 401 399 Q 414 403 436 406 L 436 407 C 439 408 444 409 474 414 Z","M 435 315 Q 435 231 413 152 Q 404 115 427 63 Q 433 47 440 45 Q 446 39 452 46 Q 459 50 468 69 Q 475 91 475 118 Q 474 154 474 414 L 474 448 Q 474 491 474 537 L 474 564 Q 474 615 476 643 L 479 684 Q 483 718 491 746 Q 498 759 496 771 Q 490 780 441 809 Q 420 824 402 810 Q 398 806 404 792 Q 434 749 435 703 Q 435 687 436 670 L 437 633 Q 437 599 439 562 Q 438 559 438 555 L 438 528 Q 437 485 437 438 L 435 315 Z","M 435 404 Q 413 352 387 300 Q 356 248 283 153 Q 279 146 288 145 Q 292 144 300 151 Q 382 221 435 315 C 450 341 449 434 436 407 L 436 407 Q 435 406 435 404 Z","M 510 331 Q 528 312 547 288 Q 554 278 566 277 Q 573 276 578 285 Q 582 295 579 315 Q 575 339 511 364 Q 501 368 496 366 Q 492 365 492 355 Q 493 348 510 331 Z","M 689 668 Q 711 702 732 748 Q 741 772 751 784 Q 757 793 752 802 Q 748 809 725 823 Q 704 833 691 830 Q 678 827 686 813 Q 704 791 666 694 Q 648 651 621 602 Q 615 595 614 590 Q 613 581 623 585 Q 638 591 677 649 L 689 668 Z","M 727 521 Q 805 632 841 660 Q 856 670 845 680 Q 833 689 802 704 Q 796 707 714 675 Q 701 671 689 668 C 660 660 647 654 677 649 Q 692 643 754 659 Q 760 660 762 659 Q 766 655 761 646 Q 731 567 711 529 Q 707 522 703 514 C 689 487 710 496 727 521 Z","M 653 506 Q 637 519 617 525 Q 610 526 604 520 Q 601 516 608 507 Q 642 417 610 276 Q 597 249 603 224 Q 610 197 619 187 Q 629 177 636 187 Q 654 206 661 352 Q 655 376 664 469 Q 664 476 666 481 C 668 495 668 495 653 506 Z","M 812 241 Q 806 220 818 202 Q 830 177 838 178 Q 851 179 864 208 Q 876 230 874 248 Q 849 419 872 474 Q 884 507 883 509 Q 859 530 817 547 Q 804 551 785 544 Q 758 531 727 521 L 703 514 Q 675 510 653 506 C 623 501 637 474 666 481 Q 665 482 668 482 Q 704 489 731 496 Q 788 512 800 503 Q 810 484 815 431 Q 819 271 812 241 Z","M 712 394 Q 718 163 644 87 Q 640 84 637 81 Q 613 59 558 28 Q 548 24 546 21 Q 542 17 554 14 Q 585 11 661 53 Q 754 107 754 320 Q 754 374 768 420 Q 772 429 765 435 Q 750 448 722 459 Q 704 466 691 461 Q 675 454 689 441 Q 711 419 712 394 Z","M 780 112 Q 813 69 847 18 Q 856 5 869 1 Q 878 0 885 9 Q 892 21 891 47 Q 892 74 860 104 Q 782 162 768 159 Q 764 156 762 145 Q 762 135 780 112 Z"],"m":[[[133,566],[128,486],[101,375]],[[263,639],[331,592]],[[195,813],[233,775],[242,754],[235,342],[219,121],[221,42]],[[359,647],[409,644],[527,680],[565,681]],[[312,537],[332,520],[339,505],[369,368]],[[355,533],[365,526],[508,562],[545,563],[569,539],[548,476],[534,469]],[[380,420],[391,413],[523,443],[572,438]],[[413,804],[452,767],[460,747],[456,304],[443,139],[445,58]],[[434,384],[416,317],[402,291],[350,218],[292,153]],[[502,357],[551,318],[565,292]],[[692,820],[703,815],[720,791],[709,750],[661,647],[622,593]],[[682,653],[758,676],[797,667],[728,534],[709,516]],[[613,516],[637,490],[644,460],[643,340],[627,251],[628,192]],[[660,502],[686,498],[805,526],[816,522],[842,494],[837,394],[844,242],[838,189]],[[693,451],[710,445],[737,419],[729,245],[710,159],[691,113],[653,70],[599,36],[554,22]],[[770,150],[844,77],[861,50],[870,18]]]},{"han":"惰","py":"duò","t":["dian","dian","shu","heng","pie","heng","shu","heng","shupie","hengzhegou","heng","heng"],"s":["M 115 523 Q 99 462 72 405 Q 66 392 67 376 Q 68 351 78 336 Q 88 318 109 334 Q 157 382 150 467 Q 150 501 139 527 Q 133 534 127 535 Q 118 532 115 523 Z","M 275 561 Q 281 557 292 551 Q 319 535 349 513 Q 362 504 374 507 Q 383 508 385 520 Q 386 533 376 556 Q 369 572 340 580 Q 280 592 276 589 C 246 585 250 577 275 561 Z","M 276 589 Q 277 671 295 728 Q 304 743 301 757 Q 294 767 238 801 Q 214 817 193 802 Q 189 798 194 782 Q 225 734 227 669 Q 227 261 217 183 Q 210 146 200 109 Q 188 67 215 6 Q 222 -12 230 -15 Q 236 -22 244 -13 Q 251 -9 262 12 Q 272 37 271 69 Q 270 118 275 561 L 276 589 Z","M 581 684 Q 672 703 767 721 Q 822 733 830 741 Q 839 748 835 756 Q 828 768 800 775 Q 772 782 681 751 Q 618 736 599 729 L 537 718 Q 492 714 446 708 Q 410 702 435 686 Q 472 664 521 671 L 581 684 Z","M 461 465 Q 524 552 581 684 L 599 729 Q 626 802 637 819 Q 644 826 640 836 Q 628 861 584 868 Q 562 871 551 866 Q 542 862 547 850 Q 562 813 537 718 L 521 671 Q 518 665 516 657 Q 468 531 311 336 Q 304 329 315 329 Q 342 338 428 425 Q 428 428 456 458 L 461 465 Z","M 658 582 Q 763 609 768 612 Q 775 619 771 626 Q 764 636 739 641 Q 714 645 688 633 Q 664 624 637 616 Q 609 609 574 604 Q 543 597 566 584 Q 590 572 617 574 L 658 582 Z","M 663 500 Q 666 519 670 536 Q 676 566 659 581 L 658 582 C 636 603 610 603 617 574 Q 617 573 618 570 Q 618 561 621 492 C 622 462 658 470 663 500 Z","M 621 492 Q 548 482 466 467 Q 462 467 461 465 C 451 462 451 462 456 458 Q 474 440 490 435 Q 508 431 522 435 Q 663 477 879 478 Q 895 479 900 486 Q 904 496 889 508 Q 841 541 780 524 Q 731 514 663 500 L 621 492 Z","M 543 166 Q 547 206 550 237 L 553 266 Q 559 327 563 346 Q 563 350 563 354 C 565 375 565 375 547 384 Q 520 399 503 399 Q 490 395 495 384 Q 532 293 487 120 Q 463 57 463 53 Q 463 22 480 -2 Q 486 -15 496 -10 Q 539 18 540 134 Q 540 137 541 138 L 543 166 Z","M 563 354 L 684 384 Q 705 390 710 379 Q 729 325 734 90 Q 734 36 727 25 Q 723 19 705 23 Q 680 27 655 34 Q 636 41 636 31 Q 688 -18 718 -54 Q 731 -73 747 -77 Q 757 -81 765 -71 Q 804 -20 803 32 Q 763 323 788 370 Q 798 389 787 400 Q 765 418 728 432 Q 709 439 694 431 Q 631 398 547 384 C 518 379 534 347 563 354 Z","M 550 237 Q 623 253 677 262 Q 698 266 689 277 Q 679 290 657 293 Q 633 294 553 266 C 525 256 521 231 550 237 Z","M 541 138 Q 625 147 686 154 Q 708 157 701 169 Q 691 182 667 188 Q 634 194 543 166 C 514 157 511 135 541 138 Z"],"m":[[[128,524],[121,441],[94,344]],[[279,582],[296,569],[340,553],[372,520]],[[205,795],[234,771],[257,741],[250,605],[247,233],[233,78],[235,-1]],[[438,698],[460,692],[511,692],[768,748],[823,752]],[[555,856],[593,824],[576,749],[535,638],[485,541],[434,463],[316,334]],[[568,595],[620,593],[722,621],[763,620]],[[624,574],[645,553],[643,520],[626,505]],[[465,457],[513,454],[794,502],[846,502],[891,491]],[[504,389],[532,357],[535,296],[523,176],[491,0]],[[556,382],[565,374],[582,374],[711,410],[736,396],[750,379],[768,40],[764,14],[746,-17],[719,-10],[645,28]],[[557,244],[567,257],[623,271],[660,276],[681,271]],[[549,144],[558,157],[615,166],[669,170],[691,164]]]}]},{"han":"很","py":"hěn","it":"molto","emo":"💪","col":"#9A5B1E","car":[{"han":"很","py":"hěn","t":["pie","pie","shu","hengzhe","heng","heng","shuti","pie","na"],"s":["M 290 802 Q 302 766 218 660 Q 178 611 126 560 Q 116 551 113 546 Q 109 536 121 537 Q 170 537 316 695 Q 334 722 361 742 Q 371 751 368 764 Q 367 777 343 801 Q 321 820 303 823 Q 285 824 290 802 Z","M 261 379 Q 289 412 319 450 Q 347 490 372 509 Q 382 519 379 533 Q 376 546 350 573 Q 325 594 305 596 Q 286 596 292 573 Q 301 546 283 508 Q 205 372 58 226 Q 46 217 44 211 Q 40 201 54 201 Q 93 205 193 308 Q 212 327 233 348 L 261 379 Z","M 233 348 Q 251 330 246 245 Q 245 169 224 91 Q 220 72 228 40 Q 238 6 250 -4 Q 266 -20 278 6 Q 293 46 292 91 Q 296 260 304 299 Q 311 326 302 336 Q 278 361 261 379 C 240 401 217 373 233 348 Z","M 652 482 Q 653 475 656 468 Q 663 452 676 453 Q 691 456 698 472 Q 716 499 738 625 Q 753 680 789 713 Q 808 731 791 747 Q 772 763 718 789 Q 702 798 645 779 Q 624 779 491 735 C 463 726 488 695 517 704 Q 665 753 685 745 Q 698 738 693 695 Q 671 551 658 511 L 652 482 Z","M 508 582 Q 512 581 521 582 Q 579 595 621 604 Q 643 610 634 621 Q 622 634 598 636 Q 561 636 507 606 C 481 592 478 585 508 582 Z","M 537 462 Q 576 472 652 482 C 682 486 682 494 658 511 Q 654 514 649 517 Q 636 524 609 515 Q 554 499 509 488 C 480 481 508 455 537 462 Z","M 491 735 Q 475 748 459 756 Q 440 763 430 757 Q 420 750 429 733 Q 496 592 443 156 Q 433 116 398 73 Q 385 57 393 32 Q 403 4 417 -9 Q 430 -18 444 0 Q 462 28 621 140 Q 642 152 647 161 Q 653 171 642 173 Q 629 173 515 124 Q 496 115 496 134 Q 506 302 508 442 L 509 488 Q 508 537 508 582 L 507 606 Q 507 673 517 704 C 519 715 516 718 491 735 Z","M 670 325 Q 721 355 752 376 Q 836 434 854 440 Q 878 450 866 470 Q 853 489 825 506 Q 800 522 785 519 Q 772 518 775 503 Q 779 470 715 403 Q 687 375 655 340 C 635 318 644 310 670 325 Z","M 655 340 Q 604 389 545 453 Q 541 459 537 462 C 501 502 456 480 508 442 Q 533 426 553 398 Q 760 128 798 117 Q 840 110 958 131 Q 976 134 981 142 Q 985 149 974 153 Q 797 214 704 295 Q 686 310 670 325 L 655 340 Z"],"m":[[[301,810],[319,785],[326,763],[287,704],[188,596],[121,545]],[[304,581],[320,565],[334,530],[291,462],[170,313],[111,253],[53,210]],[[261,370],[261,345],[276,312],[257,75],[262,6]],[[503,737],[526,725],[601,750],[695,768],[714,759],[736,732],[675,472]],[[515,588],[524,598],[569,613],[593,618],[624,615]],[[516,487],[550,481],[648,506]],[[439,746],[454,734],[478,698],[487,559],[487,407],[477,225],[465,124],[468,87],[488,87],[524,100],[641,166]],[[785,508],[810,469],[805,458],[749,402],[673,341],[664,342]],[[511,480],[524,450],[672,287],[727,233],[798,176],[822,163],[856,156],[972,144]]]}]}];
+
+// crea una slide per ogni carattere
+const CARS=[];
+PAROLE.forEach((p,pi)=>p.car.forEach((c,ci)=>{ c.parola=p; c.pi=pi; c.ci=ci; c.col=p.col; CARS.push(c) }));
+CARS.forEach((c,k)=>{ const s=document.createElement('section'); s.className='slide car'; s.dataset.car=k; s.dataset.titolo=`${c.han} ${c.py} · ${c.parola.han}`; stage.appendChild(s); c.slide=k+1 });
+const slides=[...stage.querySelectorAll('.slide')];
+let cur=0;
+
+function fit(){ const vp=document.getElementById('viewport').getBoundingClientRect();
+  stage.style.transform=`translate(-50%,-50%) scale(${Math.min(vp.width/1600,vp.height/900)*0.97})`; }
+addEventListener('resize',fit); fit();
+
+const uscita={}; let pronto=false;
+function vai(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  if(pronto&&i===cur) return;
+  if(uscita[cur]) uscita[cur]();
+  slides[cur].classList.remove('on'); cur=i; const s=slides[cur]; s.classList.add('on');
+  document.getElementById('conta').textContent=`${cur+1} / ${slides.length}`;
+  document.getElementById('titolo-slide').textContent=s.dataset.titolo||'';
+  try{history.replaceState(null,'','#s'+(cur+1))}catch(e){}
+  if(pronto&&cur===0) loopIntro();
+}
+document.getElementById('prec').onclick=()=>vai(cur-1);
+document.getElementById('succ').onclick=()=>vai(cur+1);
+document.getElementById('schermo').onclick=()=>{try{ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(()=>{}); }catch(e){}};
+addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='PageDown') vai(cur+1); if(e.key==='ArrowLeft'||e.key==='PageUp') vai(cur-1); });
+let sx=null;
+stage.addEventListener('touchstart',e=>{ if(e.target.closest('button,.traccia')){sx=null;return} sx=e.touches[0].clientX },{passive:true});
+stage.addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>60) vai(cur+(dx<0?1:-1)); sx=null });
+
+function dici(t){ try{ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t); u.lang='zh-CN'; u.rate=.72;
+  const v=speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang)); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){} }
+
+const NS='http://www.w3.org/2000/svg';
+const GUIDA=`<rect x="10" y="10" width="1004" height="1004" rx="20" fill="none" stroke="#C8102E" stroke-width="12"/>
+  <path d="M512 10 V1014 M10 512 H1014" stroke="#E3CFC0" stroke-width="7" stroke-dasharray="25 25"/>
+  <path d="M10 10 L1014 1014 M1014 10 L10 1014" stroke="#EADFD3" stroke-width="6" stroke-dasharray="25 25"/>`;
+const PENNELLO=150;
+let uid=0;
+const mediana=m=>'M'+m.map(([x,y])=>x+' '+y).join(' L');
+// griglia: ombra del carattere + tratti che si disegnano (ognuno ritagliato sulla sua forma)
+function griglia(c){
+  const id='g'+(uid++);
+  const svg=document.createElementNS(NS,'svg'); svg.setAttribute('viewBox','0 0 1024 1024'); svg.setAttribute('class','griglia');
+  svg.innerHTML=GUIDA
+    +`<defs>${c.s.map((d,k)=>`<clipPath id="${id}c${k}"><path d="${d}"/></clipPath>`).join('')}</defs>`
+    +`<g transform="translate(0,900) scale(1,-1)"><g class="ombra">${c.s.map(d=>`<path d="${d}" fill="#EADFD3"/>`).join('')}</g>`
+    +`<g class="pennello">${c.m.map((m,k)=>`<g clip-path="url(#${id}c${k})"><path class="linea" d="${mediana(m)}" stroke="${c.col}" stroke-width="${PENNELLO}"/></g>`).join('')}</g></g>`
+    +`<g class="numeri"></g><g class="miei"></g>`;
+  const paths=[...svg.querySelectorAll('.pennello .linea')];
+  return {svg,paths};
+}
+
+// ---- animazione di un singolo tratto
+function lung(p){ try{return p.getTotalLength()}catch(e){return 500} }
+function nascondi(p){ if(p._anim){p._anim.cancel(); p._anim=null} const L=lung(p)+PENNELLO; p.style.strokeDasharray=L+' '+L; p.style.strokeDashoffset=L; p.style.visibility='hidden'; }
+function mostra(p){ p.style.strokeDasharray='none'; p.style.strokeDashoffset=0; p.style.visibility='visible'; }
+function anima(p,velocita=1){
+  return new Promise(ok=>{
+    const L=lung(p)+PENNELLO; if(riduci){mostra(p); return setTimeout(ok,150)}
+    p.style.strokeDasharray=L+' '+L; p.style.strokeDashoffset=L; p.style.visibility='visible';
+    const dur=Math.max(450,L*1.6)/velocita;
+    const a=p.animate([{strokeDashoffset:L},{strokeDashoffset:0}],{duration:dur,easing:'ease-in-out',fill:'forwards'});
+    a.onfinish=()=>{mostra(p); a.cancel(); p._anim=null; ok()}; a.oncancel=()=>ok(); p._anim=a;
+  });
+}
+const attesa=ms=>new Promise(r=>setTimeout(r,ms));
+
+// ---- 1 intro: ogni carta scrive la sua parola da sola, in loop
+const giri=[];
+(function(){
+  const box=document.getElementById('intro-carte');
+  PAROLE.forEach(p=>{
+    const b=document.createElement('button'); b.className='carta-c'; b.setAttribute('aria-label',`Vai a ${p.han}, ${p.it}`);
+    const riga=document.createElement('div'); riga.style.cssText='display:flex;gap:12px';
+    const gr=[];
+    p.car.forEach(c=>{ const area=document.createElement('div'); area.style.cssText='width:170px;height:170px';
+      const g=griglia(c); g.svg.style.width='100%'; g.svg.style.height='100%'; area.appendChild(g.svg); riga.appendChild(area); gr.push(g) });
+    b.appendChild(riga);
+    b.insertAdjacentHTML('beforeend',`<span style="font-size:38px;font-weight:600;color:${p.col}">${p.py} <span style="font-size:34px">${p.emo}</span></span><span style="font-size:28px">${p.it} <span style="font-size:22px;font-weight:600;color:var(--grigio)">· ${p.car.reduce((n,c)=>n+c.s.length,0)} tratti</span></span>`);
+    b.onclick=()=>vai(p.car[0].slide); box.appendChild(b);
+    giri.push(gr);
+  });
+})();
+let introVivo=0;
+async function loopIntro(){
+  const io=++introVivo;
+  while(io===introVivo){
+    giri.forEach(gr=>gr.forEach(g=>g.paths.forEach(nascondi)));
+    await Promise.all(giri.map(async gr=>{ for(const g of gr) for(const p of g.paths){ if(io!==introVivo) return; await anima(p,2.2); await attesa(80) } }));
+    if(io!==introVivo) return;
+    await attesa(1800);
+  }
+}
+
+// ---- slide dei caratteri
+stage.querySelectorAll('.slide.car').forEach(s=>{
+  const c=CARS[+s.dataset.car], p=c.parola, n=c.s.length;
+  s.innerHTML=`<div class="cornice"></div>
+    <svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
+    <div class="abs cornice-han" style="left:70px;top:70px;width:760px;height:760px;box-sizing:border-box;padding:28px"><div class="area" style="width:100%;height:100%;position:relative"></div></div>
+    <div class="abs" style="left:880px;top:62px;width:560px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:26px">
+        <span class="han" style="font-size:136px;color:${c.col}">${c.han}</span>
+        <span style="display:flex;flex-direction:column;gap:8px"><span style="font-size:58px;font-weight:600">${c.py}</span>
+        <button class="btn" data-dici="${c.han}" style="font-size:24px;padding:6px 18px;align-self:flex-start">🔊 Ascolta</button></span>
+      </div>
+      <div class="parola">
+        ${p.car.map((x,i)=>`<button class="pc han" data-vai="${x.slide}" aria-label="${x.han}" style="${i===c.ci?`background:${c.col}`:''}" ${i===c.ci?'aria-current="true"':''}>${x.han}</button>`).join('')}
+        <span style="display:flex;flex-direction:column;margin-left:6px"><span style="font-size:32px;font-weight:600;color:${c.col}">${p.py} ${p.emo}</span><span style="font-size:28px">${p.it}</span></span>
+        ${p.car.length>1?`<button class="btn" data-dici="${p.han}" style="font-size:22px;padding:4px 14px;margin-left:auto">🔊 ${p.han}</button>`:''}
+      </div>
+      <div class="info cornice-han" style="padding:20px 28px;min-height:140px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:8px">
+        <span class="info-n" style="font-size:28px;font-weight:600;color:var(--grigio)">Premete ▶ e guardate il pennello!</span>
+        <span class="info-t" style="font-size:40px;font-weight:700"></span>
+      </div>
+      <div class="chips" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+      <button class="btn b-cancella" hidden style="align-self:center">🧽 Cancella il mio disegno</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px">
+        <button class="btn oro b-tutto">▶ Guarda tutto</button>
+        <button class="btn oro b-uno">👆 Un tratto</button>
+        <button class="btn b-ricomincia">↺ Ricomincia</button>
+        <button class="btn b-prova">✏️ Prova tu</button>
+      </div>
+    </div>`;
+  const area=s.querySelector('.area'), gr=griglia(c); area.appendChild(gr.svg);
+  gr.svg.style.width='100%'; gr.svg.style.height='100%';
+  const chips=s.querySelector('.chips'), infoN=s.querySelector('.info-n'), infoT=s.querySelector('.info-t');
+  const numG=gr.svg.querySelector('.numeri'), mieiG=gr.svg.querySelector('.miei');
+  c.t.forEach((t,k)=>{const x=document.createElement('span');x.className='chip';x.textContent=k+1;x.title=T[t].it;chips.appendChild(x)});
+  if(n>8) chips.querySelectorAll('.chip').forEach(x=>{x.style.minWidth='48px';x.style.height='48px';x.style.fontSize='22px'});
+  let fatti=0, corsa=0, occupato=false;
+
+  // posizioni dei numeri: vicino all'inizio del tratto, senza sovrapporsi
+  const R=n>10?32:40, POS=[];
+  c.m.forEach(m=>{
+    const a=m[0], b=m[Math.min(1,m.length-1)];
+    const ax=a[0], ay=900-a[1], bx=b[0], by=900-b[1];
+    let dx=ax-bx, dy=ay-by; const l=Math.hypot(dx,dy)||1; dx/=l; dy/=l;
+    const prove=[[dx*(R+22),dy*(R+22)],[dx*(R*2+30),dy*(R*2+30)],[-dy*(R+30),dx*(R+30)],[dy*(R+30),-dx*(R+30)],[dx*(R*3+30),dy*(R*3+30)]]
+      .map(([ox,oy])=>[Math.min(1014-R,Math.max(10+R,ax+ox)),Math.min(1014-R,Math.max(10+R,ay+oy))]);
+    POS.push(prove.find(([x,y])=>POS.every(([u,v])=>Math.hypot(x-u,y-v)>R*2+6))||prove[0]);
+  });
+  function numero(k){
+    const [x,y]=POS[k];
+    const g=document.createElementNS(NS,'g');
+    g.innerHTML=`<circle cx="${x}" cy="${y}" r="${R}" fill="#E9B949" stroke="#2B1B17" stroke-width="7"/><text class="num" x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" fill="#2B1B17" style="font-size:${R*1.45}px">${k+1}</text>`;
+    numG.appendChild(g);
+  }
+  function stato(k){
+    [...chips.children].forEach((x,i)=>{x.classList.toggle('fatto',i<fatti); x.classList.toggle('ora',i===k)});
+    if(k==null){ infoN.textContent=fatti===n?`Finito! ${n} tratti`:'Premete ▶ e guardate il pennello!'; infoT.innerHTML=fatti===n?`<span class="han" style="color:${c.col}">${c.han}</span> ${c.py} ✅`:''; return }
+    const t=T[c.t[k]];
+    infoN.textContent=`Tratto ${k+1} di ${n}`;
+    infoT.innerHTML=`<span class="han" style="color:${c.col}">${t.han}</span> ${t.py} · <span style="font-weight:500;font-size:30px">${t.it}</span>`;
+  }
+  function azzera(){ corsa++; occupato=false; fatti=0; gr.paths.forEach(nascondi); numG.innerHTML=''; stato(null) }
+  async function uno(){
+    if(occupato||fatti>=n) return false;
+    occupato=true; const k=fatti, io=corsa; stato(k); numero(k);
+    await anima(gr.paths[k]); if(io!==corsa) return false;
+    fatti++; occupato=false;
+    if(fatti===n){ stato(null); dici(c.han) } return true;
+  }
+  s.querySelector('.b-tutto').onclick=async()=>{ azzera(); const io=corsa; await attesa(250);
+    while(io===corsa&&fatti<n){ await uno(); await attesa(300) } };
+  s.querySelector('.b-uno').onclick=()=>{ if(fatti>=n) azzera(); uno() };
+  s.querySelector('.b-ricomincia').onclick=azzera;
+  s.querySelectorAll('[data-dici]').forEach(b=>b.onclick=()=>dici(b.dataset.dici));
+  s.querySelectorAll('[data-vai]').forEach(b=>b.onclick=()=>vai(+b.dataset.vai));
+
+  // prova tu: il bambino ripassa con il dito sull'ombra
+  const bProva=s.querySelector('.b-prova'), bCanc=s.querySelector('.b-cancella');
+  let prova=false, linea=null;
+  bProva.onclick=()=>{ prova=!prova; bProva.classList.toggle('attivo',prova); bCanc.hidden=!prova; chips.hidden=prova; gr.svg.classList.toggle('traccia',prova);
+    if(prova){ azzera(); infoN.textContent='Tocca a voi!'; infoT.innerHTML='<span style="font-size:32px">Ripassate l\'ombra con il dito, nell\'ordine dei numeri.</span>'; c.m.forEach((_,k)=>numero(k)) }
+    else { mieiG.innerHTML=''; azzera() } };
+  bCanc.onclick=()=>{ mieiG.innerHTML='' };
+  function punto(e){ const q=gr.svg.createSVGPoint(); q.x=e.clientX; q.y=e.clientY; const m=gr.svg.getScreenCTM(); return m?q.matrixTransform(m.inverse()):q }
+  gr.svg.addEventListener('pointerdown',e=>{ if(!prova) return; e.preventDefault(); try{gr.svg.setPointerCapture(e.pointerId)}catch(_){}
+    const q=punto(e); linea=document.createElementNS(NS,'path'); linea.setAttribute('class','linea'); linea.setAttribute('stroke','#2B1B17'); linea.setAttribute('stroke-width',48);
+    linea._d=`M${q.x.toFixed(0)} ${q.y.toFixed(0)}`; linea.setAttribute('d',linea._d+' l0 0'); mieiG.appendChild(linea) });
+  gr.svg.addEventListener('pointermove',e=>{ if(!prova||!linea) return; const q=punto(e); linea._d+=` L${q.x.toFixed(0)} ${q.y.toFixed(0)}`; linea.setAttribute('d',linea._d) });
+  const fine=()=>{ linea=null }; gr.svg.addEventListener('pointerup',fine); gr.svg.addEventListener('pointercancel',fine);
+
+  uscita[c.slide]=()=>{ if(prova) bProva.onclick(); azzera() };
+  azzera();
+});
+
+uscita[0]=()=>{ introVivo++ };
+const m=/^#s(\d+)$/.exec(location.hash); vai(m?(+m[1]-1):0);
+pronto=true; if(cur===0) loopIntro();
+})();
+</script>
+
+</body></html>
