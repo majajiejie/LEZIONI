@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>万圣节 · Halloween</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#1b1035;--bg2:#2d1650;--orange:#ff8a1f;--orange2:#ffb347;--green:#7be07b;--purple:#b388ff;--text:#fff7ec;--muted:#d9c9f0;--card:rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Fredoka',system-ui,sans-serif;color:var(--text);
+  background:radial-gradient(circle at 80% 10%,#4a2a7a 0,transparent 40%),linear-gradient(160deg,var(--bg1),var(--bg2));
+  overflow:hidden;user-select:none}
+.zh{font-family:'Noto Sans SC',sans-serif}
+.slide{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px 90px;text-align:center;gap:10px}
+.slide.on{display:flex;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.emoji{font-size:clamp(110px,22vw,230px);line-height:1;cursor:pointer}
+.py{font-size:clamp(30px,5.5vw,60px);color:var(--green);font-weight:600}
+.hz{font-size:clamp(70px,14vw,150px);font-weight:700;cursor:pointer;line-height:1.1}
+.it{font-size:clamp(22px,3.4vw,36px);color:var(--orange2)}
+.gt{font-size:clamp(26px,4vw,40px);color:var(--orange);font-weight:700}
+.hint{font-size:20px;color:var(--muted)}
+.title{color:var(--orange)}
+.btn{font-family:inherit;font-size:22px;font-weight:600;border:0;border-radius:999px;padding:12px 26px;background:var(--orange);color:#2a1200;cursor:pointer;box-shadow:0 5px 0 #a24a00}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #a24a00}
+.btn.ghost{background:var(--purple);box-shadow:0 5px 0 #6a3fbf;color:#1b1035}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+nav{position:fixed;bottom:14px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;z-index:5}
+#count{font-size:18px;color:var(--muted);min-width:70px}
+.grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;max-width:900px}
+.tile{font-size:clamp(54px,9vw,92px);background:var(--card);border-radius:24px;padding:8px 14px;cursor:pointer;border:4px solid transparent;transition:.2s}
+.tile.ok{border-color:var(--green);background:rgba(123,224,123,.2)}
+.tile.no{border-color:#ff5b5b;animation:shake .35s}
+.tile.gone{opacity:0}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.fb{font-size:30px;min-height:1.3em}
+.num{background:var(--card);border-radius:20px;padding:6px 18px;cursor:pointer;border:4px solid transparent}
+.num .py{font-size:24px}.num .hz{font-size:56px}
+.num.ok{border-color:var(--green)}.num.no{border-color:#ff5b5b;animation:shake .35s}
+.ghosts{font-size:clamp(56px,10vw,96px);min-height:1.2em;letter-spacing:6px}
+.kid{background:var(--card);border-radius:18px;padding:6px 12px;display:flex;align-items:center;gap:8px;font-size:22px}
+.kid b{color:var(--orange2);min-width:1.4em}
+.kid button{font-family:inherit;font-size:20px;border:0;border-radius:50%;width:34px;height:34px;cursor:pointer;background:var(--green);color:#10300f;font-weight:700}
+.kid button.m{background:#ffffff33;color:var(--text)}
+.pk{font-size:clamp(54px,9vw,90px);cursor:pointer;background:var(--card);border-radius:24px;padding:6px 12px}
+.pk.open{opacity:.3;cursor:default}
+#modal{position:fixed;inset:0;background:rgba(10,4,25,.85);display:none;align-items:center;justify-content:center;z-index:10}
+#modal.on{display:flex}
+#modal .box{background:linear-gradient(160deg,#3b1d66,#24113f);border:4px solid var(--orange);border-radius:30px;padding:26px 40px;text-align:center;max-width:90vw;display:flex;flex-direction:column;align-items:center;gap:8px;animation:pop .3s}
+#modal .emoji{font-size:130px}
+.stage{height:clamp(150px,26vh,240px);display:flex;align-items:center;justify-content:center}
+.mon{display:inline-block;font-size:clamp(80px,14vw,130px);line-height:1;transition:transform .5s cubic-bezier(.5,1.6,.5,1)}
+.adj{background:var(--card);border-radius:20px;padding:6px 18px;cursor:pointer;border:4px solid transparent}
+.adj .py{font-size:22px}.adj .hz{font-size:52px}.adj .it{font-size:18px}
+.adj.ok{border-color:var(--green)}.adj.no{border-color:#ff5b5b;animation:shake .35s}
+.adj.sel{border-color:var(--orange)}
+.acard{background:var(--card);border-radius:22px;padding:8px 14px;cursor:pointer;min-width:130px}
+.acard .mbox{height:120px;display:flex;align-items:center;justify-content:center}
+.acard .mon{font-size:64px}
+.acard .py{font-size:22px}.acard .hz{font-size:46px}.acard .it{font-size:18px}
+.fsline{min-height:110px;min-width:min(600px,90vw);border-bottom:4px dashed var(--muted);padding:6px;align-items:flex-end}
+.wt{background:var(--card);border:3px solid var(--purple);border-radius:18px;padding:6px 16px;cursor:pointer}
+.wt .py{font-size:22px}.wt .hz{font-size:46px}
+.fsline .wt{border-color:var(--orange)}
+.fsline.ok .wt{border-color:var(--green)}
+.fsline.no{animation:shake .35s}
+.dance{display:inline-block;animation:dance 1s ease-in-out infinite}
+@keyframes dance{25%{transform:rotate(-12deg) scale(1.1)}75%{transform:rotate(12deg) scale(1.1)}}
+</style>
+</head>
+<body>
+
+<!-- TITOLO -->
+<section class="slide on">
+  <div class="emoji" onclick="say('万圣节')">🎃</div>
+  <div class="py">Wànshèngjié</div>
+  <div class="hz zh title" onclick="say('万圣节')">万圣节</div>
+  <div class="it">Halloween</div>
+</section>
+
+<div id="words"></div>
+
+<!-- RIPASSO: tutte insieme -->
+<section class="slide">
+  <div class="gt">Ripetiamo tutti insieme! 🗣️</div>
+  <div class="grid" id="review"></div>
+  <div class="hint">Clicca un disegno e ripeti</div>
+</section>
+
+<!-- AGGETTIVI -->
+<section class="slide">
+  <div class="gt">Gli aggettivi di Halloween ✨</div>
+  <div class="grid" id="adjCards" style="max-width:1000px"></div>
+  <div class="hint">Clicca e ripeti</div>
+</section>
+
+<!-- GIOCO AGGETTIVI 1 -->
+<section class="slide">
+  <div class="gt">Com'è? 🤔</div>
+  <div class="stage"><span class="mon" id="a1mon">🎃</span></div>
+  <div class="row" id="a1btns"></div>
+  <div class="fb" id="a1fb"></div>
+  <button class="btn" onclick="a1New()">▶ Ancora</button>
+</section>
+
+<!-- GIOCO AGGETTIVI 2 -->
+<section class="slide">
+  <div class="gt">La bacchetta magica 🪄</div>
+  <div class="hint">Scegli un mostro e una magia!</div>
+  <div class="row" id="a2nouns"></div>
+  <div class="stage"><span class="mon" id="a2mon">👻</span></div>
+  <div class="py" id="a2py" style="font-size:40px">guǐ</div>
+  <div class="hz zh" id="a2hz" style="font-size:80px" onclick="say(this.textContent)">鬼</div>
+  <div class="row" id="a2adjs"></div>
+</section>
+
+<!-- EMOZIONI -->
+<section class="slide">
+  <div class="gt">Come ti senti? 💛</div>
+  <div class="grid" id="emoCards" style="max-width:1000px"></div>
+  <div class="hint">Clicca, ripeti e fai la faccia!</div>
+</section>
+
+<!-- GIOCO EMOZIONI -->
+<section class="slide">
+  <div class="gt">Come si sente? 🤔</div>
+  <div class="stage" id="e1scene" style="font-size:clamp(70px,12vw,120px)"></div>
+  <div class="row" id="e1btns"></div>
+  <div class="fb" id="e1fb"></div>
+  <button class="btn" onclick="e1New()">▶ Ancora</button>
+</section>
+
+<!-- FRASI -->
+<section class="slide">
+  <div class="gt">Ricostruisci la frase! 🧩</div>
+  <div class="emoji" id="fsE" style="font-size:90px"></div>
+  <div class="it" id="fsIt"></div>
+  <div class="row fsline" id="fsAns"></div>
+  <div class="row" id="fsPool"></div>
+  <div class="fb" id="fsFb"></div>
+  <div class="row">
+    <button class="btn" onclick="fsCheck()">✅ Controlla</button>
+    <button class="btn ghost" onclick="fsNext()">▶ Prossima</button>
+  </div>
+</section>
+
+<!-- GIOCO 1 -->
+<section class="slide">
+  <div class="gt">Gioco 1 · Dov'è? 🔎</div>
+  <div class="py" id="g1py">?</div>
+  <div class="hz zh" id="g1hz" style="font-size:clamp(56px,10vw,100px)">？</div>
+  <div class="grid" id="g1grid"></div>
+  <div class="fb" id="g1fb"></div>
+  <button class="btn" onclick="g1New()">▶ Nuova parola</button>
+</section>
+
+<!-- GIOCO 2 -->
+<section class="slide">
+  <div class="gt">Gioco 2 · Ascolta! 👂</div>
+  <div class="hint">Ascolta la parola (senza guardare!) e trova il disegno</div>
+  <div class="emoji" style="font-size:110px" onclick="g2Say()">🔊</div>
+  <div class="grid" id="g2grid"></div>
+  <div class="fb" id="g2fb"></div>
+  <div class="row">
+    <button class="btn" onclick="g2New()">▶ Nuova parola</button>
+    <button class="btn ghost" onclick="g2Say()">🔁 Ripeti</button>
+  </div>
+</section>
+
+<!-- GIOCO 3 -->
+<section class="slide">
+  <div class="gt">Gioco 3 · Chi manca? 🙈</div>
+  <div class="hint">Guarda bene… chiudete gli occhi… chi è sparito?</div>
+  <div class="grid" id="g3grid"></div>
+  <div class="fb" id="g3fb"></div>
+  <div class="row">
+    <button class="btn" onclick="g3Hide()">🙈 Nascondi</button>
+    <button class="btn ghost" onclick="g3Show()">👀 Soluzione</button>
+  </div>
+</section>
+
+<!-- GIOCO 4 -->
+<section class="slide">
+  <div class="gt">Gioco 4 · Quanti? 🔢</div>
+  <div class="py">Jǐ gè?</div>
+  <div class="hz zh" style="font-size:60px">几个？</div>
+  <div class="ghosts" id="g4show"></div>
+  <div class="row" id="g4nums"></div>
+  <div class="fb" id="g4fb"></div>
+  <button class="btn" onclick="g4New()">▶ Ancora</button>
+</section>
+
+<!-- GIOCO 5 -->
+<section class="slide">
+  <div class="gt">Gioco 5 · Le zucche magiche 🎃</div>
+  <div class="hint">Scegli una zucca e di' la parola in cinese! 🍬 = caramella</div>
+  <div class="grid" id="g5pk"></div>
+  <div class="row" id="team"></div>
+  <button class="btn ghost" onclick="g5Build()">🔄 Nuove zucche</button>
+</section>
+
+<!-- GIOCO 6 -->
+<section class="slide">
+  <div class="gt">Gioco 6 · Fai come me! 💃</div>
+  <div class="hint">Clicca: tutti fanno il gesto e dicono la parola</div>
+  <div class="emoji" id="g6e"><span class="dance">👻</span></div>
+  <div class="py" id="g6py">guǐ</div>
+  <div class="hz zh" id="g6hz">鬼</div>
+  <div class="it" id="g6it">Fate i fantasmi: “Buuuh!” 👐</div>
+  <button class="btn" onclick="g6Next()">▶ Prossimo</button>
+</section>
+
+<!-- FINE -->
+<section class="slide">
+  <div class="emoji">👋</div>
+  <div class="py">Zàijiàn!</div>
+  <div class="hz zh title" onclick="say('再见')">再见！</div>
+  <div class="it">Ciao!</div>
+</section>
+
+<nav>
+  <button class="btn ghost" onclick="go(-1)">◀</button>
+  <span id="count"></span>
+  <button class="btn" onclick="go(1)">▶</button>
+</nav>
+
+<div id="modal" onclick="closeM()">
+  <div class="box" onclick="event.stopPropagation()">
+    <div class="emoji" id="mE"></div>
+    <div class="py" id="mPy"></div>
+    <div class="hz zh" id="mHz" style="font-size:90px"></div>
+    <div class="it" id="mIt"></div>
+    <div class="row">
+      <button class="btn" id="mBtn">👀 Soluzione</button>
+      <button class="btn ghost" onclick="closeM()">Chiudi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WORDS=[
+  {e:'🎃',zh:'南瓜',py:'nánguā',it:'zucca'},
+  {e:'👻',zh:'鬼',py:'guǐ',it:'fantasma'},
+  {e:'🐈‍⬛',zh:'黑猫',py:'hēi māo',it:'gatto nero'},
+  {e:'🦇',zh:'蝙蝠',py:'biānfú',it:'pipistrello'},
+  {e:'🍬',zh:'糖',py:'táng',it:'caramella'}
+];
+const NUMS=[{zh:'一',py:'yī'},{zh:'二',py:'èr'},{zh:'三',py:'sān'},{zh:'四',py:'sì'},{zh:'五',py:'wǔ'}];
+const KIDS=['Anna','Filo','Liam','Matteo'];
+const $=id=>document.getElementById(id);
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+
+/* voce */
+let zhVoice=null;
+function loadVoice(){try{const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}catch(e){}}
+try{loadVoice();speechSynthesis.onvoiceschanged=loadVoice}catch(e){}
+function say(t){if(!t)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.rate=.7;if(zhVoice)u.voice=zhVoice;speechSynthesis.speak(u)}catch(e){}}
+function shake(el){el.classList.remove('no');void el.offsetWidth;el.classList.add('no')}
+
+/* slide parole */
+const first=document.querySelector('.slide');
+[...WORDS].reverse().forEach(w=>{
+  const s=document.createElement('section');s.className='slide';
+  s.innerHTML=`<div class="emoji" onclick="say('${w.zh}')">${w.e}</div>
+    <div class="py">${w.py}</div>
+    <div class="hz zh" onclick="say('${w.zh}')">${w.zh}</div>
+    <div class="it">${w.it}</div>
+    <button class="btn" onclick="say('${w.zh}')">🔊</button>`;
+  first.after(s);
+});
+
+/* navigazione */
+const slides=[...document.querySelectorAll('.slide')];let idx=0;
+function show(){slides.forEach((s,i)=>s.classList.toggle('on',i===idx));$('count').textContent=(idx+1)+' / '+slides.length}
+function go(d){idx=Math.max(0,Math.min(slides.length-1,idx+d));show()}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);if(e.key==='Escape')closeM()});
+show();
+
+/* ripasso */
+WORDS.forEach(w=>{const t=document.createElement('div');t.className='tile';
+  t.innerHTML=`${w.e}<div class="py" style="font-size:22px">${w.py}</div><div class="zh" style="font-size:34px">${w.zh}</div>`;
+  t.onclick=()=>say(w.zh);$('review').appendChild(t)});
+
+/* aggettivi */
+const ADJ=[
+  {zh:'大',py:'dà',it:'grande',tf:'scale(1.6)'},
+  {zh:'小',py:'xiǎo',it:'piccolo',tf:'scale(.45)'},
+];
+const MON=WORDS.filter(w=>w.zh!=='糖');
+ADJ.forEach((a,i)=>{const w=MON[i%MON.length];const c=document.createElement('div');c.className='acard';
+  c.innerHTML=`<div class="mbox"><span class="mon" style="transform:${a.tf}">${w.e}</span></div><div class="py">${a.py}</div><div class="hz zh">${a.zh}</div><div class="it">${a.it}</div>`;
+  c.onclick=()=>say(a.zh);$('adjCards').appendChild(c)});
+
+let a1=null;
+ADJ.forEach(a=>{const b=document.createElement('div');b.className='adj';b.innerHTML=`<div class="py">${a.py}</div><div class="hz zh">${a.zh}</div>`;
+  b.onclick=()=>{if(!a1)return;if(a===a1.a){b.classList.add('ok');$('a1fb').innerHTML=`🎉 对！ <span style="color:var(--green)">${a1.a.py} ${a1.w.py}</span> <span class="zh">${a1.a.zh}${a1.w.zh}</span>`;say(a1.a.zh+a1.w.zh)}
+    else{shake(b);$('a1fb').textContent='😜 Riprova!'}};$('a1btns').appendChild(b)});
+function a1New(){let a;do{a=rnd(ADJ)}while(a1&&a===a1.a);a1={a,w:rnd(MON)};$('a1fb').textContent='';
+  [...$('a1btns').children].forEach(b=>b.classList.remove('ok','no'));
+  const m=$('a1mon');m.style.transform='none';m.textContent=a1.w.e;setTimeout(()=>m.style.transform=a1.a.tf,300)}
+a1New();
+
+let a2w=MON[1],a2a=null;
+function a2Draw(){const m=$('a2mon');m.textContent=a2w.e;m.style.transform=a2a?a2a.tf:'none';
+  $('a2py').textContent=(a2a?a2a.py+' ':'')+a2w.py;$('a2hz').textContent=(a2a?a2a.zh:'')+a2w.zh}
+MON.forEach(w=>{const t=document.createElement('div');t.className='tile';t.style.fontSize='54px';t.textContent=w.e;
+  t.onclick=()=>{a2w=w;a2a=null;[...$('a2adjs').children].forEach(x=>x.classList.remove('sel'));a2Draw();say(w.zh)};$('a2nouns').appendChild(t)});
+ADJ.forEach(a=>{const b=document.createElement('div');b.className='adj';b.innerHTML=`<div class="py">${a.py}</div><div class="hz zh">${a.zh}</div><div class="it">${a.it}</div>`;
+  b.onclick=()=>{a2a=a;[...$('a2adjs').children].forEach(x=>x.classList.remove('sel'));b.classList.add('sel');a2Draw();say(a.zh+a2w.zh)};$('a2adjs').appendChild(b)});
+a2Draw();
+
+/* emozioni */
+const EMO=[
+  {e:'😄',zh:'高兴',py:'gāoxìng',it:'felice'},
+  {e:'😢',zh:'伤心',py:'shāngxīn',it:'triste'},
+  {e:'😱',zh:'害怕',py:'hàipà',it:'ho paura'},
+  {e:'😠',zh:'生气',py:'shēngqì',it:'arrabbiato'}
+];
+const SCENES=[
+  {s:'👻➡️🧒',e:'😱'},{s:'🍬🍬🍬➡️🧒',e:'😄'},{s:'🎃💔',e:'😢'},
+  {s:'🦇🦇🦇➡️🧒',e:'😱'},{s:'🐈‍⬛🍬❌',e:'😠'},{s:'🎃🎉',e:'😄'}
+];
+EMO.forEach(m=>{const c=document.createElement('div');c.className='acard';
+  c.innerHTML=`<div class="mbox"><span class="mon">${m.e}</span></div><div class="py">${m.py}</div><div class="hz zh">${m.zh}</div><div class="it">${m.it}</div>`;
+  c.onclick=()=>say(m.zh);$('emoCards').appendChild(c)});
+let e1=null;
+EMO.forEach(m=>{const b=document.createElement('div');b.className='adj';b.innerHTML=`<div style="font-size:40px">${m.e}</div><div class="py">${m.py}</div><div class="hz zh">${m.zh}</div>`;
+  b.onclick=()=>{if(!e1)return;if(m.e===e1.e){b.classList.add('ok');$('e1fb').innerHTML=`🎉 对！ <span style="color:var(--green)">${m.py}</span> <span class="zh">${m.zh}</span>`;say(m.zh)}
+    else{shake(b);$('e1fb').textContent='😜 Riprova!'}};$('e1btns').appendChild(b)});
+function e1New(){let n;do{n=rnd(SCENES)}while(e1&&n===e1);e1=n;$('e1scene').textContent=n.s;$('e1fb').textContent='';
+  [...$('e1btns').children].forEach(b=>b.classList.remove('ok','no'))}
+e1New();
+
+/* ricostruisci la frase */
+const FRASI=[
+  {e:'🎃',it:'La zucca è grande.',w:[['南瓜','nánguā'],['很','hěn'],['大','dà']]},
+  {e:'🐈‍⬛',it:'Il gatto nero è piccolo.',w:[['黑猫','hēi māo'],['很','hěn'],['小','xiǎo']]},
+  {e:'😱👻',it:'Ho paura dei fantasmi.',w:[['我','wǒ'],['害怕','hàipà'],['鬼','guǐ']]},
+  {e:'😄🍬',it:'Sono felice.',w:[['我','wǒ'],['很','hěn'],['高兴','gāoxìng']]},
+  {e:'😢🎃',it:'Sono triste.',w:[['我','wǒ'],['很','hěn'],['伤心','shāngxīn']]},
+  {e:'😠🦇',it:'Il pipistrello è arrabbiato.',w:[['蝙蝠','biānfú'],['很','hěn'],['生气','shēngqì']]}
+];
+let fsI=-1,fsPicked=[];
+function wtile(x){const d=document.createElement('div');d.className='wt';d.innerHTML=`<div class="py">${x[1]}</div><div class="hz zh">${x[0]}</div>`;return d}
+function fsDraw(){
+  const f=FRASI[fsI];$('fsAns').innerHTML='';$('fsPool').innerHTML='';$('fsAns').classList.remove('ok');
+  fsPicked.forEach((x,k)=>{const d=wtile(x);d.onclick=()=>{fsPicked.splice(k,1);fsDraw()};$('fsAns').appendChild(d)});
+  f.pool.forEach(x=>{if(fsPicked.includes(x))return;const d=wtile(x);d.onclick=()=>{fsPicked.push(x);say(x[0]);$('fsFb').textContent='';fsDraw()};$('fsPool').appendChild(d)})}
+function fsNext(){fsI=(fsI+1)%FRASI.length;const f=FRASI[fsI];
+  do{f.pool=shuffle(f.w)}while(f.pool.every((x,k)=>x===f.w[k]));
+  fsPicked=[];$('fsE').textContent=f.e;$('fsIt').textContent=f.it;$('fsFb').textContent='';fsDraw()}
+function fsCheck(){const f=FRASI[fsI];
+  if(fsPicked.length<f.w.length){$('fsFb').textContent='🤔 Mancano delle parole!';return}
+  if(fsPicked.every((x,k)=>x===f.w[k])){$('fsAns').classList.add('ok');$('fsFb').textContent='🎉 对！duì!';say(f.w.map(x=>x[0]).join(''))}
+  else{shake($('fsAns'));$('fsFb').textContent='😜 Riprova!'}}
+fsNext();
+
+/* gioco 1: leggi e trova */
+let g1=null;
+function tiles(box,onPick){box.innerHTML='';shuffle(WORDS).forEach(w=>{const t=document.createElement('div');t.className='tile';t.textContent=w.e;t.onclick=()=>onPick(w,t);box.appendChild(t)})}
+function g1New(){let n;do{n=rnd(WORDS)}while(g1&&n===g1);g1=n;$('g1py').textContent=n.py;$('g1hz').textContent=n.zh;$('g1fb').textContent='';
+  tiles($('g1grid'),(w,t)=>{if(w===g1){t.classList.add('ok');$('g1fb').textContent='🎉 对！duì!';say('对')}else{shake(t);$('g1fb').textContent='😜 Riprova!'}})}
+tiles($('g1grid'),()=>{});
+
+/* gioco 2: ascolta e trova */
+let g2=null;
+function g2Say(){if(g2)say(g2.zh)}
+function g2New(){let n;do{n=rnd(WORDS)}while(g2&&n===g2);g2=n;$('g2fb').textContent='';
+  tiles($('g2grid'),(w,t)=>{if(w===g2){t.classList.add('ok');$('g2fb').innerHTML=`🎉 对！ <span style="color:var(--green)">${g2.py}</span> <span class="zh">${g2.zh}</span>`;say('对')}else{shake(t);$('g2fb').textContent='😜 Riprova!'}});
+  setTimeout(g2Say,250)}
+tiles($('g2grid'),()=>{});
+
+/* gioco 3: chi manca */
+let g3hidden=null;
+function g3Build(){$('g3grid').innerHTML='';WORDS.forEach(w=>{const t=document.createElement('div');t.className='tile';t.dataset.zh=w.zh;t.textContent=w.e;$('g3grid').appendChild(t)})}
+function g3Hide(){g3Build();g3hidden=rnd(WORDS);$('g3fb').textContent='';
+  const ts=[...$('g3grid').children];ts.forEach(t=>t.classList.add('gone'));
+  setTimeout(()=>{ts.forEach(t=>{if(t.dataset.zh!==g3hidden.zh)t.classList.remove('gone')})},1500)}
+function g3Show(){if(!g3hidden)return;[...$('g3grid').children].forEach(t=>{if(t.dataset.zh===g3hidden.zh){t.classList.remove('gone');t.classList.add('ok')}});
+  $('g3fb').innerHTML=`${g3hidden.e} <span style="color:var(--green)">${g3hidden.py}</span> <span class="zh">${g3hidden.zh}</span>`;say(g3hidden.zh)}
+g3Build();
+
+/* gioco 4: quanti */
+let g4n=0;
+NUMS.forEach((n,i)=>{const b=document.createElement('div');b.className='num';b.innerHTML=`<div class="py">${n.py}</div><div class="hz zh">${n.zh}</div>`;
+  b.onclick=()=>{if(i+1===g4n){b.classList.add('ok');$('g4fb').textContent='🎉 对！duì!';say(n.zh)}else{shake(b);$('g4fb').textContent='😜 Conta ancora!'}};$('g4nums').appendChild(b)});
+function g4New(){let n;do{n=1+Math.floor(Math.random()*5)}while(n===g4n);g4n=n;const w=rnd(WORDS);$('g4show').textContent=w.e.repeat(n);$('g4fb').textContent='';
+  [...$('g4nums').children].forEach(b=>b.classList.remove('ok','no'))}
+g4New();
+
+/* gioco 5: zucche magiche */
+function g5Build(){$('g5pk').innerHTML='';
+  shuffle([...WORDS.map(w=>({t:'w',...w})),...WORDS.map(w=>({t:'w',...w})),{t:'c'},{t:'c'}]).forEach(it=>{
+    const p=document.createElement('div');p.className='pk';p.textContent='🎃';
+    p.onclick=()=>{if(p.classList.contains('open'))return;p.classList.add('open');openM(it)};$('g5pk').appendChild(p)})}
+function openM(it){
+  if(it.t==='c'){$('mE').textContent='🍬🍬';$('mPy').textContent='táng!';$('mHz').textContent='糖！';$('mIt').textContent='Caramella bonus! +2 🍬';$('mBtn').style.display='none';say('糖')}
+  else{$('mE').textContent=it.e;$('mPy').textContent='';$('mHz').textContent='？';$('mIt').textContent='Come si dice in cinese?';$('mBtn').style.display='';
+    $('mBtn').onclick=()=>{$('mPy').textContent=it.py;$('mHz').textContent=it.zh;$('mIt').textContent=it.it;say(it.zh)}}
+  $('modal').classList.add('on')}
+function closeM(){$('modal').classList.remove('on')}
+g5Build();
+KIDS.forEach(k=>{let s=0;const d=document.createElement('div');d.className='kid';
+  d.innerHTML=`<span>${k}</span><button class="m">−</button><b>0</b>🍬<button>+</button>`;
+  const [m,p]=d.querySelectorAll('button'),b=d.querySelector('b');
+  p.onclick=()=>{b.textContent=++s};m.onclick=()=>{s=Math.max(0,s-1);b.textContent=s};$('team').appendChild(d)});
+
+/* gioco 6: fai come me */
+const MOVES=[
+  {e:'👻',...WORDS[1],a:'Fate i fantasmi: “Buuuh!” 👐'},
+  {e:'🦇',...WORDS[3],a:'Volate come pipistrelli! 🦇'},
+  {e:'🐈‍⬛',...WORDS[2],a:'Fate il gatto: “Miao!” 🐾'},
+  {e:'🎃',...WORDS[0],a:'Fate una zucca grande grande! 🙆'},
+  {e:'🍬',...WORDS[4],a:'Mangiate la caramella: “Mmm!” 😋'}
+];let g6=0;
+function g6Next(){g6=(g6+1)%MOVES.length;const m=MOVES[g6];$('g6e').innerHTML=`<span class="dance">${m.e}</span>`;$('g6py').textContent=m.py;$('g6hz').textContent=m.zh;$('g6it').textContent=m.a;say(m.zh)}
+$('g6e').onclick=()=>say(MOVES[g6].zh);$('g6hz').onclick=()=>say(MOVES[g6].zh);
+</script>
+</body>
+</html>
