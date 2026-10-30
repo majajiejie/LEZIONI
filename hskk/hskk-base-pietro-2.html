@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSKK Base · Pietro 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#d6362f; --red2:#b02a24; --gold:#f2b632; --cream:#fff8ec; --ink:#2b2321;
+  --soft:#f6e9d5; --green:#2f9e5b; --blue:#2f6fd6; --card:#ffffff; --muted:#7a6c66;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:18px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:18px 16px 70px;position:relative;overflow:hidden}
+header::after{content:"说";position:absolute;right:-10px;top:-30px;font-size:200px;opacity:.12;font-family:'Noto Sans SC'}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+h1{margin:0;font-size:30px;line-height:1.1}
+.sub{opacity:.9;font-size:17px}
+.stars{position:absolute;right:16px;top:16px;background:#fff;color:var(--red);border-radius:30px;padding:6px 16px;font-weight:800;font-size:22px;box-shadow:0 4px 0 rgba(0,0,0,.15);z-index:2}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:-50px;position:relative;z-index:2}
+nav button{flex:1;min-width:140px;border:0;border-radius:16px;padding:10px 8px;background:#fff;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #e7d6bd;color:var(--ink)}
+nav button small{display:block;font-weight:500;color:var(--muted);font-size:14px}
+nav button.on{background:var(--gold);box-shadow:0 4px 0 #c98f12}
+section{display:none;margin:22px 0 40px}
+section.on{display:block;animation:pop .3s}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.card{background:var(--card);border-radius:22px;padding:20px;box-shadow:0 6px 0 #ecdcc4;margin-bottom:16px}
+h2{margin:0 0 4px;font-size:26px;color:var(--red)}
+.hint{color:var(--muted);font-size:16px;margin:0 0 12px}
+.btn{border:0;border-radius:14px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer;background:var(--soft);color:var(--ink);box-shadow:0 3px 0 #dcc6a4;margin:4px 4px 4px 0}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.red{background:var(--red);color:#fff;box-shadow:0 3px 0 var(--red2)}
+.btn.green{background:var(--green);color:#fff;box-shadow:0 3px 0 #1f7041}
+.btn.gold{background:var(--gold);box-shadow:0 3px 0 #c98f12}
+.big{font-size:34px;margin:10px 0 2px}
+.py{color:var(--muted);font-size:18px}
+.it{font-size:16px;color:var(--blue)}
+.hidden{visibility:hidden}
+.gone{display:none}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.progress{display:flex;gap:6px;margin:8px 0 14px;flex-wrap:wrap}
+.dot{width:26px;height:26px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:14px;font-weight:700}
+.dot.done{background:var(--green);color:#fff}
+.dot.cur{outline:3px solid var(--gold)}
+.speed{margin-left:auto;font-size:15px;color:var(--muted)}
+.exam{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.exam div{background:var(--soft);border-radius:16px;padding:12px}
+.exam b{color:var(--red)}
+/* match game */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:3px solid transparent;background:var(--soft);border-radius:16px;padding:12px;text-align:center;cursor:pointer;font-weight:700;user-select:none;transition:.15s}
+.tile.zhT{font-size:28px}
+.tile.sel{border-color:var(--gold);background:#fff3cf}
+.tile.ok{background:var(--green);color:#fff;cursor:default;opacity:.85}
+.tile.bad{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+/* timer */
+.timer{font-size:42px;font-weight:800;color:var(--red);min-width:110px;text-align:center}
+.bar{height:12px;background:var(--soft);border-radius:8px;overflow:hidden;flex:1;min-width:120px}
+.bar i{display:block;height:100%;width:100%;background:var(--gold);transition:width 1s linear}
+/* wheel */
+.wheel{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:10px 0}
+.wq{background:var(--soft);border-radius:16px;padding:12px;text-align:center;font-size:20px;border:3px solid transparent}
+.wq.lit{background:var(--gold);border-color:var(--red)}
+.wq.used{opacity:.4}
+.blocks{display:grid;gap:8px;margin:12px 0}
+.blk{display:flex;gap:10px;align-items:flex-start;background:var(--soft);border-radius:14px;padding:10px 12px}
+.blk .n{background:var(--red);color:#fff;border-radius:50%;width:30px;height:30px;flex:none;display:grid;place-items:center;font-weight:800}
+.blk p{margin:0;font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:0;border-radius:30px;padding:8px 14px;background:#fff;border:2px dashed var(--red);font:inherit;cursor:pointer}
+.chip.on{background:var(--green);border:2px solid var(--green);color:#fff}
+.model{background:#fffaf0;border-left:6px solid var(--gold);border-radius:12px;padding:12px;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;transition:.3s;z-index:9}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.final{text-align:center}
+.final .big{font-size:60px}
+header .wrap{padding-right:90px}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+@media (max-width:560px){h1{font-size:24px}.big{font-size:28px}nav button{min-width:45%}}
+/* lezione 2: ordina la domanda */
+.slots{min-height:64px;background:#fffaf0;border:3px dashed var(--gold);border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.wd{border:0;border-radius:12px;padding:8px 14px;background:var(--soft);font:inherit;font-size:24px;cursor:pointer;box-shadow:0 3px 0 #dcc6a4;font-family:'Noto Sans SC',sans-serif}
+.slots .wd{background:#fff;box-shadow:0 3px 0 #ecdcc4}
+.slots.ok{border-color:var(--green);background:#eaf7ef}
+/* lezione 2: crea tu */
+.topic{background:linear-gradient(135deg,#fff3cf,#fff);border:3px solid var(--gold);border-radius:20px;padding:14px;text-align:center}
+.topic .em{font-size:54px;line-height:1}
+.topic .nm{font-size:22px;font-weight:800;color:var(--red)}
+.qw{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.qw button{border:2px solid var(--red);background:#fff;border-radius:30px;padding:6px 14px;font:inherit;font-size:20px;cursor:pointer;font-family:'Noto Sans SC',sans-serif}
+.qw button.on{background:var(--red);color:#fff}
+.inp{width:100%;font:inherit;font-size:22px;padding:10px 12px;border-radius:14px;border:2px solid #e7d6bd;font-family:'Noto Sans SC','Baloo 2',sans-serif;background:#fff;color:var(--ink)}
+.mine{margin:8px 0 0;padding-left:20px}
+.mine li{margin:4px 0;font-size:18px}
+.step{display:inline-grid;place-items:center;background:var(--red);color:#fff;border-radius:50%;width:28px;height:28px;font-weight:800;margin-right:6px;font-size:16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="sub">Maja Jiejie · HSKK 初级 · Lezione 2</div>
+    <h1>Parla cinese senza paura! <span class="zh">说汉语！</span></h1>
+    <div class="sub">Lezione one to one con Pietro · 30 minuti</div>
+  </div>
+  <div class="stars">⭐ <span id="stars">0</span></div>
+</header>
+
+<div class="wrap">
+<nav id="nav">
+  <button data-s="0" class="on">🧩 Riscaldamento<small>3 min</small></button>
+  <button data-s="1">🦜 Pappagallo<small>Parte 1 · 6 min</small></button>
+  <button data-s="2">⚡ Domanda lampo<small>Parte 2 · 7 min</small></button>
+  <button data-s="3">🎡 La ruota<small>Parte 3 · 7 min</small></button>
+  <button data-s="4">🎤 Tocca a te!<small>Crea · 7 min</small></button>
+</nav>
+
+<!-- 0 RISCALDAMENTO -->
+<section class="on" id="s0">
+  <div class="card">
+    <h2>🧩 Metti in ordine la domanda</h2>
+    <p class="hint">Clicca le parole nell'ordine giusto per costruire la domanda. Poi rispondi a voce! (+1 ⭐ domanda giusta, +1 ⭐ risposta)</p>
+    <div class="progress" id="p0dots"></div>
+    <div class="slots" id="slots"></div>
+    <div class="pool" id="pool"></div>
+    <div id="p0ok" class="gone">
+      <div class="py" id="p0py"></div>
+      <div class="it" id="p0it"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn" onclick="say(S0[i0].zh)">🔊 Ascolta</button>
+        <button class="btn green" onclick="p0answer()">💬 Ha risposto! +1</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" onclick="build0()">↩️ Ricomincia questa</button>
+      <button class="btn gold" onclick="next0()">➡️ Prossima</button>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint" style="margin:0">💡 Ricorda: in cinese la parola-domanda sta <b>dove sta la risposta</b>! <span class="zh">你几点睡觉？→ 我十点睡觉。</span></p>
+  </div>
+</section>
+
+<!-- 1 PAPPAGALLO -->
+<section id="s1">
+  <div class="card">
+    <h2>🦜 Il pappagallo cinese <span class="zh">听后重复</span></h2>
+    <p class="hint">Frasi nuove, un po' più lunghe! Ascolta SENZA guardare, ripeti subito, poi controlla.</p>
+    <div class="row">
+      <div class="progress" id="p1dots"></div>
+      <label class="speed"><input type="checkbox" id="slow"> 🐢 lento</label>
+    </div>
+    <div class="row">
+      <button class="btn red" onclick="say(P1[i1].zh)">🔊 Ascolta</button>
+      <button class="btn" onclick="reveal('p1')">👀 Mostra la frase</button>
+    </div>
+    <div id="p1" class="hidden">
+      <div class="big zh" id="p1zh"></div>
+      <div class="py" id="p1py"></div>
+      <div class="it" id="p1it"></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn green" onclick="p1score(2)">🌟 Perfetta! +2</button>
+      <button class="btn gold" onclick="p1score(1)">👍 Quasi! +1</button>
+      <button class="btn" onclick="p1score(0)">🔁 Riprova dopo</button>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint" style="margin:0">💡 Trucco: dividi la frase in due pezzi nella testa. <span class="zh">我家 / 离学校很近。</span></p>
+  </div>
+</section>
+
+<!-- 2 DOMANDA LAMPO -->
+<section id="s2">
+  <div class="card">
+    <h2>⚡ Domanda lampo <span class="zh">听后回答</span></h2>
+    <p class="hint">Ascolta e rispondi entro 10 secondi con una frase completa. Bonus: aggiungi una seconda frase!</p>
+    <div class="progress" id="p2dots"></div>
+    <div class="row">
+      <button class="btn red" onclick="ask()">🔊 Ascolta la domanda</button>
+      <div class="timer" id="t2">10</div>
+      <div class="bar"><i id="b2"></i></div>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="reveal('p2q')">👀 Domanda</button>
+      <button class="btn" onclick="reveal('p2a')">💬 Risposta modello</button>
+    </div>
+    <div id="p2q" class="hidden">
+      <div class="big zh" id="p2zh"></div>
+      <div class="py" id="p2py"></div>
+    </div>
+    <div id="p2a" class="hidden model">
+      <div class="zh" style="font-size:24px" id="p2azh"></div>
+      <div class="py" id="p2apy"></div>
+      <button class="btn" onclick="say(P2[i2].a)">🔊</button>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn green" onclick="p2score(3)">🚀 Due frasi! +3</button>
+      <button class="btn gold" onclick="p2score(2)">⚡ Veloce e giusta +2</button>
+      <button class="btn" onclick="p2score(0)">➡️ Avanti</button>
+    </div>
+  </div>
+</section>
+
+<!-- 3 RUOTA -->
+<section id="s3">
+  <div class="card">
+    <h2>🎡 La ruota delle domande <span class="zh">回答问题</span></h2>
+    <p class="hint">Domande nuove! Gira la ruota, parla 1 minuto e mezzo con i 5 blocchi. Ogni connettivo = +1 ⭐</p>
+    <div class="wheel" id="wheel"></div>
+    <button class="btn red" id="spinBtn" onclick="spin()">🎡 Gira la ruota!</button>
+  </div>
+
+  <div class="card gone" id="q3card">
+    <div class="big zh" id="q3zh"></div>
+    <div class="py" id="q3py"></div>
+    <div class="it" id="q3it"></div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" onclick="say(P3[cur3].q)">🔊 Ascolta</button>
+      <button class="btn gold" onclick="startT3()">⏱️ Via! 1:30</button>
+      <div class="timer" id="t3">1:30</div>
+      <div class="bar"><i id="b3"></i></div>
+    </div>
+
+    <div class="blocks">
+      <div class="blk"><span class="n">1</span><p><b>Rispondi subito</b><br><span class="zh" id="bk1"></span></p></div>
+      <div class="blk"><span class="n">2</span><p><b>Quando? Dove? Con chi?</b><br><span class="zh">常常 · 每天 · 昨天 · 跟……一起</span></p></div>
+      <div class="blk"><span class="n">3</span><p><b>Cosa fai? (in ordine)</b><br><span class="zh">先…… 然后…… 最后……</span></p></div>
+      <div class="blk"><span class="n">4</span><p><b>Perché?</b><br><span class="zh">因为…… 所以…… · 但是……</span></p></div>
+      <div class="blk"><span class="n">5</span><p><b>Chiudi</b><br><span class="zh">我觉得…… · 我很喜欢……</span></p></div>
+    </div>
+
+    <p class="hint" style="margin-bottom:6px">Connettivi usati (clicca quando Pietro li dice: +1 ⭐ ciascuno)</p>
+    <div class="chips" id="chips"></div>
+
+    <div class="row" style="margin-top:12px">
+      <button class="btn" onclick="toggleModel()">📖 Risposta modello</button>
+    </div>
+    <div class="model gone" id="m3">
+      <div class="zh" style="font-size:21px;line-height:1.6" id="m3zh"></div>
+      <div class="py" style="margin-top:6px" id="m3py"></div>
+      <button class="btn" onclick="say(P3[cur3].m)">🔊 Ascolta il modello</button>
+    </div>
+  </div>
+</section>
+
+<!-- 4 TOCCA A TE -->
+<section id="s4">
+  <div class="card">
+    <h2>🎤 Tocca a te! Fai tu l'esaminatore</h2>
+    <p class="hint">Pietro pesca un argomento, sceglie una parola-domanda e inventa la domanda. Poi si risponde!</p>
+    <p><span class="step">1</span><b>Pesca un argomento</b></p>
+    <div class="topic" id="topic"><div class="em">🎲</div><div class="nm">Clicca "Pesca"!</div></div>
+    <div class="row" style="margin-top:10px"><button class="btn red" onclick="pick()">🎲 Pesca</button>
+      <button class="btn" onclick="help4.classList.remove('gone')">💡 Aiutino</button></div>
+    <div id="help4" class="gone model"></div>
+
+    <p style="margin-top:16px"><span class="step">2</span><b>Scegli la parola-domanda</b></p>
+    <div class="qw" id="qw"></div>
+
+    <p style="margin-top:16px"><span class="step">3</span><b>Di' la tua domanda</b> <span class="hint">(se vuoi scrivila qui, in caratteri o pinyin)</span></p>
+    <input class="inp" id="myq" placeholder="es. 你喜欢吃什么水果？">
+    <div class="row" style="margin-top:8px">
+      <button class="btn" onclick="sayMine()">🔊 Fai leggere la domanda</button>
+      <button class="btn gold" onclick="saveQ()">📌 Salva la domanda (+2 ⭐)</button>
+    </div>
+
+    <p style="margin-top:16px"><span class="step">4</span><b>Rispondi!</b></p>
+    <div class="row">
+      <button class="btn" onclick="addStars(1,'👩‍🏫 Maja ha risposto!')">👩‍🏫 Risponde Maja (+1)</button>
+      <button class="btn gold" onclick="addStars(2,'💬 Risposta breve +2')">💬 Pietro: risposta breve (+2)</button>
+      <button class="btn green" onclick="addStars(4,'🏆 5 blocchi! +4')">🏆 Pietro: 5 blocchi (+4)</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📒 Le domande di Pietro</h2>
+    <p class="hint">Restano qui per la prossima lezione (le salva questo browser).</p>
+    <ol class="mine" id="mine"></ol>
+    <div class="row"><button class="btn" onclick="clearMine()">🗑️ Svuota</button></div>
+  </div>
+
+  <div class="card final gone" id="final">
+    <div class="big">🏆</div>
+    <h2>Bravissimo Pietro! <span class="zh">你真棒！</span></h2>
+    <p>Oggi hai preso <b id="finalStars">0</b> stelle.</p>
+  </div>
+  <div class="row"><button class="btn green" onclick="finish()">🏁 Fine lezione</button></div>
+</section>
+</div>
+<footer>Maja Jiejie · <span class="zh">玛雅姐姐</span></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- DATI ----------
+const S0=[
+ {w:["你","星期六","做","什么","？"],zh:"你星期六做什么？",py:"Nǐ xīngqīliù zuò shénme?",it:"Cosa fai sabato?"},
+ {w:["你家","离","学校","远","吗","？"],zh:"你家离学校远吗？",py:"Nǐ jiā lí xuéxiào yuǎn ma?",it:"Casa tua è lontana dalla scuola?"},
+ {w:["你","想","去","哪儿","旅游","？"],zh:"你想去哪儿旅游？",py:"Nǐ xiǎng qù nǎr lǚyóu?",it:"Dove vorresti andare in viaggio?"},
+ {w:["你","喜欢","猫","还是","狗","？"],zh:"你喜欢猫还是狗？",py:"Nǐ xǐhuan māo háishi gǒu?",it:"Ti piacciono i gatti o i cani?"},
+ {w:["你的","生日","是","几月","几号","？"],zh:"你的生日是几月几号？",py:"Nǐ de shēngrì shì jǐ yuè jǐ hào?",it:"Quando è il tuo compleanno?"},
+ {w:["你","每天","几点","睡觉","？"],zh:"你每天几点睡觉？",py:"Nǐ měitiān jǐ diǎn shuìjiào?",it:"A che ora vai a dormire ogni giorno?"}
+];
+const P1=[
+ {zh:"我家离学校很近。",py:"Wǒ jiā lí xuéxiào hěn jìn.",it:"Casa mia è vicina alla scuola."},
+ {zh:"我昨天晚上看了一个电影。",py:"Wǒ zuótiān wǎnshang kàn le yí ge diànyǐng.",it:"Ieri sera ho visto un film."},
+ {zh:"他比我高一点儿。",py:"Tā bǐ wǒ gāo yìdiǎnr.",it:"Lui è un po' più alto di me."},
+ {zh:"我正在学习汉语呢。",py:"Wǒ zhèngzài xuéxí Hànyǔ ne.",it:"Sto studiando cinese."},
+ {zh:"外面下雪了，非常冷。",py:"Wàimiàn xià xuě le, fēicháng lěng.",it:"Fuori nevica, fa freddissimo."},
+ {zh:"我已经吃完早饭了。",py:"Wǒ yǐjīng chī wán zǎofàn le.",it:"Ho già finito di fare colazione."},
+ {zh:"这件衣服太贵了。",py:"Zhè jiàn yīfu tài guì le.",it:"Questo vestito è troppo caro."},
+ {zh:"妈妈让我早点儿睡觉。",py:"Māma ràng wǒ zǎo diǎnr shuìjiào.",it:"La mamma mi dice di andare a dormire presto."}
+];
+const P2=[
+ {q:"你喜欢猫还是狗？",py:"Nǐ xǐhuan māo háishi gǒu?",a:"我喜欢狗，因为狗很可爱。",apy:"Wǒ xǐhuan gǒu, yīnwèi gǒu hěn kě'ài."},
+ {q:"你的生日是几月几号？",py:"Nǐ de shēngrì shì jǐ yuè jǐ hào?",a:"我的生日是五月十号。",apy:"Wǒ de shēngrì shì wǔ yuè shí hào."},
+ {q:"你家离学校远吗？",py:"Nǐ jiā lí xuéxiào yuǎn ma?",a:"不远，走路十分钟。",apy:"Bù yuǎn, zǒulù shí fēnzhōng."},
+ {q:"你昨天晚上做什么了？",py:"Nǐ zuótiān wǎnshang zuò shénme le?",a:"我昨天晚上在家看电视了。",apy:"Wǒ zuótiān wǎnshang zài jiā kàn diànshì le."},
+ {q:"你每天几点睡觉？",py:"Nǐ měitiān jǐ diǎn shuìjiào?",a:"我每天晚上十点睡觉。",apy:"Wǒ měitiān wǎnshang shí diǎn shuìjiào."},
+ {q:"你会做饭吗？",py:"Nǐ huì zuò fàn ma?",a:"我会做一点儿，我会做面条。",apy:"Wǒ huì zuò yìdiǎnr, wǒ huì zuò miàntiáo."},
+ {q:"你想去哪儿旅游？",py:"Nǐ xiǎng qù nǎr lǚyóu?",a:"我想去北京旅游。",apy:"Wǒ xiǎng qù Běijīng lǚyóu."},
+ {q:"你觉得汉语难吗？",py:"Nǐ juéde Hànyǔ nán ma?",a:"我觉得汉语有点儿难，但是很有意思。",apy:"Wǒ juéde Hànyǔ yǒudiǎnr nán, dànshì hěn yǒu yìsi."}
+];
+const P3=[
+ {q:"你昨天做了什么？",py:"Nǐ zuótiān zuò le shénme?",it:"Cosa hai fatto ieri?",s:"我昨天……",
+  m:"我昨天很忙。早上我先去学校上课，然后中午回家吃饭。下午我跟朋友一起打篮球。晚上我在家做作业，最后十点睡觉了。我觉得昨天很有意思！",
+  mp:"Wǒ zuótiān hěn máng. Zǎoshang wǒ xiān qù xuéxiào shàngkè, ránhòu zhōngwǔ huí jiā chī fàn. Xiàwǔ wǒ gēn péngyou yìqǐ dǎ lánqiú. Wǎnshang wǒ zài jiā zuò zuòyè, zuìhòu shí diǎn shuìjiào le. Wǒ juéde zuótiān hěn yǒu yìsi!"},
+ {q:"你喜欢什么动物？",py:"Nǐ xǐhuan shénme dòngwù?",it:"Che animale ti piace?",s:"我最喜欢……",
+  m:"我最喜欢狗。我家有一只小狗，它叫Max，它两岁了。它是白色的，非常可爱。每天下午我跟它一起去公园跑步。因为它是我的好朋友，所以我很爱它。",
+  mp:"Wǒ zuì xǐhuan gǒu. Wǒ jiā yǒu yì zhī xiǎo gǒu, tā jiào Max, tā liǎng suì le. Tā shì báisè de, fēicháng kě'ài. Měitiān xiàwǔ wǒ gēn tā yìqǐ qù gōngyuán pǎobù. Yīnwèi tā shì wǒ de hǎo péngyou, suǒyǐ wǒ hěn ài tā."},
+ {q:"你过生日的时候一般做什么？",py:"Nǐ guò shēngrì de shíhou yìbān zuò shénme?",it:"Cosa fai di solito per il tuo compleanno?",s:"我的生日是……",
+  m:"我的生日是三月八号。过生日的时候，我先跟家人一起吃饭，妈妈做很多好吃的菜。然后我的朋友们来我家，我们一起吃蛋糕、玩儿游戏。朋友们送我礼物，我非常高兴。",
+  mp:"Wǒ de shēngrì shì sān yuè bā hào. Guò shēngrì de shíhou, wǒ xiān gēn jiārén yìqǐ chī fàn, māma zuò hěn duō hǎochī de cài. Ránhòu wǒ de péngyoumen lái wǒ jiā, wǒmen yìqǐ chī dàngāo, wánr yóuxì. Péngyoumen sòng wǒ lǐwù, wǒ fēicháng gāoxìng."},
+ {q:"你想去哪儿旅游？为什么？",py:"Nǐ xiǎng qù nǎr lǚyóu? Wèi shénme?",it:"Dove vorresti andare in viaggio? Perché?",s:"我想去……旅游。",
+  m:"我想去中国旅游。我想先去北京，看看长城，然后去上海。因为我在学习汉语，所以我想跟中国人说汉语。我也想吃中国菜。我觉得去中国一定很有意思！",
+  mp:"Wǒ xiǎng qù Zhōngguó lǚyóu. Wǒ xiǎng xiān qù Běijīng, kànkan Chángchéng, ránhòu qù Shànghǎi. Yīnwèi wǒ zài xuéxí Hànyǔ, suǒyǐ wǒ xiǎng gēn Zhōngguó rén shuō Hànyǔ. Wǒ yě xiǎng chī Zhōngguó cài. Wǒ juéde qù Zhōngguó yídìng hěn yǒu yìsi!"},
+ {q:"请介绍一下你的学校。",py:"Qǐng jièshào yíxià nǐ de xuéxiào.",it:"Presenta la tua scuola.",s:"我的学校在……",
+  m:"我的学校在我家旁边，不太大，但是很漂亮。我们班有二十个学生。我们每天八点上课，下午一点下课。我最喜欢的课是体育课，因为我喜欢运动。我的老师们都很好。",
+  mp:"Wǒ de xuéxiào zài wǒ jiā pángbiān, bú tài dà, dànshì hěn piàoliang. Wǒmen bān yǒu èrshí ge xuésheng. Wǒmen měitiān bā diǎn shàngkè, xiàwǔ yī diǎn xiàkè. Wǒ zuì xǐhuan de kè shì tǐyù kè, yīnwèi wǒ xǐhuan yùndòng. Wǒ de lǎoshīmen dōu hěn hǎo."},
+ {q:"你喜欢什么季节？",py:"Nǐ xǐhuan shénme jìjié?",it:"Che stagione ti piace?",s:"我最喜欢……天。",
+  m:"我最喜欢夏天。夏天天气很热，但是我们不用去学校。我常常跟家人一起去海边游泳，也吃很多冰淇淋。晚上我跟朋友们出去玩儿。所以我觉得夏天最快乐！",
+  mp:"Wǒ zuì xǐhuan xiàtiān. Xiàtiān tiānqì hěn rè, dànshì wǒmen búyòng qù xuéxiào. Wǒ chángcháng gēn jiārén yìqǐ qù hǎibiān yóuyǒng, yě chī hěn duō bīngqílín. Wǎnshang wǒ gēn péngyoumen chūqù wánr. Suǒyǐ wǒ juéde xiàtiān zuì kuàilè!"}
+];
+const CHIPS=["先","然后","最后","因为","所以","但是","也","常常","跟……一起","我觉得"];
+const TOPICS=[
+ {em:"🍜",nm:"Il cibo · 吃的",w:"面条 · 米饭 · 水果 · 好吃",ex:["你最喜欢吃什么？","你早饭吃什么？"]},
+ {em:"🐼",nm:"Gli animali · 动物",w:"猫 · 狗 · 熊猫 · 可爱",ex:["你家有狗吗？","你喜欢猫还是狗？"]},
+ {em:"⚽",nm:"Lo sport · 运动",w:"踢足球 · 打篮球 · 游泳 · 跑步",ex:["你会游泳吗？","你一个星期跑几次步？"]},
+ {em:"🏫",nm:"La scuola · 学校",w:"上课 · 老师 · 同学 · 作业",ex:["你几点上课？","你最喜欢哪个老师？"]},
+ {em:"🎂",nm:"Il compleanno · 生日",w:"几月几号 · 蛋糕 · 礼物 · 朋友",ex:["你的生日是几月几号？","你想要什么生日礼物？"]},
+ {em:"✈️",nm:"I viaggi · 旅游",w:"坐飞机 · 北京 · 海边 · 去年",ex:["你去过中国吗？","你暑假去哪儿了？"]},
+ {em:"📱",nm:"Il tempo libero · 周末",w:"看电视 · 玩儿手机 · 听音乐 · 电影",ex:["你周末喜欢做什么？","你常常看电影吗？"]},
+ {em:"🌦️",nm:"Il tempo · 天气",w:"冷 · 热 · 下雨 · 下雪",ex:["今天天气怎么样？","明天会下雨吗？"]},
+ {em:"👨‍👩‍👦",nm:"La famiglia · 家人",w:"爸爸 · 妈妈 · 哥哥 · 妹妹",ex:["你家有几口人？","你爸爸做什么工作？"]},
+ {em:"🛍️",nm:"Fare spese · 买东西",w:"多少钱 · 贵 · 便宜 · 衣服",ex:["这件衣服多少钱？","你喜欢去哪儿买东西？"]}
+];
+const QWORDS=["什么","几","谁","哪儿","怎么样","怎么","什么时候","为什么","还是","吗"];
+
+// ---------- STELLE ----------
+let stars=0;
+function addStars(n,msg){ if(n<=0) return; stars+=n; document.getElementById('stars').textContent=stars; toast(msg||('+'+n+' ⭐')); }
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),1300);}
+
+// ---------- VOCE ----------
+let zhVoice=null;
+function pickVoice(){ const v=speechSynthesis.getVoices(); zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null; }
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function say(t,rate){
+  if(!('speechSynthesis' in window)){toast('Audio non disponibile: leggi tu la frase');return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t.replace(/Pietro/g,'皮埃特罗'));
+  u.lang='zh-CN'; if(zhVoice) u.voice=zhVoice;
+  u.rate=rate||(document.getElementById('slow')?.checked?0.6:0.85);
+  speechSynthesis.speak(u);
+}
+
+// ---------- NAV ----------
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(+b.dataset.s));
+function go(n){
+  document.querySelectorAll('#nav button').forEach((b,i)=>b.classList.toggle('on',i===n));
+  document.querySelectorAll('section').forEach((s,i)=>s.classList.toggle('on',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function reveal(id){document.getElementById(id).classList.remove('hidden');}
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);}
+function dots(id,n,cur,done){const b=document.getElementById(id);b.innerHTML='';for(let i=0;i<n;i++){const d=document.createElement('div');d.className='dot'+(done.has(i)?' done':'')+(i===cur?' cur':'');d.textContent=i+1;b.appendChild(d);}}
+
+// ---------- RISCALDAMENTO: ordina ----------
+let i0=0, picked=[]; const done0=new Set(), ans0=new Set();
+function build0(){
+  const s=S0[i0]; picked=[]; const slots=document.getElementById('slots'), pool=document.getElementById('pool');
+  slots.innerHTML=''; slots.classList.remove('ok'); pool.innerHTML=''; p0ok.classList.add('gone');
+  let order=shuffle(s.w.map((w,k)=>k)); if(order.every((v,k)=>v===k)) order=order.reverse();
+  order.forEach(k=>{ const b=document.createElement('button'); b.className='wd'; b.textContent=s.w[k];
+    b.onclick=()=>{ if(b.parentNode===pool){ slots.appendChild(b); picked.push(k); } else { pool.appendChild(b); picked=picked.filter(x=>x!==k); } check0(); };
+    pool.appendChild(b); });
+  dots('p0dots',S0.length,i0,done0);
+}
+function check0(){
+  const s=S0[i0]; if(picked.length!==s.w.length) return;
+  const got=picked.map(k=>s.w[k]).join('');
+  if(got===s.w.join('')){ slots.classList.add('ok'); p0py.textContent=s.py; p0it.textContent=s.it; p0ok.classList.remove('gone');
+    if(!done0.has(i0)){ done0.add(i0); addStars(1,'🧩 Domanda giusta! +1'); } say(s.zh); dots('p0dots',S0.length,i0,done0);
+  } else { slots.querySelectorAll('.wd').forEach(x=>x.classList.add('bad')); setTimeout(()=>slots.querySelectorAll('.wd').forEach(x=>x.classList.remove('bad')),400); toast('Quasi! Riprova 🙂'); }
+}
+function p0answer(){ if(ans0.has(i0)) return; ans0.add(i0); addStars(1,'💬 Risposta! +1'); }
+function next0(){ i0=(i0+1)%S0.length; build0(); }
+build0();
+
+// ---------- PARTE 1 ----------
+let i1=0; const done1=new Set();
+function show1(){ const p=P1[i1]; document.getElementById('p1').classList.add('hidden');
+  p1zh.textContent=p.zh; p1py.textContent=p.py; p1it.textContent=p.it; dots('p1dots',P1.length,i1,done1); }
+function p1score(n){
+  addStars(n); if(n>0) done1.add(i1);
+  if(done1.size===P1.length){ dots('p1dots',P1.length,-1,done1); toast('🦜 Pappagallo campione!'); return; }
+  let k=i1; do{ k=(k+1)%P1.length; }while(done1.has(k)); i1=k; show1();
+}
+show1();
+
+// ---------- PARTE 2 ----------
+let i2=0, t2int=null; const done2=new Set();
+function show2(){ const p=P2[i2]; ['p2q','p2a'].forEach(x=>document.getElementById(x).classList.add('hidden'));
+  p2zh.textContent=p.q; p2py.textContent=p.py; p2azh.textContent=p.a; p2apy.textContent=p.apy;
+  stop2(); t2.textContent=10; b2.style.width='100%'; dots('p2dots',P2.length,i2,done2); }
+function stop2(){clearInterval(t2int);}
+function ask(){ say(P2[i2].q); stop2(); let s=10; t2.textContent=s; b2.style.width='100%';
+  setTimeout(()=>{ t2int=setInterval(()=>{ s--; t2.textContent=s; b2.style.width=(s*10)+'%'; if(s<=0){stop2(); toast('⏰ Tempo!');} },1000); },1800); }
+function p2score(n){ addStars(n); done2.add(i2);
+  if(done2.size===P2.length){ stop2(); dots('p2dots',P2.length,-1,done2); toast('⚡ Fulmine cinese!'); return; }
+  i2=(i2+1)%P2.length; show2(); }
+show2();
+
+// ---------- PARTE 3 ----------
+let cur3=-1, t3int=null; const used3=new Set();
+function buildWheel(){ const w=document.getElementById('wheel'); w.innerHTML='';
+  P3.forEach((p,i)=>{const d=document.createElement('div'); d.className='wq zh'+(used3.has(i)?' used':''); d.textContent=p.q; w.appendChild(d);}); }
+buildWheel();
+function spin(){
+  const avail=P3.map((_,i)=>i).filter(i=>!used3.has(i)); if(!avail.length){toast('Hai fatto tutte le domande! 🏆');return;}
+  const target=avail[Math.floor(Math.random()*avail.length)]; const tiles=[...document.querySelectorAll('.wq')];
+  let step=0, total=14+Math.floor(Math.random()*6), pos=0; spinBtn.disabled=true;
+  (function tick(){ tiles.forEach(t=>t.classList.remove('lit'));
+    pos=(pos+1)%P3.length; if(step>=total){ pos=target; }
+    tiles[pos].classList.add('lit'); step++;
+    if(step<=total) setTimeout(tick,60+step*14); else { spinBtn.disabled=false; open3(target); }
+  })();
+}
+function open3(i){
+  cur3=i; const p=P3[i]; q3card.classList.remove('gone'); m3.classList.add('gone');
+  q3zh.textContent=p.q; q3py.textContent=p.py; q3it.textContent=p.it; bk1.textContent=p.s;
+  m3zh.textContent=p.m; m3py.textContent=p.mp; clearInterval(t3int); t3.textContent='1:30'; b3.style.width='100%';
+  const c=document.getElementById('chips'); c.innerHTML='';
+  CHIPS.forEach(w=>{const b=document.createElement('button'); b.className='chip zh'; b.textContent=w;
+    b.onclick=()=>{ if(b.classList.contains('on')) return; b.classList.add('on'); addStars(1,'+1 ⭐ '+w); }; c.appendChild(b);});
+  setTimeout(()=>say(p.q),300); q3card.scrollIntoView({behavior:'smooth'});
+}
+function startT3(){
+  clearInterval(t3int); let s=90; const upd=()=>{t3.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); b3.style.width=(s/90*100)+'%';};
+  upd(); t3int=setInterval(()=>{ s--; upd(); if(s<=0){ clearInterval(t3int); used3.add(cur3); buildWheel(); addStars(3,'🎤 +3 ⭐ Hai parlato 1:30!'); } },1000);
+}
+function toggleModel(){ m3.classList.toggle('gone'); }
+
+// ---------- PARTE 4: TOCCA A TE ----------
+let curT=null, lastT=-1;
+function pick(){
+  let k; do{ k=Math.floor(Math.random()*TOPICS.length); }while(k===lastT && TOPICS.length>1); lastT=k; curT=TOPICS[k];
+  topic.innerHTML='<div class="em">'+curT.em+'</div><div class="nm">'+curT.nm+'</div><div class="zh" style="font-size:20px;margin-top:6px">'+curT.w+'</div>';
+  help4.classList.add('gone'); help4.innerHTML='<b>Esempi di domande:</b><br><span class="zh" style="font-size:22px">'+curT.ex.join('<br>')+'</span>';
+  document.querySelectorAll('#qw button').forEach(b=>b.classList.remove('on')); myq.value='';
+}
+(function(){ const box=document.getElementById('qw'); QWORDS.forEach(w=>{ const b=document.createElement('button'); b.textContent=w;
+  b.onclick=()=>{ document.querySelectorAll('#qw button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); say(w,0.8); }; box.appendChild(b); }); })();
+function sayMine(){ const t=myq.value.trim(); if(!t){toast('Scrivi prima la domanda ✍️');return;} say(t); }
+let MINE=[];
+try{ MINE=JSON.parse(localStorage.getItem('hskk-pietro-domande')||'[]'); }catch(e){ MINE=[]; }
+function drawMine(){ mine.innerHTML=''; MINE.forEach(q=>{ const li=document.createElement('li'); li.className='zh'; li.textContent=q; mine.appendChild(li); }); }
+function storeMine(){ try{ localStorage.setItem('hskk-pietro-domande',JSON.stringify(MINE)); }catch(e){} }
+function saveQ(){ const t=myq.value.trim(); if(!t){toast('Scrivi prima la domanda ✍️');return;}
+  MINE.push((curT?curT.em+' ':'')+t); storeMine(); drawMine(); addStars(2,'📌 Domanda salvata! +2'); }
+function clearMine(){ MINE=[]; storeMine(); drawMine(); }
+drawMine();
+
+function finish(){ finalStars.textContent=stars; final.classList.remove('gone'); final.scrollIntoView({behavior:'smooth'}); }
+</script>
+</body>
+</html>
