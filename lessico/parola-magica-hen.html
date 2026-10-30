@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>La parola magica 很</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&text=%E4%B8%80%E4%BB%96%E4%BC%A4%E4%BD%A0%E5%85%B4%E5%86%8D%E5%86%AB%E5%86%B7%E5%A4%A7%E5%AD%90%E5%B0%8F%E5%B8%88%E5%BE%88%E5%BF%83%E6%88%91%E6%9E%9C%E6%B0%94%E7%81%AC%E7%83%AD%E7%86%8A%E7%8C%AB%E7%94%9F%E7%9F%AD%E7%AB%B9%E7%AC%94%E8%80%81%E8%8B%B9%E8%A7%81%E8%AF%B4%E9%93%85%E9%95%BF%E9%AB%98%E9%BF%BF%EF%BC%81&display=swap">
+<style>
+[hidden]{display:none!important}
+:root{
+  --crema:#FBF3E4; --carta:#FFFDF7; --rosso:#C8102E; --rosso-chiaro:#F6D5CF;
+  --oro:#E9B949; --oro-chiaro:#FBEBC0; --verde:#3F8A2A; --verde-chiaro:#CDE8BC; --azzurro:#2F7FB8; --azzurro-chiaro:#D6E8F5;
+  --viola:#7A4FB0; --ink:#2B1B17; --grigio:#6A5A55; --fondo:#E8D9C4;
+  --f-body:'Fredoka','Trebuchet MS',Arial,sans-serif;
+  --f-han:'Noto Sans SC','PingFang SC','Microsoft YaHei','Heiti SC',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--fondo);color:var(--ink);font-family:var(--f-body);overflow:hidden;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--azzurro);outline-offset:3px}
+
+.viewport{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;transform:translate(-50%,-50%) scale(.5);background:var(--crema);border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(90,40,20,.25)}
+.cornice{position:absolute;inset:18px;border:4px solid var(--rosso);border-radius:10px;pointer-events:none;box-shadow:inset 0 0 0 8px var(--crema),inset 0 0 0 11px var(--oro)}
+.lanterna{position:absolute;top:0;width:110px;height:184px;pointer-events:none}
+.slide{position:absolute;inset:0;display:none}
+.slide.on{display:block;animation:entra .45s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;padding:0 16px env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:center;gap:14px;background:var(--fondo)}
+.nav button{border:3px solid var(--ink);background:var(--carta);border-radius:999px;height:44px;min-width:44px;padding:0 16px;font-weight:600;font-size:17px;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.nav button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.nav .conta{font-weight:600;font-size:17px;min-width:90px;text-align:center;font-variant-numeric:tabular-nums}
+.nav .titolo-slide{font-size:15px;color:var(--grigio);max-width:30vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.nav .titolo-slide{display:none}}
+
+.abs{position:absolute}
+.han{font-family:var(--f-han);line-height:1.05;font-weight:500}
+.titolo{position:absolute;left:70px;top:56px;margin:0;font-size:68px;font-weight:700;color:var(--rosso);line-height:1.05}
+.sotto{position:absolute;left:72px;top:142px;margin:0;font-size:30px;font-weight:500;color:var(--grigio)}
+.btn{border:4px solid var(--ink);background:var(--carta);border-radius:999px;padding:12px 30px;font-size:30px;font-weight:600;cursor:pointer;box-shadow:0 6px 0 var(--ink);transition:transform .08s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.btn.oro{background:var(--oro)}
+.pill{background:var(--carta);border:4px solid var(--rosso);border-radius:999px;padding:10px 32px;font-size:34px;font-weight:600;animation:pop .4s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.cornice-han{background:var(--carta);border:5px solid var(--rosso);border-radius:14px;box-shadow:inset 0 0 0 7px var(--carta),inset 0 0 0 10px var(--oro)}
+
+.carta-c{border:4px solid var(--ink);border-radius:22px;background:var(--carta);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 6px 0 var(--ink);transition:transform .15s,background .2s;padding:10px}
+.carta-c.scelta{background:var(--oro);transform:translateY(-4px)}
+.carta-c.ok{background:var(--verde-chiaro)}
+.carta-c.no{background:var(--rosso-chiaro);animation:scuoti .4s}
+@keyframes scuoti{25%{transform:translateX(-10px)}50%{transform:translateX(10px)}75%{transform:translateX(-6px)}}
+
+/* blocchi della frase: chi/cosa = azzurro, 很 = oro, com'è = rosso */
+.blocco{border:4px solid var(--ink);border-radius:18px;padding:10px 22px;display:inline-flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 6px 0 var(--ink);cursor:pointer;background:var(--carta)}
+.blocco .han{font-size:80px}
+.blocco .py{font-size:34px;font-weight:600}
+.b-chi{background:var(--azzurro-chiaro)}
+.b-hen{background:var(--oro-chiaro)}
+.b-emo{background:var(--rosso-chiaro)}
+.blocco.usato{opacity:.25;pointer-events:none}
+.blocco.spento{opacity:.28}
+.blocco.piccolo{padding:6px 10px;gap:2px}
+.blocco.piccolo .han{font-size:44px}
+.blocco.piccolo .py{font-size:22px}
+.slot{min-width:150px;min-height:150px;border:4px dashed #CDB9A6;border-radius:18px;display:flex;align-items:center;justify-content:center}
+
+.disegno{display:block}
+.anim-salta{animation:salta 1.6s ease-in-out infinite}
+@keyframes salta{50%{transform:translateY(-12px)}}
+.trema{animation:trema .25s linear infinite}
+@keyframes trema{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+.cursore{-webkit-appearance:none;appearance:none;width:100%;height:30px;border-radius:999px;background:linear-gradient(90deg,#9ED0F2,#FFE08A,#F59A6B);border:4px solid var(--ink);cursor:pointer}
+.cursore::-webkit-slider-thumb{-webkit-appearance:none;width:64px;height:64px;border-radius:50%;background:var(--oro);border:5px solid var(--ink);box-shadow:0 5px 0 var(--ink)}
+.cursore::-moz-range-thumb{width:56px;height:56px;border-radius:50%;background:var(--oro);border:5px solid var(--ink)}
+.etichetta{display:flex;flex-direction:column;align-items:center;padding:8px 20px;border-radius:18px;border:4px solid transparent;transition:all .25s;opacity:.4;cursor:pointer}
+.etichetta.attiva{opacity:1;border-color:var(--ink);background:var(--oro-chiaro);transform:scale(1.08)}
+
+/* bacchetta magica */
+.grigio{filter:grayscale(1);opacity:.45;transition:filter .6s,opacity .6s}
+.scintilla{position:absolute;font-size:46px;pointer-events:none;animation:scintilla 1.1s ease-out forwards}
+@keyframes scintilla{from{opacity:1;transform:translate(0,0) scale(.4)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.3)}}
+.hen-magico{animation:magia 1.8s ease-in-out infinite}
+@keyframes magia{0%,100%{text-shadow:0 0 0 rgba(233,185,73,0)}50%{text-shadow:0 0 34px rgba(233,185,73,.95)}}
+.bacchetta{transform-origin:20% 85%;animation:agita 2.4s ease-in-out infinite}
+@keyframes agita{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(10deg)}}
+
+.riga{display:grid;grid-template-columns:1fr 90px 1fr;align-items:center;gap:20px;padding:16px 26px;border-radius:20px;background:var(--carta);border:4px solid #E2CDB4}
+
+.coriandolo{position:absolute;top:-30px;width:16px;height:26px;border-radius:4px;animation:coriandoli linear forwards;pointer-events:none}
+@keyframes coriandoli{to{transform:translateY(1000px) rotate(720deg)}}
+.quiz-opz{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quiz-opz .carta-c{height:150px;font-size:34px;font-weight:600;line-height:1.15}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="lanterna" viewBox="0 0 90 150"><line x1="45" y1="0" x2="45" y2="30" stroke="#8A1C1C" stroke-width="4"/><rect x="25" y="26" width="40" height="10" rx="3" fill="#E9B949"/><ellipse cx="45" cy="75" rx="40" ry="40" fill="#D7262E"/><path d="M45 35 V115 M25 42 Q15 75 25 108 M65 42 Q75 75 65 108" stroke="#A3121F" stroke-width="3" fill="none"/><rect x="25" y="112" width="40" height="10" rx="3" fill="#E9B949"/><path d="M38 122 V148 M45 122 V150 M52 122 V148" stroke="#D7262E" stroke-width="4"/></symbol>
+  <symbol id="bacchetta" viewBox="0 0 200 200"><path d="M30 180 L120 70" stroke="#2B1B17" stroke-width="16" stroke-linecap="round"/><path d="M30 180 L58 146" stroke="#FFFDF7" stroke-width="8" stroke-linecap="round"/><path d="M140 20 L150 48 L180 50 L156 68 L165 96 L140 80 L115 96 L124 68 L100 50 L130 48Z" fill="#E9B949" stroke="#2B1B17" stroke-width="6" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="viewport" id="viewport">
+<div class="stage" id="stage" role="region" aria-label="Presentazione sulla parola magica hěn in cinese">
+
+<!-- 1 TITOLO -->
+<section class="slide" data-titolo="La parola magica 很">
+  <div class="cornice"></div>
+  <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg><svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
+  <h1 class="abs" style="left:0;right:0;top:70px;margin:0;text-align:center;font-size:92px;color:var(--rosso)">La parola magica ✨</h1>
+  <div class="abs cornice-han" style="left:520px;top:200px;width:560px;height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+    <span class="han hen-magico" style="font-size:250px;color:var(--ink)">很</span>
+    <span style="font-size:80px;font-weight:600;color:var(--rosso)">hěn</span>
+  </div>
+  <svg class="abs bacchetta" style="left:1110px;top:230px;width:260px;height:260px" viewBox="0 0 200 200"><use href="#bacchetta"/></svg>
+  <div class="abs" style="left:1110px;top:520px;width:300px;display:flex;justify-content:center"><button class="btn oro" data-dici="很">🔊 Ascolta</button></div>
+  <p class="abs" style="left:400px;right:120px;top:690px;margin:0;text-align:center;font-size:40px;font-weight:600">Una parolina piccola piccola che fa funzionare le frasi!</p>
+  <div class="abs" id="tit-disegni" style="left:180px;top:250px;width:300px;display:flex;flex-direction:column;gap:20px"></div>
+  <img class="abs" src="data:image/webp;base64,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" alt="La maestra" style="left:70px;top:620px;width:300px;pointer-events:none">
+</section>
+
+<!-- 2 IL TRUCCO -->
+<section class="slide" data-titolo="Il trucco di 很">
+  <div class="cornice"></div>
+  <h2 class="titolo">Il trucco di <span class="han" style="font-size:80px">很</span> hěn</h2>
+  <p class="sotto">In italiano diciamo “sono”, “è”, “ho”… In cinese basta <b style="color:var(--ink)">很</b>!</p>
+  <div class="abs" id="trucco-righe" style="left:80px;top:205px;width:1440px;display:flex;flex-direction:column;gap:20px"></div>
+  <div class="abs" style="left:0;right:0;top:790px;display:flex;justify-content:center;gap:20px">
+    <button class="btn oro" id="trucco-mostra">✨ Mostra la prossima</button>
+  </div>
+</section>
+
+<!-- 3 TRE FAMIGLIE -->
+<section class="slide" data-titolo="Le tre famiglie">
+  <div class="cornice"></div>
+  <h2 class="titolo">很 funziona con tre famiglie di parole!</h2>
+  <p class="sotto">Toccate una parola per sentirla. Le parole con la ⭐ sono nuove!</p>
+  <div class="abs" id="famiglie" style="left:80px;top:205px;width:1440px;display:grid;grid-template-columns:1.2fr 1.1fr 1fr;gap:28px"></div>
+</section>
+
+<!-- 4-5 PAROLE NUOVE (riempite dallo script) -->
+<section class="slide agg" data-agg="7" data-titolo="冷 lěng"></section>
+<section class="slide agg" data-agg="8" data-titolo="热 rè"></section>
+
+<!-- 6 TERMOMETRO -->
+<section class="slide" data-titolo="Freddo o caldo?">
+  <div class="cornice"></div>
+  <h2 class="titolo">Freddo o caldo? 🌡️</h2>
+  <p class="sotto">Muovete il cursore: fa freddo o fa caldo?</p>
+  <div class="abs cornice-han" style="left:80px;top:200px;width:700px;height:640px;padding:24px 40px;display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div id="tm-viso" style="width:380px;height:380px"></div>
+    <div style="display:flex;justify-content:space-between;width:100%">
+      <span class="etichetta" id="tm-leng"><span class="han" style="font-size:72px;color:#1E88C8">冷</span><span style="font-size:30px;font-weight:600">lěng</span></span>
+      <span class="etichetta" id="tm-re"><span class="han" style="font-size:72px;color:#E0561B">热</span><span style="font-size:30px;font-weight:600">rè</span></span>
+    </div>
+    <input type="range" class="cursore" id="tm-cursore" min="0" max="100" value="20" aria-label="Da freddo a caldo">
+  </div>
+  <div class="abs cornice-han" style="left:820px;top:200px;width:700px;height:640px;padding:36px 44px;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center">
+    <p style="margin:0;font-size:44px;font-weight:700;color:var(--rosso)">⚠️ Attenzione!</p>
+    <p style="margin:0;font-size:32px;font-weight:600">🇮🇹 In italiano</p>
+    <div style="display:flex;gap:12px;font-size:50px;font-weight:700"><span style="background:var(--azzurro-chiaro);padding:6px 18px;border-radius:14px">Io</span><span style="background:var(--oro-chiaro);padding:6px 18px;border-radius:14px">ho</span><span style="background:var(--rosso-chiaro);padding:6px 18px;border-radius:14px" id="tm-it-agg">freddo</span></div>
+    <p style="margin:0;font-size:32px;font-weight:600">🇨🇳 In cinese</p>
+    <div id="tm-frase" style="display:flex;gap:12px"></div>
+    <button class="btn" data-rivela="tm-segreto">🤫 Niente “ho”?</button>
+    <p id="tm-segreto" hidden class="pill" style="margin:0;font-size:28px;line-height:1.3;border-radius:28px">Esatto! In cinese non si dice “ho freddo”: si dice <b>“io 很 freddo”</b>.</p>
+  </div>
+</section>
+
+<!-- 7 BACCHETTA MAGICA -->
+<section class="slide" data-titolo="La bacchetta magica" data-entra="magia">
+  <div class="cornice"></div>
+  <h2 class="titolo">Manca la magia! 🪄</h2>
+  <p class="sotto">Senza 很 la frase non si accende. Usate la bacchetta magica!</p>
+  <div class="abs cornice-han" id="bm-box" style="left:120px;top:200px;width:1360px;height:600px;display:grid;grid-template-columns:420px 1fr;gap:30px;align-items:center;padding:30px 50px">
+    <div id="bm-disegno" style="width:400px;height:400px"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:26px">
+      <div id="bm-frase" style="display:flex;gap:16px;align-items:center"></div>
+      <p id="bm-it" style="margin:0;font-size:44px;font-weight:600;min-height:56px"></p>
+      <div style="display:flex;gap:18px">
+        <button class="btn oro" id="bm-magia" style="font-size:36px">🪄 Bacchetta magica!</button>
+        <button class="btn" id="bm-next">Nuova frase ▶</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 COSTRUISCI LA FRASE -->
+<section class="slide" data-titolo="Costruisci la frase">
+  <div class="cornice"></div>
+  <h2 class="titolo">Costruisci la frase!</h2>
+  <p class="sotto">Scegliete <b style="color:var(--azzurro)">chi</b> e <b style="color:var(--rosso)">com'è</b>. 很 c'è sempre!</p>
+  <div class="abs" style="left:70px;top:195px;width:660px;display:flex;flex-direction:column;gap:12px">
+    <p style="margin:0;font-size:30px;font-weight:700;color:var(--azzurro)">Chi? Che cosa?</p>
+    <div id="cf-cosa" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px"></div>
+    <p style="margin:8px 0 0;font-size:30px;font-weight:700;color:var(--rosso)">Com'è?</p>
+    <div id="cf-agg" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px"></div>
+  </div>
+  <div class="abs cornice-han" style="left:760px;top:190px;width:770px;height:650px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
+    <div id="cf-disegno" style="width:300px;height:300px"></div>
+    <div id="cf-frase" style="display:flex;gap:12px;align-items:center"></div>
+    <p id="cf-it" style="margin:0;font-size:40px;font-weight:600"></p>
+    <button class="btn oro" id="cf-ascolta">🔊 Ascolta la frase</button>
+  </div>
+</section>
+
+<!-- 9 METTI IN ORDINE -->
+<section class="slide" data-titolo="Metti in ordine" data-entra="ordine">
+  <div class="cornice"></div>
+  <h2 class="titolo">Metti in ordine!</h2>
+  <p class="sotto">Guardate il disegno e toccate i pezzi nell'ordine giusto.</p>
+  <div class="abs" id="mo-disegno" style="left:110px;top:220px;width:360px;height:360px"></div>
+  <p class="abs" id="mo-conta" style="left:70px;top:600px;width:440px;margin:0;text-align:center;font-size:30px;font-weight:600;color:var(--grigio)"></p>
+  <div class="abs" style="left:540px;top:220px;width:980px;display:flex;flex-direction:column;gap:40px;align-items:center">
+    <div id="mo-slot" style="display:flex;gap:18px"></div>
+    <div id="mo-pezzi" style="display:flex;gap:24px;min-height:170px"></div>
+    <p id="mo-esito" aria-live="polite" style="margin:0;font-size:40px;font-weight:700;min-height:50px;text-align:center"></p>
+    <div style="display:flex;gap:18px"><button class="btn" id="mo-reset">↺ Riprova</button><button class="btn oro" id="mo-next">Prossima ▶</button></div>
+  </div>
+</section>
+
+<!-- 10 LEGGI E SCEGLI -->
+<section class="slide" data-titolo="Leggi e scegli" data-entra="leggi">
+  <div class="cornice"></div>
+  <h2 class="titolo">Leggi e scegli! 👀</h2>
+  <p class="sotto">Leggete la frase: quale disegno è?</p>
+  <div class="abs" style="left:0;right:0;top:200px;display:flex;justify-content:center"><div id="ls-frase" class="cornice-han" style="padding:16px 40px;display:flex;gap:14px;align-items:center"></div></div>
+  <div class="abs" id="ls-opz" style="left:160px;top:400px;width:1280px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px"></div>
+  <div class="abs" style="left:0;right:0;top:790px;display:flex;justify-content:center;gap:24px;align-items:center">
+    <p id="ls-esito" aria-live="polite" style="margin:0;font-size:36px;font-weight:700"></p>
+    <button class="btn oro" id="ls-next" hidden>Prossima ▶</button>
+  </div>
+</section>
+
+<!-- 11 QUIZ -->
+<section class="slide" data-titolo="Quiz!" data-entra="quiz">
+  <div class="cornice"></div>
+  <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg><svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
+  <div class="abs cornice-han" id="quiz" style="left:200px;top:90px;width:1200px;height:720px;padding:50px 70px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center"></div>
+</section>
+
+<!-- 12 FINE -->
+<section class="slide" data-titolo="老师说！ 再见!">
+  <div class="cornice"></div>
+  <h2 class="abs" style="left:0;right:0;top:50px;margin:0;text-align:center;font-size:60px;color:var(--rosso)">Gioco: <span class="han" style="font-size:86px">老师说！</span> lǎoshī shuō</h2>
+  <p class="abs" style="left:0;right:0;top:160px;margin:0;text-align:center;font-size:32px;font-weight:600">La maestra dice una frase con 很: tutti fanno il gesto!</p>
+  <div class="abs" style="left:90px;top:220px;width:1420px;display:grid;grid-template-columns:400px 1fr;gap:36px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:20px;align-items:center">
+      <button class="btn oro" id="fine-pesca" style="font-size:36px">🎲 Pesca una frase</button>
+      <div id="fine-mostra" class="cornice-han" style="width:390px;height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px"><span style="font-size:120px;font-weight:700;color:var(--rosso)">?</span></div>
+    </div>
+    <div id="fine-carte" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
+  </div>
+  <div class="abs" style="left:0;right:0;top:770px;display:flex;justify-content:center;align-items:center;gap:30px">
+    <span class="han" style="font-size:90px;color:var(--rosso)">再见！</span><span style="font-size:52px;font-weight:600">zàijiàn</span>
+    <button class="btn oro" data-dici="再见">🔊</button>
+  </div>
+</section>
+
+</div>
+</div>
+
+<nav class="nav" aria-label="Navigazione">
+  <button id="prec" aria-label="Slide precedente">◀</button>
+  <span class="conta" id="conta">1 / 12</span>
+  <button id="succ" aria-label="Slide successiva">▶</button>
+  <span class="titolo-slide" id="titolo-slide"></span>
+  <button id="schermo" aria-label="Schermo intero">⛶</button>
+</nav>
+
+<script>
+(function(){
+const stage=document.getElementById('stage');
+const slides=[...stage.querySelectorAll('.slide')];
+let cur=0;
+const riduci=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- DATI ----------
+// tipo: dim (grande/piccolo), lung (lungo/corto), emo (emozioni), temp (freddo/caldo)
+// verbo: in italiano si usa "essere" oppure "avere" (ho freddo, ho caldo)
+const AGG=[
+  {k:'grande',han:'大',py:'dà',m:'grande',f:'grande',tipo:'dim',v:'e',col:'#C8102E',gesto:'Allargate le braccia: grandeee! 🙆'},
+  {k:'piccolo',han:'小',py:'xiǎo',m:'piccolo',f:'piccola',tipo:'dim',v:'e',col:'#2F7FB8',gesto:'Fatevi piccoli piccoli! 🤏'},
+  {k:'lungo',han:'长',py:'cháng',m:'lungo',f:'lunga',tipo:'lung',v:'e',col:'#3F8A2A',gesto:'Mani lontanissime: luuungo! 👐'},
+  {k:'corto',han:'短',py:'duǎn',m:'corto',f:'corta',tipo:'lung',v:'e',col:'#7A4FB0',gesto:'Mani vicine vicine: corto! 👌'},
+  {k:'felice',han:'高兴',py:'gāoxìng',m:'felice',f:'felice',tipo:'emo',v:'e',col:'#D98A00',gesto:'Sorridete fortissimo! 😄'},
+  {k:'triste',han:'伤心',py:'shāngxīn',m:'triste',f:'triste',tipo:'emo',v:'e',col:'#2F7FB8',gesto:'Fate finta di piangere! 😢'},
+  {k:'arrabbiato',han:'生气',py:'shēngqì',m:'arrabbiato',f:'arrabbiata',tipo:'emo',v:'e',col:'#C8102E',gesto:'Braccia incrociate e faccia arrabbiata! 😠'},
+  {k:'freddo',han:'冷',py:'lěng',m:'freddo',f:'freddo',tipo:'temp',v:'a',col:'#1E88C8',gesto:'Brrr! Tremate e abbracciatevi! 🥶',nuovo:true,
+   segreto:'Le due gocce a sinistra (冫) sono ghiaccio: il ghiaccio è freddo!'},
+  {k:'caldo',han:'热',py:'rè',m:'caldo',f:'caldo',tipo:'temp',v:'a',col:'#E0561B',gesto:'Sventolatevi con la mano! 🥵',nuovo:true,
+   segreto:'I quattro puntini sotto (灬) sono il fuoco: il fuoco è caldo!'}
+];
+const COSE=[
+  {k:'wo',han:'我',py:'wǒ',it:'Io',e:'sono',a:'ho',g:'m',tipi:['emo','temp']},
+  {k:'ni',han:'你',py:'nǐ',it:'Tu',e:'sei',a:'hai',g:'m',tipi:['emo','temp']},
+  {k:'ta',han:'他',py:'tā',it:'Lui',e:'è',a:'ha',g:'m',tipi:['emo','temp']},
+  {k:'panda',han:'熊猫',py:'xióngmāo',it:'Il panda',e:'è',a:'ha',g:'m',tipi:['dim','emo','temp']},
+  {k:'mela',han:'苹果',py:'píngguǒ',it:'La mela',e:'è',a:'ha',g:'f',tipi:['dim']},
+  {k:'bambu',han:'竹子',py:'zhúzi',it:'Il bambù',e:'è',a:'ha',g:'m',tipi:['lung']},
+  {k:'matita',han:'铅笔',py:'qiānbǐ',it:'La matita',e:'è',a:'ha',g:'f',tipi:['lung']}
+];
+const A=k=>AGG.find(a=>a.k===k), C=k=>COSE.find(c=>c.k===k);
+const PY={'很':'hěn'}; AGG.forEach(a=>PY[a.han]=a.py); COSE.forEach(c=>PY[c.han]=c.py);
+const va=(c,a)=>c.tipi.includes(a.tipo);
+const italiano=(c,a)=>`${c.it} ${a.v==='a'?c.a:c.e} ${c.g==='f'?a.f:a.m}`;
+const cinese=(c,a)=>c.han+'很'+a.han;
+const OPPOSTO={grande:'piccolo',piccolo:'grande',lungo:'corto',corto:'lungo',felice:'triste',triste:'felice',arrabbiato:'felice',freddo:'caldo',caldo:'freddo'};
+
+// ---------- DISEGNI ----------
+const INK='#22201F';
+const TERRA='<path d="M20 384 H380" stroke="#CDB9A6" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 16"/>';
+function fiocco(x,y,r){return `<g stroke="#5AA9DE" stroke-width="6" stroke-linecap="round"><path d="M${x-r} ${y} H${x+r}"/><path d="M${x-r*.5} ${y-r*.87} L${x+r*.5} ${y+r*.87}"/><path d="M${x-r*.5} ${y+r*.87} L${x+r*.5} ${y-r*.87}"/></g>`}
+function goccia(x,y,s=1,col='#6EC1F0'){return `<path d="M${x} ${y} Q${x-12*s} ${y+22*s} ${x} ${y+30*s} Q${x+12*s} ${y+22*s} ${x} ${y}Z" fill="${col}" stroke="${INK}" stroke-width="4"/>`}
+function stella(x,y,r){return `<path d="M${x} ${y-r} Q${x+r*.2} ${y-r*.2} ${x+r} ${y} Q${x+r*.2} ${y+r*.2} ${x} ${y+r} Q${x-r*.2} ${y+r*.2} ${x-r} ${y} Q${x-r*.2} ${y-r*.2} ${x} ${y-r}Z" fill="#E9B949" stroke="${INK}" stroke-width="4"/>`}
+// oggetti intorno alla faccia per ogni stato
+function attorno(st,scarfY=318){
+  if(st==='felice') return stella(58,110,22)+stella(345,95,18)+stella(330,330,14);
+  if(st==='triste') return `<path d="M40 70 q30 -30 60 0 q20 -20 40 0 q10 25 -20 25 h-70 q-25 0 -10 -25z" fill="#B9C3CC" stroke="${INK}" stroke-width="4"/>`+goccia(70,110,.7,'#8FC9EE')+goccia(110,125,.7,'#8FC9EE');
+  if(st==='arrabbiato') return `<g fill="#D9D2CC" stroke="${INK}" stroke-width="4"><circle cx="70" cy="70" r="22"/><circle cx="98" cy="52" r="18"/><circle cx="330" cy="70" r="22"/><circle cx="302" cy="52" r="18"/></g>`;
+  if(st==='freddo') return fiocco(55,80,22)+fiocco(345,70,18)+fiocco(350,250,14)+fiocco(45,260,14)+
+    `<path d="M115 ${scarfY} Q200 ${scarfY+40} 285 ${scarfY} L292 ${scarfY+36} Q200 ${scarfY+78} 108 ${scarfY+36}Z" fill="#2F7FB8" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+     <path d="M250 ${scarfY+40} l10 52 l30 -6 l-12 -52z" fill="#2F7FB8" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+     <path d="M130 ${scarfY+18} l14 8 M170 ${scarfY+30} l14 4 M210 ${scarfY+34} l14 -2" stroke="#D6E8F5" stroke-width="6" stroke-linecap="round"/>`;
+  if(st==='caldo'){ let r=''; for(let i=0;i<8;i++){const t=i*Math.PI/4; r+=`<path d="M${68+Math.cos(t)*42} ${68+Math.sin(t)*42} L${68+Math.cos(t)*58} ${68+Math.sin(t)*58}" stroke="#E9A100" stroke-width="7" stroke-linecap="round"/>`}
+    return r+`<circle cx="68" cy="68" r="32" fill="#F6C334" stroke="${INK}" stroke-width="5"/>`+goccia(318,150,1)+goccia(342,200,.8)+goccia(85,190,.8); }
+  return '';
+}
+const OCCHI_CHIUSI=(x1,x2,y)=>`<path d="M${x1-20} ${y} Q${x1} ${y-23} ${x1+20} ${y}" stroke="${INK}" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M${x2-20} ${y} Q${x2} ${y-23} ${x2+20} ${y}" stroke="${INK}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+function sopracciglia(st,x1,x2,y,col=INK){
+  if(st==='triste') return `<path d="M${x1-24} ${y+8} L${x1+18} ${y-8}" stroke="${col}" stroke-width="9" stroke-linecap="round"/><path d="M${x2+24} ${y+8} L${x2-18} ${y-8}" stroke="${col}" stroke-width="9" stroke-linecap="round"/>`;
+  if(st==='arrabbiato') return `<path d="M${x1-24} ${y-10} L${x1+20} ${y+8}" stroke="${col}" stroke-width="10" stroke-linecap="round"/><path d="M${x2+24} ${y-10} L${x2-20} ${y+8}" stroke="${col}" stroke-width="10" stroke-linecap="round"/>`;
+  return '';
+}
+function bocca(st,y){
+  if(st==='felice') return `<path d="M155 ${y} Q200 ${y+62} 245 ${y} Z" fill="${INK}"/><ellipse cx="200" cy="${y+30}" rx="18" ry="9" fill="#F27C9B"/>`;
+  if(st==='triste') return `<path d="M163 ${y+34} Q200 ${y+2} 237 ${y+34}" stroke="${INK}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+  if(st==='arrabbiato') return `<path d="M160 ${y+28} Q200 ${y+8} 240 ${y+28}" stroke="${INK}" stroke-width="10" fill="none" stroke-linecap="round"/>`;
+  if(st==='freddo'){let p=`M156 ${y+22}`; for(let i=0;i<8;i++) p+=` l11 ${i%2?10:-10}`; return `<path d="${p}" stroke="${INK}" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;}
+  if(st==='caldo') return `<ellipse cx="200" cy="${y+22}" rx="26" ry="20" fill="${INK}"/><path d="M186 ${y+30} Q200 ${y+66} 214 ${y+30}Z" fill="#F27C9B" stroke="${INK}" stroke-width="4"/>`;
+  return '';
+}
+// bambini 我 你 他
+const CAPELLI={wo:'#5A3A22',ni:'#22201F',ta:'#B5651D'};
+function viso(chi,st){
+  const pelle={freddo:'#DCEBF5',caldo:'#F7BB9A',arrabbiato:'#F4BBA6'}[st]||'#F8D7BC';
+  const guance={freddo:'#9ECBEA',caldo:'#EE6B4D',arrabbiato:'#EE8A74'}[st]||'#F7A9C4';
+  const hair=CAPELLI[chi]||INK;
+  const extra=chi==='wo'?`<circle cx="92" cy="100" r="40" fill="${hair}" stroke="${INK}" stroke-width="6"/><circle cx="308" cy="100" r="40" fill="${hair}" stroke="${INK}" stroke-width="6"/>`:'';
+  const occhi=st==='felice'?OCCHI_CHIUSI(160,240,212):`<circle cx="160" cy="208" r="13" fill="${INK}"/><circle cx="240" cy="208" r="13" fill="${INK}"/><circle cx="164" cy="203" r="4" fill="#fff"/><circle cx="244" cy="203" r="4" fill="#fff"/>`;
+  const lacrima=st==='triste'?goccia(240,224,1.1):'';
+  const nome=COSE.find(c=>c.k===chi);
+  return attorno(st)+extra+
+    `<circle cx="200" cy="205" r="128" fill="${pelle}" stroke="${INK}" stroke-width="8"/>
+     <path d="M74 200 Q70 78 200 76 Q330 78 326 200 Q312 138 250 128 Q235 150 200 140 Q160 152 150 128 Q90 140 74 200Z" fill="${hair}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+     ${sopracciglia(st,160,240,172)}${occhi}
+     <ellipse cx="125" cy="252" rx="22" ry="13" fill="${guance}"/><ellipse cx="275" cy="252" rx="22" ry="13" fill="${guance}"/>
+     ${bocca(st,252)}${lacrima}
+     ${st==='freddo'?attorno('freddo-sciarpa'):''}
+     <circle cx="330" cy="330" r="46" fill="#E9B949" stroke="${INK}" stroke-width="6"/>
+     <text x="330" y="350" text-anchor="middle" font-size="56" font-family="Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-weight="500" fill="${INK}">${nome?nome.han:''}</text>`;
+}
+// il panda con le emozioni
+function pandaSVG(st){
+  const occhi=st==='felice'
+    ?`<path d="M128 205 Q148 182 168 205" stroke="#FFFDF8" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M232 205 Q252 182 272 205" stroke="#FFFDF8" stroke-width="9" fill="none" stroke-linecap="round"/>`
+    :`<circle cx="150" cy="200" r="13" fill="#FFFDF8"/><circle cx="250" cy="200" r="13" fill="#FFFDF8"/><circle cx="152" cy="202" r="6" fill="${INK}"/><circle cx="248" cy="202" r="6" fill="${INK}"/>`;
+  const testa={freddo:'#EAF4FB',caldo:'#FFF1E6'}[st]||'#FFFDF8';
+  const guance={freddo:'#9ECBEA',caldo:'#EE6B4D',arrabbiato:'#EE8A74'}[st]||'#F7A9C4';
+  const lacrima=st==='triste'?goccia(258,228,1):'';
+  return `<circle cx="95" cy="98" r="50" fill="${INK}"/><circle cx="305" cy="98" r="50" fill="${INK}"/>
+    <ellipse cx="200" cy="218" rx="155" ry="140" fill="${testa}" stroke="${INK}" stroke-width="8"/>
+    <ellipse cx="145" cy="200" rx="40" ry="52" fill="${INK}" transform="rotate(30 145 200)"/><ellipse cx="255" cy="200" rx="40" ry="52" fill="${INK}" transform="rotate(-30 255 200)"/>
+    ${occhi}${sopracciglia(st,145,255,135)}
+    <path d="M182 258 Q200 250 218 258 Q212 276 200 280 Q188 276 182 258Z" fill="${INK}"/>
+    ${bocca(st,284)}${lacrima}
+    <ellipse cx="112" cy="268" rx="26" ry="15" fill="${guance}"/><ellipse cx="288" cy="268" rx="26" ry="15" fill="${guance}"/>`;
+}
+const MELA=`<path d="M200 128 Q206 92 226 70" stroke="#6B3E1F" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M214 96 Q248 54 292 72 Q262 112 214 96Z" fill="#5FA83A" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M200 132 C150 92 64 112 64 210 C64 300 130 352 200 340 C270 352 336 300 336 210 C336 112 250 92 200 132Z" fill="#E0393E" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="190" rx="18" ry="34" fill="#FFFFFF" opacity=".45" transform="rotate(20 120 190)"/>
+  <circle cx="165" cy="225" r="11" fill="${INK}"/><circle cx="235" cy="225" r="11" fill="${INK}"/>
+  <path d="M175 258 Q200 282 225 258" stroke="${INK}" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <ellipse cx="140" cy="255" rx="18" ry="10" fill="#F7A9C4"/><ellipse cx="260" cy="255" rx="18" ry="10" fill="#F7A9C4"/>`;
+const BASE={panda:362,mela:349};
+function cresce(k,s){
+  const ty=384-(BASE[k]-200)*s;
+  return `<g transform="translate(200 ${ty.toFixed(1)}) scale(${s.toFixed(3)}) translate(-200 -200)">${k==='panda'?pandaSVG('felice'):MELA}</g>`;
+}
+function bambu(L){
+  const top=380-L; let nodi='';
+  for(let y=380-60;y>top+20;y-=60) nodi+=`<path d="M176 ${y} H224" stroke="#2F6B1F" stroke-width="7" stroke-linecap="round"/>`;
+  return `<path d="M200 ${top+14} Q232 ${top-30} 280 ${top-20} Q244 ${top+12} 200 ${top+14}Z" fill="#7CC34A" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M200 ${top+20} Q160 ${top-18} 118 ${top-6} Q152 ${top+22} 200 ${top+20}Z" fill="#7CC34A" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="176" y="${top}" width="48" height="${L}" rx="16" fill="#8DC63F" stroke="${INK}" stroke-width="7"/>
+    <rect x="186" y="${top+10}" width="10" height="${Math.max(0,L-20)}" rx="5" fill="#FFFFFF" opacity=".35"/>${nodi}`;
+}
+function matita(L){
+  const x0=200-L/2, y=330, h=50, fine=x0+L, legno=fine-56;
+  return `<rect x="${x0}" y="${y}" width="40" height="${h}" rx="12" fill="#F49AB6" stroke="${INK}" stroke-width="6"/>
+    <rect x="${x0+30}" y="${y-2}" width="20" height="${h+4}" fill="#B9B2AE" stroke="${INK}" stroke-width="6"/>
+    <rect x="${x0+50}" y="${y}" width="${Math.max(0,legno-x0-50)}" height="${h}" fill="#F6C334" stroke="${INK}" stroke-width="6"/>
+    <path d="M${x0+50} ${y+17} H${legno}" stroke="#E0A21A" stroke-width="6"/>
+    <path d="M${legno} ${y} L${fine} ${y+h/2} L${legno} ${y+h}Z" fill="#F2D3A6" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M${fine-18} ${y+h/2-8} L${fine} ${y+h/2} L${fine-18} ${y+h/2+8}Z" fill="${INK}"/>`;
+}
+const svg=(dentro,cls='')=>`<svg class="disegno ${cls}" viewBox="0 0 400 400" width="100%" height="100%" aria-hidden="true">${dentro}</svg>`;
+function disegno(ck,ak,anim=false){
+  const a=A(ak), cls=anim?(ak==='freddo'?'trema':'anim-salta'):'';
+  if(a.tipo==='dim'){ const big=ak==='grande'; return svg(TERRA+cresce(ck,big?1:.3),cls); }
+  if(a.tipo==='lung'){ const lun=ak==='lungo'; return svg(TERRA+(ck==='bambu'?bambu(lun?350:90):matita(lun?360:110)),cls); }
+  if(ck==='panda') return svg(attorno(ak,320)+pandaSVG(ak)+(ak==='freddo'?attorno('freddo-sciarpa'):''),cls);
+  return svg(viso(ck,ak),cls);
+}
+// la sciarpa va sopra la faccia: la disegno a parte
+const _att=attorno;
+attorno=function(st,y){ if(st==='freddo-sciarpa'){ const s=_att('freddo',y||318); return s.slice(s.indexOf('<path d="M115')); } if(st==='freddo'){ const s=_att('freddo',y); return s.slice(0,s.indexOf('<path d="M115')); } return _att(st,y); };
+
+// ---------- NAVIGAZIONE ----------
+function fit(){ const vp=document.getElementById('viewport').getBoundingClientRect();
+  stage.style.transform=`translate(-50%,-50%) scale(${Math.min(vp.width/1600,vp.height/900)*0.97})`; }
+addEventListener('resize',fit); fit();
+const entra={};
+function vai(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[cur].classList.remove('on'); cur=i; const s=slides[cur]; s.classList.add('on');
+  document.getElementById('conta').textContent=`${cur+1} / ${slides.length}`;
+  document.getElementById('titolo-slide').textContent=s.dataset.titolo||'';
+  if(s.dataset.entra&&entra[s.dataset.entra]) entra[s.dataset.entra]();
+  try{history.replaceState(null,'','#s'+(cur+1))}catch(e){}
+}
+document.getElementById('prec').onclick=()=>vai(cur-1);
+document.getElementById('succ').onclick=()=>vai(cur+1);
+document.getElementById('schermo').onclick=()=>{try{ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(()=>{}); }catch(e){}};
+addEventListener('keydown',e=>{ if(e.target.matches&&e.target.matches('input')) return; if(e.key==='ArrowRight'||e.key==='PageDown') vai(cur+1); if(e.key==='ArrowLeft'||e.key==='PageUp') vai(cur-1); });
+let sx=null;
+stage.addEventListener('touchstart',e=>{ if(e.target.closest('button,.blocco,input,.etichetta')){sx=null;return} sx=e.touches[0].clientX },{passive:true});
+stage.addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>60) vai(cur+(dx<0?1:-1)); sx=null });
+
+function dici(t){ try{ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t); u.lang='zh-CN'; u.rate=.72;
+  const v=speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang)); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){} }
+stage.addEventListener('click',e=>{
+  const b=e.target.closest('[data-dici]'); if(b) dici(b.dataset.dici);
+  const r=e.target.closest('[data-rivela]'); if(r) document.getElementById(r.dataset.rivela).hidden=false;
+});
+function coriandoli(n=90){ if(riduci) return;
+  const col=['#C8102E','#E9B949','#3F8A2A','#2F7FB8','#7A4FB0','#FFFDF7'];
+  for(let i=0;i<n;i++){const d=document.createElement('div');d.className='coriandolo';d.style.left=Math.random()*1600+'px';d.style.background=col[i%col.length];
+    d.style.animationDuration=(1.8+Math.random()*1.8)+'s';d.style.animationDelay=(Math.random()*.6)+'s';stage.appendChild(d);setTimeout(()=>d.remove(),4500)} }
+function scintille(el,n=14){ if(riduci) return; const r=el.getBoundingClientRect(), s=stage.getBoundingClientRect(), k=1600/s.width;
+  const cx=(r.left+r.width/2-s.left)*k, cy=(r.top+r.height/2-s.top)*k;
+  for(let i=0;i<n;i++){const d=document.createElement('span'); d.className='scintilla'; d.textContent=['✨','⭐','🌟'][i%3];
+    const t=Math.random()*Math.PI*2, dist=120+Math.random()*120; d.style.left=cx-20+'px'; d.style.top=cy-20+'px';
+    d.style.setProperty('--dx',Math.cos(t)*dist+'px'); d.style.setProperty('--dy',Math.sin(t)*dist+'px'); stage.appendChild(d); setTimeout(()=>d.remove(),1200)} }
+const blocco=(han,cls,extra='')=>`<span class="blocco ${cls}" ${extra}><span class="han">${han}</span><span class="py">${PY[han]||''}</span></span>`;
+const fraseHTML=(c,a)=>blocco(c.han,'b-chi')+blocco('很','b-hen')+blocco(a.han,'b-emo');
+const mescola=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const conHan=(s,px)=>s.replace(/([一-鿿]+)/g,`<span class="han"${px?` style="font-size:${px}px"`:''}>$1</span>`);
+
+// ---------- 1 TITOLO ----------
+document.getElementById('tit-disegni').innerHTML=
+  `<div style="width:150px;height:150px;align-self:flex-start">${disegno('wo','felice')}</div>
+   <div style="width:150px;height:150px;align-self:flex-end">${disegno('panda','freddo')}</div>`;
+
+// ---------- 2 IL TRUCCO ----------
+(function(){
+  const esempi=[['panda','grande'],['wo','felice'],['wo','freddo']];
+  const box=document.getElementById('trucco-righe'); let n=0;
+  const pz=(t,bg)=>`<span style="background:${bg};padding:6px 16px;border-radius:14px">${t}</span>`;
+  esempi.forEach(([ck,ak])=>{ const c=C(ck), a=A(ak);
+    const r=document.createElement('div'); r.className='riga'; r.style.visibility='hidden';
+    r.innerHTML=`<div style="display:flex;gap:12px;align-items:center;font-size:46px;font-weight:700;justify-content:flex-end">
+        <span style="font-size:28px;color:var(--grigio);font-weight:600">🇮🇹</span>${pz(c.it,'var(--azzurro-chiaro)')}${pz(a.v==='a'?c.a:c.e,'var(--oro-chiaro)')}${pz(c.g==='f'?a.f:a.m,'var(--rosso-chiaro)')}</div>
+      <div style="font-size:60px;text-align:center">➜</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <span class="blocco b-chi piccolo"><span class="han">${c.han}</span><span class="py">${c.py}</span></span>
+        <span class="blocco b-hen piccolo"><span class="han">很</span><span class="py">hěn</span></span>
+        <span class="blocco b-emo piccolo"><span class="han">${a.han}</span><span class="py">${a.py}</span></span>
+        <div style="width:110px;height:110px;margin-left:10px">${disegno(ck,ak)}</div>
+        <button class="btn oro" style="padding:8px 18px" data-dici="${cinese(c,a)}">🔊</button></div>`;
+    box.appendChild(r)});
+  const bt=document.getElementById('trucco-mostra');
+  bt.onclick=()=>{ if(n<esempi.length){ const r=box.children[n]; r.style.visibility='visible'; r.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'none'}],{duration:400});
+      const [ck,ak]=esempi[n]; dici(cinese(C(ck),A(ak))); n++; scintille(r.querySelector('.b-hen'),10);
+      if(n===esempi.length) bt.textContent='🤫 Il segreto'; }
+    else { bt.textContent='“sono”, “è”, “ho” ➜ 很!'; coriandoli(40); } };
+})();
+
+// ---------- 3 TRE FAMIGLIE ----------
+(function(){
+  const fam=[
+    {t:'📏 Com\'è?',col:'var(--verde)',ks:['grande','piccolo','lungo','corto'],es:{grande:'panda',piccolo:'mela',lungo:'bambu',corto:'matita'}},
+    {t:'💛 Come mi sento?',col:'#D98A00',ks:['felice','triste','arrabbiato'],es:{}},
+    {t:'🌡️ Che freddo! Che caldo!',col:'#1E88C8',ks:['freddo','caldo'],es:{}}
+  ];
+  const box=document.getElementById('famiglie');
+  fam.forEach(f=>{ const d=document.createElement('div'); d.className='cornice-han'; d.style.cssText='padding:22px 20px;display:flex;flex-direction:column;align-items:center;gap:16px;height:600px';
+    d.innerHTML=`<p style="margin:0;font-size:32px;font-weight:700;color:${f.col};white-space:nowrap">${f.t}</p><div style="display:grid;grid-template-columns:repeat(${f.ks.length>2?2:1},1fr);gap:14px;width:100%"></div>`;
+    const g=d.lastElementChild;
+    f.ks.forEach(k=>{ const a=A(k), ck=f.es[k]||(a.tipo==='temp'?'panda':'wo');
+      const b=document.createElement('button'); b.className='carta-c'; b.style.height=f.ks.length>2?(f.ks.length===3&&k==='arrabbiato'?'230px':'230px'):'235px';
+      if(f.ks.length===3&&k==='arrabbiato') b.style.gridColumn='1 / span 2';
+      b.innerHTML=`<div style="width:110px;height:110px">${disegno(ck,k)}</div><span class="han" style="font-size:${a.han.length>1?50:64}px;color:${a.col}">${a.han}${a.nuovo?' ⭐':''}</span><span style="font-size:26px;font-weight:600">${a.py} · ${a.m}</span>`;
+      b.onclick=()=>{dici(a.han); b.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:300})};
+      g.appendChild(b)});
+    box.appendChild(d)});
+})();
+
+// ---------- 4-5 PAROLE NUOVE ----------
+stage.querySelectorAll('.slide.agg').forEach(s=>{
+  const a=AGG[+s.dataset.agg], c=C('wo'), id='agg-x'+s.dataset.agg, sid='agg-s'+s.dataset.agg;
+  s.innerHTML=`<div class="cornice"></div>
+    <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg>
+    <span class="abs pill" style="left:1240px;top:40px;font-size:28px;border-color:var(--oro);animation:none">⭐ Parola nuova!</span>
+    <div class="abs" style="left:120px;top:140px;width:620px;height:620px">${disegno(c.k,a.k,true)}</div>
+    <div class="abs cornice-han" style="left:820px;top:110px;width:640px;height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
+      <span class="han" style="font-size:220px;color:${a.col}">${a.han}</span>
+      <span style="font-size:84px;font-weight:600;color:var(--ink)">${a.py}</span>
+    </div>
+    <div class="abs" style="left:760px;top:570px;width:760px;display:flex;flex-direction:column;align-items:center;gap:16px">
+      <div style="display:flex;gap:14px"><button class="btn oro" data-dici="${a.han}">🔊 Ascolta</button><button class="btn" data-rivela="${id}">Che cosa vuol dire?</button><button class="btn" data-rivela="${sid}">🤫</button></div>
+      <span class="pill" id="${id}" hidden style="text-align:center;font-size:30px;border-radius:28px;line-height:1.35">${a.han} = <b>${a.m}</b> · ${a.gesto}<br><span class="han">${cinese(c,a)}</span> = ${italiano(c,a)} <button class="btn oro" style="padding:2px 14px;font-size:24px" data-dici="${cinese(c,a)}">🔊</button></span>
+      <span class="pill" id="${sid}" hidden style="text-align:center;font-size:28px;border-radius:28px;line-height:1.3">${a.segreto}</span>
+    </div>`;
+});
+
+// ---------- 6 TERMOMETRO ----------
+(function(){
+  const cur=document.getElementById('tm-cursore'); let lato=null;
+  function aggiorna(parla){
+    const caldo=cur.value>=50, a=A(caldo?'caldo':'freddo');
+    document.getElementById('tm-viso').innerHTML=disegno('wo',a.k,true);
+    document.getElementById('tm-leng').classList.toggle('attiva',!caldo);
+    document.getElementById('tm-re').classList.toggle('attiva',caldo);
+    document.getElementById('tm-it-agg').textContent=a.m;
+    document.getElementById('tm-frase').innerHTML=fraseHTML(C('wo'),a);
+    if(parla&&a.k!==lato) dici(cinese(C('wo'),a)); lato=a.k;
+  }
+  cur.addEventListener('input',()=>aggiorna(true));
+  document.getElementById('tm-leng').onclick=()=>{cur.value=10;aggiorna(true)};
+  document.getElementById('tm-re').onclick=()=>{cur.value=90;aggiorna(true)};
+  aggiorna(false);
+})();
+
+// ---------- 7 BACCHETTA MAGICA ----------
+(function(){
+  const giri=[['wo','felice'],['panda','grande'],['ni','freddo'],['bambu','lungo'],['ta','arrabbiato'],['panda','caldo'],['ni','triste'],['matita','corto']];
+  let g=0, fatto=false;
+  const dis=document.getElementById('bm-disegno'), fr=document.getElementById('bm-frase'), it=document.getElementById('bm-it'), bt=document.getElementById('bm-magia');
+  function giro(){ const [ck,ak]=giri[g], c=C(ck), a=A(ak); fatto=false;
+    dis.innerHTML=disegno(ck,ak); dis.className='grigio';
+    fr.innerHTML=blocco(c.han,'b-chi')+`<div class="slot" id="bm-slot"><span style="font-size:80px;font-weight:700;color:#CDB9A6">?</span></div>`+blocco(a.han,'b-emo');
+    it.textContent=''; bt.disabled=false; bt.style.opacity=1; }
+  bt.onclick=()=>{ if(fatto) return; fatto=true; const [ck,ak]=giri[g], c=C(ck), a=A(ak);
+    const s=document.getElementById('bm-slot'); s.outerHTML=blocco('很','b-hen','id="bm-hen"');
+    const h=document.getElementById('bm-hen'); h.animate([{transform:'scale(0) rotate(-30deg)'},{transform:'scale(1.2)'},{transform:'none'}],{duration:500,easing:'ease-out'});
+    dis.className=''; dis.firstElementChild.classList.add(ak==='freddo'?'trema':'anim-salta');
+    it.textContent=italiano(c,a)+'!'; scintille(h,18); dici(cinese(c,a)); bt.style.opacity=.5; };
+  document.getElementById('bm-next').onclick=()=>{g=(g+1)%giri.length;giro()};
+  entra.magia=()=>{ if(!fatto) giro() }; giro();
+})();
+
+// ---------- 8 COSTRUISCI LA FRASE ----------
+(function(){
+  let cosa=C('wo'), agg=A('felice');
+  const bc=document.getElementById('cf-cosa'), ba=document.getElementById('cf-agg');
+  function aggiorna(){
+    [...bc.children].forEach((x,k)=>x.style.outline=COSE[k]===cosa?'6px solid #2F7FB8':'');
+    [...ba.children].forEach((x,k)=>{x.style.outline=AGG[k]===agg?'6px solid #C8102E':''; x.classList.toggle('spento',!va(cosa,AGG[k]))});
+    document.getElementById('cf-disegno').innerHTML=disegno(cosa.k,agg.k,true);
+    document.getElementById('cf-frase').innerHTML=fraseHTML(cosa,agg);
+    document.getElementById('cf-it').textContent=italiano(cosa,agg);
+  }
+  COSE.forEach(c=>{const b=document.createElement('button');b.className='blocco b-chi piccolo';b.style.justifyContent='center';
+    b.innerHTML=`<span class="han">${c.han}</span><span class="py">${c.py}</span>`;
+    b.onclick=()=>{cosa=c; if(!va(c,agg)) agg=AGG.find(a=>va(c,a)); aggiorna(); dici(c.han)}; bc.appendChild(b)});
+  AGG.forEach(a=>{const b=document.createElement('button');b.className='blocco b-emo piccolo';b.style.justifyContent='center';
+    b.innerHTML=`<span class="han" style="font-size:${a.han.length>1?38:46}px">${a.han}</span><span class="py" style="font-size:20px">${a.py}</span>`;
+    b.onclick=()=>{ if(!va(cosa,a)){ b.animate([{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'none'}],{duration:300}); return }
+      agg=a; aggiorna(); dici(a.han)}; ba.appendChild(b)});
+  document.getElementById('cf-ascolta').onclick=()=>dici(cinese(cosa,agg));
+  aggiorna();
+})();
+
+// ---------- 9 METTI IN ORDINE ----------
+(function(){
+  const giri=[['wo','felice'],['panda','grande'],['ni','freddo'],['bambu','corto'],['ta','arrabbiato'],['panda','caldo'],['wo','triste'],['mela','piccolo']];
+  let g=0, presi=[];
+  const slot=document.getElementById('mo-slot'), pezzi=document.getElementById('mo-pezzi'), esito=document.getElementById('mo-esito');
+  function giro(){
+    const [ck,ak]=giri[g], c=C(ck), a=A(ak); presi=[]; esito.textContent='';
+    document.getElementById('mo-disegno').innerHTML=disegno(ck,ak,true);
+    document.getElementById('mo-conta').textContent=`Frase ${g+1} di ${giri.length} · ${italiano(c,a)}`;
+    slot.innerHTML='<div class="slot"></div><div class="slot"></div><div class="slot"></div>';
+    pezzi.innerHTML='';
+    mescola([[c.han,'b-chi'],['很','b-hen'],[a.han,'b-emo']]).forEach(([h,cl])=>{
+      const b=document.createElement('button'); b.className='blocco '+cl; b.innerHTML=`<span class="han">${h}</span><span class="py">${PY[h]}</span>`;
+      b.onclick=()=>{ if(presi.length>=3) return; b.classList.add('usato'); presi.push(h);
+        slot.children[presi.length-1].innerHTML=blocco(h,cl); dici(h);
+        if(presi.length===3){ const ok=presi.join('')===cinese(c,a);
+          if(ok){esito.innerHTML='✅ Bravissimi! '+conHan(presi.join('')); esito.style.color='var(--verde)'; setTimeout(()=>dici(presi.join('')),500); coriandoli(40)}
+          else{esito.textContent='❌ Quasi! Ricordate: chi → 很 → com\'è'; esito.style.color='var(--rosso)'; slot.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'none'}],{duration:350})}}};
+      pezzi.appendChild(b)});
+  }
+  document.getElementById('mo-reset').onclick=giro;
+  document.getElementById('mo-next').onclick=()=>{g=(g+1)%giri.length; giro()};
+  entra.ordine=()=>{ if(!slot.children.length) giro() }; giro();
+})();
+
+// ---------- 10 LEGGI E SCEGLI ----------
+(function(){
+  const giri=[['wo','freddo'],['panda','piccolo'],['ni','felice'],['matita','lungo'],['ta','caldo'],['panda','triste'],['wo','arrabbiato'],['bambu','corto']];
+  let g=0;
+  const fr=document.getElementById('ls-frase'), opz=document.getElementById('ls-opz'), es=document.getElementById('ls-esito'), nx=document.getElementById('ls-next');
+  function altraCosa(ck,ak){ const a=A(ak); const ok=COSE.filter(c=>c.k!==ck&&va(c,a)); return mescola(ok)[0].k; }
+  function giro(){
+    const [ck,ak]=giri[g], c=C(ck), a=A(ak);
+    fr.innerHTML=fraseHTML(c,a); es.textContent=''; nx.hidden=true;
+    const scelte=mescola([[ck,ak,true],[ck,OPPOSTO[ak],false],[altraCosa(ck,ak),ak,false]]);
+    opz.innerHTML=''; let fatto=false;
+    scelte.forEach(([cc,aa,ok])=>{const b=document.createElement('button');b.className='carta-c';b.style.height='360px';
+      b.innerHTML=`<div style="width:300px;height:300px">${disegno(cc,aa)}</div>`; b.setAttribute('aria-label',italiano(C(cc),A(aa)));
+      b.onclick=()=>{ if(fatto) return;
+        if(ok){fatto=true;b.classList.add('ok');b.querySelector('svg').classList.add(ak==='freddo'?'trema':'anim-salta');es.textContent='✅ '+italiano(c,a)+'!';es.style.color='var(--verde)';nx.hidden=false;dici(cinese(c,a))}
+        else{b.classList.add('no');es.textContent='❌ Guardate bene: '+(cc!==ck?'è la persona o la cosa giusta?':'leggete di nuovo la parola rossa!');es.style.color='var(--rosso)'}};
+      opz.appendChild(b)});
+  }
+  nx.onclick=()=>{g=(g+1)%giri.length;giro()};
+  entra.leggi=()=>{ if(!opz.children.length) giro() }; giro();
+})();
+
+// ---------- 11 QUIZ ----------
+(function(){
+  const domande=[
+    ['冷 vuol dire…',['freddo','caldo','felice'],0,'冷 lěng = freddo 🥶'],
+    ['Come si dice “caldo”?',['冷','热','很'],1,'热 rè = caldo 🥵'],
+    ['“Io ho freddo” si dice…',['我冷很','我很冷','很我冷'],1,'Chi → 很 → com\'è: 我很冷'],
+    ['熊猫很高兴 vuol dire…',['Il panda è felice','Il panda è triste','Il panda è grande'],0,'高兴 gāoxìng = felice 😄'],
+    ['Quale parola manca? 我 _ 伤心',['很','大','你'],0,'我很伤心 = Io sono triste'],
+    ['你很热 vuol dire…',['Tu hai caldo','Tu hai freddo','Io ho caldo'],0,'你 = tu, 热 = caldo'],
+    ['“Il bambù è corto” si dice…',['竹子很长','竹子很短','铅笔很短'],1,'竹子 = bambù, 短 = corto'],
+    ['Il contrario di 冷 è…',['热','小','生气'],0,'冷 freddo ↔ 热 caldo']
+  ];
+  const el=document.getElementById('quiz'); let i=0,punti=0;
+  const isHan=s=>/^[一-鿿]+$/.test(s);
+  function avvio(){ el.innerHTML=`<div style="width:260px;height:260px">${disegno('panda','felice',true)}</div><p style="margin:0;font-size:80px;font-weight:700;color:var(--rosso)">Quiz!</p>
+      <p style="margin:0;font-size:32px;font-weight:600;color:var(--grigio)">Rispondete bene e il panda sarà felicissimo!</p>
+      <button class="btn oro" style="font-size:44px">Via! ▶</button>`;
+    el.querySelector('button').onclick=()=>{i=0;punti=0;mostra()} }
+  function mostra(){
+    if(i>=domande.length) return fine();
+    const [q,o,g,sp]=domande[i];
+    el.innerHTML=`<p style="margin:0;font-size:26px;font-weight:600;color:var(--grigio)">Domanda ${i+1} di ${domande.length} · Punti: ${punti}</p>
+      <p style="margin:0;font-size:56px;font-weight:700;line-height:1.15;min-height:140px;display:flex;align-items:center;gap:10px">${q.replace(/([一-鿿]+)/g,'<span class="han" style="font-size:80px;color:var(--rosso)">$1</span>')}</p>
+      <div class="quiz-opz" style="width:100%"></div><p class="esito" aria-live="polite" style="margin:0;font-size:32px;min-height:50px"></p>`;
+    const box=el.querySelector('.quiz-opz'); let fatto=false;
+    o.forEach((t,k)=>{const b=document.createElement('button');b.className='carta-c';
+      b.innerHTML=isHan(t)?`<span class="han" style="font-size:${t.length>2?60:84}px">${t}</span>`:t;
+      b.onclick=()=>{ if(fatto) return; fatto=true; const ok=k===g; if(ok) punti++;
+        b.classList.add(ok?'ok':'no'); box.children[g].classList.add('ok');
+        if(isHan(o[g])) dici(o[g]);
+        el.querySelector('.esito').innerHTML=`<b>${ok?'✅ Giusto!':'❌ Non proprio!'}</b> ${conHan(sp)}`;
+        const av=document.createElement('button'); av.className='btn oro'; av.textContent=i+1<domande.length?'Avanti ➜':'Risultato';
+        av.onclick=()=>{i++;mostra()}; el.appendChild(av)};
+      box.appendChild(b)});
+  }
+  function fine(){
+    const bene=punti>=domande.length/2, st=bene?'felice':'triste';
+    el.innerHTML=`<div style="width:280px;height:280px">${disegno('panda',st,true)}</div><p style="margin:0;font-size:60px;font-weight:700">${punti} su ${domande.length}!</p>
+      <p style="margin:0;font-size:40px"><span class="han" style="font-size:64px;color:var(--rosso)">${bene?'熊猫很高兴！':'熊猫很伤心！'}</span> ${bene?'xióngmāo hěn gāoxìng!':'xióngmāo hěn shāngxīn!'}</p><button class="btn oro">Gioca ancora</button>`;
+    el.querySelector('button').onclick=avvio; if(punti>=domande.length-2) coriandoli(); dici(bene?'熊猫很高兴':'熊猫很伤心');
+  }
+  entra.quiz=avvio; avvio();
+})();
+
+// ---------- 12 老师说 ----------
+(function(){
+  const carte=[['wo','felice'],['wo','triste'],['wo','arrabbiato'],['wo','freddo'],['wo','caldo'],['panda','grande'],['panda','piccolo'],['bambu','lungo'],['matita','corto']];
+  const mostra=document.getElementById('fine-mostra'), box=document.getElementById('fine-carte'); let ultimo=-1;
+  function scegli(n){
+    const [ck,ak]=carte[n], c=C(ck), a=A(ak);
+    mostra.innerHTML=`<span class="han" style="font-size:${c.han.length+a.han.length>3?70:96}px;color:${a.col}">${cinese(c,a)}</span><span style="font-size:34px;font-weight:600">${c.py} hěn ${a.py}</span><span style="font-size:26px;line-height:1.25">${a.gesto}</span>`;
+    [...box.children].forEach((x,k)=>x.classList.toggle('scelta',k===n)); dici(cinese(c,a));
+  }
+  document.getElementById('fine-pesca').onclick=()=>{let n; do{n=Math.floor(Math.random()*carte.length)}while(n===ultimo); ultimo=n; scegli(n)};
+  carte.forEach(([ck,ak],n)=>{const a=A(ak), c=C(ck), b=document.createElement('button');b.className='carta-c';b.style.height='160px';b.style.flexDirection='row';b.style.gap='8px';b.style.padding='8px';
+    b.innerHTML=`<div style="width:100px;height:100px;flex:none">${disegno(ck,ak)}</div><span style="display:flex;flex-direction:column;align-items:flex-start"><span class="han" style="font-size:${c.han.length+a.han.length>3?30:40}px;color:${a.col};white-space:nowrap">${cinese(c,a)}</span><span style="font-size:22px;font-weight:600">${a.m}</span></span>`;
+    b.onclick=()=>scegli(n); box.appendChild(b)});
+})();
+
+const m=/^#s(\d+)$/.exec(location.hash); vai(m?(+m[1]-1):0);
+})();
+</script>
+</body>
+</html>
