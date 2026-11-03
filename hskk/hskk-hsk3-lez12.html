@@ -95,9 +95,10 @@ th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
   </nav>
 
   <div class="toolbar">
-    <label for="rate">Velocità audio</label>
-    <input id="rate" type="range" min="0.6" max="1.1" step="0.1" value="0.85">
-    <span id="rateLbl">0.85×</span>
+    <label for="voiceSel">Voce</label><select id="voiceSel" style="font:inherit;max-width:260px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)"></select>
+    <label for="rate">Velocità</label>
+    <input id="rate" type="range" min="0.6" max="1.1" step="0.1" value="0.9">
+    <span id="rateLbl">0.9×</span>
     <span class="chip" id="score">0 / 18 completate</span>
   </div>
   <p class="warn" id="noVoice" hidden>Il tuo dispositivo non ha una voce cinese installata: puoi leggere il testo e pronunciarlo tu.</p>
@@ -188,8 +189,13 @@ function save(){try{localStorage.setItem("hskk-l12-done",JSON.stringify(done))}c
 function updScore(){const n=Object.values(done).filter(Boolean).length;document.getElementById("score").textContent=n+" / 18 completate"}
 
 let zhVoice=null;
-function pickVoice(){if(!("speechSynthesis" in window))return;const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
-if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function rankV(x){const n=(x.name||"").toLowerCase();let s=0;if(/natural|online|neural/.test(n))s+=50;if(/xiaoxiao|xiaoyi|yunxi|yunjian|xiaohan|xiaomo/.test(n))s+=40;if(/google/.test(n))s+=35;if(/tingting|ting-ting|lili|meijia|yu-shu|shanshan/.test(n))s+=25;if(/huihui|kangkang|yaoyao/.test(n))s-=20;if(/zh[-_]cn/i.test(x.lang))s+=10;return s}
+function zhList(){if(!("speechSynthesis" in window))return[];return speechSynthesis.getVoices().filter(x=>/^zh|cmn/i.test(x.lang)&&!/hk|yue|cantonese/i.test(x.lang+x.name)).sort((a,b)=>rankV(b)-rankV(a))}
+function fillVoices(){const sel=document.getElementById("voiceSel");if(!sel)return;const L=zhList();if(!L.length)return;let saved=null;try{saved=localStorage.getItem("zh-voice")}catch(e){}
+  sel.innerHTML=L.map(v=>`<option value="${v.name}">${v.name}</option>`).join("");if(saved&&L.some(v=>v.name===saved))sel.value=saved;
+  sel.onchange=()=>{try{localStorage.setItem("zh-voice",sel.value)}catch(e){};pickVoice()}}
+function pickVoice(){const L=zhList();const sel=document.getElementById("voiceSel");zhVoice=(sel&&L.find(v=>v.name===sel.value))||L[0]||null}
+if("speechSynthesis" in window){fillVoices();pickVoice();speechSynthesis.onvoiceschanged=()=>{fillVoices();pickVoice()}}
 function speak(t){
   if(!("speechSynthesis" in window)){document.getElementById("noVoice").hidden=false;return}
   pickVoice();if(!zhVoice&&speechSynthesis.getVoices().length)document.getElementById("noVoice").hidden=false;
