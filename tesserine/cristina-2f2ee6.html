@@ -77,7 +77,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 </div>
 <script>
 /*DATI-INIZIO*/
-const DATI = {"nome": "Cristina", "rimanenti": 4, "aggiornata": "3 novembre 2026", "storico": [], "pagamento": {"paypal": "", "iban": "", "intestatario": "Maja Fabbri", "pacchetti": [{"lezioni": 5, "prezzo": null}, {"lezioni": 10, "prezzo": null}, {"lezioni": 15, "prezzo": null}]}};
+const DATI = {"nome": "Cristina", "rimanenti": 4, "aggiornata": "3 novembre 2026", "storico": [], "pagamento": {"paypal": "", "iban": "", "intestatario": "Maja Fabbri", "pacchetti": [{"lezioni": 10, "prezzo": 150}]}};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 const r = DATI.rimanenti;
@@ -89,7 +89,7 @@ $("agg").textContent = "Aggiornata il " + DATI.aggiornata;
 if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: rinnova qui sotto per continuare 🧧</div>'; }
 else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: puoi già rinnovare il pacchetto qui sotto 🏮</div>'; }
 const P = DATI.pagamento;
-let scelto = 1;
+let scelto = 0;
 function euro(v){ return v ? "€ " + String(v).replace(".", ",") : "prezzo in arrivo"; }
 function disegna(){
   $("pacchetti").innerHTML = P.pacchetti.map((p,i)=>
