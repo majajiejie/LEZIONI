@@ -106,9 +106,6 @@ a.mat:after{content:"→";color:var(--rosso)}
   <h2>Diario delle lezioni</h2>
   <div class="box"><ul class="diario" id="diario"></ul></div>
 
-  <div id="secand" hidden><h2>Come sta andando</h2>
-  <div class="box and" id="andamento"></div></div>
-
   <div id="secmat" hidden><h2>Materiali per ripassare</h2>
   <div id="materiali"></div></div>
 
@@ -133,7 +130,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "7M5qFMsml8OkY2Y5C4ZFng==.McSodNpUMHoVAxCs.MVJcyDtQnQQpNE4YA/ZnQbRc0w+8u0ci0NlUEhULWlxCx6GXvjBCLOuRo2uz6lPHTrlAwWXnWdHa5AUPOdkY8xF8gi0WqtQbLY2oX7W1IXmmgQa9Y1Kb28y26dd2TzfueqW7t47lQtzCu+L4QEFjKAy0+CkYubnZo7RCzWVUpIKc06dZtkkC/D6fr4Yt/r3pM7bY5OJtdpVilKtYsy40d1siGgKr0mCMhRnhphRiu0WKt4Tt+AksBeL4E63x6eEjDYiuE/+dzY+DRAw1Mf1co7NQEP2xvVvf8vsedPUArtKCJ3uSUgEyz4xnbpos5RagRYOdMF+2wyYArtpIRTcVJcYv3eAiiknN6gq+hToCX5DEvrXw9thQxcna1Cv4q4ZUJs0apCaZG3TxGy5lNTgNQkaZn8aItJU+4WEW+PDAPV/xxKFdClOTxhJ72RZkInvw+X85IGtrp3cU6c3d3HFD2et/PuLpTH90/NJPdCKv8lXJ2PO1mchInzYf9yjWkHJYd/G8yGLw38aiX0fGPvcyr5C3yqrj3jGobYBnjhE0ubje+vSuqqBFTOZ33jD910a0tM5fUSJxAmoaOK0EbeP/+F7PXbw465reSRJMoZPINOuu5RwbuJNv+IV4VO1Bma36QMLGTHK0hGMM+k4IRIdK4KpHBkF/khsznT8KHlW9npi64dQjF8x5gSnOe90RuSY2WdzP5fLyE4MS/ALPjByirKkVsPs7WpmEl8z8EsM9hXKrQVTkZiFK4xWpbDAfkyHY8xNltMbRQWQ=";
+const CIFRATO = "V0mFtiQGJm+keKJEZX6xeA==.Dv5ybBKVOJenUpq7.5fR8dEb4tKDfM3f4zVu4EdYxPw8UGYJHEoDYfJ2dA0ZvrxJuY7jDHO6BhvT23F79h8veorWsh7n1kKd5FxAh/5q5LjEUyO3QStDPGtT9QIJ4M75Wn67FSie35Y4twnbQc2RsHDzmSBv2CDjwW1FFnOw0UzDIyup8oyRGFPp2asWHBXKuKJpmfTSqnree0Yx/ZabdZ7RTStRIprd66eRKZy2ZHFJGPEhBmpIwZbmrhdu7G6s6fH1PXuqwYVgQrEklNgKvxxOIX3j6yJ/E8FksHECUSUprdYqbMLxRbUIDajXyhWLzBdb+7lMgBOYDaR9ZaP0xR7GpskMLmkFaWmQVh47Aoq5NO3BFPjd1zi3h37rKUKOJHB/g6XIvGP2Qc0GryM6IhL8g6mXyg1A7r1QcIjCIUaw6rc9b62oUwH937Qa0xHJ46IGH3tYxgifwK5qzR+m5s74vVO6CPxpjP5abwVGg9QGVJnhYKLIon4E/naFXjFCHQ0Dt8FVDYGYOYbGMhyZkm9OQCaBWSuJfJkze1ixdJxrIpJt/hlZ0qcH0n54yAmDaswh1q1IfxP8KCK8nLFSsDuHsmO5p6M0440eo78wUDzZ7FbUmr2Z20kESFKdLedZZA8RuFaE/1LjH7wtfH0bQ3kgxzgvdfeRA6J9BGz6VtmiDNhQx5kFGzxn5/poIT3FSUvrv29PZ91eamDVO3tNYEzfxZpVy2nT9L7avwaNPorau31pW/ExlmbNsYKHm4aPrlAtR";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -180,15 +177,6 @@ const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
   : '<li class="vuoto">Qui trovi cosa abbiamo fatto a ogni lezione.</li>';
-const A = DATI.andamento || {};
-if ((A.bene && A.bene.length) || (A.ripassare && A.ripassare.length) || A.nota) {
-  $("andamento").innerHTML =
-    (A.bene && A.bene.length ? '<div class="bene"><h3>🌟 Cosa va benissimo</h3><ul>' + A.bene.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
-    (A.ripassare && A.ripassare.length ? '<div class="rip"><h3>📚 Da ripassare</h3><ul>' + A.ripassare.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
-    (A.nota ? '<div>' + esc(A.nota) + '</div>' : '') +
-    (A.aggiornato ? '<div class="nota">Aggiornato il ' + esc(A.aggiornato) + '</div>' : '');
-  $("secand").hidden = false;
-}
 const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
 link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));

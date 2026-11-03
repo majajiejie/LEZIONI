@@ -106,9 +106,6 @@ a.mat:after{content:"→";color:var(--rosso)}
   <h2>Diario delle lezioni</h2>
   <div class="box"><ul class="diario" id="diario"></ul></div>
 
-  <div id="secand" hidden><h2>Come sta andando</h2>
-  <div class="box and" id="andamento"></div></div>
-
   <div id="secmat" hidden><h2>Materiali per ripassare</h2>
   <div id="materiali"></div></div>
 
@@ -133,7 +130,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "kaLvXL1QRUy/P6HHKUILNQ==.I177dvv/o/aOMaC8.hRX6kCxfgryeKAcX1+0Vo411/FgR68EYQjW5isOGXdBv6WgaadRLJrX9IJon0HV7qWmoAWl+tBtpauI3GKklp9CcCoWRJtlsF2c65f6bHP55kvnJm2kYrGP3TjVSeX6RcQP0eJZqhz3V/GrFrgpXXqV0N6/NIVjg8c0N7BvU+dsKFTlWSn+FyZ0HD4wuQpNpIBsDVUvGLCFhreODkhoJb8SAAUFjTbPKfBHWOzDsu1MOjxSwswZHuHfpeHMT8WsaLl8dRcVyJFQqHZ5QKGWOcMwcO4XBVvygE1X0v7S9G0qXhqYeRXOKEcd/HrnS671O6s0gH0BOwgKFtbHFVh5+vsHCNuMnvUMvFe7ELIoK9QfAwK7BenAsld8nvJSuEO8sPQhM+8HP780fD5pEmeNxHvdm7jdGThh0CRlPTS8sJWJCMXGPt8U+fXTml+lsXd1jsy/Ny6C7sEAsW0YGDbfRY8qAsbTS8wlOYJ5oH+RyQbLjIck43mJJTZbipO2LJF0fxeSf7J+sX6a1jtGhUjpUkrCS2G+JhVsg/KMBwHh+xTtG2ILE5ra1hDgeTkLvYH1VbDiKiYVwMBOODVDtTlSbq80ism6W2oGu62vORVVHMN+1lqk+aS82faEo+Y0EcYbUtKYr0pargO1pubPK/kVEgInaRYZC8i8eMA+DfvprFNkTOl5zuombYH99irFzzST/LB1N4rTupE80qMv3AEUpMI2AUzwMlIzpz5BfZwq2vyzWIL5uJpp8FHs0QORmPhxJWe1EZKF0FCLRW7lkM6ls1ddg98jdRG2lxEOB/VYZMaWlrBnVhtLd0I6sYisZyeFatJxtXgrdduW0+5ZlN0c5nqClZx8IBeu6rX6bXSReuCJmG5hLWZ7GWiodeb/WjVK+xfUjzFn7jb/zXNyajNRj7yN8Ycb4s9EJTxmjxTdAHobGMFb6kWBvCLAVKoIGfc84h/Hk3Fpx5FSY7lHHUpUc2TSEV1K/ycD9G28l8fKOx8xvbdNOkWjUj2d3awvUPz2K7wZ6U5V1PdEIS0yLetzFDlseESPfyPhi2MxQnClEt6aDd8o87nVNpd1ul9HDIsfifX9oMtMrJAplnC01b8JguNvA1VUCbSV3a4AHcdVFoTI5vtU7/PeGvqlOwwhg6buzrMbckrev+ESdn5jytHkiZZF+LD+ed/UcpD7xiPvkPs+K0XoUK0JTc2Q7DD7EEYz2q51QFF4O8XqgYvkhQKPl3wkewftJYaTyQup5+lQI/SKL9+W3o8RUYHxE9vl9L4I9TK95zs6Np45ydHteUVLlBLlegCrQ+M6596r21yaP0w==";
+const CIFRATO = "1O3vh4SxCkzSBzDc/Uo5OQ==.vZeNRfWuV4nWH5zJ.GsJiQuIkD4VDdAQyOFF9ME26dBPKCSW+l3E2y7FxHeMscGOtiy06nCkj9MCFsA/wDFmXcyFxGCC7gk7IvUAPVk8ryXufK4nxFdWJ2qQPoGfMSyELJqYgR9F7xH3AALh++gNShZBdSTyXRGTk6eU2LtnFnhVNNRFMTs9/wLJwxBPHcSoxihkZwDkjXt4+lHAFdWCGEHdS8kD4xVlPI4DsU0j4EW2FVhnsCJ9lsKeaKUNDWgRLtyZlHHwDcqvliMxOkif6ORsetvkb2O2KjCEwuGbxEQW9QjPAKyiYJ4HWuWb6eHaDEYd1guPwgwPN1EpK0BbAmTmChqob4yu1EcxzlzBnzC4qG1lZucU6+WFeSEJQTiQHAzen07A23rGIzHtGIyFlWVQFlzNXsC6zs/oVNhzK8Lk/n0FmBnui9Pyfzwa3xnj2uqc2ZhHZGezwv4lt0yFbUsNfost6BjZDQgBSX7TYonLVzBQXB4dnijyBEofGLM08U1WagK7sJmorPfp9qKQ5ZwMrFkgyeaxRxdhEyXjA1o1PwveHrmOBxjMVKTQXKXiWTLuwiM9xCXpzYuMSfDAV/IFzjYFIXEPRaakmadUiEdjxrwVobBBmVozg79fOGtOM64PA8mi4gBMwUgAMqNXeoEgpORg8OlHJRE2HksEwuwc5JTjFlbvwfzULxmsb9cOGEqpGJ6Jbjd/4diyJFvoehdNblmsS+jdjo56SQvDrOx+DhSVnWMF8fxPAoblkixRxaEBrGA1NbqmK7NuFYKQGKJlEzGRCCcXwS/sjn3r//i9Axr89TER73HrhdvC7KvOmoIbZ31tZCTYi2N9oEu11duivi6SEzm/ElkvR07itqQ+BzUsF520dY0jUuGocWjuEaQH8UC9d39w6TZhECBpxUEMkgKl39e4zhXlnxqGEhdi1mtGOMbHxXBxne1SdUg0A3UOTVRjbCkxhYbA8rCw0reKNVpyCC9Y7HFsKqx3NZc7JacV0tUfVhwIz2qW2BBFUQuVX3TUwtPIT97k7QSEckXGkUQPNTar0YGnlvM7O6bQ75Vb69AmBoCcbQaMWE7u6SENRuvjaZOrhN76BsbUb/FQ8X+fe0PCFh8NjTgNxe78Pw1Cw7HIIHVWUR/1OCo/LldM+f1AT8eCAYKW3fun9jfMNYnbYJX2Qkip8CHTnPvEgpl96lNxd0UAH90NlolgFNbUdPA+CJKAcxuUUxNGjEeA02NTK7vmfpfwTENOmdsuPMsALs0rKVVQL3x2ntg2qPrv0aptPIJx/Bd09XkZNXfL3F1GfGPl34xg=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -180,15 +177,6 @@ const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
   : '<li class="vuoto">Qui trovi cosa abbiamo fatto a ogni lezione.</li>';
-const A = DATI.andamento || {};
-if ((A.bene && A.bene.length) || (A.ripassare && A.ripassare.length) || A.nota) {
-  $("andamento").innerHTML =
-    (A.bene && A.bene.length ? '<div class="bene"><h3>🌟 Cosa va benissimo</h3><ul>' + A.bene.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
-    (A.ripassare && A.ripassare.length ? '<div class="rip"><h3>📚 Da ripassare</h3><ul>' + A.ripassare.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
-    (A.nota ? '<div>' + esc(A.nota) + '</div>' : '') +
-    (A.aggiornato ? '<div class="nota">Aggiornato il ' + esc(A.aggiornato) + '</div>' : '');
-  $("secand").hidden = false;
-}
 const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
 link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));

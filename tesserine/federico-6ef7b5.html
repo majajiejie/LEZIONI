@@ -106,9 +106,6 @@ a.mat:after{content:"→";color:var(--rosso)}
   <h2>Diario delle lezioni</h2>
   <div class="box"><ul class="diario" id="diario"></ul></div>
 
-  <div id="secand" hidden><h2>Come sta andando</h2>
-  <div class="box and" id="andamento"></div></div>
-
   <div id="secmat" hidden><h2>Materiali per ripassare</h2>
   <div id="materiali"></div></div>
 
@@ -133,7 +130,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "i0b8qWYeMd6uRyzgbBa99g==.TquTHCBhh4LNwUBR.QEPlfiNZxe707dy6EUToCDEp5cNKKmDFROZA8xLs0XOTEeIrtwsqta3Wx5Ly0TIG/U5HsSoVS2iDvi8Twfae0HwPVE9qiOvIgzplbLyUDadL0D3H7x9lMuXsvLVjev74U1wqFFI6v7LEyjeMj7Ltp2mWk79qfKCIqzlARYBSRNYTPFaWSM8p7l1dxUUY58IghobfvOstoBkUucgg0Ec0OwvjgjHj9b+c92dTeegWNSc4AYRpcEpkG8xJJhJV15elGmZJ9zT4mZoan8xW1hAlCyU/MYL9AYCgEtcKme4NpqXDjBofRLzXuo5GTHHvS5oohibWKPSefCa2A3XaSH+foeq7nR6kVncGhY9V3cuMyyBfkd0uQM1YsGj//rwr+IErhbDm7N8cGxGbmWKJeFOX4CfEmJk3SYZXzLKK2NaOWPJWcg6oehWDhgbm/MUA5jvkGGlwNxDHoVSX1+8RBwSygGkeRi5faLCMIvHIoLlDrV8cUJezxVUxa0kNBZpSVCTcB0e+/1lOMU4N5ucR5LPSGCWnKTk19cMsca/KiVwJpGxnMcdRHuMbj/ruRZOE3qojR3MxV8Dm0fhNqZiWq5g57dCxnQd+RcAYB032fi6vMtv11GwVNztP8GKC7PwfWNLIp7PYNAZH2dzRFfM3+GAgzY6YHMdUk3F4WLtXwfA8g3yG8uVJ8pTl1vGou3dRvWIQiVb5N/BW1opgoL+RpUaxr4oMoffVVwIYgBHaoMju9ZrTd6/9xD/SotgxBqmA1QtKXq5RPjU4/6Ff+Zms1f0gg+fVJ8mByYAFUBYRevKrvcv3EohVZd53LWqwEO8ba+1pxKihDGNYwVpPBDgnfA9h+8zKRfs0DGK3FVm47uVLapTIU6O6wDrwDeCGDClmWCF/zrtVsu01bOaN701S7V9eu9oY5559cRag6ZAQGb3IX/ZDvWH1JuzOV/Q4DJX4eIB0UMAOhqosxXyffW7SJHlfXt/nROAnTzzC0YHmRoXc";
+const CIFRATO = "zzSY3Dj38WrZN5qtuAf7zQ==.jEkMlszfecYQ8xSD./0HpgQUZ7FOuN67lQkWMHgqOce8yAmql4fHIx1CF2k98ajlrB++Rn/32VhD4FTeS2735BSmf2ZbTE5Mhdm7Cd1ztaDiFW7z4E2+ackAZfXs62T9xXC3eDN32Ih6kDsQ/EfXaVdgDBbdyelojF9/Blc4QwhhxxmKcqEk7NnfgU3usAZ8Cah7GUc2kWehG0T0zUZ5ccs4C7oq44fR0muyLEBbPLd7lHjMtL0in8/HKeA0SEJULAxwfxRyfCjoOskdr/z+A2u7uboB8G95mOJleVxOEtQJs+F9bF3uOGvEWq4ke++R/E23ij6ldtoSEVsDB8Xuvq+rXE32KrWk3sVyTTWxyn/ziWpinTPrrkP41lEDcnyiHQOgGT15lVcQsrhHfonejqFCMJRdaZnvJh3Xcrq6Al2kyKsIYTuf/fN/T2rVtSW124UEyU0LhnNL5kDCrQv8xtB1bHCAtUkcDj2zstnKT6aZ11fDmPEYawf8PPBanP1AN0sA6tIZQP8Ba8LXvKS+AxGe7+DGWACnW2H1tv+U3FJf9IVycal6RrdvbEo82+cMuxwsvp/lB6QVWZXtXfXiDUGEoaUeX3YGYoBqd+2AMw/0YEzxZ9FVf38gv6kAOZ0dzCii3ZKUbLnQDycbmy1NkULkDUDjZwUfHUc1pihzT6kBIXO8IF+fbGUFOOlQgJjLKPt6sfMKk+Q/Cmk4Fp2GebTqh85oHCNKg1CvXIjpocmkC+f9uXIGsEa/IStssyt3TR1cy9VKen9p9gFWzK9cliTes/tiRe3PuDpdJpe24f8czbSIZjNROMTSI8QFtFV6tY0DDfm/sNI0CVSzXC09yqnfmuK3YyAUOZIs+sn2idSTpmTe8RGZDOOr2bh0pSP+CpCb2l6pdhQwgWe2Bkq6lNmp9yYwcmSc5KOnStzYKLGmBwKatH6bN/XAvrU/wT2Ae/ClLKiWs68Zf6F49p63R5NjKQmFEQvlx9g==";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -180,15 +177,6 @@ const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
   : '<li class="vuoto">Qui trovi cosa abbiamo fatto a ogni lezione.</li>';
-const A = DATI.andamento || {};
-if ((A.bene && A.bene.length) || (A.ripassare && A.ripassare.length) || A.nota) {
-  $("andamento").innerHTML =
-    (A.bene && A.bene.length ? '<div class="bene"><h3>🌟 Cosa va benissimo</h3><ul>' + A.bene.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
-    (A.ripassare && A.ripassare.length ? '<div class="rip"><h3>📚 Da ripassare</h3><ul>' + A.ripassare.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
-    (A.nota ? '<div>' + esc(A.nota) + '</div>' : '') +
-    (A.aggiornato ? '<div class="nota">Aggiornato il ' + esc(A.aggiornato) + '</div>' : '');
-  $("secand").hidden = false;
-}
 const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
 link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));
