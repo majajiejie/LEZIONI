@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tesserina di Anna · Chinese Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--rosso:#c8102e;--rosso-scuro:#8f0c21;--oro:#e8b04a;--crema:#fff8ec;--carta:#ffffff;--testo:#3a2a22;--tenue:#8a7466;--linea:#f0dfc6;--verde:#2f8f5b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--testo);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:520px;margin:0 auto;padding:24px 16px 48px}
+.card{background:var(--rosso);color:#fff;border-radius:22px;padding:26px 22px 22px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(143,12,33,.25)}
+.card:before{content:"学";position:absolute;right:-18px;top:-30px;font-size:170px;opacity:.09;font-weight:700}
+.scuola{font-family:Fredoka,sans-serif;font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.nome{font-family:Fredoka,sans-serif;font-size:36px;font-weight:700;margin:4px 0 18px}
+.cuore{background:#fff;color:var(--rosso);border-radius:18px;padding:18px;text-align:center}
+.cuore .label{font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--tenue)}
+.num{font-family:Fredoka,sans-serif;font-size:76px;font-weight:700;line-height:1;margin:6px 0 2px}
+.sub{font-weight:600}
+.lanterne{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.lanterne span{width:22px;height:26px;border-radius:45% 45% 40% 40%;background:var(--rosso);position:relative}
+.lanterne span:after{content:"";position:absolute;left:8px;right:8px;bottom:-5px;height:5px;background:var(--oro);border-radius:2px}
+.agg{margin-top:14px;font-size:13px;opacity:.9;text-align:center}
+.avviso{margin-top:18px;border-radius:16px;padding:14px 16px;font-weight:600;background:#fff1d6;border:2px solid var(--oro)}
+.avviso.zero{background:#ffe3e3;border-color:var(--rosso)}
+h2{font-family:Fredoka,sans-serif;font-size:22px;margin:30px 0 10px;color:var(--rosso-scuro)}
+.box{background:var(--carta);border:1px solid var(--linea);border-radius:16px;padding:16px}
+.pacchetti{display:grid;gap:10px}
+.pac{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px solid var(--linea);border-radius:14px;padding:12px 14px;cursor:pointer;background:#fff;font:inherit;color:inherit;text-align:left;width:100%}
+.pac.sel{border-color:var(--rosso);background:#fff5f6}
+.pac b{font-family:Fredoka,sans-serif;font-size:18px}
+.prezzo{font-weight:700;color:var(--rosso)}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;font:700 16px Nunito,sans-serif;cursor:pointer;margin-top:12px}
+.btn.pp{background:#ffc439;color:#1d2a4d}
+.btn.pp[aria-disabled=true]{opacity:.45;pointer-events:none}
+.iban{margin-top:14px;font-size:15px}
+.iban div{margin:2px 0}
+.mono{font-family:ui-monospace,Menlo,monospace;background:var(--crema);padding:2px 6px;border-radius:6px;word-break:break-all}
+.copia{background:none;border:1px solid var(--linea);border-radius:8px;padding:2px 8px;font:600 12px Nunito,sans-serif;color:var(--tenue);cursor:pointer;margin-left:4px}
+.nota{color:var(--tenue);font-size:14px;margin-top:10px}
+ul.storico{list-style:none;margin:0;padding:0}
+ul.storico li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--linea)}
+ul.storico li:last-child{border:0}
+footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="scuola">Chinese Academy · Maja Jiejie</div>
+    <div class="nome" id="nome"></div>
+    <div class="cuore">
+      <div class="label">Lezioni rimanenti</div>
+      <div class="num" id="num"></div>
+      <div class="sub" id="sub"></div>
+      <div class="lanterne" id="lanterne" aria-hidden="true"></div>
+    </div>
+    <div class="agg" id="agg"></div>
+  </div>
+  <div id="avviso"></div>
+
+  <h2>Rinnova il pacchetto</h2>
+  <div class="box">
+    <div class="pacchetti" id="pacchetti"></div>
+    <a class="btn pp" id="paypal" target="_blank" rel="noopener">Paga con PayPal</a>
+    <div class="iban" id="bonifico"></div>
+    <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
+  </div>
+
+  <h2>Lezioni fatte</h2>
+  <div class="box"><ul class="storico" id="storico"></ul></div>
+
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
+</div>
+<script>
+/*DATI-INIZIO*/
+const DATI = {"nome": "Anna", "rimanenti": 7, "aggiornata": "3 novembre 2026", "storico": [], "pagamento": {"paypal": "", "iban": "", "intestatario": "Maja Fabbri", "pacchetti": [{"lezioni": 5, "prezzo": null}, {"lezioni": 10, "prezzo": null}, {"lezioni": 15, "prezzo": null}]}};
+/*DATI-FINE*/
+const $ = id => document.getElementById(id);
+const r = DATI.rimanenti;
+$("nome").textContent = DATI.nome;
+$("num").textContent = r;
+$("sub").textContent = r === 1 ? "lezione" : "lezioni";
+$("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
+$("agg").textContent = "Aggiornata il " + DATI.aggiornata;
+if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: rinnova qui sotto per continuare 🧧</div>'; }
+else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: puoi già rinnovare il pacchetto qui sotto 🏮</div>'; }
+const P = DATI.pagamento;
+let scelto = 1;
+function euro(v){ return v ? "€ " + String(v).replace(".", ",") : "prezzo in arrivo"; }
+function disegna(){
+  $("pacchetti").innerHTML = P.pacchetti.map((p,i)=>
+    '<button class="pac'+(i===scelto?' sel':'')+'" data-i="'+i+'"><b>'+p.lezioni+' lezioni</b><span class="prezzo">'+euro(p.prezzo)+'</span></button>').join("");
+  document.querySelectorAll(".pac").forEach(b=>b.onclick=()=>{scelto=+b.dataset.i;disegna();});
+  const p = P.pacchetti[scelto];
+  const causale = "Pacchetto " + p.lezioni + " lezioni - " + DATI.nome;
+  const pp = $("paypal");
+  if (P.paypal && p.prezzo) { pp.href = "https://paypal.me/" + P.paypal + "/" + p.prezzo + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(p.prezzo) + " con PayPal"; }
+  else { pp.removeAttribute("href"); pp.setAttribute("aria-disabled","true"); pp.textContent = "PayPal (in arrivo)"; }
+  $("bonifico").innerHTML = P.iban
+    ? '<div><b>Oppure con bonifico</b></div><div>Intestato a: '+P.intestatario+'</div><div>IBAN: <span class="mono" id="ib">'+P.iban+'</span><button class="copia" data-c="'+P.iban+'">copia</button></div><div>Importo: '+euro(p.prezzo)+'</div><div>Causale: <span class="mono">'+causale+'</span><button class="copia" data-c="'+causale+'">copia</button></div>'
+    : '<div><b>Oppure con bonifico</b> (dati in arrivo)</div>';
+  document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
+}
+disegna();
+$("storico").innerHTML = DATI.storico.length
+  ? DATI.storico.slice().reverse().map(s=>'<li><span>'+s.data+'</span><span>'+s.nota+'</span></li>').join("")
+  : '<li><span>Da qui in poi trovi le date delle lezioni</span></li>';
+</script>
+</body>
+</html>
