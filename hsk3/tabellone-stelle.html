@@ -98,6 +98,7 @@ const REGISTRO = [
   {data:"2026-11-03", nome:"Sofia", motivo:"compiti"},
   {data:"2026-11-03", nome:"Leo",   motivo:"compiti"},
   {data:"2026-11-03", nome:"Sofy",  motivo:"compiti"},
+  {data:"2026-11-03", nome:"Sofia", motivo:"lezione"},
 ];
 const CAPODANNO = new Date(2027,1,6);
 
@@ -123,7 +124,7 @@ function draw(){
   if(u)document.getElementById('foot').innerHTML='Aggiornato il '+new Date(u+'T12:00').toLocaleDateString('it-IT',{day:'numeric',month:'long'})+'<br>Maja Jiejie · 加油！';
 }
 draw();
-const MOTIVI={vocaboli:'⚡ sfida lampo dei vocaboli superata',compiti:'📮 compiti corretti consegnati un giorno prima',lezione:'🏆 più risposte corrette nella lezione',bonus:'✨ attività extra',prima:'⭐ stella vinta prima del tabellone'};
+const MOTIVI={vocaboli:'⚡ sfida lampo dei vocaboli superata',compiti:'📮 compiti corretti consegnati un giorno prima',lezione:'🏆 più punti durante la lezione',bonus:'✨ attività extra',prima:'⭐ stella vinta prima del tabellone'};
 (function(){const g={};REGISTRO.forEach(r=>(g[r.data]=g[r.data]||[]).push(r));
  document.getElementById('hist').innerHTML=Object.keys(g).sort().reverse().map(d=>`<div class="day"><h3>${new Date(d+'T12:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})}</h3>${g[d].map(r=>`<div class="ev"><b>${r.nome}</b><span>${MOTIVI[r.motivo]||r.motivo}${(r.stelle||1)>1?' · '+r.stelle+' stelle':''}</span></div>`).join('')}</div>`).join('')||'<p class="sub">Ancora nessuna stella assegnata.</p>'})();
 </script>
