@@ -133,14 +133,14 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "u41yjHFGTe24YJCLwJ4OvA==.ozOY3AXHZDEM3ePH.2uaVJtlLEnGeGyRyPRX0n45d+k00tNLL+lDDA9hicCHzEH1l8DkZT2lDMlI7/HZpOT8OO2PfWCdh+lRE23LroArbBAe6vANP0J8AFlc8/4LXv2StLBRVRNXZfwYh9yrDSv8+/IUks3bbDt6P/gukjyaPRUjVd+n8hkb9HmXDAcezMR8DdDSnDP+KuOr35B4EW4D3Fiq9RoPDuDVcDYbbZXtMHsPWCuXCo8wiGYFPsYIdTgSZlenXr7rpWna9kqaNkqKFPi3RzvOrCCONLHaadUTHWSnKQbQQuR+KnmyvOSbbYCyIiGiQuvfntDTpt2M8pdax5d7+DhRDYaz3FXpmV542FusM3/MEzrnmdhl4V6oirc3nN/NgKaEyAmJZYcUFx2H+PyTYLSvayPw/F/dBCw1WGlbNekgvf9o8ukKblDppdDNxLLNyAjlQOhSDWAjR/95w5UInqvbsw4m/B/8zX59Pe7t42jZ+6ESJdU/8Utehl+SoqR80DFkRx3YGCZqW5mSLJjcV55sRMFADMu4FCwm3mP5YRgJdNLMpF+NhgVan/gmYBTdqqYq/CSoGlQzMVaHZ6q3M0rEIRvHLcddfgzTbF///lEFi5OSjnlFGVMkrL+B4lKYbi8Nvc45t4p7Q40S/lT3racNygMepvl3onalzdzx8FntDEkJ3x6VYhVoOOLwC3HHzrfkY2D1Rxzi1d3u9r0zY5waGa9H0ju/1E60=";
+const CIFRATO = "HKB+1DLhr7qiuAmbNCMMdQ==.z4QNu8eT2wrmf8f3.JF6pbbXPeEE+H8MCdeJGx3NXVLFc9QuFZXU1zexHsVQwMhhbEle2d8IlWSU9wnL5bqm31+hJSYJ3ccbIAs5p2GRcHaFX+IiORHG6xvD0Ih0H+OtSqnGn7bn0KFQTeGNjjEe/yETP9Mg0Ijvbu5teEGWzYXRHQodz2ypmzJI0keG/6tTIGOU6cG6s6Nm034LFMOdqMpOTIN61paqQRfSc2iBzlZWlkHJSl4wkJccDshAVCIA0/DXxEgvCQ0NsT8BG9lqORHiajBBUzSr2AuDod1IY0h8AdrVKkarM0afhXJ2wUdTs+tEAYmicBrBZNVjSLJQidFsv5tC7OR3Uu2y9uzlNbz330HcnI3COXNXmkYNcf/arsXkjlbqShE73WPjezxa2XY0EljNOglmJ5LDD6yz6n4RZ+qtewnVKTKO6gsM638zWVorXcYa/anPcdtHb73WusoI5WD9U0Xzu+nm5bxcvgODzS8IOWRBTcJhK1YaFqonuJME3D4NwPa7dCs1gT6WvoAuVfkR3FA8bDfJf6BF0FdtyBzs6BaM0g1X9wlphGNcL62PbLmZk0OtvdAJOFdnYWynzfuNSnnkZ9khaSBNTWYaUpz1KI9iEjvRy6guLouzEmLVuIWgtl7nSkoC4Fmb+QRnxYSINRJod3kLHP6bhQKVRuqxupIDGw6iM6vW8GYtxHPz3r25YH3X+yj0ZVskeeI87DXXevIZcmjztYUbHlTeLzlxyMadCsmCyet3S";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
 const r = DATI.rimanenti;
 $("nome").textContent = DATI.nome;
 $("num").textContent = r;
-$("sub").textContent = r === 1 ? "lezione" : "lezioni";
+$("sub").textContent = (r === 1 ? "lezione" : "lezioni") + (DATI.durata ? " da " + DATI.durata + " minuti" : "");
 $("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
 $("agg").textContent = "Aggiornata il " + DATI.aggiornata;
 if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
