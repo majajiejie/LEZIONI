@@ -112,6 +112,14 @@ a.mat:after{content:"→";color:var(--rosso)}
   <div id="secmat" hidden><h2>Materiali per ripassare</h2>
   <div id="materiali"></div></div>
 
+
+  <h2>Contatti</h2>
+  <div class="box">
+    <a class="btn wa chiaro" id="scrivi" target="_blank" rel="noopener">💬 Scrivi a Maja su WhatsApp</a>
+    <a class="btn wa chiaro" id="concorso" target="_blank" rel="noopener" hidden>🏆 Entra nel gruppo del concorso</a>
+  </div>
+
+
   <h2>Rinnova il pacchetto</h2>
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
@@ -121,17 +129,11 @@ a.mat:after{content:"→";color:var(--rosso)}
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
 
-  <h2>Contatti</h2>
-  <div class="box">
-    <a class="btn wa chiaro" id="scrivi" target="_blank" rel="noopener">💬 Scrivi a Maja su WhatsApp</a>
-    <a class="btn wa chiaro" id="concorso" target="_blank" rel="noopener" hidden>🏆 Entra nel gruppo del concorso</a>
-  </div>
-
   <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "4X7IczST4XnmIV85FRwGxA==./etHhZQfMe7cw5YN.Rcc9XjStyfSa6vsBzlJ+r8bwJMi8bsCCtU/jvTxxa//JPva8vKWAa/CXaRC5KgDUYgGgRzRH0IswrKcBOMl0rjSnHLlBk8BpKT9mFJmaHWgYnhbhywqqgRWHm1Ph2ZY0/XGdM/BU/Q68QcCtmS4tVQz1/at6AvPGQoQaEfhB3b1qyJ0c0K7ZI91opxd31w1WH1q9uT0ax9hoHJA6dcp1aGuzIf8IIxthkJDNoqL48hs0msbhjuK++DJV9wo6Kd3nbwgLrZeFHCukS/V4x+6L03/ilWPhSusaVeTZtUtQHiXCs8BaEesLliZ+jO4j21BlP397eZ1ApQNeoB9/JY0frmI9PkWk+NXtyPQ7bY8YqFM6nxgM0+AxjhBEcRAh20VccchlBIgBdc8rnHkhBB48pkm1IiOP+Dukx0zdtGBqBLgt1l919S5AvhnmrEd3g08snpbXvsw5VpTAnZ4eRUjvp+nroRRHBtOe9yzeeeGj8O7yjWaPIcDyqy7w6CCuuehwX9uB6WSryzNX3Bwwe8cM9cclKdSYKKDOc1bcsyvrECyBaLQeivoF6CvjpkMC2IEh1fk38CGUvaQoPEv2M/hOm5VtX+kWoq/riE6EG0pBP3CCDtpye+8ODLUd15GUx9fN2N28RBL7tG/lvokqzQBhuxvoyNuMsrA2MEyzdAaiZSqKvHzK9AvpHeylshPPW0pCj6bq3yhUEd0B1oEwDjlDfzlIsstdvF9ASBe5B4Y+dbpGvv2+O6rmqyby461rNXcM/zMyCaywB+KpxqwBGUdK2laGHl/qan863ssplgPUquv3oj9dxCpVrm30RtJ/+BhtkR4Uu3iS2ohfi2J1usfxVuI8fNjY7uMm/dJ/YIeFGscP9ovDGBdDZ7p2OFOJWCEkwCucutjZgwFpLXj5oGC7S1U0EjksKFQKYHju4cudUnZXSGSkLoxA3mHU6lFtm61wf2z6UL82XHE4vaWcpfEB45P7JvcHmbhHewZckbPPIVhO9xDGFkWIGfEhw2+tB8zsKFoP1n4FAqGBLOEV+0CL6I0T7m4bma3wXCEkHG8tIMgPYWNmLiEUfCEkCU76tGIIuJyh8Ub9gQlZxBxgPdgnr4rr7M5bmKyYBytVlKQl/z5GJBUKpoyvAq+6qARk8SmSW8qJ+VnaY/WLIiYzr9H9zcj+625hF33QB2ykml7Q7rUYLccVziDlY7TBN1APW/TuBVj1T9Hva2YXHHzU/U889LkpPX7yIaCxEmxSZh8UAYBYKDFOZGfB7lgInm+UbrgHKlie36Ccs+kki0dEE5eP6PnJm6HalH8WVNcuqlNcpDqIoMlt539e03tU2JRvveruILtHfKvlWOe1OeTnEycV0QKLti/E/FDcqJ7CFBdgWabhU43/gYuLsILdbvok0Fl2/nr9PEPUYXrnta99qHIufeBubVPG2HbLWhH/plzetxDjZcrZ1dsv1F3I11lEeY0l";
+const CIFRATO = "G1OC+NLPcixauMSuDrU33A==.SuXete+xA0n5P0In.iTZTOiR8LWxogq+i5i0ZNW4F9bwweJJ3drUQEDfD5yrLmcwXmxjhMAmu10/j0P4LBc0W25r6qZTlhvn9QBq7Ru+YEKqMeRWvJ4n1+DTRb6hvLFhqhqtmFLu3UWB3nyq3giwQH3d45learwws0EuM1YmnanWk2MH91bBX+qBd7YuX0xKsQ1Baqlswu/+YL7joDpEviSHsf9dL3Gk95gcKGX+puEPQWwbpRo7B2Wfs2Y0bGluA0bHRmyYgD6Xrakc7X+Zkh7yeko2ziKoDrhAHxbaikitZsZ7UNhyEWVp4MxA+8U/2njP+1RI+ea5SYANMkxwonbynpGBLp+OZ11fxxwpBNQZQulqeVR9XOBZyI9vdb1gakUQaq8S934rkMP+J2SWx5on6NNaugApyRIZfcMVQhVC9N74/AHciK8dq5F3kz3Ap5vnfc9TZBLO4H64vNzizu7l8YdQPf6Q5CGIsXr4jKBuMJf+5Vlzfii9XU2gYHfDpCIi2m4+foai+pWaedt9tguCsHkcBXbGhBc0KS7rgA1Mw7ctREjyvtaXxAXWuYxyNvwD4VPeeqASZng+5gpOaRI8FGu4F04lTIhsFagFWuBs/aGVh1CxESzY6oYwyeMJgkMFQ/X10NjM9L2LezDy9J3L/ftYs/PfInBc5hBWqVFUBbVbl3yTQEJMcp0EaApHBpRvmhGpiJFYBI+tuDH4SJYShWeFtlcaW0W21CkxkVPkTFBjucAT2belhB9Jwz9h+EOjc4RjRZlD7kB0qw02mDbOBmB3quMTaMXo2xtse0wo8Vs0dReYsnzm7AlzOAw7Aifb3JUCbuW/srKpVCasTHUq8qwwCSkNzDLUd7YkorjxT8/uc3MMIdI0rb3d1vI6N85nb/ldCt31ObJUZ5cbXEt3cquu6QNcroVSdBdE6vbIbEU17oQrQt7/0aXLAVw23PySs6ZEEG+E6sq+XQxzTor6omxHli8/H9nZvjQvOKOLH+cfhvBxdViAkdgeA+qH7XROTpXg9t7xQOCZOu7rSSnbaI22UiNLuHupxE0qvcqqZhtybe2ECzjeuJKqxuuKfmXjDUGmah3wZxf4IlyA20gAbh0MdXDRFDsrshNxDZSfLewqNatibRdIzMGvQVdfVwIBCzsHrlJjozMRBedYBCD/633i61vsM/Cad0I5YwZq1R4/QuCvDedBalTKvR+i7cU+yNmetIrlG+9u6SzEm5qaqas02AX8n5eM+gIlQ3g4HOxYefYgVO3Y6VxzKipJ3ti0QKVvK9iMjJm9Jyfj98HwNTNwmFhXZ565L88CbZCl/jFG4MEdQM8+DxUyMKdlr2rivG8oohxs2tP720G3wZzQJ1CIvcPFMESyou+dKch4/huzNNZbmCqsU3s0z47Z+Vlnm8KEkSeUtGG5f3UPgkNeyrWD50k4TN3ZIdEwk57vbrTYaXXI4KaOdohfmcX4KxLEkn1eRLMSQi4WY";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -141,8 +143,8 @@ $("num").textContent = r;
 $("sub").textContent = r === 1 ? "lezione" : "lezioni";
 $("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
 $("agg").textContent = "Aggiornata il " + DATI.aggiornata;
-if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: rinnova qui sotto per continuare 🧧</div>'; }
-else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: puoi già rinnovare il pacchetto qui sotto 🏮</div>'; }
+if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
+else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🏮</div>'; }
 const P = DATI.pagamento;
 let scelto = 0;
 function euro(v){ return v ? "€ " + String(v).replace(".", ",") : "prezzo in arrivo"; }

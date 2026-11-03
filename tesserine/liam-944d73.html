@@ -112,6 +112,14 @@ a.mat:after{content:"→";color:var(--rosso)}
   <div id="secmat" hidden><h2>Materiali per ripassare</h2>
   <div id="materiali"></div></div>
 
+
+  <h2>Contatti</h2>
+  <div class="box">
+    <a class="btn wa chiaro" id="scrivi" target="_blank" rel="noopener">💬 Scrivi a Maja su WhatsApp</a>
+    <a class="btn wa chiaro" id="concorso" target="_blank" rel="noopener" hidden>🏆 Entra nel gruppo del concorso</a>
+  </div>
+
+
   <h2>Rinnova il pacchetto</h2>
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
@@ -121,17 +129,11 @@ a.mat:after{content:"→";color:var(--rosso)}
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
 
-  <h2>Contatti</h2>
-  <div class="box">
-    <a class="btn wa chiaro" id="scrivi" target="_blank" rel="noopener">💬 Scrivi a Maja su WhatsApp</a>
-    <a class="btn wa chiaro" id="concorso" target="_blank" rel="noopener" hidden>🏆 Entra nel gruppo del concorso</a>
-  </div>
-
   <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "J5WV3FjcahcczGW3mc2YSg==.FiPMir5sKmyN972A.mkBJJt9AANju6egmhRFmDF+mvnIsF4A8bvp4LW6G4PJAH4X6efdXO+AvRzxUtOyG9JgfoioHbbUGWIFrMPjvYbeOVZZFnv9KpMtFUnvnA2dutjK/bkr6y+RStbWdOmBg4VJ1MK/IenCjT5B08TpY3+MzDZP0TEdsAKMRRIGC417Efb8cfuDt1AKcNg41aXMwRvKIfsmVF8UE1xiZRzchEXc1dwIv14pfJtLOlC31eKWrLOqVEp5B0YmvRAJOwkqKMa0d6fgYST8+GLeAVg0FaPsqhQy2AgRodXPBmPjRGq4KfRzZrBpZhWvt5t4XAATchPbXweM0NRf+Oa7DIIN5bkdu/Ard2Mk9lfqw3puqgtrPdJv+BUNFGMU1I0T1q0tnSKMF1JB1WxXDNFGBuNB5ibPm2a8+t/un8Db8qj3GX6NlIlDCrsHbJr444+ZMoB2aOHJENoqnVJ4QDBXYEKxURaq3MpUxLfNYx4HIiXW007x+oejUJq8VBAPcJllZK1m3RObngP0I+nJ3TcnXLSBJl7MUs1zbRZSgSTr2gGz4QOw1gHJ2tsL2PabMxqFouzN4qe1fUr5+2Pa2IIvZ4zLCuwfiEy+L6llKOp9KBu8gpc1IBGzvgHh/FAWZ3vBxKkYlQHOb9SgzEIqPRWg6zIbeNDLCr7d2kUh3WHa/tKJf4fj4tJ+3VcK+9quDQOmh83VeIv2L+y3LpDfAIfubs7x38w3CpAm7I4G4Jbmg8vJFr+OLT9DAn8IzPW8VX9fXkv0l5wLntcE2YZawxqPXMuxH6nzgELqDj2C2M+e6lj0RxNwzTfhDBOx2j9e4SQUPn9u4FkDyn65qaYd0NOgIMGyV89EJRzQaIrfXfkc+i+cNt9vGwbC2Pvq3krWQOWo0PDPYv/rQS8bTDLKDK9FqYRmEW3+V7BJ2R2SYwv1CggIDulw8yrZn63ubjVGP7o9BkIfYPl+XfG5ZsyHGCn13R6PgozbtwDoyPl4zxA5umIvFo9CZq5PxjxvWjaJY5CxEIqjiGfuVL0nUrgdOTjhd7Tj48UXdPlGiIQcvvuoNEPwGyl0yr7x3FALmthntK9UM8L135JMvNAl63IeMNrUHw1ByqsNHyKEtBkM0Sdt0/0RwVSKkFSBvBbcNB11jjOg2HyA/AEc1VsdkaM5uxxDQCzVPheZa+XXzyRahZnT6J5vF/HP1hjFrAJKmnItipqKaUbUweYqOl8x0/dLAnYgkYORdWccrBxN/KoI9DbnA06LZ+2DnYHq2EWvPqjSG9Pnk/Qg2VKooXFmM1fDEX+/5CyoxK4FViPl+n+LZBtHSaRqPI/wGPX+3T/xMkSEchYWMK4sWCco5SFzh0u+f6oHRjH2sp4q86+UGccGYvPKUzzQuVjm6zpbnQ4QjPlV0WIzq9sFgdInpG5dRxZGLVUkYmwJD9nDd2IqjpGCTKHtW+2s7rXtdwOXmfgz6JR0Xak8GdnPuLmsnCP1LUBQWTvCJPZt8rfa+dPN//wgE6hHGZvAc5G/D5/AUs8zFy5sfsL6fTfGYBLOeWkUDMe6npiG7h+TyHfSnEilbeZGM9QAs+WGA6bpChFcgGfZ2CL4qvOI+sunwyfsKfzyWETJB6rXM49lJe9TvKcicn5m6nbgneYGBtl1z3LLC+7UXXFq7ruijpRagJAxb3DinKLa7vJ2kADOlC1Hq2bVmj7S86vOwrqkRJxokqc5U76rlh5YK4KVBT5vhi3XuiIgJfrBNLmTKAYBhFQ4/SD5R0tYztOK7n4LC5N7+u9KuB526qfBNzo7+Lm26a2l///s8U8sRJCIKQ7Qt49pRYofnqJUR5SgLdmjV4EuWd4WRRgdwiEaEhaLp2fv9ZyGYygMLAdKZ1YbMwFkQwoAzqqo00w6uL7t1k7a5VmbIW/eoEaU1E7g5Z1vvrpQRnSiopS/rhLd3LXlwv6+R3Qa6IZq85mMWQ9stNGZ2JBr9LhtRAF0JjsePmen7KPjCw60=";
+const CIFRATO = "lcOTbCX7/WwJhs4bBUWXiA==.qBjrgkKbiO2ZyGHT.p/qncZtixzaoZY/tEaznxAZMx3BF+nmrWFLw/AyotgckSnqwpXSAC81sdG8VziOkK4GYL+0mXyw8F5LUvQpmI0lXcfuB+TbTxFJ7Y/8ptC7Tqa4ZuRPTV/HxtfHYC9fs15uwwFJb/EkpyO9fYKflyYchXtJEGEOSH9f3izsr/3qZ+A8dwUBCY3vjH/HEh0pGaBNLQBa0imin6YtYe6jmm42jSqYlRqFe9x6RRcAcgwLZAbJUHfUZkrWkGi7s8pmfAP9ucUue2OTiVgGs/+zl/0iBxoG8whR5LKtj+jQynpLVSOp/d1G3huv3lPKagTPhT0qCrfPVYy64St0Ygm9732jUQrKZq3u1uxQQ9oTNJM27fJ/7+QPo6+w/WdQiyKAF96YA4J3KTy55pSxupifT/1WcgH82DYukzy2ZtZOxHUIPv97TaHtYcXu8HOvZunlanj/I/nMPfRlJWo3sn9WcQPjIe89d1bbZJYJi7jX/0t92GD52UxpASW7zcg0dqNsIEe0Vro+qEwFIpmbjzJd1ikVnULBx/e/i8DLer3bEk/s1my5DRwQ2QaErKrjjLKGgNLN/IQCUans8+ZTCHvnOMbxRWjbmOCfod3IXUYKCwxszRJan2ux+tG2hPBqr58dH0n3qwAFW9GyAPik07HefWmTK773jG3zBridL5qYm8JFOvVbAR0S4xKdLVi1Ibsqk73Ghf76SbWZjBtxq+YKUR2rOtk+xIVEzJ/5AJFI+QfIO2g8EYDehZa0Mtl8Td6q8DB0Q+0UVhbvo15ZwU70vGDZYM6jdAlDcxfnPwuuaUJCcVEgVpN9bZPXL23+TZHpJbHjZEjCRj8ZjKLZV9HeOMlJ9PY8p4HoAGm2aqxDnpmJv11Yff/GwhQEc3Fguwkq9/cv3tFmZ9A46i18Hi8cH+MV7OwWlh0767vjz24izt/qFXC7PpKajQZsa+/I2aDKor0JiW8AyjWYyK9PlOztP+WJolCJ7Zp/z+DOdvCsnwf9fLF7QULzTzqG1JW3mYFrFfrk78NRyMBhLRFa2mFc1y9BG9++rMOLRviQuocM2gAXEpAFt57wMDIm1XQUyau/rbC9ygW9JwLFaPjdgsEnQoqtTSXCic0l6OyNvzGtHjMYu+dmHKiaqrTHVz1pGbmSUH0EzyvbFeYc1UI9whimuUOCFNhEhLdpZCm3UG1XqCq6EpTJBrnbTtXZDS4kQBLRIMPqvZlQW4QXkAp5waHMTbny0e0D6HXj7l3UMFkw8dT5ZBG1lr5UlzgY3y8G476hmZqsc3gCyTG+2gWupSBqvk/+dhW8fam61ImALbHeWe0oAiQaUg5bmM9CKTXMhZMzBLjzI6XCSbgnuQPK1UFSce2FGZuulaf1OCO7pt4Q9TVuKlJCLtfopWPWfK5gXVMr+Q45ISx1MoH4xtbMdUXoQ08ydyBKYP4vA3MIqO4C6U+FeGHwAv5yLhH6g9DN47Ivj0GRyUm3vYVo3nZdxEutMoq1wXqrckzAj1X6umsh1iduz0FWVKE+WsqcJqfvcDGHmYdaAW+212RDRBk0WTGOAgF1yVqOqGvRcbUKmSFjz+9y9JL/vK1W287qoc6hT7KBuq+LRXO4gwcsPT8GNWSkDh/UPEoDjbm3wdTQ6lwEFT0p1sPidnxOkazbbutBPkQr3Epnzkz5Ya+erTuQ9hNQd+lkdZx4MFlRfDnJ83czE3QqA3mK2iBuzfMpLKbJ9wldP9e1LCMbdh4TjzuJ90ZC0Se776JBrUGBu1mZcv9ALX7/XqVw772VX7ocR7xH44eh4bOGYL80sov1BCaIUcrviu5n9AzoO7RiktQePu++wNnV/4FIDyG9XDaTQi3PAOMNsBqjqFlBBb+19064sVdpC9G6OcOlB+RUiHOkT3trwUV/oeh1p9UCISgPyR3Mgw0NsUVeycquBK9ZkSbIvE0fIJF7pLCnQ+SdlDFabFQvOLwJMebmmVtrLoQA8rXl7zIck1hM=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -141,8 +143,8 @@ $("num").textContent = r;
 $("sub").textContent = r === 1 ? "lezione" : "lezioni";
 $("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
 $("agg").textContent = "Aggiornata il " + DATI.aggiornata;
-if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: rinnova qui sotto per continuare 🧧</div>'; }
-else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: puoi già rinnovare il pacchetto qui sotto 🏮</div>'; }
+if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
+else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🏮</div>'; }
 const P = DATI.pagamento;
 let scelto = 0;
 function euro(v){ return v ? "€ " + String(v).replace(".", ",") : "prezzo in arrivo"; }
