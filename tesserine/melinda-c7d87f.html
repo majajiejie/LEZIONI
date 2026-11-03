@@ -126,7 +126,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "pAMq4ivvZdF5zpGizgvZXQ==.GGfX1lgxxq+kM629.+d21wA/7oMx4pxK7Sbypb6EduAF3QCPQFoy9MyY3ZCBHvSIQ7VBEwxsgrpOIaVN2k8jQ0fEHpIaZLWHW05daoQbjqIzrzRFaS+1Nu7vhK9gepEEQxXdAijV4BwNF83RxGosmSDPezOW8J5l55hwG6ljmRAWhZ34CKAcxwFEBXkiwNPBGvUDGjoGNL9/OzBEdEMF7rH0E738z3ima080mpFWKPXhvFbtTcdIkJnzPknwduO5zsVIvywRa9FPjIpA/yg3cScDtePt29x80d9KxQzC0iyNsR1ii2coJF2FG1n3cQ7OAibSz7DLAjvAoZ2V3Py2cBBNBDZZ76+Ss36d9FcfGhTsXTQSYA/Un4ykvGkPSXR5vuMK7T4GLnBvKBd34xfNxyjC2H+Y6mCvMYkLidMQcO3czmxSRWYvWHETH0zZmcVmiFOIa+2YXhjeEfMSS3wnCiD2rMzGRUkMb69TxADoFghn6VC1chX1te8cyZWHcizk0TYoCDKCpW8ttTL7muDBM6n0dts3CVSXDU4bIWKpX/vgBdrS7b7jn5hmjYuKAS7MXaWf7n8kb++yfI9qVZ9d7zqxO4SGUiAYnFsuq7HkfPpzgjovu7h9orzqXJtdrXEY8XwysHWkLaX/x98XJSAkP5foiubAjH9xwM5tEPVurFGEyK8fU5hMKkA63kpgYcXsmFSAkkLISoajtxS1Dj9ie1OV95DiRUwsEuVTnKqiQt48PWChYLe2Oi5JuqIDAdKDhdFfLb+8dDcTvfYjtfHI4yRQjDo9SoILj/VCrXEAsC1hWXYctE05tiTYs+9y52YKuwPdKIKYEXPmswwzDDpC4YxXWP4nzEbILZUUp3pJJoWTbx1P9dMkC1jA+lu7TQ+ZCsFLaenzv+HjenQ57aAejGV1alHdXK+Gn9TtZTYDrTbGgiiZjt/0awqCjmgUzIOXaFmZoDR7TcTYIPyOd12vqP84/ITQkAxU=";
+const CIFRATO = "7avuQJWVO1tVnijHWGN0Kg==.gULU2FMqeSFG/D4l.rbQMiO0FstO9b+lEsZL7dvduly6r7ok/+LmrrzTbE0+dvmZJGi+9gatO44de12CBC7UvwFhsoTj8Isx0kK3Ap4/28O7ivDrNt0ZbWmEwjDd7voI6xOWs43g1pc7GacQ6OdzM7ULTINJQ1K0ZNfHGA8BZxlbLhSTVdOJQdM1SkeYLQZ9EZfZu7XkZ52ajIb+bU/IG3MeJCr/KedHhEURN/waiNWIV+i3bHdUA+CQ+kU2BxuZlCQcLVheTrP8zuKK0w4h7vzFEEOsQHs2LAsIXL0oTwRfgFsSfZ4EByTABFzycI2WZeLK12h/z47ciSyywJd6H8JW16RLv6zwNoBdLL+d0rBPUQTTTKQYFmJlyx1cu1qlTvQGOYIeeeuVQwaCcdgOLxILfxcKV/qMJtZfUiaEIor02B/VabD3TBHRBRngGqFK5siJz4s0Di+HRelsZi6sCRFJxFghfRcmhGlJ+7U1D/a9pTVphGQUNY1pyJhpxzqsyt17kHqftRnoPBkfux/wSrMywADO8zC05r+yWkg6cdjV8rzZvqAaNAHrsZZs5PoAOdFyPr6Lucpf0k/f8jq2NfhaoNw8de0c2noenozIkUfCVv+FjSiT+CG9LuCKgMbRThbjIyxX+kIVuZL66/SRmZvJkUbk8eA+0GEhnO3loQ7TLRFgylAupejETyKkYlsOVQKslnP6uP1DVH/An3LFHzM5qxTMa+fAOkGr5nvuDrSlkPtK1+fRQNlxar4Dhv4ic4wMklbqiu5WYpZT2bk7NXfUlbZJsppI0ka6JSMsQmu2eSTt6PsratNC+h/777/aNPgYTshN5CAhhnv8P3pGD8VOfb3NTx1JKyTL8ayFq1HhaV+NQWONqMwKxUQKinQzrM3O9eB34kanRq4XCZzMU5AmJoVo2tykpobmteFn51aYpWHCaORO6ycSobiqfIoSPtAUemhmdFBnROAMOPrMngTqrIVxtjwXXxLLJA0tCzaiTlMgA6N4uwu32iGw9MjTi4BHsfZKBeUhhV0cUyaX3hgWcrqUIjFgXYEFyxp4j1EfifWyBJEKn328yQZJr";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -165,7 +165,7 @@ const cp = DATI.compiti;
 $("compiti").innerHTML = cp && cp.testo
   ? '<div class="compito"><small>Dalla lezione del ' + esc(cp.data) + '</small>' + esc(cp.testo) + '</div>'
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
-link($("mandacompiti"), wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
+link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo)) $("mandacompiti").hidden = true;
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length

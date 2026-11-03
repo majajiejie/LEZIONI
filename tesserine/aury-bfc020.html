@@ -126,7 +126,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "IzhNSWomlrbvoox6x9Kxyg==.41PWUia9TKmujrlw.Otb44S1QcR6QYWmPj15FmsMYQEgDTNQR+djsc1vjwTi1djqks7gV9KZsa/KkOKBVQMTj+2mvFBDy23CNWmfxl+CL6wCQELWDV0Po1XzBc4YayR2rrbQWqm4l6gIeewfRcS8dnTXKnKvDNnJREt2rBVbVOv1d/jZSeYnV61eJfEMljTEJTJEak5gKZZDFAoOCf5e7XqbNVs+Hksd/JbzhI9trWno9ne8qETP7ZnqTDsl6m8nY6QJuLOdfLitymP5Zef/GPvmwAPosbFI3mthPIe/YnA5gy5kmOsJgJe/w7/rFKKIwPr8FvhmAsilIXVeWxk+yN3+MsY7UO+7f5SjDUFsCdOTXMgZUuldF/KS/SoK3h+L0a56V4ONC76zOIYdA3v0Vce7OM1Ktn7bGqL7utkK4jBCKM8gRB2Ab5aw84cvRzQvSKGRwCeCWPc0+A+mmwOCeaJI+nz1Af0/cAYgFIX/qz1UackCqc9ac735ZfezqBXKAxR4Cg4atLca8oMvTty6vuxp2Pozgt2TIqODiEIVbjS8EB41zkHhkVCHw6Q==";
+const CIFRATO = "V9qqcBA56wm5XXUgw+tibg==.DLS07kDbgcnqGyEi.Cym5CklENXJiIIYpbIISrwAG89aj855RDCn1QccGvQPG53/8wJ6BznrOcDutk7Z0iFF4X2dw3PQfJlSkFleBqdrYvw8+LrMqc8OV5vHe9BF3M+CmqeJlgjJc8DbUE1HkrAYnaLgdZD4vxq3htOm/acJwHzsTuBxZfA/ImRTnscG+zKWCQP6wRYErszs71wTUlh68QNNdzQW4PZnP8Mel7aFwKmrK8V8zxAyrgA0GCZldEpw4KkNjipMCRcr6PU04DhHnToGaZimhAKYJqMVKQ05n5YAZgOxRwGmBQ86DdGzvyXlAhid4IVR+XsaEF8LLc4swEoRcuKAxBmPPwTDsQdajBryB9z2QPeejOQH77kL9DRaUJX/J3RsD+qUuV6mYex4AsEXU1+HvyTXsRQ9Xt/2VfmalqiSUyVqbOkl1tWuoRS3qKTpVI+HHA+smWdUAj7FAaf5oAeul4glObH/809yurO8c/jlnKin0FKWD0KgbnMAkPMXATRWwLLW9uOMoo4bDF9ibpKpyfJPWyg49kmlOdCSURR3TqlXufTUih0Em4d2yQF1wDWBMtQ2v91R3yeFQyufZDVpamc+xP5hhFFpqEcu6RCETHJBGRe46+HH5rZvy78MRnvinTIVHGcVwiI73QTI=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -165,7 +165,7 @@ const cp = DATI.compiti;
 $("compiti").innerHTML = cp && cp.testo
   ? '<div class="compito"><small>Dalla lezione del ' + esc(cp.data) + '</small>' + esc(cp.testo) + '</div>'
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
-link($("mandacompiti"), wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
+link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo)) $("mandacompiti").hidden = true;
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
