@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Tesserina di Anna · Chinese Academy</title>
+<title>Tesserina · Chinese Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -45,10 +45,24 @@ ul.storico{list-style:none;margin:0;padding:0}
 ul.storico li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--linea)}
 ul.storico li:last-child{border:0}
 footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
+.pin{max-width:360px;margin:12vh auto 0;padding:0 16px;text-align:center}
+.pin .card{text-align:left}
+.pin input{width:100%;font:700 30px Fredoka,sans-serif;letter-spacing:.35em;text-align:center;padding:12px;border:2px solid var(--linea);border-radius:14px;margin-top:18px;background:#fff;color:var(--testo)}
+.pin input:focus{outline:none;border-color:var(--rosso)}
+.pin .btn{background:var(--rosso);color:#fff}
+.errore{color:var(--rosso);font-weight:700;min-height:24px;margin-top:10px}
+.esci{background:none;border:0;color:var(--tenue);font:600 13px Nunito,sans-serif;text-decoration:underline;cursor:pointer;display:block;margin:10px auto 0}
 </style>
 </head>
 <body>
-<div class="wrap">
+<form class="pin" id="pinbox">
+  <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
+  <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
+  <input id="pin" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" aria-label="PIN">
+  <button class="btn" type="submit">Apri</button>
+  <div class="errore" id="errore"></div>
+</form>
+<div class="wrap" id="app" hidden>
   <div class="card">
     <div class="scuola">Chinese Academy · Maja Jiejie</div>
     <div class="nome" id="nome"></div>
@@ -74,13 +88,14 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
   <h2>Lezioni fatte</h2>
   <div class="box"><ul class="storico" id="storico"></ul></div>
 
-  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const DATI = {"nome": "Anna", "rimanenti": 7, "aggiornata": "3 novembre 2026", "storico": [], "pagamento": {"paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL", "iban": "IT33W0306968053100000007993", "intestatario": "Maja Fabbri (Intesa Sanpaolo)", "pacchetti": [{"lezioni": 10, "prezzo": 150}]}};
+const CIFRATO = "BM/LafkiWpnuWXg5ZWc+1g==.rndKUvtpa2L9o/8C.absOMVU+LFkx3qjQnBDzHWF/XW9DDw3xziGyv+Zfr00swDSzKJQzHH5pfQiUM3Y3XBrwDk9DcbJK5cnLyBkpPXEINNQ1Ak0dC8FCdC2gG00lBUh1Fg9B9VXi+pNQiU6RnH+pHv+3P15SyTJJvQZujH4T4rW67knxcdOgSCXe9ph5V3JheNY//GhDKKEni6SpH0stXZndWVJamRnyN62wzWHyAR11rIJZZxCOYrv7Q+hLfog1e07nv7igqNOOEP6jCnfYEiK9jHqGqMsSJOmLqIw7KGSD0DHG5L9kPxjLI20dfD0C2Qd6aTF1U2dtGxma5SAsidj6prQlWxc8l2Ta/+xJaBMGRoTlZ1ybvTFWhSVQ7tenkXMzFR5NyIvXoAH2ii9qtU5BqY0de2Tb/Nk+hnzCNeVWo7c=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
+function mostra(DATI){
 const r = DATI.rimanenti;
 $("nome").textContent = DATI.nome;
 $("num").textContent = r;
@@ -111,6 +126,25 @@ disegna();
 $("storico").innerHTML = DATI.storico.length
   ? DATI.storico.slice().reverse().map(s=>'<li><span>'+s.data+'</span><span>'+s.nota+'</span></li>').join("")
   : '<li><span>Da qui in poi trovi le date delle lezioni</span></li>';
+$("pinbox").hidden = true; $("app").hidden = false;
+}
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function apri(pin){
+  const [sale, iv, ct] = CIFRATO.split('.').map(b64);
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
+  const k = await crypto.subtle.deriveKey({name:'PBKDF2', salt:sale, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv}, k, ct)));
+}
+const CHIAVE = 'pin:' + location.pathname;
+function salva(p){ try{ localStorage.setItem(CHIAVE, p); }catch(e){} }
+function ricorda(){ try{ return localStorage.getItem(CHIAVE); }catch(e){ return null; } }
+async function prova(pin, silenzioso){
+  try{ const d = await apri(pin); salva(pin); mostra(d); }
+  catch(e){ if(!silenzioso) $("errore").textContent = 'PIN non corretto, riprova'; try{ localStorage.removeItem(CHIAVE); }catch(_){} }
+}
+$("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
+$("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
+const gia = ricorda(); if (gia) prova(gia, true);
 </script>
 </body>
 </html>
