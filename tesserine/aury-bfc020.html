@@ -63,6 +63,9 @@ a.mat{display:flex;justify-content:space-between;align-items:center;gap:10px;tex
 a.mat:after{content:"→";color:var(--rosso)}
 .vuoto{color:var(--tenue)}
 [hidden]{display:none!important}
+.hero{display:block;width:100%;height:auto;border-radius:22px;margin-bottom:-36px;position:relative;z-index:0;box-shadow:0 10px 30px rgba(143,12,33,.25)}
+.card{z-index:1;background:#a92e2b}
+.pin .hero{margin-bottom:-30px}
 .pin{max-width:360px;margin:12vh auto 0;padding:0 16px;text-align:center}
 .pin .card{text-align:left}
 .pin input{width:100%;font:700 30px Fredoka,sans-serif;letter-spacing:.35em;text-align:center;padding:12px;border:2px solid var(--linea);border-radius:14px;margin-top:18px;background:#fff;color:var(--testo)}
@@ -74,6 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </head>
 <body>
 <form class="pin" id="pinbox">
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
   <input id="pin" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" aria-label="PIN">
@@ -81,6 +85,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   <div class="errore" id="errore"></div>
 </form>
 <div class="wrap" id="app" hidden>
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card">
     <div class="scuola">Chinese Academy · Maja Jiejie</div>
     <div class="nome" id="nome"></div>
@@ -126,7 +131,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "V9qqcBA56wm5XXUgw+tibg==.DLS07kDbgcnqGyEi.Cym5CklENXJiIIYpbIISrwAG89aj855RDCn1QccGvQPG53/8wJ6BznrOcDutk7Z0iFF4X2dw3PQfJlSkFleBqdrYvw8+LrMqc8OV5vHe9BF3M+CmqeJlgjJc8DbUE1HkrAYnaLgdZD4vxq3htOm/acJwHzsTuBxZfA/ImRTnscG+zKWCQP6wRYErszs71wTUlh68QNNdzQW4PZnP8Mel7aFwKmrK8V8zxAyrgA0GCZldEpw4KkNjipMCRcr6PU04DhHnToGaZimhAKYJqMVKQ05n5YAZgOxRwGmBQ86DdGzvyXlAhid4IVR+XsaEF8LLc4swEoRcuKAxBmPPwTDsQdajBryB9z2QPeejOQH77kL9DRaUJX/J3RsD+qUuV6mYex4AsEXU1+HvyTXsRQ9Xt/2VfmalqiSUyVqbOkl1tWuoRS3qKTpVI+HHA+smWdUAj7FAaf5oAeul4glObH/809yurO8c/jlnKin0FKWD0KgbnMAkPMXATRWwLLW9uOMoo4bDF9ibpKpyfJPWyg49kmlOdCSURR3TqlXufTUih0Em4d2yQF1wDWBMtQ2v91R3yeFQyufZDVpamc+xP5hhFFpqEcu6RCETHJBGRe46+HH5rZvy78MRnvinTIVHGcVwiI73QTI=";
+const CIFRATO = "I4Jc9nvYCggISqEWpHf0Jg==.++oioh9wjNbDCvfF.Ql+dosDebV+ADpCBPlUqIjdFbwi6fkqCIEcACnnZRa8TPf8HLKxwvqsRaRjODGXI4pJXfCfJZEBgl5ACvjdqeZ7JcUMDBAYFs6Y/H3NX6WJbjGBggHG11Tiv9It5kdIAfp7iKnc8wjtvRo2oovKlG/xxW0rCTfX02bqOgXz72/E2o9L1C4u8x3LtbVmredcY6xeOzqKwJkn3zfqaZmWYDQ8vjOSbq8cCgjHhVDRKzPm/npGhDUeEInwPWzIZ51WX5fad0dkDiqh9kGjoyAKCp24c+Z2NpG618eKIME+XL9LWU7uWHG2SieH4vhn2Zl08ads9FTtu95NsX0PwgQNvDYJ0gQGWJD28hCGSyZ0X+gwpQ+7emEcLeQz0VvMA96OCLzh3hVI1ZSeL++o3kzoJPg8Dy/Vg/t6xNljXkLvO+lv83o2BHrrWew9ZamzBZ/sohXa8s7rO9Q0r6LlS0XAquoP9lm5Y2A9Dg7Q9pmA7BJpoX3zWsA+Is2Mt3yP4/0FrzWJ8ZygukNWuPnfauc2t9k77vQ9sn5hS/NM+ISDEl3/yqkJonepoCxDmUAVdbwcLMoLxzEXrDAUfVepw410J7zoyBQry76pzEmaDoKzaZ8QGtqkvSxLxDDfMimLLzzlAFPCFveDNsEFwMh1jC7nL9JM=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){

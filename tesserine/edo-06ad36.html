@@ -63,6 +63,9 @@ a.mat{display:flex;justify-content:space-between;align-items:center;gap:10px;tex
 a.mat:after{content:"→";color:var(--rosso)}
 .vuoto{color:var(--tenue)}
 [hidden]{display:none!important}
+.hero{display:block;width:100%;height:auto;border-radius:22px;margin-bottom:-36px;position:relative;z-index:0;box-shadow:0 10px 30px rgba(143,12,33,.25)}
+.card{z-index:1;background:#a92e2b}
+.pin .hero{margin-bottom:-30px}
 .pin{max-width:360px;margin:12vh auto 0;padding:0 16px;text-align:center}
 .pin .card{text-align:left}
 .pin input{width:100%;font:700 30px Fredoka,sans-serif;letter-spacing:.35em;text-align:center;padding:12px;border:2px solid var(--linea);border-radius:14px;margin-top:18px;background:#fff;color:var(--testo)}
@@ -74,6 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </head>
 <body>
 <form class="pin" id="pinbox">
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
   <input id="pin" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" aria-label="PIN">
@@ -81,6 +85,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   <div class="errore" id="errore"></div>
 </form>
 <div class="wrap" id="app" hidden>
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card">
     <div class="scuola">Chinese Academy · Maja Jiejie</div>
     <div class="nome" id="nome"></div>
@@ -126,7 +131,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "PtOmzgaQdug+sFrZ7MwwvQ==.BsxbSTM4YTRySUvQ.kLFnZR/a4RGJnHE8TKf6vBOxW6IoEYqAlpYI7rIzFj24U4KUDrc5ooLm5Y0jsKV18njhTSw5c88O6hrm65R9lG/+5X9DNm8qk+vsXm1KarPVMYm2NDl1FBN8s5O1vz6tnZPSfVh+h9KaKzcuTt+HaA9SGBgL/9EgEnqMmVAo3gT7U1qd7S95+uVLCtAuK6ED9d3Ik6tcGwI0nmIxMzGJ3AoVurjNbsXUJB8zNY5M2dnUsFDpIUvlDml/KGYAoE3mLToyp/Ctfcd08rJTdAbWtF4it2PIzs5QftJeNIHyz9UGF8hHL7m6OF0h7fb0KA2SoK36a6nt2RRtGTMq5OXhzMLFemI0xjUzRw9RaL7PrcHYVdDZCNWhzfexbGCTT84+TRMLHAGQyM8ttJKf/Wmc6axXJYfPaxdeXfQUn98Gn86wPAPoUP1ILHhyoHh8DzxWq7sMEMEZ/b/ALOYfypMmPCOIoIYol7OES9MRjB/QmXEw40Om7wOE0T0eG2HG88fnk9iQwUNTuam8h/zTc4moJdFRdNnbrEWm9O9SSeACyG2Al98oNtHhd2FLds3igNZOYq2ygRg4nba8SBs5MqU+5KwnykfXHLDqoXQ7BYtnRyO3Pb6qjSSA+3q3sCQNjchoXRAwgjvOrS4fkESgEQ+1kVz0b0pvItdsKA04H4LHnNeIS4tzCrTyY3h9jNhdTpsr2KgRyBsxYqqaLkLq4In4vUq8+tWSrRsDJdW5UcCw6brsJa1wK7/VM/hcwCExGDU3HC/FB7vQMxmG2MLJN8AckDhSLpdmHV+bdASTouh3nijmZlmGOtyBPsjfjpuYFIw0uUoEAyxCpVBufEy/WYLmfI9byI8oKyl3PmHMwlwagJCld3jxX8D+q/MWhqMpZn1X2UA86RXmWxfA52AWChSJIwOR8HepynsrmLFM1Gg5vG3Yv4EwQVJywjXkQ7YNuFAr19LBE4tofbMK6jZzRH2Ta/1Y48JdOrsfgT9xqpwr65TqZWpI21d6IiL4IyL81IpN4N1Ct3VTCUaxfnWkXLDqRVXjsCNZFLvxomeNhi8HGaDi30WD/jB7Pc6zKhpuwJtFX8aFXxwTkZokg4aypZF2KOodkUUICdALNusyergQof4A5eFueBFrOpFOB+o4Vw8+SKSYVlWQa2xY5UQzOCPY78AdrGp5bQn+kl5JkPrvWd86LSyilzjCm7n5kYbRN7cpYlwRcPgG1czumizGyNy5yvfkZV9zigp3nc+KufpMi/OTjFFjLX69k2niv0Hq+VY6FBizd9EK0i2SkTIENRuxBrZSAGsKzdsJvV7UI8yA5UOWXtp8kdcMJOADAY/5p9FFLU4SAgNfh05vTYU71PKXvPfLG8JNuSbsjITUj8Y+OA==";
+const CIFRATO = "JRmA8QvxZ9uhj7sl8r8U8w==.m0fHor5KnDmthr5j.793gcJM41rLSpyVJXyuXyyEaAO6711YHUgp8FpZECPd/VD/4XgTjQrk4Fsr2y6OxAg0Q42Wihy9dIuXHHUmPWkbXxl2fz/Y5zEDCiZUJ+46Rru21yOBJ3baLe95SGiPLUJZoKaU+OBhqc3V3Mz932kBODcrqK9uBeotDqxEdYxtnHjg6mrtPMHq50NvqJAApckKe0B/hm3pD7kc6+RvnOUVMD78iZ1WeHiyAJXaE4xPtF+6K7ZTSU0/yZsI/putqQ1H1HIoZhSgEBjlr2N8X22q6plRy/ioGflKW/ElcvssZTnVabqfi3Rqs9OF2LG7ul3hEG0skO4pjMLm0UzVyTcf3HP4urNfuzxT6FoWV+SC3FCPgKfHH2OnSGiUp54goGNojA8p3Sd6qfaAx01ohVn3ZiREiqiN+ZVgh1NQi3ZJPqZgf+Gq67fpTd20oo0BwQUFltB/iM+cdHqUWsfNUWCgigEg9rp/iYfZIrmmWYwoAO5ibnia1WRQO34E9xHGC81GsctptQmec3VT0IwNXop9KAJRLWvMnp2tTtGoguOtpj6qiGpcpivRm1cyJ3SFDuVVk0PQ/nbSUwRJqMZkOwx+ILQSzTsYMMFj5icJow0r1Hcr3npLp7A9XDbAvIXLBCyi/AiUsRX6grH8OYihwVMFt+ChQ+rn5/0WRM8CaU+7jRQgMwY1taXialWNQg6C49R2ALesDLiU8bUN1lZs6IXDeOXhxnEqMUZRll7ypuFB2pp/Eclj+xopU+ysMW11Zeo24UcUCblNPdDgl21HLJZJWxPu3udN3/QbTp7SUthdvsylnyAYNkpOW9C2/AfIguWFT5lHE/gz8UdczlNfFYQHpVyxsMC3vrYHzPTYpZRiShKLkxNgofFrdes6kATcPHUDZzAmK324aw1az8WRKcSO11eGaxZ3m6PIR3Fj6xjZv3vbUWLc6ZnWyXtgyJ2pIVqJdIqdEFDw/Qh5MAebUY0IHKbC+X4yYYbd76ywjUdqFju4YCro3y3T9GbA30tQpxIcAd/Cx8ha2+hOhoAXY9KStznCZ8QtRw8tgRVw98hLKTTPze8EiGocDZVbadg0nWGrBGc+ahocVbF7h8dRo6RB5DHAtcdUsID9fDxo1qVavnB5kZ4hJCtNCl+fAAj3mk6oN2aIx3vgybdwv4UWN0kXbfzGcS6WRhrhrP+ArTxdb7AFyd+M02FtGSWTCkPwlLmuktGBZeAZY7/VSJZGHWiOc4I+F2s1W/pacq2O8D6vgMfe4JrxZl+pD1ElyehB9GS3g4uQVWij+l4KZ8CBi2+cCfRSKmyBYBjFUe0WXu/ssuq/DOFAPOxeuK2Kl9oBtylzNdIHtc2gc7f1knu70O/Y7A6PIOmD8LAoIs8n/pVnBBaifyn1wTTVWTA==";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){

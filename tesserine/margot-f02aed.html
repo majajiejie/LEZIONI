@@ -63,6 +63,9 @@ a.mat{display:flex;justify-content:space-between;align-items:center;gap:10px;tex
 a.mat:after{content:"→";color:var(--rosso)}
 .vuoto{color:var(--tenue)}
 [hidden]{display:none!important}
+.hero{display:block;width:100%;height:auto;border-radius:22px;margin-bottom:-36px;position:relative;z-index:0;box-shadow:0 10px 30px rgba(143,12,33,.25)}
+.card{z-index:1;background:#a92e2b}
+.pin .hero{margin-bottom:-30px}
 .pin{max-width:360px;margin:12vh auto 0;padding:0 16px;text-align:center}
 .pin .card{text-align:left}
 .pin input{width:100%;font:700 30px Fredoka,sans-serif;letter-spacing:.35em;text-align:center;padding:12px;border:2px solid var(--linea);border-radius:14px;margin-top:18px;background:#fff;color:var(--testo)}
@@ -74,6 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </head>
 <body>
 <form class="pin" id="pinbox">
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
   <input id="pin" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" aria-label="PIN">
@@ -81,6 +85,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   <div class="errore" id="errore"></div>
 </form>
 <div class="wrap" id="app" hidden>
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card">
     <div class="scuola">Chinese Academy · Maja Jiejie</div>
     <div class="nome" id="nome"></div>
@@ -126,7 +131,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "MGlG7yDTlDgTjoCWkSVKKw==.3NtHfsF0oDQSLTA+.VldFuCoiUOldI9MjckUj4dfYOi2kHberKqRC37lfLH4xa4ubG90360EjtgvVresGFFWTG/IDyd4P1Qqgrchn654JMeLiwoK+GSOeUh6v1uSnRjEcL/SItCR4Fg9mygdblAiPKVR6mM5qjouAuHGamxSczgxoSqWP7dOXnopMtF002TJBMwcgB1qig8kGphu688Xf+U34GRTeCgOrhiBBYtZErgyg739EwPnHym5xqe6yBZ7vjLklSLmvK/d0Zz2lBXmsv+w0jhkNhp+utCkH9P+TYYt5mxVJD18yb0HitaLw6myUEJd8GclmBQeQjWT/2vD1xl+Sw6az2z4uK9X7Lv44CGLjxnRyhsa04IzO/bqLZm96gK14xzyuTh81PKASciykPN4TmyaoASLqLKAn0wkRWrj7jOsQFq15rmR3mimud0p9klCdxBamYw+AKCRBflPMVXwCYdO3c/ZKR4PYVwQUEBF3nAro//wcScKBjhfOI/V6itzDJTE7UgEwfhLfGT2gTaRqJNs0VycV2AJNQ6v3kMTqp1BVBwQcAKplJefCCIro9RHQQ5QzkQXYErDRbz5iFapgtvxvKvfBvEqOto+xyJ59PW5tqOh5xGtfymy9blEAp3lArjPl9OFtIdOVq5Ne5cL6xft4NtGYmDr3/VaVEQbU6S1HyBOnVQ6CUnS2RB+cWhnlTe7HrV7l5Bh+f3W/g+PLoJFWSWNOsizVicO2avPHUI9SWRhe4/LWai5WRkjkCojMvB7/20kmCZ3jfA8va9rkJ/ZsEtjMnlAwwrS5Yfq4eJqtlR+iQ9q+PPnRnKVYpaA1sLGaS4V00dxY1spUfWO38lMcrUWWk8Wdc2P9epilErLeZj58WJCeIILYLVffElayhbMJaOPfb7qkVFndRueWu4/YDFsORrnpD0UyYGADc+Nl2ba6ySb+yKmmzb+C4MELFA8SsRFJ3+6cSy3hH/7mvt17FQplI2ptbww75N01aSpkPf31RW+YXufcR7h2dhSxmIwTRYjzKv3cJ/YC16VcwVgm5NMQxDfVjwhsnIbXFIShz9mFP4UqYk7wKXSZgQCT+H94fb8/z/J/7qDMQQ4P36F659hkhNxwTuv/lNRKReMlt2ZIHN/nTs2FyUEL2FbadXG6ynzA3lO4X3CbBE3SrG6/QItuAJS+tZ4v4INgqTjc+8pxhQ==";
+const CIFRATO = "1qIqfNmGgCNR5La826SokQ==.I3IMljJpiH1dDvqY.HvzM8lSR9tPRzCJtb6i5+GHjsH7PknVTMKXRFfu0DQt24oRk/H5gmI92h403k86GnKq/OOoqtbvodRximTIR63W+gSohWQl9qz3UTVZyg3HxKaEjAvYhQ6mvyYUnV0uX/MsqMf4VYGJUGiOj/9m/pFE1+LLpNUHi19I6vVaqN0meCIAUDlbM9/iVLdVYT0ZcR5ZKMhzARAhV5E0OSjhkn2oeqjJ82kU1lVyk9nIisYEaiPWzJaoFKXkmB/vqNtCRktIBpz8UBzGAAsI+ANtopFe+0H1PggcS0S3QpGRrtIdJcftiTj8DDGYXR/fBBGYXQoC2Go6vsHYCswh1zeHsf1bEK8iuu/xC1Yc4+JfN8EEE7KCUJ6tL6Q7KUi5zQz6TdVWW1tuGNhnkHmYw3hN4dGer8dM/55V61MdxNamv57vaSnpzPd7r2eaH/ODqjVlH3fuQ37BV0Vsy2lkWS9HPwMHwXgW2sifalf1fa2xNJgWE0bw9D8NdmJZO80Hd0Jpr6dQBNE/M95zk1TpkeSTguOmTBVPm0A9BngniFoNo1Y0y7mgQECf3WoowbxEzEgJ1W6VxB9SZnC2ANwimPUUa860tofQO04d/0Yd9M917utJjccseLRBPsvI5sImKn2/oGxzfQIPL0m4nFDBfLmj5ahQeD1CK4ZNP4vuoMekBpkwwQdRpUM+guALAhSUmz6CNhDyymxHwt/UOaJsu2g0E3G8Iz6tIDroVN1Srtf8ghCLdVSuXBhZ6ux4KC8Ju4gGm+6EuQUYBElTT8l+yHeRP9mjz2SKg+X+qbID2izeAl8ZdMJXwS8rdajEVlJGL6NgcsdSjQwhikW6/jAyXQW0701/6F86zVdikGvcabcAOu5979t1RN7cSC1thWFoDEqwFOhCWeXeFlD0VcYV7UNfioBXz20dKdol9qH6c34apoAitauAtMF3UksP0t5wPb1zNHpV2U7Tw22J9UwTjnCn2l8KBHCOPFgzbX9fFspETkwWvTZKz6SYql6vNJqKjBB4LGcS6VSl6vfZqYusA2kbUsBkIDcGaPOLoGInbwyc89Cj1sQm2EzHEYDCp4AeligItkgHjWhzidQAEs17HxdXQ+ISQvrEmDTOq35mkYvZk/sigZEMvflwlY4ZLzRi52mp2gCjTsZNtPnMKqCengKCY2tBN53OWZuNJfHdskJ5OczU6NlPB8ATsQw==";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
