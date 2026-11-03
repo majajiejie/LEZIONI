@@ -71,10 +71,14 @@ section.hist{background:var(--sky);border:1px solid var(--line);border-radius:18
   <div class="board" id="board"><div class="row"><div></div><div class="sub">Carico le stelle…</div><div></div></div></div>
 
   <section class="rules">
-    <h2>Come si vincono le stelle</h2>
+    <h2>📜 Regolamento della sfida</h2>
+    <div class="rule"><div class="ic">📅</div><div><b>Quando</b><span>La sfida dura da novembre fino al Capodanno cinese, il 6 febbraio 2027.</span></div></div>
     <div class="rule"><div class="ic">📮</div><div><b>Compiti corretti consegnati un giorno prima</b><span>Consegna i compiti su Classroom almeno un giorno prima della lezione, e fatti bene: 1 stella.</span></div></div>
-    <div class="rule"><div class="ic">🏆</div><div><b>Più risposte corrette</b><span>In ogni lezione chi dà più risposte corrette vince 1 stella a fine lezione.</span></div></div>
+    <div class="rule"><div class="ic">⚡</div><div><b>Sfida lampo dei vocaboli</b><span>All’inizio della lezione rispondi subito alle parole della lezione precedente: se le sai tutte, 1 stella.</span></div></div>
+    <div class="rule"><div class="ic">🏆</div><div><b>Più risposte corrette</b><span>In ogni lezione chi dà più risposte corrette nelle attività vince 1 stella a fine lezione.</span></div></div>
     <div class="rule"><div class="ic">✨</div><div><b>Stella bonus</b><span>Ogni tanto arriveranno delle attività extra: chi le svolge vince 1 stella bonus.</span></div></div>
+    <div class="rule"><div class="ic">🔒</div><div><b>Le stelle non si perdono</b><span>Le stelle le assegna Maja Jiejie a fine lezione. Una volta vinte, restano tue.</span></div></div>
+    <div class="rule"><div class="ic">🎁</div><div><b>Il premio</b><span>Al Capodanno cinese vince chi ha più stelle. Il premio è segreto: sarà svelato a Capodanno! In caso di pareggio, sfida finale di vocaboli.</span></div></div>
     <div class="rule"><div class="ic">⭐</div><div><b>Stelle già vinte</b><span>Le stelle guadagnate nelle lezioni prima dell’arrivo del tabellone.</span></div></div>
   </section>
 
@@ -102,9 +106,9 @@ const CAPODANNO = new Date(2027,1,6);
 (function(){const g=Math.ceil((CAPODANNO-new Date())/864e5);const c=document.getElementById('count');
  c.innerHTML=g>0?`🧧 Mancano <b>${g}</b> giorni al Capodanno cinese`:`🧧 La sfida è finita: 新年快乐！`})();
 
-const ICONE={compiti:'📮',lezione:'🏆',bonus:'✨',prima:'⭐'};
+const ICONE={compiti:'📮',vocaboli:'⚡',lezione:'🏆',bonus:'✨',prima:'⭐'};
 function draw(){
-  const data=NOMI.map(nome=>{const c={compiti:0,lezione:0,bonus:0,prima:0};
+  const data=NOMI.map(nome=>{const c={compiti:0,vocaboli:0,lezione:0,bonus:0,prima:0};
     REGISTRO.filter(r=>r.nome===nome).forEach(r=>{c[r.motivo]=(c[r.motivo]||0)+(r.stelle||1)});
     return {nome,c,t:Object.values(c).reduce((x,y)=>x+y,0)}})
     .sort((a,b)=>b.t-a.t||a.nome.localeCompare(b.nome));
@@ -119,7 +123,7 @@ function draw(){
   if(u)document.getElementById('foot').innerHTML='Aggiornato il '+new Date(u+'T12:00').toLocaleDateString('it-IT',{day:'numeric',month:'long'})+'<br>Maja Jiejie · 加油！';
 }
 draw();
-const MOTIVI={compiti:'📮 compiti corretti consegnati un giorno prima',lezione:'🏆 più risposte corrette nella lezione',bonus:'✨ attività extra',prima:'⭐ stella vinta prima del tabellone'};
+const MOTIVI={vocaboli:'⚡ sfida lampo dei vocaboli superata',compiti:'📮 compiti corretti consegnati un giorno prima',lezione:'🏆 più risposte corrette nella lezione',bonus:'✨ attività extra',prima:'⭐ stella vinta prima del tabellone'};
 (function(){const g={};REGISTRO.forEach(r=>(g[r.data]=g[r.data]||[]).push(r));
  document.getElementById('hist').innerHTML=Object.keys(g).sort().reverse().map(d=>`<div class="day"><h3>${new Date(d+'T12:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})}</h3>${g[d].map(r=>`<div class="ev"><b>${r.nome}</b><span>${MOTIVI[r.motivo]||r.motivo}${(r.stelle||1)>1?' · '+r.stelle+' stelle':''}</span></div>`).join('')}</div>`).join('')||'<p class="sub">Ancora nessuna stella assegnata.</p>'})();
 </script>
