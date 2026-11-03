@@ -66,6 +66,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
     <a class="btn pp" id="paypal" target="_blank" rel="noopener">Paga con PayPal</a>
+    <p class="nota" id="ppnota"></p>
     <div class="iban" id="bonifico"></div>
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
@@ -77,7 +78,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 </div>
 <script>
 /*DATI-INIZIO*/
-const DATI = {"nome": "Edo", "rimanenti": 3, "aggiornata": "3 novembre 2026", "storico": [], "pagamento": {"paypal": "", "iban": "", "intestatario": "Maja Fabbri", "pacchetti": [{"lezioni": 10, "prezzo": 150}]}};
+const DATI = {"nome": "Edo", "rimanenti": 3, "aggiornata": "3 novembre 2026", "storico": [], "pagamento": {"paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL", "iban": "", "intestatario": "Maja Fabbri", "pacchetti": [{"lezioni": 10, "prezzo": 150}]}};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 const r = DATI.rimanenti;
@@ -98,8 +99,9 @@ function disegna(){
   const p = P.pacchetti[scelto];
   const causale = "Pacchetto " + p.lezioni + " lezioni - " + DATI.nome;
   const pp = $("paypal");
-  if (P.paypal && p.prezzo) { pp.href = "https://paypal.me/" + P.paypal + "/" + p.prezzo + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(p.prezzo) + " con PayPal"; }
+  if (P.paypal && p.prezzo) { pp.href = P.paypal.startsWith("http") ? P.paypal : "https://paypal.me/" + P.paypal + "/" + p.prezzo + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(p.prezzo) + " con PayPal"; }
   else { pp.removeAttribute("href"); pp.setAttribute("aria-disabled","true"); pp.textContent = "PayPal (in arrivo)"; }
+  $("ppnota").textContent = (P.paypal && p.prezzo && P.paypal.startsWith("http")) ? "Su PayPal inserisci l'importo di " + euro(p.prezzo) + " e nella nota il nome: " + DATI.nome + "." : "";
   $("bonifico").innerHTML = P.iban
     ? '<div><b>Oppure con bonifico</b></div><div>Intestato a: '+P.intestatario+'</div><div>IBAN: <span class="mono" id="ib">'+P.iban+'</span><button class="copia" data-c="'+P.iban+'">copia</button></div><div>Importo: '+euro(p.prezzo)+'</div><div>Causale: <span class="mono">'+causale+'</span><button class="copia" data-c="'+causale+'">copia</button></div>'
     : '<div><b>Oppure con bonifico</b> (dati in arrivo)</div>';
