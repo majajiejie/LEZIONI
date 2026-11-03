@@ -76,6 +76,17 @@ th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .five{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:10px 0 0}
 .five div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px}
 .five b{color:var(--seal)}
+.who{grid-column:2;display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.who .wl{font-size:.75rem;color:var(--muted);font-weight:600;margin-right:2px}
+.who button{font:inherit;font-size:.82rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:999px;padding:3px 10px;cursor:pointer}
+.who button[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.card .who{grid-column:auto;margin-top:10px}
+.res td,.res th{text-align:center}.res td:first-child,.res th:first-child{text-align:left;font-weight:700}
+.res tr.win td{background:var(--jade-soft)}
+.res .tot{font-weight:800;font-size:1.15rem}
+.winner{margin:16px 0 0;padding:14px 16px;border-radius:12px;background:var(--seal-soft);font-size:1.05rem}
+.winner b{color:var(--seal)}
+.grp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 </style>
 
 <div class="wrap">
@@ -92,6 +103,7 @@ th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
     <button role="tab" data-tab="p1" aria-selected="true">1 · Ripeti</button>
     <button role="tab" data-tab="p2" aria-selected="false">2 · Rispondi</button>
     <button role="tab" data-tab="p3" aria-selected="false">3 · Parla con i 5 blocchi</button>
+    <button role="tab" data-tab="p4" aria-selected="false">🏆 Risultati</button>
   </nav>
 
   <div class="toolbar">
@@ -142,6 +154,17 @@ th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
     <p class="note">Tocca per ascoltare.</p>
     <div class="phr" id="phr"></div>
   </section>
+
+  <section id="p4" role="tabpanel" hidden>
+    <h2>🏆 Risultati della lezione</h2>
+    <p class="lead">Ogni risposta giusta vale 1 punto: nelle attività tocca il nome di chi ha risposto bene. Qui vedi i punti di tutte le attività insieme.</p>
+    <div class="grp"><label for="grpSel" class="note">Gruppo</label>
+      <select id="grpSel" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)">
+        <option value="0">Sveva, Sofia, Sofy, Leo</option><option value="1">Greg, Samu</option></select>
+      <button class="btn" id="resetPts">Azzera i punti</button></div>
+    <div class="tbl card" style="padding:6px 10px"><table class="res"><thead><tr><th>Nome</th><th>1 · Ripeti</th><th>2 · Rispondi</th><th>3 · Parla</th><th>Totale</th></tr></thead><tbody id="resBody"></tbody></table></div>
+    <div class="winner" id="winner"></div>
+  </section>
 </div>
 
 <script>
@@ -186,6 +209,22 @@ const PHR=[["把……放在……","bǎ… fàng zài…","mettere… in/su…"
 
 let done={};try{done=JSON.parse(localStorage.getItem("hskk-l12-done")||"{}")}catch(e){}
 function save(){try{localStorage.setItem("hskk-l12-done",JSON.stringify(done))}catch(e){};updScore()}
+const GRUPPI=[["Sveva","Sofia","Sofy","Leo"],["Greg","Samu"]];
+let grp=0;try{grp=parseInt(localStorage.getItem("hskk-l12-grp")||"0")||0}catch(e){}
+let pts={};try{pts=JSON.parse(localStorage.getItem("hskk-l12-pts")||"{}")}catch(e){}
+function nomi(){return GRUPPI[grp]||GRUPPI[0]}
+function savePts(){try{localStorage.setItem("hskk-l12-pts",JSON.stringify(pts));localStorage.setItem("hskk-l12-grp",grp)}catch(e){};renderRes()}
+function whoRow(key){const w=document.createElement("div");w.className="who";w.dataset.key=key;fillWho(w);return w}
+function fillWho(w){const key=w.dataset.key;w.innerHTML='<span class="wl">Risposta giusta:</span>';
+  nomi().forEach(n=>{const b=document.createElement("button");b.textContent=n;const on=(pts[key]||[]).includes(n);b.setAttribute("aria-pressed",on);
+    b.onclick=()=>{const a=pts[key]||[];pts[key]=a.includes(n)?a.filter(x=>x!==n):a.concat(n);b.setAttribute("aria-pressed",pts[key].includes(n));savePts()};w.appendChild(b)})}
+function renderRes(){const body=document.getElementById("resBody");if(!body)return;
+  const rows=nomi().map(n=>{const c={p1:0,p2:0,p3:0};Object.keys(pts).forEach(k=>{if((pts[k]||[]).includes(n))c[k.split("-")[0]]++});return{n,c,t:c.p1+c.p2+c.p3}});
+  const max=Math.max(0,...rows.map(r=>r.t));
+  body.innerHTML=rows.map(r=>`<tr class="${max>0&&r.t===max?"win":""}"><td>${r.n}</td><td>${r.c.p1}</td><td>${r.c.p2}</td><td>${r.c.p3}</td><td class="tot">${r.t}</td></tr>`).join("");
+  const w=rows.filter(r=>max>0&&r.t===max).map(r=>r.n);
+  document.getElementById("winner").innerHTML=!w.length?"Ancora nessun punto assegnato.":
+    w.length===1?`Più risposte corrette: <b>${w[0]}</b> con ${max} punti 🎉`:`Pareggio a ${max} punti tra <b>${w.join("</b> e <b>")}</b>`}
 function updScore(){const n=Object.values(done).filter(Boolean).length;document.getElementById("score").textContent=n+" / 18 completate"}
 
 let zhVoice=null;
@@ -215,6 +254,7 @@ function buildList(el,data,part){
     sh.onclick=()=>{const h=rv.classList.toggle("hidden-text");rv.setAttribute("aria-hidden",h);sh.textContent=h?"Mostra":"Nascondi"};
     if(part==="p2")it.querySelector(".ma").onclick=()=>speak(d[3]);
     const ok=it.querySelector(".ok");ok.onclick=()=>{done[key]=!done[key];ok.setAttribute("aria-pressed",done[key]);it.classList.toggle("done",done[key]);save()};
+    it.appendChild(whoRow(key));
     el.appendChild(it)})
 }
 buildList(document.getElementById("list1"),P1,"p1");buildList(document.getElementById("list2"),P2,"p2");updScore();
@@ -230,7 +270,7 @@ P3.forEach((d,i)=>{const c=document.createElement("div");c.className="card";
     e.innerHTML=`<div class="bn">${shown+1}</div><div class="bl">${LBL[shown]}</div><div class="bz">${b[0]}</div><div><div class="bp">${b[1]}</div><div class="bi">${b[2]}</div></div>`;
     e.onclick=()=>speak(b[0]);box.appendChild(e);shown++;nb.textContent=shown<5?"Mostra il blocco "+(shown+1):"Nascondi i blocchi"};
   c.querySelector(".sel").onclick=()=>{document.getElementById("curQ").textContent=d.q;speak(d.q)};
-  c.querySelector(".lm").onclick=()=>speak(d.b.map(x=>x[0]).join(""));q3.appendChild(c)});
+  c.querySelector(".lm").onclick=()=>speak(d.b.map(x=>x[0]).join(""));c.insertBefore(whoRow("p3-"+i),box);q3.appendChild(c)});
 
 const phr=document.getElementById("phr");
 PHR.forEach(p=>{const b=document.createElement("button");b.innerHTML=`<span class="zh">${p[0]}</span><small>${p[1]} · ${p[2]}</small>`;b.onclick=()=>speak(p[0].replace(/……/g,""));phr.appendChild(b)});
@@ -248,5 +288,10 @@ document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
   document.querySelectorAll("[role=tabpanel]").forEach(s=>s.hidden=s.id!==b.dataset.tab);
   try{speechSynthesis.cancel()}catch(e){}});
+const gs=document.getElementById("grpSel");gs.value=String(grp);
+gs.onchange=()=>{grp=parseInt(gs.value);document.querySelectorAll(".who").forEach(fillWho);savePts()};
+const rb=document.getElementById("resetPts");rb.onclick=()=>{if(rb.dataset.arm!=="1"){rb.dataset.arm="1";rb.textContent="Sicura? Tocca ancora";setTimeout(()=>{rb.dataset.arm="";rb.textContent="Azzera i punti"},3000);return}
+  pts={};rb.dataset.arm="";rb.textContent="Azzera i punti";document.querySelectorAll(".who").forEach(fillWho);savePts()};
+renderRes();
 </script>
 </body></html>
