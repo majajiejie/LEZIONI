@@ -67,15 +67,19 @@ section.rules{background:var(--sky);border:1px solid var(--line);border-radius:1
     <div class="rule"><div class="ic">📮</div><div><b>Compiti consegnati un giorno prima</b><span>Consegna i compiti su Classroom almeno un giorno prima della lezione: 1 stella.</span></div></div>
     <div class="rule"><div class="ic">🏆</div><div><b>Migliore della lezione</b><span>In ogni lezione ogni attività dà dei punti: chi ne fa di più vince 1 stella a fine lezione.</span></div></div>
     <div class="rule"><div class="ic">✨</div><div><b>Stella bonus</b><span>Ogni tanto arriveranno delle attività extra: chi le svolge vince 1 stella bonus.</span></div></div>
+    <div class="rule"><div class="ic">⭐</div><div><b>Stelle già vinte</b><span>Le stelle guadagnate nelle lezioni prima dell’arrivo del tabellone.</span></div></div>
   </section>
 
   <p class="foot" id="foot">Maja Jiejie · 加油！</p>
 </div>
 <script>
-/* Link CSV del foglio "Totali" pubblicato sul web (Google Fogli → File → Condividi → Pubblica sul web) */
-const SHEET_CSV = "";
-/* Riserva, usata solo se il foglio non è raggiungibile */
-const RISERVA = [["Sveva",0,0,0],["Sofia",0,0,0],["Sofy",0,0,0],["Leo",0,0,0],["Greg",0,0,0],["Samu",0,0,0]];
+/* Registro delle stelle: una riga per ogni stella.
+   motivo: "compiti" (in anticipo), "lezione" (migliore della lezione), "bonus" (attività extra), "prima" (stelle vinte prima del tabellone) */
+const NOMI = ["Sveva","Sofia","Sofy","Leo","Greg","Samu"];
+const REGISTRO = [
+  {data:"2026-11-03", nome:"Sofy", motivo:"prima"},
+  {data:"2026-11-03", nome:"Leo",  motivo:"prima"},
+];
 const CAPODANNO = new Date(2027,1,6);
 
 (function(){const s=document.getElementById('sky');for(let i=0;i<70;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.top=Math.random()*100+'%';e.style.animationDelay=(Math.random()*4)+'s';if(Math.random()<.2){e.style.width=e.style.height='3px'}s.appendChild(e)}})();
@@ -83,27 +87,23 @@ const CAPODANNO = new Date(2027,1,6);
 (function(){const g=Math.ceil((CAPODANNO-new Date())/864e5);const c=document.getElementById('count');
  c.innerHTML=g>0?`🧧 Mancano <b>${g}</b> giorni al Capodanno cinese`:`🧧 La sfida è finita: 新年快乐！`})();
 
-function parseCSV(t){return t.trim().split(/\r?\n/).slice(1).map(l=>l.split(',').map(x=>x.replace(/^"|"$/g,'').trim())).filter(r=>r[0])}
-const n=v=>{const x=parseFloat(String(v).replace(',','.'));return isNaN(x)?0:x};
-
-function draw(rows,note){
-  const data=rows.map(r=>({nome:r[0],c:n(r[1]),l:n(r[2]),b:n(r[3])})).map(d=>({...d,t:d.c+d.l+d.b}))
+const ICONE={compiti:'📮',lezione:'🏆',bonus:'✨',prima:'⭐'};
+function draw(){
+  const data=NOMI.map(nome=>{const c={compiti:0,lezione:0,bonus:0,prima:0};
+    REGISTRO.filter(r=>r.nome===nome).forEach(r=>{c[r.motivo]=(c[r.motivo]||0)+(r.stelle||1)});
+    return {nome,c,t:Object.values(c).reduce((x,y)=>x+y,0)}})
     .sort((a,b)=>b.t-a.t||a.nome.localeCompare(b.nome));
   const max=data.length?data[0].t:0; let pos=0,prev=null;
   document.getElementById('board').innerHTML=data.map((d,i)=>{
     if(d.t!==prev){pos=i+1;prev=d.t}
     const top=max>0&&d.t===max;
     const stelle=d.t>0?'★'.repeat(Math.min(d.t,60)):'<span class="none">ancora nessuna stella… la prossima è tua!</span>';
-    return `<div class="row${top?' top':''}"><div class="pos">${pos}</div><div><div class="name">${d.nome}${top?'<span class="crown">👑 in testa</span>':''}</div><div class="stars">${stelle}</div><div class="detail">📮 ${d.c} · 🏆 ${d.l} · ✨ ${d.b}</div></div><div class="tot">${d.t}<small>stelle</small></div></div>`}).join('');
-  if(note)document.getElementById('foot').innerHTML=note+'<br>Maja Jiejie · 加油！';
+    const det=Object.keys(ICONE).filter(k=>d.c[k]>0).map(k=>ICONE[k]+' '+d.c[k]).join(' · ');
+    return `<div class="row${top?' top':''}"><div class="pos">${pos}</div><div><div class="name">${d.nome}${top?'<span class="crown">👑 in testa</span>':''}</div><div class="stars">${stelle}</div>${det?`<div class="detail">${det}</div>`:''}</div><div class="tot">${d.t}<small>stelle</small></div></div>`}).join('');
+  const u=REGISTRO.map(r=>r.data).sort().pop();
+  if(u)document.getElementById('foot').innerHTML='Aggiornato il '+new Date(u+'T12:00').toLocaleDateString('it-IT',{day:'numeric',month:'long'})+'<br>Maja Jiejie · 加油！';
 }
-
-if(SHEET_CSV){
-  fetch(SHEET_CSV+(SHEET_CSV.includes('?')?'&':'?')+'t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.text()})
-   .then(t=>{const rows=parseCSV(t);if(!rows.length)throw 0;
-     draw(rows,'Aggiornato: '+new Date().toLocaleString('it-IT',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}))})
-   .catch(()=>draw(RISERVA,'<span class="err">Non riesco a leggere le stelle aggiornate: riprova tra poco.</span>'));
-}else draw(RISERVA);
+draw();
 </script>
 </body>
 </html>
