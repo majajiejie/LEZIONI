@@ -63,7 +63,6 @@ h1{margin:0;font-size:clamp(2rem,5vw,4rem);line-height:1.1}
     <li>Libro e appunti <b>chiusi</b>, un foglio bianco e un <b>pennarello</b>.</li>
     <li>Senti la parola: scrivi <b>caratteri e pinyin</b>, grandi.</li>
     <li>Quando lo schermo diventa rosso: <b>alzate subito il foglio</b> 📷</li>
-    <li>Tutte e 10 giuste = <b>1 stella</b> ⭐</li>
   </ol>
   <div class="row">
     <label class="opt">Secondi per scrivere
@@ -156,7 +155,7 @@ function nextWord(){
 }
 function endPhase(){
   screen("end");$("allWords").hidden=true;
-  $("board").innerHTML=KIDS.map(k=>{const win=score[k]===W.length;return `<div class="card${win?" win":""}"><b>${k}</b><div class="sc">${score[k]}/${W.length}</div><div class="st">${win?"⭐":""}</div></div>`}).join("");
+  $("board").innerHTML=KIDS.map(k=>`<div class="card"><b>${k}</b><div class="sc">${score[k]}/${W.length}</div></div>`).join("");
   $("allWords").innerHTML=order.map(w=>`${w[0]} <span style="color:var(--jade)">${w[1]}</span>`).join(" · ");
 }
 
