@@ -133,7 +133,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "kMM/a1PLyrq/BWwGPVIGHg==.JgvxBc8nS2CsO5MT.ocEUUgDSlNGsWbhdAWSvXRhTWjwUtIZUFKCbdXRpmhxkKwInu8plSkT0a2VV6VTzrHq5Yk5KBowwKMbitULdlaFQxs16YWrGTIZmXQg4ZbaYcouRMO9/N4iY/EdfOeowhlOTtf5JFVqoLAmsAqg0M/Er2+cBawVhUf+w9ie+luNnliy8Dm/LZpCeo7eIfct3f1aZMfmuMAM01vr1cYmN9+HFEkPpVRTT+/vs3mSDej2gGlouPxTk2/RYwjUpQJHq6+RVdfrRWqCY0erfwUxR41Z324+U0VMcHnJ1esB6hpyz7yrz44jq7DVEUARnAK/Kmehfl4O/tJ2TmiP2v/uNxdHG5jSK7tZ0gmFPUiXEqPT/pBbl9oM5g0MxjwANYxT5GkmJ+BOcM/hSF9WFS9yNmaNXD9FJHxugNwdqIFDsARrgndMtMFmo0WKMvEGukrymm8706WhzquuUimxqlIhp44o+xyELSe5ankXuAMEolcZ7gZnxCsYK7/WdZJ27tTpjDumUxXfX6XgXZIlLodKMHuNBaTPhEVWgaCvlYvA4zfrxWp0UpKiduwWTh9tfIt2UpSj+Gcs83jFOiC8DAN20dWTSan9qnPL+pXlLCNtBV3dRmMLi9gUI3Fy1UEjIdNN/wItTZSyaddTT3RQWxLufbJBYSjhDrHX1cdb2z4ncj8zahXTt+9Y/YMYaOASlnm1454akDfP4LCkxWuXlSVEyIhUAtjef4kBjSTkPATcqHSPeJxsQqG9ToMgL3i0g7IFYJ8Gf80ebqf4aAldL1LnbZmBMKeeRk1WJRZ3jwKt5HIXUKoCPTVD3Mgpqjq/c89toueVM/1/wWxWlaylld1Hgw5l4SA/KdPrAiTP21POBULVO/xZg/w==";
+const CIFRATO = "C9PiyYA7RpNV/MJTQJDg3A==.KBhsr17oCaWHgiwH.GKk8DE0QZPU9n3pWjSmPGFbIQTKixL+UDySS04syd+Z+sH8eJvkUk5L5NgmKGC+UszJ/oFaQi+bUWO/3ZAMsRHluH/GBN5bzEaFhOt9eKSzrg/3WqehwfJDpSR06/SScMrm6GF9/dVICpffI+G8GGG10pQjAKfD7eYs2aGKcXCz1R04BzW1HRnTvCFusiD6ck0jNFuxiVZTj756LoA1zzqrFJnzNtxQ7kPxp9QO3e6gIlCnTvLE5Sxhw34+21XD3JaG7QKAUOCJ2Qvbe1ejzR5r8IaioWgNPrNMLB3LuKZF+oW3+OLcCVAwsJb3UNsjQYgwntH8Ro7lp3vL0VjOkGEdn2RW1OTgqxwIOGVJu6qqkbbZDNq4Ha8LjUs7yjyy8FhVBdebCsUntoyJ3V06zacAuaoGzwublHWHqH8tF/AiF96cVD3/puOe9J7/t4pz1px6QIKV9q4NvC+0DCv5hbxXOdxrQubCfw5GeTG7asrBEoYGgUuubWz+f0otyMwKa70B2uWY5j5dI1LWjSFjCfmSsEGcPWPpN2unh9zet3r/aSX6mo6yjX/cyBdbRerBs27zxMJn+jksVhYFuabxNYoscpHeYsVBb2nXfgUMQCaoiFamtgbkJTElREqWhlspIaU9sLCAVMMo29XzMb2hSMErfwQ5e1pwdIXNfsj8m7ZTSydfi6PbVNOEd+2zScGeoWTzMqZodR7nLWMcNMN0vlb5IBNN+mjST/aPk2lzZnZjRwve+jsIMD55gbCJf1Y24WbWwk6wZqNf5Nbl44JbsNJZfYxelteFN1c8ixs2mwESEVJjVNYtgIkYn4dyB5e0pTPVfNKU3Gq150FjZr/DN5OCMJY/oNZGPtW8e7TLb84IQ0IMxDOU61yf/clQQmI0qwCxWycEZNehvXHi4g/UgT7168G3ewNBFX67dxdA=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -169,11 +169,13 @@ const C = DATI.contatti || {};
 const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;
 function link(el, url){ if (url) { el.href = url; el.removeAttribute("aria-disabled"); } else { el.removeAttribute("href"); el.setAttribute("aria-disabled","true"); } }
 const cp = DATI.compiti;
-$("compiti").innerHTML = cp && cp.testo
-  ? '<div class="compito"><small>Dalla lezione del ' + esc(cp.data) + '</small>' + esc(cp.testo) + '</div>'
+$("compiti").innerHTML = DATI.compiti_fisso
+  ? '<div class="compito">' + esc(DATI.compiti_fisso) + '</div>'
+  : cp && cp.testo
+  ? '<div class="compito">' + (cp.data ? '<small>Dalla lezione del ' + esc(cp.data) + '</small>' : '') + esc(cp.testo) + '</div>'
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
-if (!(cp && cp.testo)) $("mandacompiti").hidden = true;
+if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")

@@ -133,7 +133,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "yk7rEjGKtN3M2Fo+JFyRMQ==.7+jFUQK0JpkCElim.1kimxTVTZt1NotBBa7Tb71VGGFxFeWDaPgBHBg4Jhjw+BcXkvaMC6Q5SCIKU+4HyvzW+1Kl5gSwkEXOuQTLPGmppOq9P7RDOIS5cuQ7rG16HGEN2/tlMYUmdKu1jKOW1LOGWXgYqVNTSiQqZEX83lGIM4U4nd0mIWPsQErFLZiSYWvFwAZdcNT3mBQk6VqlDSKUioihOkNIRmn30ZOl+rWvMJoU3F8eFPiOyLHiH0XYqrAkZeLjOkADViWCNut7bQS+SZDT473GrUTJwcOviUKVROOcaTsy8rp0zoQ+Ib2tA+P8ULzi4ZUdjK8O3csoxfOZ7uEgy6rmn1MJ2ldtDWPr3RoNlybhyap7e9q0VSdgcjoo7YI5riDrZkqfEZ95PqIJggr7jrvALJm0ryxIe4Z9SC1uYUyu/ASnTHkwHQlbu4K4q9qs5mWohW+yrUnYHrycLgQUBjP+Q/K8HXdOmw2PPtZE5ws5Id5etT0cTuQyYl9qsCsobac7OdpJIArcD+DW3JskXJrsk65DaWGHWqxmFLFznPfRiDbR9Phllc+ZqvwYY0k2m18GDfVm+8gDslLVnh9sbIMXwAcUMVYARDsBvjRDTzbjpHH6BZAsGUF7nTu1vOegXmmHyAkVX4WQrzRoUU4anU/r+tPszYZIH7IYneUZy/0NCcY5Bl3lLuSH8H6HxUpHBzDLYi9SuFZAVD/J253K3AWHEfve4f+cmy0hMefQZOPTQfi9dfU/7ENjX";
+const CIFRATO = "BQ9KTMtztxzGQrIhsUiDxw==.IIFVxFrKjjmSQ5no.1y5IzyHBcowflRP2ECevue6VbM2zkL/ppVzBLXRS0sA8lBMlRMZKqHIDNGv1R0LnpIQJ9NYmLKjB/YWxWyf1sAi9u+vY5WRM8AHCJLSAjmO+uagVPMn+pYqKeVkO7XGDwWL7CMhJlC6lzkx988/zn5cz01NGukfUK75nqWj3sdgLXVEhn9XmyrXfcpeg5mNHDmMdIjQr7REgaGWV9tbOg6f2ithRQesA4ePtRvTd/r78LN0ivSG9uwyOUpdIPGxnyMXBLzO0vofPvSGD558orKmkTu3GSWd+0/Y4nFij117ayskwukHyBkTqlDbBjobTDoe3TC8uDjXf/qJ/z4TpkyM6I6RDElVaJf+ajQt4YeTvMDwdrs30ktaSU1Cw2wNrDQS6JCMCtI6UnGE6Vyu3Ei1xlZuSQtz/8RWltbr3B/VhyRrVgZFwqMQXb8YxUkfvUmPq6nF5M3CbPgxjQXntEH60V1ywTY0uNax/mDkuka+lHtEmYqtYUrkzmZVePFKKhd+7/+3D9kb2KhTcHcc2xbCPrP9mJUdzqivyu+iMegy+JL1D8lSpVoI6g866xOcIAEs8oSw1t5u8zfBGPMZdi0vrHkCYhJEjrbK2rfwmMepHddE6zU0/CvC4Bku7OlRJK4BLE/dJhAJan5P3dTHPCndv7kK/gfDddlePCtE2DtoMYLWxejMUun/TW4+Y8Bw0ZrXgr7B5MOaZ61Y4Qi/mSzJiOcbiCeWhLWr91ZAzuqM+6JKvdUs1YKKwqvcd6PaoE0OMSxoTUVE=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -169,11 +169,13 @@ const C = DATI.contatti || {};
 const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;
 function link(el, url){ if (url) { el.href = url; el.removeAttribute("aria-disabled"); } else { el.removeAttribute("href"); el.setAttribute("aria-disabled","true"); } }
 const cp = DATI.compiti;
-$("compiti").innerHTML = cp && cp.testo
-  ? '<div class="compito"><small>Dalla lezione del ' + esc(cp.data) + '</small>' + esc(cp.testo) + '</div>'
+$("compiti").innerHTML = DATI.compiti_fisso
+  ? '<div class="compito">' + esc(DATI.compiti_fisso) + '</div>'
+  : cp && cp.testo
+  ? '<div class="compito">' + (cp.data ? '<small>Dalla lezione del ' + esc(cp.data) + '</small>' : '') + esc(cp.testo) + '</div>'
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
-if (!(cp && cp.testo)) $("mandacompiti").hidden = true;
+if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
