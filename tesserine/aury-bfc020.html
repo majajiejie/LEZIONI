@@ -48,6 +48,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 .compito{font-size:17px;font-weight:600}
 .compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
 .btn.wa{background:#25d366;color:#fff}
+.btn.cr{background:#1e8e3e;color:#fff}
 .btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
 .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 ul.diario{list-style:none;margin:0;padding:0}
@@ -101,6 +102,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
+    <a class="btn cr" id="classroom" target="_blank" rel="noopener" hidden>📚 Apri Classroom</a>
     <a class="btn wa" id="mandacompiti" target="_blank" rel="noopener">📷 Manda i compiti a Maja</a></div>
 
   <h2>Diario delle lezioni</h2>
@@ -132,7 +134,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "nKca3UBeclcGgAvMnme1dQ==.zZlVFrDXtTkblXK+.qiOxcPERIxgAVPP1rDTojO+CuoQt4D0ZKplN1r4w92mZ1sonb65pcnjVE+uW/fexYfWD8jDt6z+8q0jNIeryxN6TexmYSd/+iLC1VLigeTOiCGFa4hlRQrknPwqJPHMXPGvhK1cumeyaxd/QpzZyAt44C1bLDpFj2vVEuqM1dX8f71fPbUBkzZ+KfexpxXR1eDG6zq0dXk9Fx7nfiLkR6dVs5egxq/bjgBEyxEj3K8R0lded7DbVNzbzqY6hasFjqSuyy2MjjMa26eF9M6MtBh2V6vKecRi18wbQo7qMUhCW4vJM0oOtAo7+NI8/NRi9n3gGUC8Vm2jxn8xXy/xvHgvka8qLhET4KwEwchC+lxrWVp/Anyj+la6uiD2tk51mXo1JR3+X7mE/BPHzI1mb9xF+h1In7AfEe6tFH5qCVxrxLOVGWXVCATwuNNMhbpq1Zpg5cOl7HjDrg7xZfiit2ssLKmMCk+2GTCXtVaEtnvI90X/+JxUw4EBCEvtfACRBgYqP2hJkr/slpu+yvfjoepN4vZ/i44kZBZPEuugMQ7Ia85a230htadISWpGYU1SmCjnm7+CDnJbgQXmJd5vOA/R8lgBHpQFMMe/mEizkyoVwCQK+5nOrtqvTPrSeQ4cYDBORYJydVZ3BmKTlsP3TxThA2xXm6b3DJBdPKiuS/NOB9N6/4EUQiktamyUkgFilHQBFriyHCLiiBh4N8Huek98Nhk01iMPhPVijk68vOCHdBGfVmZRR";
+const CIFRATO = "y9TqOiMOcy2inykhiPF5XA==.R7uxO1mnc/nJ184D.sJPj4wSA6NX+DSyR0K53tXzlJDOhhmbLuU2VROsofxlsTnMbQlZQrYfjZPln/Fxq5N0vGp+H2xmyKM6MKBMik9nJzXiJyBnjtXt4yBFa1PBZ+VgjhfczPfTkKbz5jmbJcwkAtl0SY6wSCna+bZRcEV0TvWLAb3doVB17ROSXngq8Syrs9t2SsWgJYHjX0i3Un0RrQ6lF7lCbclEj8JkUe+Z48kYSYsKx6Pb4Fgi/zBnKR9birhmXRz5Q3PV3LMxh/DHTkSpljAS2HsG2NW6Z0VE5AQgjbqV59ae4ChQNx0kyECTq0tNsAJDklo5DTt4I1UkM4UsL7IUQYNQMsta13wFmRpEl6Vt9oVU1i2m8TdtOwa/2C1UcK8dMm2wpqz2/WM0M/SYi0ULuCrjGOuoz5yAnSh8vD3LnWE/AaUQgjLXv4hBTbeVoM9RUqUxBViNdmpvpWTldG1hen2b04qjIrP1fojYFc2ieayww1nLa5Vgl4wdOOlKjm+Sy5Iaqslg5blr9mc7V2XMHe+b9+1EIl/cjcuyeyYlJo1i7arPTP7LR/spW6hs0XftCWsiwBvwy/ydOGoiJAlYOcKNMempBcZrNCeubLqOQlZJBi8rws+Clrw/pAVC27uHmzhDT/V1V0rxJK5/z+g9vr+KuWItMawc5KLLRja8UEIraXFaLSe+Ua73d1+VJf5CElO9wI/nMs3akUI/RwHfeuc7ZF24ZoXZAB2GEkbh/j4F7Amtp1P7nbtMyO8ZAZoOdrPstS0uXlkl2Ogbhwb+eMQ==";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -176,6 +178,7 @@ $("compiti").innerHTML = DATI.compiti_fisso
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")

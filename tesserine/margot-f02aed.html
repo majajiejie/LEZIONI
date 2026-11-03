@@ -48,6 +48,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 .compito{font-size:17px;font-weight:600}
 .compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
 .btn.wa{background:#25d366;color:#fff}
+.btn.cr{background:#1e8e3e;color:#fff}
 .btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
 .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 ul.diario{list-style:none;margin:0;padding:0}
@@ -101,6 +102,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
+    <a class="btn cr" id="classroom" target="_blank" rel="noopener" hidden>📚 Apri Classroom</a>
     <a class="btn wa" id="mandacompiti" target="_blank" rel="noopener">📷 Manda i compiti a Maja</a></div>
 
   <h2>Diario delle lezioni</h2>
@@ -132,7 +134,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "KKsxt8N8uNw/fD5+4Zk5hA==.YiI7CKoAI2lfh0S7.IdUy1ysQV21Bq1unZBb7FFEIRytO1jnoRvMspOptMZ+tDtnk/fWYBKXCnAmRT8Od/MShFzJw76YA4QDf4gODe8pb3UEXSMYDenG6Hm373gsQSIJ9EdK6iEm1wJ+t5lpnqcJUm+2rL5KB/lEVDXbL02j0iGUSO4La06xprHUz8WsU15n558k6yPhvfYPBsgtTiD2rqxjFJRhgnv6gBc3ED6uzJXV/MCMFYmxOtgXSv9w6AYIcAnQvugHKD3Yvw9Urvqsn/4ykU2BVYry0ikJkvS5t3b2gSqi5qpFsj7zqZ9HZnL3VVPIlr+BdYFNeYfDjxrIAUOPRg+pdiwQewljftgfP5vOKtLcDSAQCesLBDw1v90o6aDVsnV/Z4/L/lAFbNQc6pUiYfV6uQMAPezA7ngHMAcbGJ5x0eSaeTRBIWo4+Xq8g7AcuiU/j4LLK2hOqN9ZPI5Z7yO21axrScxhDtNQ6igDI55x1sFXHdsW3eU06Hldc+g8QHdlzfiSQuO/9hrzcBetNgobeOynsewLsX5o1WU7dFNmqxNDcu2+7wR2c+gXpOCgAfoR8bhsCFw6X8EQD4MECbychnji60chfTUI/NjqHIwz4V1sJS6CJghGIBvPXLnJGdJDXeoOqWw4bzxYXtKm9RN7pMm2/a0TFTLotdLAhu5h7uCC/D0gdL0ZP6JWfJzJLONrs9q33ED2EhTuH2QbczeD7BUbBs9sfJ3eIswg9oO8ddkMvjIMxNdV7eudWz6uQXeN32A+8gYkokTs8BWboTI+EOYIx+qwheSupkA2vIF9DPyJpFo5ehKKX1GrxkZXDLyxUyNmMUVZf2yqa8YPnvU1YOXZxX1LcKVaq+MMwjt+oZznHKZ4cGPebvdZ/fqlk7rCRY4FzD+H2hrQyGpybotMMJwf6NB7WEgoEIV7h/tNSjPuremQM6D+jQf9Zx+Q3JCYAxfrTp4/Tb+a/2XfA+YOPTmmSeWkFusP1cSEZq2q7Tc7QWeu/ZuNN4a0aZpWsLhMhSB2BZaSFeTIk4ysKU0jcEelSUskSlP0gOEt6cdEF1bkYoB0yl+jTIVSbBCojThtYrAALEGEkdOL/PH9AV87x3pmA2l1FgvDsReNCZlXwFxyzizvmXbf+A5c+VZMOuGY80WAHfJ124KD08R8Idx8d8isN6Bf0I6TX4aj3bxWlRBKnLUaA1SeqeAXs93P57Ti7r6ZFFCx22RSOjHeDcMEGdybc4UWebjuh2S9fJNX6WI8vaoSp+FPBHH3Nmwo5MYHpPH573J0ye2fkuFb1Vv4VOCIC6D0=";
+const CIFRATO = "/Z4mELxvrs+1q+YbIw7AOQ==.dn6y7tKuEhVK1NR7.ZkPLIkMGBqk8ULE9IdbSeB0/mem6kaarE0wIfxlJRE5jbIZbneriXMkVuCbqdbiHNOQ284oTFKH3nOLYjsNDGYOONJEOj4YCyHvj5k2I/VAP18tmFrF57TRrQuFnmKj3RChJfmGklfb7Rv+MlBX40EimSGukqMSv48Pdgxeb9K/b74nc4A5FooQNID76+NbGOtkMq4GjGZBZhPjP35xHlrxrovHlmXv3M5aGXvQi91WLtk51tKDRjk0QbB7aLFGHXnCCrdGfAEEt5mvs6HGnrd9m4q9Kz5S1aXZWdCPOF3dTg9JdPxxYnqRYsupW+lMpgbXO52gWZfLZJ5xtVLIAr+cGADbnXH+RSXlyrD1yCfHQViQRrjypq5Okf4ozTiZfoLh5rZgriJryLH6tJD7yTZNVmlJGq+4yxB61Gx78xe1Ouye4WMDVifiESWimdClo4zhdF5/NIHD+ipFiQMwTgIgkvHwvBfgv+V4XU9S+yAC0F180biN1IQJja8Fc2J8rXBf2hzDbiyNrnLnqM867CfQTZRGFhHLQskM2eQNjqDXxtv7LkSI8NxB9FC7OJWTlGrYaVLIvaqPsPZW0uaRYxOSLHFCw0gZdyoeVBHYXM2bR3tzNuVJBXuq3wYdQMZfTRmj22qcCkbs3/sEvFiNmK/amNv9OfXEOvQwZ3Emm0bppvF+jnDpDiXn+9WnApmQkf12tIN0AtONALw3NgRoVuYdHRbUqf/v0esLCvm5dW/750xuf1v0pXiRdzjjXbeSjxdaD0l1+4tjJlIwEvVmqmgBvIdeJzi3SY2vdv+CHKZdLkxNrLfERzGxYGKkVWFOz4CnSJYAfKOsbQIhP9u3kene//D2ZBrLwIraAI5A7rm96l1p/vHT7V8/DLbXynPb4fEnK5DW1dVrBKAWWXailpk34cHHd4TWoadegghgh7fmsmooYRz6rSCFU1kuokfSnnSJMCk7pG+RtQ5m3rI8vLnfXdOxGpM3UhVqnn86EB/PXvJsekybvx0Y3wTWqZWfMwQ+5J33mWeZydCgax9bCaZTgy6NjjGPeUFXOyE4zEoB8+4CHTf5xLDE1BMJRqcpECVU8OGsXOhIby1+bk5BBwLpIzuyxsrZ4jebJCaoZ3SCPmB3gxkoCKzzfuRsBtMYvg62BUtityJGHLpeOMiCjUWlfqByGh+/3qzglOk7UzyTgCwqkXRC58Fw3Hghjbk4LfqtieWj6dQzD0QPPe7ZWYLK34NZyUF92GJKnO0JOOHQp8JAu+MheXgY3V/+dB8mTmN2+dD3OcvT5yU8pmPnvI3OBNQKxK20giha70YhU9yu0";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -176,6 +178,7 @@ $("compiti").innerHTML = DATI.compiti_fisso
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")

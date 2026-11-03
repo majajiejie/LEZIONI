@@ -48,6 +48,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 .compito{font-size:17px;font-weight:600}
 .compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
 .btn.wa{background:#25d366;color:#fff}
+.btn.cr{background:#1e8e3e;color:#fff}
 .btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
 .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 ul.diario{list-style:none;margin:0;padding:0}
@@ -101,6 +102,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
+    <a class="btn cr" id="classroom" target="_blank" rel="noopener" hidden>📚 Apri Classroom</a>
     <a class="btn wa" id="mandacompiti" target="_blank" rel="noopener">📷 Manda i compiti a Maja</a></div>
 
   <h2>Diario delle lezioni</h2>
@@ -132,7 +134,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "PoDnGbQdUrPf1egs57T1/g==.gS+3CvJIxJqEYFdU.KpdCUnK1pGVr4IPvJjSOjqLs/2CNdUvU7PeDrTAP/0ZlP9wQRb8EzoTtFWif4gscFvvf67sCHmQrzeLDrCKTqjm4adeo3bcuRGtOYcJ8WoTn3IwEbIVviEYlLOmIngO1OR1KAM9kfGU6gpOUVHqh9xB5inrt5+8pq5WK9xKzu3g5JAXBmgas+W1/JcPwrDE2ysPJr+qvXo3HNHaghiX6lmdLyuKSC7Qcxx/bTsvuRHJpQQUkog7SMAqQHGtXinCxqmbPhUJup12vyYFQ5PZ1TJIpRkX0CL0wRbEP1CPTlhSyS9N84UdfKB0lsfNWVt3q1ThayyWDFjd9089D7TWqpb0Er+jgj9MUFl1U1I7OO0Ff3wUFLJ9djzygthN1bcAfG1ECq5Lf+Pn7DEaFoEpHpCFaOO12R/VLp8xF4AbqrhKnn8541jVof8wVlfGcILcWE4RppANiLEWTClQonPVkLSiVj9C3YGQy6SKVdBUdt93PRQv36tgOlJjkQGPjcy3MEH/TwW2tl6wspITVz+dxn/lI7/8jtPv1cK09kR/dW4DbARLRYaLV3PR5G19v5JWgEDNyWQsaPtmryy9KlotUxsEXKKh6k19Mmej9Qse2zLfT0vc3BIGA5DMhyNxDn6GBwoqdJNwTs99W9cl89Y0FHqPas7WSqrZ/2IFxR4nu3cU/L9WDdo0S11gb/Gm1Xd9r78pGhKK7swTpeKV6HfTz7isRU0dnM/JrBnaidYAzAePSQiVC9+kUQ77k2/gMD57V0yohY2IOJx6csRShbNhuM9yHCvrkDdgM+mZIG/C7TynIdWH/mOLd1QKKvaJoSfl6fIu7hP1cqt68iN89Fef6fqVQmAMBSwREgd38AfkTSpXJq0Dl6bDCAE4pk5Sy43lIW2JP7r1DouoCrFRD/4WWAZfKSRIGdhqSXY0Uc15GWbTY6BtWQNP6Ehs1EszB+EA+wmfRXR7ATCZnaDJtt1nuBDmgrhJfZtY0h8BI7nTzkBZTMUWjL1GQm9oe4C4A50UXQHosCdTvt3jvPZDZ+9BwLes3WSulMuzRnJCfuHSDVqUQKHNwLNBzjQtJ/jsoXrszOiS8uEa/4ED3/vt7pevN9cxGOg0NABe8/FlSC2Ce4R+i3AObZp8A";
+const CIFRATO = "Yqwza0m93LXt4xzH4qx7jA==.zC5TtIQylbP0WzmX.Lq2468xAK9wRaqEDiGGh3Ov8QC7DEr2TRKl8hc82UUN5e+KkRMw7hlO/l/9Eobq1i7NA1lEC/DMSUnReCqR94lO1b+2/MinPkRtf3WvtGYRimHbsTdnuR3J6YJEk182BHLvhaa0LNcVd4x5dGpTws0XWRSUEowMWznUtQwBVZpzM5BRt0FSOgB067em9eO2J63YlkfUQwDSIDhqi1Q2B6LQiIr6XbuEUP7ZJbwqweIALeSHIULBVamldZdMkPznV/Nkv0TItvIwxsMyBuZWTJf5MVH7YYdzVzxATz55x9q3+yiuz9LZWhLqjNIo+DwEWkGSuO5lnbeNTjjdZFcwez9PSCmNQ4ZktyoFTLvtnuT0gVxZroJ++DX6am11Oh7rzfLrmCNrb1bGSlMpG4cZ1FEARdC6aTSKOlpZ+yyrayatk6E4MqrcnPmlj0Nb0SsLtpG3YxIFSB/hGO38DJ8qYQEZR1vVT0CgtrnosoThN9c+HuNemgwvUCF+CwLmm28KjWxEHgemOL2WOz1Y9Hijk1zqqROa4W3wdbjMOqCiwjNooNr69+07exFRYZJgn/LGoIKLjI03tD87R6wuHRzvATeDbSrSY1OKc+zUwtRUYxwp1hXtU5i3fuIkdePsbIUYDj4pO2zBDMAaZ7Ocn3L4Yiyb0WXFg9ahLNQS4nN0WicXzUvvbJd6hKk9dNPCVFiHPcp/JXu6zL+LegAl0PQEYsR7kGK2ICmYGaMk1HV88Fo58FBA3Z5+s9IE8Tw+jPHMAaof0cjet1FTsJZP1ITV1uh5oAqJn1EOTo8W2QGJuCCpGSuLnBW1KmQkWq1BVyEfm9mbj5kh456jpZaDaEosybsj4k5YDSnKp3khwJ2wp4U3UmTw8WM30Ac+SYZGmg/L2kwtsH6skkATHoi+/a24q/O5wwwWCBoq/FZxTRr/WrEyshaX++l8rYT0lDaFHAJ06rhw2y51+CyD7NdKwvLjfkK5e9zgSdNjnpIvBs/jL1gm2YUV+R7fvWKNv2sdBm/kYbbs14hjT0VeoZ5PpNfkHKofFzInGoXITb8suECBRbHsaut8iZY63Juo7FuwlBR7M1AdvbhSfG99lzpp8cUu6nFBSEohZTRLlhjM7B0UWQNEMp5xIcjUrc7JuLjASkObnpvlqFcLgQ6nTjsGDGNMeykU1iISQOWcMPp8f2D0SH5guId/l9P8Kp/G+xOGEUyVwH2sNx22LVDv+CQUG298pId9T2+g=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -176,6 +178,7 @@ $("compiti").innerHTML = DATI.compiti_fisso
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")

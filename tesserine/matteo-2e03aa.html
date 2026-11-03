@@ -48,6 +48,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 .compito{font-size:17px;font-weight:600}
 .compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
 .btn.wa{background:#25d366;color:#fff}
+.btn.cr{background:#1e8e3e;color:#fff}
 .btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
 .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 ul.diario{list-style:none;margin:0;padding:0}
@@ -101,6 +102,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
+    <a class="btn cr" id="classroom" target="_blank" rel="noopener" hidden>📚 Apri Classroom</a>
     <a class="btn wa" id="mandacompiti" target="_blank" rel="noopener">📷 Manda i compiti a Maja</a></div>
 
   <h2>Diario delle lezioni</h2>
@@ -132,7 +134,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "EkDhO+7RC3ieuDBgimgr8g==.5kUVMeD7WWsJv04M.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";
+const CIFRATO = "qpbZ2C2SQxbxhHMDuHUTBw==.fvfJwXIE5oqiqrya.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";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -176,6 +178,7 @@ $("compiti").innerHTML = DATI.compiti_fisso
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
   ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
