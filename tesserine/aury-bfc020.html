@@ -117,6 +117,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
 
 
+  <div id="secrin">
   <h2>Rinnova il pacchetto</h2>
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
@@ -125,12 +126,13 @@ a.mat:after{content:"→";color:var(--rosso)}
     <div class="iban" id="bonifico"></div>
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
+  </div>
 
   <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "hvc84/CFhtAOw9gJI+K+Qw==.mwU8yhly8TZCssb7.276+Y1WeZOa92MUqGhviVZa7AjrJFHfJFSV1vWw3E2IvMf3MaJMy0WG4fObopvQo5dgR9K4wqETyLIPcsYNDp2hxd49IH2SR1eKGRAgvzx4XYn89u485ecPF/wsVJtsG9Ig8f9ouAoGl9cVwToCuI6sFIoreHVQxiT/Rvlbpjarb96wKGTK9m4DT4+ajaEePTH9c9wwAgfgksSiRc4SenGXhX7mWvvGnN8S7KdU+sINI9AKGdkqdugBj2xcRYBrEsFaqluXsz4AhQpHzfteIizMXSpYqgVrUPNKZJD0cpCop0m+qsXpjHBZkTZVMImzSX9QuW4+Qn585W9l+lxy/KwTs3D6mOxywitWBzpGBFzJT2Gmg9ikBGyhmusywUdIHNLvl+7PedhxCQWGfiwGTc19erHAG7Ya/muHFTV8QMdLH6EO+pefbZPQvESno4Mz6YVdwAGWkIc2iFZQH1oAQiMC0q4fzvPE8Y4w78ZEOIppN1mQNXQppWHKMOTr14XEq6OyPYZIGtAEZve/5JboBlgGTzGgPPaF8mXMV5431r9izLxz8nHF4Q7tnWXCerONSff3tcjBVpY5hVGcpJH3V72ZNVqfjee8BZUSTe7SpQv+MIrlH6gKDktO/05EkKbmT8TGbJoYecxdr7LscyAn2Lv9Nb2ngzwK73G6grkmhsuLzXJYc+BqeRh7vHrKCggUfxMRpao3/BAaK2rh3/um4epouzxrkItZAlhxlIbBHPYCJZc2tnM+H";
+const CIFRATO = "nKca3UBeclcGgAvMnme1dQ==.zZlVFrDXtTkblXK+.qiOxcPERIxgAVPP1rDTojO+CuoQt4D0ZKplN1r4w92mZ1sonb65pcnjVE+uW/fexYfWD8jDt6z+8q0jNIeryxN6TexmYSd/+iLC1VLigeTOiCGFa4hlRQrknPwqJPHMXPGvhK1cumeyaxd/QpzZyAt44C1bLDpFj2vVEuqM1dX8f71fPbUBkzZ+KfexpxXR1eDG6zq0dXk9Fx7nfiLkR6dVs5egxq/bjgBEyxEj3K8R0lded7DbVNzbzqY6hasFjqSuyy2MjjMa26eF9M6MtBh2V6vKecRi18wbQo7qMUhCW4vJM0oOtAo7+NI8/NRi9n3gGUC8Vm2jxn8xXy/xvHgvka8qLhET4KwEwchC+lxrWVp/Anyj+la6uiD2tk51mXo1JR3+X7mE/BPHzI1mb9xF+h1In7AfEe6tFH5qCVxrxLOVGWXVCATwuNNMhbpq1Zpg5cOl7HjDrg7xZfiit2ssLKmMCk+2GTCXtVaEtnvI90X/+JxUw4EBCEvtfACRBgYqP2hJkr/slpu+yvfjoepN4vZ/i44kZBZPEuugMQ7Ia85a230htadISWpGYU1SmCjnm7+CDnJbgQXmJd5vOA/R8lgBHpQFMMe/mEizkyoVwCQK+5nOrtqvTPrSeQ4cYDBORYJydVZ3BmKTlsP3TxThA2xXm6b3DJBdPKiuS/NOB9N6/4EUQiktamyUkgFilHQBFriyHCLiiBh4N8Huek98Nhk01iMPhPVijk68vOCHdBGfVmZRR";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -161,6 +163,7 @@ function disegna(){
   document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
 }
 disegna();
+if (r > 2) $("secrin").hidden = true;
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const C = DATI.contatti || {};
 const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;

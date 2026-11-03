@@ -117,6 +117,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
 
 
+  <div id="secrin">
   <h2>Rinnova il pacchetto</h2>
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
@@ -125,12 +126,13 @@ a.mat:after{content:"→";color:var(--rosso)}
     <div class="iban" id="bonifico"></div>
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
+  </div>
 
   <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "fXx8jzPk7P40qaZPLJvnow==.zxn7173lCT3D1EUo.Q//Y+i5ilT4Nh1zwxSyMKidIUoEmUNSKsD6AD3KB9rSgjmLPvOAEeEk+YHlqzwTc+WDUa03ojqO0ayDUUJO4JIdivyMrklabKLSHaPuWp+dvj75KDI33nOGGu/dS2HabcKl7/md2405mNFjWRDuT4wdBXAlojYnxpsqnmowl3jO92mjwrnfoQ0O8ZbcCvFIxDC6wqkC+yUVXBY6wdRqxkISZxw14MZOfhT+6VTMZaPDGJru9ALzkJDD3PA1Eo1F7fm72fEtbD8+kJzTi3jtp82tWaQz8mYi7xdVZU2hocXsJQVC7E58/Q+iqjNmD5tI7RR5BRk48XECZlYULG4yUT5r8VSuEwB7MQw1DAVsJSvSC7TB9g1qUPuhiAUNQKTGJfeKTvVNOFEbZ2wK1VXZ5qFG2g3T5Lqwv8jxF76wdr0yozzqsJiFufSFEjNB1OSvsaI8zUu5nJif3yDvlSyKrDIIU+7XjKz+MvZbBJvuniLB+MxKfqhT8W9nD5ykoyHabZavV4/R+DUY0FMcdLcChceG1KO03NBJPCIwSobb6v6GgaXZka5AlA+AqXOlY0icVRPw2QG1h621R0m9miBAPqQNKPX8OnQMxGc6Cuuj2HRsgjTDkZ2oN1lDYWasaoO8+yHXeamKtWNJbIDsjY2R7gInepn3WWLptwb+2nSSvZ+Qo+rP+AXey3JCvh7sHhTLxdOUE39wB53ANpS3DfszA4KCZDcqJcftCQysEvwdPtx/M8+eYj1mPX2UirL8/vPt9iNOsCJEnMdmLgFPEJaYiwmuygzzbo6GSKNY0IEOHGTAYVOZi6eoxscDnX+NRrwBHLx1KlUpLcqCsjQ1jZaoqn/6RgkZSt0H5F5kkKDrT+srPWngjlD2/b5aiB1+ykGZ/A8n8h54dseHFoTFxth8cyIhkbWN3ARBXMUioifzmnMSwSk4ti6q13q5nikyksuJv95PutSnOJw+wnU3wgOQHJ22RMFc/Wqgq9F6enqgT11yuD8VfAyKIv2Wp8sMDdEAxCdRZLMuTtvi76qNZqHVhBcX/nEFNdkHflwBV74AXSA3JuDhButIDHu3zxAGhTgCZ+oifER+vyokNcG+WMcthzsy+qbL5YrsE88l2Qszjd2vz2AcR4y4I8uuEHz+0IVwIgj82nD7KqqEfw2sH2NJGRthqU5FtOKDKCZwM6CXTcnNGAudefupXocV/sP1xlkFp4oQNiUWXTK+yQRdnL8gzuDCFWI8HLekX9Dg0b/1SdpZnoLorNIQrmPhixqyVeGZcu/C/P/W1SM26xVhwRjkGMyrRQJaxX0xzPEa0QiwIIZRkEpqBL6/D6C+e2vC870uV+HXwzsAfgNLv4nvyNVFzC711yk7Xh7tUdAPvS6c41Tu604h3PrrrPN04qZp9j0RHBSnwltLKRVL53qG8/U8drSe+Pf3L1+MoHYBhGiWQRML3D/90PnsrDkoHOCaFTmsO1RoRGrbwblIB3rrTzPJVPPQ=";
+const CIFRATO = "XyvZ+y3c5qN62w/C7WHKZg==.uojCGCQQUYSnox27.vUM1c+omw4dLeoZ7wE43vYUn8jEU30M6cVuu/qJ1u1Ryl5qox9r9buX+f9+w/sf+vCcL3Y0sT5LLI68F4YkMw0OOUz05abLFqf7LQ2CvmzKK4cX+heY26CAuQ3JAOrXcDus9Wviy8DE0AZtBOSc3IicmcoX5Kpk7kv1AoN0S1QN9OeSnhbcarwCPvbimnjTuQwVltXtLKrK+IRhZKe0xceVXYgqQGHepDPclHM3j6JCWH5l/k+TakytD1yDzOtv5y/9b0suWBtsA688GxPXJSE9kZPI1lrDcIJ2IxFasCjkBbgR3ko+3dyu2klZ8WGCCeoVcqcSGhFFlaoGm5AI4wvrMS/eRQTaDwUAatXYZTFyaZ0oDu9i45W8Qetsbzg1YYfXgVR040OygsdFX8bypX3knBVCzYRwwcCxHFwKLoJQprJJA+ItK2BWBNfzftjVr1xVPEH7d4VGPYbrzFe88zhVVN19L/2X62E2BkCWfv7A3PNRnv4K8uW/WmJflR1mkbH2aCs0BqEaXf5SezlrAqnY7QgwtdIe5OxzaP/kbk0b/FWnLPkBObirRtUs9+0IEpMVuZ7NtAYYdm8pV3fOCgl+v4oTsSGnrSLVurU0fD9iIqHZU7O5D+RrxydyrdYdfUYoGShTnyOIhet8Z4tKUwAHqnAtqxLNzYMem7YqsLua2JrLVqWImpccIBH+V3zBWtyPWBzF3kdcPeLNPzClY4oZcNTbG6HlIF1s6o0jSdjPQ3arpvFGQt91IIqwWqzakVspTw6WMSDtfxlp1FNeBCvyLy4XvFblnB52m6j0BSMKvTlfDI0ETtWlG/5EPmsUAzxzsQeTmETQW0AtONhNsQCO/vjRsuW9VHyuM0E8lGmUHikBjc7LxHmfCphfOQB3uFWgVxu4cuKnUX7h0ufYJMIDhtCouHJ6wN3zu73jIklpTNRaoImVPvsupdrf8lj1ndcF3aWKykvYTBGP3BR5mBJ/TcdYT1VJdwGQ1Pi5vyWHpqayuX9BHrWd3Uaw0eQSatRR3egGfcWSlb+/IS/4mp3O8AMC7GEmGHLsQxOQIz4MVgpQsb52/W+5lSrNEvVt61HNXl8fj569GG6gyk0nVoJzi7P1s3HNBJB9qu+XC7SlXTcS/fum5l+2T9CUqpnvGoZJ1qHXHHP8Ez94BgNr6kf1xThyfEO5nZBfuu3EVozokPOV01R12z0KYDcTTmi8lw3QvP3M3FEiX2fE1WHHaaiv/YrRK7ho5cf3gIxk2bKOx0V7W2kNC9QfVgC3DEsecdZJCwP9YeCK8OPKmQa1OLzxGlg/eNgKcmdrukp0AUsfqYBqfFSIv+p/mJUw1GdOECuAi7CFopnGMGe3fjCJVdFqehoer3t12/uHmoC5y9Evg2bQy9AxOBbaFOnQw7JG9Hud5fjnILuPbCzvsYTxQYrzchbaBoOLKNfVKFBseIrjVhmVk4ySMeBH+UlLqRlbOxhvr6iOErKcrmK37YAfW5QM=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -161,6 +163,7 @@ function disegna(){
   document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
 }
 disegna();
+if (r > 2) $("secrin").hidden = true;
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const C = DATI.contatti || {};
 const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;

@@ -117,6 +117,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
 
 
+  <div id="secrin">
   <h2>Rinnova il pacchetto</h2>
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
@@ -125,12 +126,13 @@ a.mat:after{content:"→";color:var(--rosso)}
     <div class="iban" id="bonifico"></div>
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
+  </div>
 
   <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "00fPT5ZjnXMrcKsmvLPtGQ==.MBVzYqXK/x2vYg6Q.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";
+const CIFRATO = "Q+nxaROYVsikw5UdQnSbFg==.1k0tPkrFLwFWOutJ.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";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -161,6 +163,7 @@ function disegna(){
   document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
 }
 disegna();
+if (r > 2) $("secrin").hidden = true;
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const C = DATI.contatti || {};
 const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;
