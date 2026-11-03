@@ -101,7 +101,7 @@ function disegna(){
   const pp = $("paypal");
   if (P.paypal && p.prezzo) { pp.href = P.paypal.startsWith("http") ? P.paypal : "https://paypal.me/" + P.paypal + "/" + p.prezzo + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(p.prezzo) + " con PayPal"; }
   else { pp.removeAttribute("href"); pp.setAttribute("aria-disabled","true"); pp.textContent = "PayPal (in arrivo)"; }
-  $("ppnota").textContent = (P.paypal && p.prezzo && P.paypal.startsWith("http")) ? "Su PayPal inserisci l'importo di " + euro(p.prezzo) + " e nella nota il nome: " + DATI.nome + "." : "";
+  $("ppnota").textContent = (P.paypal && p.prezzo && P.paypal.startsWith("http")) ? "Su PayPal inserisci l'importo di " + euro(p.prezzo) + ", seleziona l'opzione Amici e parenti e nella nota scrivi il nome: " + DATI.nome + "." : "";
   $("bonifico").innerHTML = P.iban
     ? '<div><b>Oppure con bonifico</b></div><div>Intestato a: '+P.intestatario+'</div><div>IBAN: <span class="mono" id="ib">'+P.iban+'</span><button class="copia" data-c="'+P.iban+'">copia</button></div><div>Importo: '+euro(p.prezzo)+'</div><div>Causale: <span class="mono">'+causale+'</span><button class="copia" data-c="'+causale+'">copia</button></div>'
     : '<div><b>Oppure con bonifico</b> (dati in arrivo)</div>';
