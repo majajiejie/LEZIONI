@@ -133,7 +133,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "Uvan5yjB2hZerikATj+uRg==.gyTmMvty2YYdDvnu.6w3SlCiAHlzrxwZ3zzUbVIPI6e3O1mtyfh/vqXnXj0aKYnRDahXlfYiuPB26zxzoLDjmeK397qiTU12l1r6rP+oKafCMJgY8bBXSAg9cI7li/ZJPeX7utLco6QChIDjEuP+6Mvtn7cCRwKHFaZAcOuXGpt2nXNC5AoQ9yLFO4YPYU8QaM9YbSGpzZ/5N8KzU5U+e0APrkWDXOmstzmJfhQxiUuDIZy2Aj+CXwbk2w3ycCgdO99j7oQbEsFogDJs90YIobttDC3irHZe87P0FY9JN94NgV7PlLlgkJ7UV3K2JqXS/qW4prAVw65lBuYpa89Zc0NdQkdrJ+mLxZvj80ml5n9NJVuHcTMEWia6rpAvubDUF4lQ4eB1CeyXD1EqaDiyPy6MUEQYy2g4SU//1yS2r/C9YlMf+nTfuAOLgPCo0D0rJX984ykXn9o772lvKyRK+Lr0xrKxmDsEuUfU360bXOM/2bSEr57pjPkFaRQqYkVOwEz7tqifi8Je3WSV3X2rb1PVoS2+Sgbr0mOuofaqbhuvyytonHFNlvX9AXGOVFptEGenqkL1Lfwbmo1VCZNQ/rY6q72DEG/lai/YNmnF5FC+Auc1IZs8MuDhKR8DUvf4ZZiBjk2y/kj7o088HpZGHKUmzmvnE1FHiC/4MOoYQzLbHYICI15KSqSmaPK/ToWhmj79Yi4Lp4h4gVYGoyzcxW5pcBraEviBxQjgyZnE=";
+const CIFRATO = "u41yjHFGTe24YJCLwJ4OvA==.ozOY3AXHZDEM3ePH.2uaVJtlLEnGeGyRyPRX0n45d+k00tNLL+lDDA9hicCHzEH1l8DkZT2lDMlI7/HZpOT8OO2PfWCdh+lRE23LroArbBAe6vANP0J8AFlc8/4LXv2StLBRVRNXZfwYh9yrDSv8+/IUks3bbDt6P/gukjyaPRUjVd+n8hkb9HmXDAcezMR8DdDSnDP+KuOr35B4EW4D3Fiq9RoPDuDVcDYbbZXtMHsPWCuXCo8wiGYFPsYIdTgSZlenXr7rpWna9kqaNkqKFPi3RzvOrCCONLHaadUTHWSnKQbQQuR+KnmyvOSbbYCyIiGiQuvfntDTpt2M8pdax5d7+DhRDYaz3FXpmV542FusM3/MEzrnmdhl4V6oirc3nN/NgKaEyAmJZYcUFx2H+PyTYLSvayPw/F/dBCw1WGlbNekgvf9o8ukKblDppdDNxLLNyAjlQOhSDWAjR/95w5UInqvbsw4m/B/8zX59Pe7t42jZ+6ESJdU/8Utehl+SoqR80DFkRx3YGCZqW5mSLJjcV55sRMFADMu4FCwm3mP5YRgJdNLMpF+NhgVan/gmYBTdqqYq/CSoGlQzMVaHZ6q3M0rEIRvHLcddfgzTbF///lEFi5OSjnlFGVMkrL+B4lKYbi8Nvc45t4p7Q40S/lT3racNygMepvl3onalzdzx8FntDEkJ3x6VYhVoOOLwC3HHzrfkY2D1Rxzi1d3u9r0zY5waGa9H0ju/1E60=";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -209,7 +209,8 @@ async function prova(pin, silenzioso){
 }
 $("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
 $("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
-const gia = ricorda(); if (gia) prova(gia, true);
+const dalLink = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
+const gia = dalLink || ricorda(); if (gia) prova(gia, !dalLink);
 </script>
 </body>
 </html>
