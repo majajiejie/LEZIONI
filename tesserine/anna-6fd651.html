@@ -45,6 +45,24 @@ ul.storico{list-style:none;margin:0;padding:0}
 ul.storico li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--linea)}
 ul.storico li:last-child{border:0}
 footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
+.compito{font-size:17px;font-weight:600}
+.compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
+.btn.wa{background:#25d366;color:#fff}
+.btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
+.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+ul.diario{list-style:none;margin:0;padding:0}
+ul.diario li{padding:12px 0;border-bottom:1px dashed var(--linea)}
+ul.diario li:last-child{border:0}
+ul.diario .d{font-family:Fredoka,sans-serif;font-weight:600;color:var(--rosso-scuro)}
+ul.diario .c{color:var(--tenue);font-size:14px;margin-top:2px}
+.and h3{font-family:Fredoka,sans-serif;font-size:16px;margin:0 0 6px}
+.and ul{margin:0 0 14px;padding-left:20px}
+.and .bene h3{color:var(--verde)}
+.and .rip h3{color:#b7791f}
+a.mat{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;color:var(--testo);font-weight:700;padding:12px 14px;border:2px solid var(--linea);border-radius:14px;margin-bottom:8px;background:#fff}
+a.mat:after{content:"→";color:var(--rosso)}
+.vuoto{color:var(--tenue)}
+[hidden]{display:none!important}
 .pin{max-width:360px;margin:12vh auto 0;padding:0 16px;text-align:center}
 .pin .card{text-align:left}
 .pin input{width:100%;font:700 30px Fredoka,sans-serif;letter-spacing:.35em;text-align:center;padding:12px;border:2px solid var(--linea);border-radius:14px;margin-top:18px;background:#fff;color:var(--testo)}
@@ -76,6 +94,19 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
   </div>
   <div id="avviso"></div>
 
+  <h2>Compiti da fare</h2>
+  <div class="box"><div id="compiti"></div>
+    <a class="btn wa" id="mandacompiti" target="_blank" rel="noopener">📷 Manda i compiti a Maja</a></div>
+
+  <h2>Diario delle lezioni</h2>
+  <div class="box"><ul class="diario" id="diario"></ul></div>
+
+  <div id="secand" hidden><h2>Come sta andando</h2>
+  <div class="box and" id="andamento"></div></div>
+
+  <div id="secmat" hidden><h2>Materiali per ripassare</h2>
+  <div id="materiali"></div></div>
+
   <h2>Rinnova il pacchetto</h2>
   <div class="box">
     <div class="pacchetti" id="pacchetti"></div>
@@ -85,14 +116,17 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
     <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
   </div>
 
-  <h2>Lezioni fatte</h2>
-  <div class="box"><ul class="storico" id="storico"></ul></div>
+  <h2>Contatti</h2>
+  <div class="box">
+    <a class="btn wa chiaro" id="scrivi" target="_blank" rel="noopener">💬 Scrivi a Maja su WhatsApp</a>
+    <a class="btn wa chiaro" id="concorso" target="_blank" rel="noopener" hidden>🏆 Entra nel gruppo del concorso</a>
+  </div>
 
   <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "BM/LafkiWpnuWXg5ZWc+1g==.rndKUvtpa2L9o/8C.absOMVU+LFkx3qjQnBDzHWF/XW9DDw3xziGyv+Zfr00swDSzKJQzHH5pfQiUM3Y3XBrwDk9DcbJK5cnLyBkpPXEINNQ1Ak0dC8FCdC2gG00lBUh1Fg9B9VXi+pNQiU6RnH+pHv+3P15SyTJJvQZujH4T4rW67knxcdOgSCXe9ph5V3JheNY//GhDKKEni6SpH0stXZndWVJamRnyN62wzWHyAR11rIJZZxCOYrv7Q+hLfog1e07nv7igqNOOEP6jCnfYEiK9jHqGqMsSJOmLqIw7KGSD0DHG5L9kPxjLI20dfD0C2Qd6aTF1U2dtGxma5SAsidj6prQlWxc8l2Ta/+xJaBMGRoTlZ1ybvTFWhSVQ7tenkXMzFR5NyIvXoAH2ii9qtU5BqY0de2Tb/Nk+hnzCNeVWo7c=";
+const CIFRATO = "eJwWmWqNmxpzAyirVBzlYA==.TpR5MSiQn3hba4mM.vEQGXlls8f2Xlgre/NJlduujgO8eQS8XzftqD6Hu4yh/vJvyH6xG9lwgEILGhN7o+QfeXaGjbmulwinofqoz6lrZhapJEFara5nMcc9iiASewN+oaZF1VzESqI8zSOIUzS1caCgT3BY5V0/x4MRAfw4pRZtyisTDSIJQDhuFQnLXSyzip8VMHC8+mcfJv+1V4H6LmI+22MowshazCNaZjZxZxZGyYnzMCD1WgkDeg1v4YYkPQ4uW/nTK17X/7jKRVL/Iqftub/7qIifaEhcaV2sxym8fFUmwtEmknh8HVnYr8Iii8owXL3JhAm0ECsVCgE7ui/Ao2ELI9IK8sitn2ikNke+ZDWuc2/uT5LyFroJx8Imt49nQNym2gpRhxgTa04vOciDU/spfjhVfDen0oVB2PqwRxY2TbUQhhP30RdNOq4HloLAusmc+LQkytLagpvneXgnnN+AU9tk31VQSnusgNgRHrmDMZp1XU78q9iAMlhed7W2VPzmf6Rp4qLk89LR/BInrp2D8totpplCg5BwRog3SoK6/enFgEF7fEnWgtPlag8eTJD5qXA8J2F6mpfOgawuPWr5fIUygk+7XVrR1drmVbvO3HBButsl2UnO0v8fTyRIltFHe7qO/WEgN722X/4DTg2blV4HcZt0+oViirxDIVX8ypRHzhesYyl3yFNYiNfMCwXarkHWNJdy01kFVxBAWqtDzLtyI0pK4yu3dmAElSSKyjcO1Epj/+NUv4qv2OQAfxyXf8PnvWC5hsRMMKwvevnrvx+tPDOdYayNtHXHfHJNeAVvQL/VjDCuYc+l/2uqiTb+O/kzkgulfZhjBea/rJ0pm6ECu2VZ8PkmEILohLlAL+HgPouok4yDOE8hn/tFyw0mAbsZTk/U15mbVf0h9tBpv313BTXbWP7m7OwGp+UIeIhBf/Hs5BGyxOD/+El+ako2geXun+fB2IKrIozvo/3wkR5b3/4bcZiF+OTTjD9MWHIABDW9u7Gdg34+XHAljvqTWwjzMgk2B9PtNZrl7S7HCL1PXN501sm5Ky0H8ir31Szk469U+wggWZrAVaVURmJHxgnv9nBHxfXTrHyX5qzyhpUqn/lKuIRF4yi3eQ82LTS/NHj8LtjTGhbaKGqqP6WUnZJroltETomPuLiSb2vwXbcsHsMdhYjOgxYC6V0Kebw1KfMtwoMFQ6Rbt7MeCXmtassbaMmOUJbSqM8xYltFS8kd3VYYc2rNs0IXMNHLoiDI025EeuM6ZNJHMUTcnutcJHUz5x3zYIzJZWHNwkXGJWvLwDM/Z4IJS+kwe0zztr4SHunLIFLt6A/+LqThsQHnxw8iCJ+S4OESDgWjdMWaamJfXfaDTZKGm22JLQq8aAYpmaQNkCFnz7xxMZhj7VVFawLnEOSCE9udhpxrZzFkq3AdZdOvHfkfIB9GYLs2Pa8b8M96kRVf3MXcTPihzInJudhc1R53bl+LBwb0yg+7SG2wxllWdh2ekZ6ml8wXazEDfPm4hXQNJPW+qEzQob3hPXuquYNu3u7M8/hvq6+WBWxOUjfmmUIZLZX/mgv7xTdywmBPdeMTd9RgfAxENJ6L7gxk0OW048IvtVaaci5rWqqgj4eRfHteTFf3v+MY0qBK67WpTJNWCd91NVSq+6t5oz8WRveLAL0AuoUOrkPidxKAuos6HcESfd++oMn31YuakmuDwFfHkHh/P2NTgzF24rjewfHYz/Sjca8WNr2qi9VOhtsgYOpd9xJemTICHazhIzcq7kSfEP8WTn/G5h+Nr7xt9ETO9Gjdvx6V4+c6Zce8rsLbV7Q==";
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -123,9 +157,33 @@ function disegna(){
   document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
 }
 disegna();
-$("storico").innerHTML = DATI.storico.length
-  ? DATI.storico.slice().reverse().map(s=>'<li><span>'+s.data+'</span><span>'+s.nota+'</span></li>').join("")
-  : '<li><span>Da qui in poi trovi le date delle lezioni</span></li>';
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const C = DATI.contatti || {};
+const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;
+function link(el, url){ if (url) { el.href = url; el.removeAttribute("aria-disabled"); } else { el.removeAttribute("href"); el.setAttribute("aria-disabled","true"); } }
+const cp = DATI.compiti;
+$("compiti").innerHTML = cp && cp.testo
+  ? '<div class="compito"><small>Dalla lezione del ' + esc(cp.data) + '</small>' + esc(cp.testo) + '</div>'
+  : '<div class="vuoto">Nessun compito per ora 🎉</div>';
+link($("mandacompiti"), wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
+if (!(cp && cp.testo)) $("mandacompiti").hidden = true;
+const st = DATI.storico || [];
+$("diario").innerHTML = st.length
+  ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
+  : '<li class="vuoto">Qui trovi cosa abbiamo fatto a ogni lezione.</li>';
+const A = DATI.andamento || {};
+if ((A.bene && A.bene.length) || (A.ripassare && A.ripassare.length) || A.nota) {
+  $("andamento").innerHTML =
+    (A.bene && A.bene.length ? '<div class="bene"><h3>🌟 Cosa va benissimo</h3><ul>' + A.bene.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
+    (A.ripassare && A.ripassare.length ? '<div class="rip"><h3>📚 Da ripassare</h3><ul>' + A.ripassare.map(x => '<li>' + esc(x) + '</li>').join("") + '</ul></div>' : '') +
+    (A.nota ? '<div>' + esc(A.nota) + '</div>' : '') +
+    (A.aggiornato ? '<div class="nota">Aggiornato il ' + esc(A.aggiornato) + '</div>' : '');
+  $("secand").hidden = false;
+}
+const M = DATI.materiali || [];
+if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
+link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));
+if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
 const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
