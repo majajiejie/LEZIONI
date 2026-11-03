@@ -72,7 +72,7 @@ section.hist{background:var(--sky);border:1px solid var(--line);border-radius:18
 
   <section class="rules">
     <h2>Come si vincono le stelle</h2>
-    <div class="rule"><div class="ic">📮</div><div><b>Compiti consegnati un giorno prima</b><span>Consegna i compiti su Classroom almeno un giorno prima della lezione: 1 stella.</span></div></div>
+    <div class="rule"><div class="ic">📮</div><div><b>Compiti corretti consegnati un giorno prima</b><span>Consegna i compiti su Classroom almeno un giorno prima della lezione, e fatti bene: 1 stella.</span></div></div>
     <div class="rule"><div class="ic">🏆</div><div><b>Più risposte corrette</b><span>In ogni lezione chi dà più risposte corrette vince 1 stella a fine lezione.</span></div></div>
     <div class="rule"><div class="ic">✨</div><div><b>Stella bonus</b><span>Ogni tanto arriveranno delle attività extra: chi le svolge vince 1 stella bonus.</span></div></div>
     <div class="rule"><div class="ic">⭐</div><div><b>Stelle già vinte</b><span>Le stelle guadagnate nelle lezioni prima dell’arrivo del tabellone.</span></div></div>
@@ -120,7 +120,7 @@ function draw(){
   if(u)document.getElementById('foot').innerHTML='Aggiornato il '+new Date(u+'T12:00').toLocaleDateString('it-IT',{day:'numeric',month:'long'})+'<br>Maja Jiejie · 加油！';
 }
 draw();
-const MOTIVI={compiti:'📮 compiti consegnati un giorno prima',lezione:'🏆 più risposte corrette nella lezione',bonus:'✨ attività extra',prima:'⭐ stella vinta prima del tabellone'};
+const MOTIVI={compiti:'📮 compiti corretti consegnati un giorno prima',lezione:'🏆 più risposte corrette nella lezione',bonus:'✨ attività extra',prima:'⭐ stella vinta prima del tabellone'};
 (function(){const g={};REGISTRO.forEach(r=>(g[r.data]=g[r.data]||[]).push(r));
  document.getElementById('hist').innerHTML=Object.keys(g).sort().reverse().map(d=>`<div class="day"><h3>${new Date(d+'T12:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})}</h3>${g[d].map(r=>`<div class="ev"><b>${r.nome}</b><span>${MOTIVI[r.motivo]||r.motivo}${(r.stelle||1)>1?' · '+r.stelle+' stelle':''}</span></div>`).join('')}</div>`).join('')||'<p class="sub">Ancora nessuna stella assegnata.</p>'})();
 </script>
