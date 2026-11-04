@@ -1,0 +1,319 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HSKK lezione 13</title>
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;600&family=Figtree:wght@400;600;700&display=swap">
+<style>
+/* Layout: un "foglio d'esame" centrale, schede per le 3 parti, ogni frase è una riga da ascoltare-ripetere-verificare */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --fg:#1D2421; --muted:#5E6A64; --line:#DCE2DD;
+  --seal:#B8382A; --seal-soft:#F6E3DF; --jade:#2F7A63; --jade-soft:#DFF0E9;
+  --hanzi:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --brush:"Ma Shan Zheng","KaiTi","STKaiti",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A18; --surface:#1E2522; --fg:#E8EDEA; --muted:#9AA8A1; --line:#2F3934;
+  --seal:#E2705F; --seal-soft:#3A2420; --jade:#6CC3A5; --jade-soft:#1C3329; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151A18; --surface:#1E2522; --fg:#E8EDEA; --muted:#9AA8A1; --line:#2F3934;
+  --seal:#E2705F; --seal-soft:#3A2420; --jade:#6CC3A5; --jade-soft:#1C3329; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.seal{flex:none;width:68px;height:68px;border-radius:10px;background:var(--seal);color:#fff;display:grid;place-items:center;font-family:var(--brush);font-size:38px;line-height:1;transform:rotate(-4deg)}
+header h1{margin:0;font-size:1.75rem;line-height:1.15;text-wrap:balance}
+header p{margin:2px 0 0;color:var(--muted)}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--seal);font-weight:700}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 18px;border-bottom:1px solid var(--line)}
+nav button{font:inherit;font-weight:600;border:0;background:none;color:var(--muted);padding:10px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav button[aria-selected="true"]{color:var(--fg);border-color:var(--seal)}
+nav button:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.zh{font-family:var(--hanzi)}
+h2{font-size:1.3rem;margin:0 0 4px}
+.lead{color:var(--muted);margin:0 0 18px;max-width:65ch}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-size:.9rem;color:var(--muted)}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;background:var(--jade-soft);color:var(--jade);font-weight:600;font-size:.85rem;font-variant-numeric:tabular-nums}
+.list{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.item.done{border-color:var(--jade)}
+.num{grid-row:span 3;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;min-width:1.6em}
+.item .ctrl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.btn.play{background:var(--seal);border-color:var(--seal);color:#fff}
+.btn.ok[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.reveal{min-width:0}
+.reveal .h{font-family:var(--hanzi);font-size:1.35rem;line-height:1.4}
+.reveal .py{color:var(--jade);font-size:.95rem}
+.reveal .it{color:var(--muted);font-size:.9rem}
+.model{margin-top:6px;padding:8px 12px;border-radius:8px;background:var(--jade-soft)}
+.hidden-text{filter:blur(6px);user-select:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.timer{font-variant-numeric:tabular-nums;font-size:2.6rem;font-weight:700;line-height:1}
+.timer.prep{color:var(--muted)} .timer.speak{color:var(--seal)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:10px 0 14px}
+.bar i{display:block;height:100%;background:var(--seal);width:0;transition:width .3s linear}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.phr{display:flex;flex-wrap:wrap;gap:8px}
+.phr button{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 10px;cursor:pointer;text-align:left}
+.phr button small{display:block;color:var(--muted);font-size:.78rem}
+.note{font-size:.85rem;color:var(--muted)}
+.warn{background:var(--seal-soft);color:var(--fg);padding:8px 12px;border-radius:8px;font-size:.88rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.blk{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);margin-top:8px}
+.blk .bn{grid-row:span 3;width:28px;height:28px;border-radius:50%;background:var(--seal);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.blk .bl{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.blk .bz{font-family:var(--hanzi);font-size:1.1rem;line-height:1.6}
+.blk .bp{color:var(--jade);font-size:.9rem}
+.blk .bi{color:var(--muted);font-size:.85rem}
+.five{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:10px 0 0}
+.five div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px}
+.five b{color:var(--seal)}
+.who{grid-column:2;display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.who .wl{font-size:.75rem;color:var(--muted);font-weight:600;margin-right:2px}
+.who button{font:inherit;font-size:.82rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:999px;padding:3px 10px;cursor:pointer}
+.who button[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.card .who{grid-column:auto;margin-top:10px}
+.res td,.res th{text-align:center}.res td:first-child,.res th:first-child{text-align:left;font-weight:700}
+.res tr.win td{background:var(--jade-soft)}
+.res .tot{font-weight:800;font-size:1.15rem}
+.winner{margin:16px 0 0;padding:14px 16px;border-radius:12px;background:var(--seal-soft);font-size:1.05rem}
+.winner b{color:var(--seal)}
+.grp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="seal" aria-hidden="true">说</div>
+    <div>
+      <div class="eyebrow">HSKK · Lezione 13 · 我是走回来的</div>
+      <h1>HSKK con Maja Jiejie · A casa dei nonni</h1>
+      <p>Ripeti, rispondi e parla con i 5 blocchi. Tutto con le parole della lezione 13.</p>
+    </div>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" data-tab="p1" aria-selected="true">1 · Ripeti</button>
+    <button role="tab" data-tab="p2" aria-selected="false">2 · Rispondi</button>
+    <button role="tab" data-tab="p3" aria-selected="false">3 · Parla con i 5 blocchi</button>
+    <button role="tab" data-tab="p4" aria-selected="false">🏆 Risultati</button>
+  </nav>
+
+  <div class="toolbar">
+    <label for="srcSel">Audio</label><select id="srcSel" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)">
+      <option value="net">🔊 Voce cinese online (consigliata)</option><option value="dev">Voce del dispositivo</option></select>
+    <select id="voiceSel" hidden style="font:inherit;max-width:220px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)"></select>
+    <button class="btn" id="testBtn" type="button">🔈 Prova audio</button>
+    <label for="rate">Velocità</label>
+    <input id="rate" type="range" min="0.6" max="1.1" step="0.1" value="0.9">
+    <span id="rateLbl">0.9×</span>
+    <label for="grpSel">Gruppo</label><select id="grpSel" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)">
+      <option value="0">Sveva, Sofia, Sofy, Leo</option><option value="1">Gregorio, Samu</option></select>
+    <span class="chip" id="score">0 / 18 completate</span>
+  </div>
+  <p class="warn" id="noVoice" hidden>L'audio non parte: controlla il volume e la connessione, oppure prova l'altra opzione nel menu "Audio". In videochiamata, condividi la scheda con "Condividi anche l'audio della scheda".</p>
+
+  <section id="p1" role="tabpanel">
+    <h2 class="zh">第一部分 · 听后重复</h2>
+    <p class="lead">Ascolta la frase una sola volta e ripetila subito, uguale. Poi controlla il testo.</p>
+    <div class="list" id="list1"></div>
+  </section>
+
+  <section id="p2" role="tabpanel" hidden>
+    <h2 class="zh">第二部分 · 听后回答</h2>
+    <p class="lead">Ascolta la domanda e rispondi con una frase completa, riprendendo le parole della domanda.</p>
+    <div class="list" id="list2"></div>
+  </section>
+
+  <section id="p3" role="tabpanel" hidden>
+    <h2 class="zh">第三部分 · 回答问题</h2>
+    <p class="lead">Scegli una domanda, prepara la risposta con i 5 blocchi, poi parla per 1 minuto e mezzo senza fermarti.</p>
+    <div class="five">
+      <div><b>①</b> 我觉得…<br><span class="note">la tua opinione</span></div>
+      <div><b>②</b> 比…<br><span class="note">il confronto</span></div>
+      <div><b>③</b> 因为…<br><span class="note">il perché</span></div>
+      <div><b>④</b> 比如…<br><span class="note">un esempio</span></div>
+      <div><b>⑤</b> 所以… / 总之…<br><span class="note">la conclusione</span></div>
+    </div>
+    <div class="grid2" id="q3" style="margin-top:14px"></div>
+    <div class="card" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+        <div><div class="eyebrow" id="phase">Pronti?</div><div class="zh" id="curQ" style="font-size:1.2rem">Scegli una domanda qui sopra</div></div>
+        <div class="timer prep" id="clock">1:30</div>
+      </div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="prepBtn">Preparazione (1:30)</button>
+        <button class="btn play" id="speakBtn">Parla ora (1:30)</button>
+        <button class="btn" id="stopBtn">Ferma</button>
+      </div>
+    </div>
+    <h2 style="margin-top:22px;font-size:1.05rem">Parole e frasi utili della lezione 13</h2>
+    <p class="note">Tocca per ascoltare.</p>
+    <div class="phr" id="phr"></div>
+  </section>
+
+  <section id="p4" role="tabpanel" hidden>
+    <h2>🏆 Risultati della lezione</h2>
+    <p class="lead">Ogni risposta giusta vale 1 punto: nelle attività tocca il nome di chi ha risposto bene (scegli il gruppo in alto). Qui vedi i punti di tutte le attività insieme.</p>
+    <div class="grp">
+      <button class="btn" id="resetPts">Azzera i punti</button></div>
+    <div class="tbl card" style="padding:6px 10px"><table class="res"><thead><tr><th>Nome</th><th>1 · Ripeti</th><th>2 · Rispondi</th><th>3 · Parla</th><th>Totale</th></tr></thead><tbody id="resBody"></tbody></table></div>
+    <div class="winner" id="winner"></div>
+  </section>
+</div>
+
+<script>
+const P1=[
+ ["我是走回来的。","Wǒ shì zǒu huílai de.","Sono tornato/a a piedi."],
+ ["我终于到爷爷奶奶家了。","Wǒ zhōngyú dào yéye nǎinai jiā le.","Finalmente sono arrivato/a a casa dei nonni."],
+ ["这是我给奶奶买的礼物。","Zhè shì wǒ gěi nǎinai mǎi de lǐwù.","Questo è il regalo che ho comprato per la nonna."],
+ ["我在路上遇到了校长。","Wǒ zài lù shang yùdào le xiàozhǎng.","Per strada ho incontrato il preside."],
+ ["爷爷一边喝茶，一边看报纸。","Yéye yìbiān hē chá, yìbiān kàn bàozhǐ.","Il nonno beve il tè e intanto legge il giornale."],
+ ["我的自行车坏了。","Wǒ de zìxíngchē huài le.","La mia bicicletta si è rotta."],
+ ["老师走进教室，我们都站起来了。","Lǎoshī zǒu jìn jiàoshì, wǒmen dōu zhàn qǐlai le.","La maestra è entrata in classe e ci siamo alzati tutti."],
+ ["周末我一般在家休息。","Zhōumò wǒ yìbān zài jiā xiūxi.","Nel fine settimana di solito mi riposo a casa."],
+ ["我们应该经常给爷爷奶奶打电话。","Wǒmen yīnggāi jīngcháng gěi yéye nǎinai dǎ diànhuà.","Dovremmo telefonare spesso ai nonni."],
+ ["你愿意跟我一起过去吗？","Nǐ yuànyì gēn wǒ yìqǐ guòqu ma?","Vuoi venire di là con me?"]
+];
+const P2=[
+ ["你今天是怎么来学校的？","Nǐ jīntiān shì zěnme lái xuéxiào de?","Oggi come sei venuto/a a scuola?","我今天是坐公共汽车来的。","Wǒ jīntiān shì zuò gōnggòng qìchē lái de."],
+ ["你经常去爷爷奶奶家吗？","Nǐ jīngcháng qù yéye nǎinai jiā ma?","Vai spesso dai nonni?","我经常去，一般周末去。","Wǒ jīngcháng qù, yìbān zhōumò qù."],
+ ["你给妈妈买过礼物吗？","Nǐ gěi māma mǎi guo lǐwù ma?","Hai mai comprato un regalo alla mamma?","买过，我给妈妈买过一本书。","Mǎi guo, wǒ gěi māma mǎi guo yì běn shū."],
+ ["你一般几点起床？","Nǐ yìbān jǐ diǎn qǐchuáng?","Di solito a che ora ti alzi?","我一般早上七点起床。","Wǒ yìbān zǎoshang qī diǎn qǐchuáng."],
+ ["你喜欢一边做作业一边听音乐吗？","Nǐ xǐhuan yìbiān zuò zuòyè yìbiān tīng yīnyuè ma?","Ti piace fare i compiti ascoltando la musica?","我不喜欢，我做作业的时候不听音乐。","Wǒ bù xǐhuan, wǒ zuò zuòyè de shíhou bù tīng yīnyuè."],
+ ["你在路上遇到过老师吗？","Nǐ zài lù shang yùdào guo lǎoshī ma?","Ti è mai capitato di incontrare un insegnante per strada?","遇到过，我在超市遇到过我的老师。","Yùdào guo, wǒ zài chāoshì yùdào guo wǒ de lǎoshī."],
+ ["你的手机坏过吗？","Nǐ de shǒujī huài guo ma?","Il tuo cellulare si è mai rotto?","坏过一次，后来我买了一个新的。","Huài guo yí cì, hòulái wǒ mǎi le yí ge xīn de."],
+ ["你愿意帮妈妈做饭吗？","Nǐ yuànyì bāng māma zuò fàn ma?","Ti va di aiutare la mamma a cucinare?","我愿意，我喜欢帮妈妈做饭。","Wǒ yuànyì, wǒ xǐhuan bāng māma zuò fàn."]
+];
+const P3=[
+ {q:"你觉得我们应该经常去看爷爷奶奶吗？为什么？",py:"Nǐ juéde wǒmen yīnggāi jīngcháng qù kàn yéye nǎinai ma? Wèishénme?",it:"Secondo te dovremmo andare spesso a trovare i nonni? Perché?",
+  b:[["我觉得我们应该经常去看爷爷奶奶。","Wǒ juéde wǒmen yīnggāi jīngcháng qù kàn yéye nǎinai.","Secondo me dovremmo andare spesso a trovare i nonni."],
+     ["去看他们比给他们打电话好多了。","Qù kàn tāmen bǐ gěi tāmen dǎ diànhuà hǎo duō le.","Andare a trovarli è molto meglio che telefonare."],
+     ["因为爷爷奶奶年纪大了，他们很愿意看到我们。","Yīnwèi yéye nǎinai niánjì dà le, tāmen hěn yuànyì kàndào wǒmen.","Perché i nonni sono anziani e sono felicissimi di vederci."],
+     ["比如，上个周末我给奶奶买了一个礼物，是走过去的。奶奶一边吃饭一边跟我说她过去的生活，她特别高兴。","Bǐrú, shàng ge zhōumò wǒ gěi nǎinai mǎi le yí ge lǐwù, shì zǒu guòqu de. Nǎinai yìbiān chī fàn yìbiān gēn wǒ shuō tā guòqù de shēnghuó, tā tèbié gāoxìng.","Per esempio, lo scorso weekend ho comprato un regalo alla nonna e ci sono andato/a a piedi. La nonna, mentre mangiava, mi raccontava della sua vita di una volta: era felicissima."],
+     ["所以我觉得，我们应该常常去看他们。","Suǒyǐ wǒ juéde, wǒmen yīnggāi chángcháng qù kàn tāmen.","Quindi penso che dovremmo andarli a trovare spesso."]]},
+ {q:"你觉得过去的生活好还是现在的生活好？为什么？",py:"Nǐ juéde guòqù de shēnghuó hǎo háishi xiànzài de shēnghuó hǎo? Wèishénme?",it:"Secondo te era meglio la vita di una volta o quella di oggi? Perché?",
+  b:[["我觉得现在的生活更好。","Wǒ juéde xiànzài de shēnghuó gèng hǎo.","Secondo me la vita di oggi è migliore."],
+     ["现在的生活比过去方便多了。","Xiànzài de shēnghuó bǐ guòqù fāngbiàn duō le.","La vita di oggi è molto più comoda di quella di una volta."],
+     ["因为现在有手机、电脑，还有很多车。","Yīnwèi xiànzài yǒu shǒujī, diànnǎo, hái yǒu hěn duō chē.","Perché oggi ci sono il cellulare, il computer e tante macchine."],
+     ["比如，我爷爷说，过去他一般是走路去学校的，要走一个小时。现在我坐公共汽车，十分钟就到了。","Bǐrú, wǒ yéye shuō, guòqù tā yìbān shì zǒulù qù xuéxiào de, yào zǒu yí ge xiǎoshí. Xiànzài wǒ zuò gōnggòng qìchē, shí fēnzhōng jiù dào le.","Per esempio, il nonno dice che una volta di solito andava a scuola a piedi e ci metteva un'ora. Adesso io prendo l'autobus e in dieci minuti arrivo."],
+     ["总之，我觉得现在的生活更方便，更好。","Zǒngzhī, wǒ juéde xiànzài de shēnghuó gèng fāngbiàn, gèng hǎo.","Insomma, penso che la vita di oggi sia più comoda e migliore."]]}
+];
+const LBL=["① Opinione","② Confronto","③ Perché","④ Esempio","⑤ Conclusione"];
+const PHR=[["是……的","shì… de","è stato… (come/quando/dove)"],["走回来","zǒu huílai","tornare a piedi"],["终于","zhōngyú","finalmente"],["礼物","lǐwù","regalo"],["遇到","yùdào","incontrare per caso"],["一边……一边……","yìbiān… yìbiān…","mentre…, intanto…"],["一般","yìbān","di solito"],["愿意","yuànyì","essere disposto, volere"],["应该","yīnggāi","dovere"],["经常","jīngcháng","spesso"],["生活","shēnghuó","vita"],["坏了","huài le","si è rotto"],["站起来","zhàn qǐlai","alzarsi in piedi"],["过去","guòqù","il passato, una volta"],["爷爷奶奶","yéye nǎinai","i nonni (paterni)"],["校长","xiàozhǎng","preside"]];
+
+let done={};try{done=JSON.parse(localStorage.getItem("hskk-l13-done")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("hskk-l13-done",JSON.stringify(done))}catch(e){};updScore()}
+const GRUPPI=[["Sveva","Sofia","Sofy","Leo"],["Gregorio","Samu"]];
+let grp=0;try{grp=parseInt(localStorage.getItem("hskk-l13-grp")||"0")||0}catch(e){}
+let pts={};try{pts=JSON.parse(localStorage.getItem("hskk-l13-pts")||"{}")}catch(e){}
+function nomi(){return GRUPPI[grp]||GRUPPI[0]}
+function savePts(){try{localStorage.setItem("hskk-l13-pts",JSON.stringify(pts));localStorage.setItem("hskk-l13-grp",grp)}catch(e){};renderRes()}
+function whoRow(key){const w=document.createElement("div");w.className="who";w.dataset.key=key;fillWho(w);return w}
+function fillWho(w){const key=w.dataset.key;w.innerHTML='<span class="wl">Risposta giusta:</span>';
+  nomi().forEach(n=>{const b=document.createElement("button");b.textContent=n;const on=(pts[key]||[]).includes(n);b.setAttribute("aria-pressed",on);
+    b.onclick=()=>{const a=pts[key]||[];pts[key]=a.includes(n)?a.filter(x=>x!==n):a.concat(n);b.setAttribute("aria-pressed",pts[key].includes(n));savePts()};w.appendChild(b)})}
+function renderRes(){const body=document.getElementById("resBody");if(!body)return;
+  const rows=nomi().map(n=>{const c={p1:0,p2:0,p3:0};Object.keys(pts).forEach(k=>{if((pts[k]||[]).includes(n))c[k.split("-")[0]]++});return{n,c,t:c.p1+c.p2+c.p3}});
+  const max=Math.max(0,...rows.map(r=>r.t));
+  body.innerHTML=rows.map(r=>`<tr class="${max>0&&r.t===max?"win":""}"><td>${r.n}</td><td>${r.c.p1}</td><td>${r.c.p2}</td><td>${r.c.p3}</td><td class="tot">${r.t}</td></tr>`).join("");
+  const w=rows.filter(r=>max>0&&r.t===max).map(r=>r.n);
+  document.getElementById("winner").innerHTML=!w.length?"Ancora nessun punto assegnato.":
+    w.length===1?`Più risposte corrette: <b>${w[0]}</b> con ${max} punti 🎉`:`Pareggio a ${max} punti tra <b>${w.join("</b> e <b>")}</b>`}
+function updScore(){const n=Object.values(done).filter(Boolean).length;document.getElementById("score").textContent=n+" / 18 completate"}
+
+/* Audio: di base usa un file audio con voce cinese online (si sente su ogni dispositivo e anche condividendo la scheda in videochiamata);
+   se non si carica, passa da solo alla voce del dispositivo. */
+let zhVoice=null,src="net";try{src=localStorage.getItem("hskk-audio-src")||"net"}catch(e){}
+const player=new Audio();player.preload="auto";let queue=[],playId=0;
+function rankV(x){const n=(x.name||"").toLowerCase();let s=0;if(/natural|online|neural/.test(n))s+=50;if(/xiaoxiao|xiaoyi|yunxi|yunjian|xiaohan|xiaomo/.test(n))s+=40;if(/google/.test(n))s+=35;if(/tingting|ting-ting|lili|meijia|yu-shu|shanshan/.test(n))s+=25;if(/huihui|kangkang|yaoyao/.test(n))s-=20;if(/zh[-_]cn/i.test(x.lang))s+=10;return s}
+function zhList(){if(!("speechSynthesis" in window))return[];return speechSynthesis.getVoices().filter(x=>/^zh|cmn/i.test(x.lang)&&!/hk|yue|cantonese/i.test(x.lang+x.name)).sort((a,b)=>rankV(b)-rankV(a))}
+function fillVoices(){const sel=document.getElementById("voiceSel");if(!sel)return;const L=zhList();if(!L.length)return;let saved=null;try{saved=localStorage.getItem("zh-voice")}catch(e){}
+  sel.innerHTML=L.map(v=>`<option value="${v.name}">${v.name}</option>`).join("");if(saved&&L.some(v=>v.name===saved))sel.value=saved;
+  sel.onchange=()=>{try{localStorage.setItem("zh-voice",sel.value)}catch(e){};pickVoice()}}
+function pickVoice(){const L=zhList();const sel=document.getElementById("voiceSel");zhVoice=(sel&&L.find(v=>v.name===sel.value))||L[0]||null}
+if("speechSynthesis" in window){fillVoices();pickVoice();speechSynthesis.onvoiceschanged=()=>{fillVoices();pickVoice()}}
+function rateVal(){return parseFloat(document.getElementById("rate").value)}
+function stopAll(){playId++;queue=[];try{player.pause()}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
+function chunks(t){const parts=t.match(/[^。！？；，,!?;]+[。！？；，,!?;]*/g)||[t];const out=[];let cur="";
+  parts.forEach(p=>{if((cur+p).length>150&&cur){out.push(cur);cur=p}else cur+=p});if(cur)out.push(cur);return out}
+function ttsUrl(t){return "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&q="+encodeURIComponent(t)}
+function speakDev(t){
+  if(!("speechSynthesis" in window)){document.getElementById("noVoice").hidden=false;return}
+  pickVoice();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;
+  u.rate=rateVal();u.onerror=()=>{document.getElementById("noVoice").hidden=false};speechSynthesis.speak(u)}
+function playNext(id){if(id!==playId)return;const t=queue.shift();if(!t)return;
+  player.src=ttsUrl(t);player.playbackRate=rateVal();try{player.preservesPitch=true}catch(e){}
+  player.onended=()=>playNext(id);
+  player.onerror=()=>{if(id!==playId)return;const rest=[t].concat(queue).join("");stopAll();speakDev(rest)};
+  const p=player.play();if(p&&p.catch)p.catch(()=>{if(id!==playId)return;const rest=[t].concat(queue).join("");stopAll();speakDev(rest)})}
+function speak(t){stopAll();document.getElementById("noVoice").hidden=true;
+  if(src==="dev"){speakDev(t);return}
+  queue=chunks(t);playNext(playId)}
+const srcSel=document.getElementById("srcSel");srcSel.value=src;document.getElementById("voiceSel").hidden=src!=="dev";
+srcSel.onchange=()=>{src=srcSel.value;try{localStorage.setItem("hskk-audio-src",src)}catch(e){};document.getElementById("voiceSel").hidden=src!=="dev";stopAll()};
+document.getElementById("testBtn").onclick=()=>speak("你好！我们开始吧。");
+const rate=document.getElementById("rate");rate.oninput=()=>{document.getElementById("rateLbl").textContent=rate.value+"×";player.playbackRate=rateVal()};
+
+function buildList(el,data,part){
+  data.forEach((d,i)=>{
+    const key=part+"-"+i,it=document.createElement("div");it.className="item"+(done[key]?" done":"");
+    const ans=part==="p2"?`<div class="model"><div class="h" style="font-size:1.15rem">${d[3]}</div><div class="py">${d[4]}</div></div>`:"";
+    it.innerHTML=`<div class="num">${i+1}</div>
+      <div class="ctrl"><button class="btn play">▶ Ascolta</button><button class="btn sh">Mostra</button><button class="btn ok" aria-pressed="${!!done[key]}">✓ Fatto</button>${part==="p2"?'<button class="btn ma">▶ Risposta</button>':""}</div>
+      <div class="reveal hidden-text" aria-hidden="true"><div class="h">${d[0]}</div><div class="py">${d[1]}</div><div class="it">${d[2]}</div>${ans}</div>`;
+    const rv=it.querySelector(".reveal"),sh=it.querySelector(".sh");
+    it.querySelector(".play").onclick=()=>speak(d[0]);
+    sh.onclick=()=>{const h=rv.classList.toggle("hidden-text");rv.setAttribute("aria-hidden",h);sh.textContent=h?"Mostra":"Nascondi"};
+    if(part==="p2")it.querySelector(".ma").onclick=()=>speak(d[3]);
+    const ok=it.querySelector(".ok");ok.onclick=()=>{done[key]=!done[key];ok.setAttribute("aria-pressed",done[key]);it.classList.toggle("done",done[key]);save()};
+    it.appendChild(whoRow(key));
+    el.appendChild(it)})
+}
+buildList(document.getElementById("list1"),P1,"p1");buildList(document.getElementById("list2"),P2,"p2");updScore();
+
+const q3=document.getElementById("q3");
+P3.forEach((d,i)=>{const c=document.createElement("div");c.className="card";
+  c.innerHTML=`<div class="eyebrow">Domanda ${i+1}</div><div class="zh" style="font-size:1.2rem;margin:4px 0">${d.q}</div><div class="py" style="color:var(--jade)">${d.py}</div><div class="note">${d.it}</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn play sel">Scegli</button><button class="btn nb">Mostra il blocco 1</button><button class="btn lm">▶ Tutto insieme</button></div>
+  <div class="blocks"></div>`;
+  let shown=0;const box=c.querySelector(".blocks"),nb=c.querySelector(".nb");
+  nb.onclick=()=>{if(shown>=5){box.innerHTML="";shown=0;nb.textContent="Mostra il blocco 1";return}
+    const b=d.b[shown],e=document.createElement("div");e.className="blk";
+    e.innerHTML=`<div class="bn">${shown+1}</div><div class="bl">${LBL[shown]}</div><div class="bz">${b[0]}</div><div><div class="bp">${b[1]}</div><div class="bi">${b[2]}</div></div>`;
+    e.onclick=()=>speak(b[0]);box.appendChild(e);shown++;nb.textContent=shown<5?"Mostra il blocco "+(shown+1):"Nascondi i blocchi"};
+  c.querySelector(".sel").onclick=()=>{document.getElementById("curQ").textContent=d.q;speak(d.q)};
+  c.querySelector(".lm").onclick=()=>speak(d.b.map(x=>x[0]).join(""));c.insertBefore(whoRow("p3-"+i),box);q3.appendChild(c)});
+
+const phr=document.getElementById("phr");
+PHR.forEach(p=>{const b=document.createElement("button");b.innerHTML=`<span class="zh">${p[0]}</span><small>${p[1]} · ${p[2]}</small>`;b.onclick=()=>speak(p[0].replace(/……/g,""));phr.appendChild(b)});
+
+let tid=null;const clock=document.getElementById("clock"),fill=document.getElementById("barFill"),phase=document.getElementById("phase");
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function run(total,label,cls){clearInterval(tid);let left=total;phase.textContent=label;clock.className="timer "+cls;clock.textContent=fmt(left);fill.style.width="0";
+  tid=setInterval(()=>{left--;clock.textContent=fmt(Math.max(left,0));fill.style.width=((total-left)/total*100)+"%";
+    if(left<=0){clearInterval(tid);phase.textContent=cls==="prep"?"Tempo di preparazione finito":"Tempo scaduto · 好！";if(cls==="prep")run(90,"Parla adesso","speak")}},1000)}
+document.getElementById("prepBtn").onclick=()=>run(90,"Preparazione","prep");
+document.getElementById("speakBtn").onclick=()=>run(90,"Parla adesso","speak");
+document.getElementById("stopBtn").onclick=()=>{clearInterval(tid);phase.textContent="Fermato"};
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  document.querySelectorAll("[role=tabpanel]").forEach(s=>s.hidden=s.id!==b.dataset.tab);
+  stopAll()});
+const gs=document.getElementById("grpSel");gs.value=String(grp);
+gs.onchange=()=>{grp=parseInt(gs.value);document.querySelectorAll(".who").forEach(fillWho);savePts()};
+const rb=document.getElementById("resetPts");rb.onclick=()=>{if(rb.dataset.arm!=="1"){rb.dataset.arm="1";rb.textContent="Sicura? Tocca ancora";setTimeout(()=>{rb.dataset.arm="";rb.textContent="Azzera i punti"},3000);return}
+  pts={};rb.dataset.arm="";rb.textContent="Azzera i punti";document.querySelectorAll(".who").forEach(fillWho);savePts()};
+renderRes();
+</script>
+</body></html>
