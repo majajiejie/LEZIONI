@@ -198,6 +198,40 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
  linear-gradient(#fbe0ea,#fbe0ea) center/100% 1px no-repeat,linear-gradient(#fbe0ea,#fbe0ea) center/1px 100% no-repeat,#fff}
 .step svg{width:100%;height:100%;display:block}
 .step b{position:absolute;top:1px;left:4px;font-size:14px;color:#e8558f;font-family:'Noto Sans',sans-serif}
+.brow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bh{position:relative;border-radius:22px;padding:14px 8px 12px;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center}
+.bh .n{position:absolute;top:8px;left:10px;background:#fff;color:var(--ink);border-radius:50%;width:32px;height:32px;line-height:32px;font-size:20px;font-weight:700}
+.bh .bi{font-size:56px;line-height:1.1}
+.bh b{font-size:30px;line-height:1.2}
+.bh b.zh{font-size:40px}
+.bh small{font-size:18px;opacity:.95;line-height:1.2}
+.bh:not(:last-child)::after{content:'➜';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--soft);font-size:22px;z-index:2;background:#fff6eb;border-radius:50%;width:22px;text-align:center}
+.k1{--c:#3a8fd0;--l:#e7f2fb} .k2{--c:#f39a3d;--l:#fff0dd} .k3{--c:#3fa874;--l:#e6f6ec} .k4{--c:#e0524a;--l:#fde8e6}
+.bh.k1,.bh.k2,.bh.k3,.bh.k4{background:var(--c)}
+.bex{background:#fff;border-radius:22px;padding:12px;margin-top:14px}
+.bc{background:var(--l);border:3px solid var(--c);border-radius:18px;text-align:center;padding:8px 4px}
+.bc .bi{font-size:50px;line-height:1.1}
+.bc .bz{font-size:40px;color:var(--c);line-height:1.2}
+.bc .bp{font-size:20px;color:var(--soft)}
+.bfull{display:flex;align-items:center;gap:14px;margin-top:10px;padding:0 6px}
+.bfull .zh{font-size:34px}
+.bfull .py{font-size:22px}
+.bfull .it{color:var(--soft);font-size:22px}
+.place{border-radius:20px;padding:12px;text-align:center;margin-bottom:6px}
+.place.bath{background:linear-gradient(135deg,#d9f0fb,#eef9ff)}
+.place.kitchen{background:linear-gradient(135deg,#ffeccc,#fff7e8)}
+.place .pe{font-size:62px;letter-spacing:8px;line-height:1.2}
+.place .pl{font-size:28px;font-weight:700;color:var(--soft)}
+.face3{flex:none;width:84px;height:84px;border-radius:50%;border:4px solid;background:#fff;font-size:54px;display:flex;align-items:center;justify-content:center}
+.talk2{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px}
+.tk{background:#fff3d6;border-radius:20px;padding:16px 18px}
+.tq{display:flex;align-items:center;gap:12px}
+.tq .zh{font-size:34px}
+.tq .py,.ta .py{font-size:22px;display:block}
+.ta{margin-top:10px;background:#fff;border-radius:14px;padding:8px 14px;color:#5a4a42}
+.ta .zh{font-size:32px;white-space:nowrap}
+.bl{display:inline-block;width:110px;border-bottom:3px solid #c9b8ab;margin:0 4px;vertical-align:baseline}
+@media (max-width:640px){.brow{gap:6px}.bh b{font-size:20px}.bh .bi,.bc .bi{font-size:36px}.bc .bz{font-size:28px}.bh small{font-size:14px}.talk2{grid-template-columns:1fr}.ta .zh{white-space:normal}}
 .hw{background:#ffe9f2;border:3px dashed #e8558f;border-radius:24px;padding:18px 22px;margin-top:22px;font-size:26px;text-align:center}
 </style>
 </head>
@@ -261,22 +295,29 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 <!-- 把 -->
 <section id="s2">
   <h2>La parola magica <span class="zh">把</span> 🪄</h2>
-  <p class="hint">Con 把 diciamo prima <b>la cosa</b>, poi <b>che cosa le facciamo</b></p>
+  <p class="hint">把 è un ponte: collega <b>chi fa l'azione</b> alla <b>cosa</b></p>
 
   <div class="box orange">
     <h3>1 · Come si costruisce la frase</h3>
-    <div class="struct">
-      <div class="blk cA"><div class="t">chi</div><div class="s">fa l'azione</div></div>
-      <div class="plus">+</div>
-      <div class="blk cZ"><div class="t">把</div><div class="s"><span class="pyf">bǎ</span></div></div>
-      <div class="plus">+</div>
-      <div class="blk cB"><div class="t">che cosa</div><div class="s">la cosa</div></div>
-      <div class="plus">+</div>
-      <div class="blk cL"><div class="t">吃了 / 喝了 / 关上</div><div class="s">l'azione</div></div>
+    <div class="brow bhead">
+      <div class="bh k1"><span class="n">1</span><div class="bi">🙋</div><b>Chi</b><small>fa l'azione</small></div>
+      <div class="bh k2"><span class="n">2</span><div class="bi">🪄</div><b class="zh">把</b><small class="pyf">bǎ</small></div>
+      <div class="bh k3"><span class="n">3</span><div class="bi">📦</div><b>La cosa</b><small>che riceve l'azione</small></div>
+      <div class="bh k4"><span class="n">4</span><div class="bi">✋</div><b>L'azione</b><small>cosa le succede</small></div>
     </div>
-    <div class="exrow"><div class="mini">👵🥘</div><div><div class="zh"><span class="tA">奶奶</span><span class="tZ">把</span><span class="tB">菜</span><span class="tL">吃了</span>。</div><span class="py">Nǎinai bǎ cài chī le.</span><span class="it">La nonna ha mangiato la verdura.</span></div><button class="spk" onclick="say('奶奶把菜吃了。')">🔊</button></div>
-    <div class="exrow"><div class="mini">👴🧃</div><div><div class="zh"><span class="tA">爷爷</span><span class="tZ">把</span><span class="tB">果汁</span><span class="tL">喝了</span>。</div><span class="py">Yéye bǎ guǒzhī hē le.</span><span class="it">Il nonno si è bevuto il succo.</span></div><button class="spk" onclick="say('爷爷把果汁喝了。')">🔊</button></div>
-    <div class="exrow"><div class="mini">👦🥛</div><div><div class="zh"><span class="tA">弟弟</span><span class="tZ">把</span><span class="tB">牛奶</span><span class="tL">喝了</span>。</div><span class="py">Dìdi bǎ niúnǎi hē le.</span><span class="it">Il fratellino ha bevuto il latte.</span></div><button class="spk" onclick="say('弟弟把牛奶喝了。')">🔊</button></div>
+    <p class="hint" style="margin:14px 0 8px">Ogni frase va in questo ordine: 1 ➜ 2 ➜ 3 ➜ 4</p>
+    <div class="bex">
+      <div class="brow"><div class="bc k1"><div class="bi">👵</div><div class="bz zh">奶奶</div><div class="bp pyf">nǎinai</div></div><div class="bc k2"><div class="bi">🪄</div><div class="bz zh">把</div><div class="bp pyf">bǎ</div></div><div class="bc k3"><div class="bi">🥘</div><div class="bz zh">菜</div><div class="bp pyf">cài</div></div><div class="bc k4"><div class="bi">😋</div><div class="bz zh">吃了</div><div class="bp pyf">chī le</div></div></div>
+      <div class="bfull"><button class="spk" onclick="say('奶奶把菜吃了。')">🔊</button><div><span class="py">Nǎinai bǎ cài chī le.</span><div class="zh">奶奶把菜吃了。</div><div class="it">La nonna ha mangiato la verdura.</div></div></div>
+    </div>
+    <div class="bex">
+      <div class="brow"><div class="bc k1"><div class="bi">👦</div><div class="bz zh">弟弟</div><div class="bp pyf">dìdi</div></div><div class="bc k2"><div class="bi">🪄</div><div class="bz zh">把</div><div class="bp pyf">bǎ</div></div><div class="bc k3"><div class="bi">🥛</div><div class="bz zh">牛奶</div><div class="bp pyf">niúnǎi</div></div><div class="bc k4"><div class="bi">🥤</div><div class="bz zh">喝了</div><div class="bp pyf">hē le</div></div></div>
+      <div class="bfull"><button class="spk" onclick="say('弟弟把牛奶喝了。')">🔊</button><div><span class="py">Dìdi bǎ niúnǎi hē le.</span><div class="zh">弟弟把牛奶喝了。</div><div class="it">Il fratellino ha bevuto il latte.</div></div></div>
+    </div>
+    <div class="bex">
+      <div class="brow"><div class="bc k1"><div class="bi">👩</div><div class="bz zh">妈妈</div><div class="bp pyf">māma</div></div><div class="bc k2"><div class="bi">🪄</div><div class="bz zh">把</div><div class="bp pyf">bǎ</div></div><div class="bc k3"><div class="bi">🚪</div><div class="bz zh">门</div><div class="bp pyf">mén</div></div><div class="bc k4"><div class="bi">🔒</div><div class="bz zh">关上了</div><div class="bp pyf">guānshang le</div></div></div>
+      <div class="bfull"><button class="spk" onclick="say('妈妈把门关上了。')">🔊</button><div><span class="py">Māma bǎ mén guānshang le.</span><div class="zh">妈妈把门关上了。</div><div class="it">La mamma ha chiuso la porta.</div></div></div>
+    </div>
   </div>
 
   <div class="box blue">
@@ -298,13 +339,13 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
     <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
   </div>
   <div class="dlg">
-    <h3>Testo 1 · Nel bagno 🛁</h3>
+    <div class="place bath"><div class="pe">🚿 🛁 🧴 🪥 🐶</div><div class="pl">In bagno</div></div>
     <div id="d1"></div>
     <div class="q" onclick="this.classList.toggle('open')"><span class="zh">女孩让妈妈做什么？</span> <small>(clicca per la risposta)</small>
       <div class="ans zh">把门关上。</div></div>
   </div>
   <div class="dlg">
-    <h3>Testo 2 · In cucina 🍳</h3>
+    <div class="place kitchen"><div class="pe">🍳 🍚 🥘 🐟 🐱</div><div class="pl">In cucina</div></div>
     <div id="d2"></div>
     <div class="q" onclick="this.classList.toggle('open')"><span class="zh">鱼在哪儿？</span> <small>(clicca per la risposta)</small>
       <div class="ans zh">小猫把鱼吃了！</div></div>
@@ -353,13 +394,21 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 <section id="s6">
   <h2>Parliamo! 🙋</h2>
   <p class="hint">Rispondi alle domande della maestra</p>
-  <div class="talk">
-    <div><button class="spk" onclick="say('你最爱吃什么？')">🔊</button> <span class="py">Nǐ zuì ài chī shénme?</span><br><span class="zh">你最爱吃什么？</span><div class="builder zh">我最爱吃 ______ 。</div></div>
-    <div><button class="spk" onclick="say('你最爱喝什么？')">🔊</button> <span class="py">Nǐ zuì ài hē shénme?</span><br><span class="zh">你最爱喝什么？</span><div class="builder zh">我最爱喝 ______ 。</div></div>
-    <div><button class="spk" onclick="say('你爱吃鱼吗？')">🔊</button> <span class="py">Nǐ ài chī yú ma?</span><br><span class="zh">你爱吃鱼吗？</span><div class="builder zh">爱吃。/ 不爱吃。</div></div>
-    <div><button class="spk" onclick="say('你家有小猫或者小狗吗？它爱吃什么？')">🔊</button> <span class="py">Nǐ jiā yǒu xiǎo māo huòzhě xiǎo gǒu ma? Tā ài chī shénme?</span><br><span class="zh">你家有小猫或者小狗吗？它爱吃什么？</span><div class="builder zh">它爱吃 ______ 。</div></div>
-    <div><button class="spk" onclick="say('你爱洗澡吗？')">🔊</button> <span class="py">Nǐ ài xǐzǎo ma?</span><br><span class="zh">你爱洗澡吗？</span><div class="builder zh">我爱洗澡。/ 我不爱洗澡。😄</div></div>
-    <div><button class="spk" onclick="say('你把果汁喝了吗？')">🔊</button> <span class="py">Nǐ bǎ guǒzhī hē le ma?</span><br><span class="zh">你把果汁喝了吗？</span><div class="builder zh">我把果汁喝了。</div></div>
+  <div class="talk2">
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('你最爱吃什么？')">🔊</button><div><span class="py">Nǐ zuì ài chī shénme?</span><div class="zh">你最爱吃什么？</div></div></div>
+      <div class="ta"><span class="py">Wǒ zuì ài chī …</span><div class="zh">我最爱吃<span class="bl"></span>。</div></div></div>
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('你最爱喝什么？')">🔊</button><div><span class="py">Nǐ zuì ài hē shénme?</span><div class="zh">你最爱喝什么？</div></div></div>
+      <div class="ta"><span class="py">Wǒ zuì ài hē …</span><div class="zh">我最爱喝<span class="bl"></span>。</div></div></div>
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('你爱吃鱼吗？')">🔊</button><div><span class="py">Nǐ ài chī yú ma?</span><div class="zh">你爱吃鱼吗？</div></div></div>
+      <div class="ta"><span class="py">Ài chī. / Bú ài chī.</span><div class="zh">爱吃。/ 不爱吃。</div></div></div>
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('你家有小猫或者小狗吗？')">🔊</button><div><span class="py">Nǐ jiā yǒu xiǎo māo huòzhě xiǎo gǒu ma?</span><div class="zh">你家有小猫或者小狗吗？</div></div></div>
+      <div class="ta"><span class="py">Yǒu. / Méiyǒu.</span><div class="zh">有。/ 没有。</div></div></div>
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('它爱吃什么？')">🔊</button><div><span class="py">Tā ài chī shénme?</span><div class="zh">它爱吃什么？</div></div></div>
+      <div class="ta"><span class="py">Tā ài chī …</span><div class="zh">它爱吃<span class="bl"></span>。</div></div></div>
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('你爱洗澡吗？')">🔊</button><div><span class="py">Nǐ ài xǐzǎo ma?</span><div class="zh">你爱洗澡吗？</div></div></div>
+      <div class="ta"><span class="py">Wǒ ài xǐzǎo. / Wǒ bú ài xǐzǎo.</span><div class="zh">我爱洗澡。/ 我不爱洗澡。</div></div></div>
+    <div class="tk"><div class="tq"><button class="spk" onclick="say('你把果汁喝了吗？')">🔊</button><div><span class="py">Nǐ bǎ guǒzhī hē le ma?</span><div class="zh">你把果汁喝了吗？</div></div></div>
+      <div class="ta"><span class="py">Wǒ bǎ guǒzhī hē le.</span><div class="zh">我把果汁喝了。</div></div></div>
   </div>
   <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Ho finito! 🎉</button></div>
   <div class="end" id="end"></div>
@@ -452,21 +501,20 @@ function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComple
 
 /* dialoghi */
 function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
- <div class="line"><div class="who" style="background:${l[4]}">${l[0]}</div>
- ${l[5]}
+ <div class="line"><div class="face3" style="border-color:${l[4]}">${l[0]}</div>
  <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
  <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
 dlg('d1',[
- ['妈妈 👩','你在做什么？我可以进来吗？','Nǐ zài zuò shénme? Wǒ kěyǐ jìnlai ma?','Cosa stai facendo? Posso entrare?','#9a7bd1',pics('🚪❓')],
- ['女孩 👧','请进，快把门关上。','Qǐng jìn, kuài bǎ mén guānshang.','Entra, chiudi subito la porta.','#e0524a',pics('🚪🔒')],
- ['妈妈 👩','小狗怎么在这里？','Xiǎo gǒu zěnme zài zhèli?','Come mai il cagnolino è qui?','#9a7bd1',pics('🐶❓')],
- ['女孩 👧','我在给它洗澡。','Wǒ zài gěi tā xǐzǎo.','Gli sto facendo il bagno.','#e0524a',pics('🛁🐶')],
+ ['👩','你在做什么？我可以进来吗？','Nǐ zài zuò shénme? Wǒ kěyǐ jìnlai ma?','Cosa stai facendo? Posso entrare?','#9a7bd1',pics('🚪❓')],
+ ['👧','请进，快把门关上。','Qǐng jìn, kuài bǎ mén guānshang.','Entra, chiudi subito la porta.','#e0524a',pics('🚪🔒')],
+ ['👩','小狗怎么在这里？','Xiǎo gǒu zěnme zài zhèli?','Come mai il cagnolino è qui?','#9a7bd1',pics('🐶❓')],
+ ['👧','我在给它洗澡。','Wǒ zài gěi tā xǐzǎo.','Gli sto facendo il bagno.','#e0524a',pics('🛁🐶')],
 ]);
 dlg('d2',[
- ['女孩 👧','我们今天吃什么？','Wǒmen jīntiān chī shénme?','Cosa mangiamo oggi?','#e0524a',pics('🍽️❓')],
- ['爸爸 👨','吃鱼，还有米饭和菜，喝果汁。','Chī yú, hái yǒu mǐfàn hé cài, hē guǒzhī.','Mangiamo pesce, e poi riso e verdure, e beviamo succo di frutta.','#3a8fd0',pics('🐟🍚🥘🧃')],
- ['女孩 👧','鱼？鱼在哪儿？','Yú? Yú zài nǎr?','Il pesce? Dov\'è il pesce?','#e0524a',pics('🐟❓')],
- ['爸爸 👨','不好，小猫把鱼吃了！','Bù hǎo, xiǎo māo bǎ yú chī le!','Oh no, il gattino si è mangiato il pesce!','#3a8fd0',pics('🐱🦴')],
+ ['👧','我们今天吃什么？','Wǒmen jīntiān chī shénme?','Cosa mangiamo oggi?','#e0524a',pics('🍽️❓')],
+ ['👨','吃鱼，还有米饭和菜，喝果汁。','Chī yú, hái yǒu mǐfàn hé cài, hē guǒzhī.','Mangiamo pesce, e poi riso e verdure, e beviamo succo di frutta.','#3a8fd0',pics('🐟🍚🥘🧃')],
+ ['👧','鱼？鱼在哪儿？','Yú? Yú zài nǎr?','Il pesce? Dov\'è il pesce?','#e0524a',pics('🐟❓')],
+ ['👨','不好，小猫把鱼吃了！','Bù hǎo, xiǎo māo bǎ yú chī le!','Oh no, il gattino si è mangiato il pesce!','#3a8fd0',pics('🐱🦴')],
 ]);
 
 /* gioco 1: ascolta e scegli */
