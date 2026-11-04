@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 2 · 第8课 马丁比我大三岁</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,#e8558f,#f78fb3);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:50px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header h1 .zh{font-size:52px}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:#e8558f;border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:#e8558f;color:#fff}
+nav small{opacity:.75}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:46px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+h3{font-size:30px;margin:0 0 12px}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:inherit;font-size:22px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.py{color:var(--red);font-size:24px}
+/* font dedicato al pinyin: toni sempre al posto giusto */
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.hide-py .py{visibility:hidden}
+
+/* mini-scene */
+.ms{position:relative;display:inline-block;width:150px;height:140px;flex:none}
+.ms .b{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:90px;line-height:1}
+.ms .o{position:absolute;left:50%;transform:translateX(-50%);font-size:46px;line-height:1}
+.ms .o.on{bottom:82px}
+.ms .o.in{bottom:20px;font-size:36px;filter:drop-shadow(0 0 3px #fff)}
+.ms.under .b{bottom:30px}
+.ms .o.under{bottom:0;font-size:40px}
+.ms .x{position:absolute;right:4px;top:4px;font-size:34px}
+.pics{font-size:60px;line-height:1;flex:none;width:150px;text-align:center}
+
+/* frasi chiave */
+.key{display:flex;align-items:center;gap:20px;background:#fff;border:3px solid var(--line);border-radius:26px;padding:24px;margin-bottom:20px;flex-wrap:wrap}
+.key .txt{flex:1;min-width:260px}
+.key .py{font-size:30px}
+.key .zh{font-size:56px}
+.key .it{color:var(--soft);font-size:28px}
+
+/* specchietti */
+.box{background:#fff;border:3px solid var(--line);border-radius:26px;padding:22px;margin-bottom:22px}
+.box.blue{border-color:#bcdcf3;background:#f3f9ff}
+.box.green{border-color:#c4e8d3;background:#f2fbf6}
+.box.orange{border-color:#f7d2a6;background:#fff6eb}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.var{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid var(--line)}
+.var .big{font-size:52px}
+.var .py{font-size:28px}
+.var .ex{margin-top:10px;font-size:34px}
+.var .ex .py{font-size:22px;display:block}
+.var .it{color:var(--soft);font-size:22px}
+.loc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.loc .var .big{font-size:70px;color:var(--red)}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px;opacity:.95}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cZ{background:var(--orange)} .cB{background:var(--green)} .cL{background:var(--red)}
+.exrow{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;flex-wrap:wrap}
+.exrow .zh{font-size:44px}
+.exrow .zh span{padding:0 4px;border-radius:8px}
+.exrow .py{display:block;font-size:24px}
+.exrow .it{color:var(--soft);font-size:24px}
+.tA{color:var(--blue)} .tZ{color:var(--orange)} .tB{color:var(--green)} .tL{color:var(--red)}
+
+/* vocab */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{perspective:800px;height:250px;cursor:pointer;position:relative}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--line);border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+.face .pic{font-size:70px;line-height:1}
+.face .w{font-size:44px}
+.back{transform:rotateY(180deg);background:#fff3d6}
+.back .it{font-size:28px;font-weight:700}
+.card .spk{position:absolute;top:8px;right:8px;width:42px;height:42px;font-size:20px;z-index:2}
+
+
+/* ordine dei tratti */
+.card .wr{position:absolute;top:8px;left:8px;width:42px;height:42px;font-size:20px;z-index:2;border:0;border-radius:50%;background:#ffd6e7;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:28px;padding:24px;max-width:760px;width:100%;text-align:center;position:relative}
+.mbox .close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:34px;cursor:pointer}
+.mword{font-size:28px;margin-bottom:6px}
+.writers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.tzg{width:240px;height:240px;border:3px solid #e8558f;border-radius:10px;position:relative;background:
+ linear-gradient(#f7c6d9,#f7c6d9) center/100% 2px no-repeat,linear-gradient(#f7c6d9,#f7c6d9) center/2px 100% no-repeat}
+.ctrl{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:22px}
+.ctrl input[type=range]{width:220px;accent-color:#e8558f}
+
+/* dialogue */
+.dlg{background:#fff;border-radius:24px;padding:20px;border:3px solid var(--line);margin-bottom:22px}
+.line{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.who{flex:none;width:110px;text-align:center;border-radius:14px;padding:6px;color:#fff;font-size:22px}
+.bubble{background:#f7f1ea;border-radius:18px;padding:8px 18px;flex:1;min-width:240px}
+.bubble .zh{font-size:36px}
+.bubble .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .bubble .tr{display:block}
+.q{background:#eaf5ff;border-radius:16px;padding:14px 18px;margin-top:12px;cursor:pointer}
+.q .zh{font-size:30px}
+.q .ans{display:none;color:var(--green);font-weight:700;font-size:30px}
+.q.open .ans{display:block}
+
+/* game */
+.stage{background:#fff;border-radius:26px;border:3px solid var(--line);padding:22px;text-align:center}
+.scene{position:relative;height:230px;width:300px;margin:0 auto 10px}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:150px;line-height:1}
+.obj{position:absolute;left:50%;transform:translateX(-50%);font-size:68px;line-height:1}
+.obj.on{bottom:136px}
+.obj.in{bottom:34px;font-size:54px;filter:drop-shadow(0 0 4px #fff)}
+.question .zh{font-size:44px}
+.question .py{font-size:28px}
+.opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 22px;font:inherit;cursor:pointer}
+.opt .zh{font-size:36px;display:block}
+.opt .py{display:block;font-size:22px}
+.opt.ok{border-color:var(--green);background:#e8f8ef}
+.opt.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:36px;font-size:28px;margin-top:12px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots span{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots span.done{background:var(--green)}
+.dots span.cur{background:var(--orange)}
+
+/* storia: una vignetta alla volta */
+.intro{background:#fff3d6;border-radius:22px;padding:16px 20px;margin-bottom:18px;font-size:24px}
+.newwords{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 16px 6px 8px;display:flex;align-items:center;gap:10px;font-size:24px}
+.chip .zh{font-size:30px}
+.chip .spk{width:42px;height:42px;font-size:20px}
+.comic{background:#fff;border:4px solid #b9dfa0;border-radius:28px;padding:22px;max-width:760px;margin:0 auto}
+.comic .num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:46px;height:46px;line-height:46px;text-align:center;font-size:26px}
+.comic .sp{display:flex;align-items:center;gap:12px;margin:14px 0}
+.comic .face2{font-size:56px;flex:none;width:70px;text-align:center}
+.comic .bubble .zh{font-size:40px}
+.comic .middle{text-align:center;margin:6px 0}
+.snav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:18px}
+.snav .btn{font-size:26px;padding:10px 26px}
+
+/* parla */
+.talk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.talk div{background:#fff3d6;border-radius:20px;padding:18px}
+.talk .zh{font-size:34px}
+.talk .py{font-size:22px}
+.builder{margin-top:8px;color:var(--soft);font-size:26px}
+.end{display:none;text-align:center;font-size:30px;margin-top:20px;background:#e8f8ef;border-radius:20px;padding:18px}
+footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
+</style>
+<style>
+/* scena del 把 */
+.bscene{display:flex;align-items:center;justify-content:center;gap:14px;font-size:84px;line-height:1;min-height:140px;margin-bottom:6px;flex-wrap:wrap}
+.bscene .arr{font-size:48px;color:var(--soft)}
+.bscene .ba{font-family:'Noto Sans SC',sans-serif;font-size:56px;color:#fff;background:var(--orange);border-radius:18px;padding:6px 16px}
+.mini{font-size:46px;line-height:1}
+.pron{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.pron .var .big{font-size:72px}
+.pron .var.hl{border-color:var(--orange);background:#fff6eb}
+.chant{background:#fff;border:4px solid #f7d2a6;border-radius:28px;padding:18px 22px;max-width:860px;margin:0 auto}
+.chant .cl{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap}
+.chant .cl .zh{font-size:36px}
+.chant .cl .py{display:block;font-size:22px}
+.chant .cl .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .chant .cl .tr{display:block}
+.chant .cl .ic{font-size:44px;width:70px;text-align:center;flex:none}
+.listen .opt{font-size:70px;padding:10px 26px;line-height:1.1}
+.sw{background:#fff;border:3px solid var(--line);border-radius:24px;padding:16px 18px;margin-bottom:18px}
+.sw .head{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.sw .head .zh{font-size:64px;line-height:1}
+.sw .head .py{font-size:28px}
+.sw .head .it{color:var(--soft);font-size:22px}
+.sw .head .cnt{margin-left:auto;background:#ffe9f2;color:#e8558f;border-radius:20px;padding:4px 14px;font-size:20px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{position:relative;width:78px;height:78px;border:2px solid #f3b3cd;border-radius:8px;background:
+ linear-gradient(#fbe0ea,#fbe0ea) center/100% 1px no-repeat,linear-gradient(#fbe0ea,#fbe0ea) center/1px 100% no-repeat,#fff}
+.step svg{width:100%;height:100%;display:block}
+.step b{position:absolute;top:1px;left:4px;font-size:14px;color:#e8558f;font-family:'Noto Sans',sans-serif}
+.brow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bh{position:relative;border-radius:22px;padding:14px 8px 12px;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center}
+.bh .n{position:absolute;top:8px;left:10px;background:#fff;color:var(--ink);border-radius:50%;width:32px;height:32px;line-height:32px;font-size:20px;font-weight:700}
+.bh .bi{font-size:56px;line-height:1.1}
+.bh b{font-size:30px;line-height:1.2}
+.bh b.zh{font-size:40px}
+.bh small{font-size:18px;opacity:.95;line-height:1.2}
+.bh:not(:last-child)::after{content:'➜';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--soft);font-size:22px;z-index:2;background:#fff6eb;border-radius:50%;width:22px;text-align:center}
+.k1{--c:#3a8fd0;--l:#e7f2fb} .k2{--c:#f39a3d;--l:#fff0dd} .k3{--c:#3fa874;--l:#e6f6ec} .k4{--c:#e0524a;--l:#fde8e6}
+.bh.k1,.bh.k2,.bh.k3,.bh.k4{background:var(--c)}
+.bex{background:#fff;border-radius:22px;padding:12px;margin-top:14px}
+.bc{background:var(--l);border:3px solid var(--c);border-radius:18px;text-align:center;padding:8px 4px}
+.bc .bi{font-size:50px;line-height:1.1}
+.bc .bz{font-size:40px;color:var(--c);line-height:1.2}
+.bc .bp{font-size:20px;color:var(--soft)}
+.bfull{display:flex;align-items:center;gap:14px;margin-top:10px;padding:0 6px}
+.bfull .zh{font-size:34px}
+.bfull .py{font-size:22px}
+.bfull .it{color:var(--soft);font-size:22px}
+.place{border-radius:20px;padding:12px;text-align:center;margin-bottom:6px}
+.place.bath{background:linear-gradient(135deg,#d9f0fb,#eef9ff)}
+.place.kitchen{background:linear-gradient(135deg,#ffeccc,#fff7e8)}
+.place .pe{font-size:62px;letter-spacing:8px;line-height:1.2}
+.place .pl{font-size:28px;font-weight:700;color:var(--soft)}
+.face3{flex:none;width:84px;height:84px;border-radius:50%;border:4px solid;background:#fff;font-size:54px;display:flex;align-items:center;justify-content:center}
+.talk2{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px}
+.tk{background:#fff3d6;border-radius:20px;padding:16px 18px}
+.tq{display:flex;align-items:center;gap:12px}
+.tq .zh{font-size:34px}
+.tq .py,.ta .py{font-size:22px;display:block}
+.ta{margin-top:10px;background:#fff;border-radius:14px;padding:8px 14px;color:#5a4a42}
+.ta .zh{font-size:32px;white-space:nowrap}
+.bl{display:inline-block;width:110px;border-bottom:3px solid #c9b8ab;margin:0 4px;vertical-align:baseline}
+@media (max-width:640px){.brow{gap:6px}.bh b{font-size:20px}.bh .bi,.bc .bi{font-size:36px}.bc .bz{font-size:28px}.bh small{font-size:14px}.talk2{grid-template-columns:1fr}.ta .zh{white-space:normal}}
+.hw{background:#ffe9f2;border:3px dashed #e8558f;border-radius:24px;padding:18px 22px;margin-top:22px;font-size:26px;text-align:center}
+</style>
+<style>
+.place{background:linear-gradient(135deg,#fff0dd,#fff9f0)}
+.place.p2{background:linear-gradient(135deg,#e7f2fb,#f3f9ff)}
+.cmp{display:inline-block;font-family:'Noto Sans SC',sans-serif;font-size:34px;line-height:1.25;background:#fff6eb;border:3px solid #f7d2a6;border-radius:18px;padding:8px 16px;text-align:center}
+.bscene .ba{font-family:'Noto Sans',sans-serif}
+.opt .zh{font-size:32px}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>YCT 2 · Lezione 8 · <span class="zh">马丁比我大三岁。</span></h1>
+  <p>Martin ha tre anni più di me · con Maja Jiejie 🐼</p>
+</header>
+<nav id="nav"><button data-s="0" class="on">⭐ Frasi chiave <small>2'</small></button><button data-s="1">Parole <small>5'</small></button><button data-s="7">Tratti ✍️ <small>5'</small></button><button data-s="2">Chi è più grande? 🎂 <small>5'</small></button><button data-s="3">Leggiamo <small>5'</small></button><button data-s="4">Giochi 🎮 <small>4'</small></button><button data-s="5">Filastrocca 🎵 <small>2'</small></button><button data-s="6">Parliamo <small>2'</small></button></nav>
+<main>
+<section id="s0" class="on">
+  <h2>Frasi chiave</h2>
+  <p class="hint">Le due frasi più importanti della lezione</p>
+  <div class="key"><div class="pics">👧👦🏫</div><div class="txt"><div class="py">Tāmen yě shì xiǎoxuéshēng.</div><div class="zh">他们也是小学生。</div><div class="it">Anche loro sono alunni delle elementari.</div></div><button class="spk" onclick="say('他们也是小学生。')">🔊</button></div><div class="key"><div class="pics">👦🎂3️⃣</div><div class="txt"><div class="py">Mǎdīng bǐ wǒ dà sān suì.</div><div class="zh">马丁比我大三岁。</div><div class="it">Martin ha tre anni più di me.</div></div><button class="spk" onclick="say('马丁比我大三岁。')">🔊</button></div>
+</section>
+<section id="s1">
+  <h2>Le parole nuove <span class="zh">生词</span></h2>
+  <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per il significato. ✍️ = come si scrive</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="grid" id="vocab"></div>
+</section>
+<section id="s7">
+  <h2>L'ordine dei tratti <span class="zh">笔顺</span></h2>
+  <p class="hint">Segui i numeri: il tratto rosso è quello nuovo. ▶ = guarda l'animazione</p>
+  <div id="strokeList"></div>
+</section>
+<section id="s2">
+  <h2>Chi è più grande? 🎂</h2>
+  <p class="hint">A + 比 + B + 大 / 小 + quanti anni</p>
+  <div class="box orange"><h3>1 · Quanti anni di più?</h3><div class="struct"><div class="blk cA"><div class="t">马丁</div><div class="s">A</div></div><span class="plus">+</span><div class="blk cZ"><div class="t">比</div><div class="s">più di</div></div><span class="plus">+</span><div class="blk cB"><div class="t">我</div><div class="s">B</div></div><span class="plus">+</span><div class="blk cL"><div class="t">大三岁</div><div class="s">3 anni più grande</div></div></div><div class="exrow"><div class="mini">👩🧒</div><div style="flex:1;min-width:220px"><span class="py">Jiějie bǐ wǒ dà liǎng suì.</span><div class="zh"><span class="tA">姐姐</span><span class="tZ">比</span><span class="tB">我</span><span class="tL">大两岁</span>。</div><span class="it">La sorella maggiore ha due anni più di me.</span></div><button class="spk" onclick="say('姐姐比我大两岁。')">🔊</button></div><div class="exrow"><div class="mini">🧒👦</div><div style="flex:1;min-width:220px"><span class="py">Wǒ bǐ dìdi dà sì suì.</span><div class="zh"><span class="tA">我</span><span class="tZ">比</span><span class="tB">弟弟</span><span class="tL">大四岁</span>。</div><span class="it">Ho quattro anni più del fratellino.</span></div><button class="spk" onclick="say('我比弟弟大四岁。')">🔊</button></div><div class="exrow"><div class="mini">👧🧒</div><div style="flex:1;min-width:220px"><span class="py">Mèimei bǐ wǒ xiǎo yí suì.</span><div class="zh"><span class="tA">妹妹</span><span class="tZ">比</span><span class="tB">我</span><span class="tL">小一岁</span>。</div><span class="it">La sorellina ha un anno meno di me.</span></div><button class="spk" onclick="say('妹妹比我小一岁。')">🔊</button></div></div><div class="box blue"><h3>2 · La famiglia: grandi e piccoli 👨‍👩‍👧‍👦</h3><div class="two"><div class="var"><div class="mini">🧑</div><div class="big zh">哥哥</div><div class="py">gēge</div><div class="it">fratello maggiore</div></div><div class="var"><div class="mini">👩</div><div class="big zh">姐姐</div><div class="py">jiějie</div><div class="it">sorella maggiore</div></div><div class="var hl"><div class="mini">👦</div><div class="big zh">弟弟</div><div class="py">dìdi</div><div class="it">fratellino</div></div><div class="var hl"><div class="mini">👧</div><div class="big zh">妹妹</div><div class="py">mèimei</div><div class="it">sorellina</div></div></div></div><div class="box green"><h3>3 · 也 = anche ➕ (va sempre PRIMA del verbo!)</h3><div class="exrow"><div class="mini">🧒🎒 👦🎒</div><div style="flex:1;min-width:220px"><span class="py">Wǒ shì xuésheng, dìdi yě shì xuésheng.</span><div class="zh">我是学生，弟弟<span class="tZ">也</span>是学生。</div><span class="it">Io sono uno studente, anche il fratellino è uno studente.</span></div><button class="spk" onclick="say('我是学生，弟弟也是学生。')">🔊</button></div><div class="exrow"><div class="mini">🤝</div><div style="flex:1;min-width:220px"><span class="py">Nǐ shì wǒ de péngyou, wǒ yě shì nǐ de péngyou.</span><div class="zh">你是我的朋友，我<span class="tZ">也</span>是你的朋友。</div><span class="it">Tu sei mio amico, e anch'io sono tuo amico.</span></div><button class="spk" onclick="say('你是我的朋友，我也是你的朋友。')">🔊</button></div><p class="hint" style="margin:10px 0 0">✅ 弟弟也是学生 &nbsp; ❌ 也弟弟是学生</p></div>
+</section>
+<section id="s3">
+  <h2>Leggiamo</h2>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="dlg"><div class="place "><div class="pe">🎂 🎈 🎁</div><div class="pl">Alla festa</div></div><div id="d1"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">安娜比她大几岁？</span> <small>(clicca per la risposta)</small><div class="ans zh">大一岁。</div></div></div>
+  <div class="dlg"><div class="place p2"><div class="pe">🌳 ⚽ 🐶</div><div class="pl">Al parco</div></div><div id="d2"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">他几岁？</span> <small>(clicca per la risposta)</small><div class="ans zh">他九岁。</div></div></div>
+</section>
+<section id="s4">
+  <h2>Giochi 🎮</h2>
+  <div class="box blue">
+    <h3>Gioco 1 · Ascolta e scegli 👂</h3>
+    <p class="hint" style="margin-bottom:10px">Premi 🔊, ascolta la parola e clicca il disegno giusto</p>
+    <div class="stage listen">
+      <button class="spk" style="width:80px;height:80px;font-size:38px" onclick="say(lr[li].w)">🔊</button>
+      <div class="opts" id="lopts"></div>
+      <div class="feedback" id="lfb"></div>
+      <div class="dots" id="ldots"></div>
+      <div style="margin-top:14px"><button class="btn" id="lnext" onclick="nextL()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+  <div class="box orange">
+    <h3>Gioco 2 · Chi è più grande? 🎂</h3>
+    <p class="hint" style="margin-bottom:10px">Guarda gli anni e scegli la frase giusta</p>
+    <div class="stage">
+      <div class="bscene" id="bscene"></div>
+      <div class="opts" id="bopts"></div>
+      <div class="feedback" id="bfb"></div>
+      <div class="dots" id="bdots"></div>
+      <div style="margin-top:14px"><button class="btn" id="bnext" onclick="nextB()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+</section>
+<section id="s5">
+  <h2>Filastrocca degli amici 🎵</h2>
+  <p class="hint">Leggiamo insieme a ritmo!</p>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="chant" id="chant"></div>
+</section>
+<section id="s6">
+  <h2>Parliamo! 🙋</h2>
+  <p class="hint">Rispondi alle domande della maestra</p>
+  <div class="talk2"><div class="tk"><div class="tq"><button class="spk" onclick="say('你几岁？')">🔊</button><div><span class="py">Nǐ jǐ suì?</span><div class="zh">你几岁？</div></div></div>
+      <div class="ta"><span class="py">Wǒ … suì.</span><div class="zh">我<span class="bl"></span>岁。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你有弟弟吗？你有妹妹吗？')">🔊</button><div><span class="py">Nǐ yǒu dìdi ma? Nǐ yǒu mèimei ma?</span><div class="zh">你有弟弟吗？你有妹妹吗？</div></div></div>
+      <div class="ta"><span class="py">Yǒu. / Méiyǒu.</span><div class="zh">有。/ 没有。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('他/她几岁？你比他/她大几岁？')">🔊</button><div><span class="py">Tā jǐ suì? Nǐ bǐ tā dà jǐ suì?</span><div class="zh">他/她几岁？你比他/她大几岁？</div></div></div>
+      <div class="ta"><span class="py">Wǒ bǐ tā dà … suì.</span><div class="zh">我比他/她大<span class="bl"></span>岁。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你的好朋友叫什么名字？')">🔊</button><div><span class="py">Nǐ de hǎo péngyou jiào shénme míngzi?</span><div class="zh">你的好朋友叫什么名字？</div></div></div>
+      <div class="ta"><span class="py">Tā jiào …</span><div class="zh">他/她叫<span class="bl"></span>。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('他/她也是小学生吗？')">🔊</button><div><span class="py">Tā yě shì xiǎoxuéshēng ma?</span><div class="zh">他/她也是小学生吗？</div></div></div>
+      <div class="ta"><span class="py">Shì, tā yě shì xiǎoxuéshēng.</span><div class="zh">是，他/她也是小学生。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你的同学多大？')">🔊</button><div><span class="py">Nǐ de tóngxué duō dà?</span><div class="zh">你的同学多大？</div></div></div>
+      <div class="ta"><span class="py">Tāmen … suì.</span><div class="zh">他们<span class="bl"></span>岁。</div></div></div></div>
+  <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Ho finito! 🎉</button></div>
+  <div class="end" id="end"></div>
+  <div class="hw">📝 <b>Compito:</b> su Classroom trovi le schede con l'ordine dei tratti (le trovi anche qui, in <b>Tratti ✍️</b>).<br>Scrivi 3 volte ogni carattere: <span class="zh">弟弟 妹妹 朋友 同学 也 学生</span></div>
+</section>
+</main>
+<div class="modal" id="wmodal" onclick="if(event.target===this)closeW()">
+ <div class="mbox">
+  <button class="close" onclick="closeW()">✕</button>
+  <div class="mword"><span class="py" id="wpy"></span> · <span id="wit"></span></div>
+  <div class="writers" id="writers"></div>
+  <div class="ctrl">
+   <button class="btn" onclick="playW()">▶ Guarda come si scrive</button>
+   <label>🐢 Lento <input type="range" id="wspeed" min="0.15" max="1.5" step="0.05" value="0.5" oninput="document.getElementById('wsv').textContent=speedLabel(this.value)"> Veloce 🐇</label>
+   <span id="wsv" style="color:var(--soft)"></span>
+   <button class="btn alt" onclick="quizW()">✍️ Prova tu</button>
+  </div>
+ </div>
+</div>
+<footer>Maja Jiejie · Chinese Academy</footer>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script>
+let stars=0;
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+const vocab=[["弟弟", "dìdi", "il fratellino", "👦"], ["妹妹", "mèimei", "la sorellina", "👧"], ["朋友", "péngyou", "l'amico, l'amica", "🤝"], ["同学", "tóngxué", "il compagno di classe", "🧑‍🤝‍🧑"], ["也", "yě", "anche", "➕"], ["学生", "xuésheng", "lo studente", "🎒"]];
+document.getElementById('vocab').innerHTML=vocab.map((v,i)=>`
+ <div class="card" onclick="this.classList.toggle('flip')">
+  <button class="spk" onclick="say('${v[0]}',event)">🔊</button>
+  <button class="wr" title="Come si scrive" onclick="openW(${i},event)">✍️</button>
+  <div class="inner">
+   <div class="face"><div class="pic"${[...v[3]].length>1?' style="font-size:48px"':''}>${v[3]}</div><div class="py">${v[1]}</div><div class="w zh">${v[0]}</div></div>
+   <div class="face back"><div class="w zh">${v[0]}</div><div class="py">${v[1]}</div><div class="it">${v[2]}</div></div>
+  </div></div>`).join('');
+
+const STROKES={"也": ["M 323 369 Q 375 396 449 430 L 496 452 Q 562 485 644 523 Q 663 532 669 520 Q 676 505 625 342 Q 615 291 580 308 Q 559 315 539 321 Q 523 324 527 315 Q 531 303 597 238 Q 619 208 640 231 Q 683 277 698 347 Q 714 407 729 467 Q 741 506 774 539 Q 789 555 771 569 Q 752 582 696 595 Q 674 599 660 586 Q 620 549 541 509 Q 519 499 498 486 L 451 463 Q 391 436 327 409 L 270 385 Q 158 340 92 320 Q 77 317 77 307 Q 76 300 122 285 Q 152 276 176 292 Q 198 307 271 343 L 323 369 Z", "M 449 430 Q 442 343 434 278 Q 435 247 442 225 Q 448 212 458 218 Q 477 239 488 359 Q 491 407 496 452 L 498 486 Q 511 699 526 753 Q 536 774 523 787 Q 507 803 477 819 Q 453 829 428 820 Q 415 811 430 794 Q 451 746 456 707 Q 456 527 451 463 L 449 430 Z", "M 328 97 Q 413 27 678 28 Q 835 29 923 59 Q 954 65 962 81 Q 966 91 956 115 Q 931 166 913 279 Q 909 295 900 301 Q 894 304 891 289 Q 881 228 869 176 Q 859 131 835 114 Q 811 102 689 93 Q 565 87 467 102 Q 394 114 366 134 Q 341 150 332 182 Q 320 228 322 326 Q 322 348 323 369 L 327 409 Q 331 457 343 485 Q 352 504 341 518 Q 326 531 286 548 Q 252 560 241 549 Q 232 540 247 519 Q 269 488 269 438 Q 269 413 270 385 L 271 343 Q 271 168 299 126 Q 309 111 328 97 Z"], "友": ["M 485 583 Q 585 604 691 625 Q 767 643 778 653 Q 788 662 783 671 Q 776 684 744 692 Q 713 699 679 686 Q 592 656 500 632 L 433 618 Q 357 605 271 596 Q 231 589 260 571 Q 302 546 388 564 Q 401 567 417 569 L 485 583 Z", "M 419 422 Q 458 500 485 583 L 500 632 Q 521 707 553 759 Q 563 769 554 781 Q 538 805 502 830 Q 481 846 461 844 Q 436 841 450 817 Q 474 777 466 743 Q 450 676 433 618 L 417 569 Q 318 290 132 130 Q 113 115 92 98 Q 77 91 74 87 Q 70 80 87 78 Q 97 77 144 103 Q 178 119 236 169 Q 317 239 404 392 L 419 422 Z", "M 594 174 Q 642 252 684 373 Q 697 404 718 425 Q 739 443 724 458 Q 709 471 675 482 Q 651 488 570 456 Q 452 428 419 422 C 390 416 374 396 404 392 Q 441 382 488 397 Q 582 428 600 428 Q 625 425 620 397 Q 602 313 552 212 L 529 178 Q 447 76 288 25 Q 273 19 286 11 Q 293 4 344 8 Q 464 23 565 134 L 594 174 Z", "M 565 134 Q 694 -14 741 -16 Q 832 -19 906 -10 Q 943 -6 941 5 Q 941 8 757 69 Q 693 96 594 174 L 552 212 Q 516 248 480 288 Q 443 328 409 328 Q 391 329 387 324 Q 386 318 401 307 Q 446 279 529 178 L 565 134 Z"], "同": ["M 282 732 Q 258 751 232 761 Q 222 762 214 754 Q 210 747 218 735 Q 276 576 226 266 Q 216 215 198 162 Q 188 134 193 111 Q 202 72 215 58 Q 227 42 239 57 Q 267 90 279 237 Q 273 249 289 563 Q 293 650 299 687 C 303 717 303 717 282 732 Z", "M 299 687 Q 306 687 314 689 Q 477 729 676 757 Q 703 763 716 747 Q 732 740 739 667 Q 761 424 753 148 Q 753 108 738 96 Q 720 83 631 99 Q 612 102 615 91 Q 616 82 631 77 Q 712 28 754 -11 Q 779 -33 794 -29 Q 807 -25 819 8 Q 835 60 831 135 Q 804 514 803 654 Q 802 699 815 726 Q 828 751 816 764 Q 804 780 749 807 Q 727 817 705 812 Q 543 758 282 732 C 252 729 270 681 299 687 Z", "M 384 586 Q 351 580 375 565 Q 414 544 464 555 Q 530 568 599 583 Q 630 590 635 594 Q 642 601 639 609 Q 632 619 606 627 Q 578 631 551 621 Q 515 609 477 600 Q 434 590 384 586 Z", "M 406 441 Q 396 447 366 453 Q 354 456 351 451 Q 344 445 352 430 Q 377 376 391 288 Q 394 261 409 243 Q 425 222 431 237 Q 435 250 434 271 L 430 302 Q 418 384 417 412 C 416 436 416 436 406 441 Z", "M 600 324 Q 618 393 649 419 Q 664 435 651 451 Q 579 503 542 479 Q 478 458 406 441 C 377 434 388 403 417 412 Q 423 416 542 439 Q 557 443 563 437 Q 572 428 570 410 Q 563 367 554 328 C 547 299 592 295 600 324 Z", "M 434 271 Q 440 271 448 272 Q 500 284 612 292 Q 622 293 624 301 Q 624 308 600 324 C 586 333 584 333 554 328 Q 553 328 552 328 Q 485 312 430 302 C 400 297 404 270 434 271 Z"], "妹": ["M 299 163 Q 327 141 360 108 Q 376 95 386 93 Q 395 93 400 104 Q 407 116 401 146 Q 392 177 331 210 L 288 231 Q 263 244 230 258 Q 211 268 211 288 Q 232 349 251 413 L 262 454 Q 284 539 305 624 Q 314 672 332 696 Q 345 718 338 731 Q 323 749 277 776 Q 256 789 240 780 Q 227 773 237 756 Q 270 707 217 446 L 207 401 Q 203 389 201 375 Q 189 326 167 287 Q 157 265 179 247 Q 225 223 263 192 L 299 163 Z", "M 263 192 Q 187 116 174 106 Q 170 105 167 101 Q 161 97 104 60 Q 91 51 103 48 Q 116 47 152 59 Q 207 80 250 116 Q 278 138 299 163 L 331 210 Q 376 292 389 351 Q 410 450 428 478 Q 438 496 423 506 Q 377 545 351 536 Q 336 532 342 517 Q 352 495 352 470 L 350 440 Q 349 431 348 420 Q 341 321 288 231 L 263 192 Z", "M 352 470 Q 307 463 262 454 L 217 446 Q 81 428 52 431 Q 39 431 37 422 Q 33 410 41 401 Q 60 383 89 361 Q 98 357 110 363 Q 155 387 207 401 L 251 413 Q 299 428 350 440 C 379 447 382 475 352 470 Z", "M 644 565 Q 783 604 788 607 Q 797 616 792 624 Q 785 636 754 642 Q 726 646 645 616 L 598 601 Q 550 591 496 582 Q 459 575 487 559 Q 526 538 599 555 L 644 565 Z", "M 643 416 Q 710 429 816 436 Q 865 440 870 447 Q 874 459 858 470 Q 798 509 758 488 Q 712 475 643 457 L 598 447 Q 522 432 434 413 Q 415 410 430 395 Q 445 383 461 380 Q 482 376 496 382 Q 530 395 572 402 L 643 416 Z", "M 643 457 Q 643 509 644 565 L 645 616 Q 646 698 664 758 Q 674 774 670 787 Q 663 797 605 833 Q 580 851 559 834 Q 553 828 560 813 Q 594 761 596 710 Q 597 658 598 601 L 599 555 Q 599 483 598 447 L 596 347 Q 592 172 580 117 Q 561 33 578 -10 Q 581 -19 586 -29 Q 593 -48 601 -51 Q 608 -58 616 -49 Q 623 -45 634 -23 Q 644 4 643 36 Q 642 78 642 372 L 643 457 Z", "M 642 412 Q 642 413 643 416 C 657 443 585 429 572 402 Q 529 309 415 165 Q 409 155 420 154 Q 426 153 435 161 Q 534 239 596 347 L 642 412 Z", "M 642 372 Q 709 269 796 156 Q 814 137 843 137 Q 945 137 977 142 Q 987 143 988 149 Q 989 153 976 162 Q 835 222 761 291 Q 704 345 642 412 C 622 434 626 397 642 372 Z"], "学": ["M 311 681 Q 332 656 354 626 Q 364 611 380 610 Q 390 609 397 621 Q 404 634 399 664 Q 395 694 313 727 Q 298 733 292 731 Q 288 728 287 715 Q 288 705 311 681 Z", "M 456 744 Q 475 717 495 685 Q 504 672 517 669 Q 526 668 533 677 Q 540 689 539 715 Q 536 745 462 785 Q 450 792 444 791 Q 440 788 438 777 Q 439 767 456 744 Z", "M 669 770 Q 642 724 586 650 Q 580 643 587 635 Q 594 634 603 639 Q 700 721 749 752 Q 768 759 763 770 Q 756 786 734 806 Q 712 824 688 825 Q 672 824 674 802 Q 678 787 669 770 Z", "M 241 550 Q 231 569 222 576 Q 203 589 201 564 Q 207 527 148 466 Q 129 445 155 387 Q 170 360 190 388 Q 217 454 246 522 C 251 533 251 533 241 550 Z", "M 246 522 Q 276 504 310 515 Q 472 560 708 577 Q 745 580 761 577 Q 776 570 775 563 Q 775 562 727 483 Q 720 470 725 464 Q 732 460 750 470 Q 813 507 862 516 Q 904 526 903 536 Q 902 546 832 605 Q 808 626 745 613 Q 598 600 365 564 Q 307 555 248 551 Q 244 551 241 550 C 211 547 218 534 246 522 Z", "M 516 320 Q 519 321 599 382 Q 636 410 663 419 Q 682 425 676 441 Q 673 457 610 492 Q 592 502 570 494 Q 510 472 420 447 Q 396 440 339 442 Q 317 443 324 423 Q 331 411 350 400 Q 378 384 411 402 Q 433 411 546 449 Q 559 455 570 448 Q 582 441 576 427 Q 546 382 508 326 C 493 304 493 304 516 320 Z", "M 538 295 Q 529 310 516 320 L 508 326 Q 502 330 498 332 Q 488 339 483 331 Q 479 327 486 314 Q 490 304 495 290 L 506 247 Q 518 163 508 105 Q 502 68 492 60 Q 489 57 408 73 Q 398 76 392 72 Q 388 71 402 59 Q 454 11 482 -28 Q 498 -46 516 -37 Q 538 -25 555 27 Q 579 117 557 250 L 538 295 Z", "M 557 250 Q 701 269 878 253 Q 902 250 908 259 Q 915 272 903 284 Q 875 312 831 332 Q 816 338 790 330 Q 742 321 538 295 L 495 290 Q 384 281 328 274 Q 264 264 170 264 Q 157 264 155 253 Q 154 240 173 226 Q 189 213 220 201 Q 232 197 249 205 Q 265 211 332 221 Q 408 239 506 247 L 557 250 Z"], "弟": ["M 353 743 Q 381 719 412 691 Q 425 679 439 680 Q 449 680 453 693 Q 457 706 449 733 Q 443 752 412 767 Q 337 794 328 787 Q 324 783 325 771 Q 328 761 353 743 Z", "M 614 808 Q 593 769 534 695 Q 524 677 542 681 Q 591 712 617 733 Q 695 790 701 793 Q 722 803 711 822 Q 696 838 669 852 Q 644 865 632 861 Q 619 860 624 846 Q 628 827 614 808 Z", "M 712 522 Q 737 574 763 591 Q 784 613 758 631 Q 734 650 708 666 Q 695 678 641 659 Q 577 650 431 617 Q 365 604 323 600 Q 310 600 308 592 Q 305 586 327 574 Q 343 562 385 572 Q 445 587 483 595 L 520 601 Q 577 611 661 621 Q 674 622 679 616 Q 685 603 659 528 C 649 500 698 495 712 522 Z", "M 542 463 Q 621 476 723 487 Q 735 488 736 498 Q 736 505 712 522 C 697 533 689 532 659 528 Q 656 529 654 528 Q 596 515 541 500 L 492 490 Q 393 471 306 457 C 276 452 288 419 318 422 Q 325 422 335 424 Q 396 440 493 455 L 542 463 Z", "M 542 330 Q 608 342 697 352 Q 755 362 779 358 Q 794 357 800 344 Q 807 326 765 214 Q 759 196 741 200 Q 711 207 674 217 Q 644 226 665 198 Q 720 143 731 116 Q 738 101 753 103 Q 766 102 784 116 Q 808 141 832 201 Q 850 283 886 318 Q 905 339 892 353 Q 867 381 828 405 Q 812 417 752 401 Q 724 397 542 364 L 493 355 Q 405 340 350 325 Q 317 319 301 320 Q 292 321 295 338 Q 307 411 318 422 C 327 444 327 444 306 457 Q 290 470 268 480 Q 256 489 246 480 Q 237 473 247 455 Q 260 427 251 388 Q 235 333 219 311 Q 207 293 219 276 Q 229 248 244 241 Q 254 235 279 254 Q 330 297 450 314 L 542 330 Z", "M 491 275 Q 491 109 481 22 Q 478 -20 503 -53 Q 516 -68 525 -50 Q 543 -14 544 59 Q 543 86 542 330 L 542 364 Q 542 413 542 463 L 541 500 Q 541 561 544 570 Q 547 582 538 589 Q 531 595 520 601 C 495 617 479 625 483 595 Q 486 588 492 490 L 493 455 Q 493 406 493 355 L 491 275 Z", "M 450 314 Q 444 295 426 269 Q 371 194 310 143 Q 259 97 155 32 Q 136 20 153 17 Q 190 14 294 72 Q 363 121 414 175 Q 421 184 491 275 C 531 326 472 370 450 314 Z"], "朋": ["M 253 393 Q 253 394 254 396 Q 263 453 266 509 L 268 544 Q 269 563 270 583 Q 273 685 279 697 C 282 714 282 714 261 726 Q 248 735 228 742 Q 209 751 197 745 Q 187 738 194 725 Q 212 698 218 645 Q 218 432 191 318 Q 188 311 187 301 Q 157 192 84 62 Q 80 55 79 49 Q 78 39 87 42 Q 100 45 136 96 Q 212 193 248 365 L 253 393 Z", "M 279 697 Q 297 701 364 721 Q 382 727 387 718 Q 406 666 397 319 Q 390 198 382 185 Q 379 182 314 194 Q 295 201 296 192 Q 345 146 372 112 Q 385 93 399 88 Q 408 85 416 94 Q 456 140 455 191 Q 434 662 459 705 Q 471 724 459 734 Q 440 752 405 765 Q 386 774 340 748 Q 310 736 261 726 C 232 719 250 689 279 697 Z", "M 266 509 Q 315 518 352 523 Q 376 529 366 540 Q 354 553 328 557 Q 304 558 268 544 C 240 533 236 504 266 509 Z", "M 248 365 Q 251 365 256 365 Q 314 375 356 380 Q 378 384 369 397 Q 359 410 335 413 Q 298 416 253 393 C 226 380 218 365 248 365 Z", "M 617 399 Q 626 448 629 525 L 630 556 Q 631 578 631 600 Q 628 672 634 707 Q 635 710 635 711 C 638 732 638 732 617 743 Q 604 752 584 758 Q 565 765 553 760 Q 543 753 550 740 Q 571 710 577 651 Q 577 638 578 620 Q 585 449 556 315 Q 529 213 460 74 Q 456 67 454 61 Q 453 51 463 54 Q 481 57 510 110 Q 583 209 612 372 L 617 399 Z", "M 635 711 Q 641 714 744 735 Q 766 739 771 727 Q 799 639 787 208 Q 783 126 773 110 Q 769 104 746 109 Q 713 116 680 123 Q 658 129 661 119 Q 728 68 767 30 Q 780 11 798 5 Q 808 2 816 12 Q 856 63 855 122 Q 843 315 840 627 Q 839 688 853 716 Q 866 737 853 747 Q 831 766 792 783 Q 773 790 756 783 Q 698 753 617 743 C 587 738 606 704 635 711 Z", "M 629 525 Q 690 534 736 543 Q 758 547 750 560 Q 738 575 712 577 Q 670 580 630 556 C 604 541 599 521 629 525 Z", "M 612 372 Q 615 371 623 372 Q 690 382 739 387 Q 761 391 753 404 Q 743 419 717 423 Q 675 429 617 399 C 590 385 582 375 612 372 Z"], "生": ["M 324 495 Q 328 502 332 509 Q 357 558 382 599 Q 392 615 375 630 Q 318 663 296 657 Q 283 654 287 638 Q 308 536 204 397 Q 200 396 160 342 Q 153 324 169 330 Q 188 334 213 357 Q 273 409 311 471 L 324 495 Z", "M 556 479 Q 748 518 754 521 Q 764 530 759 539 Q 752 552 721 561 Q 688 568 656 557 Q 607 544 558 529 L 500 516 Q 418 501 324 495 C 294 493 284 484 311 471 L 312 471 Q 351 447 432 459 Q 463 465 499 469 L 556 479 Z", "M 549 276 Q 702 307 710 313 Q 720 322 715 331 Q 708 344 676 353 Q 649 359 551 329 L 495 315 Q 428 303 347 295 Q 308 291 336 271 Q 378 244 484 265 Q 488 266 495 267 L 549 276 Z", "M 543 92 Q 546 186 549 276 L 551 329 Q 552 405 556 479 L 558 529 Q 567 718 580 760 Q 593 782 578 797 Q 538 828 506 838 Q 490 842 473 829 Q 467 820 474 808 Q 507 751 504 688 Q 503 604 500 516 L 499 469 Q 498 394 495 315 L 495 267 Q 492 179 492 86 C 492 56 542 62 543 92 Z", "M 492 86 Q 330 70 144 51 Q 119 48 137 27 Q 173 -9 220 1 Q 520 73 900 54 Q 901 54 904 54 Q 929 53 935 63 Q 942 78 922 95 Q 856 144 785 129 Q 688 113 543 92 L 492 86 Z"]};
+function stepSvg(paths,k){return `<svg viewBox="0 0 1024 1024"><g transform="translate(0,900) scale(1,-1)">${paths.map((d,i)=>i<=k?`<path d="${d}" fill="${i===k?'#e0524a':'#3a2e2a'}"/>`:`<path d="${d}" fill="#eee5df"/>`).join('')}</g></svg>`}
+document.getElementById('strokeList').innerHTML=vocab.map((v,vi)=>[...v[0]].map(c=>{const P=STROKES[c];return `
+ <div class="sw"><div class="head"><span class="zh">${c}</span><button class="spk" onclick="say('${c}')">🔊</button>
+  <div><div class="py">${v[1]}</div><div class="it">${v[0].length>1?v[0]+' · ':''}${v[2]}</div></div>
+  <button class="btn" onclick="openW(${vi},event)">▶</button><span class="cnt">${P.length} tratti</span></div>
+  <div class="steps">${P.map((_,k)=>`<div class="step"><b>${k+1}</b>${stepSvg(P,k)}</div>`).join('')}</div></div>`}).join('')).join('');
+
+let wIdx=0,writers=[];
+function speedLabel(v){v=+v;return v<0.35?'molto lento':v<0.7?'lento':v<1.1?'normale':'veloce'}
+function buildW(){
+ const sp=+document.getElementById('wspeed').value, box=document.getElementById('writers');
+ box.innerHTML='';writers=[];
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p>Serve la connessione a internet per l\'animazione.</p>';return}
+ vocab[wIdx][0].split('').forEach((c,k)=>{const d=document.createElement('div');d.className='tzg';box.appendChild(d);
+  writers.push(HanziWriter.create(d,c,{width:240,height:240,padding:14,showOutline:true,showCharacter:true,
+   strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#eadfd8',highlightColor:'#e8558f',drawingColor:'#e8558f',
+   strokeAnimationSpeed:sp,delayBetweenStrokes:Math.round(500/sp)}))});
+}
+function openW(i,e){e.stopPropagation();wIdx=i;
+ document.getElementById('wpy').textContent=vocab[i][1];document.getElementById('wit').textContent=vocab[i][2];
+ document.getElementById('wsv').textContent=speedLabel(document.getElementById('wspeed').value);
+ document.getElementById('wmodal').classList.add('on');buildW();}
+function closeW(){document.getElementById('wmodal').classList.remove('on');document.getElementById('writers').innerHTML='';writers=[]}
+async function playW(){buildW();for(const w of writers){await w.animateCharacter()}}
+function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComplete:()=>star()})})}
+
+function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
+ <div class="line"><div class="face3" style="border-color:${l[4]}">${l[0]}</div>
+ <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
+ <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
+dlg('d1',[["👧", "这是我的好朋友，她叫安娜。", "Zhè shì wǒ de hǎo péngyou, tā jiào Ānnà.", "Questa è la mia migliore amica, si chiama Anna.", "#e0524a"], ["👩", "她也是小学生吗？", "Tā yě shì xiǎoxuéshēng ma?", "Anche lei va alle elementari?", "#9a7bd1"], ["👧", "是，我们是同学。", "Shì, wǒmen shì tóngxué.", "Sì, siamo compagne di classe.", "#e0524a"], ["👩", "她几岁？", "Tā jǐ suì?", "Quanti anni ha?", "#9a7bd1"], ["👧", "十二岁，她比我大一岁。", "Shí'èr suì, tā bǐ wǒ dà yí suì.", "Dodici anni, ha un anno più di me.", "#e0524a"]]);
+dlg('d2',[["👦", "这是我弟弟，这是我妹妹。", "Zhè shì wǒ dìdi, zhè shì wǒ mèimei.", "Questo è il mio fratellino e questa è la mia sorellina.", "#3a8fd0"], ["👨", "你弟弟几岁？", "Nǐ dìdi jǐ suì?", "Quanti anni ha il tuo fratellino?", "#3fa874"], ["👦", "他六岁，我比他大三岁。", "Tā liù suì, wǒ bǐ tā dà sān suì.", "Ha sei anni, io ho tre anni più di lui.", "#3a8fd0"], ["👨", "你妹妹呢？", "Nǐ mèimei ne?", "E la tua sorellina?", "#3fa874"], ["👦", "她四岁，比弟弟小两岁。", "Tā sì suì, bǐ dìdi xiǎo liǎng suì.", "Ha quattro anni, due meno del fratellino.", "#3a8fd0"]]);
+
+const lr=[{"w": "弟弟", "a": "👦", "o": ["👦", "👧", "👴"]}, {"w": "妹妹", "a": "👧", "o": ["👵", "👧", "👦"]}, {"w": "朋友", "a": "🤝", "o": ["🤝", "🛒", "🍳"]}, {"w": "学生", "a": "🎒", "o": ["👨‍⚕️", "🧑‍🍳", "🎒"]}, {"w": "同学", "a": "🧑‍🤝‍🧑", "o": ["🧑‍🤝‍🧑", "👨‍⚕️", "🐱"]}];
+let li=0,ltried=false;
+function drawL(){
+ const d=lr[li];ltried=false;
+ document.getElementById('lopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickL(this,${k})">${o}</button>`).join('');
+ document.getElementById('lfb').textContent='';document.getElementById('lnext').style.display='none';
+ document.getElementById('ldots').innerHTML=lr.map((_,i)=>`<span class="${i<li?'done':i===li?'cur':''}"></span>`).join('');
+}
+function pickL(b,k){
+ const d=lr[li];
+ if(d.o[k]===d.a){b.classList.add('ok');if(!ltried)star();
+   document.getElementById('lfb').innerHTML=`🎉 <span class="zh">对！${d.w}</span>`;
+   document.querySelectorAll('#lopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('lnext');n.style.display='inline-block';n.textContent=li<lr.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');ltried=true;document.getElementById('lfb').innerHTML='🤔 Riprova!'}
+}
+function nextL(){if(li<lr.length-1){li++;drawL();say(lr[li].w)}else{document.getElementById('lfb').innerHTML='🌟 <span class="zh">太棒了！</span>';document.getElementById('lnext').style.display='none';document.getElementById('ldots').innerHTML=lr.map(()=>'<span class="done"></span>').join('')}}
+drawL();
+
+const br=[{"s": "<span class=\"cmp\">👩<br>10岁</span> <span class=\"cmp\">👦<br>7岁</span>", "o": [["姐姐比弟弟大三岁。", "Jiějie bǐ dìdi dà sān suì."], ["姐姐比弟弟大两岁。", "Jiějie bǐ dìdi dà liǎng suì."], ["弟弟比姐姐大三岁。", "Dìdi bǐ jiějie dà sān suì."]], "a": 0}, {"s": "<span class=\"cmp\">🧒 我<br>9岁</span> <span class=\"cmp\">👧<br>5岁</span>", "o": [["妹妹比我大四岁。", "Mèimei bǐ wǒ dà sì suì."], ["我比妹妹大四岁。", "Wǒ bǐ mèimei dà sì suì."], ["我比妹妹小四岁。", "Wǒ bǐ mèimei xiǎo sì suì."]], "a": 1}, {"s": "<span class=\"cmp\">👦<br>6岁</span> <span class=\"cmp\">🧒 我<br>8岁</span>", "o": [["弟弟比我大两岁。", "Dìdi bǐ wǒ dà liǎng suì."], ["我比弟弟小两岁。", "Wǒ bǐ dìdi xiǎo liǎng suì."], ["弟弟比我小两岁。", "Dìdi bǐ wǒ xiǎo liǎng suì."]], "a": 2}, {"s": "🧒🎒 + 👦🎒", "o": [["我是学生，弟弟也是学生。", "Wǒ shì xuésheng, dìdi yě shì xuésheng."], ["我是学生，也弟弟是学生。", "Wǒ shì xuésheng, yě dìdi shì xuésheng."], ["我是学生，弟弟是老师。", "Wǒ shì xuésheng, dìdi shì lǎoshī."]], "a": 0}, {"s": "🧑‍🤝‍🧑 🏫", "o": [["我们是医生。", "Wǒmen shì yīshēng."], ["我们是同学。", "Wǒmen shì tóngxué."], ["我们是厨师。", "Wǒmen shì chúshī."]], "a": 1}];
+let bi=0,btried=false;
+function drawB(){
+ const d=br[bi];btried=false;
+ document.getElementById('bscene').innerHTML=d.s;
+ document.getElementById('bopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickB(this,${k})"><span class="py">${o[1]}</span><span class="zh">${o[0]}</span></button>`).join('');
+ document.getElementById('bfb').textContent='';document.getElementById('bnext').style.display='none';
+ document.getElementById('bdots').innerHTML=br.map((_,i)=>`<span class="${i<bi?'done':i===bi?'cur':''}"></span>`).join('');
+}
+function pickB(b,k){
+ const d=br[bi];
+ if(k===d.a){b.classList.add('ok');if(!btried)star();say(d.o[k][0]);
+   document.getElementById('bfb').innerHTML='🎉 <span class="zh">对！</span> Bravissima!';
+   document.querySelectorAll('#bopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('bnext');n.style.display='inline-block';n.textContent=bi<br.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');btried=true;document.getElementById('bfb').innerHTML='🤔 Riprova!'}
+}
+function nextB(){if(bi<br.length-1){bi++;drawB()}else{document.getElementById('bfb').innerHTML='🌟 <span class="zh">太棒了！</span> Hai finito il gioco!';document.getElementById('bnext').style.display='none';document.getElementById('bdots').innerHTML=br.map(()=>'<span class="done"></span>').join('')}}
+drawB();
+
+const chant=[["🧒🎒", "我是小学生，弟弟也是小学生。", "Wǒ shì xiǎoxuéshēng, dìdi yě shì xiǎoxuéshēng.", "Io vado alle elementari, anche il fratellino va alle elementari."], ["👧", "妹妹三岁，我比妹妹大！", "Mèimei sān suì, wǒ bǐ mèimei dà!", "La sorellina ha tre anni, io sono più grande di lei!"], ["🐶", "小狗一岁，我比小狗大！", "Xiǎo gǒu yí suì, wǒ bǐ xiǎo gǒu dà!", "Il cagnolino ha un anno, io sono più grande di lui!"], ["🤝", "你是我的朋友，我也是你的朋友！", "Nǐ shì wǒ de péngyou, wǒ yě shì nǐ de péngyou!", "Tu sei mio amico, e anch'io sono tuo amico!"], ["🧑‍🤝‍🧑", "我们是同学，也是好朋友！", "Wǒmen shì tóngxué, yě shì hǎo péngyou!", "Siamo compagni di classe e anche grandi amici!"]];
+document.getElementById('chant').innerHTML=chant.map(c=>`<div class="cl"><span class="ic">${c[0]}</span><div style="flex:1;min-width:240px"><span class="py">${c[2]}</span><span class="zh">${c[1]}</span><div class="tr">${c[3]}</div></div><button class="spk" onclick="say('${c[1]}')">🔊</button></div>`).join('');
+
+function finish(){star(1);const e=document.getElementById('end');e.style.display='block';e.innerHTML=`🎉 <span class="zh">太棒了！</span><br>Hai raccolto <b>${stars}</b> ⭐ oggi! <span class="zh">再见！</span> 👋`}
+</script>
+</body>
+</html>
