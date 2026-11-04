@@ -339,13 +339,13 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
     <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
   </div>
   <div class="dlg">
-    <div class="place bath"><div class="pe">🚿 🛁 🧴 🪥 🐶</div><div class="pl">In bagno</div></div>
+    <div class="place bath"><div class="pe">🚿 🛁 🧴</div><div class="pl">In bagno</div></div>
     <div id="d1"></div>
     <div class="q" onclick="this.classList.toggle('open')"><span class="zh">女孩让妈妈做什么？</span> <small>(clicca per la risposta)</small>
       <div class="ans zh">把门关上。</div></div>
   </div>
   <div class="dlg">
-    <div class="place kitchen"><div class="pe">🍳 🍚 🥘 🐟 🐱</div><div class="pl">In cucina</div></div>
+    <div class="place kitchen"><div class="pe">🍳 🍚 🥘</div><div class="pl">In cucina</div></div>
     <div id="d2"></div>
     <div class="q" onclick="this.classList.toggle('open')"><span class="zh">鱼在哪儿？</span> <small>(clicca per la risposta)</small>
       <div class="ans zh">小猫把鱼吃了！</div></div>
@@ -505,16 +505,16 @@ function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
  <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
  <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
 dlg('d1',[
- ['👩','你在做什么？我可以进来吗？','Nǐ zài zuò shénme? Wǒ kěyǐ jìnlai ma?','Cosa stai facendo? Posso entrare?','#9a7bd1',pics('🚪❓')],
- ['👧','请进，快把门关上。','Qǐng jìn, kuài bǎ mén guānshang.','Entra, chiudi subito la porta.','#e0524a',pics('🚪🔒')],
- ['👩','小狗怎么在这里？','Xiǎo gǒu zěnme zài zhèli?','Come mai il cagnolino è qui?','#9a7bd1',pics('🐶❓')],
- ['👧','我在给它洗澡。','Wǒ zài gěi tā xǐzǎo.','Gli sto facendo il bagno.','#e0524a',pics('🛁🐶')],
+ ['👩','你在做什么？我可以进来吗？','Nǐ zài zuò shénme? Wǒ kěyǐ jìnlai ma?','Cosa stai facendo? Posso entrare?','#9a7bd1'],
+ ['👧','请进，快把门关上。','Qǐng jìn, kuài bǎ mén guānshang.','Entra, chiudi subito la porta.','#e0524a'],
+ ['👩','小狗怎么在这里？','Xiǎo gǒu zěnme zài zhèli?','Come mai il cagnolino è qui?','#9a7bd1'],
+ ['👧','我在给它洗澡。','Wǒ zài gěi tā xǐzǎo.','Gli sto facendo il bagno.','#e0524a'],
 ]);
 dlg('d2',[
- ['👧','我们今天吃什么？','Wǒmen jīntiān chī shénme?','Cosa mangiamo oggi?','#e0524a',pics('🍽️❓')],
- ['👨','吃鱼，还有米饭和菜，喝果汁。','Chī yú, hái yǒu mǐfàn hé cài, hē guǒzhī.','Mangiamo pesce, e poi riso e verdure, e beviamo succo di frutta.','#3a8fd0',pics('🐟🍚🥘🧃')],
- ['👧','鱼？鱼在哪儿？','Yú? Yú zài nǎr?','Il pesce? Dov\'è il pesce?','#e0524a',pics('🐟❓')],
- ['👨','不好，小猫把鱼吃了！','Bù hǎo, xiǎo māo bǎ yú chī le!','Oh no, il gattino si è mangiato il pesce!','#3a8fd0',pics('🐱🦴')],
+ ['👧','我们今天吃什么？','Wǒmen jīntiān chī shénme?','Cosa mangiamo oggi?','#e0524a'],
+ ['👨','吃鱼，还有米饭和菜，喝果汁。','Chī yú, hái yǒu mǐfàn hé cài, hē guǒzhī.','Mangiamo pesce, e poi riso e verdure, e beviamo succo di frutta.','#3a8fd0'],
+ ['👧','鱼？鱼在哪儿？','Yú? Yú zài nǎr?','Il pesce? Dov\'è il pesce?','#e0524a'],
+ ['👨','不好，小猫把鱼吃了！','Bù hǎo, xiǎo māo bǎ yú chī le!','Oh no, il gattino si è mangiato il pesce!','#3a8fd0'],
 ]);
 
 /* gioco 1: ascolta e scegli */
