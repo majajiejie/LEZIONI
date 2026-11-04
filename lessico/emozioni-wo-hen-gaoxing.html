@@ -70,7 +70,7 @@ button{font-family:inherit;color:inherit}
 @keyframes affonda{50%{transform:translateY(10px) rotate(-3deg)}}
 .anim-arrabbiato{animation:trema .18s linear infinite}
 @keyframes trema{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.anim-pigro{animation:dondola 3s ease-in-out infinite;transform-origin:50% 100%}
+.anim-stanco{animation:dondola 3s ease-in-out infinite;transform-origin:50% 100%}
 @keyframes dondola{50%{transform:rotate(-7deg)}}
 .anim-spaventato{animation:brivido .12s linear infinite}
 @keyframes brivido{25%{transform:translate(-3px,1px)}75%{transform:translate(3px,-1px)}}
@@ -118,7 +118,7 @@ button{font-family:inherit;color:inherit}
 <section class="slide emo" data-emo="0" data-titolo="高兴 gāoxìng"></section>
 <section class="slide emo" data-emo="1" data-titolo="伤心 shāngxīn"></section>
 <section class="slide emo" data-emo="2" data-titolo="生气 shēngqì"></section>
-<section class="slide emo" data-emo="3" data-titolo="懒惰 lǎnduò"></section>
+<section class="slide emo" data-emo="3" data-titolo="累 lèi"></section>
 <section class="slide emo" data-emo="4" data-titolo="害怕 hàipà"></section>
 
 <!-- 8 INDOVINA -->
@@ -250,7 +250,7 @@ const EMO=[
   {k:'felice',han:'高兴',py:'gāoxìng',m:'felice',f:'felice',col:'#C27A00',faccia:'Sorridete tantissimo! 😄'},
   {k:'triste',han:'伤心',py:'shāngxīn',m:'triste',f:'triste',col:'#2F7FB8',faccia:'Fate una faccia triste triste… 😢'},
   {k:'arrabbiato',han:'生气',py:'shēngqì',m:'arrabbiato',f:'arrabbiata',col:'#C8102E',faccia:'Grrr! Fate la faccia arrabbiata! 😠'},
-  {k:'pigro',han:'懒惰',py:'lǎnduò',m:'pigro',f:'pigra',col:'#3F8A2A',faccia:'Sbadigliate e stiracchiatevi… 🥱'},
+  {k:'stanco',han:'累',py:'lèi',m:'stanco',f:'stanca',col:'#3F8A2A',faccia:'Che sonno! Sbadigliate e chiudete gli occhi… 🥱'},
   {k:'spaventato',han:'害怕',py:'hàipà',m:'spaventato',f:'spaventata',col:'#7A4FB0',faccia:'Aiuto! Fate la faccia spaventata! 😱'}
 ];
 const CHI=[
@@ -283,7 +283,7 @@ function faccia(k,{fiocco=false,anim=true}={}){
     sopr=`<path d="M108 140 L178 172" stroke="#22201F" stroke-width="13" stroke-linecap="round"/><path d="M292 140 L222 172" stroke="#22201F" stroke-width="13" stroke-linecap="round"/>`;
     bocca=`<path d="M160 322 Q200 290 240 322" stroke="#22201F" stroke-width="10" fill="none" stroke-linecap="round"/>`;
     extra=`<g fill="#B9B2AE"><circle cx="38" cy="60" r="16"/><circle cx="58" cy="38" r="20"/><circle cx="342" cy="60" r="16"/><circle cx="362" cy="38" r="20"/></g><ellipse cx="112" cy="268" rx="28" ry="16" fill="#F2667E"/><ellipse cx="288" cy="268" rx="28" ry="16" fill="#F2667E"/>`;
-  }else if(k==='pigro'){
+  }else if(k==='stanco'){
     occhi=`<path d="M128 210 Q148 222 168 210" stroke="#FFFDF8" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M232 210 Q252 222 272 210" stroke="#FFFDF8" stroke-width="8" fill="none" stroke-linecap="round"/>`;
     bocca=`<ellipse cx="200" cy="308" rx="20" ry="26" fill="#22201F"/><ellipse cx="200" cy="320" rx="12" ry="9" fill="#F27C9B"/>`;
     extra=`<g fill="none" stroke="#3F8A2A" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"><path d="M318 100 h28 l-28 30 h28"/><path d="M350 50 h20 l-20 22 h20"/></g>`;
@@ -342,7 +342,7 @@ const mescola=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1])
 (function(){
   const box=document.getElementById('risposte-ciao'), panda=document.getElementById('ciao-panda');
   panda.innerHTML=faccia('felice');
-  [['我很好','wǒ hěn hǎo','Sto bene!','felice'],['还可以','hái kěyǐ','Così così','pigro'],['不好','bù hǎo','Non bene','triste']].forEach(([h,p,it,k])=>{
+  [['我很好','wǒ hěn hǎo','Sto bene!','felice'],['还可以','hái kěyǐ','Così così','stanco'],['不好','bù hǎo','Non bene','triste']].forEach(([h,p,it,k])=>{
     const b=document.createElement('button'); b.className='carta-c'; b.style.height='190px';
     b.innerHTML=`<span class="han" style="font-size:56px">${h}</span><span style="font-size:32px;font-weight:600">${p}</span><span style="font-size:26px">${it}</span>`;
     b.onclick=()=>{box.querySelectorAll('.carta-c').forEach(x=>x.classList.toggle('scelta',x===b)); panda.innerHTML=faccia(k); dici(h)};
@@ -448,13 +448,13 @@ stage.querySelectorAll('.slide.emo').forEach(s=>{
 // ---- 13 quiz
 (function(){
   const domande=[
-    ['高兴 vuol dire…',['felice','triste','pigro'],0,'高兴 gāoxìng = felice'],
+    ['高兴 vuol dire…',['felice','triste','stanco'],0,'高兴 gāoxìng = felice'],
     ['Come si dice “arrabbiato”?',['害怕','生气','伤心'],1,'生气 shēngqì = arrabbiato'],
     ['“Io sono felice” si dice…',['我高兴很','很我高兴','我很高兴'],2,'Chi → 很 → emozione: 我很高兴'],
     ['她很伤心 vuol dire…',['Lei è triste','Lui è triste','Lei è felice'],0,'她 = lei, 伤心 = triste'],
-    ['害怕 vuol dire…',['pigro','spaventato','arrabbiato'],1,'害怕 hàipà = spaventato'],
+    ['害怕 vuol dire…',['stanco','spaventato','arrabbiato'],1,'害怕 hàipà = spaventato'],
     ['Al posto di “sono” in cinese usiamo…',['很','吗','们'],0,'很 hěn fa da colla!'],
-    ['懒惰 vuol dire…',['pigro','felice','triste'],0,'懒惰 lǎnduò = pigro 🥱']
+    ['累 vuol dire…',['stanco','felice','triste'],0,'累 lèi = stanco 🥱']
   ];
   const el=document.getElementById('quiz'); let i=0,punti=0;
   const isHan=s=>/^[一-鿿]+$/.test(s);
@@ -478,7 +478,7 @@ stage.querySelectorAll('.slide.emo').forEach(s=>{
       box.appendChild(b)});
   }
   function fine(){
-    const k=punti>=domande.length-1?'felice':punti>=domande.length/2?'pigro':'triste';
+    const k=punti>=domande.length-1?'felice':punti>=domande.length/2?'stanco':'triste';
     el.innerHTML=`<div style="width:260px;height:260px">${faccia(k)}</div><p style="margin:0;font-size:60px;font-weight:700">${punti} su ${domande.length}!</p>
       <p style="margin:0;font-size:40px"><span class="han" style="font-size:64px;color:var(--rosso)">我很高兴！</span> wǒ hěn gāoxìng!</p><button class="btn oro">Gioca ancora</button>`;
     el.querySelector('button').onclick=avvio; if(punti>=domande.length-2) coriandoli();
