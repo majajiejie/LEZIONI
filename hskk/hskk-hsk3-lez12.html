@@ -111,6 +111,8 @@ th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
     <label for="rate">Velocità</label>
     <input id="rate" type="range" min="0.6" max="1.1" step="0.1" value="0.9">
     <span id="rateLbl">0.9×</span>
+    <label for="grpSel">Gruppo</label><select id="grpSel" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)">
+      <option value="0">Sveva, Sofia, Sofy, Leo</option><option value="1">Gregorio, Samu</option></select>
     <span class="chip" id="score">0 / 18 completate</span>
   </div>
   <p class="warn" id="noVoice" hidden>Il tuo dispositivo non ha una voce cinese installata: puoi leggere il testo e pronunciarlo tu.</p>
@@ -157,10 +159,8 @@ th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 
   <section id="p4" role="tabpanel" hidden>
     <h2>🏆 Risultati della lezione</h2>
-    <p class="lead">Ogni risposta giusta vale 1 punto: nelle attività tocca il nome di chi ha risposto bene. Qui vedi i punti di tutte le attività insieme.</p>
-    <div class="grp"><label for="grpSel" class="note">Gruppo</label>
-      <select id="grpSel" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)">
-        <option value="0">Sveva, Sofia, Sofy, Leo</option><option value="1">Greg, Samu</option></select>
+    <p class="lead">Ogni risposta giusta vale 1 punto: nelle attività tocca il nome di chi ha risposto bene (scegli il gruppo in alto). Qui vedi i punti di tutte le attività insieme.</p>
+    <div class="grp">
       <button class="btn" id="resetPts">Azzera i punti</button></div>
     <div class="tbl card" style="padding:6px 10px"><table class="res"><thead><tr><th>Nome</th><th>1 · Ripeti</th><th>2 · Rispondi</th><th>3 · Parla</th><th>Totale</th></tr></thead><tbody id="resBody"></tbody></table></div>
     <div class="winner" id="winner"></div>
@@ -209,7 +209,7 @@ const PHR=[["把……放在……","bǎ… fàng zài…","mettere… in/su…"
 
 let done={};try{done=JSON.parse(localStorage.getItem("hskk-l12-done")||"{}")}catch(e){}
 function save(){try{localStorage.setItem("hskk-l12-done",JSON.stringify(done))}catch(e){};updScore()}
-const GRUPPI=[["Sveva","Sofia","Sofy","Leo"],["Greg","Samu"]];
+const GRUPPI=[["Sveva","Sofia","Sofy","Leo"],["Gregorio","Samu"]];
 let grp=0;try{grp=parseInt(localStorage.getItem("hskk-l12-grp")||"0")||0}catch(e){}
 let pts={};try{pts=JSON.parse(localStorage.getItem("hskk-l12-pts")||"{}")}catch(e){}
 function nomi(){return GRUPPI[grp]||GRUPPI[0]}
