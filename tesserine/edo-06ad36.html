@@ -77,7 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </style>
 </head>
 <body>
-<form class="pin" id="pinbox">
+<form class="pin" id="pinbox" hidden>
   <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
@@ -130,11 +130,65 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
   </div>
 
-  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "kFNN5ngp9yfRTQ2+I+iOoQ==.cA/VauH91K6NNrOG.wc9bPDhmRnGQy3ll3HWmynFMeOapIyw+DP76GYRItETpBJ0C6yuIn0fXVSe/AkFQ310lnyMM29Z5OA8eDxf7R3/dRwVqBuR9snlrAdB5VQp9LCl9X8CgFw0xgw5VkiaFYca4qVOxkPblPvLJQ5Ei0K+/UGxgyY/4vo6EDAAhECTwDMuQnlgtPF8AV0W/LotNXnyGzsRR7tN9dMtnDusYyEczh3R5bl0hkX+CxdhzRCrTZEChMsllcA2xfOBS3MjzQ3DkrLb255goGwOvUDMpvnwq+LnrVevc4PKpKQp30n+ybogkOq7lVsdTaLjo2pjCgEL0g0JBBAH387D+SkkvcYvQPsi1FKWXoOW0VhEnUHiOyoHFsjGZw68Adz4Y0/rCxRlXMjJ0O8nTfpMHIGrwfMA5mufVmst0ad+SJs76WRiiLV1WvEzyoS1qopLzfIFHP2CJV7ewrmZWuNoQNYxGDiEGgHfKys0h1DS3TWr5uKN2mPDor3lcapDM78fm30uPL/7PJgNPvZ/eAQAbRI0eClXpZ4kLUrspHZwNGtDY2ezI1fXTG7OO6Rc4UyrCM7ir0meY/gcuqiWMhf1f8H90Ls4JqF3IYLSoXjrmC+TiiOH86ReWKTUuqJGXWfDgaDGhoeKKlI7qxYxW0SShLLAWpw44AKBFVCiRlyKo0n1YQ1Datuv4amO86pVppcnmgTy6ObN1D3zT2ZXNqe7x4V9Ju9ZS7+wBG9BSrAPgk18QxgFUr3ebfmFQaeGQlF9gmcwLVug3vr6ZLHD8jCNRq4ObfEjfVI5owBqx5SlQH0LVSnVHv5uBDcUG8IjxyAGTMehxltKp/DGgYNbhk1XZreodwO26otqEKucX5B8IaIB+N27y8/3nRcgztplJ1OspK87b/bHXGHo1XlMbBg/GBsjbLZAurw13NsIHUocZnq8/ktXhvBkCqAySuGy7/pAXSuHwL/FJMzxLAh4ub9UUkVH00xQaJmN0zcwlfGkGEbCmcRIUGis2fjwXzcKkLWENriX8T13ojPMOcPsogSHlc/HuRke0R4izigg/DnBuoeG7w43WHT1rmdyBp3N+z5pRk+2PmiuXE9+FInPUw0MmxqS2HtdEFbtcnrUVAatXtwNELTAx2dLzCuwjh2Ri3lKMqWIuDEHksdWBnFuc5E9MPA+QhWDXg79qDMCrc3YvAGw6J79P3bMaL2KTTUk9rqxp9XcWQ+MfGLTFNgTAa0cJAKCiWMqa3mlk8SiTU1dJM8zGXWJKgJnLF4MAGEX46VTGhSlqpghL6Bf5pdhiKR/rvEllS6lOW1d5R5p9srWZvWAdETp2nVxwGJALgcZa7+aAWIl3bKfh1vEvxB+xODGSWgVc3GFsKVH9mpdC0KO/cMy7ZBGCE+FO1xgmTdhX3v0lpMbjr4MJM2yqYoJ21oNYlDfOMT6NDJDXrrkSlkkkfnTi+te5WOlu0/N3mGqfrDh4O8fz/mhkw6Zd4rhkW7AoOnjpm1dT7LLjsrIZdtacyheYGkwDHDyz";
+const DATI_APERTI = {
+ "nome": "Edo",
+ "rimanenti": 2,
+ "aggiornata": "4 novembre 2026",
+ "compiti": {
+  "data": "04/11/2026",
+  "testo": "Scrivi due volte sul quaderno ogni aggettivo e ogni emozione. Qui sotto, nei Materiali, trovi l'ordine dei tratti delle emozioni e degli aggettivi."
+ },
+ "storico": [
+  {
+   "data": "28/10/2026",
+   "assente": true,
+   "fatto": "Lezione sugli aggettivi: è stata registrata, da guardare a casa.",
+   "compiti": "Guardare la lezione registrata e scrivere gli aggettivi."
+  },
+  {
+   "data": "04/11/2026",
+   "fatto": "Lezione fatta",
+   "compiti": "Scrivi due volte sul quaderno ogni aggettivo e ogni emozione. Qui sotto, nei Materiali, trovi l'ordine dei tratti delle emozioni e degli aggettivi."
+  }
+ ],
+ "materiali": [
+  {
+   "titolo": "Ordine dei tratti: le emozioni",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/tratti-emozioni.html"
+  },
+  {
+   "titolo": "Ordine dei tratti: 大 小 长 短",
+   "url": "https://majajiejie.github.io/LEZIONI/tratti-da-xiao-chang-duan.html"
+  },
+  {
+   "titolo": "Grande e piccolo 大小长短 (gli aggettivi)",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/grande-e-piccolo.html"
+  }
+ ],
+ "contatti": {
+  "whatsapp": "393398768166",
+  "gruppo_concorso": "https://chat.whatsapp.com/LS9SCsDbxkRJFPOI2XaGN6",
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
+ },
+ "durata": null,
+ "compiti_fisso": null,
+ "classroom": null,
+ "pagamento": {
+  "paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL",
+  "iban": "IT33W0306968053100000007993",
+  "intestatario": "Maja Fabbri (Intesa Sanpaolo)",
+  "pacchetti": [
+   {
+    "lezioni": 10,
+    "prezzo": 150
+   }
+  ]
+ }
+};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -189,24 +243,7 @@ link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". ")
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
-const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function apri(pin){
-  const [sale, iv, ct] = CIFRATO.split('.').map(b64);
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
-  const k = await crypto.subtle.deriveKey({name:'PBKDF2', salt:sale, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv}, k, ct)));
-}
-const CHIAVE = 'pin:' + location.pathname;
-function salva(p){ try{ localStorage.setItem(CHIAVE, p); }catch(e){} }
-function ricorda(){ try{ return localStorage.getItem(CHIAVE); }catch(e){ return null; } }
-async function prova(pin, silenzioso){
-  try{ const d = await apri(pin); salva(pin); mostra(d); }
-  catch(e){ if(!silenzioso) $("errore").textContent = 'PIN non corretto, riprova'; try{ localStorage.removeItem(CHIAVE); }catch(_){} }
-}
-$("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
-$("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
-const dalLink = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
-const gia = dalLink || ricorda(); if (gia) prova(gia, !dalLink);
+mostra(DATI_APERTI);
 </script>
 </body>
 </html>

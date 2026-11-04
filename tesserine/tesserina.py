@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Legge e aggiorna i dati cifrati di una tesserina.
 
-Uso:
+Uso (tesserine con PIN):
   python3 tesserina.py leggi  FILE.html PIN            -> stampa i dati (JSON)
   python3 tesserina.py scrivi FILE.html PIN dati.json  -> salva i nuovi dati
+Uso (tesserine aperte, senza PIN):
+  python3 tesserina.py leggi  FILE.html                -> stampa i dati (JSON)
+  python3 tesserina.py scrivi FILE.html dati.json      -> salva i nuovi dati
 """
 import base64, json, os, re, sys
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
@@ -33,6 +36,19 @@ def blocco(testo_cifrato):
     return '/*DATI-INIZIO*/\nconst CIFRATO = "%s";\n/*DATI-FINE*/' % testo_cifrato
 
 
+APERTI = re.compile(r'const DATI_APERTI = (.*?);\n/\*DATI-FINE\*/', re.S)
+
+
+def leggi_aperta(file):
+    return json.loads(APERTI.search(open(file, encoding="utf-8").read()).group(1))
+
+
+def scrivi_aperta(file, dati):
+    html = open(file, encoding="utf-8").read()
+    html = BLOCCO.sub(lambda _: '/*DATI-INIZIO*/\nconst DATI_APERTI = %s;\n/*DATI-FINE*/' % json.dumps(dati, ensure_ascii=False, indent=1), html, count=1)
+    open(file, "w", encoding="utf-8").write(html)
+
+
 def leggi(file, pin):
     html = open(file, encoding="utf-8").read()
     m = re.search(r'const CIFRATO = "([^"]+)"', html)
@@ -46,7 +62,15 @@ def scrivi(file, pin, dati):
 
 
 if __name__ == "__main__":
-    cmd, file, pin = sys.argv[1:4]
+    cmd, file = sys.argv[1:3]
+    if "DATI_APERTI" in open(file, encoding="utf-8").read():
+        if cmd == "leggi":
+            print(json.dumps(leggi_aperta(file), ensure_ascii=False, indent=1))
+        elif cmd == "scrivi":
+            scrivi_aperta(file, json.load(open(sys.argv[-1], encoding="utf-8")))
+            print("ok")
+        sys.exit()
+    pin = sys.argv[3]
     if cmd == "leggi":
         print(json.dumps(leggi(file, pin), ensure_ascii=False, indent=1))
     elif cmd == "scrivi":
