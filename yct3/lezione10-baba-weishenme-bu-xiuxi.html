@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 3 · 第10课 爸爸为什么不休息</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,#e8558f,#f78fb3);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:50px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header h1 .zh{font-size:52px}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:#e8558f;border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:#e8558f;color:#fff}
+nav small{opacity:.75}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:46px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+h3{font-size:30px;margin:0 0 12px}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:inherit;font-size:22px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.py{color:var(--red);font-size:24px}
+/* font dedicato al pinyin: toni sempre al posto giusto */
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.hide-py .py{visibility:hidden}
+
+/* mini-scene */
+.ms{position:relative;display:inline-block;width:150px;height:140px;flex:none}
+.ms .b{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:90px;line-height:1}
+.ms .o{position:absolute;left:50%;transform:translateX(-50%);font-size:46px;line-height:1}
+.ms .o.on{bottom:82px}
+.ms .o.in{bottom:20px;font-size:36px;filter:drop-shadow(0 0 3px #fff)}
+.ms.under .b{bottom:30px}
+.ms .o.under{bottom:0;font-size:40px}
+.ms .x{position:absolute;right:4px;top:4px;font-size:34px}
+.pics{font-size:60px;line-height:1;flex:none;width:150px;text-align:center}
+
+/* frasi chiave */
+.key{display:flex;align-items:center;gap:20px;background:#fff;border:3px solid var(--line);border-radius:26px;padding:24px;margin-bottom:20px;flex-wrap:wrap}
+.key .txt{flex:1;min-width:260px}
+.key .py{font-size:30px}
+.key .zh{font-size:56px}
+.key .it{color:var(--soft);font-size:28px}
+
+/* specchietti */
+.box{background:#fff;border:3px solid var(--line);border-radius:26px;padding:22px;margin-bottom:22px}
+.box.blue{border-color:#bcdcf3;background:#f3f9ff}
+.box.green{border-color:#c4e8d3;background:#f2fbf6}
+.box.orange{border-color:#f7d2a6;background:#fff6eb}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.var{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid var(--line)}
+.var .big{font-size:52px}
+.var .py{font-size:28px}
+.var .ex{margin-top:10px;font-size:34px}
+.var .ex .py{font-size:22px;display:block}
+.var .it{color:var(--soft);font-size:22px}
+.loc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.loc .var .big{font-size:70px;color:var(--red)}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px;opacity:.95}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cZ{background:var(--orange)} .cB{background:var(--green)} .cL{background:var(--red)}
+.exrow{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;flex-wrap:wrap}
+.exrow .zh{font-size:44px}
+.exrow .zh span{padding:0 4px;border-radius:8px}
+.exrow .py{display:block;font-size:24px}
+.exrow .it{color:var(--soft);font-size:24px}
+.tA{color:var(--blue)} .tZ{color:var(--orange)} .tB{color:var(--green)} .tL{color:var(--red)}
+
+/* vocab */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{perspective:800px;height:250px;cursor:pointer;position:relative}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--line);border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+.face .pic{font-size:70px;line-height:1}
+.face .w{font-size:44px}
+.back{transform:rotateY(180deg);background:#fff3d6}
+.back .it{font-size:28px;font-weight:700}
+.card .spk{position:absolute;top:8px;right:8px;width:42px;height:42px;font-size:20px;z-index:2}
+
+
+/* ordine dei tratti */
+.card .wr{position:absolute;top:8px;left:8px;width:42px;height:42px;font-size:20px;z-index:2;border:0;border-radius:50%;background:#ffd6e7;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:28px;padding:24px;max-width:760px;width:100%;text-align:center;position:relative}
+.mbox .close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:34px;cursor:pointer}
+.mword{font-size:28px;margin-bottom:6px}
+.writers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.tzg{width:240px;height:240px;border:3px solid #e8558f;border-radius:10px;position:relative;background:
+ linear-gradient(#f7c6d9,#f7c6d9) center/100% 2px no-repeat,linear-gradient(#f7c6d9,#f7c6d9) center/2px 100% no-repeat}
+.ctrl{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:22px}
+.ctrl input[type=range]{width:220px;accent-color:#e8558f}
+
+/* dialogue */
+.dlg{background:#fff;border-radius:24px;padding:20px;border:3px solid var(--line);margin-bottom:22px}
+.line{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.who{flex:none;width:110px;text-align:center;border-radius:14px;padding:6px;color:#fff;font-size:22px}
+.bubble{background:#f7f1ea;border-radius:18px;padding:8px 18px;flex:1;min-width:240px}
+.bubble .zh{font-size:36px}
+.bubble .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .bubble .tr{display:block}
+.q{background:#eaf5ff;border-radius:16px;padding:14px 18px;margin-top:12px;cursor:pointer}
+.q .zh{font-size:30px}
+.q .ans{display:none;color:var(--green);font-weight:700;font-size:30px}
+.q.open .ans{display:block}
+
+/* game */
+.stage{background:#fff;border-radius:26px;border:3px solid var(--line);padding:22px;text-align:center}
+.scene{position:relative;height:230px;width:300px;margin:0 auto 10px}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:150px;line-height:1}
+.obj{position:absolute;left:50%;transform:translateX(-50%);font-size:68px;line-height:1}
+.obj.on{bottom:136px}
+.obj.in{bottom:34px;font-size:54px;filter:drop-shadow(0 0 4px #fff)}
+.question .zh{font-size:44px}
+.question .py{font-size:28px}
+.opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 22px;font:inherit;cursor:pointer}
+.opt .zh{font-size:36px;display:block}
+.opt .py{display:block;font-size:22px}
+.opt.ok{border-color:var(--green);background:#e8f8ef}
+.opt.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:36px;font-size:28px;margin-top:12px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots span{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots span.done{background:var(--green)}
+.dots span.cur{background:var(--orange)}
+
+/* storia: una vignetta alla volta */
+.intro{background:#fff3d6;border-radius:22px;padding:16px 20px;margin-bottom:18px;font-size:24px}
+.newwords{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 16px 6px 8px;display:flex;align-items:center;gap:10px;font-size:24px}
+.chip .zh{font-size:30px}
+.chip .spk{width:42px;height:42px;font-size:20px}
+.comic{background:#fff;border:4px solid #b9dfa0;border-radius:28px;padding:22px;max-width:760px;margin:0 auto}
+.comic .num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:46px;height:46px;line-height:46px;text-align:center;font-size:26px}
+.comic .sp{display:flex;align-items:center;gap:12px;margin:14px 0}
+.comic .face2{font-size:56px;flex:none;width:70px;text-align:center}
+.comic .bubble .zh{font-size:40px}
+.comic .middle{text-align:center;margin:6px 0}
+.snav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:18px}
+.snav .btn{font-size:26px;padding:10px 26px}
+
+/* parla */
+.talk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.talk div{background:#fff3d6;border-radius:20px;padding:18px}
+.talk .zh{font-size:34px}
+.talk .py{font-size:22px}
+.builder{margin-top:8px;color:var(--soft);font-size:26px}
+.end{display:none;text-align:center;font-size:30px;margin-top:20px;background:#e8f8ef;border-radius:20px;padding:18px}
+footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
+</style>
+<style>
+/* scena del 把 */
+.bscene{display:flex;align-items:center;justify-content:center;gap:14px;font-size:84px;line-height:1;min-height:140px;margin-bottom:6px;flex-wrap:wrap}
+.bscene .arr{font-size:48px;color:var(--soft)}
+.bscene .ba{font-family:'Noto Sans SC',sans-serif;font-size:56px;color:#fff;background:var(--orange);border-radius:18px;padding:6px 16px}
+.mini{font-size:46px;line-height:1}
+.pron{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.pron .var .big{font-size:72px}
+.pron .var.hl{border-color:var(--orange);background:#fff6eb}
+.chant{background:#fff;border:4px solid #f7d2a6;border-radius:28px;padding:18px 22px;max-width:860px;margin:0 auto}
+.chant .cl{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap}
+.chant .cl .zh{font-size:36px}
+.chant .cl .py{display:block;font-size:22px}
+.chant .cl .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .chant .cl .tr{display:block}
+.chant .cl .ic{font-size:44px;width:70px;text-align:center;flex:none}
+.listen .opt{font-size:70px;padding:10px 26px;line-height:1.1}
+.sw{background:#fff;border:3px solid var(--line);border-radius:24px;padding:16px 18px;margin-bottom:18px}
+.sw .head{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.sw .head .zh{font-size:64px;line-height:1}
+.sw .head .py{font-size:28px}
+.sw .head .it{color:var(--soft);font-size:22px}
+.sw .head .cnt{margin-left:auto;background:#ffe9f2;color:#e8558f;border-radius:20px;padding:4px 14px;font-size:20px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{position:relative;width:78px;height:78px;border:2px solid #f3b3cd;border-radius:8px;background:
+ linear-gradient(#fbe0ea,#fbe0ea) center/100% 1px no-repeat,linear-gradient(#fbe0ea,#fbe0ea) center/1px 100% no-repeat,#fff}
+.step svg{width:100%;height:100%;display:block}
+.step b{position:absolute;top:1px;left:4px;font-size:14px;color:#e8558f;font-family:'Noto Sans',sans-serif}
+.brow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bh{position:relative;border-radius:22px;padding:14px 8px 12px;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center}
+.bh .n{position:absolute;top:8px;left:10px;background:#fff;color:var(--ink);border-radius:50%;width:32px;height:32px;line-height:32px;font-size:20px;font-weight:700}
+.bh .bi{font-size:56px;line-height:1.1}
+.bh b{font-size:30px;line-height:1.2}
+.bh b.zh{font-size:40px}
+.bh small{font-size:18px;opacity:.95;line-height:1.2}
+.bh:not(:last-child)::after{content:'➜';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--soft);font-size:22px;z-index:2;background:#fff6eb;border-radius:50%;width:22px;text-align:center}
+.k1{--c:#3a8fd0;--l:#e7f2fb} .k2{--c:#f39a3d;--l:#fff0dd} .k3{--c:#3fa874;--l:#e6f6ec} .k4{--c:#e0524a;--l:#fde8e6}
+.bh.k1,.bh.k2,.bh.k3,.bh.k4{background:var(--c)}
+.bex{background:#fff;border-radius:22px;padding:12px;margin-top:14px}
+.bc{background:var(--l);border:3px solid var(--c);border-radius:18px;text-align:center;padding:8px 4px}
+.bc .bi{font-size:50px;line-height:1.1}
+.bc .bz{font-size:40px;color:var(--c);line-height:1.2}
+.bc .bp{font-size:20px;color:var(--soft)}
+.bfull{display:flex;align-items:center;gap:14px;margin-top:10px;padding:0 6px}
+.bfull .zh{font-size:34px}
+.bfull .py{font-size:22px}
+.bfull .it{color:var(--soft);font-size:22px}
+.place{border-radius:20px;padding:12px;text-align:center;margin-bottom:6px}
+.place.bath{background:linear-gradient(135deg,#d9f0fb,#eef9ff)}
+.place.kitchen{background:linear-gradient(135deg,#ffeccc,#fff7e8)}
+.place .pe{font-size:62px;letter-spacing:8px;line-height:1.2}
+.place .pl{font-size:28px;font-weight:700;color:var(--soft)}
+.face3{flex:none;width:84px;height:84px;border-radius:50%;border:4px solid;background:#fff;font-size:54px;display:flex;align-items:center;justify-content:center}
+.talk2{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px}
+.tk{background:#fff3d6;border-radius:20px;padding:16px 18px}
+.tq{display:flex;align-items:center;gap:12px}
+.tq .zh{font-size:34px}
+.tq .py,.ta .py{font-size:22px;display:block}
+.ta{margin-top:10px;background:#fff;border-radius:14px;padding:8px 14px;color:#5a4a42}
+.ta .zh{font-size:32px;white-space:nowrap}
+.bl{display:inline-block;width:110px;border-bottom:3px solid #c9b8ab;margin:0 4px;vertical-align:baseline}
+@media (max-width:640px){.brow{gap:6px}.bh b{font-size:20px}.bh .bi,.bc .bi{font-size:36px}.bc .bz{font-size:28px}.bh small{font-size:14px}.talk2{grid-template-columns:1fr}.ta .zh{white-space:normal}}
+.hw{background:#ffe9f2;border:3px dashed #e8558f;border-radius:24px;padding:18px 22px;margin-top:22px;font-size:26px;text-align:center}
+</style>
+<style>
+.place{background:linear-gradient(135deg,#fff0dd,#fff9f0)}
+.place.p2{background:linear-gradient(135deg,#e7f2fb,#f3f9ff)}
+.cmp{display:inline-block;font-family:'Noto Sans SC',sans-serif;font-size:34px;line-height:1.25;background:#fff6eb;border:3px solid #f7d2a6;border-radius:18px;padding:8px 16px;text-align:center}
+.bscene .ba{font-family:'Noto Sans',sans-serif}
+.opt .zh{font-size:32px}
+.pairs .var .big{font-size:46px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>YCT 3 · Lezione 10 · <span class="zh">爸爸为什么不休息？</span></h1>
+  <p>Perché papà non si riposa? · con Maja Jiejie 🐼</p>
+</header>
+<nav id="nav"><button data-s="0" class="on">⭐ Frasi chiave <small>2'</small></button><button data-s="1">Parole <small>8'</small></button><button data-s="7">Tratti ✍️ <small>8'</small></button><button data-s="2">Perché? ❓ <small>6'</small></button><button data-s="3">Leggiamo <small>6'</small></button><button data-s="4">Giochi 🎮 <small>6'</small></button><button data-s="5">Filastrocca 🎵 <small>4'</small></button><button data-s="6">Parliamo <small>3'</small></button></nav>
+<main>
+<section id="s0" class="on">
+  <h2>Frasi chiave</h2>
+  <p class="hint">Le due frasi più importanti della lezione</p>
+  <div class="key"><div class="pics">👨📋📋</div><div class="txt"><div class="py">Yīnwèi bàba yǒu hěn duō shìqing, suǒyǐ hěn máng.</div><div class="zh">因为爸爸有很多事情，所以很忙。</div><div class="it">Siccome papà ha tante cose da fare, è molto occupato.</div></div><button class="spk" onclick="say('因为爸爸有很多事情，所以很忙。')">🔊</button></div><div class="key"><div class="pics">💻🎬</div><div class="txt"><div class="py">Wǒ shì zài diànnǎo shang kàn de.</div><div class="zh">我是在电脑上看的。</div><div class="it">L'ho visto sul computer.</div></div><button class="spk" onclick="say('我是在电脑上看的。')">🔊</button></div>
+</section>
+<section id="s1">
+  <h2>Le parole nuove <span class="zh">生词</span></h2>
+  <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per il significato. ✍️ = come si scrive</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="grid" id="vocab"></div>
+</section>
+<section id="s7">
+  <h2>L'ordine dei tratti <span class="zh">笔顺</span></h2>
+  <p class="hint">Segui i numeri: il tratto rosso è quello nuovo. ▶ = guarda l'animazione</p>
+  <div id="strokeList"></div>
+</section>
+<section id="s2">
+  <h2>Perché? Perché! ❓👉</h2>
+  <p class="hint">为什么 = la domanda · 因为……所以…… = la risposta</p>
+  <div class="box orange"><h3>1 · Domanda e risposta</h3><div class="exrow"><div class="mini">❓</div><div style="flex:1;min-width:220px"><span class="py">Bàba wèi shénme bù xiūxi?</span><div class="zh">爸爸<span class="tZ">为什么</span>不休息？</div><span class="it">Perché papà non si riposa?</span></div><button class="spk" onclick="say('爸爸为什么不休息？')">🔊</button></div><div class="exrow"><div class="mini">👉</div><div style="flex:1;min-width:220px"><span class="py">Yīnwèi bàba tài máng le.</span><div class="zh"><span class="tA">因为</span>爸爸太忙了。</div><span class="it">Perché papà è troppo occupato.</span></div><button class="spk" onclick="say('因为爸爸太忙了。')">🔊</button></div></div><div class="box blue"><h3>2 · 因为 (il motivo) …… 所以 (la conseguenza) ……</h3><div class="struct"><div class="blk cA"><div class="t">因为</div><div class="s">perché</div></div><span class="plus">+</span><div class="blk cB"><div class="t">下雨了</div><div class="s">motivo</div></div><span class="plus">+</span><div class="blk cZ"><div class="t">所以</div><div class="s">quindi</div></div><span class="plus">+</span><div class="blk cL"><div class="t">我拿了雨伞</div><div class="s">conseguenza</div></div></div><div class="exrow"><div class="mini">🌧️☂️</div><div style="flex:1;min-width:220px"><span class="py">Yīnwèi xiàyǔ le, suǒyǐ wǒ ná le yǔsǎn.</span><div class="zh"><span class="tA">因为</span>下雨了，<span class="tZ">所以</span>我拿了雨伞。</div><span class="it">Siccome pioveva, ho preso l'ombrello.</span></div><button class="spk" onclick="say('因为下雨了，所以我拿了雨伞。')">🔊</button></div><div class="exrow"><div class="mini">😩🛏️</div><div style="flex:1;min-width:220px"><span class="py">Yīnwèi wǒ hěn lèi, suǒyǐ wǒ yào xiūxi.</span><div class="zh"><span class="tA">因为</span>我很累，<span class="tZ">所以</span>我要休息。</div><span class="it">Siccome sono stanco, voglio riposare.</span></div><button class="spk" onclick="say('因为我很累，所以我要休息。')">🔊</button></div></div><div class="box green"><h3>3 · 什么意思？ Che cosa vuol dire? 💡</h3><div class="exrow"><div class="mini">💡❓</div><div style="flex:1;min-width:220px"><span class="py">Zhège zì shì shénme yìsi?</span><div class="zh">这个字是<span class="tL">什么意思</span>？</div><span class="it">Che cosa vuol dire questo carattere?</span></div><button class="spk" onclick="say('这个字是什么意思？')">🔊</button></div><div class="exrow"><div class="mini">🎬🤔</div><div style="flex:1;min-width:220px"><span class="py">Wǒ kàn le, dànshì méi kàn dǒng.</span><div class="zh">我看了，但是没看懂。</div><span class="it">L'ho visto, ma non l'ho capito.</span></div><button class="spk" onclick="say('我看了，但是没看懂。')">🔊</button></div></div>
+</section>
+<section id="s3">
+  <h2>Leggiamo</h2>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="dlg"><div class="place "><div class="pe">🏠 🚪 💼</div><div class="pl">A casa</div></div><div id="d1"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">爸爸为什么不休息？</span> <small>(clicca per la risposta)</small><div class="ans zh">因为他有很多事情，所以很忙。</div></div></div>
+  <div class="dlg"><div class="place p2"><div class="pe">💻 🎬 🍿</div><div class="pl">Davanti al computer</div></div><div id="d2"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">她是在哪儿看的这个电影？</span> <small>(clicca per la risposta)</small><div class="ans zh">她是在电脑上看的。</div></div></div>
+</section>
+<section id="s4">
+  <h2>Giochi 🎮</h2>
+  <div class="box blue">
+    <h3>Gioco 1 · Ascolta e scegli 👂</h3>
+    <p class="hint" style="margin-bottom:10px">Premi 🔊, ascolta la parola e clicca il disegno giusto</p>
+    <div class="stage listen">
+      <button class="spk" style="width:80px;height:80px;font-size:38px" onclick="say(lr[li].w)">🔊</button>
+      <div class="opts" id="lopts"></div>
+      <div class="feedback" id="lfb"></div>
+      <div class="dots" id="ldots"></div>
+      <div style="margin-top:14px"><button class="btn" id="lnext" onclick="nextL()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+  <div class="box orange">
+    <h3>Gioco 2 · Perché? 因为…… 👉</h3>
+    <p class="hint" style="margin-bottom:10px">Guarda il disegno e scegli la frase giusta</p>
+    <div class="stage">
+      <div class="bscene" id="bscene"></div>
+      <div class="opts" id="bopts"></div>
+      <div class="feedback" id="bfb"></div>
+      <div class="dots" id="bdots"></div>
+      <div style="margin-top:14px"><button class="btn" id="bnext" onclick="nextB()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+</section>
+<section id="s5">
+  <h2>Filastrocca del perché 🎵</h2>
+  <p class="hint">Leggiamo insieme a ritmo! Domanda e risposta.</p>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="chant" id="chant"></div>
+</section>
+<section id="s6">
+  <h2>Parliamo! 🙋</h2>
+  <p class="hint">Rispondi alle domande della maestra</p>
+  <div class="talk2"><div class="tk"><div class="tq"><button class="spk" onclick="say('你家谁最忙？为什么？')">🔊</button><div><span class="py">Nǐ jiā shéi zuì máng? Wèi shénme?</span><div class="zh">你家谁最忙？为什么？</div></div></div>
+      <div class="ta"><span class="py">… zuì máng, yīnwèi …</span><div class="zh"><span class="bl"></span>最忙，因为……</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你今天忙吗？')">🔊</button><div><span class="py">Nǐ jīntiān máng ma?</span><div class="zh">你今天忙吗？</div></div></div>
+      <div class="ta"><span class="py">Hěn máng. / Bù máng.</span><div class="zh">很忙。/ 不忙。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你喜欢看电影吗？')">🔊</button><div><span class="py">Nǐ xǐhuan kàn diànyǐng ma?</span><div class="zh">你喜欢看电影吗？</div></div></div>
+      <div class="ta"><span class="py">Xǐhuan. / Bù xǐhuan.</span><div class="zh">喜欢。/ 不喜欢。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你在哪儿看电影？')">🔊</button><div><span class="py">Nǐ zài nǎr kàn diànyǐng?</span><div class="zh">你在哪儿看电影？</div></div></div>
+      <div class="ta"><span class="py">Zài diànnǎo shang kàn. / Zài diànyǐngyuàn kàn.</span><div class="zh">在电脑上看。/ 在电影院看。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你为什么学汉语？')">🔊</button><div><span class="py">Nǐ wèi shénme xué Hànyǔ?</span><div class="zh">你为什么学汉语？</div></div></div>
+      <div class="ta"><span class="py">Yīnwèi …</span><div class="zh">因为<span class="bl"></span>。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('"休息"是什么意思？')">🔊</button><div><span class="py">"Xiūxi" shì shénme yìsi?</span><div class="zh">"休息"是什么意思？</div></div></div>
+      <div class="ta"><span class="py">Shì "riposare" de yìsi.</span><div class="zh">是"riposare"的意思。</div></div></div></div>
+  <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Ho finito! 🎉</button></div>
+  <div class="end" id="end"></div>
+  <div class="hw">📝 <b>Compito:</b> su Classroom trovi le schede con l'ordine dei tratti (le trovi anche qui, in <b>Tratti ✍️</b>).<br>Scrivi 3 volte ogni carattere: <span class="zh">电影 为什么 忙 事情 意思 因为 所以</span></div>
+</section>
+</main>
+<div class="modal" id="wmodal" onclick="if(event.target===this)closeW()">
+ <div class="mbox">
+  <button class="close" onclick="closeW()">✕</button>
+  <div class="mword"><span class="py" id="wpy"></span> · <span id="wit"></span></div>
+  <div class="writers" id="writers"></div>
+  <div class="ctrl">
+   <button class="btn" onclick="playW()">▶ Guarda come si scrive</button>
+   <label>🐢 Lento <input type="range" id="wspeed" min="0.15" max="1.5" step="0.05" value="0.5" oninput="document.getElementById('wsv').textContent=speedLabel(this.value)"> Veloce 🐇</label>
+   <span id="wsv" style="color:var(--soft)"></span>
+   <button class="btn alt" onclick="quizW()">✍️ Prova tu</button>
+  </div>
+ </div>
+</div>
+<footer>Maja Jiejie · Chinese Academy</footer>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script>
+let stars=0;
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+const vocab=[["电影", "diànyǐng", "il film", "🎬"], ["为什么", "wèi shénme", "perché? (domanda)", "❓"], ["忙", "máng", "occupato, impegnato", "🤹"], ["事情", "shìqing", "la cosa (da fare), la faccenda", "📋"], ["意思", "yìsi", "il significato", "💡"], ["因为", "yīnwèi", "perché, siccome (risposta)", "👉"], ["所以", "suǒyǐ", "quindi, perciò", "➡️"]];
+document.getElementById('vocab').innerHTML=vocab.map((v,i)=>`
+ <div class="card" onclick="this.classList.toggle('flip')">
+  <button class="spk" onclick="say('${v[0]}',event)">🔊</button>
+  <button class="wr" title="Come si scrive" onclick="openW(${i},event)">✍️</button>
+  <div class="inner">
+   <div class="face"><div class="pic"${[...v[3]].length>1?' style="font-size:48px"':''}>${v[3]}</div><div class="py">${v[1]}</div><div class="w zh">${v[0]}</div></div>
+   <div class="face back"><div class="w zh">${v[0]}</div><div class="py">${v[1]}</div><div class="it">${v[2]}</div></div>
+  </div></div>`).join('');
+
+const STROKES={"为": ["M 324 704 Q 349 673 378 635 Q 390 619 406 617 Q 416 616 425 629 Q 432 644 428 676 Q 422 715 327 754 Q 311 761 304 759 Q 298 756 298 742 Q 299 730 324 704 Z", "M 460 496 Q 367 331 357 314 Q 353 311 350 305 Q 263 187 115 58 Q 108 54 104 47 Q 98 37 110 35 Q 143 32 266 135 Q 308 172 349 220 Q 449 341 527 509 L 542 542 Q 558 582 574 622 Q 614 725 630 751 Q 643 764 639 780 Q 627 804 598 828 Q 580 846 565 844 Q 550 840 553 823 Q 563 786 552 735 Q 540 704 528 664 Q 503 594 475 530 L 460 496 Z", "M 475 530 Q 459 529 443 525 Q 298 504 216 507 Q 194 510 192 497 Q 191 485 216 468 Q 247 446 277 454 Q 368 479 460 496 L 527 509 Q 612 525 699 534 Q 727 535 733 521 Q 742 502 738 454 Q 725 276 692 181 Q 674 121 655 103 Q 642 88 613 96 Q 571 109 533 121 Q 508 128 526 105 Q 581 50 612 6 Q 624 -19 648 -11 Q 670 -7 696 23 Q 772 101 798 406 Q 804 473 829 514 Q 848 539 838 551 Q 819 573 778 591 Q 748 606 717 591 Q 641 563 542 542 L 475 530 Z", "M 496 321 Q 524 291 554 256 Q 564 243 580 242 Q 590 241 597 253 Q 603 266 598 296 Q 591 332 497 368 Q 482 372 476 371 Q 472 368 471 355 Q 472 345 496 321 Z"], "么": ["M 464 772 Q 476 682 334 526 Q 256 448 174 381 Q 164 375 176 372 Q 263 387 398 520 Q 401 524 405 528 Q 456 583 534 696 Q 544 711 552 717 Q 559 721 559 734 Q 558 744 544 759 Q 505 795 471 788 Q 461 787 464 772 Z", "M 727 196 Q 574 180 407 145 Q 391 139 386 144 Q 382 153 397 172 Q 644 446 695 491 Q 713 501 707 518 Q 701 536 644 574 Q 625 587 611 584 Q 593 580 597 551 Q 603 515 574 472 Q 498 343 376 218 Q 342 178 273 142 Q 252 129 256 114 Q 260 92 290 62 Q 302 46 321 58 Q 390 107 741 166 Q 742 166 744 166 C 774 171 757 199 727 196 Z", "M 744 166 Q 807 61 814 57 Q 823 53 834 62 Q 850 72 848 123 Q 849 192 672 329 Q 665 336 658 324 Q 654 309 663 296 Q 694 251 727 196 L 744 166 Z"], "事": ["M 535 708 Q 595 714 849 714 Q 870 714 875 723 Q 881 735 863 749 Q 809 791 771 783 Q 683 765 539 745 L 481 738 Q 330 722 153 703 Q 131 702 147 683 Q 162 668 180 662 Q 202 656 219 661 Q 381 703 481 704 L 535 708 Z", "M 321 624 Q 308 630 285 631 Q 273 634 271 629 Q 265 622 274 608 Q 298 568 315 502 Q 319 483 332 470 Q 350 451 354 465 Q 357 474 356 486 L 352 517 Q 342 572 340 593 C 337 618 337 618 321 624 Z", "M 671 555 Q 698 594 718 600 Q 734 616 723 634 Q 654 695 612 674 Q 570 662 531 651 L 481 642 Q 403 630 321 624 C 291 622 310 588 340 593 Q 446 611 481 615 L 530 622 Q 561 628 592 632 Q 622 638 633 625 Q 637 621 636 611 Q 629 584 622 562 C 613 533 653 531 671 555 Z", "M 526 510 Q 592 519 680 524 Q 690 525 691 533 Q 691 540 671 555 C 655 568 652 567 622 562 Q 571 553 527 543 L 480 535 Q 413 525 352 517 C 322 513 326 484 356 486 Q 360 486 368 487 Q 411 497 480 504 L 526 510 Z", "M 691 255 Q 698 289 707 323 L 728 376 Q 738 392 751 407 Q 770 429 743 445 Q 718 464 693 478 Q 680 487 601 464 Q 574 461 525 452 L 479 445 Q 437 441 394 431 Q 321 418 275 416 Q 262 417 260 409 Q 259 402 279 390 Q 298 375 328 384 Q 419 408 479 413 L 525 419 Q 577 426 643 431 Q 658 432 662 425 Q 671 413 666 366 L 658 322 Q 652 297 645 267 C 638 238 685 226 691 255 Z", "M 478 339 Q 321 323 141 302 Q 119 301 135 283 Q 148 270 167 263 Q 188 257 204 262 Q 319 292 448 306 Q 461 309 478 309 L 526 314 Q 584 321 658 322 L 707 323 Q 893 323 899 332 Q 903 344 888 358 Q 831 400 766 383 Q 747 380 728 376 L 666 366 Q 600 359 525 346 L 478 339 Z", "M 477 236 Q 374 221 286 213 Q 262 212 276 192 Q 283 182 294 177 Q 307 173 321 176 Q 381 189 477 199 L 529 204 Q 605 213 701 218 Q 713 219 715 229 Q 715 236 691 255 C 673 270 673 270 645 267 Q 638 267 629 265 Q 577 255 527 245 L 477 236 Z", "M 479 413 Q 478 379 478 339 L 478 309 Q 477 275 477 236 L 477 199 Q 477 151 477 97 Q 476 70 461 60 Q 455 56 373 69 Q 340 79 343 69 Q 344 62 366 48 Q 436 0 455 -29 Q 477 -63 493 -62 Q 508 -63 521 -28 Q 537 17 534 90 Q 531 147 529 204 L 527 245 Q 526 279 526 314 L 525 346 Q 524 383 525 419 L 525 452 Q 524 482 526 510 L 527 543 Q 528 583 530 622 L 531 651 Q 531 655 535 708 L 539 745 Q 543 776 550 797 Q 568 827 512 849 Q 478 868 459 861 Q 441 854 457 832 Q 475 808 481 738 L 481 704 Q 481 679 481 642 L 481 615 Q 480 581 480 535 L 480 504 Q 479 476 479 445 L 479 413 Z"], "什": ["M 266 534 Q 309 589 356 661 Q 384 712 411 735 Q 421 747 417 763 Q 413 778 381 804 Q 350 825 329 825 Q 308 824 317 798 Q 332 764 318 736 Q 278 640 216 553 Q 158 468 76 375 Q 64 363 62 356 Q 58 343 74 346 Q 119 356 223 483 Q 230 493 240 502 L 266 534 Z", "M 240 502 Q 261 433 262 403 Q 255 265 251 241 Q 244 189 229 135 Q 214 86 251 38 Q 252 35 256 32 Q 275 16 287 44 Q 302 86 302 134 Q 308 387 318 445 Q 325 473 315 484 Q 297 506 283 520 Q 276 529 266 534 C 242 552 231 531 240 502 Z", "M 676 454 Q 755 464 874 468 Q 934 468 941 479 Q 945 492 928 505 Q 865 548 817 529 Q 760 516 677 498 L 622 488 Q 511 469 384 447 Q 362 444 379 427 Q 412 400 452 409 Q 530 433 622 446 L 676 454 Z", "M 622 446 Q 622 233 618 163 Q 615 -26 636 -56 Q 651 -72 660 -50 Q 675 -14 676 454 L 677 498 Q 678 640 684 714 Q 685 748 703 778 Q 710 794 689 811 Q 664 830 619 842 Q 598 848 585 833 Q 575 824 588 812 Q 619 787 621 750 Q 622 657 622 488 L 622 446 Z"], "以": ["M 225 514 Q 229 492 229 411 Q 228 345 214 308 Q 210 268 173 219 Q 160 206 171 181 Q 183 150 200 138 Q 213 128 228 146 Q 288 239 477 437 Q 493 452 493 462 Q 494 469 487 467 Q 469 461 298 299 Q 283 287 276 291 Q 272 294 273 307 Q 282 532 286 557 Q 290 576 278 586 Q 265 599 217 612 Q 198 615 192 609 Q 185 602 197 582 Q 218 554 225 514 Z", "M 446 658 Q 500 594 532 579 Q 548 575 559 589 Q 566 602 564 620 Q 552 668 461 698 Q 445 704 434 700 Q 427 699 429 686 Q 430 673 446 658 Z", "M 695 336 Q 746 441 761 512 Q 794 656 810 685 Q 822 707 803 718 Q 748 761 717 752 Q 701 748 707 729 Q 723 693 716 602 Q 716 536 671 414 Q 599 240 430 137 Q 411 124 392 111 Q 376 101 391 97 Q 407 96 449 111 Q 524 142 580 192 Q 661 255 681 310 L 695 336 Z", "M 681 310 Q 759 232 846 127 Q 862 105 879 98 Q 889 97 897 107 Q 912 120 900 169 Q 888 232 695 336 C 669 350 660 331 681 310 Z"], "因": ["M 268 735 Q 226 762 208 756 Q 199 750 206 735 Q 231 648 233 614 Q 233 290 214 199 Q 196 109 198 93 Q 198 69 227 34 Q 239 18 252 33 Q 262 48 266 65 L 270 102 Q 274 138 274 192 Q 284 681 289 692 C 292 721 292 721 268 735 Z", "M 723 85 Q 750 52 771 9 Q 781 -15 797 -14 Q 810 -13 820 9 Q 853 61 832 251 Q 814 662 838 697 Q 839 700 843 703 Q 855 716 854 725 Q 854 738 821 762 Q 763 804 720 789 Q 699 785 665 779 Q 517 766 338 738 Q 301 734 268 735 C 238 735 260 687 289 692 Q 301 693 318 697 Q 331 701 451 719 Q 601 740 715 746 Q 740 747 745 735 Q 769 711 767 408 Q 768 225 770 182 Q 773 134 763 116 Q 759 103 752 102 Q 745 101 735 107 Q 734 108 731 108 C 710 103 710 103 723 85 Z", "M 531 465 Q 673 498 679 502 Q 686 509 683 517 Q 676 527 650 535 Q 626 538 539 511 L 482 496 Q 424 486 360 478 Q 327 472 351 457 Q 390 436 451 450 Q 461 453 476 454 L 531 465 Z", "M 539 511 Q 543 536 548 565 Q 554 584 556 595 Q 563 614 544 626 Q 499 654 484 653 Q 465 652 478 628 Q 493 598 482 496 L 476 454 Q 464 340 372 250 Q 369 249 366 245 Q 332 218 319 205 Q 316 198 328 197 Q 362 194 426 248 Q 495 312 526 445 Q 527 455 531 465 L 539 511 Z", "M 550 364 Q 596 315 652 243 Q 665 224 678 220 Q 685 219 693 226 Q 705 236 696 276 Q 689 324 553 391 Q 546 395 542 385 Q 541 373 550 364 Z", "M 266 65 Q 269 64 271 63 Q 284 59 300 61 Q 432 79 723 85 C 753 86 752 87 731 108 Q 722 118 705 132 Q 686 145 649 139 Q 438 108 270 102 C 240 101 237 73 266 65 Z"], "影": ["M 268 773 Q 255 777 237 780 Q 227 783 223 778 Q 217 772 225 757 Q 253 702 269 612 Q 273 584 289 567 Q 305 546 310 561 Q 311 568 313 575 L 313 596 Q 310 623 303 660 L 299 683 Q 292 728 290 744 C 287 768 287 768 268 773 Z", "M 450 593 Q 463 572 477 566 Q 486 559 500 578 Q 512 597 537 700 Q 544 727 565 749 Q 577 759 567 772 Q 554 787 516 810 Q 500 819 436 804 Q 427 804 342 786 Q 302 779 268 773 C 238 768 262 733 290 744 Q 297 753 453 773 Q 475 776 482 768 Q 492 756 490 745 Q 471 630 453 618 C 442 604 442 604 450 593 Z", "M 303 660 Q 307 660 312 660 Q 382 672 436 678 Q 457 682 449 693 Q 439 706 417 710 Q 395 713 299 683 C 270 674 273 660 303 660 Z", "M 313 575 Q 317 575 324 575 Q 394 587 450 593 C 480 596 480 606 453 618 Q 447 621 441 622 Q 414 626 313 596 C 284 587 283 575 313 575 Z", "M 422 516 Q 422 523 420 531 Q 413 553 353 569 Q 341 572 336 571 Q 332 568 332 558 L 378 506 C 398 484 423 486 422 516 Z", "M 378 506 Q 327 496 124 467 Q 97 464 118 447 Q 148 422 176 429 Q 347 468 566 496 Q 576 495 585 507 Q 586 517 564 528 Q 537 549 456 525 Q 438 521 422 516 L 378 506 Z", "M 246 411 Q 243 411 242 411 Q 232 412 228 408 Q 224 402 232 389 Q 257 347 275 276 Q 279 255 293 241 Q 309 223 314 237 Q 315 247 315 260 L 310 291 Q 297 355 294 378 C 290 408 276 410 246 411 Z", "M 508 320 Q 530 368 555 381 Q 570 396 558 412 Q 545 425 500 448 Q 484 455 465 449 Q 338 401 246 411 C 216 414 264 374 294 378 Q 318 381 450 406 Q 468 409 474 402 Q 480 396 478 383 Q 471 350 461 323 C 451 295 495 293 508 320 Z", "M 401 273 Q 449 282 521 288 Q 531 289 532 297 Q 532 304 508 320 L 461 323 L 460 323 Q 376 301 310 291 C 280 286 285 261 315 260 Q 322 259 332 261 Q 347 265 367 267 L 401 273 Z", "M 367 267 Q 367 266 369 261 Q 382 228 379 126 Q 378 93 373 86 Q 370 73 345 75 Q 317 81 287 86 Q 277 87 275 81 Q 274 75 284 67 Q 348 18 371 -11 Q 386 -24 397 -21 Q 407 -17 418 14 Q 434 45 431 103 Q 430 173 431 198 Q 438 235 422 255 Q 410 267 401 273 C 377 291 357 295 367 267 Z", "M 240 212 Q 218 163 186 120 Q 164 90 181 57 Q 188 39 209 51 Q 231 66 245 95 Q 261 128 263 156 Q 269 187 263 211 Q 259 220 252 221 Q 245 220 240 212 Z", "M 497 183 Q 521 161 546 133 Q 556 121 571 121 Q 580 121 585 133 Q 589 146 584 171 Q 580 190 552 204 Q 489 231 476 227 Q 472 223 472 212 Q 475 202 497 183 Z", "M 776 786 Q 788 753 717 645 Q 683 596 636 543 Q 626 536 624 529 Q 620 519 633 521 Q 679 528 809 685 Q 830 718 849 733 Q 858 742 854 754 Q 851 766 827 788 Q 803 806 787 807 Q 769 806 776 786 Z", "M 798 578 Q 811 536 722 427 Q 680 378 625 322 Q 615 315 613 309 Q 609 299 621 300 Q 670 307 813 463 Q 837 499 865 522 Q 875 529 872 542 Q 869 554 847 577 Q 826 596 809 597 Q 793 597 798 578 Z", "M 818 369 Q 827 288 687 125 Q 674 113 662 101 Q 616 55 502 -35 Q 492 -41 504 -44 Q 588 -31 723 94 Q 828 214 883 292 Q 895 308 902 314 Q 911 318 909 330 Q 908 342 895 355 Q 861 389 825 385 Q 816 384 818 369 Z"], "忙": ["M 143 523 Q 127 457 99 397 Q 83 360 106 328 Q 116 310 137 326 Q 156 347 167 381 Q 182 429 178 467 Q 179 501 167 527 Q 161 534 155 535 Q 146 532 143 523 Z", "M 323 600 Q 348 585 404 537 Q 416 527 429 528 Q 438 529 441 540 Q 445 553 436 577 Q 424 607 334 627 Q 328 628 324 627 C 294 624 298 616 323 600 Z", "M 324 627 Q 327 696 342 744 Q 352 759 348 773 Q 341 783 286 817 Q 262 835 241 819 Q 237 813 242 798 Q 275 750 275 673 Q 275 241 255 150 Q 237 77 243 57 Q 258 -4 274 -11 Q 281 -18 288 -9 Q 295 -5 306 16 Q 316 41 315 73 Q 314 122 323 584 Q 323 593 323 600 L 324 627 Z", "M 585 701 Q 618 676 653 644 Q 669 631 687 632 Q 700 633 704 648 Q 708 666 697 699 Q 690 721 653 737 Q 568 762 552 756 Q 546 750 549 736 Q 553 723 585 701 Z", "M 496 434 Q 652 482 901 481 Q 922 481 929 491 Q 933 504 916 517 Q 864 553 822 545 Q 710 517 380 459 Q 358 456 375 439 Q 408 412 448 421 Q 449 422 452 422 L 496 434 Z", "M 452 422 Q 501 322 457 217 Q 435 184 455 155 Q 461 148 470 139 Q 483 129 500 143 Q 578 198 775 198 Q 803 198 836 196 Q 861 192 871 199 Q 878 206 872 219 Q 865 232 824 256 Q 803 268 721 255 Q 676 255 537 222 Q 527 218 525 221 Q 516 228 520 245 Q 526 353 536 385 Q 543 401 528 412 Q 515 425 496 434 C 470 449 440 449 452 422 Z"], "思": ["M 293 725 Q 263 741 232 747 Q 225 748 219 743 Q 212 736 223 724 Q 274 655 297 478 Q 306 406 349 384 L 351 383 Q 369 380 369 407 L 366 439 Q 362 463 352 488 Q 321 647 314 689 C 309 717 309 717 293 725 Z", "M 623 443 Q 624 442 626 438 Q 648 401 668 392 Q 681 383 698 407 Q 719 444 759 648 Q 769 684 796 712 Q 812 725 798 742 Q 780 761 732 791 Q 711 801 619 780 Q 595 779 417 747 Q 350 734 293 725 C 263 720 285 682 314 689 Q 378 705 470 721 L 510 727 Q 564 739 628 746 Q 674 752 688 736 Q 707 714 703 691 Q 669 504 653 476 Q 649 466 639 461 C 623 442 623 444 623 443 Z", "M 532 576 Q 574 583 613 589 Q 638 593 629 607 Q 617 623 589 628 Q 567 632 535 623 L 484 608 Q 436 595 396 583 Q 377 579 400 562 Q 409 556 484 568 L 532 576 Z", "M 526 469 Q 529 527 532 576 L 535 623 Q 536 641 537 656 Q 538 669 539 678 Q 546 696 537 705 Q 524 718 510 727 C 485 744 459 749 470 721 Q 480 703 484 615 Q 483 612 484 608 L 484 568 Q 484 525 484 460 C 484 430 524 439 526 469 Z", "M 369 407 Q 415 422 623 443 C 653 446 656 446 639 461 Q 632 468 616 479 Q 598 488 526 469 L 484 460 Q 420 448 366 439 C 336 434 340 399 369 407 Z", "M 206 303 Q 179 236 142 175 Q 121 142 140 105 Q 147 86 170 100 Q 192 116 208 150 Q 230 199 233 243 Q 237 277 231 303 Q 225 312 219 313 Q 210 312 206 303 Z", "M 330 268 Q 345 154 432 90 Q 480 56 561 41 Q 633 22 726 20 Q 787 23 834 40 Q 862 50 865 68 Q 869 78 830 110 Q 772 170 729 230 Q 717 248 712 241 Q 708 234 712 219 Q 749 108 730 93 Q 717 87 686 86 Q 497 86 422 161 Q 386 194 372 249 Q 366 274 354 279 Q 341 286 333 283 Q 327 282 330 268 Z", "M 487 324 Q 539 266 574 250 Q 590 247 599 261 Q 605 274 602 291 Q 590 336 502 362 Q 501 363 500 363 Q 484 367 473 364 Q 467 363 470 350 Q 471 338 487 324 Z", "M 770 367 Q 828 330 898 274 Q 917 258 934 255 Q 943 255 949 267 Q 959 283 939 324 Q 917 373 766 399 Q 756 403 756 390 Q 757 377 770 367 Z"], "情": ["M 143 553 Q 122 487 90 427 Q 72 391 92 360 Q 101 344 121 357 Q 142 375 154 407 Q 173 456 173 498 Q 176 531 167 555 Q 161 562 155 564 Q 148 563 143 553 Z", "M 294 610 Q 387 543 389 541 Q 390 541 394 541 Q 401 542 405 552 Q 409 564 400 587 Q 391 614 305 635 Q 299 636 295 635 C 265 632 270 628 294 610 Z", "M 295 635 Q 298 708 313 758 Q 322 773 319 786 Q 312 796 258 829 Q 236 845 215 831 Q 211 827 217 811 Q 247 763 249 686 Q 249 266 232 182 Q 226 154 218 125 Q 208 88 232 26 Q 239 8 247 5 Q 253 -2 260 7 Q 287 23 287 86 Q 286 135 294 598 Q 294 605 294 610 L 295 635 Z", "M 643 689 Q 790 719 799 726 Q 806 733 803 741 Q 796 751 770 759 Q 746 763 645 733 L 591 721 Q 539 712 481 706 Q 447 700 471 685 Q 501 666 575 677 Q 582 678 593 680 L 643 689 Z", "M 637 585 Q 673 595 743 605 Q 752 604 758 615 Q 759 624 740 632 Q 719 647 643 624 Q 640 624 639 623 L 593 610 Q 566 606 543 600 Q 516 596 486 591 Q 464 587 482 574 Q 506 558 544 564 Q 566 570 593 576 L 637 585 Z", "M 633 513 Q 634 550 637 585 L 639 623 Q 640 657 643 689 L 645 733 Q 645 754 661 818 Q 664 828 645 842 Q 611 860 589 863 Q 573 866 566 858 Q 559 851 567 837 Q 588 807 588 787 Q 589 756 591 721 L 593 680 Q 593 646 593 610 L 593 576 Q 593 543 593 507 C 593 477 632 483 633 513 Z", "M 593 507 Q 479 489 348 470 Q 327 467 343 451 Q 356 438 374 433 Q 395 429 410 433 Q 621 497 933 497 Q 934 497 936 497 Q 955 497 960 506 Q 964 516 949 530 Q 897 566 861 558 Q 777 537 633 513 L 593 507 Z", "M 526 184 Q 527 227 532 260 L 535 288 Q 538 340 542 359 C 545 378 545 378 538 386 Q 517 413 485 410 Q 472 407 477 396 Q 522 288 470 105 Q 463 83 453 67 Q 435 34 462 -6 Q 462 -7 465 -11 Q 471 -24 480 -19 Q 522 8 523 127 Q 523 145 525 159 L 526 184 Z", "M 542 359 Q 549 362 560 365 Q 678 393 698 385 Q 710 379 708 354 Q 721 183 712 50 Q 711 22 694 18 Q 685 17 638 36 Q 626 40 626 33 Q 626 24 640 14 Q 671 -20 695 -53 Q 708 -69 724 -70 Q 740 -67 760 -20 Q 785 28 781 76 Q 774 193 765 300 Q 761 342 779 376 Q 789 391 776 404 Q 760 419 723 432 Q 702 442 685 430 Q 669 423 638 412 Q 574 394 538 386 C 509 379 513 350 542 359 Z", "M 532 260 Q 533 260 536 260 Q 606 270 659 277 Q 681 281 673 293 Q 663 306 639 311 Q 606 315 535 288 C 507 277 502 259 532 260 Z", "M 525 159 Q 529 159 537 159 Q 612 168 666 173 Q 688 177 681 189 Q 671 202 647 208 Q 628 211 526 184 C 497 176 495 159 525 159 Z"], "意": ["M 486 809 Q 508 790 533 765 Q 548 752 565 753 Q 575 754 581 768 Q 585 784 575 815 Q 563 842 479 859 Q 463 862 456 859 Q 450 855 453 841 Q 457 831 486 809 Z", "M 615 689 Q 729 711 738 718 Q 745 725 742 733 Q 736 743 710 752 Q 683 759 597 732 Q 444 698 322 689 Q 288 685 311 669 Q 350 644 400 655 Q 488 670 580 683 L 615 689 Z", "M 375 610 Q 397 556 422 549 Q 434 545 443 560 Q 447 572 442 592 Q 430 619 384 633 Q 377 637 373 626 Q 370 619 375 610 Z", "M 568 554 Q 589 581 613 617 Q 620 630 634 644 Q 646 654 640 663 Q 634 675 615 689 C 591 707 576 713 580 683 Q 586 658 549 572 Q 543 560 541 550 C 534 521 550 530 568 554 Z", "M 541 550 Q 522 549 505 544 Q 340 519 145 492 Q 123 489 139 471 Q 175 441 214 451 Q 484 532 878 532 Q 879 532 882 532 Q 903 532 908 541 Q 914 554 896 569 Q 839 609 799 599 Q 709 580 568 554 L 541 550 Z", "M 348 431 Q 329 441 307 444 Q 300 445 296 440 Q 290 434 300 425 Q 331 386 352 281 Q 358 229 396 203 Q 397 203 399 202 Q 415 201 414 225 L 410 251 Q 406 270 398 290 Q 395 300 393 311 L 387 335 Q 381 372 376 401 C 373 419 373 419 348 431 Z", "M 578 245 Q 594 221 609 214 Q 619 207 633 226 Q 646 248 674 367 Q 681 397 704 421 Q 716 433 705 446 Q 690 462 650 486 Q 635 493 555 474 Q 549 474 437 450 Q 388 440 348 431 C 319 424 347 393 376 401 Q 448 423 578 444 Q 606 448 616 439 Q 628 426 625 412 Q 604 289 591 275 C 578 248 577 246 578 245 Z", "M 393 311 Q 397 311 406 312 Q 497 330 564 341 Q 586 345 577 357 Q 567 370 543 374 Q 513 378 387 335 C 359 325 363 309 393 311 Z", "M 414 225 Q 507 237 578 245 C 608 248 619 263 591 275 Q 585 278 579 279 Q 567 282 410 251 C 381 245 384 221 414 225 Z", "M 236 182 Q 217 124 187 72 Q 171 41 188 8 Q 197 -8 216 4 Q 235 20 248 52 Q 264 92 264 128 Q 267 159 259 183 Q 255 190 248 192 Q 241 191 236 182 Z", "M 330 151 Q 351 46 433 -4 Q 547 -68 744 -41 Q 772 -34 797 -23 Q 822 -11 823 4 Q 827 14 787 39 Q 726 88 679 139 Q 666 157 660 148 Q 659 147 685 58 Q 694 24 655 15 Q 646 15 636 13 Q 483 6 418 64 Q 388 89 375 133 Q 368 158 354 163 Q 341 170 332 166 Q 326 165 330 151 Z", "M 491 172 Q 530 124 554 113 Q 567 110 576 121 Q 582 131 580 147 Q 573 183 504 205 Q 491 209 481 207 Q 477 206 478 195 Q 479 185 491 172 Z", "M 726 229 Q 784 195 856 141 Q 875 125 891 123 Q 898 124 905 135 Q 914 150 893 190 Q 872 230 737 256 Q 728 259 721 259 Q 711 262 712 250 Q 713 237 726 229 Z"], "所": ["M 268 652 Q 442 724 444 725 Q 468 731 461 752 Q 451 771 427 793 Q 405 812 392 812 Q 379 813 380 798 Q 377 768 301 710 Q 277 694 254 675 C 231 656 240 641 268 652 Z", "M 257 533 Q 257 539 258 544 Q 261 619 265 639 Q 268 646 268 652 C 271 665 271 665 254 675 Q 203 708 184 698 Q 172 691 180 677 Q 201 653 201 585 Q 201 398 174 294 Q 144 189 81 79 Q 77 72 75 66 Q 74 56 83 58 Q 99 61 131 109 Q 195 188 233 339 L 239 369 Q 248 397 256 506 L 257 533 Z", "M 424 399 Q 443 489 469 516 Q 491 541 467 555 Q 406 588 398 586 Q 391 586 384 581 Q 344 553 257 533 C 228 526 226 506 256 506 Q 271 505 292 511 Q 331 523 365 531 Q 387 537 393 527 Q 399 521 376 407 C 370 378 418 370 424 399 Z", "M 233 339 Q 246 336 264 338 Q 316 354 434 369 Q 444 370 445 380 Q 445 387 424 399 C 401 413 401 413 376 407 Q 370 406 366 404 Q 296 382 239 369 C 210 362 203 344 233 339 Z", "M 596 672 Q 615 679 644 688 Q 698 706 738 726 Q 784 747 823 756 Q 841 757 844 766 Q 848 776 835 788 Q 813 804 766 819 Q 750 826 736 824 Q 729 820 729 809 Q 729 775 583 693 C 557 678 568 662 596 672 Z", "M 585 534 Q 586 603 595 665 Q 596 669 596 672 C 598 686 598 686 583 693 Q 582 694 579 695 Q 530 719 514 716 Q 495 712 511 690 Q 542 639 525 431 Q 516 371 487 299 Q 457 224 375 148 Q 362 135 358 128 Q 357 121 368 122 Q 407 122 477 198 Q 561 294 583 505 L 585 534 Z", "M 755 522 Q 819 534 926 534 Q 945 535 949 543 Q 953 555 937 567 Q 883 603 826 584 Q 721 562 585 534 C 556 528 555 515 583 505 Q 607 493 653 505 Q 669 511 693 513 L 755 522 Z", "M 714 -31 Q 720 -56 726 -65 Q 732 -72 739 -70 Q 757 -58 760 -3 Q 767 66 767 133 Q 764 191 770 413 Q 770 453 780 487 Q 783 505 769 514 Q 762 520 755 522 C 729 537 679 540 693 513 Q 711 482 714 449 Q 715 325 711 131 Q 710 10 714 -31 Z"], "电": ["M 272 553 Q 244 569 214 577 Q 207 578 201 573 Q 192 566 203 554 Q 255 473 269 285 Q 270 222 312 187 Q 315 186 319 183 Q 338 177 339 213 Q 339 217 339 221 L 335 256 Q 308 376 296 514 C 294 541 294 541 272 553 Z", "M 614 250 Q 633 220 652 212 Q 665 202 683 228 Q 705 267 745 475 Q 755 512 783 542 Q 799 557 785 574 Q 766 593 716 625 Q 695 634 610 614 Q 603 614 498 594 L 445 585 Q 424 582 405 578 Q 332 563 272 553 C 242 548 267 505 296 514 Q 295 515 298 515 Q 356 533 445 548 L 496 557 Q 548 567 612 576 Q 657 583 671 567 Q 690 545 686 521 Q 647 301 624 286 C 609 260 608 259 614 250 Z", "M 491 397 Q 543 406 589 411 Q 614 414 605 428 Q 595 444 568 449 Q 526 456 492 440 L 443 428 Q 389 418 344 406 Q 326 402 347 386 Q 359 377 442 390 L 491 397 Z", "M 490 240 Q 544 247 614 250 C 644 251 646 266 624 286 Q 621 290 616 293 Q 600 302 490 280 L 437 270 Q 383 263 335 256 C 305 252 309 221 339 221 Q 346 220 358 222 Q 389 229 437 234 L 490 240 Z", "M 942 61 Q 921 119 913 220 Q 912 236 905 244 Q 898 251 892 235 Q 877 175 861 130 Q 854 99 825 81 Q 791 44 630 46 Q 569 52 545 64 Q 526 77 513 101 Q 494 141 490 240 L 490 280 Q 490 344 491 397 L 492 440 Q 493 506 496 557 L 498 594 Q 504 682 515 724 Q 522 746 492 769 Q 467 785 445 797 Q 426 810 408 798 Q 396 792 418 763 Q 443 729 444 680 Q 445 647 445 585 L 445 548 Q 444 496 443 428 L 442 390 Q 441 368 441 344 Q 438 304 437 270 L 437 234 Q 437 101 490 40 Q 544 -21 756 -10 Q 850 -6 920 27 Q 953 36 942 61 Z"]};
+function stepSvg(paths,k){return `<svg viewBox="0 0 1024 1024"><g transform="translate(0,900) scale(1,-1)">${paths.map((d,i)=>i<=k?`<path d="${d}" fill="${i===k?'#e0524a':'#3a2e2a'}"/>`:`<path d="${d}" fill="#eee5df"/>`).join('')}</g></svg>`}
+document.getElementById('strokeList').innerHTML=vocab.map((v,vi)=>[...v[0]].map(c=>{const P=STROKES[c];return `
+ <div class="sw"><div class="head"><span class="zh">${c}</span><button class="spk" onclick="say('${c}')">🔊</button>
+  <div><div class="py">${v[1]}</div><div class="it">${v[0].length>1?v[0]+' · ':''}${v[2]}</div></div>
+  <button class="btn" onclick="openW(${vi},event)">▶</button><span class="cnt">${P.length} tratti</span></div>
+  <div class="steps">${P.map((_,k)=>`<div class="step"><b>${k+1}</b>${stepSvg(P,k)}</div>`).join('')}</div></div>`}).join('')).join('');
+
+let wIdx=0,writers=[];
+function speedLabel(v){v=+v;return v<0.35?'molto lento':v<0.7?'lento':v<1.1?'normale':'veloce'}
+function buildW(){
+ const sp=+document.getElementById('wspeed').value, box=document.getElementById('writers');
+ box.innerHTML='';writers=[];
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p>Serve la connessione a internet per l\'animazione.</p>';return}
+ vocab[wIdx][0].split('').forEach((c,k)=>{const d=document.createElement('div');d.className='tzg';box.appendChild(d);
+  writers.push(HanziWriter.create(d,c,{width:240,height:240,padding:14,showOutline:true,showCharacter:true,
+   strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#eadfd8',highlightColor:'#e8558f',drawingColor:'#e8558f',
+   strokeAnimationSpeed:sp,delayBetweenStrokes:Math.round(500/sp)}))});
+}
+function openW(i,e){e.stopPropagation();wIdx=i;
+ document.getElementById('wpy').textContent=vocab[i][1];document.getElementById('wit').textContent=vocab[i][2];
+ document.getElementById('wsv').textContent=speedLabel(document.getElementById('wspeed').value);
+ document.getElementById('wmodal').classList.add('on');buildW();}
+function closeW(){document.getElementById('wmodal').classList.remove('on');document.getElementById('writers').innerHTML='';writers=[]}
+async function playW(){buildW();for(const w of writers){await w.animateCharacter()}}
+function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComplete:()=>star()})})}
+
+function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
+ <div class="line"><div class="face3" style="border-color:${l[4]}">${l[0]}</div>
+ <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
+ <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
+dlg('d1',[["👧", "妈妈，爸爸为什么不休息？", "Māma, bàba wèi shénme bù xiūxi?", "Mamma, perché papà non si riposa?", "#e0524a"], ["👩", "因为爸爸有很多事情，所以很忙。", "Yīnwèi bàba yǒu hěn duō shìqing, suǒyǐ hěn máng.", "Perché papà ha tante cose da fare, quindi è molto occupato.", "#9a7bd1"], ["👧", "爸爸每天都很忙吗？", "Bàba měitiān dōu hěn máng ma?", "Papà è occupato tutti i giorni?", "#e0524a"], ["👩", "对，他今天也很忙。", "Duì, tā jīntiān yě hěn máng.", "Sì, anche oggi è molto occupato.", "#9a7bd1"]]);
+dlg('d2',[["👦", "你看过这个电影吗？", "Nǐ kànguo zhège diànyǐng ma?", "Hai già visto questo film?", "#3a8fd0"], ["👧", "看过，我是在电脑上看的。", "Kànguo, wǒ shì zài diànnǎo shang kàn de.", "Sì, l'ho visto sul computer.", "#e0524a"], ["👦", "我也看了，但是没看懂。", "Wǒ yě kàn le, dànshì méi kàn dǒng.", "Anch'io l'ho visto, ma non l'ho capito.", "#3a8fd0"], ["👧", "没关系，我们一起再看一次吧！", "Méi guānxi, wǒmen yìqǐ zài kàn yí cì ba!", "Non fa niente, guardiamolo ancora una volta insieme!", "#e0524a"]]);
+
+const lr=[{"w": "电影", "a": "🎬", "o": ["📚", "🎬", "🍳"]}, {"w": "忙", "a": "🤹", "o": ["😴", "🤹", "😋"]}, {"w": "电脑", "a": "💻", "o": ["💻", "📱", "📺"]}, {"w": "休息", "a": "🛋️", "o": ["🏃", "🍳", "🛋️"]}, {"w": "为什么", "a": "❓", "o": ["❓", "✅", "❌"]}];
+let li=0,ltried=false;
+function drawL(){
+ const d=lr[li];ltried=false;
+ document.getElementById('lopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickL(this,${k})">${o}</button>`).join('');
+ document.getElementById('lfb').textContent='';document.getElementById('lnext').style.display='none';
+ document.getElementById('ldots').innerHTML=lr.map((_,i)=>`<span class="${i<li?'done':i===li?'cur':''}"></span>`).join('');
+}
+function pickL(b,k){
+ const d=lr[li];
+ if(d.o[k]===d.a){b.classList.add('ok');if(!ltried)star();
+   document.getElementById('lfb').innerHTML=`🎉 <span class="zh">对！${d.w}</span>`;
+   document.querySelectorAll('#lopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('lnext');n.style.display='inline-block';n.textContent=li<lr.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');ltried=true;document.getElementById('lfb').innerHTML='🤔 Riprova!'}
+}
+function nextL(){if(li<lr.length-1){li++;drawL();say(lr[li].w)}else{document.getElementById('lfb').innerHTML='🌟 <span class="zh">太棒了！</span>';document.getElementById('lnext').style.display='none';document.getElementById('ldots').innerHTML=lr.map(()=>'<span class="done"></span>').join('')}}
+drawL();
+
+const br=[{"s": "🌧️ ➜ ☂️", "o": [["因为下雨了，所以我拿了雨伞。", "Yīnwèi xiàyǔ le, suǒyǐ wǒ ná le yǔsǎn."], ["因为天气很好，所以我拿了雨伞。", "Yīnwèi tiānqì hěn hǎo, suǒyǐ wǒ ná le yǔsǎn."], ["因为下雨了，所以我没拿雨伞。", "Yīnwèi xiàyǔ le, suǒyǐ wǒ méi ná yǔsǎn."]], "a": 0}, {"s": "😩 ➜ 🛏️", "o": [["因为我很高兴，所以我要休息。", "Yīnwèi wǒ hěn gāoxìng, suǒyǐ wǒ yào xiūxi."], ["因为我很累，所以我要休息。", "Yīnwèi wǒ hěn lèi, suǒyǐ wǒ yào xiūxi."], ["因为我很累，所以我去学校。", "Yīnwèi wǒ hěn lèi, suǒyǐ wǒ qù xuéxiào."]], "a": 1}, {"s": "👨 📋📋📋", "o": [["爸爸没有事情。", "Bàba méiyǒu shìqing."], ["爸爸在休息。", "Bàba zài xiūxi."], ["爸爸有很多事情。", "Bàba yǒu hěn duō shìqing."]], "a": 2}, {"s": "💻 🎬", "o": [["我是在电脑上看的。", "Wǒ shì zài diànnǎo shang kàn de."], ["我是在电影院看的。", "Wǒ shì zài diànyǐngyuàn kàn de."], ["我是在手机上看的。", "Wǒ shì zài shǒujī shang kàn de."]], "a": 0}, {"s": "<span class=\"ba\">字</span> 💡❓", "o": [["这个字很漂亮。", "Zhège zì hěn piàoliang."], ["这个字是什么意思？", "Zhège zì shì shénme yìsi?"], ["这个电影很好看。", "Zhège diànyǐng hěn hǎokàn."]], "a": 1}];
+let bi=0,btried=false;
+function drawB(){
+ const d=br[bi];btried=false;
+ document.getElementById('bscene').innerHTML=d.s;
+ document.getElementById('bopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickB(this,${k})"><span class="py">${o[1]}</span><span class="zh">${o[0]}</span></button>`).join('');
+ document.getElementById('bfb').textContent='';document.getElementById('bnext').style.display='none';
+ document.getElementById('bdots').innerHTML=br.map((_,i)=>`<span class="${i<bi?'done':i===bi?'cur':''}"></span>`).join('');
+}
+function pickB(b,k){
+ const d=br[bi];
+ if(k===d.a){b.classList.add('ok');if(!btried)star();say(d.o[k][0]);
+   document.getElementById('bfb').innerHTML='🎉 <span class="zh">对！</span> Bravissimo!';
+   document.querySelectorAll('#bopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('bnext');n.style.display='inline-block';n.textContent=bi<br.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');btried=true;document.getElementById('bfb').innerHTML='🤔 Riprova!'}
+}
+function nextB(){if(bi<br.length-1){bi++;drawB()}else{document.getElementById('bfb').innerHTML='🌟 <span class="zh">太棒了！</span> Hai finito il gioco!';document.getElementById('bnext').style.display='none';document.getElementById('bdots').innerHTML=br.map(()=>'<span class="done"></span>').join('')}}
+drawB();
+
+const chant=[["❓", "为什么？为什么？爸爸为什么不休息？", "Wèi shénme? Wèi shénme? Bàba wèi shénme bù xiūxi?", "Perché? Perché? Perché papà non si riposa?"], ["📋", "因为事情很多，所以爸爸很忙。", "Yīnwèi shìqing hěn duō, suǒyǐ bàba hěn máng.", "Perché ha tante cose da fare, quindi papà è occupato."], ["🌧️☂️", "为什么拿雨伞？因为要下雨了！", "Wèi shénme ná yǔsǎn? Yīnwèi yào xiàyǔ le!", "Perché prendi l'ombrello? Perché sta per piovere!"], ["😩🛏️", "为什么要睡觉？因为我很累！", "Wèi shénme yào shuìjiào? Yīnwèi wǒ hěn lèi!", "Perché vuoi dormire? Perché sono stanco!"], ["🎬🤔", "电影好看吗？好看！什么意思？不知道！", "Diànyǐng hǎokàn ma? Hǎokàn! Shénme yìsi? Bù zhīdào!", "Il film è bello? Bello! Cosa vuol dire? Non lo so!"]];
+document.getElementById('chant').innerHTML=chant.map(c=>`<div class="cl"><span class="ic">${c[0]}</span><div style="flex:1;min-width:240px"><span class="py">${c[2]}</span><span class="zh">${c[1]}</span><div class="tr">${c[3]}</div></div><button class="spk" onclick="say('${c[1]}')">🔊</button></div>`).join('');
+
+function finish(){star(1);const e=document.getElementById('end');e.style.display='block';e.innerHTML=`🎉 <span class="zh">太棒了！</span><br>Hai raccolto <b>${stars}</b> ⭐ oggi! <span class="zh">再见！</span> 👋`}
+</script>
+</body>
+</html>

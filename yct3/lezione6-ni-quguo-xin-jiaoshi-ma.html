@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 3 · 第6课 你去过我们的新教室吗</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,#e8558f,#f78fb3);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:50px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header h1 .zh{font-size:52px}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:#e8558f;border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:#e8558f;color:#fff}
+nav small{opacity:.75}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:46px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+h3{font-size:30px;margin:0 0 12px}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:inherit;font-size:22px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.py{color:var(--red);font-size:24px}
+/* font dedicato al pinyin: toni sempre al posto giusto */
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.hide-py .py{visibility:hidden}
+
+/* mini-scene */
+.ms{position:relative;display:inline-block;width:150px;height:140px;flex:none}
+.ms .b{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:90px;line-height:1}
+.ms .o{position:absolute;left:50%;transform:translateX(-50%);font-size:46px;line-height:1}
+.ms .o.on{bottom:82px}
+.ms .o.in{bottom:20px;font-size:36px;filter:drop-shadow(0 0 3px #fff)}
+.ms.under .b{bottom:30px}
+.ms .o.under{bottom:0;font-size:40px}
+.ms .x{position:absolute;right:4px;top:4px;font-size:34px}
+.pics{font-size:60px;line-height:1;flex:none;width:150px;text-align:center}
+
+/* frasi chiave */
+.key{display:flex;align-items:center;gap:20px;background:#fff;border:3px solid var(--line);border-radius:26px;padding:24px;margin-bottom:20px;flex-wrap:wrap}
+.key .txt{flex:1;min-width:260px}
+.key .py{font-size:30px}
+.key .zh{font-size:56px}
+.key .it{color:var(--soft);font-size:28px}
+
+/* specchietti */
+.box{background:#fff;border:3px solid var(--line);border-radius:26px;padding:22px;margin-bottom:22px}
+.box.blue{border-color:#bcdcf3;background:#f3f9ff}
+.box.green{border-color:#c4e8d3;background:#f2fbf6}
+.box.orange{border-color:#f7d2a6;background:#fff6eb}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.var{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid var(--line)}
+.var .big{font-size:52px}
+.var .py{font-size:28px}
+.var .ex{margin-top:10px;font-size:34px}
+.var .ex .py{font-size:22px;display:block}
+.var .it{color:var(--soft);font-size:22px}
+.loc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.loc .var .big{font-size:70px;color:var(--red)}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px;opacity:.95}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cZ{background:var(--orange)} .cB{background:var(--green)} .cL{background:var(--red)}
+.exrow{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;flex-wrap:wrap}
+.exrow .zh{font-size:44px}
+.exrow .zh span{padding:0 4px;border-radius:8px}
+.exrow .py{display:block;font-size:24px}
+.exrow .it{color:var(--soft);font-size:24px}
+.tA{color:var(--blue)} .tZ{color:var(--orange)} .tB{color:var(--green)} .tL{color:var(--red)}
+
+/* vocab */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{perspective:800px;height:250px;cursor:pointer;position:relative}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--line);border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+.face .pic{font-size:70px;line-height:1}
+.face .w{font-size:44px}
+.back{transform:rotateY(180deg);background:#fff3d6}
+.back .it{font-size:28px;font-weight:700}
+.card .spk{position:absolute;top:8px;right:8px;width:42px;height:42px;font-size:20px;z-index:2}
+
+
+/* ordine dei tratti */
+.card .wr{position:absolute;top:8px;left:8px;width:42px;height:42px;font-size:20px;z-index:2;border:0;border-radius:50%;background:#ffd6e7;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:28px;padding:24px;max-width:760px;width:100%;text-align:center;position:relative}
+.mbox .close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:34px;cursor:pointer}
+.mword{font-size:28px;margin-bottom:6px}
+.writers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.tzg{width:240px;height:240px;border:3px solid #e8558f;border-radius:10px;position:relative;background:
+ linear-gradient(#f7c6d9,#f7c6d9) center/100% 2px no-repeat,linear-gradient(#f7c6d9,#f7c6d9) center/2px 100% no-repeat}
+.ctrl{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:22px}
+.ctrl input[type=range]{width:220px;accent-color:#e8558f}
+
+/* dialogue */
+.dlg{background:#fff;border-radius:24px;padding:20px;border:3px solid var(--line);margin-bottom:22px}
+.line{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.who{flex:none;width:110px;text-align:center;border-radius:14px;padding:6px;color:#fff;font-size:22px}
+.bubble{background:#f7f1ea;border-radius:18px;padding:8px 18px;flex:1;min-width:240px}
+.bubble .zh{font-size:36px}
+.bubble .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .bubble .tr{display:block}
+.q{background:#eaf5ff;border-radius:16px;padding:14px 18px;margin-top:12px;cursor:pointer}
+.q .zh{font-size:30px}
+.q .ans{display:none;color:var(--green);font-weight:700;font-size:30px}
+.q.open .ans{display:block}
+
+/* game */
+.stage{background:#fff;border-radius:26px;border:3px solid var(--line);padding:22px;text-align:center}
+.scene{position:relative;height:230px;width:300px;margin:0 auto 10px}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:150px;line-height:1}
+.obj{position:absolute;left:50%;transform:translateX(-50%);font-size:68px;line-height:1}
+.obj.on{bottom:136px}
+.obj.in{bottom:34px;font-size:54px;filter:drop-shadow(0 0 4px #fff)}
+.question .zh{font-size:44px}
+.question .py{font-size:28px}
+.opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 22px;font:inherit;cursor:pointer}
+.opt .zh{font-size:36px;display:block}
+.opt .py{display:block;font-size:22px}
+.opt.ok{border-color:var(--green);background:#e8f8ef}
+.opt.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:36px;font-size:28px;margin-top:12px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots span{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots span.done{background:var(--green)}
+.dots span.cur{background:var(--orange)}
+
+/* storia: una vignetta alla volta */
+.intro{background:#fff3d6;border-radius:22px;padding:16px 20px;margin-bottom:18px;font-size:24px}
+.newwords{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 16px 6px 8px;display:flex;align-items:center;gap:10px;font-size:24px}
+.chip .zh{font-size:30px}
+.chip .spk{width:42px;height:42px;font-size:20px}
+.comic{background:#fff;border:4px solid #b9dfa0;border-radius:28px;padding:22px;max-width:760px;margin:0 auto}
+.comic .num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:46px;height:46px;line-height:46px;text-align:center;font-size:26px}
+.comic .sp{display:flex;align-items:center;gap:12px;margin:14px 0}
+.comic .face2{font-size:56px;flex:none;width:70px;text-align:center}
+.comic .bubble .zh{font-size:40px}
+.comic .middle{text-align:center;margin:6px 0}
+.snav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:18px}
+.snav .btn{font-size:26px;padding:10px 26px}
+
+/* parla */
+.talk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.talk div{background:#fff3d6;border-radius:20px;padding:18px}
+.talk .zh{font-size:34px}
+.talk .py{font-size:22px}
+.builder{margin-top:8px;color:var(--soft);font-size:26px}
+.end{display:none;text-align:center;font-size:30px;margin-top:20px;background:#e8f8ef;border-radius:20px;padding:18px}
+footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
+</style>
+<style>
+/* scena del 把 */
+.bscene{display:flex;align-items:center;justify-content:center;gap:14px;font-size:84px;line-height:1;min-height:140px;margin-bottom:6px;flex-wrap:wrap}
+.bscene .arr{font-size:48px;color:var(--soft)}
+.bscene .ba{font-family:'Noto Sans SC',sans-serif;font-size:56px;color:#fff;background:var(--orange);border-radius:18px;padding:6px 16px}
+.mini{font-size:46px;line-height:1}
+.pron{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.pron .var .big{font-size:72px}
+.pron .var.hl{border-color:var(--orange);background:#fff6eb}
+.chant{background:#fff;border:4px solid #f7d2a6;border-radius:28px;padding:18px 22px;max-width:860px;margin:0 auto}
+.chant .cl{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap}
+.chant .cl .zh{font-size:36px}
+.chant .cl .py{display:block;font-size:22px}
+.chant .cl .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .chant .cl .tr{display:block}
+.chant .cl .ic{font-size:44px;width:70px;text-align:center;flex:none}
+.listen .opt{font-size:70px;padding:10px 26px;line-height:1.1}
+.sw{background:#fff;border:3px solid var(--line);border-radius:24px;padding:16px 18px;margin-bottom:18px}
+.sw .head{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.sw .head .zh{font-size:64px;line-height:1}
+.sw .head .py{font-size:28px}
+.sw .head .it{color:var(--soft);font-size:22px}
+.sw .head .cnt{margin-left:auto;background:#ffe9f2;color:#e8558f;border-radius:20px;padding:4px 14px;font-size:20px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{position:relative;width:78px;height:78px;border:2px solid #f3b3cd;border-radius:8px;background:
+ linear-gradient(#fbe0ea,#fbe0ea) center/100% 1px no-repeat,linear-gradient(#fbe0ea,#fbe0ea) center/1px 100% no-repeat,#fff}
+.step svg{width:100%;height:100%;display:block}
+.step b{position:absolute;top:1px;left:4px;font-size:14px;color:#e8558f;font-family:'Noto Sans',sans-serif}
+.brow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bh{position:relative;border-radius:22px;padding:14px 8px 12px;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center}
+.bh .n{position:absolute;top:8px;left:10px;background:#fff;color:var(--ink);border-radius:50%;width:32px;height:32px;line-height:32px;font-size:20px;font-weight:700}
+.bh .bi{font-size:56px;line-height:1.1}
+.bh b{font-size:30px;line-height:1.2}
+.bh b.zh{font-size:40px}
+.bh small{font-size:18px;opacity:.95;line-height:1.2}
+.bh:not(:last-child)::after{content:'➜';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--soft);font-size:22px;z-index:2;background:#fff6eb;border-radius:50%;width:22px;text-align:center}
+.k1{--c:#3a8fd0;--l:#e7f2fb} .k2{--c:#f39a3d;--l:#fff0dd} .k3{--c:#3fa874;--l:#e6f6ec} .k4{--c:#e0524a;--l:#fde8e6}
+.bh.k1,.bh.k2,.bh.k3,.bh.k4{background:var(--c)}
+.bex{background:#fff;border-radius:22px;padding:12px;margin-top:14px}
+.bc{background:var(--l);border:3px solid var(--c);border-radius:18px;text-align:center;padding:8px 4px}
+.bc .bi{font-size:50px;line-height:1.1}
+.bc .bz{font-size:40px;color:var(--c);line-height:1.2}
+.bc .bp{font-size:20px;color:var(--soft)}
+.bfull{display:flex;align-items:center;gap:14px;margin-top:10px;padding:0 6px}
+.bfull .zh{font-size:34px}
+.bfull .py{font-size:22px}
+.bfull .it{color:var(--soft);font-size:22px}
+.place{border-radius:20px;padding:12px;text-align:center;margin-bottom:6px}
+.place.bath{background:linear-gradient(135deg,#d9f0fb,#eef9ff)}
+.place.kitchen{background:linear-gradient(135deg,#ffeccc,#fff7e8)}
+.place .pe{font-size:62px;letter-spacing:8px;line-height:1.2}
+.place .pl{font-size:28px;font-weight:700;color:var(--soft)}
+.face3{flex:none;width:84px;height:84px;border-radius:50%;border:4px solid;background:#fff;font-size:54px;display:flex;align-items:center;justify-content:center}
+.talk2{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px}
+.tk{background:#fff3d6;border-radius:20px;padding:16px 18px}
+.tq{display:flex;align-items:center;gap:12px}
+.tq .zh{font-size:34px}
+.tq .py,.ta .py{font-size:22px;display:block}
+.ta{margin-top:10px;background:#fff;border-radius:14px;padding:8px 14px;color:#5a4a42}
+.ta .zh{font-size:32px;white-space:nowrap}
+.bl{display:inline-block;width:110px;border-bottom:3px solid #c9b8ab;margin:0 4px;vertical-align:baseline}
+@media (max-width:640px){.brow{gap:6px}.bh b{font-size:20px}.bh .bi,.bc .bi{font-size:36px}.bc .bz{font-size:28px}.bh small{font-size:14px}.talk2{grid-template-columns:1fr}.ta .zh{white-space:normal}}
+.hw{background:#ffe9f2;border:3px dashed #e8558f;border-radius:24px;padding:18px 22px;margin-top:22px;font-size:26px;text-align:center}
+</style>
+<style>
+.place{background:linear-gradient(135deg,#fff0dd,#fff9f0)}
+.place.p2{background:linear-gradient(135deg,#e7f2fb,#f3f9ff)}
+.cmp{display:inline-block;font-family:'Noto Sans SC',sans-serif;font-size:34px;line-height:1.25;background:#fff6eb;border:3px solid #f7d2a6;border-radius:18px;padding:8px 16px;text-align:center}
+.bscene .ba{font-family:'Noto Sans',sans-serif}
+.opt .zh{font-size:32px}
+.pairs .var .big{font-size:46px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>YCT 3 · Lezione 6 · <span class="zh">你去过我们的新教室吗？</span></h1>
+  <p>Sei già stato nella nostra nuova aula? · con Maja Jiejie 🐼</p>
+</header>
+<nav id="nav"><button data-s="0" class="on">⭐ Frasi chiave <small>2'</small></button><button data-s="1">Parole <small>8'</small></button><button data-s="7">Tratti ✍️ <small>8'</small></button><button data-s="2">Ci sei stato? 过 🧭 <small>6'</small></button><button data-s="3">Leggiamo <small>6'</small></button><button data-s="4">Giochi 🎮 <small>6'</small></button><button data-s="5">Filastrocca 🎵 <small>4'</small></button><button data-s="6">Parliamo <small>3'</small></button></nav>
+<main>
+<section id="s0" class="on">
+  <h2>Frasi chiave</h2>
+  <p class="hint">Le due frasi più importanti della lezione</p>
+  <div class="key"><div class="pics">🏫❓</div><div class="txt"><div class="py">Nǐ qùguo wǒmen de xīn jiàoshì ma?</div><div class="zh">你去过我们的新教室吗？</div><div class="it">Sei già stato nella nostra nuova aula?</div></div><button class="spk" onclick="say('你去过我们的新教室吗？')">🔊</button></div><div class="key"><div class="pics">👉🏫✨</div><div class="txt"><div class="py">Qiánbian dōu shì xīn jiàoshì.</div><div class="zh">前边都是新教室。</div><div class="it">Qui davanti sono tutte aule nuove.</div></div><button class="spk" onclick="say('前边都是新教室。')">🔊</button></div>
+</section>
+<section id="s1">
+  <h2>Le parole nuove <span class="zh">生词</span></h2>
+  <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per il significato. ✍️ = come si scrive</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="grid" id="vocab"></div>
+</section>
+<section id="s7">
+  <h2>L'ordine dei tratti <span class="zh">笔顺</span></h2>
+  <p class="hint">Segui i numeri: il tratto rosso è quello nuovo. ▶ = guarda l'animazione</p>
+  <div id="strokeList"></div>
+</section>
+<section id="s2">
+  <h2>Ci sei mai stato? 过 🧭</h2>
+  <p class="hint">Verbo + 过 = l'ho già fatto almeno una volta</p>
+  <div class="box orange"><h3>1 · Verbo + 过 = esperienza</h3><div class="struct"><div class="blk cA"><div class="t">我</div><div class="s">chi</div></div><span class="plus">+</span><div class="blk cB"><div class="t">去</div><div class="s">azione</div></div><span class="plus">+</span><div class="blk cL"><div class="t">过</div><div class="s">già fatto!</div></div><span class="plus">+</span><div class="blk cZ"><div class="t">北京</div><div class="s">dove / cosa</div></div></div><div class="exrow"><div class="mini">🏯✅</div><div style="flex:1;min-width:220px"><span class="py">Wǒ qùguo Běijīng.</span><div class="zh">我去<span class="tL">过</span>北京。</div><span class="it">Sono già stato a Pechino.</span></div><button class="spk" onclick="say('我去过北京。')">🔊</button></div><div class="exrow"><div class="mini">🥟✅</div><div style="flex:1;min-width:220px"><span class="py">Wǒ chīguo bāozi.</span><div class="zh">我吃<span class="tL">过</span>包子。</div><span class="it">Ho già mangiato i baozi.</span></div><button class="spk" onclick="say('我吃过包子。')">🔊</button></div><div class="exrow"><div class="mini">🏫❓</div><div style="flex:1;min-width:220px"><span class="py">Nǐ qùguo xīn jiàoshì ma?</span><div class="zh">你去<span class="tL">过</span>新教室吗？</div><span class="it">Sei già stato nell'aula nuova?</span></div><button class="spk" onclick="say('你去过新教室吗？')">🔊</button></div></div><div class="box blue"><h3>2 · Non ci sono ancora stato: (还)没 + verbo + 过</h3><div class="exrow"><div class="mini">🏫❌</div><div style="flex:1;min-width:220px"><span class="py">Wǒ hái méi qùguo.</span><div class="zh">我<span class="tZ">还没</span>去<span class="tL">过</span>。</div><span class="it">Non ci sono ancora stato.</span></div><button class="spk" onclick="say('我还没去过。')">🔊</button></div><div class="exrow"><div class="mini">✈️❌</div><div style="flex:1;min-width:220px"><span class="py">Wǒ méi zuòguo fēijī.</span><div class="zh">我<span class="tZ">没</span>坐<span class="tL">过</span>飞机。</div><span class="it">Non sono mai salito su un aereo.</span></div><button class="spk" onclick="say('我没坐过飞机。')">🔊</button></div></div><div class="box green"><h3>3 · Davanti, dietro, a sinistra, a destra 🧭</h3><div class="loc"><div class="var"><div class="mini">⬆️</div><div class="big zh">前边</div><div class="py">qiánbian</div><div class="it">davanti</div></div><div class="var"><div class="mini">⬇️</div><div class="big zh">后边</div><div class="py">hòubian</div><div class="it">dietro</div></div><div class="var"><div class="mini">⬅️</div><div class="big zh">左边</div><div class="py">zuǒbian</div><div class="it">a sinistra</div></div><div class="var"><div class="mini">➡️</div><div class="big zh">右边</div><div class="py">yòubian</div><div class="it">a destra</div></div></div><div class="exrow"><div class="mini">🏫⬇️</div><div style="flex:1;min-width:220px"><span class="py">Wǒmen de jiàoshì zài èr niánjí de hòubian.</span><div class="zh">我们的教室在二年级的<span class="tA">后边</span>。</div><span class="it">La nostra aula è dietro quella della seconda.</span></div><button class="spk" onclick="say('我们的教室在二年级的后边。')">🔊</button></div></div>
+</section>
+<section id="s3">
+  <h2>Leggiamo</h2>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="dlg"><div class="place "><div class="pe">🏫 🌳 ☀️</div><div class="pl">Davanti alla scuola</div></div><div id="d1"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">她去过新教室吗？</span> <small>(clicca per la risposta)</small><div class="ans zh">还没去过。</div></div></div>
+  <div class="dlg"><div class="place p2"><div class="pe">🗺️ 🏫 🏫</div><div class="pl">Nella scuola nuova</div></div><div id="d2"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">他们的教室在哪儿？</span> <small>(clicca per la risposta)</small><div class="ans zh">在三年级的后边。</div></div></div>
+</section>
+<section id="s4">
+  <h2>Giochi 🎮</h2>
+  <div class="box blue">
+    <h3>Gioco 1 · Ascolta e scegli 👂</h3>
+    <p class="hint" style="margin-bottom:10px">Premi 🔊, ascolta la parola e clicca il disegno giusto</p>
+    <div class="stage listen">
+      <button class="spk" style="width:80px;height:80px;font-size:38px" onclick="say(lr[li].w)">🔊</button>
+      <div class="opts" id="lopts"></div>
+      <div class="feedback" id="lfb"></div>
+      <div class="dots" id="ldots"></div>
+      <div style="margin-top:14px"><button class="btn" id="lnext" onclick="nextL()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+  <div class="box orange">
+    <h3>Gioco 2 · Dove si trova? 🧭</h3>
+    <p class="hint" style="margin-bottom:10px">Guarda dove si trova l'animale rispetto all'edificio e scegli la frase giusta</p>
+    <div class="stage">
+      <div class="bscene" id="bscene"></div>
+      <div class="opts" id="bopts"></div>
+      <div class="feedback" id="bfb"></div>
+      <div class="dots" id="bdots"></div>
+      <div style="margin-top:14px"><button class="btn" id="bnext" onclick="nextB()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+</section>
+<section id="s5">
+  <h2>Filastrocca della scuola nuova 🎵</h2>
+  <p class="hint">Leggiamo insieme a ritmo e indichiamo con la mano!</p>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="chant" id="chant"></div>
+</section>
+<section id="s6">
+  <h2>Parliamo! 🙋</h2>
+  <p class="hint">Rispondi alle domande della maestra</p>
+  <div class="talk2"><div class="tk"><div class="tq"><button class="spk" onclick="say('你去过北京吗？')">🔊</button><div><span class="py">Nǐ qùguo Běijīng ma?</span><div class="zh">你去过北京吗？</div></div></div>
+      <div class="ta"><span class="py">Qùguo. / Méi qùguo.</span><div class="zh">去过。/ 没去过。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你吃过包子吗？')">🔊</button><div><span class="py">Nǐ chīguo bāozi ma?</span><div class="zh">你吃过包子吗？</div></div></div>
+      <div class="ta"><span class="py">Chīguo. / Méi chīguo.</span><div class="zh">吃过。/ 没吃过。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你的左边是什么？')">🔊</button><div><span class="py">Nǐ de zuǒbian shì shénme?</span><div class="zh">你的左边是什么？</div></div></div>
+      <div class="ta"><span class="py">Wǒ de zuǒbian shì …</span><div class="zh">我的左边是<span class="bl"></span>。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你的右边有什么？')">🔊</button><div><span class="py">Nǐ de yòubian yǒu shénme?</span><div class="zh">你的右边有什么？</div></div></div>
+      <div class="ta"><span class="py">Wǒ de yòubian yǒu …</span><div class="zh">我的右边有<span class="bl"></span>。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你家前边有什么？')">🔊</button><div><span class="py">Nǐ jiā qiánbian yǒu shénme?</span><div class="zh">你家前边有什么？</div></div></div>
+      <div class="ta"><span class="py">Wǒ jiā qiánbian yǒu …</span><div class="zh">我家前边有<span class="bl"></span>。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你的教室大吗？漂亮吗？')">🔊</button><div><span class="py">Nǐ de jiàoshì dà ma? Piàoliang ma?</span><div class="zh">你的教室大吗？漂亮吗？</div></div></div>
+      <div class="ta"><span class="py">Hěn dà, hěn piàoliang.</span><div class="zh">很大，很漂亮。</div></div></div></div>
+  <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Ho finito! 🎉</button></div>
+  <div class="end" id="end"></div>
+  <div class="hw">📝 <b>Compito:</b> su Classroom trovi le schede con l'ordine dei tratti (le trovi anche qui, in <b>Tratti ✍️</b>).<br>Scrivi 3 volte ogni carattere: <span class="zh">教室 走 过 前 后 左 右</span></div>
+</section>
+</main>
+<div class="modal" id="wmodal" onclick="if(event.target===this)closeW()">
+ <div class="mbox">
+  <button class="close" onclick="closeW()">✕</button>
+  <div class="mword"><span class="py" id="wpy"></span> · <span id="wit"></span></div>
+  <div class="writers" id="writers"></div>
+  <div class="ctrl">
+   <button class="btn" onclick="playW()">▶ Guarda come si scrive</button>
+   <label>🐢 Lento <input type="range" id="wspeed" min="0.15" max="1.5" step="0.05" value="0.5" oninput="document.getElementById('wsv').textContent=speedLabel(this.value)"> Veloce 🐇</label>
+   <span id="wsv" style="color:var(--soft)"></span>
+   <button class="btn alt" onclick="quizW()">✍️ Prova tu</button>
+  </div>
+ </div>
+</div>
+<footer>Maja Jiejie · Chinese Academy</footer>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script>
+let stars=0;
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+const vocab=[["教室", "jiàoshì", "l'aula", "🏫"], ["走", "zǒu", "camminare, andare", "🚶"], ["过", "guo", "(l'ho già fatto)", "✔️"], ["前", "qián", "davanti", "⬆️"], ["后", "hòu", "dietro", "⬇️"], ["左", "zuǒ", "sinistra", "⬅️"], ["右", "yòu", "destra", "➡️"]];
+document.getElementById('vocab').innerHTML=vocab.map((v,i)=>`
+ <div class="card" onclick="this.classList.toggle('flip')">
+  <button class="spk" onclick="say('${v[0]}',event)">🔊</button>
+  <button class="wr" title="Come si scrive" onclick="openW(${i},event)">✍️</button>
+  <div class="inner">
+   <div class="face"><div class="pic"${[...v[3]].length>1?' style="font-size:48px"':''}>${v[3]}</div><div class="py">${v[1]}</div><div class="w zh">${v[0]}</div></div>
+   <div class="face back"><div class="w zh">${v[0]}</div><div class="py">${v[1]}</div><div class="it">${v[2]}</div></div>
+  </div></div>`).join('');
+
+const STROKES={"前": ["M 378 762 Q 438 698 453 697 Q 463 696 469 709 Q 475 722 468 752 Q 464 771 436 786 Q 373 816 356 811 Q 352 807 351 795 Q 354 785 378 762 Z", "M 640 810 Q 622 779 570 707 Q 560 689 578 693 Q 596 705 686 766 Q 705 784 730 795 Q 752 807 739 825 Q 724 841 697 856 Q 672 869 658 866 Q 645 865 649 850 Q 653 831 640 810 Z", "M 520 614 Q 578 618 633 625 Q 772 643 935 629 Q 959 628 965 636 Q 972 649 960 661 Q 891 724 816 698 Q 713 679 384 638 Q 333 632 300 627 Q 225 614 113 612 Q 100 612 98 601 Q 98 588 117 574 Q 133 561 165 550 Q 175 546 194 554 Q 212 561 290 575 Q 393 600 520 614 Z", "M 303 368 Q 307 434 312 455 Q 312 458 312 459 C 314 477 314 477 305 485 Q 281 509 251 506 Q 238 502 243 491 Q 289 385 237 183 Q 213 123 214 114 Q 214 84 232 62 Q 238 49 248 54 Q 282 76 292 198 Q 293 216 294 231 L 296 263 Q 297 306 301 341 L 303 368 Z", "M 312 459 Q 312 460 414 483 Q 430 487 436 480 Q 451 431 446 189 Q 442 116 437 108 L 376 117 Q 358 124 357 116 Q 402 74 428 42 Q 438 26 452 22 Q 459 18 467 27 Q 500 66 501 129 Q 480 429 500 469 Q 510 485 500 494 Q 482 510 451 523 Q 436 529 422 522 Q 376 497 305 485 C 276 479 283 451 312 459 Z", "M 301 341 Q 304 341 308 341 Q 363 351 404 356 Q 426 360 417 373 Q 407 386 382 389 Q 343 392 303 368 C 277 353 271 341 301 341 Z", "M 294 231 Q 354 238 399 244 Q 421 248 413 260 Q 403 275 377 279 Q 332 285 296 263 C 270 248 264 228 294 231 Z", "M 569 464 Q 596 407 575 254 Q 566 226 593 194 Q 600 184 610 194 Q 629 222 627 262 Q 621 367 634 437 Q 640 458 622 467 Q 607 477 593 484 Q 583 488 573 483 Q 566 479 569 464 Z", "M 692 64 Q 671 73 645 83 Q 633 87 633 81 Q 632 72 641 62 Q 695 4 729 -43 Q 739 -53 754 -37 Q 793 8 794 110 Q 778 338 788 507 Q 794 535 788 544 Q 778 557 740 577 Q 724 587 713 579 Q 703 570 715 549 Q 725 527 730 366 Q 733 93 728 71 Q 718 56 692 64 Z"], "右": ["M 488 525 Q 641 550 907 550 Q 931 551 936 561 Q 943 574 923 591 Q 853 639 785 619 Q 682 598 516 570 Q 509 570 505 568 L 444 559 Q 302 540 146 518 Q 121 515 140 495 Q 158 479 178 473 Q 203 467 222 473 Q 318 501 428 517 L 488 525 Z", "M 374 313 Q 446 427 488 525 L 505 568 Q 527 628 536 675 Q 543 706 561 736 Q 577 755 555 769 Q 527 791 486 802 Q 467 808 457 801 Q 450 795 456 776 Q 493 703 444 559 L 428 517 Q 323 277 127 118 Q 64 73 61 62 Q 60 55 77 63 Q 224 120 346 272 L 374 313 Z", "M 404 303 Q 394 309 374 313 C 345 320 336 300 346 272 Q 374 196 388 80 Q 389 40 411 13 Q 430 -12 436 5 Q 442 21 442 45 L 439 83 Q 430 110 414 266 C 411 296 410 300 404 303 Z", "M 722 128 Q 749 246 791 284 Q 810 306 792 327 Q 774 342 707 370 Q 686 377 663 367 Q 566 328 404 303 C 374 298 384 262 414 266 Q 432 266 642 310 Q 667 316 677 306 Q 690 293 688 267 Q 678 191 664 129 C 658 100 715 99 722 128 Z", "M 442 45 Q 449 44 462 46 Q 550 68 742 85 Q 754 86 756 97 Q 756 106 722 128 C 705 139 693 136 664 129 Q 540 98 439 83 C 409 78 412 45 442 45 Z"], "后": ["M 353 620 Q 498 656 596 701 Q 651 723 699 731 Q 720 732 724 741 Q 728 754 715 768 Q 690 787 636 809 Q 617 819 601 818 Q 592 814 591 800 Q 591 755 347 642 C 320 629 324 613 353 620 Z", "M 330 467 Q 337 519 344 581 Q 353 614 353 620 C 356 636 356 636 347 642 Q 344 646 339 648 Q 288 678 272 676 Q 250 673 266 649 Q 299 580 257 362 Q 242 304 209 236 Q 175 167 78 85 Q 62 72 58 66 Q 55 59 68 58 Q 107 55 191 130 Q 293 232 327 447 L 330 467 Z", "M 327 447 Q 363 417 400 430 Q 602 493 857 493 Q 858 493 860 493 Q 881 494 885 503 Q 889 516 872 529 Q 815 566 778 556 Q 646 522 332 468 Q 329 468 330 467 C 306 462 306 462 327 447 Z", "M 386 295 Q 373 301 347 306 Q 334 310 329 304 Q 322 297 331 279 Q 364 203 380 80 Q 381 43 403 17 Q 422 -8 428 10 Q 432 23 434 45 L 430 89 Q 412 216 406 257 C 402 287 401 289 386 295 Z", "M 737 123 Q 773 235 815 264 Q 836 286 819 308 Q 801 323 734 358 Q 713 367 688 358 Q 568 313 386 295 C 356 292 376 252 406 257 Q 418 258 659 301 Q 689 308 700 295 Q 712 282 708 256 Q 693 186 675 127 C 666 98 728 95 737 123 Z", "M 434 45 Q 443 45 452 46 Q 549 65 759 74 Q 772 75 774 86 Q 775 96 738 123 L 737 123 L 675 127 Q 539 100 430 89 C 400 86 404 44 434 45 Z"], "室": ["M 487 791 Q 514 769 543 741 Q 559 728 576 729 Q 588 730 593 744 Q 597 760 586 793 Q 574 823 480 843 Q 462 847 456 843 Q 450 839 453 825 Q 457 812 487 791 Z", "M 285 639 Q 284 640 284 643 Q 274 667 262 676 Q 244 692 241 666 Q 245 636 202 582 Q 157 534 173 487 Q 174 478 179 471 Q 192 444 214 471 Q 233 496 249 537 Q 265 582 278 608 C 288 629 288 629 285 639 Z", "M 278 608 Q 302 596 338 603 Q 449 637 696 660 Q 738 664 753 661 Q 769 649 767 641 Q 754 599 739 554 L 741 553 Q 748 549 765 561 Q 819 597 863 609 Q 899 619 898 628 Q 897 638 824 692 Q 802 710 729 697 Q 591 682 386 651 Q 335 644 285 639 C 255 636 249 617 278 608 Z", "M 493 487 Q 680 523 686 526 Q 695 533 690 541 Q 684 551 658 560 Q 630 566 535 537 Q 405 516 369 513 Q 336 509 359 493 Q 389 474 441 478 L 493 487 Z", "M 511 317 Q 557 330 623 343 Q 638 347 648 353 C 675 365 666 375 636 370 Q 530 354 415 325 Q 405 321 401 324 Q 400 327 405 333 Q 495 426 514 440 Q 527 447 522 461 Q 518 470 493 487 C 469 505 441 508 441 478 Q 447 439 392 377 Q 367 346 319 319 Q 306 309 308 299 Q 312 283 334 262 Q 343 250 356 260 Q 392 288 472 307 L 511 317 Z", "M 648 353 Q 685 307 696 304 Q 706 303 713 313 Q 720 326 717 354 Q 714 384 628 430 Q 615 436 608 435 Q 604 432 602 420 Q 602 410 636 370 L 648 353 Z", "M 537 170 Q 585 179 697 189 Q 707 188 716 199 Q 717 209 696 221 Q 666 243 587 220 Q 563 216 540 210 L 486 200 Q 441 196 321 183 Q 293 180 314 163 Q 341 139 386 147 Q 431 156 486 163 L 537 170 Z", "M 531 53 Q 534 117 537 170 L 540 210 Q 546 286 542 292 Q 526 308 511 317 C 486 333 461 335 472 307 Q 482 289 486 200 L 486 163 Q 486 117 486 49 C 486 19 530 23 531 53 Z", "M 524 5 Q 569 6 612 11 Q 742 20 846 5 Q 868 2 875 11 Q 882 24 871 36 Q 843 64 799 84 Q 790 87 649 65 Q 618 65 531 53 L 486 49 Q 386 42 335 35 Q 277 28 190 28 Q 177 29 175 17 Q 174 5 193 -10 Q 209 -23 240 -35 Q 250 -39 269 -31 Q 282 -27 345 -18 Q 424 -2 524 5 Z"], "左": ["M 490 526 Q 583 542 681 558 Q 754 571 765 581 Q 775 590 771 599 Q 764 612 733 621 Q 700 630 667 618 Q 591 596 508 576 L 451 565 Q 369 553 276 547 Q 236 543 264 523 Q 309 495 369 506 Q 400 512 433 516 L 490 526 Z", "M 433 516 Q 337 284 144 108 Q 66 45 65 37 Q 64 31 81 39 Q 283 127 406 351 Q 455 439 490 526 L 508 576 Q 508 577 509 578 Q 534 651 543 708 Q 547 741 567 773 Q 582 794 560 807 Q 530 828 490 837 Q 471 841 461 835 Q 454 828 461 810 Q 506 729 451 565 L 433 516 Z", "M 566 302 Q 738 335 746 339 Q 755 346 751 356 Q 744 368 714 376 Q 687 382 577 352 Q 483 334 419 329 Q 382 325 408 306 Q 447 279 509 292 Q 515 293 523 294 L 566 302 Z", "M 574 93 Q 592 276 593 276 Q 580 291 566 302 C 543 321 516 323 523 294 Q 532 266 527 88 C 526 58 571 63 574 93 Z", "M 527 88 Q 415 78 286 63 Q 264 62 280 43 Q 295 27 313 21 Q 335 15 353 19 Q 539 64 821 54 Q 842 54 863 53 Q 885 52 890 61 Q 897 74 879 89 Q 822 131 784 124 Q 705 111 574 93 L 527 88 Z"], "教": ["M 388 654 Q 407 660 431 665 Q 462 674 468 678 Q 475 685 471 693 Q 464 703 437 709 Q 412 713 392 705 L 340 687 Q 259 666 211 658 Q 178 651 202 637 Q 244 616 295 632 Q 314 638 340 642 L 388 654 Z", "M 376 528 Q 382 594 388 654 L 392 705 Q 395 744 410 794 Q 414 804 395 818 Q 364 836 342 840 Q 327 844 320 836 Q 313 829 320 815 Q 338 790 338 773 Q 339 733 340 687 L 340 642 Q 340 584 338 518 C 337 488 373 498 376 528 Z", "M 427 498 Q 470 508 521 515 Q 537 518 538 525 Q 539 538 521 546 Q 494 558 473 552 L 403 535 Q 390 532 376 528 L 338 518 Q 182 484 108 474 Q 95 473 93 465 Q 90 455 105 443 Q 144 418 185 431 Q 329 480 363 484 L 427 498 Z", "M 348 410 Q 348 411 349 411 Q 392 460 427 498 L 473 552 Q 551 646 568 656 Q 581 662 581 671 Q 580 677 568 682 Q 540 698 514 701 Q 499 702 493 687 Q 484 642 403 535 L 363 484 Q 326 439 276 385 L 240 346 Q 173 276 74 196 Q 67 192 69 189 Q 70 186 77 188 Q 140 212 216 278 Q 298 356 313 360 C 334 373 328 388 348 410 Z", "M 387 295 Q 462 367 484 376 Q 500 382 494 395 Q 490 408 434 434 Q 418 441 400 432 Q 376 422 348 410 L 276 385 Q 257 382 229 381 Q 210 380 218 364 Q 225 354 240 346 C 264 331 287 345 313 360 Q 383 402 403 392 Q 413 385 410 374 Q 394 341 374 302 C 360 275 365 274 387 295 Z", "M 423 240 Q 411 280 387 295 L 374 302 Q 368 306 360 308 Q 341 314 331 308 Q 319 301 333 290 Q 366 266 376 222 L 383 190 Q 392 103 372 58 Q 360 39 333 45 Q 308 51 284 57 Q 274 61 277 50 Q 281 43 296 31 Q 329 0 339 -24 Q 348 -40 362 -39 Q 375 -38 399 -14 Q 462 49 430 212 L 423 240 Z", "M 430 212 Q 437 216 445 219 Q 505 247 505 264 Q 501 268 489 266 Q 456 254 423 240 L 376 222 Q 289 192 195 159 Q 174 152 140 150 Q 128 149 127 139 Q 126 127 134 120 Q 155 107 186 90 Q 196 89 206 96 Q 248 129 383 190 L 430 212 Z", "M 607 512 Q 671 630 693 675 Q 699 708 727 746 Q 736 761 730 775 Q 723 788 690 806 Q 659 819 640 816 Q 621 812 633 790 Q 663 750 597 591 Q 566 519 522 437 Q 513 424 512 418 Q 511 405 524 411 Q 542 418 592 487 L 607 512 Z", "M 727 486 Q 884 526 888 529 Q 897 539 892 547 Q 883 560 852 567 Q 819 571 787 558 Q 748 543 705 531 Q 659 521 607 512 C 577 507 565 500 592 487 Q 632 466 689 478 L 727 486 Z", "M 708 211 Q 747 286 767 408 Q 771 433 777 444 Q 784 451 778 461 Q 763 479 727 486 C 698 493 682 497 689 478 Q 689 475 700 449 Q 724 391 672 255 Q 671 255 671 252 L 651 214 Q 650 213 649 211 Q 600 139 468 78 Q 443 65 473 65 Q 560 62 654 139 Q 666 154 681 170 L 708 211 Z", "M 681 170 Q 726 106 768 52 Q 783 33 808 31 Q 946 30 958 42 Q 962 49 952 52 Q 789 122 713 206 Q 710 209 708 211 L 671 252 Q 634 295 592 351 Q 582 367 566 370 Q 542 371 535 365 Q 532 361 540 355 Q 573 334 593 300 Q 621 255 651 214 L 681 170 Z"], "走": ["M 541 606 Q 587 616 638 624 Q 690 636 698 643 Q 708 650 703 660 Q 696 672 666 680 Q 645 686 543 656 L 492 642 Q 485 642 479 640 Q 407 624 322 618 Q 285 612 311 594 Q 350 573 427 585 Q 458 591 493 597 L 541 606 Z", "M 533 485 Q 537 546 541 606 L 543 656 Q 544 719 562 788 Q 565 798 546 813 Q 512 831 488 835 Q 472 838 464 830 Q 457 823 465 808 Q 486 778 486 758 Q 490 703 492 642 L 493 597 Q 493 540 492 477 C 492 447 531 455 533 485 Z", "M 520 446 Q 565 453 832 469 Q 851 470 857 479 Q 861 492 844 505 Q 792 541 750 533 Q 666 512 533 485 L 492 477 Q 491 478 489 477 Q 341 452 168 423 Q 146 420 163 403 Q 196 376 236 385 Q 363 427 479 440 L 520 446 Z", "M 533 154 Q 536 223 540 281 L 541 308 Q 542 377 547 399 Q 554 415 545 425 Q 532 438 520 446 C 496 464 469 468 479 440 Q 491 409 492 390 Q 493 368 492 182 C 492 152 532 124 533 154 Z", "M 540 281 Q 550 277 567 280 Q 660 298 729 309 Q 757 316 746 331 Q 733 347 701 352 Q 671 355 541 308 C 513 298 511 289 540 281 Z", "M 377 271 Q 384 284 395 297 Q 405 310 391 325 Q 349 359 322 357 Q 310 356 312 340 Q 319 213 181 66 Q 139 32 105 -8 Q 96 -23 112 -19 Q 172 -9 274 113 Q 281 123 360 244 L 377 271 Z", "M 360 244 Q 465 139 598 48 Q 617 36 639 22 Q 726 -36 758 -39 Q 777 -39 914 -13 Q 948 -6 956 6 Q 962 18 942 19 Q 861 34 811 38 Q 678 51 542 149 Q 536 152 533 154 L 492 182 Q 434 224 377 271 C 354 290 339 265 360 244 Z"], "过": ["M 712 553 Q 719 556 863 575 Q 875 574 885 587 Q 886 600 861 611 Q 825 635 746 610 Q 728 607 712 601 L 664 590 Q 607 578 413 551 Q 382 547 405 528 Q 441 500 473 508 Q 558 527 665 545 L 712 553 Z", "M 665 545 Q 666 439 666 261 Q 665 243 656 236 Q 649 230 560 239 Q 527 246 531 237 Q 534 230 555 219 Q 628 177 649 151 Q 674 120 690 121 Q 703 121 716 154 Q 729 197 724 267 Q 712 411 712 553 L 712 601 Q 712 677 729 739 Q 745 767 692 789 Q 659 807 641 800 Q 625 794 640 772 Q 661 747 662 713 Q 663 700 664 590 L 665 545 Z", "M 466 397 Q 488 375 512 349 Q 524 337 538 337 Q 548 337 553 349 Q 557 362 551 389 Q 544 417 464 441 Q 451 445 444 443 Q 440 439 440 428 Q 443 418 466 397 Z", "M 241 717 Q 268 695 297 668 Q 313 655 331 656 Q 344 657 348 672 Q 352 690 341 723 Q 334 742 301 756 Q 270 765 233 772 Q 215 775 208 771 Q 202 767 205 752 Q 209 739 241 717 Z", "M 321 180 Q 331 189 335 204 Q 342 246 300 317 Q 273 365 342 451 Q 345 455 349 458 Q 371 477 352 493 Q 331 509 297 523 Q 275 536 238 506 Q 159 461 132 466 Q 125 466 122 461 Q 121 457 129 452 Q 169 433 247 465 Q 257 469 265 458 Q 284 437 264 411 Q 221 369 252 316 Q 306 229 294 182 C 290 152 303 156 321 180 Z", "M 294 182 Q 249 183 204 168 Q 170 155 118 149 Q 111 149 108 140 Q 105 133 114 123 Q 132 105 156 94 Q 168 88 186 103 Q 267 169 401 116 Q 449 100 513 71 Q 735 -31 816 -3 Q 879 19 931 58 Q 955 73 931 73 Q 720 64 571 104 Q 492 126 393 162 Q 357 177 321 180 L 294 182 Z"]};
+function stepSvg(paths,k){return `<svg viewBox="0 0 1024 1024"><g transform="translate(0,900) scale(1,-1)">${paths.map((d,i)=>i<=k?`<path d="${d}" fill="${i===k?'#e0524a':'#3a2e2a'}"/>`:`<path d="${d}" fill="#eee5df"/>`).join('')}</g></svg>`}
+document.getElementById('strokeList').innerHTML=vocab.map((v,vi)=>[...v[0]].map(c=>{const P=STROKES[c];return `
+ <div class="sw"><div class="head"><span class="zh">${c}</span><button class="spk" onclick="say('${c}')">🔊</button>
+  <div><div class="py">${v[1]}</div><div class="it">${v[0].length>1?v[0]+' · ':''}${v[2]}</div></div>
+  <button class="btn" onclick="openW(${vi},event)">▶</button><span class="cnt">${P.length} tratti</span></div>
+  <div class="steps">${P.map((_,k)=>`<div class="step"><b>${k+1}</b>${stepSvg(P,k)}</div>`).join('')}</div></div>`}).join('')).join('');
+
+let wIdx=0,writers=[];
+function speedLabel(v){v=+v;return v<0.35?'molto lento':v<0.7?'lento':v<1.1?'normale':'veloce'}
+function buildW(){
+ const sp=+document.getElementById('wspeed').value, box=document.getElementById('writers');
+ box.innerHTML='';writers=[];
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p>Serve la connessione a internet per l\'animazione.</p>';return}
+ vocab[wIdx][0].split('').forEach((c,k)=>{const d=document.createElement('div');d.className='tzg';box.appendChild(d);
+  writers.push(HanziWriter.create(d,c,{width:240,height:240,padding:14,showOutline:true,showCharacter:true,
+   strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#eadfd8',highlightColor:'#e8558f',drawingColor:'#e8558f',
+   strokeAnimationSpeed:sp,delayBetweenStrokes:Math.round(500/sp)}))});
+}
+function openW(i,e){e.stopPropagation();wIdx=i;
+ document.getElementById('wpy').textContent=vocab[i][1];document.getElementById('wit').textContent=vocab[i][2];
+ document.getElementById('wsv').textContent=speedLabel(document.getElementById('wspeed').value);
+ document.getElementById('wmodal').classList.add('on');buildW();}
+function closeW(){document.getElementById('wmodal').classList.remove('on');document.getElementById('writers').innerHTML='';writers=[]}
+async function playW(){buildW();for(const w of writers){await w.animateCharacter()}}
+function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComplete:()=>star()})})}
+
+function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
+ <div class="line"><div class="face3" style="border-color:${l[4]}">${l[0]}</div>
+ <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
+ <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
+dlg('d1',[["👦", "你去过我们的新教室吗？", "Nǐ qùguo wǒmen de xīn jiàoshì ma?", "Sei già stata nella nostra aula nuova?", "#3a8fd0"], ["👧", "还没去过。新教室在哪儿？", "Hái méi qùguo. Xīn jiàoshì zài nǎr?", "Non ancora. Dov'è l'aula nuova?", "#e0524a"], ["👦", "在前边，很大很漂亮。", "Zài qiánbian, hěn dà hěn piàoliang.", "È qui davanti, grandissima e bellissima.", "#3a8fd0"], ["👧", "我们一起去看看吧！", "Wǒmen yìqǐ qù kànkan ba!", "Andiamo a vederla insieme!", "#e0524a"], ["👦", "好，走吧！", "Hǎo, zǒu ba!", "Va bene, andiamo!", "#3a8fd0"]]);
+dlg('d2',[["👧", "左边是什么？", "Zuǒbian shì shénme?", "Cosa c'è a sinistra?", "#e0524a"], ["👦", "左边是一年级的教室。", "Zuǒbian shì yī niánjí de jiàoshì.", "A sinistra c'è l'aula della prima.", "#3a8fd0"], ["👧", "右边呢？", "Yòubian ne?", "E a destra?", "#e0524a"], ["👦", "右边是三年级的教室。", "Yòubian shì sān niánjí de jiàoshì.", "A destra c'è l'aula della terza.", "#3a8fd0"], ["👧", "我们的教室在哪儿？", "Wǒmen de jiàoshì zài nǎr?", "E la nostra aula dov'è?", "#e0524a"], ["👦", "在三年级的后边。", "Zài sān niánjí de hòubian.", "Dietro quella della terza.", "#3a8fd0"]]);
+
+const lr=[{"w": "教室", "a": "🏫", "o": ["🏥", "🏫", "🏠"]}, {"w": "走", "a": "🚶", "o": ["🚶", "🛁", "😴"]}, {"w": "左边", "a": "⬅️", "o": ["⬅️", "➡️", "⬆️"]}, {"w": "右边", "a": "➡️", "o": ["⬆️", "⬅️", "➡️"]}, {"w": "前边", "a": "⬆️", "o": ["⬇️", "⬆️", "➡️"]}, {"w": "后边", "a": "⬇️", "o": ["⬇️", "⬅️", "⬆️"]}];
+let li=0,ltried=false;
+function drawL(){
+ const d=lr[li];ltried=false;
+ document.getElementById('lopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickL(this,${k})">${o}</button>`).join('');
+ document.getElementById('lfb').textContent='';document.getElementById('lnext').style.display='none';
+ document.getElementById('ldots').innerHTML=lr.map((_,i)=>`<span class="${i<li?'done':i===li?'cur':''}"></span>`).join('');
+}
+function pickL(b,k){
+ const d=lr[li];
+ if(d.o[k]===d.a){b.classList.add('ok');if(!ltried)star();
+   document.getElementById('lfb').innerHTML=`🎉 <span class="zh">对！${d.w}</span>`;
+   document.querySelectorAll('#lopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('lnext');n.style.display='inline-block';n.textContent=li<lr.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');ltried=true;document.getElementById('lfb').innerHTML='🤔 Riprova!'}
+}
+function nextL(){if(li<lr.length-1){li++;drawL();say(lr[li].w)}else{document.getElementById('lfb').innerHTML='🌟 <span class="zh">太棒了！</span>';document.getElementById('lnext').style.display='none';document.getElementById('ldots').innerHTML=lr.map(()=>'<span class="done"></span>').join('')}}
+drawL();
+
+const br=[{"s": "🐱 ⬅️ 🏫", "o": [["小猫在教室的左边。", "Xiǎo māo zài jiàoshì de zuǒbian."], ["小猫在教室的右边。", "Xiǎo māo zài jiàoshì de yòubian."], ["小猫在教室的前边。", "Xiǎo māo zài jiàoshì de qiánbian."]], "a": 0}, {"s": "🐶 ➡️ 🏠", "o": [["小狗在房子的左边。", "Xiǎo gǒu zài fángzi de zuǒbian."], ["小狗在房子的右边。", "Xiǎo gǒu zài fángzi de yòubian."], ["小狗在房子的后边。", "Xiǎo gǒu zài fángzi de hòubian."]], "a": 1}, {"s": "🐰 ⬆️ 🏫", "o": [["兔子在教室的后边。", "Tùzi zài jiàoshì de hòubian."], ["兔子在教室里。", "Tùzi zài jiàoshì li."], ["兔子在教室的前边。", "Tùzi zài jiàoshì de qiánbian."]], "a": 2}, {"s": "🐼 ⬇️ 🏠", "o": [["熊猫在房子的后边。", "Xióngmāo zài fángzi de hòubian."], ["熊猫在房子的前边。", "Xióngmāo zài fángzi de qiánbian."], ["熊猫在房子的右边。", "Xióngmāo zài fángzi de yòubian."]], "a": 0}, {"s": "🇨🇳 ✈️ ✅", "o": [["我没去过中国。", "Wǒ méi qùguo Zhōngguó."], ["我去过中国。", "Wǒ qùguo Zhōngguó."], ["我去过中国过。", "Wǒ qùguo Zhōngguó guo."]], "a": 1}];
+let bi=0,btried=false;
+function drawB(){
+ const d=br[bi];btried=false;
+ document.getElementById('bscene').innerHTML=d.s;
+ document.getElementById('bopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickB(this,${k})"><span class="py">${o[1]}</span><span class="zh">${o[0]}</span></button>`).join('');
+ document.getElementById('bfb').textContent='';document.getElementById('bnext').style.display='none';
+ document.getElementById('bdots').innerHTML=br.map((_,i)=>`<span class="${i<bi?'done':i===bi?'cur':''}"></span>`).join('');
+}
+function pickB(b,k){
+ const d=br[bi];
+ if(k===d.a){b.classList.add('ok');if(!btried)star();say(d.o[k][0]);
+   document.getElementById('bfb').innerHTML='🎉 <span class="zh">对！</span> Bravissimo!';
+   document.querySelectorAll('#bopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('bnext');n.style.display='inline-block';n.textContent=bi<br.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');btried=true;document.getElementById('bfb').innerHTML='🤔 Riprova!'}
+}
+function nextB(){if(bi<br.length-1){bi++;drawB()}else{document.getElementById('bfb').innerHTML='🌟 <span class="zh">太棒了！</span> Hai finito il gioco!';document.getElementById('bnext').style.display='none';document.getElementById('bdots').innerHTML=br.map(()=>'<span class="done"></span>').join('')}}
+drawB();
+
+const chant=[["⬅️", "左边左边，是一年级。", "Zuǒbian zuǒbian, shì yī niánjí.", "A sinistra, a sinistra, c'è la prima."], ["➡️", "右边右边，是二年级。", "Yòubian yòubian, shì èr niánjí.", "A destra, a destra, c'è la seconda."], ["⬆️", "前边前边，都是新教室。", "Qiánbian qiánbian, dōu shì xīn jiàoshì.", "Davanti, davanti, sono tutte aule nuove."], ["⬇️", "后边后边，是我们的教室！", "Hòubian hòubian, shì wǒmen de jiàoshì!", "Dietro, dietro, c'è la nostra aula!"], ["🚶", "走走走，一起去看看！", "Zǒu zǒu zǒu, yìqǐ qù kànkan!", "Andiamo, andiamo, andiamo a vedere insieme!"]];
+document.getElementById('chant').innerHTML=chant.map(c=>`<div class="cl"><span class="ic">${c[0]}</span><div style="flex:1;min-width:240px"><span class="py">${c[2]}</span><span class="zh">${c[1]}</span><div class="tr">${c[3]}</div></div><button class="spk" onclick="say('${c[1]}')">🔊</button></div>`).join('');
+
+function finish(){star(1);const e=document.getElementById('end');e.style.display='block';e.innerHTML=`🎉 <span class="zh">太棒了！</span><br>Hai raccolto <b>${stars}</b> ⭐ oggi! <span class="zh">再见！</span> 👋`}
+</script>
+</body>
+</html>

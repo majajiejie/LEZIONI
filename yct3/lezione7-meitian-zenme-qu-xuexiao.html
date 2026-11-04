@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 3 · 第7课 你们每天怎么去学校</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,#e8558f,#f78fb3);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:50px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header h1 .zh{font-size:52px}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:#e8558f;border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:#e8558f;color:#fff}
+nav small{opacity:.75}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:46px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+h3{font-size:30px;margin:0 0 12px}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:inherit;font-size:22px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.py{color:var(--red);font-size:24px}
+/* font dedicato al pinyin: toni sempre al posto giusto */
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.hide-py .py{visibility:hidden}
+
+/* mini-scene */
+.ms{position:relative;display:inline-block;width:150px;height:140px;flex:none}
+.ms .b{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:90px;line-height:1}
+.ms .o{position:absolute;left:50%;transform:translateX(-50%);font-size:46px;line-height:1}
+.ms .o.on{bottom:82px}
+.ms .o.in{bottom:20px;font-size:36px;filter:drop-shadow(0 0 3px #fff)}
+.ms.under .b{bottom:30px}
+.ms .o.under{bottom:0;font-size:40px}
+.ms .x{position:absolute;right:4px;top:4px;font-size:34px}
+.pics{font-size:60px;line-height:1;flex:none;width:150px;text-align:center}
+
+/* frasi chiave */
+.key{display:flex;align-items:center;gap:20px;background:#fff;border:3px solid var(--line);border-radius:26px;padding:24px;margin-bottom:20px;flex-wrap:wrap}
+.key .txt{flex:1;min-width:260px}
+.key .py{font-size:30px}
+.key .zh{font-size:56px}
+.key .it{color:var(--soft);font-size:28px}
+
+/* specchietti */
+.box{background:#fff;border:3px solid var(--line);border-radius:26px;padding:22px;margin-bottom:22px}
+.box.blue{border-color:#bcdcf3;background:#f3f9ff}
+.box.green{border-color:#c4e8d3;background:#f2fbf6}
+.box.orange{border-color:#f7d2a6;background:#fff6eb}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.var{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid var(--line)}
+.var .big{font-size:52px}
+.var .py{font-size:28px}
+.var .ex{margin-top:10px;font-size:34px}
+.var .ex .py{font-size:22px;display:block}
+.var .it{color:var(--soft);font-size:22px}
+.loc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.loc .var .big{font-size:70px;color:var(--red)}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px;opacity:.95}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cZ{background:var(--orange)} .cB{background:var(--green)} .cL{background:var(--red)}
+.exrow{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;flex-wrap:wrap}
+.exrow .zh{font-size:44px}
+.exrow .zh span{padding:0 4px;border-radius:8px}
+.exrow .py{display:block;font-size:24px}
+.exrow .it{color:var(--soft);font-size:24px}
+.tA{color:var(--blue)} .tZ{color:var(--orange)} .tB{color:var(--green)} .tL{color:var(--red)}
+
+/* vocab */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{perspective:800px;height:250px;cursor:pointer;position:relative}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--line);border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+.face .pic{font-size:70px;line-height:1}
+.face .w{font-size:44px}
+.back{transform:rotateY(180deg);background:#fff3d6}
+.back .it{font-size:28px;font-weight:700}
+.card .spk{position:absolute;top:8px;right:8px;width:42px;height:42px;font-size:20px;z-index:2}
+
+
+/* ordine dei tratti */
+.card .wr{position:absolute;top:8px;left:8px;width:42px;height:42px;font-size:20px;z-index:2;border:0;border-radius:50%;background:#ffd6e7;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:28px;padding:24px;max-width:760px;width:100%;text-align:center;position:relative}
+.mbox .close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:34px;cursor:pointer}
+.mword{font-size:28px;margin-bottom:6px}
+.writers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.tzg{width:240px;height:240px;border:3px solid #e8558f;border-radius:10px;position:relative;background:
+ linear-gradient(#f7c6d9,#f7c6d9) center/100% 2px no-repeat,linear-gradient(#f7c6d9,#f7c6d9) center/2px 100% no-repeat}
+.ctrl{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:22px}
+.ctrl input[type=range]{width:220px;accent-color:#e8558f}
+
+/* dialogue */
+.dlg{background:#fff;border-radius:24px;padding:20px;border:3px solid var(--line);margin-bottom:22px}
+.line{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.who{flex:none;width:110px;text-align:center;border-radius:14px;padding:6px;color:#fff;font-size:22px}
+.bubble{background:#f7f1ea;border-radius:18px;padding:8px 18px;flex:1;min-width:240px}
+.bubble .zh{font-size:36px}
+.bubble .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .bubble .tr{display:block}
+.q{background:#eaf5ff;border-radius:16px;padding:14px 18px;margin-top:12px;cursor:pointer}
+.q .zh{font-size:30px}
+.q .ans{display:none;color:var(--green);font-weight:700;font-size:30px}
+.q.open .ans{display:block}
+
+/* game */
+.stage{background:#fff;border-radius:26px;border:3px solid var(--line);padding:22px;text-align:center}
+.scene{position:relative;height:230px;width:300px;margin:0 auto 10px}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:150px;line-height:1}
+.obj{position:absolute;left:50%;transform:translateX(-50%);font-size:68px;line-height:1}
+.obj.on{bottom:136px}
+.obj.in{bottom:34px;font-size:54px;filter:drop-shadow(0 0 4px #fff)}
+.question .zh{font-size:44px}
+.question .py{font-size:28px}
+.opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 22px;font:inherit;cursor:pointer}
+.opt .zh{font-size:36px;display:block}
+.opt .py{display:block;font-size:22px}
+.opt.ok{border-color:var(--green);background:#e8f8ef}
+.opt.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:36px;font-size:28px;margin-top:12px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots span{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots span.done{background:var(--green)}
+.dots span.cur{background:var(--orange)}
+
+/* storia: una vignetta alla volta */
+.intro{background:#fff3d6;border-radius:22px;padding:16px 20px;margin-bottom:18px;font-size:24px}
+.newwords{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 16px 6px 8px;display:flex;align-items:center;gap:10px;font-size:24px}
+.chip .zh{font-size:30px}
+.chip .spk{width:42px;height:42px;font-size:20px}
+.comic{background:#fff;border:4px solid #b9dfa0;border-radius:28px;padding:22px;max-width:760px;margin:0 auto}
+.comic .num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:46px;height:46px;line-height:46px;text-align:center;font-size:26px}
+.comic .sp{display:flex;align-items:center;gap:12px;margin:14px 0}
+.comic .face2{font-size:56px;flex:none;width:70px;text-align:center}
+.comic .bubble .zh{font-size:40px}
+.comic .middle{text-align:center;margin:6px 0}
+.snav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:18px}
+.snav .btn{font-size:26px;padding:10px 26px}
+
+/* parla */
+.talk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.talk div{background:#fff3d6;border-radius:20px;padding:18px}
+.talk .zh{font-size:34px}
+.talk .py{font-size:22px}
+.builder{margin-top:8px;color:var(--soft);font-size:26px}
+.end{display:none;text-align:center;font-size:30px;margin-top:20px;background:#e8f8ef;border-radius:20px;padding:18px}
+footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
+</style>
+<style>
+/* scena del 把 */
+.bscene{display:flex;align-items:center;justify-content:center;gap:14px;font-size:84px;line-height:1;min-height:140px;margin-bottom:6px;flex-wrap:wrap}
+.bscene .arr{font-size:48px;color:var(--soft)}
+.bscene .ba{font-family:'Noto Sans SC',sans-serif;font-size:56px;color:#fff;background:var(--orange);border-radius:18px;padding:6px 16px}
+.mini{font-size:46px;line-height:1}
+.pron{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.pron .var .big{font-size:72px}
+.pron .var.hl{border-color:var(--orange);background:#fff6eb}
+.chant{background:#fff;border:4px solid #f7d2a6;border-radius:28px;padding:18px 22px;max-width:860px;margin:0 auto}
+.chant .cl{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap}
+.chant .cl .zh{font-size:36px}
+.chant .cl .py{display:block;font-size:22px}
+.chant .cl .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .chant .cl .tr{display:block}
+.chant .cl .ic{font-size:44px;width:70px;text-align:center;flex:none}
+.listen .opt{font-size:70px;padding:10px 26px;line-height:1.1}
+.sw{background:#fff;border:3px solid var(--line);border-radius:24px;padding:16px 18px;margin-bottom:18px}
+.sw .head{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.sw .head .zh{font-size:64px;line-height:1}
+.sw .head .py{font-size:28px}
+.sw .head .it{color:var(--soft);font-size:22px}
+.sw .head .cnt{margin-left:auto;background:#ffe9f2;color:#e8558f;border-radius:20px;padding:4px 14px;font-size:20px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{position:relative;width:78px;height:78px;border:2px solid #f3b3cd;border-radius:8px;background:
+ linear-gradient(#fbe0ea,#fbe0ea) center/100% 1px no-repeat,linear-gradient(#fbe0ea,#fbe0ea) center/1px 100% no-repeat,#fff}
+.step svg{width:100%;height:100%;display:block}
+.step b{position:absolute;top:1px;left:4px;font-size:14px;color:#e8558f;font-family:'Noto Sans',sans-serif}
+.brow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bh{position:relative;border-radius:22px;padding:14px 8px 12px;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center}
+.bh .n{position:absolute;top:8px;left:10px;background:#fff;color:var(--ink);border-radius:50%;width:32px;height:32px;line-height:32px;font-size:20px;font-weight:700}
+.bh .bi{font-size:56px;line-height:1.1}
+.bh b{font-size:30px;line-height:1.2}
+.bh b.zh{font-size:40px}
+.bh small{font-size:18px;opacity:.95;line-height:1.2}
+.bh:not(:last-child)::after{content:'➜';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--soft);font-size:22px;z-index:2;background:#fff6eb;border-radius:50%;width:22px;text-align:center}
+.k1{--c:#3a8fd0;--l:#e7f2fb} .k2{--c:#f39a3d;--l:#fff0dd} .k3{--c:#3fa874;--l:#e6f6ec} .k4{--c:#e0524a;--l:#fde8e6}
+.bh.k1,.bh.k2,.bh.k3,.bh.k4{background:var(--c)}
+.bex{background:#fff;border-radius:22px;padding:12px;margin-top:14px}
+.bc{background:var(--l);border:3px solid var(--c);border-radius:18px;text-align:center;padding:8px 4px}
+.bc .bi{font-size:50px;line-height:1.1}
+.bc .bz{font-size:40px;color:var(--c);line-height:1.2}
+.bc .bp{font-size:20px;color:var(--soft)}
+.bfull{display:flex;align-items:center;gap:14px;margin-top:10px;padding:0 6px}
+.bfull .zh{font-size:34px}
+.bfull .py{font-size:22px}
+.bfull .it{color:var(--soft);font-size:22px}
+.place{border-radius:20px;padding:12px;text-align:center;margin-bottom:6px}
+.place.bath{background:linear-gradient(135deg,#d9f0fb,#eef9ff)}
+.place.kitchen{background:linear-gradient(135deg,#ffeccc,#fff7e8)}
+.place .pe{font-size:62px;letter-spacing:8px;line-height:1.2}
+.place .pl{font-size:28px;font-weight:700;color:var(--soft)}
+.face3{flex:none;width:84px;height:84px;border-radius:50%;border:4px solid;background:#fff;font-size:54px;display:flex;align-items:center;justify-content:center}
+.talk2{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px}
+.tk{background:#fff3d6;border-radius:20px;padding:16px 18px}
+.tq{display:flex;align-items:center;gap:12px}
+.tq .zh{font-size:34px}
+.tq .py,.ta .py{font-size:22px;display:block}
+.ta{margin-top:10px;background:#fff;border-radius:14px;padding:8px 14px;color:#5a4a42}
+.ta .zh{font-size:32px;white-space:nowrap}
+.bl{display:inline-block;width:110px;border-bottom:3px solid #c9b8ab;margin:0 4px;vertical-align:baseline}
+@media (max-width:640px){.brow{gap:6px}.bh b{font-size:20px}.bh .bi,.bc .bi{font-size:36px}.bc .bz{font-size:28px}.bh small{font-size:14px}.talk2{grid-template-columns:1fr}.ta .zh{white-space:normal}}
+.hw{background:#ffe9f2;border:3px dashed #e8558f;border-radius:24px;padding:18px 22px;margin-top:22px;font-size:26px;text-align:center}
+</style>
+<style>
+.place{background:linear-gradient(135deg,#fff0dd,#fff9f0)}
+.place.p2{background:linear-gradient(135deg,#e7f2fb,#f3f9ff)}
+.cmp{display:inline-block;font-family:'Noto Sans SC',sans-serif;font-size:34px;line-height:1.25;background:#fff6eb;border:3px solid #f7d2a6;border-radius:18px;padding:8px 16px;text-align:center}
+.bscene .ba{font-family:'Noto Sans',sans-serif}
+.opt .zh{font-size:32px}
+.pairs .var .big{font-size:46px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>YCT 3 · Lezione 7 · <span class="zh">你们每天怎么去学校？</span></h1>
+  <p>Come andate a scuola ogni giorno? · con Maja Jiejie 🐼</p>
+</header>
+<nav id="nav"><button data-s="0" class="on">⭐ Frasi chiave <small>2'</small></button><button data-s="1">Parole <small>8'</small></button><button data-s="7">Tratti ✍️ <small>8'</small></button><button data-s="2">Come ci vai? 🚌 <small>6'</small></button><button data-s="3">Leggiamo <small>6'</small></button><button data-s="4">Giochi 🎮 <small>6'</small></button><button data-s="5">Filastrocca 🎵 <small>4'</small></button><button data-s="6">Parliamo <small>3'</small></button></nav>
+<main>
+<section id="s0" class="on">
+  <h2>Frasi chiave</h2>
+  <p class="hint">Le due frasi più importanti della lezione</p>
+  <div class="key"><div class="pics">🦁🛣️❓</div><div class="txt"><div class="py">Qù dòngwùyuán zǒu zhè tiáo lù, duì ma?</div><div class="zh">去动物园走这条路，对吗？</div><div class="it">Per andare allo zoo si fa questa strada, vero?</div></div><button class="spk" onclick="say('去动物园走这条路，对吗？')">🔊</button></div><div class="key"><div class="pics">🚌🏫</div><div class="txt"><div class="py">Wǒ zuò gōnggòng qìchē qù xuéxiào.</div><div class="zh">我坐公共汽车去学校。</div><div class="it">Vado a scuola in autobus.</div></div><button class="spk" onclick="say('我坐公共汽车去学校。')">🔊</button></div>
+</section>
+<section id="s1">
+  <h2>Le parole nuove <span class="zh">生词</span></h2>
+  <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per il significato. ✍️ = come si scrive</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="grid" id="vocab"></div>
+</section>
+<section id="s7">
+  <h2>L'ordine dei tratti <span class="zh">笔顺</span></h2>
+  <p class="hint">Segui i numeri: il tratto rosso è quello nuovo. ▶ = guarda l'animazione</p>
+  <div id="strokeList"></div>
+</section>
+<section id="s2">
+  <h2>Come vai a scuola? 🚌</h2>
+  <p class="hint">Chi + 坐 / 开 + mezzo + 去 + dove</p>
+  <div class="box orange"><h3>1 · Come si costruisce la frase</h3><div class="struct"><div class="blk cA"><div class="t">我</div><div class="s">chi</div></div><span class="plus">+</span><div class="blk cB"><div class="t">坐公共汽车</div><div class="s">come</div></div><span class="plus">+</span><div class="blk cZ"><div class="t">去</div><div class="s">va</div></div><span class="plus">+</span><div class="blk cL"><div class="t">学校</div><div class="s">dove</div></div></div><div class="exrow"><div class="mini">👦🚌</div><div style="flex:1;min-width:220px"><span class="py">Wǒ zuò gōnggòng qìchē qù xuéxiào.</span><div class="zh">我<span class="tB">坐公共汽车</span>去学校。</div><span class="it">Vado a scuola in autobus.</span></div><button class="spk" onclick="say('我坐公共汽车去学校。')">🔊</button></div><div class="exrow"><div class="mini">🧑🚗</div><div style="flex:1;min-width:220px"><span class="py">Gēge kāichē qù xuéxiào.</span><div class="zh">哥哥<span class="tB">开车</span>去学校。</div><span class="it">Il fratello maggiore va a scuola in macchina (guida lui).</span></div><button class="spk" onclick="say('哥哥开车去学校。')">🔊</button></div><div class="exrow"><div class="mini">👧🚶</div><div style="flex:1;min-width:220px"><span class="py">Wǒ zǒulù qù xuéxiào.</span><div class="zh">我<span class="tB">走路</span>去学校。</div><span class="it">Vado a scuola a piedi.</span></div><button class="spk" onclick="say('我走路去学校。')">🔊</button></div></div><div class="box blue"><h3>2 · Lontano o vicino?</h3><div class="two"><div class="var"><div class="mini">🏠 · · · · · · 🏫</div><div class="big zh">远</div><div class="py">yuǎn</div><div class="it">lontano: 很远</div></div><div class="var hl"><div class="mini">🏠🏫</div><div class="big zh">近</div><div class="py">jìn</div><div class="it">vicino: 很近</div></div></div><div class="exrow"><div class="mini">🚏👫</div><div style="flex:1;min-width:220px"><span class="py">Chēzhàn jiù zài pángbiān.</span><div class="zh">车站就在<span class="tA">旁边</span>。</div><span class="it">La fermata è proprio qui accanto.</span></div><button class="spk" onclick="say('车站就在旁边。')">🔊</button></div></div><div class="box green"><h3>3 · …，对吗？ = …, vero? ✅</h3><div class="exrow"><div class="mini">🛣️</div><div style="flex:1;min-width:220px"><span class="py">Zhè tiáo lù hěn jìn, duì ma?</span><div class="zh">这<span class="tZ">条</span>路很近，<span class="tL">对吗</span>？</div><span class="it">Questa strada è corta, vero?</span></div><button class="spk" onclick="say('这条路很近，对吗？')">🔊</button></div><div class="exrow"><div class="mini">✅</div><div style="flex:1;min-width:220px"><span class="py">Duì!</span><div class="zh">对！</div><span class="it">Esatto!</span></div><button class="spk" onclick="say('对！')">🔊</button></div><div class="exrow"><div class="mini">❌</div><div style="flex:1;min-width:220px"><span class="py">Bú duì.</span><div class="zh">不对。</div><span class="it">Non è giusto.</span></div><button class="spk" onclick="say('不对。')">🔊</button></div></div>
+</section>
+<section id="s3">
+  <h2>Leggiamo</h2>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="dlg"><div class="place "><div class="pe">🚏 🚌 ☀️</div><div class="pl">Alla fermata</div></div><div id="d1"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">他每天怎么去学校？</span> <small>(clicca per la risposta)</small><div class="ans zh">他坐公共汽车去学校。</div></div></div>
+  <div class="dlg"><div class="place p2"><div class="pe">🛣️ 🦁 🗺️</div><div class="pl">Verso lo zoo</div></div><div id="d2"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">车站在哪儿？</span> <small>(clicca per la risposta)</small><div class="ans zh">车站就在旁边。</div></div></div>
+</section>
+<section id="s4">
+  <h2>Giochi 🎮</h2>
+  <div class="box blue">
+    <h3>Gioco 1 · Ascolta e scegli 👂</h3>
+    <p class="hint" style="margin-bottom:10px">Premi 🔊, ascolta la parola e clicca il disegno giusto</p>
+    <div class="stage listen">
+      <button class="spk" style="width:80px;height:80px;font-size:38px" onclick="say(lr[li].w)">🔊</button>
+      <div class="opts" id="lopts"></div>
+      <div class="feedback" id="lfb"></div>
+      <div class="dots" id="ldots"></div>
+      <div style="margin-top:14px"><button class="btn" id="lnext" onclick="nextL()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+  <div class="box orange">
+    <h3>Gioco 2 · Come ci va? 🚌</h3>
+    <p class="hint" style="margin-bottom:10px">Guarda il disegno e scegli la frase giusta</p>
+    <div class="stage">
+      <div class="bscene" id="bscene"></div>
+      <div class="opts" id="bopts"></div>
+      <div class="feedback" id="bfb"></div>
+      <div class="dots" id="bdots"></div>
+      <div style="margin-top:14px"><button class="btn" id="bnext" onclick="nextB()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+</section>
+<section id="s5">
+  <h2>Filastrocca della strada 🎵</h2>
+  <p class="hint">Leggiamo insieme a ritmo!</p>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="chant" id="chant"></div>
+</section>
+<section id="s6">
+  <h2>Parliamo! 🙋</h2>
+  <p class="hint">Rispondi alle domande della maestra</p>
+  <div class="talk2"><div class="tk"><div class="tq"><button class="spk" onclick="say('你每天怎么去学校？')">🔊</button><div><span class="py">Nǐ měitiān zěnme qù xuéxiào?</span><div class="zh">你每天怎么去学校？</div></div></div>
+      <div class="ta"><span class="py">Wǒ … qù xuéxiào.</span><div class="zh">我<span class="bl"></span>去学校。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你的学校远吗？')">🔊</button><div><span class="py">Nǐ de xuéxiào yuǎn ma?</span><div class="zh">你的学校远吗？</div></div></div>
+      <div class="ta"><span class="py">Hěn yuǎn. / Hěn jìn.</span><div class="zh">很远。/ 很近。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你家旁边有什么？')">🔊</button><div><span class="py">Nǐ jiā pángbiān yǒu shénme?</span><div class="zh">你家旁边有什么？</div></div></div>
+      <div class="ta"><span class="py">Wǒ jiā pángbiān yǒu …</span><div class="zh">我家旁边有<span class="bl"></span>。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你去过动物园吗？')">🔊</button><div><span class="py">Nǐ qùguo dòngwùyuán ma?</span><div class="zh">你去过动物园吗？</div></div></div>
+      <div class="ta"><span class="py">Qùguo. / Méi qùguo.</span><div class="zh">去过。/ 没去过。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你家旁边有车站吗？')">🔊</button><div><span class="py">Nǐ jiā pángbiān yǒu chēzhàn ma?</span><div class="zh">你家旁边有车站吗？</div></div></div>
+      <div class="ta"><span class="py">Yǒu. / Méiyǒu.</span><div class="zh">有。/ 没有。</div></div></div><div class="tk"><div class="tq"><button class="spk" onclick="say('你会开车吗？')">🔊</button><div><span class="py">Nǐ huì kāichē ma?</span><div class="zh">你会开车吗？</div></div></div>
+      <div class="ta"><span class="py">Wǒ bú huì kāichē!</span><div class="zh">我不会开车！</div></div></div></div>
+  <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Ho finito! 🎉</button></div>
+  <div class="end" id="end"></div>
+  <div class="hw">📝 <b>Compito:</b> su Classroom trovi le schede con l'ordine dei tratti (le trovi anche qui, in <b>Tratti ✍️</b>).<br>Scrivi 3 volte ogni carattere: <span class="zh">公共汽车 动物园 车站 开 对 路 远 近 旁边 条</span></div>
+</section>
+</main>
+<div class="modal" id="wmodal" onclick="if(event.target===this)closeW()">
+ <div class="mbox">
+  <button class="close" onclick="closeW()">✕</button>
+  <div class="mword"><span class="py" id="wpy"></span> · <span id="wit"></span></div>
+  <div class="writers" id="writers"></div>
+  <div class="ctrl">
+   <button class="btn" onclick="playW()">▶ Guarda come si scrive</button>
+   <label>🐢 Lento <input type="range" id="wspeed" min="0.15" max="1.5" step="0.05" value="0.5" oninput="document.getElementById('wsv').textContent=speedLabel(this.value)"> Veloce 🐇</label>
+   <span id="wsv" style="color:var(--soft)"></span>
+   <button class="btn alt" onclick="quizW()">✍️ Prova tu</button>
+  </div>
+ </div>
+</div>
+<footer>Maja Jiejie · Chinese Academy</footer>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script>
+let stars=0;
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+const vocab=[["公共汽车", "gōnggòng qìchē", "l'autobus", "🚌"], ["动物园", "dòngwùyuán", "lo zoo", "🦁"], ["车站", "chēzhàn", "la fermata", "🚏"], ["开", "kāi", "guidare (开车)", "🚗"], ["对", "duì", "giusto, esatto", "✅"], ["路", "lù", "la strada", "🛣️"], ["远", "yuǎn", "lontano", "🔭"], ["近", "jìn", "vicino", "📍"], ["旁边", "pángbiān", "accanto", "👫"], ["条", "tiáo", "classificatore per strade (cose lunghe)", "〰️"]];
+document.getElementById('vocab').innerHTML=vocab.map((v,i)=>`
+ <div class="card" onclick="this.classList.toggle('flip')">
+  <button class="spk" onclick="say('${v[0]}',event)">🔊</button>
+  <button class="wr" title="Come si scrive" onclick="openW(${i},event)">✍️</button>
+  <div class="inner">
+   <div class="face"><div class="pic"${[...v[3]].length>1?' style="font-size:48px"':''}>${v[3]}</div><div class="py">${v[1]}</div><div class="w zh">${v[0]}</div></div>
+   <div class="face back"><div class="w zh">${v[0]}</div><div class="py">${v[1]}</div><div class="it">${v[2]}</div></div>
+  </div></div>`).join('');
+
+const STROKES={"公": ["M 304 649 Q 322 577 199 422 Q 193 418 189 411 Q 152 368 61 284 Q 52 280 64 276 Q 140 291 252 412 Q 256 419 264 426 Q 307 477 374 581 Q 383 594 389 601 Q 396 607 395 617 Q 394 627 380 640 Q 344 670 310 665 Q 301 662 304 649 Z", "M 467 783 Q 527 747 562 678 Q 662 477 753 386 Q 775 370 886 372 Q 919 375 966 376 Q 987 377 987 383 Q 987 387 968 395 Q 794 459 735 515 Q 656 594 554 760 Q 533 794 495 799 Q 467 802 465 795 Q 461 786 467 783 Z", "M 629 177 Q 500 164 362 133 Q 347 129 343 133 Q 340 137 347 150 Q 477 334 505 364 Q 520 376 512 391 Q 505 406 448 432 Q 429 442 417 436 Q 401 429 409 405 Q 430 333 302 171 Q 277 146 238 118 Q 222 103 226 91 Q 232 70 262 47 Q 275 34 291 47 Q 357 93 633 146 Q 640 147 647 150 C 676 157 659 180 629 177 Z", "M 647 150 Q 707 54 718 48 Q 727 45 738 54 Q 754 66 750 118 Q 750 181 585 289 Q 576 296 571 284 Q 567 269 576 255 Q 601 221 629 177 L 647 150 Z"], "共": ["M 657 539 Q 786 563 797 572 Q 807 581 803 590 Q 796 605 763 614 Q 732 623 664 602 L 606 585 Q 557 575 507 564 Q 471 558 434 551 L 382 545 Q 330 541 273 537 Q 231 533 260 512 Q 305 484 385 496 L 433 503 Q 515 518 603 531 L 657 539 Z", "M 434 551 Q 435 630 440 651 Q 444 676 428 690 Q 403 711 373 722 Q 357 729 347 722 Q 338 715 345 698 Q 376 634 382 545 L 385 496 Q 386 429 391 318 C 392 288 437 293 436 323 Q 433 429 433 503 L 434 551 Z", "M 635 349 Q 645 446 657 539 L 664 602 Q 670 668 695 755 Q 699 767 679 784 Q 642 808 615 813 Q 597 819 588 809 Q 578 802 587 784 Q 612 744 610 717 Q 609 653 606 585 L 603 531 Q 596 440 587 342 C 584 312 632 319 635 349 Z", "M 391 318 Q 261 306 119 290 Q 94 287 112 267 Q 146 233 194 242 Q 434 303 859 304 Q 887 304 913 303 Q 937 303 943 313 Q 950 326 930 343 Q 870 389 825 381 Q 747 366 635 349 L 587 342 Q 548 338 508 332 Q 472 329 436 323 L 391 318 Z", "M 365 177 Q 307 98 210 10 Q 198 -6 215 -9 Q 255 -9 349 69 Q 395 108 443 147 Q 462 157 455 176 Q 448 192 407 220 Q 394 229 382 225 Q 366 219 371 205 Q 378 189 365 177 Z", "M 613 198 Q 674 131 746 35 Q 762 10 781 2 Q 791 -1 802 11 Q 818 26 808 79 Q 801 127 718 180 Q 700 192 618 235 Q 608 242 603 228 Q 602 212 613 198 Z"], "动": ["M 242 646 Q 202 639 231 620 Q 279 593 342 610 Q 403 623 466 637 Q 494 644 499 648 Q 509 657 504 667 Q 495 680 462 687 Q 428 694 394 679 Q 363 669 327 659 Q 288 650 242 646 Z", "M 343 449 Q 401 461 475 470 Q 493 471 493 480 Q 494 493 476 503 Q 448 516 425 510 Q 187 461 110 456 Q 97 455 93 447 Q 90 435 105 424 Q 147 396 189 408 Q 240 424 283 435 L 343 449 Z", "M 439 288 Q 352 267 260 241 Q 253 240 252 241 Q 249 244 255 252 Q 325 384 356 420 Q 368 433 358 442 Q 352 446 343 449 C 316 462 276 464 283 435 Q 284 434 285 429 Q 298 386 232 280 Q 213 249 172 218 Q 147 205 148 195 Q 149 179 160 161 Q 172 143 185 140 Q 192 139 202 144 Q 251 189 446 270 Q 446 271 448 271 C 476 283 468 295 439 288 Z", "M 448 271 Q 473 225 485 219 Q 494 218 501 225 Q 510 235 511 261 Q 514 283 489 313 Q 461 338 429 363 Q 419 370 413 370 Q 407 369 405 359 Q 405 353 439 288 L 448 271 Z", "M 688 471 Q 740 487 794 495 Q 809 496 812 489 Q 819 474 816 432 Q 804 281 775 200 Q 760 151 743 134 Q 731 121 705 129 Q 666 141 632 153 Q 608 160 625 138 Q 674 86 702 46 Q 712 24 735 30 Q 754 33 777 58 Q 844 127 872 389 Q 878 447 900 481 Q 916 503 908 513 Q 892 532 856 547 Q 831 560 804 547 Q 758 525 696 507 L 634 492 Q 564 477 522 475 Q 503 476 503 466 Q 502 456 524 444 Q 551 428 574 437 Q 598 446 625 453 L 688 471 Z", "M 625 453 Q 580 273 489 145 Q 462 102 433 61 Q 427 54 425 48 Q 421 35 433 37 Q 469 43 562 170 Q 581 201 601 235 Q 646 323 688 471 L 696 507 Q 714 654 734 713 Q 734 719 737 724 Q 747 740 741 755 Q 723 774 689 792 Q 668 805 654 800 Q 641 793 647 777 Q 665 752 661 681 Q 658 663 657 641 Q 648 563 634 492 L 625 453 Z"], "园": ["M 272 720 Q 257 735 233 744 Q 223 750 209 745 Q 200 741 207 726 Q 210 710 216 694 Q 247 625 216 267 Q 209 204 187 129 Q 169 63 208 15 Q 218 -1 232 13 Q 239 23 244 36 L 251 78 Q 255 115 257 172 Q 279 671 285 676 C 289 706 289 707 272 720 Z", "M 735 64 Q 756 43 781 -6 Q 791 -27 805 -26 Q 818 -25 825 -5 Q 855 46 831 238 Q 801 667 825 696 Q 826 700 830 702 Q 840 717 840 724 Q 839 737 807 758 Q 753 795 709 781 Q 690 777 656 770 Q 506 754 327 723 Q 299 719 272 720 C 242 719 256 669 285 676 Q 294 677 306 682 Q 319 686 441 707 Q 592 729 708 738 Q 733 739 739 727 Q 764 702 769 392 Q 775 205 777 160 Q 780 126 766 82 C 759 53 717 88 735 64 Z", "M 404 580 Q 368 573 394 558 Q 442 537 489 551 Q 540 563 592 575 Q 617 581 620 585 Q 627 592 623 601 Q 616 611 588 618 Q 558 622 530 610 Q 503 600 474 592 Q 441 585 404 580 Z", "M 548 440 Q 560 443 575 445 Q 632 452 679 460 Q 689 459 697 471 Q 698 481 676 492 Q 639 510 551 483 Q 533 480 516 474 Q 453 458 396 451 Q 356 447 312 439 Q 284 435 306 419 Q 328 404 369 403 Q 385 407 405 411 L 440 418 Q 471 425 508 432 L 548 440 Z", "M 405 411 L 406 410 Q 419 346 362 268 Q 344 244 303 202 Q 297 195 302 194 Q 323 191 375 234 Q 423 274 453 358 Q 459 371 467 385 Q 471 392 467 400 Q 463 407 440 418 C 413 431 397 439 405 411 Z", "M 734 261 Q 721 283 697 353 Q 696 366 689 370 Q 683 371 681 357 Q 668 279 656 254 Q 644 239 604 242 Q 589 243 577 248 Q 567 252 563 260 Q 545 297 566 407 Q 569 423 548 440 C 527 461 499 461 508 432 L 509 430 Q 519 397 518 365 Q 512 230 552 209 Q 561 206 574 201 Q 667 176 732 225 Q 747 241 734 261 Z", "M 244 36 Q 250 35 260 36 Q 411 61 735 64 C 765 64 779 64 766 82 Q 762 92 737 112 Q 718 125 681 119 Q 443 85 251 78 C 221 77 214 36 244 36 Z"], "对": ["M 367 367 Q 404 431 428 515 Q 438 558 468 590 Q 487 609 468 622 Q 444 635 414 642 Q 386 651 360 634 Q 335 624 292 609 Q 244 597 194 590 Q 175 590 170 584 Q 166 571 192 555 Q 222 536 291 560 Q 349 588 356 588 Q 375 588 375 569 Q 356 463 325 400 L 301 356 Q 279 323 253 293 Q 199 235 94 173 Q 79 166 88 160 Q 95 157 117 166 Q 205 199 261 237 Q 298 264 335 316 L 367 367 Z", "M 335 316 Q 372 276 412 227 Q 425 208 438 203 Q 445 202 453 210 Q 465 220 456 260 Q 450 299 367 367 L 325 400 Q 246 461 201 491 Q 194 495 190 485 Q 189 473 198 464 Q 247 415 301 356 L 335 316 Z", "M 771 530 Q 786 536 914 549 Q 926 548 936 562 Q 937 575 912 587 Q 870 612 786 586 Q 779 585 772 582 L 720 570 Q 657 558 481 537 Q 448 533 474 513 Q 513 483 543 490 Q 622 508 720 522 L 771 530 Z", "M 720 522 Q 721 383 724 145 Q 724 123 711 113 Q 702 109 615 121 Q 579 131 583 120 Q 586 113 607 100 Q 683 51 705 21 Q 730 -13 748 -13 Q 763 -13 776 23 Q 792 71 787 146 Q 771 338 771 530 L 772 582 Q 772 688 789 747 Q 805 778 748 802 Q 714 820 693 813 Q 674 806 692 782 Q 714 754 716 719 Q 717 703 720 570 L 720 522 Z", "M 510 363 Q 540 332 571 296 Q 584 281 600 281 Q 610 280 617 293 Q 623 306 617 338 Q 610 377 510 412 Q 495 416 488 415 Q 482 411 483 399 Q 486 387 510 363 Z"], "开": ["M 612 685 Q 634 691 660 694 Q 717 706 726 713 Q 736 722 731 731 Q 724 744 693 753 Q 663 760 557 728 Q 431 700 324 691 Q 284 687 312 667 Q 355 640 417 652 Q 487 665 561 677 L 612 685 Z", "M 653 401 Q 752 411 907 399 Q 932 396 938 405 Q 945 418 933 431 Q 902 459 857 480 Q 842 487 815 478 Q 742 462 667 451 Q 660 451 653 449 L 594 442 Q 453 429 407 421 L 350 414 Q 310 413 282 407 Q 209 395 101 394 Q 86 394 85 382 Q 85 369 104 354 Q 149 321 187 334 Q 229 350 342 365 Q 343 366 347 366 L 403 375 Q 460 387 594 395 L 653 401 Z", "M 407 421 Q 411 464 413 514 Q 417 535 419 546 Q 425 568 403 578 Q 354 603 337 601 Q 316 597 333 574 Q 354 535 350 414 L 347 366 Q 347 245 264 128 Q 216 77 200 61 Q 185 48 182 41 Q 179 34 192 34 Q 208 34 230 49 Q 273 77 300 106 Q 373 187 394 314 Q 398 342 403 375 L 407 421 Z", "M 599 -2 Q 605 -30 613 -41 Q 619 -48 627 -46 Q 645 -37 651 31 Q 658 115 656 197 Q 653 248 653 401 L 653 449 Q 653 554 665 632 Q 669 651 653 663 Q 628 679 612 685 C 585 698 551 705 561 677 Q 558 670 577 643 Q 587 622 593 530 Q 593 490 594 442 L 594 395 Q 588 68 599 -2 Z"], "旁": ["M 481 815 Q 505 799 530 777 Q 546 765 562 768 Q 572 769 577 784 Q 580 800 567 830 Q 560 846 531 856 Q 459 871 448 863 Q 444 859 446 845 Q 450 835 481 815 Z", "M 611 698 Q 713 722 718 726 Q 727 733 723 741 Q 716 751 690 759 Q 666 765 548 729 Q 454 705 337 694 Q 303 690 327 673 Q 364 649 416 661 Q 495 677 577 691 L 611 698 Z", "M 379 610 Q 406 552 430 545 Q 442 541 451 556 Q 455 568 450 588 Q 438 615 388 633 Q 379 637 377 626 Q 374 619 379 610 Z", "M 568 543 Q 572 550 580 558 Q 598 580 618 608 Q 625 621 641 636 Q 657 646 649 657 Q 642 675 614 696 Q 613 697 611 698 C 587 715 564 718 577 691 Q 578 690 579 688 Q 588 658 544 562 Q 537 549 533 537 C 523 509 551 518 568 543 Z", "M 224 486 Q 223 487 223 489 Q 208 514 195 522 Q 174 535 174 508 Q 180 477 153 432 Q 117 389 122 367 Q 131 334 143 315 Q 161 288 180 319 Q 186 331 222 452 C 229 476 229 476 224 486 Z", "M 222 452 Q 241 445 264 450 Q 390 490 676 533 Q 767 546 791 542 Q 804 532 802 525 Q 784 479 767 430 L 769 429 Q 776 425 794 437 Q 852 476 899 489 Q 938 502 936 511 Q 935 521 860 573 Q 839 589 815 584 Q 728 571 622 551 Q 597 548 568 543 L 533 537 Q 449 525 342 505 Q 284 495 224 486 C 194 481 192 457 222 452 Z", "M 465 443 Q 478 428 494 410 Q 504 397 519 398 Q 528 397 533 409 Q 537 422 532 447 Q 525 468 463 485 Q 450 489 444 487 Q 440 483 440 472 Q 443 462 465 443 Z", "M 501 334 Q 582 347 705 352 Q 760 356 764 362 Q 768 372 754 384 Q 706 414 676 406 Q 550 375 262 324 Q 244 321 258 307 Q 288 285 326 296 Q 383 314 451 325 L 501 334 Z", "M 501 263 Q 516 256 570 251 Q 609 245 605 201 Q 604 197 602 188 Q 578 94 539 54 Q 523 39 500 41 Q 490 44 462 53 Q 422 69 418 62 Q 412 52 431 41 Q 476 5 487 -32 Q 491 -48 504 -56 Q 517 -62 553 -40 Q 607 2 646 129 Q 664 186 685 207 Q 697 211 698 221 Q 699 231 675 257 Q 639 293 583 285 Q 549 288 527 292 C 497 297 472 272 501 263 Z", "M 527 292 Q 530 304 517 321 Q 510 328 501 334 C 477 352 456 355 451 325 Q 442 241 322 126 Q 319 125 317 121 Q 277 84 182 15 Q 175 11 183 7 Q 243 7 367 112 Q 376 122 387 131 Q 430 174 501 263 C 520 286 527 289 527 292 Z"], "条": ["M 434 709 Q 453 739 489 759 Q 499 766 497 780 Q 496 792 475 817 Q 454 839 438 842 Q 422 843 424 823 Q 439 751 207 558 Q 197 551 194 546 Q 188 536 201 536 Q 240 536 350 632 L 362 642 Q 387 664 415 690 L 434 709 Z", "M 542 538 Q 587 587 636 651 Q 654 675 678 689 Q 693 695 693 703 Q 694 715 670 732 Q 640 756 627 757 Q 617 757 606 751 Q 509 718 440 711 Q 436 711 434 709 C 404 704 386 699 415 690 Q 460 666 569 705 Q 585 708 591 702 Q 595 698 576 663 Q 548 614 503 566 L 479 542 Q 361 425 175 371 Q 166 370 166 365 Q 166 361 173 359 Q 278 341 438 447 Q 468 471 515 511 L 542 538 Z", "M 515 511 Q 534 496 553 478 Q 703 349 751 350 Q 811 350 913 381 Q 950 391 946 400 Q 945 404 906 411 Q 735 435 679 458 Q 630 479 542 538 L 503 566 Q 472 590 440 615 Q 401 648 368 644 Q 364 644 362 642 C 339 640 339 640 350 632 Q 353 628 364 622 Q 400 607 479 542 L 515 511 Z", "M 534 269 Q 573 275 695 285 Q 705 284 715 296 Q 716 309 694 320 Q 654 344 580 323 Q 556 320 535 313 L 482 303 Q 413 296 270 282 Q 239 279 262 260 Q 295 232 325 238 Q 395 251 483 262 L 534 269 Z", "M 440 64 Q 401 71 362 80 Q 349 81 351 74 Q 352 67 363 60 Q 445 0 476 -38 Q 491 -54 506 -41 Q 542 -4 538 64 Q 537 92 534 269 L 535 313 Q 538 341 546 363 Q 555 381 539 394 Q 514 416 484 427 Q 465 434 457 426 Q 451 419 462 404 Q 480 371 482 303 L 483 262 Q 484 81 465 67 Q 455 60 440 64 Z", "M 302 189 Q 265 140 219 99 Q 191 72 200 35 Q 203 16 226 23 Q 287 48 313 127 Q 326 158 325 183 Q 322 193 317 195 Q 308 196 302 189 Z", "M 639 184 Q 700 132 774 54 Q 792 33 808 29 Q 817 28 825 39 Q 838 52 823 99 Q 808 160 639 217 Q 629 221 627 209 Q 627 194 639 184 Z"], "汽": ["M 223 699 Q 248 678 275 653 Q 291 640 308 641 Q 320 642 325 656 Q 329 672 318 705 Q 306 735 216 751 Q 198 755 192 751 Q 186 747 189 733 Q 193 720 223 699 Z", "M 133 497 Q 185 446 223 432 Q 239 431 247 444 Q 251 457 248 475 Q 241 499 221 510 Q 173 538 129 539 Q 122 539 117 536 Q 110 535 114 522 Q 117 510 133 497 Z", "M 142 130 Q 129 126 133 107 Q 155 28 189 14 Q 196 7 207 10 Q 216 13 215 39 Q 218 84 307 363 Q 313 379 312 386 Q 311 396 301 389 Q 285 376 182 177 Q 169 155 142 130 Z", "M 488 706 Q 516 752 541 790 Q 551 803 536 818 Q 488 851 465 847 Q 455 844 457 830 Q 470 731 367 608 Q 355 602 317 552 Q 310 536 324 542 Q 343 545 368 565 Q 435 620 476 685 L 488 706 Z", "M 476 685 Q 521 660 579 675 Q 768 720 776 727 Q 785 736 780 744 Q 773 756 742 762 Q 711 766 681 754 Q 641 738 596 726 Q 547 713 488 706 C 458 702 449 699 476 685 Z", "M 450 561 Q 416 552 442 538 Q 487 519 537 535 Q 598 553 664 571 Q 692 580 697 585 Q 704 592 700 601 Q 693 611 663 616 Q 635 620 606 606 Q 573 593 537 580 Q 497 568 450 561 Z", "M 370 410 Q 355 409 362 393 Q 366 381 391 373 Q 416 364 439 372 Q 658 447 665 444 Q 674 438 669 419 Q 584 -20 937 -22 Q 958 -21 971 -15 Q 990 -8 982 19 Q 966 77 961 143 Q 960 176 953 184 Q 946 191 939 175 Q 909 76 887 56 Q 866 44 842 54 Q 799 64 762 97 Q 707 146 703 269 Q 700 378 759 444 Q 775 456 767 466 Q 758 481 702 502 Q 686 509 671 497 Q 625 469 509 437 Q 433 415 370 410 Z"], "物": ["M 219 521 Q 238 561 259 593 Q 268 606 252 620 Q 206 648 182 643 Q 172 639 175 625 Q 193 549 120 440 Q 113 437 88 396 Q 81 380 96 386 Q 150 402 207 499 L 219 521 Z", "M 364 511 Q 455 541 457 541 Q 464 548 460 557 Q 453 567 423 573 Q 395 576 366 562 L 325 546 Q 312 543 301 539 Q 264 529 219 521 C 189 516 179 509 207 499 Q 255 480 314 498 Q 318 499 323 500 L 364 511 Z", "M 316 319 Q 310 178 288 105 Q 275 63 301 6 Q 307 -12 315 -15 Q 321 -21 328 -13 Q 335 -9 346 11 Q 356 36 355 66 Q 355 103 360 349 L 361 381 Q 361 442 364 511 L 366 562 Q 366 685 389 762 Q 404 787 374 807 Q 359 819 334 833 Q 312 851 291 835 Q 287 831 292 815 Q 325 767 325 686 Q 325 617 325 546 L 323 500 Q 320 431 317 358 L 316 319 Z", "M 317 358 Q 223 312 142 266 Q 106 248 82 242 Q 69 238 67 229 Q 66 219 79 205 Q 98 189 121 179 Q 137 175 148 186 Q 217 250 316 319 L 360 349 Q 372 359 386 367 Q 405 377 416 392 Q 423 405 412 405 Q 399 405 361 381 L 317 358 Z", "M 530 519 Q 590 610 626 683 Q 642 720 657 739 Q 664 751 659 763 Q 653 776 622 794 Q 594 809 575 807 Q 557 803 568 782 Q 581 760 576 739 Q 560 667 527 599 Q 496 533 451 459 Q 442 449 441 441 Q 440 431 452 434 Q 471 443 521 506 L 530 519 Z", "M 727 518 Q 757 527 803 528 Q 815 528 820 523 Q 838 483 812 292 Q 794 184 757 116 Q 741 85 721 83 Q 706 80 629 110 Q 619 114 619 108 Q 618 104 629 94 Q 674 48 693 13 Q 703 -8 718 -7 Q 737 -10 757 10 Q 829 61 855 202 Q 874 298 889 443 Q 890 477 913 501 Q 926 514 926 522 Q 925 531 906 544 Q 879 565 844 577 Q 823 584 747 562 Q 738 561 728 557 Q 644 538 530 519 C 500 514 498 514 521 506 Q 530 497 567 495 L 605 498 Q 605 499 606 499 Q 649 506 690 512 L 727 518 Z", "M 567 495 Q 567 494 569 489 Q 587 431 446 269 Q 440 265 440 259 Q 440 255 445 255 Q 515 273 603 413 Q 606 419 628 450 Q 634 459 627 471 Q 617 490 605 498 C 582 517 558 524 567 495 Z", "M 690 512 Q 706 455 594 273 Q 581 254 568 236 Q 508 164 434 106 Q 427 102 424 97 Q 418 87 428 86 Q 474 86 570 171 Q 571 175 576 177 Q 651 258 734 421 Q 740 434 751 449 Q 764 459 761 473 Q 752 494 729 516 Q 728 517 727 518 C 706 539 687 542 690 512 Z"], "站": ["M 296 721 Q 321 697 347 669 Q 362 654 379 654 Q 391 654 396 669 Q 402 685 393 718 Q 389 737 357 753 Q 284 781 268 775 Q 262 771 264 757 Q 267 744 296 721 Z", "M 152 515 Q 115 506 142 491 Q 185 467 243 486 Q 330 508 421 533 Q 463 545 469 551 Q 476 560 472 568 Q 465 580 434 585 Q 410 588 309 552 Q 177 519 152 515 Z", "M 174 362 Q 205 266 226 256 Q 238 250 249 263 Q 256 273 255 295 Q 252 317 232 337 Q 202 373 188 383 Q 181 387 175 378 Q 171 371 174 362 Z", "M 349 228 Q 365 256 400 351 Q 409 378 427 412 Q 440 425 430 434 Q 420 449 390 463 Q 375 470 361 463 Q 352 459 359 448 Q 377 402 323 241 Q 319 228 318 218 C 313 188 335 202 349 228 Z", "M 318 218 Q 245 197 165 175 Q 146 169 114 170 Q 101 169 100 159 Q 97 146 107 138 Q 129 122 162 103 Q 172 99 184 108 Q 214 130 397 211 Q 422 221 441 235 Q 454 242 454 252 Q 448 258 436 255 Q 394 242 349 228 L 318 218 Z", "M 670 311 Q 674 414 679 511 L 681 545 Q 682 629 702 731 Q 706 743 684 759 Q 647 778 620 783 Q 602 786 594 777 Q 587 768 595 753 Q 622 714 623 687 Q 633 509 626 302 C 625 272 669 281 670 311 Z", "M 679 511 Q 716 505 841 542 Q 886 557 890 559 Q 897 568 892 576 Q 885 588 854 592 Q 823 595 793 580 Q 766 570 737 559 Q 710 552 681 545 C 652 538 649 514 679 511 Z", "M 514 287 Q 502 291 475 297 Q 462 301 459 295 Q 452 289 461 272 Q 495 197 512 77 Q 515 40 535 16 Q 554 -6 559 9 Q 565 28 563 57 L 559 93 Q 537 217 533 254 C 530 282 530 282 514 287 Z", "M 811 115 Q 841 223 882 256 Q 901 277 886 297 Q 802 363 745 334 Q 706 322 670 311 L 626 302 Q 571 293 514 287 C 484 284 503 250 533 254 Q 564 257 742 291 Q 766 295 775 286 Q 787 274 783 250 Q 770 181 752 125 C 743 96 803 86 811 115 Z", "M 563 57 Q 575 54 589 56 Q 662 69 821 78 Q 833 79 835 89 Q 835 96 811 115 C 792 130 782 129 752 125 Q 751 126 749 125 Q 643 103 559 93 C 529 89 533 62 563 57 Z"], "路": ["M 195 702 Q 183 708 157 713 Q 144 717 141 712 Q 134 706 142 690 Q 167 638 179 551 Q 182 526 196 508 Q 212 486 219 501 Q 222 508 223 518 L 223 548 Q 217 569 210 674 C 208 696 208 696 195 702 Z", "M 385 575 Q 407 654 432 675 Q 457 700 433 717 Q 372 756 363 754 Q 354 754 347 749 Q 301 721 195 702 C 165 697 182 664 210 674 Q 211 677 315 698 Q 346 705 353 692 Q 360 686 351 655 Q 342 619 330 576 C 322 547 377 546 385 575 Z", "M 297 533 Q 334 542 395 549 Q 404 550 405 558 Q 405 564 385 575 C 367 586 359 584 330 576 Q 269 560 223 548 C 194 540 193 519 223 518 Q 229 517 237 519 Q 244 522 255 524 L 297 533 Z", "M 311 261 Q 314 334 318 394 L 320 428 Q 321 444 322 460 Q 326 506 322 512 Q 309 525 297 533 C 273 551 249 553 255 524 Q 264 484 267 406 Q 267 349 267 244 C 267 214 310 231 311 261 Z", "M 318 394 L 416 409 Q 440 416 430 428 Q 417 443 390 445 Q 366 445 320 428 C 292 418 288 389 318 394 Z", "M 199 220 Q 190 329 195 365 Q 196 387 183 397 Q 161 413 134 422 Q 121 426 112 420 Q 105 414 112 399 Q 128 374 137 345 Q 143 317 160 207 C 165 177 201 190 199 220 Z", "M 160 207 Q 91 186 71 185 Q 58 184 56 172 Q 55 159 65 150 Q 90 135 125 118 Q 135 115 148 125 Q 178 152 352 243 Q 376 256 393 271 Q 406 278 406 289 Q 396 296 311 261 L 267 244 Q 233 234 199 220 L 160 207 Z", "M 575 662 Q 624 758 635 768 Q 642 780 637 792 Q 633 804 602 823 Q 575 838 557 835 Q 539 832 549 812 Q 562 790 556 770 Q 538 703 507 638 Q 476 577 431 506 Q 424 496 421 489 Q 420 479 432 482 Q 445 486 494 542 L 507 560 Q 525 584 563 643 L 575 662 Z", "M 442 230 Q 542 311 626 419 L 651 454 Q 694 515 738 585 Q 757 613 792 644 Q 807 656 801 665 Q 800 675 736 697 Q 723 704 678 685 Q 597 666 575 662 C 546 656 537 654 563 643 Q 591 622 654 642 Q 679 648 687 638 Q 694 620 613 486 L 593 455 Q 488 314 357 194 Q 344 181 358 182 Q 368 183 434 224 L 442 230 Z", "M 626 419 Q 714 325 789 252 Q 808 233 835 236 Q 985 258 993 274 Q 997 281 986 284 Q 820 330 738 387 Q 698 415 651 454 L 613 486 Q 583 514 550 545 Q 537 561 518 562 Q 511 562 507 560 C 477 558 467 555 494 542 Q 530 529 593 455 L 626 419 Z", "M 493 218 Q 459 236 442 230 C 433 229 433 229 434 224 Q 433 218 439 205 Q 467 142 481 40 Q 482 9 500 -12 Q 518 -34 523 -19 Q 529 -4 527 21 L 523 57 Q 508 154 506 186 C 504 212 504 212 493 218 Z", "M 746 80 Q 773 164 805 186 Q 821 205 807 224 Q 791 237 737 264 Q 718 273 696 264 Q 621 237 493 218 C 463 213 477 180 506 186 Q 513 187 523 190 Q 602 203 678 216 Q 697 220 705 212 Q 715 202 713 182 Q 703 130 692 87 C 685 58 737 52 746 80 Z", "M 527 21 Q 534 20 546 22 Q 613 35 758 44 Q 770 45 771 54 Q 771 61 746 80 L 692 87 Q 691 87 690 87 Q 596 66 523 57 C 493 53 497 22 527 21 Z"], "车": ["M 452 611 Q 558 627 670 641 Q 737 651 748 660 Q 758 667 754 678 Q 747 693 715 703 Q 681 713 647 702 Q 569 680 486 666 Q 482 666 477 664 L 424 657 Q 357 651 286 648 Q 244 645 273 624 Q 318 591 384 603 Q 391 604 401 605 L 452 611 Z", "M 491 421 Q 433 414 370 405 Q 354 404 352 407 Q 351 410 358 423 Q 394 490 452 611 L 477 664 Q 510 742 539 762 Q 558 775 548 788 Q 497 842 471 841 Q 461 841 466 818 Q 473 776 424 657 L 401 605 Q 340 461 286 417 Q 264 401 276 352 Q 280 336 298 342 Q 370 366 492 379 L 538 385 Q 580 394 712 400 Q 754 401 756 414 Q 757 429 728 447 Q 704 462 638 447 Q 593 438 539 428 L 491 421 Z", "M 491 255 Q 460 255 287 234 Q 220 224 117 224 Q 102 224 100 212 Q 100 199 120 183 Q 138 170 172 156 Q 184 152 203 160 Q 219 166 292 177 Q 380 196 489 205 L 538 209 Q 754 227 853 215 Q 910 215 914 217 Q 914 218 915 218 Q 924 233 911 246 Q 833 316 770 291 Q 709 282 538 260 L 491 255 Z", "M 539 428 Q 540 461 544 480 Q 547 492 539 498 Q 515 519 496 528 Q 483 532 474 524 Q 468 520 476 510 Q 485 495 491 421 L 492 379 Q 493 330 492 268 Q 491 262 491 255 L 489 205 Q 480 69 474 51 Q 465 12 500 -39 Q 512 -58 520 -62 Q 532 -63 537 -50 Q 549 -17 545 13 Q 541 116 538 209 L 538 260 Q 538 323 538 385 L 539 428 Z"], "边": ["M 623 512 Q 672 524 725 530 Q 741 531 746 524 Q 752 511 749 474 Q 739 344 714 273 Q 701 230 687 216 Q 675 203 649 210 Q 618 217 591 225 Q 569 231 585 211 Q 628 165 651 131 Q 660 112 679 117 Q 695 118 717 141 Q 777 201 804 433 Q 810 485 830 516 Q 846 535 838 546 Q 822 564 789 579 Q 765 592 739 580 Q 693 561 630 544 L 571 532 Q 483 514 431 514 Q 413 515 413 506 Q 412 497 432 484 Q 457 468 479 476 Q 522 489 565 499 L 623 512 Z", "M 565 499 Q 532 340 427 184 Q 423 177 420 171 Q 417 159 428 162 Q 461 166 538 284 Q 550 305 562 329 Q 601 416 623 512 L 630 544 Q 637 590 643 634 Q 652 713 658 729 Q 668 744 660 758 Q 644 777 610 791 Q 591 803 577 798 Q 564 791 571 776 Q 589 749 585 673 Q 585 616 571 532 L 565 499 Z", "M 271 729 Q 299 701 329 667 Q 344 651 361 650 Q 374 650 380 665 Q 387 681 379 716 Q 375 738 341 757 Q 263 794 244 787 Q 238 783 239 768 Q 242 755 271 729 Z", "M 313 178 Q 329 188 335 207 Q 347 249 300 321 Q 266 378 346 481 Q 368 500 348 515 Q 327 530 292 543 Q 270 556 252 537 Q 219 513 178 496 Q 121 471 103 473 Q 96 474 94 469 Q 93 463 101 459 Q 143 441 244 483 Q 254 487 263 476 Q 285 454 264 423 Q 212 369 263 303 Q 293 240 295 216 Q 295 194 290 182 Q 289 182 289 181 C 280 152 291 158 313 178 Z", "M 289 181 Q 243 185 192 170 Q 155 157 97 154 Q 90 154 86 146 Q 83 139 91 128 Q 107 109 131 97 Q 143 90 162 103 Q 237 154 308 137 Q 372 122 502 64 Q 728 -41 808 -14 Q 871 8 924 45 Q 948 60 923 60 Q 706 51 544 101 Q 469 123 381 157 Q 348 173 313 178 L 289 181 Z"], "近": ["M 548 647 Q 567 654 593 663 Q 642 678 679 697 Q 724 718 764 728 Q 780 729 785 738 Q 788 750 775 760 Q 753 776 706 791 Q 690 798 676 795 Q 669 791 669 780 Q 669 753 537 669 C 512 653 520 637 548 647 Z", "M 538 507 Q 542 553 543 609 Q 547 643 548 647 C 550 663 550 663 537 669 Q 536 670 532 672 Q 483 694 467 691 Q 446 687 463 665 Q 493 625 480 450 Q 474 405 456 352 Q 438 304 371 228 Q 356 215 353 208 Q 352 201 364 202 Q 397 202 457 266 Q 523 344 535 478 L 538 507 Z", "M 707 501 Q 761 511 853 517 Q 895 517 902 527 Q 906 539 890 550 Q 832 589 777 564 Q 737 555 679 539 Q 612 524 538 507 C 509 500 506 487 535 478 Q 556 469 597 477 Q 622 486 655 492 L 707 501 Z", "M 680 126 Q 684 104 691 95 Q 695 88 703 90 Q 715 99 722 152 Q 722 359 737 463 Q 740 479 728 488 Q 716 495 707 501 C 682 517 644 520 655 492 Q 670 452 672 446 Q 675 364 675 234 Q 676 153 680 126 Z", "M 257 718 Q 282 694 309 665 Q 324 649 342 650 Q 354 650 360 665 Q 367 681 357 716 Q 348 749 253 773 Q 235 777 228 775 Q 222 771 223 756 Q 227 743 257 718 Z", "M 299 190 Q 312 199 319 216 Q 331 255 292 321 Q 262 381 345 470 Q 367 488 348 504 Q 329 520 294 535 Q 272 548 254 532 Q 221 510 179 495 Q 122 474 104 478 Q 97 478 95 473 Q 94 469 101 464 Q 143 443 243 479 Q 253 482 261 470 Q 282 448 259 420 Q 211 375 253 304 Q 280 249 279 224 Q 279 206 273 192 C 265 163 278 169 299 190 Z", "M 273 192 Q 233 193 192 181 Q 149 166 85 162 Q 78 162 74 153 Q 70 146 79 136 Q 95 117 119 105 Q 131 98 150 112 Q 231 166 308 148 Q 374 132 506 68 Q 722 -40 816 -22 Q 817 -21 820 -21 Q 883 -2 937 35 Q 961 50 936 50 Q 707 50 530 109 Q 461 133 381 167 Q 341 186 299 190 L 273 192 Z"], "远": ["M 507 675 Q 467 665 498 648 Q 555 627 609 647 Q 670 663 733 682 Q 761 692 766 696 Q 775 706 769 715 Q 759 728 726 733 Q 692 736 659 720 Q 628 707 592 695 Q 553 683 507 675 Z", "M 659 493 Q 698 505 842 528 Q 852 527 862 540 Q 863 553 838 562 Q 805 583 720 554 Q 687 547 655 536 Q 607 524 419 490 Q 389 486 413 468 Q 449 444 472 449 Q 487 456 623 485 L 659 493 Z", "M 506 420 Q 516 326 387 207 Q 381 200 387 198 Q 409 194 466 236 Q 515 272 556 361 Q 563 374 571 389 Q 578 396 573 405 Q 567 414 542 428 Q 523 438 515 436 Q 505 432 506 420 Z", "M 923 236 Q 910 264 896 347 Q 895 362 889 366 Q 883 369 879 353 Q 857 265 839 236 Q 832 226 807 220 Q 750 208 705 229 Q 671 248 671 312 Q 672 372 687 451 Q 691 467 681 478 Q 672 487 659 493 C 634 509 615 514 623 485 Q 623 482 625 478 Q 637 441 634 405 Q 625 270 637 232 Q 641 213 657 197 Q 726 142 853 168 Q 854 169 858 169 Q 888 178 917 199 Q 935 212 923 236 Z", "M 292 736 Q 320 714 349 685 Q 365 672 383 672 Q 395 673 400 688 Q 406 706 394 739 Q 382 770 285 791 Q 267 795 260 791 Q 254 787 256 772 Q 260 759 292 736 Z", "M 334 196 Q 355 223 345 267 Q 338 288 312 329 Q 290 368 323 429 Q 342 466 362 488 Q 384 506 364 522 Q 345 538 309 552 Q 287 565 269 547 Q 235 525 192 509 Q 134 487 116 490 Q 109 490 106 485 Q 105 481 113 476 Q 155 455 259 494 Q 269 497 278 485 Q 300 463 278 432 Q 227 375 272 315 Q 308 251 302 200 C 301 170 319 170 334 196 Z", "M 302 200 Q 257 204 212 190 Q 173 177 113 174 Q 106 174 102 166 Q 99 159 107 148 Q 123 129 147 116 Q 159 110 177 123 Q 255 174 328 156 Q 392 140 520 80 Q 742 -32 824 -5 Q 887 14 941 51 Q 965 66 940 67 Q 721 67 578 111 Q 499 135 401 175 Q 367 191 334 196 L 302 200 Z"]};
+function stepSvg(paths,k){return `<svg viewBox="0 0 1024 1024"><g transform="translate(0,900) scale(1,-1)">${paths.map((d,i)=>i<=k?`<path d="${d}" fill="${i===k?'#e0524a':'#3a2e2a'}"/>`:`<path d="${d}" fill="#eee5df"/>`).join('')}</g></svg>`}
+document.getElementById('strokeList').innerHTML=vocab.map((v,vi)=>[...v[0]].map(c=>{const P=STROKES[c];return `
+ <div class="sw"><div class="head"><span class="zh">${c}</span><button class="spk" onclick="say('${c}')">🔊</button>
+  <div><div class="py">${v[1]}</div><div class="it">${v[0].length>1?v[0]+' · ':''}${v[2]}</div></div>
+  <button class="btn" onclick="openW(${vi},event)">▶</button><span class="cnt">${P.length} tratti</span></div>
+  <div class="steps">${P.map((_,k)=>`<div class="step"><b>${k+1}</b>${stepSvg(P,k)}</div>`).join('')}</div></div>`}).join('')).join('');
+
+let wIdx=0,writers=[];
+function speedLabel(v){v=+v;return v<0.35?'molto lento':v<0.7?'lento':v<1.1?'normale':'veloce'}
+function buildW(){
+ const sp=+document.getElementById('wspeed').value, box=document.getElementById('writers');
+ box.innerHTML='';writers=[];
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p>Serve la connessione a internet per l\'animazione.</p>';return}
+ vocab[wIdx][0].split('').forEach((c,k)=>{const d=document.createElement('div');d.className='tzg';box.appendChild(d);
+  writers.push(HanziWriter.create(d,c,{width:240,height:240,padding:14,showOutline:true,showCharacter:true,
+   strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#eadfd8',highlightColor:'#e8558f',drawingColor:'#e8558f',
+   strokeAnimationSpeed:sp,delayBetweenStrokes:Math.round(500/sp)}))});
+}
+function openW(i,e){e.stopPropagation();wIdx=i;
+ document.getElementById('wpy').textContent=vocab[i][1];document.getElementById('wit').textContent=vocab[i][2];
+ document.getElementById('wsv').textContent=speedLabel(document.getElementById('wspeed').value);
+ document.getElementById('wmodal').classList.add('on');buildW();}
+function closeW(){document.getElementById('wmodal').classList.remove('on');document.getElementById('writers').innerHTML='';writers=[]}
+async function playW(){buildW();for(const w of writers){await w.animateCharacter()}}
+function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComplete:()=>star()})})}
+
+function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
+ <div class="line"><div class="face3" style="border-color:${l[4]}">${l[0]}</div>
+ <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
+ <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
+dlg('d1',[["👧", "你每天怎么去学校？", "Nǐ měitiān zěnme qù xuéxiào?", "Come vai a scuola ogni giorno?", "#e0524a"], ["👦", "我坐公共汽车去学校。你呢？", "Wǒ zuò gōnggòng qìchē qù xuéxiào. Nǐ ne?", "Vado in autobus. E tu?", "#3a8fd0"], ["👧", "我走路去学校。", "Wǒ zǒulù qù xuéxiào.", "Io vado a piedi.", "#e0524a"], ["👦", "你的学校远吗？", "Nǐ de xuéxiào yuǎn ma?", "La tua scuola è lontana?", "#3a8fd0"], ["👧", "不远，很近，就在我家旁边。", "Bù yuǎn, hěn jìn, jiù zài wǒ jiā pángbiān.", "No, è vicinissima, proprio accanto a casa mia.", "#e0524a"]]);
+dlg('d2',[["👦", "去动物园走这条路，对吗？", "Qù dòngwùyuán zǒu zhè tiáo lù, duì ma?", "Per lo zoo si fa questa strada, vero?", "#3a8fd0"], ["👨", "对，不远，走十分钟。", "Duì, bù yuǎn, zǒu shí fēnzhōng.", "Esatto, non è lontano, dieci minuti a piedi.", "#3fa874"], ["👦", "有公共汽车吗？", "Yǒu gōnggòng qìchē ma?", "C'è un autobus?", "#3a8fd0"], ["👨", "有，车站就在旁边。", "Yǒu, chēzhàn jiù zài pángbiān.", "Sì, la fermata è proprio qui accanto.", "#3fa874"]]);
+
+const lr=[{"w": "公共汽车", "a": "🚌", "o": ["🚗", "🚌", "✈️"]}, {"w": "动物园", "a": "🦁", "o": ["🏫", "🏥", "🦁"]}, {"w": "车站", "a": "🚏", "o": ["🚏", "🏠", "🌳"]}, {"w": "开车", "a": "🚗", "o": ["🚲", "🚗", "🚌"]}, {"w": "路", "a": "🛣️", "o": ["🛣️", "🏫", "🚏"]}, {"w": "对", "a": "✅", "o": ["❌", "❓", "✅"]}];
+let li=0,ltried=false;
+function drawL(){
+ const d=lr[li];ltried=false;
+ document.getElementById('lopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickL(this,${k})">${o}</button>`).join('');
+ document.getElementById('lfb').textContent='';document.getElementById('lnext').style.display='none';
+ document.getElementById('ldots').innerHTML=lr.map((_,i)=>`<span class="${i<li?'done':i===li?'cur':''}"></span>`).join('');
+}
+function pickL(b,k){
+ const d=lr[li];
+ if(d.o[k]===d.a){b.classList.add('ok');if(!ltried)star();
+   document.getElementById('lfb').innerHTML=`🎉 <span class="zh">对！${d.w}</span>`;
+   document.querySelectorAll('#lopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('lnext');n.style.display='inline-block';n.textContent=li<lr.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');ltried=true;document.getElementById('lfb').innerHTML='🤔 Riprova!'}
+}
+function nextL(){if(li<lr.length-1){li++;drawL();say(lr[li].w)}else{document.getElementById('lfb').innerHTML='🌟 <span class="zh">太棒了！</span>';document.getElementById('lnext').style.display='none';document.getElementById('ldots').innerHTML=lr.map(()=>'<span class="done"></span>').join('')}}
+drawL();
+
+const br=[{"s": "👦 🚌 ➜ 🏫", "o": [["他坐公共汽车去学校。", "Tā zuò gōnggòng qìchē qù xuéxiào."], ["他开车去学校。", "Tā kāichē qù xuéxiào."], ["他坐公共汽车去动物园。", "Tā zuò gōnggòng qìchē qù dòngwùyuán."]], "a": 0}, {"s": "🧑 🚗 ➜ 🏫", "o": [["哥哥坐公共汽车去学校。", "Gēge zuò gōnggòng qìchē qù xuéxiào."], ["哥哥开车去学校。", "Gēge kāichē qù xuéxiào."], ["哥哥走路去学校。", "Gēge zǒulù qù xuéxiào."]], "a": 1}, {"s": "🏠 · · · · · · · · 🏫", "o": [["学校很近。", "Xuéxiào hěn jìn."], ["学校在旁边。", "Xuéxiào zài pángbiān."], ["学校很远。", "Xuéxiào hěn yuǎn."]], "a": 2}, {"s": "👧 🚶 ➜ 🦁", "o": [["她走路去动物园。", "Tā zǒulù qù dòngwùyuán."], ["她走路去学校。", "Tā zǒulù qù xuéxiào."], ["她开车去动物园。", "Tā kāichē qù dòngwùyuán."]], "a": 0}, {"s": "🏠🚏", "o": [["车站很远。", "Chēzhàn hěn yuǎn."], ["车站就在旁边。", "Chēzhàn jiù zài pángbiān."], ["这条路不对。", "Zhè tiáo lù bú duì."]], "a": 1}];
+let bi=0,btried=false;
+function drawB(){
+ const d=br[bi];btried=false;
+ document.getElementById('bscene').innerHTML=d.s;
+ document.getElementById('bopts').innerHTML=d.o.map((o,k)=>`<button class="opt" onclick="pickB(this,${k})"><span class="py">${o[1]}</span><span class="zh">${o[0]}</span></button>`).join('');
+ document.getElementById('bfb').textContent='';document.getElementById('bnext').style.display='none';
+ document.getElementById('bdots').innerHTML=br.map((_,i)=>`<span class="${i<bi?'done':i===bi?'cur':''}"></span>`).join('');
+}
+function pickB(b,k){
+ const d=br[bi];
+ if(k===d.a){b.classList.add('ok');if(!btried)star();say(d.o[k][0]);
+   document.getElementById('bfb').innerHTML='🎉 <span class="zh">对！</span> Bravissimo!';
+   document.querySelectorAll('#bopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('bnext');n.style.display='inline-block';n.textContent=bi<br.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');btried=true;document.getElementById('bfb').innerHTML='🤔 Riprova!'}
+}
+function nextB(){if(bi<br.length-1){bi++;drawB()}else{document.getElementById('bfb').innerHTML='🌟 <span class="zh">太棒了！</span> Hai finito il gioco!';document.getElementById('bnext').style.display='none';document.getElementById('bdots').innerHTML=br.map(()=>'<span class="done"></span>').join('')}}
+drawB();
+
+const chant=[["🚌", "公共汽车嘀嘀嘀，我坐汽车去学校。", "Gōnggòng qìchē dī dī dī, wǒ zuò qìchē qù xuéxiào.", "L'autobus fa bip bip bip, io vado a scuola in autobus."], ["🚗", "哥哥开车嘟嘟嘟，哥哥开车去学校。", "Gēge kāichē dū dū dū, gēge kāichē qù xuéxiào.", "Il fratellone guida brum brum brum, va a scuola in macchina."], ["🚶", "我家很近很近，我走路去学校。", "Wǒ jiā hěn jìn hěn jìn, wǒ zǒulù qù xuéxiào.", "Casa mia è vicinissima, vado a scuola a piedi."], ["🦁", "动物园远不远？有一点儿远！", "Dòngwùyuán yuǎn bu yuǎn? Yǒu yìdiǎnr yuǎn!", "Lo zoo è lontano? Un pochino!"], ["🚏", "车站在哪儿？就在旁边！", "Chēzhàn zài nǎr? Jiù zài pángbiān!", "Dov'è la fermata? Proprio qui accanto!"]];
+document.getElementById('chant').innerHTML=chant.map(c=>`<div class="cl"><span class="ic">${c[0]}</span><div style="flex:1;min-width:240px"><span class="py">${c[2]}</span><span class="zh">${c[1]}</span><div class="tr">${c[3]}</div></div><button class="spk" onclick="say('${c[1]}')">🔊</button></div>`).join('');
+
+function finish(){star(1);const e=document.getElementById('end');e.style.display='block';e.innerHTML=`🎉 <span class="zh">太棒了！</span><br>Hai raccolto <b>${stars}</b> ⭐ oggi! <span class="zh">再见！</span> 👋`}
+</script>
+</body>
+</html>
