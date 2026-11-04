@@ -1,547 +1,521 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lezione 5 · 把门关上</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 3 · 第5课 把门关上</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#fff8ef; --card:#ffffff; --ink:#3a2a20; --soft:#8a7566;
-  --red:#e2453c; --orange:#f39a2b; --yellow:#ffd45c; --green:#3fb37f; --blue:#3d8bd9; --purple:#8a5cc7;
-  --line:#f0e2d0; --shadow:0 6px 0 rgba(58,42,32,.08), 0 12px 30px rgba(58,42,32,.08);
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;overflow:hidden}
-.zh{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
-.py{color:var(--blue);font-weight:700}
-.it{color:var(--soft)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,#e8558f,#f78fb3);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:50px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header h1 .zh{font-size:52px}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:#e8558f;border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:#e8558f;color:#fff}
+nav small{opacity:.75}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:46px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+h3{font-size:30px;margin:0 0 12px}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:inherit;font-size:22px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.py{color:var(--red);font-size:24px}
+/* font dedicato al pinyin: toni sempre al posto giusto */
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.hide-py .py{visibility:hidden}
 
-/* top bar */
-.top{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;z-index:10}
-.brand{font-weight:800;color:var(--red);font-size:18px}
-.brand span{color:var(--soft);font-weight:500}
-.stars{background:var(--card);border-radius:30px;padding:4px 16px;font-weight:800;font-size:20px;box-shadow:var(--shadow)}
-.stars.pop{animation:pop .5s}
-@keyframes pop{50%{transform:scale(1.35)}}
-.progress{position:fixed;top:0;left:0;height:5px;background:linear-gradient(90deg,var(--red),var(--orange));transition:width .3s;z-index:11}
+/* mini-scene */
+.ms{position:relative;display:inline-block;width:150px;height:140px;flex:none}
+.ms .b{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:90px;line-height:1}
+.ms .o{position:absolute;left:50%;transform:translateX(-50%);font-size:46px;line-height:1}
+.ms .o.on{bottom:82px}
+.ms .o.in{bottom:20px;font-size:36px;filter:drop-shadow(0 0 3px #fff)}
+.ms.under .b{bottom:30px}
+.ms .o.under{bottom:0;font-size:40px}
+.ms .x{position:absolute;right:4px;top:4px;font-size:34px}
+.pics{font-size:60px;line-height:1;flex:none;width:150px;text-align:center}
 
-/* slides */
-.slide{position:absolute;inset:56px 0 70px 0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px;overflow:auto}
-.slide.active{display:flex;animation:fade .35s}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1}}
-h1{font-size:clamp(34px,5vw,58px);margin:0;line-height:1.1;text-align:center}
-h2{font-size:clamp(26px,3.4vw,40px);margin:0 0 14px;text-align:center}
-.sub{font-size:clamp(18px,2vw,24px);color:var(--soft);text-align:center;margin:4px 0}
-.time{position:absolute;top:8px;right:20px;background:var(--yellow);border-radius:20px;padding:2px 12px;font-weight:700;font-size:15px}
-.tag{display:inline-block;background:var(--red);color:#fff;border-radius:20px;padding:2px 14px;font-weight:700;font-size:16px;margin-bottom:8px}
+/* frasi chiave */
+.key{display:flex;align-items:center;gap:20px;background:#fff;border:3px solid var(--line);border-radius:26px;padding:24px;margin-bottom:20px;flex-wrap:wrap}
+.key .txt{flex:1;min-width:260px}
+.key .py{font-size:30px}
+.key .zh{font-size:56px}
+.key .it{color:var(--soft);font-size:28px}
 
-/* nav */
-.nav{position:fixed;bottom:12px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:16px;z-index:10}
-.nav button{border:0;background:var(--red);color:#fff;font:800 22px 'Baloo 2';width:56px;height:46px;border-radius:14px;cursor:pointer;box-shadow:0 4px 0 #a92d26}
-.nav button:active{transform:translateY(3px);box-shadow:0 1px 0 #a92d26}
-.nav .count{font-weight:700;color:var(--soft);min-width:70px;text-align:center}
-
-/* generic */
-.btn{border:0;cursor:pointer;font:700 18px 'Baloo 2';padding:8px 18px;border-radius:14px;background:var(--orange);color:#fff;box-shadow:0 4px 0 #c47414;margin:4px}
-.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #c47414}
-.btn.blue{background:var(--blue);box-shadow:0 4px 0 #2a65a3}
-.btn.green{background:var(--green);box-shadow:0 4px 0 #2a8059}
-.btn.purple{background:var(--purple);box-shadow:0 4px 0 #613f92}
-.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 4px 0 var(--line)}
-.speak{border:0;background:#fff3dd;border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer;vertical-align:middle}
-.card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:20px 26px}
-.grid{display:grid;gap:14px;width:100%;max-width:1000px}
-.shake{animation:shake .4s}
-@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.hidden{visibility:hidden}
-
-/* cover */
-.cover-zh{font-size:clamp(70px,11vw,140px);color:var(--red);font-weight:700;letter-spacing:8px}
-.emoji-big{font-size:clamp(60px,9vw,110px)}
-.plan{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px;max-width:900px}
-.plan span{background:#fff;border-radius:20px;padding:4px 14px;box-shadow:var(--shadow);font-size:16px}
-
-/* mood / choices */
-.choice{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:16px;text-align:center;cursor:pointer;transition:transform .15s;border:4px solid transparent}
-.choice:hover{transform:translateY(-4px)}
-.choice .e{font-size:58px}
-.choice .h{font-size:30px}
-.choice.ok{border-color:var(--green);background:#e9f8f0}
-.choice.no{border-color:var(--red);background:#fdecea}
-
-/* flip cards */
-.flip{perspective:800px;cursor:pointer;height:170px}
-.flip-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-.flip.on .flip-in{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff}
-.face.back{transform:rotateY(180deg);background:#fff3dd}
-.face .e{font-size:70px}
-.face .h{font-size:40px}
+/* specchietti */
+.box{background:#fff;border:3px solid var(--line);border-radius:26px;padding:22px;margin-bottom:22px}
+.box.blue{border-color:#bcdcf3;background:#f3f9ff}
+.box.green{border-color:#c4e8d3;background:#f2fbf6}
+.box.orange{border-color:#f7d2a6;background:#fff6eb}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.var{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid var(--line)}
+.var .big{font-size:52px}
+.var .py{font-size:28px}
+.var .ex{margin-top:10px;font-size:34px}
+.var .ex .py{font-size:22px;display:block}
+.var .it{color:var(--soft);font-size:22px}
+.loc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.loc .var .big{font-size:70px;color:var(--red)}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px;opacity:.95}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cZ{background:var(--orange)} .cB{background:var(--green)} .cL{background:var(--red)}
+.exrow{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;flex-wrap:wrap}
+.exrow .zh{font-size:44px}
+.exrow .zh span{padding:0 4px;border-radius:8px}
+.exrow .py{display:block;font-size:24px}
+.exrow .it{color:var(--soft);font-size:24px}
+.tA{color:var(--blue)} .tZ{color:var(--orange)} .tB{color:var(--green)} .tL{color:var(--red)}
 
 /* vocab */
-.vocab{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;width:100%;max-width:1080px;align-items:center}
-.vocab .word{font-size:clamp(70px,9vw,120px);line-height:1;color:var(--red)}
-.vocab .pin{font-size:clamp(28px,3vw,40px)}
-.vocab .mean{font-size:clamp(22px,2.4vw,30px);font-weight:700}
-.vocab .ex{margin-top:14px;font-size:clamp(22px,2.4vw,30px)}
-.tip{margin-top:14px;background:#eef6ff;border-left:6px solid var(--blue);border-radius:12px;padding:8px 14px;font-size:18px}
-.writers{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.writer{background:#fff;border-radius:18px;box-shadow:var(--shadow);position:relative;
-  background-image:linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line));
-  background-size:100% 2px,2px 100%;background-position:center;background-repeat:no-repeat}
-.wbtns{text-align:center;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{perspective:800px;height:250px;cursor:pointer;position:relative}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--line);border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+.face .pic{font-size:70px;line-height:1}
+.face .w{font-size:44px}
+.back{transform:rotateY(180deg);background:#fff3d6}
+.back .it{font-size:28px;font-weight:700}
+.card .spk{position:absolute;top:8px;right:8px;width:42px;height:42px;font-size:20px;z-index:2}
 
-/* mime */
-.mime{width:340px;height:300px;font-size:30px}
-.mime .face .h{font-size:62px}
 
-/* grammar */
-.gram{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1050px;width:100%}
-.gram .card{padding:14px 20px}
-.gram h3{margin:0 0 4px;color:var(--purple);font-size:22px}
-.formula{font-size:24px;margin:4px 0}
-.formula b{background:#fff3dd;border-radius:8px;padding:0 6px}
-
-/* builder */
-.answer{min-height:76px;width:100%;max-width:800px;border:3px dashed var(--orange);border-radius:20px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:10px;background:#fff}
-.tiles{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0;min-height:70px}
-.tile{font-size:34px;background:var(--yellow);border-radius:14px;padding:4px 18px;cursor:pointer;box-shadow:0 4px 0 #d9a92b;user-select:none}
-.answer .tile{background:#ffe9a8}
+/* ordine dei tratti */
+.card .wr{position:absolute;top:8px;left:8px;width:42px;height:42px;font-size:20px;z-index:2;border:0;border-radius:50%;background:#ffd6e7;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:28px;padding:24px;max-width:760px;width:100%;text-align:center;position:relative}
+.mbox .close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:34px;cursor:pointer}
+.mword{font-size:28px;margin-bottom:6px}
+.writers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.tzg{width:240px;height:240px;border:3px solid #e8558f;border-radius:10px;position:relative;background:
+ linear-gradient(#f7c6d9,#f7c6d9) center/100% 2px no-repeat,linear-gradient(#f7c6d9,#f7c6d9) center/2px 100% no-repeat}
+.ctrl{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:22px}
+.ctrl input[type=range]{width:220px;accent-color:#e8558f}
 
 /* dialogue */
-.dlg{width:100%;max-width:900px;display:flex;flex-direction:column;gap:8px}
-.line{display:flex;gap:12px;align-items:flex-start}
-.line.r{flex-direction:row-reverse}
-.av{font-size:40px;flex:none;text-align:center;line-height:1}
-.av small{display:block;font-size:13px;color:var(--soft)}
-.bub{background:#fff;border-radius:18px;padding:6px 16px;box-shadow:var(--shadow);max-width:78%}
-.line.r .bub{background:#e9f8f0}
-.bub .zh{font-size:25px}
-.bub .py{font-size:16px}
-.bub .it{font-size:16px}
-.hide-py .bub .py,.hide-it .bub .it{display:none}
+.dlg{background:#fff;border-radius:24px;padding:20px;border:3px solid var(--line);margin-bottom:22px}
+.line{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.who{flex:none;width:110px;text-align:center;border-radius:14px;padding:6px;color:#fff;font-size:22px}
+.bubble{background:#f7f1ea;border-radius:18px;padding:8px 18px;flex:1;min-width:240px}
+.bubble .zh{font-size:36px}
+.bubble .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .bubble .tr{display:block}
+.q{background:#eaf5ff;border-radius:16px;padding:14px 18px;margin-top:12px;cursor:pointer}
+.q .zh{font-size:30px}
+.q .ans{display:none;color:var(--green);font-weight:700;font-size:30px}
+.q.open .ans{display:block}
 
-/* match */
-.match{display:grid;grid-template-columns:1fr 1fr;gap:14px 60px;max-width:950px;width:100%}
-.mitem{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:10px 16px;font-size:26px;cursor:pointer;border:4px solid transparent;text-align:center}
-.mitem small{display:block;font-size:15px;color:var(--blue);font-family:'Baloo 2'}
-.mitem.sel{border-color:var(--orange);background:#fff3dd}
-.mitem.done{border-color:var(--green);background:#e9f8f0;cursor:default}
+/* game */
+.stage{background:#fff;border-radius:26px;border:3px solid var(--line);padding:22px;text-align:center}
+.scene{position:relative;height:230px;width:300px;margin:0 auto 10px}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:150px;line-height:1}
+.obj{position:absolute;left:50%;transform:translateX(-50%);font-size:68px;line-height:1}
+.obj.on{bottom:136px}
+.obj.in{bottom:34px;font-size:54px;filter:drop-shadow(0 0 4px #fff)}
+.question .zh{font-size:44px}
+.question .py{font-size:28px}
+.opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 22px;font:inherit;cursor:pointer}
+.opt .zh{font-size:36px;display:block}
+.opt .py{display:block;font-size:22px}
+.opt.ok{border-color:var(--green);background:#e8f8ef}
+.opt.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:36px;font-size:28px;margin-top:12px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots span{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots span.done{background:var(--green)}
+.dots span.cur{background:var(--orange)}
 
-/* listen */
-.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:760px;width:100%}
-.lgrid .choice .e{font-size:64px}
-.feedback{font-size:26px;min-height:40px;text-align:center;margin-top:10px}
+/* storia: una vignetta alla volta */
+.intro{background:#fff3d6;border-radius:22px;padding:16px 20px;margin-bottom:18px;font-size:24px}
+.newwords{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 16px 6px 8px;display:flex;align-items:center;gap:10px;font-size:24px}
+.chip .zh{font-size:30px}
+.chip .spk{width:42px;height:42px;font-size:20px}
+.comic{background:#fff;border:4px solid #b9dfa0;border-radius:28px;padding:22px;max-width:760px;margin:0 auto}
+.comic .num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:46px;height:46px;line-height:46px;text-align:center;font-size:26px}
+.comic .sp{display:flex;align-items:center;gap:12px;margin:14px 0}
+.comic .face2{font-size:56px;flex:none;width:70px;text-align:center}
+.comic .bubble .zh{font-size:40px}
+.comic .middle{text-align:center;margin:6px 0}
+.snav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:18px}
+.snav .btn{font-size:26px;padding:10px 26px}
 
-@media (max-width:760px){
-  .vocab,.gram,.match{grid-template-columns:1fr}
-  .lgrid{grid-template-columns:repeat(2,1fr)}
-}
+/* parla */
+.talk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.talk div{background:#fff3d6;border-radius:20px;padding:18px}
+.talk .zh{font-size:34px}
+.talk .py{font-size:22px}
+.builder{margin-top:8px;color:var(--soft);font-size:26px}
+.end{display:none;text-align:center;font-size:30px;margin-top:20px;background:#e8f8ef;border-radius:20px;padding:18px}
+footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
+</style>
+<style>
+/* scena del 把 */
+.bscene{display:flex;align-items:center;justify-content:center;gap:14px;font-size:84px;line-height:1;min-height:140px;margin-bottom:6px;flex-wrap:wrap}
+.bscene .arr{font-size:48px;color:var(--soft)}
+.bscene .ba{font-family:'Noto Sans SC',sans-serif;font-size:56px;color:#fff;background:var(--orange);border-radius:18px;padding:6px 16px}
+.mini{font-size:46px;line-height:1}
+.pron{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.pron .var .big{font-size:72px}
+.pron .var.hl{border-color:var(--orange);background:#fff6eb}
+.chant{background:#fff;border:4px solid #f7d2a6;border-radius:28px;padding:18px 22px;max-width:860px;margin:0 auto}
+.chant .cl{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap}
+.chant .cl .zh{font-size:36px}
+.chant .cl .py{display:block;font-size:22px}
+.chant .cl .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .chant .cl .tr{display:block}
+.chant .cl .ic{font-size:44px;width:70px;text-align:center;flex:none}
+.listen .opt{font-size:70px;padding:10px 26px;line-height:1.1}
+.hw{background:#ffe9f2;border:3px dashed #e8558f;border-radius:24px;padding:18px 22px;margin-top:22px;font-size:26px;text-align:center}
 </style>
 </head>
 <body>
-<div class="progress" id="progress"></div>
-<div class="top">
-  <div class="brand">Maja Jiejie <span>· YCT 3 · Lezione 5</span></div>
-  <div class="stars" id="stars">⭐ 0</div>
-</div>
-
-<main id="deck">
-
-<!-- 0 COPERTINA -->
-<section class="slide">
-  <div class="tag">Lezione 5 · 第五课</div>
-  <div class="cover-zh zh">把门关上</div>
-  <div class="sub"><span class="py" style="font-size:30px">Bǎ mén guānshang!</span> &nbsp;— Chiudi la porta! 🚪</div>
-  <div class="plan">
-    <span>🥶 Hai freddo?</span><span>🏠 La casa</span><span>📚 8 parole nuove</span><span>🎭 Mimo</span>
-    <span>🧩 Grammatica</span><span>👩 A casa con la mamma</span><span>🔗 Abbina</span><span>👂 Ascolta</span><span>🫡 Il maestro dice</span>
-  </div>
-  <p class="sub" style="margin-top:20px">Raccogli più ⭐ che puoi!</p>
-</section>
-
-<!-- 1 RISCALDAMENTO -->
-<section class="slide">
-  <span class="time">⏱ 3 min</span>
-  <h2 class="zh">今天天气怎么样？ <button class="speak" onclick="say('今天天气怎么样？')">🔊</button></h2>
-  <p class="sub"><span class="py">Jīntiān tiānqì zěnmeyàng?</span> — Che tempo fa oggi? Clicca la tua risposta!</p>
-  <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:14px">
-    <div class="choice" onclick="mood(this,'今天很冷。')"><div class="e">🥶</div><div class="h zh">很冷</div><div class="py">hěn lěng</div></div>
-    <div class="choice" onclick="mood(this,'今天很热。')"><div class="e">🥵</div><div class="h zh">很热</div><div class="py">hěn rè</div></div>
-    <div class="choice" onclick="mood(this,'今天下雨了。')"><div class="e">🌧️</div><div class="h zh">下雨了</div><div class="py">xià yǔ le</div></div>
-    <div class="choice" onclick="mood(this,'今天天气很好。')"><div class="e">☀️</div><div class="h zh">天气很好</div><div class="py">tiānqì hěn hǎo</div></div>
-  </div>
-  <p class="sub" style="margin-top:18px">Oggi impariamo a dare <b>ordini</b>: apri, chiudi… la porta, la finestra, la luce! 🚪🪟💡</p>
-</section>
-
-<!-- 2 RIPASSO CASA -->
-<section class="slide">
-  <span class="time">⏱ 5 min</span>
-  <h2>Ripasso: cosa c'è in casa? 🏠</h2>
-  <p class="sub">Clicca la carta per girarla. Poi premi 🎲 e chiedi gentilmente: <b class="zh">请把___给我！</b></p>
-  <div class="grid" id="bodyGrid" style="grid-template-columns:repeat(6,1fr);margin-top:12px"></div>
-  <div style="text-align:center;margin-top:20px">
-    <button class="btn purple" onclick="ouch()">🎲 Cosa ti serve?</button>
-    <div id="ouch" class="feedback"></div>
-  </div>
-</section>
-
-<!-- 3 FRASI CHIAVE -->
-<section class="slide">
-  <span class="time">⏱ 3 min</span>
-  <h2>Frasi chiave 🔑</h2>
-  <div class="grid" id="keyGrid" style="max-width:900px"></div>
-  <p class="sub" style="margin-top:12px">Clicca 👀 per vedere il significato.</p>
-</section>
-
-<!-- 4–11 PAROLE (generate) -->
-<div id="vocabSlot"></div>
-
-<!-- 12 MIMO -->
-<section class="slide">
-  <span class="time">⏱ 4 min</span>
-  <h2>🎭 Gioco del mimo</h2>
-  <p class="sub">Pesca una carta segreta e <b>mima</b> la parola davanti alla webcam. L'altro indovina in cinese!</p>
-  <div class="flip mime" id="mimeCard" onclick="this.classList.toggle('on')" style="margin-top:14px">
-    <div class="flip-in">
-      <div class="face"><div class="e">❓</div><div>clicca per vedere</div></div>
-      <div class="face back"><div class="e" id="mimeE">🚪</div><div class="h zh" id="mimeH">门</div><div class="py" id="mimeP">mén</div></div>
-    </div>
-  </div>
-  <div style="margin-top:16px">
-    <button class="btn" onclick="newMime()">🃏 Nuova carta</button>
-    <button class="btn green" onclick="addStar()">✅ Indovinato! +⭐</button>
-  </div>
-</section>
-
-<!-- 13 GRAMMATICA -->
-<section class="slide">
-  <span class="time">⏱ 4 min</span>
-  <h2>🧩 Come funziona?</h2>
-  <div class="gram">
-    <div class="card">
-      <h3>1. La frase con 把</h3>
-      <div class="formula zh"><b>把</b> + cosa + verbo + 上/开</div>
-      <div class="formula zh">把门关上。 把窗户开开。</div>
-      <div class="it">Con 把 la <b>cosa</b> va prima del verbo: "prendi la porta e… chiudila!"</div>
-    </div>
-    <div class="card">
-      <h3>2. Aprire e chiudere</h3>
-      <div class="formula zh"><b>开</b>门 ↔ <b>关</b>门</div>
-      <div class="formula zh"><b>开</b>灯 ↔ <b>关</b>灯</div>
-      <div class="it">开 e 关 valgono anche per luce 💡 e tv 📺: accendere / spegnere!</div>
-    </div>
-    <div class="card">
-      <h3>3. 有点儿 = un po' (troppo)</h3>
-      <div class="formula zh">我<b>有点儿</b>冷。 这儿<b>有点儿</b>热。</div>
-      <div class="it">有点儿 va <b>prima</b> dell'aggettivo e di solito dice qualcosa che non ci piace. Ricordi 一点儿? Quello va prima della cosa: 喝一点儿水.</div>
-    </div>
-    <div class="card">
-      <h3>4. Chiedere con gentilezza</h3>
-      <div class="formula zh"><b>请</b>把灯关上，<b>好吗</b>？</div>
-      <div class="formula zh">✅ 好的！ &nbsp; 🙂 没问题！</div>
-      <div class="it">请 = per favore. 好吗？ alla fine = "va bene?"</div>
-    </div>
-  </div>
-</section>
-
-<!-- 14 COSTRUISCI -->
-<section class="slide">
-  <span class="time">⏱ 4 min</span>
-  <h2>🧱 Costruisci la frase</h2>
-  <p class="sub" id="bIt">…</p>
-  <div class="answer zh" id="bAns"></div>
-  <div class="tiles zh" id="bTiles"></div>
-  <div>
-    <button class="btn ghost" onclick="bReset()">↩️ Ricomincia</button>
-    <button class="btn green" onclick="bCheck()">✔️ Controlla</button>
-    <button class="btn blue" onclick="bNext()">➡️ Prossima</button>
-  </div>
-  <div class="feedback" id="bFb"></div>
-</section>
-
-<!-- 15 DIALOGO -->
-<section class="slide">
-  <span class="time">⏱ 5 min</span>
-  <h2>👩 A casa con la mamma</h2>
-  <div style="margin-bottom:10px">
-    <button class="btn blue" onclick="toggleD('hide-py')">pinyin on/off</button>
-    <button class="btn purple" onclick="toggleD('hide-it')">italiano on/off</button>
-    <button class="btn" onclick="playDialog()">▶️ Ascolta tutto</button>
-  </div>
-  <div class="dlg hide-it" id="dlg"></div>
-  <p class="sub" style="margin-top:10px">Poi facciamo il <b>role play</b>: tu sei 小乐, io sono la mamma. E poi cambiamo! 🔄</p>
-</section>
-
-<!-- 16 DOMANDE DIALOGO -->
-<section class="slide">
-  <span class="time">⏱ 3 min</span>
-  <h2>❓ Hai capito?</h2>
-  <div class="grid" id="qGrid" style="max-width:950px"></div>
-</section>
-
-<!-- 17 ABBINA -->
-<section class="slide">
-  <span class="time">⏱ 4 min</span>
-  <h2>🔗 Abbina frase e risposta</h2>
-  <p class="sub">Clicca una frase a sinistra, poi la risposta giusta a destra.</p>
-  <div class="match zh" id="match" style="margin-top:10px"></div>
-</section>
-
-<!-- 18 ASCOLTA E SCEGLI -->
-<section class="slide">
-  <span class="time">⏱ 4 min</span>
-  <h2>👂 Ascolta e scegli</h2>
-  <div style="margin-bottom:12px">
-    <button class="btn blue" onclick="lPlay()">🔊 Ascolta</button>
-    <span class="sub" id="lRound" style="margin-left:10px"></span>
-  </div>
-  <div class="lgrid" id="lGrid"></div>
-  <div class="feedback" id="lFb"></div>
-  <button class="btn green" id="lNextBtn" onclick="lNext()" style="display:none">➡️ Avanti</button>
-</section>
-
-<!-- 19 IL MAESTRO DICE -->
-<section class="slide">
-  <span class="time">⏱ 3 min</span>
-  <h2>🫡 老师说… Il maestro dice!</h2>
-  <p class="sub">Premi il pulsante, ascolta l'ordine e <b>fallo davvero</b> (o mimalo)! Se non c'è <span class="zh">老师说</span>… stai fermo! 😜</p>
-  <div class="card" style="text-align:center;min-width:320px;margin-top:10px">
-    <div class="emoji-big" id="cmdE">🫡</div>
-    <div class="zh hidden" id="cmdH" style="font-size:40px"></div>
-    <div class="py hidden" id="cmdP" style="font-size:20px"></div>
-  </div>
-  <div style="margin-top:16px">
-    <button class="btn purple" onclick="cmd()">🔊 Nuovo ordine</button>
-    <button class="btn ghost" onclick="cmdShow()">👀 Mostra</button>
-    <button class="btn green" onclick="addStar()">✅ Fatto! +⭐</button>
-  </div>
-</section>
-
-<!-- 20 FINE -->
-<section class="slide">
-  <div class="emoji-big">🎉</div>
-  <h1 class="zh" style="color:var(--red)">太棒了！</h1>
-  <p class="sub"><span class="py">Tài bàng le!</span> — Bravissimo!</p>
-  <div class="card" style="margin-top:14px;text-align:center;font-size:24px">Oggi hai raccolto <b id="finalStars">0</b> ⭐</div>
-  <div class="card" style="margin-top:14px;max-width:700px">
-    <b>📝 Compiti (su Classroom)</b>
-    <ul style="margin:6px 0;font-size:19px">
-      <li>Scrivi 3 volte ogni carattere nuovo, seguendo l'<b>ordine dei tratti</b></li>
-      <li><span class="zh">把 · 门 · 关 · 开 · 窗户 · 灯 · 冷 · 热</span></li>
-      <li>Prova a casa: dai 3 ordini in cinese alla tua famiglia! 🏠</li>
-    </ul>
-  </div>
-  <p class="sub zh" style="font-size:34px;margin-top:10px">再见！<button class="speak" onclick="say('再见！下次见！')">🔊</button></p>
-</section>
-
-</main>
-
-<nav class="nav">
-  <button onclick="go(-1)" aria-label="indietro">◀</button>
-  <span class="count" id="count">1 / 1</span>
-  <button onclick="go(1)" aria-label="avanti">▶</button>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>YCT 3 · Lezione 5 · <span class="zh">把门关上。</span></h1>
+  <p>Chiudi la porta! · con Maja Jiejie 🐼</p>
+</header>
+<nav id="nav">
+  <button data-s="0" class="on">⭐ Frasi chiave <small>2'</small></button>
+  <button data-s="1">Parole <small>8'</small></button>
+  <button data-s="2">La magia di 把 🪄 <small>6'</small></button>
+  <button data-s="3">Leggiamo <small>6'</small></button>
+  <button data-s="4">Giochi 🎮 <small>6'</small></button>
+  <button data-s="5">Filastrocca 🎵 <small>4'</small></button>
+  <button data-s="6">Parliamo <small>3'</small></button>
 </nav>
 
+<main>
+<!-- FRASI CHIAVE -->
+<section id="s0" class="on">
+  <h2>Frasi chiave</h2>
+  <p class="hint">Oggi impariamo a dire <b>cosa facciamo a qualcosa</b> con la parola magica 把</p>
+  <div class="key">
+    <div class="pics">🙋‍♀️🚪</div>
+    <div class="txt">
+      <div class="py">Qǐng jìn, kuài bǎ mén guānshang.</div>
+      <div class="zh">请进，快把门关上。</div>
+      <div class="it">Entra, chiudi subito la porta.</div>
+    </div>
+    <button class="spk" onclick="say('请进，快把门关上。')">🔊</button>
+  </div>
+  <div class="key">
+    <div class="pics">🐱🐟➜🦴</div>
+    <div class="txt">
+      <div class="py">Bù hǎo, xiǎo māo bǎ yú chī le!</div>
+      <div class="zh">不好，小猫把鱼吃了！</div>
+      <div class="it">Oh no, il gattino si è mangiato il pesce!</div>
+    </div>
+    <button class="spk" onclick="say('不好，小猫把鱼吃了！')">🔊</button>
+  </div>
+</section>
+
+<!-- PAROLE -->
+<section id="s1">
+  <h2>Le parole nuove <span class="zh">生词</span></h2>
+  <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per il significato. ✍️ = come si scrive</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="grid" id="vocab"></div>
+</section>
+
+<!-- 把 -->
+<section id="s2">
+  <h2>La parola magica <span class="zh">把</span> 🪄</h2>
+  <p class="hint">Con 把 diciamo prima <b>la cosa</b>, poi <b>che cosa le facciamo</b></p>
+
+  <div class="box orange">
+    <h3>1 · Come si costruisce la frase</h3>
+    <div class="struct">
+      <div class="blk cA"><div class="t">chi</div><div class="s">fa l'azione</div></div>
+      <div class="plus">+</div>
+      <div class="blk cZ"><div class="t">把</div><div class="s"><span class="pyf">bǎ</span></div></div>
+      <div class="plus">+</div>
+      <div class="blk cB"><div class="t">che cosa</div><div class="s">la cosa</div></div>
+      <div class="plus">+</div>
+      <div class="blk cL"><div class="t">吃了 / 喝了 / 关上</div><div class="s">l'azione</div></div>
+    </div>
+    <div class="exrow"><div class="mini">🐱🐟</div><div><div class="zh"><span class="tA">小猫</span><span class="tZ">把</span><span class="tB">鱼</span><span class="tL">吃了</span>。</div><span class="py">Xiǎo māo bǎ yú chī le.</span><span class="it">Il gattino si è mangiato il pesce.</span></div><button class="spk" onclick="say('小猫把鱼吃了。')">🔊</button></div>
+    <div class="exrow"><div class="mini">👴🧃</div><div><div class="zh"><span class="tA">爷爷</span><span class="tZ">把</span><span class="tB">果汁</span><span class="tL">喝了</span>。</div><span class="py">Yéye bǎ guǒzhī hē le.</span><span class="it">Il nonno si è bevuto il succo.</span></div><button class="spk" onclick="say('爷爷把果汁喝了。')">🔊</button></div>
+    <div class="exrow"><div class="mini">👉🚪</div><div><div class="zh">（你）<span class="tZ">把</span><span class="tB">门</span><span class="tL">关上</span>！</div><span class="py">(Nǐ) bǎ mén guānshang!</span><span class="it">Chiudi la porta!</span></div><button class="spk" onclick="say('把门关上！')">🔊</button></div>
+  </div>
+
+  <div class="box blue">
+    <h3>2 · 他、她、它 — tutti si leggono <span class="pyf" style="color:var(--red)">tā</span>!</h3>
+    <div class="pron">
+      <div class="var"><div class="mini">👦</div><div class="big zh">他</div><div class="it">lui</div></div>
+      <div class="var"><div class="mini">👧</div><div class="big zh">她</div><div class="it">lei</div></div>
+      <div class="var hl"><div class="mini">🐶 🐱 📦</div><div class="big zh">它</div><div class="it"><b>esso / essa</b><br>animali e cose</div></div>
+    </div>
+    <div class="exrow"><div class="mini">🛁🐶</div><div><div class="zh">我在给<span class="tL">它</span>洗澡。</div><span class="py">Wǒ zài gěi tā xǐzǎo.</span><span class="it">Gli sto facendo il bagno (al cagnolino).</span></div><button class="spk" onclick="say('我在给它洗澡。')">🔊</button></div>
+  </div>
+</section>
+
+<!-- LEGGIAMO -->
+<section id="s3">
+  <h2>Leggiamo</h2>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="dlg">
+    <h3>Testo 1 · Nel bagno 🛁</h3>
+    <div id="d1"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">女孩让妈妈做什么？</span> <small>(clicca per la risposta)</small>
+      <div class="ans zh">把门关上。</div></div>
+  </div>
+  <div class="dlg">
+    <h3>Testo 2 · In cucina 🍳</h3>
+    <div id="d2"></div>
+    <div class="q" onclick="this.classList.toggle('open')"><span class="zh">鱼在哪儿？</span> <small>(clicca per la risposta)</small>
+      <div class="ans zh">小猫把鱼吃了！</div></div>
+  </div>
+</section>
+
+<!-- GIOCHI -->
+<section id="s4">
+  <h2>Giochi 🎮</h2>
+  <div class="box blue">
+    <h3>Gioco 1 · Ascolta e scegli 👂</h3>
+    <p class="hint" style="margin-bottom:10px">Premi 🔊, ascolta la parola e clicca il disegno giusto</p>
+    <div class="stage listen">
+      <button class="spk" style="width:80px;height:80px;font-size:38px" onclick="say(lr[li].w)">🔊</button>
+      <div class="opts" id="lopts"></div>
+      <div class="feedback" id="lfb"></div>
+      <div class="dots" id="ldots"></div>
+      <div style="margin-top:14px"><button class="btn" id="lnext" onclick="nextL()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+  <div class="box orange">
+    <h3>Gioco 2 · Che cosa è successo? 🪄</h3>
+    <p class="hint" style="margin-bottom:10px">Guarda il disegno e scegli la frase giusta con 把</p>
+    <div class="stage">
+      <div class="bscene" id="bscene"></div>
+      <div class="opts" id="bopts"></div>
+      <div class="feedback" id="bfb"></div>
+      <div class="dots" id="bdots"></div>
+      <div style="margin-top:14px"><button class="btn" id="bnext" onclick="nextB()" style="display:none">Avanti ➜</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILASTROCCA -->
+<section id="s5">
+  <h2>Filastrocca 🎵</h2>
+  <p class="hint">Leggiamo insieme a ritmo! Chi ha mangiato cosa?</p>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div class="chant" id="chant"></div>
+</section>
+
+<!-- PARLIAMO -->
+<section id="s6">
+  <h2>Parliamo! 🙋</h2>
+  <p class="hint">Rispondi alle domande della maestra</p>
+  <div class="talk">
+    <div><button class="spk" onclick="say('你最爱吃什么？')">🔊</button> <span class="py">Nǐ zuì ài chī shénme?</span><br><span class="zh">你最爱吃什么？</span><div class="builder zh">我最爱吃 ______ 。</div></div>
+    <div><button class="spk" onclick="say('你最爱喝什么？')">🔊</button> <span class="py">Nǐ zuì ài hē shénme?</span><br><span class="zh">你最爱喝什么？</span><div class="builder zh">我最爱喝 ______ 。</div></div>
+    <div><button class="spk" onclick="say('你爱吃鱼吗？')">🔊</button> <span class="py">Nǐ ài chī yú ma?</span><br><span class="zh">你爱吃鱼吗？</span><div class="builder zh">爱吃。/ 不爱吃。</div></div>
+    <div><button class="spk" onclick="say('你家有小猫或者小狗吗？它爱吃什么？')">🔊</button> <span class="py">Nǐ jiā yǒu xiǎo māo huòzhě xiǎo gǒu ma? Tā ài chī shénme?</span><br><span class="zh">你家有小猫或者小狗吗？它爱吃什么？</span><div class="builder zh">它爱吃 ______ 。</div></div>
+    <div><button class="spk" onclick="say('你爱洗澡吗？')">🔊</button> <span class="py">Nǐ ài xǐzǎo ma?</span><br><span class="zh">你爱洗澡吗？</span><div class="builder zh">我爱洗澡。/ 我不爱洗澡。😄</div></div>
+    <div><button class="spk" onclick="say('你把果汁喝了吗？')">🔊</button> <span class="py">Nǐ bǎ guǒzhī hē le ma?</span><br><span class="zh">你把果汁喝了吗？</span><div class="builder zh">我把果汁喝了。</div></div>
+  </div>
+  <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Ho finito! 🎉</button></div>
+  <div class="end" id="end"></div>
+  <div class="hw">📝 <b>Compito:</b> su Classroom trovi le schede con l'ordine dei tratti.<br>Scrivi i caratteri <span class="zh">鱼 菜 果汁 洗澡 它 进 把 关上</span></div>
+</section>
+</main>
+<div class="modal" id="wmodal" onclick="if(event.target===this)closeW()">
+ <div class="mbox">
+  <button class="close" onclick="closeW()">✕</button>
+  <div class="mword"><span class="py" id="wpy"></span> · <span id="wit"></span></div>
+  <div class="writers" id="writers"></div>
+  <div class="ctrl">
+   <button class="btn" onclick="playW()">▶ Guarda come si scrive</button>
+   <label>🐢 Lento <input type="range" id="wspeed" min="0.15" max="1.5" step="0.05" value="0.5" oninput="document.getElementById('wsv').textContent=speedLabel(this.value)"> Veloce 🐇</label>
+   <span id="wsv" style="color:var(--soft)"></span>
+   <button class="btn alt" onclick="quizW()">✍️ Prova tu</button>
+  </div>
+ </div>
+</div>
+<footer>Maja Jiejie · Chinese Academy</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 <script>
-/* ---------- voce ---------- */
-let zhVoice=null;
-function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null;}
-if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice;}
-function say(t,cb){
-  if(!('speechSynthesis' in window)){cb&&cb();return;}
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.rate=.8;if(zhVoice)u.voice=zhVoice;
-  if(cb)u.onend=cb;speechSynthesis.speak(u);
-}
-
-/* ---------- stelle ---------- */
 let stars=0;
-function addStar(n=1){stars+=n;const s=document.getElementById('stars');s.textContent='⭐ '+stars;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');document.getElementById('finalStars').textContent=stars;}
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
 
-/* ---------- dati ---------- */
-const VOCAB=[
- {h:'把',p:'bǎ',it:'parola che "prende" una cosa prima del verbo',e:'✋',ex:'把书给我。',exp:'Bǎ shū gěi wǒ.',exit:'Dammi il libro.',tip:'把 ha il radicale 扌 (mano): con 把 "prendi in mano" la cosa e poi fai l\'azione!'},
- {h:'门',p:'mén',it:'porta',e:'🚪',ex:'门开着呢。',exp:'Mén kāizhe ne.',exit:'La porta è aperta.',tip:'门 sembra proprio una porta vista da davanti, con i due battenti!'},
- {h:'关',p:'guān',it:'chiudere · spegnere',e:'🔒',ex:'把门关上。',exp:'Bǎ mén guānshang.',exit:'Chiudi la porta.',tip:'关上 = chiudere bene, fino in fondo. 关灯 = spegnere la luce.'},
- {h:'开',p:'kāi',it:'aprire · accendere',e:'🔓',ex:'请开门！',exp:'Qǐng kāi mén!',exit:'Apri la porta, per favore!',tip:'开 è il contrario di 关. 开灯 = accendere la luce, 开电视 = accendere la tv.'},
- {h:'窗户',p:'chuānghu',it:'finestra',e:'🪟',ex:'把窗户关上吧。',exp:'Bǎ chuānghu guānshang ba.',exit:'Chiudi la finestra.',tip:'户 da solo significa anche "porta di casa": la finestra è la "porta" dell\'aria!'},
- {h:'灯',p:'dēng',it:'luce, lampada',e:'💡',ex:'请把灯开开。',exp:'Qǐng bǎ dēng kāikai.',exit:'Accendi la luce, per favore.',tip:'灯 = 火 (fuoco) + 丁: una volta le lampade avevano il fuoco dentro! 🔥'},
- {h:'冷',p:'lěng',it:'freddo',e:'🥶',ex:'我有点儿冷。',exp:'Wǒ yǒudiǎnr lěng.',exit:'Ho un po\' freddo.',tip:'冫 a sinistra = ghiaccio ❄️ (due gocce gelate). Lo trovi anche in 冬 (inverno)!'},
- {h:'热',p:'rè',it:'caldo',e:'🥵',ex:'今天太热了！',exp:'Jīntiān tài rè le!',exit:'Oggi fa troppo caldo!',tip:'I 4 puntini sotto 灬 sono il fuoco 🔥: per forza fa caldo!'}
+/* voce cinese */
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+
+/* nav */
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+function pics(t){return `<span class="pics">${t}</span>`}
+
+/* vocab */
+const vocab=[
+ ['鱼','yú','il pesce','🐟'],
+ ['菜','cài','il piatto (cucinato), la verdura','🥘'],
+ ['果汁','guǒzhī','il succo di frutta','🧃'],
+ ['洗澡','xǐzǎo','fare il bagno / la doccia','🛁'],
+ ['它','tā','esso, essa (animale o cosa)','🐶'],
+ ['进','jìn','entrare','🚪➡️'],
+ ['把','bǎ','la parola magica 把','🪄'],
+ ['关上','guānshang','chiudere','🚪🔒'],
 ];
-const BODY=[['📖','书','shū'],['🥛','牛奶','niúnǎi'],['🍎','苹果','píngguǒ'],['✏️','铅笔','qiānbǐ'],['📱','手机','shǒujī'],['🎒','书包','shūbāo']];
+document.getElementById('vocab').innerHTML=vocab.map((v,i)=>`
+ <div class="card" onclick="this.classList.toggle('flip')">
+  <button class="spk" onclick="say('${v[0]}',event)">🔊</button>
+  <button class="wr" title="Come si scrive" onclick="openW(${i},event)">✍️</button>
+  <div class="inner">
+   <div class="face"><div class="pic"${[...v[3]].length>1?' style="font-size:48px"':''}>${v[3]}</div><div class="py">${v[1]}</div><div class="w zh">${v[0]}</div></div>
+   <div class="face back"><div class="w zh">${v[0]}</div><div class="py">${v[1]}</div><div class="it">${v[2]}</div></div>
+  </div></div>`).join('');
 
-/* ---------- costruzione slide parole ---------- */
-const slot=document.getElementById('vocabSlot');
-VOCAB.forEach((v,i)=>{
-  const s=document.createElement('section');s.className='slide';s.dataset.vocab=i;
-  s.innerHTML=`<span class="time">⏱ 1–2 min</span>
-  <div class="vocab">
-    <div>
-      <div class="tag">Parola nuova ${i+1}/8 ${v.e}</div>
-      <div class="word zh">${v.h}</div>
-      <div class="pin py">${v.p} <button class="speak" onclick="say('${v.h}')">🔊</button></div>
-      <div class="mean">${v.it}</div>
-      <div class="ex card" style="padding:10px 16px"><span class="zh">${v.ex}</span> <button class="speak" onclick="say('${v.ex}')">🔊</button>
-        <div class="py" style="font-size:17px">${v.exp}</div><div class="it" style="font-size:17px">${v.exit}</div></div>
-      <div class="tip">💡 ${v.tip}</div>
-    </div>
-    <div>
-      <div class="writers" id="w${i}"></div>
-      <div class="wbtns">
-        <button class="btn" onclick="animW(${i})">▶️ Ordine dei tratti</button>
-        <button class="btn purple" onclick="quizW(${i})">✍️ Prova tu!</button>
-      </div>
-    </div>
-  </div>`;
-  slot.before(s);
-});
-slot.remove();
-
-const writers={};
-function buildW(i){
-  if(writers[i]||typeof HanziWriter==='undefined')return;
-  const chars=[...VOCAB[i].h];const box=document.getElementById('w'+i);
-  const size=chars.length>2?150:Math.min(220,Math.floor((window.innerWidth*0.42)/chars.length)-14);
-  writers[i]=chars.map((c,k)=>{const d=document.createElement('div');d.className='writer';d.style.width=d.style.height=size+'px';box.appendChild(d);
-    return HanziWriter.create(d,c,{width:size,height:size,padding:12,strokeColor:'#e2453c',radicalColor:'#3d8bd9',outlineColor:'#f0e2d0',strokeAnimationSpeed:1,delayBetweenStrokes:250,showCharacter:true,showOutline:true,drawingWidth:22});});
+/* animazione ordine dei tratti */
+let wIdx=0,writers=[];
+function speedLabel(v){v=+v;return v<0.35?'molto lento':v<0.7?'lento':v<1.1?'normale':'veloce'}
+function wChars(){return vocab[wIdx][0].split('')}
+function buildW(){
+ const sp=+document.getElementById('wspeed').value, box=document.getElementById('writers');
+ box.innerHTML='';writers=[];
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p>Serve la connessione a internet per l\'animazione.</p>';return}
+ wChars().forEach((c,k)=>{const d=document.createElement('div');d.className='tzg';d.id='tz'+k;box.appendChild(d);
+  writers.push(HanziWriter.create(d,c,{width:240,height:240,padding:14,showOutline:true,showCharacter:true,
+   strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#eadfd8',highlightColor:'#e8558f',drawingColor:'#e8558f',
+   strokeAnimationSpeed:sp,delayBetweenStrokes:Math.round(500/sp)}))});
 }
-async function animW(i){buildW(i);for(const w of writers[i]){await w.animateCharacter();}}
-function quizW(i){buildW(i);let done=0;writers[i].forEach(w=>w.quiz({onComplete:()=>{done++;if(done===writers[i].length)addStar();}}));}
+function openW(i,e){e.stopPropagation();wIdx=i;
+ document.getElementById('wpy').textContent=vocab[i][1];document.getElementById('wit').textContent=vocab[i][2];
+ document.getElementById('wsv').textContent=speedLabel(document.getElementById('wspeed').value);
+ document.getElementById('wmodal').classList.add('on');buildW();}
+function closeW(){document.getElementById('wmodal').classList.remove('on');document.getElementById('writers').innerHTML='';writers=[]}
+async function playW(){buildW();for(const w of writers){await w.animateCharacter()}}
+function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComplete:()=>star()})})}
 
-/* ---------- ripasso casa ---------- */
-const bg=document.getElementById('bodyGrid');
-BODY.forEach(([e,h,p])=>{const d=document.createElement('div');d.className='flip';
-  d.innerHTML=`<div class="flip-in"><div class="face"><div class="e">${e}</div></div><div class="face back"><div class="h zh">${h}</div><div class="py">${p}</div></div></div>`;
-  d.onclick=()=>{d.classList.toggle('on');if(d.classList.contains('on'))say(h);};bg.appendChild(d);});
-function ouch(){const [e,h,p]=BODY[Math.floor(Math.random()*BODY.length)];
-  document.getElementById('ouch').innerHTML=`<span style="font-size:60px">${e}</span> 🙏 → <span class="zh hidden" id="ouchA">请把${h}给我！</span> <button class="btn ghost" onclick="document.getElementById('ouchA').classList.remove('hidden');say('请把${h}给我');addStar()">👀 soluzione</button>`;}
+/* dialoghi */
+function dlg(id,lines){document.getElementById(id).innerHTML=lines.map(l=>`
+ <div class="line"><div class="who" style="background:${l[4]}">${l[0]}</div>
+ ${l[5]}
+ <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>
+ <button class="spk" onclick="say('${l[1]}')">🔊</button></div>`).join('')}
+dlg('d1',[
+ ['妈妈 👩','你在做什么？我可以进来吗？','Nǐ zài zuò shénme? Wǒ kěyǐ jìnlai ma?','Cosa stai facendo? Posso entrare?','#9a7bd1',pics('🚪❓')],
+ ['女孩 👧','请进，快把门关上。','Qǐng jìn, kuài bǎ mén guānshang.','Entra, chiudi subito la porta.','#e0524a',pics('🚪🔒')],
+ ['妈妈 👩','小狗怎么在这里？','Xiǎo gǒu zěnme zài zhèli?','Come mai il cagnolino è qui?','#9a7bd1',pics('🐶❓')],
+ ['女孩 👧','我在给它洗澡。','Wǒ zài gěi tā xǐzǎo.','Gli sto facendo il bagno.','#e0524a',pics('🛁🐶')],
+]);
+dlg('d2',[
+ ['女孩 👧','我们今天吃什么？','Wǒmen jīntiān chī shénme?','Cosa mangiamo oggi?','#e0524a',pics('🍽️❓')],
+ ['爸爸 👨','吃鱼，还有米饭和菜，喝果汁。','Chī yú, hái yǒu mǐfàn hé cài, hē guǒzhī.','Mangiamo pesce, e poi riso e verdure, e beviamo succo di frutta.','#3a8fd0',pics('🐟🍚🥘🧃')],
+ ['女孩 👧','鱼？鱼在哪儿？','Yú? Yú zài nǎr?','Il pesce? Dov\'è il pesce?','#e0524a',pics('🐟❓')],
+ ['爸爸 👨','不好，小猫把鱼吃了！','Bù hǎo, xiǎo māo bǎ yú chī le!','Oh no, il gattino si è mangiato il pesce!','#3a8fd0',pics('🐱🦴')],
+]);
 
-/* ---------- frasi chiave ---------- */
-const KEY=[['把门关上。','Bǎ mén guānshang.','Chiudi la porta.'],
- ['把窗户开开，好吗？','Bǎ chuānghu kāikai, hǎo ma?','Apri la finestra, va bene?'],
- ['我有点儿冷。','Wǒ yǒudiǎnr lěng.','Ho un po\' freddo.'],
- ['请把灯关上。','Qǐng bǎ dēng guānshang.','Spegni la luce, per favore.']];
-const kg=document.getElementById('keyGrid');
-KEY.forEach(([h,p,it])=>{const d=document.createElement('div');d.className='card';d.style.padding='10px 20px';
-  d.innerHTML=`<span class="zh" style="font-size:30px">${h}</span> <button class="speak" onclick="say('${h}')">🔊</button> <button class="speak" onclick="this.parentNode.querySelector('.it').classList.toggle('hidden')">👀</button>
-  <div class="py" style="font-size:18px">${p}</div><div class="it hidden" style="font-size:19px">${it}</div>`;kg.appendChild(d);});
+/* gioco 1: ascolta e scegli */
+const lr=[
+ {w:'鱼',a:'🐟',o:['🍞','🐟','🥛']},
+ {w:'果汁',a:'🧃',o:['🧃','💧','🍚']},
+ {w:'洗澡',a:'🛁',o:['😴','🏃','🛁']},
+ {w:'菜',a:'🥘',o:['🥘','🐟','🍰']},
+ {w:'牛奶',a:'🥛',o:['🧃','🥛','🍎']},
+ {w:'进来',a:'🚪➡️',o:['🚪🔒','🚪➡️','🏫']},
+];
+let li=0,ltried=false;
+function drawL(){
+ const d=lr[li];ltried=false;
+ document.getElementById('lopts').innerHTML=d.o.map(o=>`<button class="opt" onclick="pickL(this,'${o}')">${o}</button>`).join('');
+ document.getElementById('lfb').textContent='';document.getElementById('lnext').style.display='none';
+ document.getElementById('ldots').innerHTML=lr.map((_,i)=>`<span class="${i<li?'done':i===li?'cur':''}"></span>`).join('');
+}
+function pickL(b,o){
+ const d=lr[li];
+ if(o===d.a){b.classList.add('ok');if(!ltried)star();
+   document.getElementById('lfb').innerHTML=`🎉 <span class="zh">对！${d.w}</span>`;
+   document.querySelectorAll('#lopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('lnext');n.style.display='inline-block';n.textContent=li<lr.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');ltried=true;document.getElementById('lfb').innerHTML='🤔 Riprova!'}
+}
+function nextL(){if(li<lr.length-1){li++;drawL();say(lr[li].w)}else{document.getElementById('lfb').innerHTML='🌟 <span class="zh">太棒了！</span>';document.getElementById('lnext').style.display='none';document.getElementById('ldots').innerHTML=lr.map(()=>'<span class="done"></span>').join('')}}
+drawL();
 
-/* ---------- riscaldamento ---------- */
-function mood(el,t){document.querySelectorAll('.choice').forEach(c=>{if(c.parentNode===el.parentNode)c.classList.remove('ok')});el.classList.add('ok');say(t);}
+/* gioco 2: 把 */
+const PYB={
+ '小猫把鱼吃了。':'Xiǎo māo bǎ yú chī le.','小狗把鱼吃了。':'Xiǎo gǒu bǎ yú chī le.','小猫把菜吃了。':'Xiǎo māo bǎ cài chī le.',
+ '爷爷把果汁喝了。':'Yéye bǎ guǒzhī hē le.','爷爷把牛奶喝了。':'Yéye bǎ niúnǎi hē le.','奶奶把果汁喝了。':'Nǎinai bǎ guǒzhī hē le.',
+ '把门关上。':'Bǎ mén guānshang.','把水喝了。':'Bǎ shuǐ hē le.','把鱼吃了。':'Bǎ yú chī le.',
+ '妹妹把面包吃了。':'Mèimei bǎ miànbāo chī le.','妹妹把菜吃了。':'Mèimei bǎ cài chī le.','弟弟把面包吃了。':'Dìdi bǎ miànbāo chī le.',
+ '小狗把牛奶喝了。':'Xiǎo gǒu bǎ niúnǎi hē le.','小狗把水喝了。':'Xiǎo gǒu bǎ shuǐ hē le.','小猫把牛奶喝了。':'Xiǎo māo bǎ niúnǎi hē le.',
+};
+const br=[
+ {s:'🐱 <span class="ba">把</span> 🐟 <span class="arr">➜</span> 🦴',a:'小猫把鱼吃了。',o:['小狗把鱼吃了。','小猫把鱼吃了。','小猫把菜吃了。']},
+ {s:'👴 <span class="ba">把</span> 🧃 <span class="arr">➜</span> 😋',a:'爷爷把果汁喝了。',o:['爷爷把牛奶喝了。','奶奶把果汁喝了。','爷爷把果汁喝了。']},
+ {s:'👉 <span class="ba">把</span> 🚪 <span class="arr">➜</span> 🔒',a:'把门关上。',o:['把门关上。','把水喝了。','把鱼吃了。']},
+ {s:'👧 <span class="ba">把</span> 🍞 <span class="arr">➜</span> 😋',a:'妹妹把面包吃了。',o:['妹妹把菜吃了。','弟弟把面包吃了。','妹妹把面包吃了。']},
+ {s:'🐶 <span class="ba">把</span> 🥛 <span class="arr">➜</span> 😋',a:'小狗把牛奶喝了。',o:['小狗把牛奶喝了。','小狗把水喝了。','小猫把牛奶喝了。']},
+];
+let bi=0,btried=false;
+function drawB(){
+ const d=br[bi];btried=false;
+ document.getElementById('bscene').innerHTML=d.s;
+ document.getElementById('bopts').innerHTML=d.o.map(o=>`<button class="opt" onclick="pickB(this,'${o}')"><span class="py">${PYB[o]}</span><span class="zh">${o}</span></button>`).join('');
+ document.getElementById('bfb').textContent='';document.getElementById('bnext').style.display='none';
+ document.getElementById('bdots').innerHTML=br.map((_,i)=>`<span class="${i<bi?'done':i===bi?'cur':''}"></span>`).join('');
+}
+function pickB(b,o){
+ const d=br[bi];
+ if(o===d.a){b.classList.add('ok');if(!btried)star();say(d.a);
+   document.getElementById('bfb').innerHTML='🎉 <span class="zh">对！</span> Bravissimo!';
+   document.querySelectorAll('#bopts .opt').forEach(x=>x.disabled=true);
+   const n=document.getElementById('bnext');n.style.display='inline-block';n.textContent=bi<br.length-1?'Avanti ➜':'Finito! 🌟';
+ }else{b.classList.add('no');btried=true;document.getElementById('bfb').innerHTML='🤔 Riprova!'}
+}
+function nextB(){if(bi<br.length-1){bi++;drawB()}else{document.getElementById('bfb').innerHTML='🌟 <span class="zh">太棒了！</span> Hai finito il gioco!';document.getElementById('bnext').style.display='none';document.getElementById('bdots').innerHTML=br.map(()=>'<span class="done"></span>').join('')}}
+drawB();
 
-/* ---------- mimo ---------- */
-let lastMime=-1;
-function newMime(){const c=document.getElementById('mimeCard');c.classList.remove('on');
-  let i;do{i=Math.floor(Math.random()*VOCAB.length)}while(i===lastMime);lastMime=i;
-  setTimeout(()=>{mimeE.textContent=VOCAB[i].e;mimeH.textContent=VOCAB[i].h;mimeP.textContent=VOCAB[i].p;},300);}
+/* filastrocca */
+const chant=[
+ ['👵🥬','奶奶爱吃青菜，把青菜吃了。','Nǎinai ài chī qīngcài, bǎ qīngcài chī le.','La nonna adora la verdura, e la verdura se l\'è mangiata.'],
+ ['👴🧃','爷爷爱喝果汁，把果汁喝了。','Yéye ài hē guǒzhī, bǎ guǒzhī hē le.','Il nonno adora il succo, e il succo se l\'è bevuto.'],
+ ['👧🍞','妹妹爱吃面包，把面包吃了。','Mèimei ài chī miànbāo, bǎ miànbāo chī le.','La sorellina adora il pane, e il pane se l\'è mangiato.'],
+ ['👦🥛','弟弟爱喝牛奶，把牛奶喝了。','Dìdi ài hē niúnǎi, bǎ niúnǎi hē le.','Il fratellino adora il latte, e il latte se l\'è bevuto.'],
+ ['🧑❓','哥哥爱吃什么？妈妈知道。','Gēge ài chī shénme? Māma zhīdào.','Cosa adora mangiare il fratello maggiore? Lo sa la mamma.'],
+ ['👩❓','姐姐爱喝什么？爸爸知道。','Jiějie ài hē shénme? Bàba zhīdào.','Cosa adora bere la sorella maggiore? Lo sa il papà.'],
+ ['🐱🐟','猫爱吃什么？小鱼知道。','Māo ài chī shénme? Xiǎo yú zhīdào.','Cosa adora mangiare il gatto? Lo sa il pesciolino!'],
+ ['🙋❓','我爱喝什么？谁知道？','Wǒ ài hē shénme? Shéi zhīdào?','E io cosa adoro bere? Chi lo sa?'],
+];
+document.getElementById('chant').innerHTML=chant.map(c=>`<div class="cl"><span class="ic">${c[0]}</span><div style="flex:1;min-width:240px"><span class="py">${c[2]}</span><span class="zh">${c[1]}</span><div class="tr">${c[3]}</div></div><button class="spk" onclick="say('${c[1]}')">🔊</button></div>`).join('');
 
-/* ---------- costruisci frase ---------- */
-const BUILD=[
- {w:['把','门','关上'],it:'🚪 Chiudi la porta.'},
- {w:['请','把','窗户','开开'],it:'🪟 Apri la finestra, per favore.'},
- {w:['我','有点儿','冷'],it:'🥶 Ho un po\' freddo.'},
- {w:['把','灯','关上','吧'],it:'💡 Spegni la luce.'},
- {w:['今天','太','热','了'],it:'🥵 Oggi fa troppo caldo!'},
- {w:['请','把','书','给我'],it:'📖 Dammi il libro, per favore.'}];
-let bi=0;
-const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
-function bLoad(){const s=BUILD[bi];bIt.textContent=`(${bi+1}/${BUILD.length}) ${s.it}`;bAns.innerHTML='';bTiles.innerHTML='';bFb.textContent='';
-  let order;do{order=shuffle(s.w)}while(order.join()===s.w.join()&&s.w.length>1);
-  order.forEach(w=>{const t=document.createElement('span');t.className='tile';t.textContent=w;
-    t.onclick=()=>{(t.parentNode===bTiles?bAns:bTiles).appendChild(t);};bTiles.appendChild(t);});}
-function bReset(){bLoad();}
-function bCheck(){const got=[...bAns.children].map(t=>t.textContent).join('');const want=BUILD[bi].w.join('');
-  if(got===want){bFb.innerHTML='🎉 <b>对了！</b> Giusto! +⭐';addStar();say(want);}
-  else{bFb.textContent='🤔 Quasi… riprova!';bAns.classList.remove('shake');void bAns.offsetWidth;bAns.classList.add('shake');}}
-function bNext(){bi=(bi+1)%BUILD.length;bLoad();}
-bLoad();
-
-/* ---------- dialogo ---------- */
-const DLG=[
- ['m','小乐，你冷吗？','Xiǎo Lè, nǐ lěng ma?','Xiao Le, hai freddo?'],
- ['p','妈妈，我有点儿冷。','Māma, wǒ yǒudiǎnr lěng.','Mamma, ho un po\' freddo.'],
- ['m','门开着呢！把门关上吧。','Mén kāizhe ne! Bǎ mén guānshang ba.','La porta è aperta! Chiudila.'],
- ['p','好的。窗户也关上吗？','Hǎo de. Chuānghu yě guānshang ma?','Va bene. Chiudo anche la finestra?'],
- ['m','对，把窗户也关上。','Duì, bǎ chuānghu yě guānshang.','Sì, chiudi anche la finestra.'],
- ['p','妈妈，房间里有点儿黑。','Māma, fángjiān li yǒudiǎnr hēi.','Mamma, in camera è un po\' buio.'],
- ['m','那请你把灯开开。','Nà qǐng nǐ bǎ dēng kāikai.','Allora accendi la luce, per favore.'],
- ['p','现在不冷了！谢谢妈妈！','Xiànzài bù lěng le! Xièxie māma!','Adesso non ho più freddo! Grazie mamma!']];
-const dlg=document.getElementById('dlg');
-DLG.forEach(([who,h,p,it])=>{const d=document.createElement('div');d.className='line'+(who==='p'?' r':'');
-  d.innerHTML=`<div class="av">${who==='m'?'👩<small>妈妈</small>':'🧒<small>小乐</small>'}</div>
-  <div class="bub"><span class="zh">${h}</span> <button class="speak" style="width:34px;height:34px;font-size:17px" onclick="say('${h}')">🔊</button><div class="py">${p}</div><div class="it">${it}</div></div>`;dlg.appendChild(d);});
-function toggleD(c){dlg.classList.toggle(c);}
-function playDialog(){let k=0;const next=()=>{if(k<DLG.length)say(DLG[k++][1],next);};next();}
-
-/* ---------- domande ---------- */
-const QS=[
- {q:'小乐冷吗？',p:'Xiǎo Lè lěng ma?',o:['他有点儿冷。','他很热。','他不冷。'],a:0},
- {q:'妈妈说把什么关上？',p:'Māma shuō bǎ shénme guānshang?',o:['电视','门和窗户','书包'],a:1},
- {q:'房间里怎么样？',p:'Fángjiān li zěnmeyàng?',o:['有点儿热','有点儿黑','很大'],a:1},
- {q:'小乐把什么开开了？',p:'Xiǎo Lè bǎ shénme kāikai le?',o:['门','窗户','灯'],a:2}];
-const qg=document.getElementById('qGrid');
-QS.forEach((q,qi)=>{const d=document.createElement('div');d.className='card';d.style.padding='10px 20px';
-  d.innerHTML=`<div><span class="zh" style="font-size:26px">${qi+1}. ${q.q}</span> <button class="speak" onclick="say('${q.q}')">🔊</button> <span class="py" style="font-size:16px">${q.p}</span></div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">${q.o.map((o,k)=>`<div class="choice zh" style="padding:6px 16px;font-size:22px" data-k="${k}">${o}</div>`).join('')}</div>`;
-  let done=false;
-  d.querySelectorAll('.choice').forEach(c=>c.onclick=()=>{if(done)return;if(+c.dataset.k===q.a){c.classList.add('ok');done=true;addStar();say(c.textContent);}else{c.classList.add('no');setTimeout(()=>c.classList.remove('no'),700);}});
-  qg.appendChild(d);});
-
-/* ---------- abbina ---------- */
-const PAIRS=[
- ['我有点儿冷。','Wǒ yǒudiǎnr lěng.','把窗户关上吧。','Bǎ chuānghu guānshang ba.'],
- ['这儿太热了！','Zhèr tài rè le!','把窗户开开吧。','Bǎ chuānghu kāikai ba.'],
- ['房间里有点儿黑。','Fángjiān li yǒudiǎnr hēi.','请把灯开开。','Qǐng bǎ dēng kāikai.'],
- ['我想睡觉了。','Wǒ xiǎng shuìjiào le.','那把灯关上吧。','Nà bǎ dēng guānshang ba.'],
- ['请把门关上，好吗？','Qǐng bǎ mén guānshang, hǎo ma?','好的，没问题！','Hǎo de, méi wèntí!']];
-const mt=document.getElementById('match');let mSel=null;
-const rightOrder=shuffle(PAIRS.map((_,i)=>i));
-PAIRS.forEach((pr,i)=>{
-  const L=document.createElement('div');L.className='mitem';L.dataset.i=i;L.innerHTML=`${pr[0]}<small>${pr[1]}</small>`;
-  const j=rightOrder[i];const R=document.createElement('div');R.className='mitem';R.dataset.i=j;R.innerHTML=`${PAIRS[j][2]}<small>${PAIRS[j][3]}</small>`;
-  L.onclick=()=>{if(L.classList.contains('done'))return;mt.querySelectorAll('.sel').forEach(x=>x.classList.remove('sel'));L.classList.add('sel');mSel=L;say(pr[0]);};
-  R.onclick=()=>{if(R.classList.contains('done')||!mSel)return;
-    if(mSel.dataset.i===R.dataset.i){mSel.classList.remove('sel');mSel.classList.add('done');R.classList.add('done');addStar();say(PAIRS[j][2]);mSel=null;}
-    else{R.classList.remove('shake');void R.offsetWidth;R.classList.add('shake');}};
-  mt.appendChild(L);mt.appendChild(R);});
-
-/* ---------- ascolta e scegli ---------- */
-const LIS=[['🚪','把门关上。'],['🪟','把窗户开开。'],['💡','请把灯开开。'],['🥶','我有点儿冷。'],['🥵','今天太热了。'],['📖','请把书给我。']];
-let lOrder=shuffle(LIS.map((_,i)=>i)),lr=0,lDone=false;
-const lg=document.getElementById('lGrid');
-LIS.forEach(([e],i)=>{const c=document.createElement('div');c.className='choice';c.dataset.i=i;c.innerHTML=`<div class="e">${e}</div>`;
-  c.onclick=()=>{if(lDone)return;const want=lOrder[lr];
-    if(i===want){c.classList.add('ok');lDone=true;addStar();lFb.innerHTML=`🎉 <span class="zh">${LIS[want][1]}</span>`;lNextBtn.style.display='inline-block';}
-    else{c.classList.add('no');setTimeout(()=>c.classList.remove('no'),700);lFb.textContent='Ascolta ancora… 👂';}};lg.appendChild(c);});
-function lShow(){lRound.textContent=`Turno ${lr+1} / ${LIS.length}`;lFb.textContent='';lDone=false;lNextBtn.style.display='none';lg.querySelectorAll('.choice').forEach(c=>c.classList.remove('ok','no'));}
-function lPlay(){say(LIS[lOrder[lr]][1]);}
-function lNext(){lr++;if(lr>=LIS.length){lFb.innerHTML='🏆 Finito! Bravissimo! 太棒了！';lNextBtn.style.display='none';lOrder=shuffle(lOrder);lr=0;setTimeout(lShow,2500);return;}lShow();lPlay();}
-lShow();
-
-/* ---------- il maestro dice ---------- */
-const CMD=[['🚪','开门','kāi mén'],['🚪','关门','guān mén'],['🪟','把窗户开开','bǎ chuānghu kāikai'],['🪟','把窗户关上','bǎ chuānghu guānshang'],['💡','开灯','kāi dēng'],['💡','关灯','guān dēng'],['🥶','你很冷！','nǐ hěn lěng!'],['🥵','你很热！','nǐ hěn rè!']];
-let lastC=-1;
-function cmd(){let i;do{i=Math.floor(Math.random()*CMD.length)}while(i===lastC);lastC=i;
-  const ls=Math.random()<.75;const t=(ls?'老师说，':'')+CMD[i][1];
-  cmdE.textContent=CMD[i][0];cmdH.textContent=t;cmdP.textContent=(ls?'lǎoshī shuō, ':'')+CMD[i][2];
-  cmdH.classList.add('hidden');cmdP.classList.add('hidden');say(t);}
-function cmdShow(){cmdH.classList.remove('hidden');cmdP.classList.remove('hidden');}
-
-/* ---------- navigazione ---------- */
-const slides=[...document.querySelectorAll('.slide')];let cur=0;
-function show(n){cur=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
-  document.getElementById('count').textContent=`${cur+1} / ${slides.length}`;
-  document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
-  const v=slides[cur].dataset.vocab;if(v!==undefined)buildW(+v);
-  if('speechSynthesis' in window)speechSynthesis.cancel();}
-function go(d){show(cur+d);}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown')go(1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);});
-show(0);
+function finish(){star(1);const e=document.getElementById('end');e.style.display='block';e.innerHTML=`🎉 <span class="zh">太棒了！</span><br>Hai raccolto <b>${stars}</b> ⭐ oggi! <span class="zh">再见！</span> 👋`}
 </script>
 </body>
 </html>
