@@ -77,7 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </style>
 </head>
 <body>
-<form class="pin" id="pinbox">
+<form class="pin" id="pinbox" hidden>
   <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
@@ -130,11 +130,47 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
   </div>
 
-  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "2wRM7pn5DVxthdsfZwlxTg==.8t4kXOO/39DYrBT2.NCCLxTvFKHcOVBzX48nfWm4axbz8AFgCVswmBqnGeRMcKdS9fLzV/hsBWP2LrUhdFnTJx8W/og+XSXh7tDJK09x0bT3ePZJUqwrQWn6LZBN1vawOW78r47zQ9L/rzzink8lHsX/czHsFHo1RDu89XlbgWOPPX24XlzRvAKVPJkSTbVnpV9e8r3ZAUw4P+me8AmMgG+Nb8BaG1uLZQDXT/yL9ob1CfMNq2kSRdYpTwFEgfxQ6YS0b8ke2CmvWL5qE3+Mo5SGnPb6Y2Y3pZ4Idkb0enLHesZ3yqwx2n4N/v/qvlQVLSAlQNppSPN+6jV7cdsKz+uf7K44lAnF7nMubQShCqWa0QbtDJ8PvzIlEHXoywLn4tCF+c9mpQjmZavh/7z3hg2yo5kWZfaZrnIk7WDl6KI4WLrKDa/Q51YoTRheOpNNjjoGDhjHFptqoofPK7/KQWfygKDSgH1639K0+mEDlzhWF//ugggAZl2XEuamLyIJB0qYyD9u3LP8K2KythwgOlq7LRY5Iu3CezV8neGYblR2zRiFQOkdvTVSshcpbzh3z35GHpMNKSjGS13gRP9LRfvFIW0XtnfJ53N2KVklflXrGttNPDKKWj/uHQiZo56PAAmPYYp5UHVBZsnrrj4wTZY/HuNlQCEjpf8Z970OpA+LSxB+SbJDzFBo9rbkHEAN+2nK2XsvGSVNi4Coq/aXWGy040Vc07kZ3aCMJwNtHdtVfhj0mQ+OrRsq7tMYQ/DR9tpLNdaixsxbGr46dcj35haFrxTeOEKoC3/Kv1TmKD39MiaItER/tSzGtxnjHQs7Y6ddnCdoqmm2eHu1TyDW00Grd3cECWJ02xqyvIKm8wVF+PJRZqAEOkpdSLmmoZZLAJgTax8YRvPRR+uvJlNXADUTbAxw58DVoQR+nKlSiGn+WA5RUXA8qlb+cK42jwyRX9nTKIH3pWzjnEWGbbqAmEKoa1U48TVqcbQ+fFOfOFWc8By6gFl7OPZR1zOV75HJI90FupckBztWqtat9YDIdiGGcU3lIqEP5LH8/GA36T26ABZk68Bs3XKYCYupnjXZa4bLqBOo8vfhWBWpgcVOCG/YuaxYzP32s9jYzXHOlpy9F1e06p5ApFyrwYZBa8ZfE15CnQNKoUNd64oj0X6i/K/BA2nxwAW+eokxC0q56ly12eXCsxlyNOzT7O6uR9dFggMLPcU19SBeFvKfYSNJ3kU4TKPHPrimVnP5slpUS7TaUKs3JqxcyQiOhGqKPyQV21Fa1/sIY40X2FU7pNbgBeQrwZwU8RvEqbfudyQZG5GWbHHQFMmbosAbVC8bkPsmbyhEaYKvE+NIQP5QBkEx4TsuIkXdCd8V+dFv5mXj/QOgj6U38CTav8tNkrCS4tkujRVzfjN4v0lb+F064tdCPQ/E+mv7zET+G6vNAkx++7gXn3SUyDBwIKNyFH9n7cGhi5Ghc44pB+/r75JDMm3oYNfeQ4O1XfPKjntu5kTDCBdQNHem780ooIeU6ktW3MMDdxHyUMktBeaChBJTD9ryYnyz5YVgxJJkXA9WS+ZG7wHE6sG2qEXECGtauEIxYpVE5QciVJFISLDvIwdCA3Wzl0EXy9XJd3Awzvn9JOLzbPHJEAxvHi980iqRALOMdxJRgro7bE3nmNEx0rwVKkmENRql7sJ93z/lQGIiJEhcxnahEyRDqxEbBcb4Sp+F4/++qSO2Pa+zQyeHsvXMNG33GHymfAxeItXCmhnf3biMBhherR3ocRRAXZxxqAckBfjRbOlZXCtNM0oomAK1oEaV0z364MN8Twv3YrpSe4C4Pp3+fr2n/Y4NtFbINWkPjpE64AvxQAkyFYD9h8Pp8wOdDNLPdDX5k6U9N7jne5H+uHARZFs90on6/AMU3PzRxrLe9OgFe3yNlaNXL2Kpr89t+yFQGV7X1MxqIyaUADfB/YdIfQWHu+83g6X2YEAS1aijrH7hWO0hkFnY4bixofcmPom4F8Q==";
+const DATI_APERTI = {
+ "nome": "Melissa",
+ "rimanenti": 2,
+ "aggiornata": "5 novembre 2026",
+ "compiti": null,
+ "storico": [
+  {
+   "data": "05/11/2026",
+   "fatto": "YCT 2, lezione 3 (你的铅笔呢？): correzione ed esercizi."
+  }
+ ],
+ "materiali": [
+  {
+   "titolo": "YCT 2 · Lezione 3 · 你的铅笔呢？",
+   "url": "https://majajiejie.github.io/LEZIONI/yct2/lezione3-melissa.html"
+  }
+ ],
+ "contatti": {
+  "whatsapp": "393398768166",
+  "gruppo_concorso": "https://chat.whatsapp.com/LS9SCsDbxkRJFPOI2XaGN6",
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
+ },
+ "durata": 30,
+ "compiti_fisso": null,
+ "classroom": null,
+ "pagamento": {
+  "paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL",
+  "iban": "IT33W0306968053100000007993",
+  "intestatario": "Maja Fabbri (Intesa Sanpaolo)",
+  "pacchetti": [
+   {
+    "lezioni": 10,
+    "prezzo": 230
+   }
+  ]
+ }
+};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -189,24 +225,7 @@ link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". ")
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
-const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function apri(pin){
-  const [sale, iv, ct] = CIFRATO.split('.').map(b64);
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
-  const k = await crypto.subtle.deriveKey({name:'PBKDF2', salt:sale, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv}, k, ct)));
-}
-const CHIAVE = 'pin:' + location.pathname;
-function salva(p){ try{ localStorage.setItem(CHIAVE, p); }catch(e){} }
-function ricorda(){ try{ return localStorage.getItem(CHIAVE); }catch(e){ return null; } }
-async function prova(pin, silenzioso){
-  try{ const d = await apri(pin); salva(pin); mostra(d); }
-  catch(e){ if(!silenzioso) $("errore").textContent = 'PIN non corretto, riprova'; try{ localStorage.removeItem(CHIAVE); }catch(_){} }
-}
-$("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
-$("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
-const dalLink = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
-const gia = dalLink || ricorda(); if (gia) prova(gia, !dalLink);
+mostra(DATI_APERTI);
 </script>
 </body>
 </html>
