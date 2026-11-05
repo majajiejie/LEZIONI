@@ -77,7 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </style>
 </head>
 <body>
-<form class="pin" id="pinbox">
+<form class="pin" id="pinbox" hidden>
   <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
@@ -130,11 +130,37 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
   </div>
 
-  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "y9TqOiMOcy2inykhiPF5XA==.R7uxO1mnc/nJ184D.sJPj4wSA6NX+DSyR0K53tXzlJDOhhmbLuU2VROsofxlsTnMbQlZQrYfjZPln/Fxq5N0vGp+H2xmyKM6MKBMik9nJzXiJyBnjtXt4yBFa1PBZ+VgjhfczPfTkKbz5jmbJcwkAtl0SY6wSCna+bZRcEV0TvWLAb3doVB17ROSXngq8Syrs9t2SsWgJYHjX0i3Un0RrQ6lF7lCbclEj8JkUe+Z48kYSYsKx6Pb4Fgi/zBnKR9birhmXRz5Q3PV3LMxh/DHTkSpljAS2HsG2NW6Z0VE5AQgjbqV59ae4ChQNx0kyECTq0tNsAJDklo5DTt4I1UkM4UsL7IUQYNQMsta13wFmRpEl6Vt9oVU1i2m8TdtOwa/2C1UcK8dMm2wpqz2/WM0M/SYi0ULuCrjGOuoz5yAnSh8vD3LnWE/AaUQgjLXv4hBTbeVoM9RUqUxBViNdmpvpWTldG1hen2b04qjIrP1fojYFc2ieayww1nLa5Vgl4wdOOlKjm+Sy5Iaqslg5blr9mc7V2XMHe+b9+1EIl/cjcuyeyYlJo1i7arPTP7LR/spW6hs0XftCWsiwBvwy/ydOGoiJAlYOcKNMempBcZrNCeubLqOQlZJBi8rws+Clrw/pAVC27uHmzhDT/V1V0rxJK5/z+g9vr+KuWItMawc5KLLRja8UEIraXFaLSe+Ua73d1+VJf5CElO9wI/nMs3akUI/RwHfeuc7ZF24ZoXZAB2GEkbh/j4F7Amtp1P7nbtMyO8ZAZoOdrPstS0uXlkl2Ogbhwb+eMQ==";
+const DATI_APERTI = {
+ "nome": "Aury",
+ "rimanenti": 7,
+ "aggiornata": "3 novembre 2026",
+ "compiti": null,
+ "storico": [],
+ "materiali": [],
+ "contatti": {
+  "whatsapp": "393398768166",
+  "gruppo_concorso": "https://chat.whatsapp.com/LS9SCsDbxkRJFPOI2XaGN6",
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
+ },
+ "durata": null,
+ "compiti_fisso": null,
+ "classroom": null,
+ "pagamento": {
+  "paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL",
+  "iban": "IT33W0306968053100000007993",
+  "intestatario": "Maja Fabbri (Intesa Sanpaolo)",
+  "pacchetti": [
+   {
+    "lezioni": 10,
+    "prezzo": 200
+   }
+  ]
+ }
+};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -189,24 +215,7 @@ link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". ")
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
-const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function apri(pin){
-  const [sale, iv, ct] = CIFRATO.split('.').map(b64);
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
-  const k = await crypto.subtle.deriveKey({name:'PBKDF2', salt:sale, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv}, k, ct)));
-}
-const CHIAVE = 'pin:' + location.pathname;
-function salva(p){ try{ localStorage.setItem(CHIAVE, p); }catch(e){} }
-function ricorda(){ try{ return localStorage.getItem(CHIAVE); }catch(e){ return null; } }
-async function prova(pin, silenzioso){
-  try{ const d = await apri(pin); salva(pin); mostra(d); }
-  catch(e){ if(!silenzioso) $("errore").textContent = 'PIN non corretto, riprova'; try{ localStorage.removeItem(CHIAVE); }catch(_){} }
-}
-$("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
-$("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
-const dalLink = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
-const gia = dalLink || ricorda(); if (gia) prova(gia, !dalLink);
+mostra(DATI_APERTI);
 </script>
 </body>
 </html>

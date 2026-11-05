@@ -77,7 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </style>
 </head>
 <body>
-<form class="pin" id="pinbox">
+<form class="pin" id="pinbox" hidden>
   <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
@@ -130,11 +130,69 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
   </div>
 
-  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "m3GGAH3sq1CAIW9PclYVtA==.3WSY1SRVTMIIqzTL.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";
+const DATI_APERTI = {
+ "nome": "Liam",
+ "rimanenti": 1,
+ "aggiornata": "3 novembre 2026",
+ "compiti": null,
+ "storico": [
+  {
+   "data": "16/10/2026",
+   "fatto": "Gli aggettivi con la presentazione interattiva: abbiamo usato gli aggettivi per fare delle frasi e visto l'ordine dei tratti.",
+   "compiti": "Scrivere le parole più volte."
+  },
+  {
+   "data": "30/10/2026",
+   "fatto": "Lezione speciale di Halloween con la presentazione interattiva.",
+   "compiti": "Nessuno."
+  }
+ ],
+ "materiali": [
+  {
+   "titolo": "Le emozioni 我很高兴",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/emozioni-wo-hen-gaoxing.html"
+  },
+  {
+   "titolo": "Ordine dei tratti delle emozioni",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/tratti-emozioni.html"
+  },
+  {
+   "titolo": "Grande e piccolo 大小长短 (gli aggettivi)",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/grande-e-piccolo.html"
+  },
+  {
+   "titolo": "Ordine dei tratti: 大 小 长 短",
+   "url": "https://majajiejie.github.io/LEZIONI/tratti-da-xiao-chang-duan.html"
+  },
+  {
+   "titolo": "Halloween 万圣节",
+   "url": "https://majajiejie.github.io/LEZIONI/cultura/halloween.html"
+  }
+ ],
+ "contatti": {
+  "whatsapp": "393398768166",
+  "gruppo_concorso": "https://chat.whatsapp.com/LS9SCsDbxkRJFPOI2XaGN6",
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
+ },
+ "durata": null,
+ "compiti_fisso": null,
+ "classroom": null,
+ "pagamento": {
+  "paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL",
+  "iban": "IT33W0306968053100000007993",
+  "intestatario": "Maja Fabbri (Intesa Sanpaolo)",
+  "pacchetti": [
+   {
+    "lezioni": 10,
+    "prezzo": 150
+   }
+  ]
+ }
+};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -189,24 +247,7 @@ link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". ")
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
-const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function apri(pin){
-  const [sale, iv, ct] = CIFRATO.split('.').map(b64);
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
-  const k = await crypto.subtle.deriveKey({name:'PBKDF2', salt:sale, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv}, k, ct)));
-}
-const CHIAVE = 'pin:' + location.pathname;
-function salva(p){ try{ localStorage.setItem(CHIAVE, p); }catch(e){} }
-function ricorda(){ try{ return localStorage.getItem(CHIAVE); }catch(e){ return null; } }
-async function prova(pin, silenzioso){
-  try{ const d = await apri(pin); salva(pin); mostra(d); }
-  catch(e){ if(!silenzioso) $("errore").textContent = 'PIN non corretto, riprova'; try{ localStorage.removeItem(CHIAVE); }catch(_){} }
-}
-$("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
-$("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
-const dalLink = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
-const gia = dalLink || ricorda(); if (gia) prova(gia, !dalLink);
+mostra(DATI_APERTI);
 </script>
 </body>
 </html>
