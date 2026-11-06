@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 1 · 第8课 我去商店。</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+header{background:linear-gradient(135deg,#16a394,#5fd1b9);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:50px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header h1 .zh{font-size:52px}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:#16a394;border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:#16a394;color:#fff}
+nav small{opacity:.75}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:46px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+h3{font-size:30px;margin:0 0 12px}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:inherit;font-size:22px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.py{color:var(--red);font-size:24px}
+/* font dedicato al pinyin: toni sempre al posto giusto */
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.hide-py .py{visibility:hidden}
+
+/* mini-scene */
+.ms{position:relative;display:inline-block;width:150px;height:140px;flex:none}
+.ms .b{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:90px;line-height:1}
+.ms .o{position:absolute;left:50%;transform:translateX(-50%);font-size:46px;line-height:1}
+.ms .o.on{bottom:82px}
+.ms .o.in{bottom:20px;font-size:36px;filter:drop-shadow(0 0 3px #fff)}
+.ms.under .b{bottom:30px}
+.ms .o.under{bottom:0;font-size:40px}
+.ms .x{position:absolute;right:4px;top:4px;font-size:34px}
+.pics{font-size:60px;line-height:1;flex:none;width:150px;text-align:center}
+
+/* frasi chiave */
+.key{display:flex;align-items:center;gap:20px;background:#fff;border:3px solid var(--line);border-radius:26px;padding:24px;margin-bottom:20px;flex-wrap:wrap}
+.key .txt{flex:1;min-width:260px}
+.key .py{font-size:30px}
+.key .zh{font-size:56px}
+.key .it{color:var(--soft);font-size:28px}
+
+/* specchietti */
+.box{background:#fff;border:3px solid var(--line);border-radius:26px;padding:22px;margin-bottom:22px}
+.box.blue{border-color:#bcdcf3;background:#f3f9ff}
+.box.green{border-color:#c4e8d3;background:#f2fbf6}
+.box.orange{border-color:#f7d2a6;background:#fff6eb}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.var{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid var(--line)}
+.var .big{font-size:52px}
+.var .py{font-size:28px}
+.var .ex{margin-top:10px;font-size:34px}
+.var .ex .py{font-size:22px;display:block}
+.var .it{color:var(--soft);font-size:22px}
+.loc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.loc .var .big{font-size:70px;color:var(--red)}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px;opacity:.95}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cZ{background:var(--orange)} .cB{background:var(--green)} .cL{background:var(--red)}
+.exrow{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:12px 16px;margin:12px 0;flex-wrap:wrap}
+.exrow .zh{font-size:44px}
+.exrow .zh span{padding:0 4px;border-radius:8px}
+.exrow .py{display:block;font-size:24px}
+.exrow .it{color:var(--soft);font-size:24px}
+.tA{color:var(--blue)} .tZ{color:var(--orange)} .tB{color:var(--green)} .tL{color:var(--red)}
+
+/* vocab */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{perspective:800px;height:250px;cursor:pointer;position:relative}
+.inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:var(--card);box-shadow:0 4px 0 var(--line);border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+.face .pic{font-size:70px;line-height:1}
+.face .w{font-size:44px}
+.back{transform:rotateY(180deg);background:#fff3d6}
+.back .it{font-size:28px;font-weight:700}
+.card .spk{position:absolute;top:8px;right:8px;width:42px;height:42px;font-size:20px;z-index:2}
+
+
+/* ordine dei tratti */
+.card .wr{position:absolute;top:8px;left:8px;width:42px;height:42px;font-size:20px;z-index:2;border:0;border-radius:50%;background:#cdf1ea;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:28px;padding:24px;max-width:760px;width:100%;text-align:center;position:relative}
+.mbox .close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:34px;cursor:pointer}
+.mword{font-size:28px;margin-bottom:6px}
+.writers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.tzg{width:240px;height:240px;border:3px solid #16a394;border-radius:10px;position:relative;background:
+ linear-gradient(#bfe9e1,#bfe9e1) center/100% 2px no-repeat,linear-gradient(#bfe9e1,#bfe9e1) center/2px 100% no-repeat}
+.ctrl{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:22px}
+.ctrl input[type=range]{width:220px;accent-color:#16a394}
+
+/* dialogue */
+.dlg{background:#fff;border-radius:24px;padding:20px;border:3px solid var(--line);margin-bottom:22px}
+.line{display:flex;align-items:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.who{flex:none;width:110px;text-align:center;border-radius:14px;padding:6px;color:#fff;font-size:22px}
+.bubble{background:#f7f1ea;border-radius:18px;padding:8px 18px;flex:1;min-width:240px}
+.bubble .zh{font-size:36px}
+.bubble .tr{color:var(--soft);font-size:22px;display:none}
+.show-tr .bubble .tr{display:block}
+.q{background:#eaf5ff;border-radius:16px;padding:14px 18px;margin-top:12px;cursor:pointer}
+.q .zh{font-size:30px}
+.q .ans{display:none;color:var(--green);font-weight:700;font-size:30px}
+.q.open .ans{display:block}
+
+/* game */
+.stage{background:#fff;border-radius:26px;border:3px solid var(--line);padding:22px;text-align:center}
+.scene{position:relative;height:230px;width:300px;margin:0 auto 10px}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-size:150px;line-height:1}
+.obj{position:absolute;left:50%;transform:translateX(-50%);font-size:68px;line-height:1}
+.obj.on{bottom:136px}
+.obj.in{bottom:34px;font-size:54px;filter:drop-shadow(0 0 4px #fff)}
+.question .zh{font-size:44px}
+.question .py{font-size:28px}
+.opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:10px 22px;font:inherit;cursor:pointer}
+.opt .zh{font-size:36px;display:block}
+.opt .py{display:block;font-size:22px}
+.opt.ok{border-color:var(--green);background:#e8f8ef}
+.opt.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{min-height:36px;font-size:28px;margin-top:12px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots span{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots span.done{background:var(--green)}
+.dots span.cur{background:var(--orange)}
+
+/* storia: una vignetta alla volta */
+.intro{background:#fff3d6;border-radius:22px;padding:16px 20px;margin-bottom:18px;font-size:24px}
+.newwords{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 16px 6px 8px;display:flex;align-items:center;gap:10px;font-size:24px}
+.chip .zh{font-size:30px}
+.chip .spk{width:42px;height:42px;font-size:20px}
+.comic{background:#fff;border:4px solid #b9dfa0;border-radius:28px;padding:22px;max-width:760px;margin:0 auto}
+.comic .num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:46px;height:46px;line-height:46px;text-align:center;font-size:26px}
+.comic .sp{display:flex;align-items:center;gap:12px;margin:14px 0}
+.comic .face2{font-size:56px;flex:none;width:70px;text-align:center}
+.comic .bubble .zh{font-size:40px}
+.comic .middle{text-align:center;margin:6px 0}
+.snav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:18px}
+.snav .btn{font-size:26px;padding:10px 26px}
+
+/* parla */
+.talk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.talk div{background:#fff3d6;border-radius:20px;padding:18px}
+.talk .zh{font-size:34px}
+.talk .py{font-size:22px}
+.builder{margin-top:8px;color:var(--soft);font-size:26px}
+.end{display:none;text-align:center;font-size:30px;margin-top:20px;background:#e8f8ef;border-radius:20px;padding:18px}
+footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
+
+.pick{border:3px solid var(--line);background:#fff;border-radius:22px;padding:14px 20px;cursor:pointer;font:inherit;min-width:150px}
+.pick .zh{font-size:56px;display:block}
+.pick .py{display:block;font-size:22px}
+.pick.ok{border-color:var(--green);background:#e8f8ef}
+.pick.no{border-color:var(--red);background:#fdeceb;animation:shake .3s}
+.bigpic{font-size:110px;line-height:1.1;margin:6px 0 10px}
+.bigpic.txt{font-size:54px;font-weight:700;color:var(--blue)}
+.note{background:#fff3d6;border-radius:16px;padding:12px 16px;margin-top:12px;font-size:24px}
+.hw{background:#e6f7f4;border:3px dashed #16a394;border-radius:22px;padding:16px 20px;margin-top:22px;font-size:26px;text-align:center}
+.exrow .pics{font-size:52px}
+
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>YCT 1 · Lezione 8 · <span class="zh">我去商店。</span></h1>
+  <p><span class="pyf">Wǒ qù shāngdiàn.</span> · Vado al negozio · con Maja Jiejie 🐼</p>
+</header>
+<nav id="nav">
+  <button data-s="0" class="on">⭐ Frasi chiave <small>3'</small></button>
+  <button data-s="1">Parole <small>8'</small></button>
+  <button data-s="2">在 e 去 📍 <small>5'</small></button>
+  <button data-s="3">Leggiamo <small>6'</small></button>
+  <button data-s="4">Gioco 1 🎯 <small>5'</small></button>
+  <button data-s="5">Gioco 2 👂 <small>5'</small></button>
+  <button data-s="6">Parliamo <small>4'</small></button>
+</nav>
+
+<main>
+<section id="s0" class="on">
+  <h2>Frasi chiave</h2>
+  <p class="hint">Oggi impariamo a dire <b>dove siamo</b> e <b>dove andiamo</b>.</p>
+  <div id="keys"></div>
+</section>
+
+<section id="s1">
+  <h2>Le parole nuove <span class="zh">生词</span></h2>
+  <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per vedere cosa vuol dire. ✍️ = come si scrive</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="grid" id="vocab"></div>
+</section>
+
+<section id="s2">
+  <h2 id="boxh"></h2>
+  <div id="boxes"></div>
+</section>
+
+<section id="s3">
+  <h2>Leggiamo</h2>
+  <div class="tools">
+    <button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button>
+    <button class="btn alt" onclick="document.body.classList.toggle('show-tr')">Traduzione sì / no</button>
+  </div>
+  <div id="dialogs"></div>
+</section>
+
+<section id="s4">
+  <h2>Dove? 哪儿？ 🗺️</h2>
+  <p class="hint">Guarda il disegno e scegli la risposta giusta. Poi dilla ad alta voce!</p>
+  <div class="stage">
+    <div class="bigpic" id="g1pic"></div>
+    <div class="question"><div class="py" id="g1qp"></div><div class="zh" id="g1q"></div></div>
+    <button class="spk" id="g1spk">🔊</button>
+    <div class="opts" id="g1opts"></div>
+    <div class="feedback" id="g1fb"></div>
+    <div class="dots" id="g1dots"></div>
+    <div style="margin-top:14px"><button class="btn" id="g1next" style="display:none">Avanti ➜</button></div>
+  </div>
+</section>
+
+<section id="s5">
+  <h2>Ascolta e scegli 👂</h2>
+  <p class="hint">Premi 🔊, ascolta la parola e clicca il carattere giusto!</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <div class="stage">
+    <button class="spk" id="g2spk" style="width:90px;height:90px;font-size:44px">🔊</button>
+    <div class="opts" id="g2opts" style="margin-top:20px"></div>
+    <div class="feedback" id="g2fb"></div>
+    <div class="dots" id="g2dots"></div>
+    <div style="margin-top:14px"><button class="btn" id="g2next" style="display:none">Avanti ➜</button></div>
+  </div>
+</section>
+
+<section id="s6">
+  <h2>Parliamo! 🙋</h2>
+  <p class="hint">Rispondi alle domande della maestra. Poi fai tu la domanda a un compagno!</p>
+  <div class="talk" id="talk"></div>
+  <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Abbiamo finito! 🎉</button></div>
+  <div class="end" id="end"></div>
+  <div class="hw">📝 <b>Compito</b>: su Classroom trovi la presentazione con l'<b>ordine dei tratti</b>.<br>Scrivi i caratteri nuovi sul quaderno e manda la foto alla maestra!</div>
+</section>
+</main>
+
+<div class="modal" id="wmodal" onclick="if(event.target===this)closeW()">
+ <div class="mbox">
+  <button class="close" onclick="closeW()">✕</button>
+  <div class="mword"><span class="py" id="wpy"></span> · <span id="wit"></span></div>
+  <div class="writers" id="writers"></div>
+  <div class="ctrl">
+   <button class="btn" onclick="playW()">▶ Guarda come si scrive</button>
+   <label>🐢 Lento <input type="range" id="wspeed" min="0.15" max="1.5" step="0.05" value="0.5" oninput="document.getElementById('wsv').textContent=speedLabel(this.value)"> Veloce 🐇</label>
+   <span id="wsv" style="color:var(--soft)"></span>
+   <button class="btn alt" onclick="quizW()">✍️ Prova tu</button>
+  </div>
+ </div>
+</div>
+<footer>Maja Jiejie · Chinese Academy</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script>
+const D={"keys": [["你姐姐在家吗？", "Nǐ jiějie zài jiā ma?", "Tua sorella è a casa?", "👱‍♀️🏠❔"], ["我去商店。", "Wǒ qù shāngdiàn.", "Vado al negozio.", "🚶➡️🏪"]], "vocab": [["学校", "xuéxiào", "scuola", "🏫"], ["商店", "shāngdiàn", "negozio", "🏪"], ["在", "zài", "essere (in un posto)", "📍"], ["谢谢", "xièxie", "grazie", "🙏"], ["去", "qù", "andare", "🚶"], ["你们", "nǐmen", "voi", "👉👥"], ["我们", "wǒmen", "noi", "🙋👫"], ["哪儿", "nǎr", "dove?", "🗺️❓"]], "dialogs": [{"t": "Testo 1 · Alla porta 🚪", "lines": [["女孩 👧", "你姐姐在家吗？", "Nǐ jiějie zài jiā ma?", "Tua sorella è a casa?", "#e0524a"], ["男孩 👦", "不在，她在学校。", "Bú zài, tā zài xuéxiào.", "No, è a scuola.", "#3a8fd0"], ["女孩 👧", "谢谢，再见！", "Xièxie, zàijiàn!", "Grazie, ciao!", "#e0524a"], ["男孩 👦", "再见！", "Zàijiàn!", "Ciao!", "#3a8fd0"]], "q": ["他姐姐在家吗？", "不在，她在学校。"]}, {"t": "Testo 2 · La mamma esce 🛍️", "lines": [["妈妈 👩", "我去商店，你们去吗？", "Wǒ qù shāngdiàn, nǐmen qù ma?", "Vado al negozio, venite?", "#9a7bd1"], ["哥哥 👦", "不去。我们在家。", "Bú qù. Wǒmen zài jiā.", "No. Restiamo a casa.", "#3a8fd0"], ["妹妹 👧", "妈妈，我去。", "Māma, wǒ qù.", "Mamma, vengo io!", "#e0524a"]], "q": ["妈妈去哪儿？", "妈妈去商店。"]}], "g1": [{"pic": "👧🏫", "q": "她在哪儿？", "qp": "Tā zài nǎr?", "a": "在学校。", "opts": [["在学校。", "Zài xuéxiào."], ["在商店。", "Zài shāngdiàn."], ["在家。", "Zài jiā."]]}, {"pic": "👩🚶➡️🏪", "q": "妈妈去哪儿？", "qp": "Māma qù nǎr?", "a": "去商店。", "opts": [["去学校。", "Qù xuéxiào."], ["去商店。", "Qù shāngdiàn."], ["在家。", "Zài jiā."]]}, {"pic": "👦🏠", "q": "哥哥在哪儿？", "qp": "Gēge zài nǎr?", "a": "在家。", "opts": [["在商店。", "Zài shāngdiàn."], ["去学校。", "Qù xuéxiào."], ["在家。", "Zài jiā."]]}, {"pic": "👫🚶➡️🏫", "q": "你们去哪儿？", "qp": "Nǐmen qù nǎr?", "a": "我们去学校。", "opts": [["我们去学校。", "Wǒmen qù xuéxiào."], ["我们在家。", "Wǒmen zài jiā."], ["我们去商店。", "Wǒmen qù shāngdiàn."]]}, {"pic": "🎁➡️🧒", "q": "Ti danno un regalo. Cosa dici?", "a": "谢谢！", "opts": [["再见！", "Zàijiàn!"], ["谢谢！", "Xièxie!"], ["不去！", "Bú qù!"]]}, {"pic": "👱‍♀️❌🏠", "q": "你姐姐在家吗？", "qp": "Nǐ jiějie zài jiā ma?", "a": "不在。", "opts": [["在。", "Zài."], ["不在。", "Bú zài."], ["没有。", "Méiyǒu."]]}], "talk": [["你在哪儿？", "Nǐ zài nǎr?", "我在 ______ 。"], ["明天你去学校吗？", "Míngtiān nǐ qù xuéxiào ma?", "去。/ 不去。"], ["你妈妈在家吗？", "Nǐ māma zài jiā ma?", "在。/ 不在，她在 ______ 。"], ["我去商店，你们去吗？", "Wǒ qù shāngdiàn, nǐmen qù ma?", "去！/ 不去，我们在家。"]], "box": {"nav": "在 e 去 📍", "title": "在 e 去 📍🚶", "parts": [{"h": "在 + posto = sono lì", "rows": [["我在家。", "Wǒ zài jiā.", "Sono a casa.", "🙋🏠"], ["她在学校。", "Tā zài xuéxiào.", "Lei è a scuola.", "👧🏫"]]}, {"h": "去 + posto = ci vado", "rows": [["我去商店。", "Wǒ qù shāngdiàn.", "Vado al negozio.", "🚶🏪"], ["我们去学校。", "Wǒmen qù xuéxiào.", "Andiamo a scuola.", "👫🏫"]]}, {"h": "Dove? 哪儿", "rows": [["你去哪儿？", "Nǐ qù nǎr?", "Dove vai?", "🚶❓"], ["你在哪儿？", "Nǐ zài nǎr?", "Dove sei?", "📍❓"]], "note": "Per rispondere metti il posto al posto di <b>哪儿</b>!"}]}};
+let stars=0;
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+
+/* voce cinese */
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.75;speechSynthesis.speak(u)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-say]');if(b){e.stopPropagation();say(b.dataset.say)}},true);
+const spk=t=>`<button class="spk" data-say="${esc(t)}">🔊</button>`;
+
+/* nav */
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+/* frasi chiave */
+document.getElementById('keys').innerHTML=D.keys.map(k=>`<div class="key"><div class="pics">${k[3]}</div>
+ <div class="txt"><div class="py">${k[1]}</div><div class="zh">${k[0]}</div><div class="it">${k[2]}</div></div>${spk(k[0])}</div>`).join('');
+
+/* parole */
+const vocab=D.vocab;
+document.getElementById('vocab').innerHTML=vocab.map((v,i)=>`
+ <div class="card" onclick="this.classList.toggle('flip')">
+  <button class="spk" data-say="${esc(v[0])}">🔊</button>
+  <button class="wr" title="Come si scrive" onclick="openW(${i},event)">✍️</button>
+  <div class="inner">
+   <div class="face"><div class="pic">${v[3]}</div><div class="py">${v[1]}</div><div class="w zh">${v[0]}</div></div>
+   <div class="face back"><div class="w zh">${v[0]}</div><div class="py">${v[1]}</div><div class="it">${v[2]}</div></div>
+  </div></div>`).join('');
+
+/* ordine dei tratti */
+let wIdx=0,writers=[];
+function speedLabel(v){v=+v;return v<0.35?'molto lento':v<0.7?'lento':v<1.1?'normale':'veloce'}
+function wChars(){return vocab[wIdx][0].replace(/[^一-鿿]/g,'').split('')}
+function buildW(){
+ const sp=+document.getElementById('wspeed').value, box=document.getElementById('writers');
+ box.innerHTML='';writers=[];
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p>Serve la connessione a internet per l\'animazione.</p>';return}
+ const n=wChars().length, size=n>2?190:240;
+ wChars().forEach((c,k)=>{const d=document.createElement('div');d.className='tzg';d.style.width=d.style.height=size+'px';box.appendChild(d);
+  writers.push(HanziWriter.create(d,c,{width:size,height:size,padding:14,showOutline:true,showCharacter:true,
+   strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#eadfd8',highlightColor:'#16a394',drawingColor:'#16a394',
+   strokeAnimationSpeed:sp,delayBetweenStrokes:Math.round(500/sp)}))});
+}
+function openW(i,e){e.stopPropagation();wIdx=i;
+ document.getElementById('wpy').textContent=vocab[i][1];document.getElementById('wit').textContent=vocab[i][2];
+ document.getElementById('wsv').textContent=speedLabel(document.getElementById('wspeed').value);
+ document.getElementById('wmodal').classList.add('on');buildW();}
+function closeW(){document.getElementById('wmodal').classList.remove('on');document.getElementById('writers').innerHTML='';writers=[]}
+async function playW(){buildW();for(const w of writers){await w.animateCharacter()}}
+function quizW(){buildW();writers.forEach(w=>{w.hideCharacter();w.quiz({onComplete:()=>star()})})}
+
+/* specchietti */
+if(D.box){document.getElementById('boxh').innerHTML=D.box.title;
+ const cls=['blue','green','orange'];
+ document.getElementById('boxes').innerHTML=D.box.parts.map((p,i)=>`<div class="box ${cls[i%3]}"><h3>${i+1} · ${p.h}</h3>${
+  p.rows.map(r=>`<div class="exrow"><span class="pics">${r[3]}</span><div><div class="zh">${r[0]}</div><span class="py">${r[1]}</span><span class="it">${r[2]}</span></div>${spk(r[0])}</div>`).join('')
+ }${p.note?`<div class="note">💡 ${p.note}</div>`:''}</div>`).join('');}
+
+/* dialoghi */
+document.getElementById('dialogs').innerHTML=D.dialogs.map(d=>`<div class="dlg"><h3>${d.t}</h3>${
+ d.lines.map(l=>`<div class="line"><div class="who" style="background:${l[4]}">${l[0]}</div>
+ <div class="bubble"><div class="py">${l[2]}</div><div class="zh">${l[1]}</div><div class="tr">${l[3]}</div></div>${spk(l[1])}</div>`).join('')}
+ <div class="q" onclick="this.classList.toggle('open')"><span class="zh">${d.q[0]}</span> <small>(clicca per la risposta)</small>
+ <div class="ans zh">${d.q[1]}</div></div></div>`).join('');
+
+/* gioco 1 */
+function game(cfg){
+ let r=0,tried=false;const R=cfg.rounds;
+ const $=id=>document.getElementById(cfg.p+id);
+ function draw(){
+  const d=R[r];tried=false;cfg.draw(d);
+  const opts=[...d.opts].sort(()=>Math.random()-.5);
+  $('opts').innerHTML=opts.map(o=>`<button class="pick" data-o="${esc(o[0])}"><span class="py">${o[1]}</span><span class="zh">${o[0]}</span></button>`).join('');
+  $('opts').querySelectorAll('.pick').forEach(b=>b.onclick=()=>pick(b,b.dataset.o));
+  $('fb').textContent='';$('next').style.display='none';
+  $('dots').innerHTML=R.map((_,i)=>`<span class="${i<r?'done':i===r?'cur':''}"></span>`).join('');
+ }
+ function pick(b,o){
+  const d=R[r];
+  if(o===d.a){b.classList.add('ok');if(!tried)star();say(d.a);
+   $('fb').innerHTML='🎉 <span class="zh">对！</span> Bravissimi!';
+   $('opts').querySelectorAll('.pick').forEach(x=>x.disabled=true);
+   $('next').style.display='inline-block';$('next').textContent=r<R.length-1?'Avanti ➜':'Finito! 🌟';
+  }else{b.classList.add('no');tried=true;$('fb').innerHTML='🤔 Riprova!'}
+ }
+ $('next').onclick=()=>{if(r<R.length-1){r++;draw()}else{$('fb').innerHTML='🌟 <span class="zh">太棒了！</span> Gioco finito!';$('next').style.display='none';$('dots').innerHTML=R.map(()=>'<span class="done"></span>').join('')}};
+ draw();
+}
+game({p:'g1',rounds:D.g1,draw:d=>{
+ const pic=document.getElementById('g1pic');pic.innerHTML=d.pic;pic.className='bigpic'+(d.txt?' txt':'');
+ document.getElementById('g1q').textContent=d.q;document.getElementById('g1qp').textContent=d.qp||'';
+ const s=document.getElementById('g1spk');s.style.display=/[一-鿿]/.test(d.q)?'inline-block':'none';s.dataset.say=d.q;
+}});
+
+/* gioco 2: ascolta e scegli */
+const pool=vocab.filter(v=>!v[4]);
+const g2=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(8,pool.length)).map(v=>{
+ const others=pool.filter(x=>x[0]!==v[0]).sort(()=>Math.random()-.5).slice(0,2);
+ return {a:v[0],opts:[[v[0],v[1]],...others.map(x=>[x[0],x[1]])]};});
+game({p:'g2',rounds:g2,draw:d=>{document.getElementById('g2spk').dataset.say=d.a;setTimeout(()=>{if(document.getElementById('s5').classList.contains('on'))say(d.a)},300)}});
+
+/* parliamo */
+document.getElementById('talk').innerHTML=D.talk.map(t=>`<div>${spk(t[0])} <span class="py">${t[1]}</span><br><span class="zh">${t[0]}</span><div class="builder zh">${t[2]}</div></div>`).join('');
+
+function finish(){star(1);const e=document.getElementById('end');e.style.display='block';e.innerHTML=`🎉 <span class="zh">太棒了！</span><br>Oggi avete raccolto <b>${stars}</b> ⭐! <span class="zh">再见！</span> 👋`}
+</script>
+</body>
+</html>
