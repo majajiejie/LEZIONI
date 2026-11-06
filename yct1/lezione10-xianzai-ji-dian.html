@@ -181,6 +181,22 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 .hw{background:#e6f7f4;border:3px dashed #16a394;border-radius:22px;padding:16px 20px;margin-top:22px;font-size:26px;text-align:center}
 .exrow .pics{font-size:52px}
 
+.trw{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.trw button{border:0;border-radius:16px;padding:4px 14px;font:inherit;font-size:30px;background:var(--line);cursor:pointer;font-family:'Noto Sans SC',sans-serif}
+.trw button.on{background:#16a394;color:#fff}
+.trhead{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.trhead .pic{font-size:64px}.trhead .zh{font-size:64px}.trhead .py{font-size:30px;display:block}.trhead .it{color:var(--soft);font-size:26px}
+.trchar{background:#fff;border:3px solid var(--line);border-radius:26px;padding:18px;margin-bottom:20px}
+.trtop{display:flex;gap:22px;align-items:center;flex-wrap:wrap;justify-content:center}
+.trtop .tzg{width:280px;height:280px}
+.trctrl{display:flex;flex-direction:column;gap:10px;min-width:250px}
+.trcount{font-size:26px;text-align:center}.trcount b{color:var(--red);font-size:34px}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;justify-content:center}
+.step{position:relative}
+.step svg{width:78px;height:78px;border:2px solid #16a394;border-radius:8px;background:#fff}
+.step span{position:absolute;top:2px;left:5px;font-size:14px;color:var(--soft);font-weight:700}
+.trnav{display:flex;justify-content:center;gap:20px;margin-top:10px}
+
 </style>
 </head>
 <body>
@@ -192,6 +208,7 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 <nav id="nav">
   <button data-s="0" class="on">⭐ Frasi chiave <small>3'</small></button>
   <button data-s="1">Parole <small>8'</small></button>
+  <button data-s="7">✍️ Tratti <small>8'</small></button>
   <button data-s="2">L'ora ⏰ <small>5'</small></button>
   <button data-s="3">Leggiamo <small>6'</small></button>
   <button data-s="4">Gioco 1 🎯 <small>5'</small></button>
@@ -209,8 +226,18 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 <section id="s1">
   <h2>Le parole nuove <span class="zh">生词</span></h2>
   <p class="hint">Ascolta 🔊 e ripeti. Clicca sulla carta per vedere cosa vuol dire. ✍️ = come si scrive</p>
-  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button> <a class="btn" style="text-decoration:none" href="tratti-lezione10.html" target="_blank">✍️ Ordine dei tratti di tutte le parole</a></div>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
   <div class="grid" id="vocab"></div>
+</section>
+
+
+<section id="s7">
+  <h2>L'ordine dei tratti ✍️ <span class="zh">笔顺</span></h2>
+  <p class="hint">Guarda il pennello, conta i tratti e poi scrivi sul quaderno!</p>
+  <div class="trw" id="trw"></div>
+  <div class="trhead" id="trh"></div>
+  <div id="trc"></div>
+  <div class="trnav"><button class="btn ghost" onclick="trGo(-1)">◀ Indietro</button><button class="btn" onclick="trGo(1)">Avanti ▶</button></div>
 </section>
 
 <section id="s2">
@@ -260,7 +287,7 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
   <div class="talk" id="talk"></div>
   <div style="text-align:center;margin-top:20px"><button class="btn" onclick="finish()">Abbiamo finito! 🎉</button></div>
   <div class="end" id="end"></div>
-  <div class="hw">📝 <b>Compito</b>: guarda l'<b>ordine dei tratti</b> e scrivi i caratteri nuovi sul quaderno (5 volte ognuno).<br>Poi manda la foto alla maestra! 📸<br><a class="btn" style="text-decoration:none;display:inline-block;margin-top:10px" href="tratti-lezione10.html" target="_blank">✍️ Apri l'ordine dei tratti</a></div>
+  <div class="hw">📝 <b>Compito</b>: guarda l'<b>ordine dei tratti</b> (sezione ✍️ Tratti) e scrivi i caratteri nuovi sul quaderno (5 volte ognuno).<br>Poi manda la foto alla maestra! 📸</div>
 </section>
 </main>
 
@@ -281,7 +308,7 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 <script>
-const D={"keys": [["现在几点？", "Xiànzài jǐ diǎn?", "Che ore sono adesso?", "⏰❓"], ["明天5点见。", "Míngtiān wǔ diǎn jiàn.", "Ci vediamo domani alle 5.", "🕔🤝"]], "vocab": [["现在", "xiànzài", "adesso", "⏰"], ["点", "diǎn", "ora (le … in punto)", "🕐"], ["分", "fēn", "minuto", "⏱️"], ["见", "jiàn", "vedersi, incontrarsi", "🤝"], ["早上", "zǎoshang", "mattina", "🌅"], ["太早了！", "tài zǎo le!", "è troppo presto!", "😴"], ["五点", "wǔ diǎn", "le cinque", "🕔", 1], ["十二点", "shí'èr diǎn", "le dodici", "🕛", 1], ["一点十分", "yī diǎn shí fēn", "l'una e dieci", "🕐", 1]], "dialogs": [{"t": "Testo 1 · A casa 🏠", "lines": [["男孩 👦", "妈妈，现在几点？", "Māma, xiànzài jǐ diǎn?", "Mamma, che ore sono?", "#3a8fd0"], ["妈妈 👩", "11点10分。", "Shíyī diǎn shí fēn.", "Le undici e dieci.", "#9a7bd1"]], "q": ["现在几点？", "11点10分。"]}, {"t": "Testo 2 · La squadra di calcio ⚽", "lines": [["男孩 👦", "明天几点见？", "Míngtiān jǐ diǎn jiàn?", "A che ora ci vediamo domani?", "#3a8fd0"], ["男孩 🧒", "早上5点。", "Zǎoshang wǔ diǎn.", "Alle 5 di mattina.", "#3fa874"], ["男孩 👦", "太早了！", "Tài zǎo le!", "È troppo presto!", "#3a8fd0"]], "q": ["明天几点见？", "早上5点。"]}], "g1": [{"pic": "🕔", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "5点", "opts": [["5点", "wǔ diǎn"], ["8点", "bā diǎn"], ["3点", "sān diǎn"]]}, {"pic": "🕛", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "12点", "opts": [["2点", "liǎng diǎn"], ["12点", "shí'èr diǎn"], ["10点", "shí diǎn"]]}, {"pic": "🕗", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "8点", "opts": [["6点", "liù diǎn"], ["9点", "jiǔ diǎn"], ["8点", "bā diǎn"]]}, {"pic": "🕒", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "3点", "opts": [["3点", "sān diǎn"], ["4点", "sì diǎn"], ["7点", "qī diǎn"]]}, {"pic": "⏰ 1:10", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "1点10分", "opts": [["10点1分", "shí diǎn yī fēn"], ["1点10分", "yī diǎn shí fēn"], ["1点", "yī diǎn"]]}, {"pic": "🌅🕔", "q": "早上5点见！", "qp": "Zǎoshang wǔ diǎn jiàn!", "a": "太早了！", "opts": [["太早了！", "Tài zǎo le!"], ["谢谢！", "Xièxie!"], ["不认识。", "Bú rènshi."]]}], "talk": [["现在几点？", "Xiànzài jǐ diǎn?", "现在 ___ 点 ___ 分。"], ["你早上几点去学校？", "Nǐ zǎoshang jǐ diǎn qù xuéxiào?", "我早上 ___ 点去学校。"], ["明天几点见？", "Míngtiān jǐ diǎn jiàn?", "明天 ___ 点见！"], ["早上5点见！", "Zǎoshang wǔ diǎn jiàn!", "太早了！"]], "box": {"nav": "L'ora ⏰", "title": "Come si dice l'ora ⏰", "parts": [{"h": "Numero + 点", "rows": [["5点", "wǔ diǎn", "le cinque", "🕔"], ["12点", "shí'èr diǎn", "le dodici", "🕛"]]}, {"h": "Numero + 点 + numero + 分", "rows": [["1点10分", "yī diǎn shí fēn", "l'una e dieci", "🕐"], ["11点10分", "shíyī diǎn shí fēn", "le undici e dieci", "🕚"]], "note": "Prima le <b>ore 点</b>, poi i <b>minuti 分</b>."}, {"h": "Ci vediamo!", "rows": [["明天几点见？", "Míngtiān jǐ diǎn jiàn?", "A che ora ci vediamo domani?", "🤝❓"], ["早上5点见。", "Zǎoshang wǔ diǎn jiàn.", "Ci vediamo alle 5 di mattina.", "🌅🕔"]]}]}};
+const D={"keys": [["现在几点？", "Xiànzài jǐ diǎn?", "Che ore sono adesso?", "⏰❓"], ["明天5点见。", "Míngtiān wǔ diǎn jiàn.", "Ci vediamo domani alle 5.", "🕔🤝"]], "vocab": [["现在", "xiànzài", "adesso", "⏰"], ["点", "diǎn", "ora (le … in punto)", "🕐"], ["分", "fēn", "minuto", "⏱️"], ["见", "jiàn", "vedersi, incontrarsi", "🤝"], ["早上", "zǎoshang", "mattina", "🌅"], ["太早了！", "tài zǎo le!", "è troppo presto!", "😴"], ["五点", "wǔ diǎn", "le cinque", "🕔", 1], ["十二点", "shí'èr diǎn", "le dodici", "🕛", 1], ["一点十分", "yī diǎn shí fēn", "l'una e dieci", "🕐", 1]], "dialogs": [{"t": "Testo 1 · A casa 🏠", "lines": [["男孩 👦", "妈妈，现在几点？", "Māma, xiànzài jǐ diǎn?", "Mamma, che ore sono?", "#3a8fd0"], ["妈妈 👩", "11点10分。", "Shíyī diǎn shí fēn.", "Le undici e dieci.", "#9a7bd1"]], "q": ["现在几点？", "11点10分。"]}, {"t": "Testo 2 · La squadra di calcio ⚽", "lines": [["男孩 👦", "明天几点见？", "Míngtiān jǐ diǎn jiàn?", "A che ora ci vediamo domani?", "#3a8fd0"], ["男孩 🧒", "早上5点。", "Zǎoshang wǔ diǎn.", "Alle 5 di mattina.", "#3fa874"], ["男孩 👦", "太早了！", "Tài zǎo le!", "È troppo presto!", "#3a8fd0"]], "q": ["明天几点见？", "早上5点。"]}], "g1": [{"pic": "🕔", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "5点", "opts": [["5点", "wǔ diǎn"], ["8点", "bā diǎn"], ["3点", "sān diǎn"]]}, {"pic": "🕛", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "12点", "opts": [["2点", "liǎng diǎn"], ["12点", "shí'èr diǎn"], ["10点", "shí diǎn"]]}, {"pic": "🕗", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "8点", "opts": [["6点", "liù diǎn"], ["9点", "jiǔ diǎn"], ["8点", "bā diǎn"]]}, {"pic": "🕒", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "3点", "opts": [["3点", "sān diǎn"], ["4点", "sì diǎn"], ["7点", "qī diǎn"]]}, {"pic": "⏰ 1:10", "q": "现在几点？", "qp": "Xiànzài jǐ diǎn?", "a": "1点10分", "opts": [["10点1分", "shí diǎn yī fēn"], ["1点10分", "yī diǎn shí fēn"], ["1点", "yī diǎn"]]}, {"pic": "🌅🕔", "q": "早上5点见！", "qp": "Zǎoshang wǔ diǎn jiàn!", "a": "太早了！", "opts": [["太早了！", "Tài zǎo le!"], ["谢谢！", "Xièxie!"], ["不认识。", "Bú rènshi."]]}], "talk": [["现在几点？", "Xiànzài jǐ diǎn?", "现在 ___ 点 ___ 分。"], ["你早上几点去学校？", "Nǐ zǎoshang jǐ diǎn qù xuéxiào?", "我早上 ___ 点去学校。"], ["明天几点见？", "Míngtiān jǐ diǎn jiàn?", "明天 ___ 点见！"], ["早上5点见！", "Zǎoshang wǔ diǎn jiàn!", "太早了！"]], "box": {"nav": "L'ora ⏰", "title": "Come si dice l'ora ⏰", "parts": [{"h": "Numero + 点", "rows": [["5点", "wǔ diǎn", "le cinque", "🕔"], ["12点", "shí'èr diǎn", "le dodici", "🕛"]]}, {"h": "Numero + 点 + numero + 分", "rows": [["1点10分", "yī diǎn shí fēn", "l'una e dieci", "🕐"], ["11点10分", "shíyī diǎn shí fēn", "le undici e dieci", "🕚"]], "note": "Prima le <b>ore 点</b>, poi i <b>minuti 分</b>."}, {"h": "Ci vediamo!", "rows": [["明天几点见？", "Míngtiān jǐ diǎn jiàn?", "A che ora ci vediamo domani?", "🤝❓"], ["早上5点见。", "Zǎoshang wǔ diǎn jiàn.", "Ci vediamo alle 5 di mattina.", "🌅🕔"]]}]}, "tratti": [["现在", "xiànzài", "adesso", "⏰"], ["点", "diǎn", "ora (le … in punto)", "🕐"], ["分", "fēn", "minuto", "⏱️"], ["见", "jiàn", "vedersi, incontrarsi", "🤝"], ["早上", "zǎoshang", "mattina", "🌅"], ["太早了！", "tài zǎo le!", "è troppo presto!", "😴"]]};
 let stars=0;
 function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
 function togglePy(){document.body.classList.toggle('hide-py')}
@@ -387,6 +414,39 @@ const g2=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(8,pool.length)).m
  const others=pool.filter(x=>x[0]!==v[0]).sort(()=>Math.random()-.5).slice(0,2);
  return {a:v[0],opts:[[v[0],v[1]],...others.map(x=>[x[0],x[1]])]};});
 game({p:'g2',rounds:g2,draw:d=>{document.getElementById('g2spk').dataset.say=d.a;setTimeout(()=>{if(document.getElementById('s5').classList.contains('on'))say(d.a)},300)}});
+
+
+/* ordine dei tratti: sezione dedicata */
+const TW=D.tratti;let trCur=0,trW=[];
+function trStep(strokes,k){let p='';for(let i=0;i<=k;i++)p+=`<path d="${strokes[i]}" fill="${i===k?'#e0524a':'#3a2e2a'}"/>`;
+ return `<div class="step"><span>${k+1}</span><svg viewBox="0 0 1024 1024"><line x1="0" y1="512" x2="1024" y2="512" stroke="#bfe9e1" stroke-width="10"/><line x1="512" y1="0" x2="512" y2="1024" stroke="#bfe9e1" stroke-width="10"/><g transform="translate(0,900) scale(1,-1)">${p}</g></svg></div>`}
+document.getElementById('trw').innerHTML=TW.map((w,i)=>`<button onclick="trShow(${i})">${w[0]}</button>`).join('');
+function trShow(i){
+ trCur=i;const w=TW[i];
+ document.querySelectorAll('#trw button').forEach((b,k)=>b.classList.toggle('on',k===i));
+ document.getElementById('trh').innerHTML=`<span class="pic">${w[3]}</span><div><span class="py">${w[1]}</span><span class="zh">${w[0]}</span></div><span class="it">${w[2]}</span>${spk(w[0])}`;
+ const cs=w[0].replace(/[^一-鿿]/g,'').split('');trW=[];
+ document.getElementById('trc').innerHTML=cs.map((c,k)=>`<div class="trchar"><div class="trtop"><div class="tzg" id="trz${k}"></div>
+  <div class="trctrl"><div class="trcount"><span class="zh" style="font-size:40px">${c}</span> · tratti: <b id="trn${k}">…</b></div>
+  <button class="btn" onclick="trAnim(${k})">▶ Guarda tutto</button>
+  <button class="btn ghost" onclick="trStepB(${k})">👆 Un tratto alla volta <span id="trs${k}"></span></button>
+  <button class="btn alt" onclick="trQuiz(${k})">✍️ Prova tu</button></div></div>
+  <div class="steps" id="trst${k}"><div class="hint">Carico i tratti…</div></div></div>`).join('');
+ if(typeof HanziWriter==='undefined'){document.getElementById('trc').innerHTML='<p class="hint">Serve la connessione a internet per vedere i tratti.</p>';return}
+ cs.forEach((c,k)=>{
+  const wr=HanziWriter.create('trz'+k,c,{width:280,height:280,padding:16,showOutline:true,strokeColor:'#3a2e2a',radicalColor:'#3a2e2a',outlineColor:'#e6dcd5',highlightColor:'#16a394',drawingColor:'#16a394',strokeAnimationSpeed:.6,delayBetweenStrokes:450});
+  wr._step=0;trW[k]=wr;
+  HanziWriter.loadCharacterData(c).then(d=>{document.getElementById('trn'+k).textContent=d.strokes.length;wr._n=d.strokes.length;
+   document.getElementById('trst'+k).innerHTML=d.strokes.map((_,j)=>trStep(d.strokes,j)).join('')})
+  .catch(()=>{document.getElementById('trst'+k).innerHTML='<p class="hint">Non riesco a caricare questo carattere.</p>'});
+ });
+}
+function trAnim(k){const w=trW[k];w._step=0;document.getElementById('trs'+k).textContent='';w.animateCharacter()}
+function trStepB(k){const w=trW[k];if(!w._n)return;if(w._step===0||w._step>=w._n){w.hideCharacter();w._step=0}
+ w.animateStroke(w._step);w._step++;document.getElementById('trs'+k).textContent=`(${w._step}/${w._n})`}
+function trQuiz(k){const w=trW[k];w._step=0;document.getElementById('trs'+k).textContent='';w.quiz({onComplete:()=>{star();document.getElementById('trs'+k).textContent='🌟 Bravo!'}})}
+function trGo(d){trShow(Math.max(0,Math.min(TW.length-1,trCur+d)));window.scrollTo(0,0)}
+trShow(0);
 
 /* parliamo */
 document.getElementById('talk').innerHTML=D.talk.map(t=>`<div>${spk(t[0])} <span class="py">${t[1]}</span><br><span class="zh">${t[0]}</span><div class="builder zh">${t[2]}</div></div>`).join('');
