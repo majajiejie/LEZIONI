@@ -1,0 +1,327 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Tratti della famiglia 爸 妈 哥 姐 弟 妹 爷 奶</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&text=%E5%8D%A7%E5%93%A5%E5%A5%B6%E5%A6%88%E5%A6%B9%E5%A7%90%E5%AD%97%E5%BC%9F%E5%BC%AF%E6%8A%98%E6%8D%BA%E6%8F%90%E6%92%87%E6%96%9C%E6%A0%BC%E6%A8%AA%E7%82%B9%E7%88%B7%E7%88%B8%E7%94%B0%E7%AB%96%E9%92%A9&display=swap">
+<style>
+/* Layout: lavagna 16:9 scalata come le altre lezioni Maja Jiejie; a sinistra il 田字格 dove il pennello scrive un tratto alla volta, a destra parola, tratto e comandi */
+[hidden]{display:none!important}
+:root{
+  --crema:#FBF3E4; --carta:#FFFDF7; --rosso:#C8102E; --rosso-chiaro:#F6D5CF;
+  --oro:#E9B949; --oro-chiaro:#FBEBC0; --verde:#3F8A2A; --verde-chiaro:#CDE8BC; --azzurro:#2F7FB8; --azzurro-chiaro:#D6E8F5;
+  --viola:#7A4FB0; --ink:#2B1B17; --grigio:#6A5A55; --fondo:#E8D9C4; --guida:#E3CFC0; --ombra:#EADFD3;
+  --f-body:'Fredoka','Trebuchet MS',Arial,sans-serif;
+  --f-han:'Noto Sans SC','PingFang SC','Microsoft YaHei','Heiti SC',sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{margin:0;background:var(--fondo);color:var(--ink);font-family:var(--f-body);overflow:hidden;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--azzurro);outline-offset:3px}
+
+.viewport{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;transform:translate(-50%,-50%) scale(.5);background:var(--crema);border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(90,40,20,.25)}
+.cornice{position:absolute;inset:18px;border:4px solid var(--rosso);border-radius:10px;pointer-events:none;box-shadow:inset 0 0 0 8px var(--crema),inset 0 0 0 11px var(--oro)}
+.lanterna{position:absolute;top:0;width:110px;height:184px;pointer-events:none}
+.slide{position:absolute;inset:0;display:none}
+.slide.on{display:block;animation:entra .45s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;padding:0 16px env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:center;gap:14px;background:var(--fondo)}
+.nav button{border:3px solid var(--ink);background:var(--carta);border-radius:999px;height:44px;min-width:44px;padding:0 16px;font-weight:600;font-size:17px;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.nav button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.nav .conta{font-weight:600;font-size:17px;min-width:90px;text-align:center;font-variant-numeric:tabular-nums}
+.nav .titolo-slide{font-size:15px;color:var(--grigio);max-width:30vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.nav .titolo-slide{display:none}}
+
+.abs{position:absolute}
+.han{font-family:var(--f-han);line-height:1.05;font-weight:500}
+.btn{border:4px solid var(--ink);background:var(--carta);border-radius:999px;padding:12px 28px;font-size:30px;font-weight:600;cursor:pointer;box-shadow:0 6px 0 var(--ink);transition:transform .08s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.btn.oro{background:var(--oro)}
+.btn.attivo{background:var(--verde-chiaro)}
+.cornice-han{background:var(--carta);border:5px solid var(--rosso);border-radius:14px;box-shadow:inset 0 0 0 7px var(--carta),inset 0 0 0 10px var(--oro)}
+.carta-c{border:4px solid var(--ink);border-radius:22px;background:var(--carta);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 0 var(--ink);transition:transform .15s;padding:12px}
+.slide.car .btn{padding:12px 14px;white-space:nowrap;font-size:28px}
+.carta-c:hover{transform:translateY(-4px)}
+
+/* parola con il carattere attuale evidenziato */
+.parola{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.parola .pc{border:3px solid var(--ink);border-radius:14px;background:var(--carta);font-size:46px;width:72px;height:72px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 4px 0 var(--ink)}
+.parola .pc.qui{color:var(--carta)}
+.parola .pc:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+
+/* 田字格 */
+.griglia{display:block;background:var(--carta);border-radius:10px}
+.griglia .linea{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.griglia .num{font-family:var(--f-body);font-weight:700;font-size:60px}
+.traccia{touch-action:none;cursor:crosshair}
+
+/* tratti mostrati a destra */
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:56px;height:56px;border-radius:14px;border:3px solid var(--ink);background:var(--carta);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;box-sizing:border-box}
+.chip.fatto{background:var(--oro)}
+.chip.ora{background:var(--rosso);color:var(--carta);transform:scale(1.1)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="lanterna" viewBox="0 0 90 150"><line x1="45" y1="0" x2="45" y2="30" stroke="#8A1C1C" stroke-width="4"/><rect x="25" y="26" width="40" height="10" rx="3" fill="#E9B949"/><ellipse cx="45" cy="75" rx="40" ry="40" fill="#D7262E"/><path d="M45 35 V115 M25 42 Q15 75 25 108 M65 42 Q75 75 65 108" stroke="#A3121F" stroke-width="3" fill="none"/><rect x="25" y="112" width="40" height="10" rx="3" fill="#E9B949"/><path d="M38 122 V148 M45 122 V150 M52 122 V148" stroke="#D7262E" stroke-width="4"/></symbol>
+</defs></svg>
+
+<div class="viewport" id="viewport">
+<div class="stage" id="stage" role="region" aria-label="Animazioni dell'ordine dei tratti della famiglia">
+
+<!-- 1 INTRO -->
+<section class="slide" data-titolo="Come si scrivono le parole della famiglia?">
+  <div class="cornice"></div>
+  <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg><svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
+  <h1 class="abs" style="left:0;right:0;top:50px;margin:0;text-align:center;font-size:60px;color:var(--rosso)">Come si scrivono le parole della famiglia?</h1>
+  <p class="abs" style="left:0;right:0;top:160px;margin:0;text-align:center;font-size:34px;font-weight:600">Il carattere si scrive una volta e si ripete due volte: 爸 ➜ 爸爸!</p>
+  <div class="abs" id="intro-carte" style="left:120px;top:220px;width:1360px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px"></div>
+</section>
+
+<!-- slide dei caratteri: create dallo script -->
+
+</div>
+</div>
+
+<nav class="nav" aria-label="Navigazione">
+  <button id="prec" aria-label="Slide precedente">◀</button>
+  <span class="conta" id="conta">1 / 1</span>
+  <button id="succ" aria-label="Slide successiva">▶</button>
+  <span class="titolo-slide" id="titolo-slide"></span>
+  <button id="schermo" aria-label="Schermo intero">⛶</button>
+</nav>
+
+<script src="../voce.js"></script>
+<script>
+(function(){
+const stage=document.getElementById('stage');
+const riduci=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// nomi dei tratti
+const T={
+  dian:{han:'点',py:'diǎn',it:'punto'},
+  heng:{han:'横',py:'héng',it:'orizzontale →'},
+  shu:{han:'竖',py:'shù',it:'verticale ↓'},
+  pie:{han:'撇',py:'piě',it:'scende a sinistra ↙'},
+  na:{han:'捺',py:'nà',it:'scende a destra ↘'},
+  hengzhe:{han:'横折',py:'héngzhé',it:'orizzontale che piega giù'},
+  hengzhegou:{han:'横折钩',py:'héngzhégōu',it:'piega giù con gancio'},
+  henggou:{han:'横钩',py:'hénggōu',it:'orizzontale con gancio'},
+  hengpie:{han:'横撇',py:'héngpiě',it:'orizzontale e poi ↙'},
+  hengxiegou:{han:'横斜钩',py:'héngxiégōu',it:'orizzontale, poi giù curvo con gancio'},
+  wogou:{han:'卧钩',py:'wògōu',it:'gancio sdraiato'},
+  shuti:{han:'竖提',py:'shùtí',it:'verticale che risale'},
+  shupie:{han:'竖撇',py:'shùpiě',it:'verticale che piega a sinistra'},
+  piezhe:{han:'撇折',py:'piězhé',it:'scende a sinistra e poi va a destra'},
+  shugou:{han:'竖钩',py:'shùgōu',it:'verticale con gancio'},
+  ti:{han:'提',py:'tí',it:'sale verso destra ↗'},
+  piedian:{han:'撇点',py:'piědiǎn',it:'scende a sinistra e poi a destra'},
+  shuzhezhegou:{han:'竖折折钩',py:'shùzhézhégōu',it:'giù, a destra, giù e gancio'},
+  shuwangou:{han:'竖弯钩',py:'shùwāngōu',it:'giù, curva a destra e gancio in su'},
+  hengzhezhezhegou:{han:'横折折折钩',py:'héngzhézhézhégōu',it:'a zig-zag con il gancio'},
+  hengzhewangou:{han:'横折弯钩',py:'héngzhéwāngōu',it:'orizzontale, giù, curva e gancio'}
+};
+// parole e caratteri: s = forma dei tratti, m = percorso del pennello (riquadro 1024)
+const PAROLE=[{"han":"爸爸","py":"bàba","it":"papà","emo":"👨","col":"#2F7FB8","car":[{"han":"爸","py":"bà","t":["pie","dian","pie","na","hengzhe","shu","heng","shuwangou"],"s":["M 334 794 Q 325 718 210 640 Q 186 628 164 611 Q 152 599 168 599 Q 226 595 329 677 Q 335 686 398 736 Q 411 745 401 762 Q 365 804 347 807 Q 337 808 334 794 Z","M 609 771 Q 658 737 711 693 Q 726 680 742 682 Q 752 683 757 696 Q 761 712 750 741 Q 735 786 602 819 Q 586 822 580 819 Q 576 815 577 802 Q 581 792 609 771 Z","M 294 407 Q 385 462 507 568 L 538 597 Q 593 648 602 653 Q 612 656 612 667 Q 613 677 604 693 Q 579 732 544 736 Q 534 736 533 723 Q 530 687 488 633 L 462 602 Q 374 509 284 454 Q 218 412 64 340 Q 54 336 64 331 Q 115 328 266 392 L 294 407 Z","M 507 568 Q 586 508 629 470 Q 749 373 791 369 Q 809 369 916 391 Q 953 400 965 407 Q 984 417 965 423 Q 937 433 805 453 Q 748 463 649 525 Q 600 555 538 597 L 488 633 Q 410 678 388 676 Q 369 677 350 671 Q 335 667 335 659 Q 336 649 353 647 Q 398 647 462 602 L 507 568 Z","M 623 259 Q 650 343 683 360 Q 701 379 686 397 Q 670 410 617 437 Q 599 446 577 437 Q 487 404 331 385 C 301 381 323 349 353 353 Q 366 354 382 358 Q 413 364 444 368 L 484 375 Q 520 382 556 388 Q 578 392 587 383 Q 596 376 593 358 Q 584 307 573 266 C 565 237 613 231 623 259 Z","M 444 368 Q 447 356 442 238 C 441 208 478 216 483 246 Q 501 355 500 358 Q 493 367 484 375 C 462 395 440 398 444 368 Z","M 325 186 Q 332 185 343 187 Q 436 208 635 226 Q 645 227 647 235 Q 647 244 623 259 L 573 266 Q 572 266 571 266 Q 525 256 483 246 L 442 238 Q 379 228 327 220 C 297 215 295 186 325 186 Z","M 820 66 Q 807 115 802 200 Q 801 216 794 222 Q 787 228 781 207 Q 757 104 740 87 Q 698 39 520 35 Q 423 36 381 52 Q 344 71 336 95 Q 326 122 325 186 L 327 220 Q 333 293 348 330 Q 352 343 353 353 C 357 368 356 369 331 385 Q 309 401 294 407 C 268 422 253 419 266 392 Q 287 371 283 296 Q 276 98 305 53 Q 362 -32 649 -12 Q 760 -3 802 22 Q 830 35 820 66 Z"],"m":[[[347,794],[360,752],[327,711],[291,675],[236,635],[173,607]],[[585,813],[699,747],[718,731],[739,700]],[[544,725],[555,710],[564,677],[493,593],[417,523],[321,450],[248,406],[143,360],[68,336]],[[344,659],[396,657],[449,634],[677,472],[764,422],[791,412],[818,411],[966,415]],[[341,384],[351,375],[371,372],[579,413],[602,410],[636,378],[605,288],[580,272]],[[451,367],[472,346],[472,338],[465,266],[447,250]],[[329,191],[349,207],[568,243],[614,243],[638,235]],[[275,393],[294,385],[316,345],[303,197],[306,131],[315,86],[331,58],[379,29],[464,12],[563,9],[677,21],[742,40],[775,59],[791,214]]]}]},{"han":"妈妈","py":"māma","it":"mamma","emo":"👩","col":"#C8102E","car":[{"han":"妈","py":"mā","t":["piedian","pie","ti","hengzhe","shuzhezhegou","ti"],"s":["M 319 161 Q 353 133 395 87 Q 411 71 420 70 Q 429 70 435 81 Q 442 91 438 122 Q 432 156 349 204 L 307 228 Q 285 241 257 256 Q 236 266 239 288 Q 258 352 276 416 L 286 456 Q 308 546 328 636 Q 335 684 354 709 Q 366 731 358 744 Q 345 762 297 788 Q 276 800 260 791 Q 247 784 257 767 Q 290 719 241 447 L 233 402 Q 230 392 228 378 Q 218 326 195 287 Q 185 265 205 248 Q 248 223 284 192 L 319 161 Z","M 284 192 Q 281 189 279 185 Q 245 140 144 68 Q 131 58 143 56 Q 215 49 319 161 L 349 204 Q 391 291 404 342 Q 404 384 424 437 Q 428 455 438 471 Q 448 489 432 498 Q 384 534 358 526 Q 345 522 351 507 Q 360 491 361 472 L 361 442 Q 361 430 360 416 Q 357 326 307 228 L 284 192 Z","M 361 472 Q 324 465 286 456 L 241 447 Q 180 437 116 424 Q 95 420 63 423 Q 50 423 47 414 Q 44 401 52 393 Q 71 375 101 354 Q 111 350 123 357 Q 183 393 233 402 L 276 416 Q 316 429 361 442 C 390 450 390 478 361 472 Z","M 723 412 Q 747 437 767 617 Q 779 672 814 706 Q 832 725 814 739 Q 795 755 740 777 Q 725 784 665 766 Q 644 766 561 741 Q 515 728 486 723 Q 470 722 467 716 Q 463 712 481 700 Q 515 684 536 693 Q 581 709 685 728 Q 703 729 710 727 Q 726 720 721 671 Q 703 490 691 453 Q 682 426 698 409 C 709 388 709 388 723 412 Z","M 698 409 Q 652 403 585 389 Q 561 385 561 405 Q 564 567 580 605 Q 586 621 579 632 Q 563 648 539 659 Q 523 666 514 658 Q 507 654 515 642 Q 533 603 514 412 Q 510 396 506 378 Q 500 359 514 343 Q 533 327 552 339 Q 571 352 610 360 Q 691 379 776 385 Q 807 386 819 374 Q 829 362 816 321 Q 807 252 793 179 Q 784 124 758 87 Q 748 75 724 78 Q 690 87 662 94 Q 646 98 647 91 Q 647 85 656 78 Q 710 27 729 -8 Q 738 -27 756 -18 Q 820 18 834 88 Q 855 185 871 294 Q 878 330 898 360 Q 911 376 899 388 Q 883 409 847 430 Q 826 442 798 430 Q 762 417 729 413 Q 725 413 723 412 L 698 409 Z","M 425 224 Q 412 223 409 214 Q 405 204 421 192 Q 463 162 505 178 Q 625 218 752 238 Q 770 239 770 248 Q 771 261 752 270 Q 724 283 701 277 Q 509 234 425 224 Z"],"m":[[[267,778],[292,759],[313,726],[259,427],[216,272],[232,251],[345,176],[396,133],[420,84]],[[361,514],[391,489],[398,476],[372,322],[332,223],[304,179],[267,138],[202,87],[149,62]],[[61,409],[111,389],[161,407],[335,450],[355,465]],[[473,714],[518,709],[701,753],[737,745],[765,717],[747,656],[724,488],[703,421]],[[521,650],[531,645],[552,616],[536,401],[541,370],[579,370],[798,407],[838,400],[861,373],[844,308],[816,143],[795,77],[783,58],[755,36],[656,87]],[[421,210],[472,201],[718,256],[758,251]]]}]},{"han":"哥哥","py":"gēge","it":"fratello maggiore","emo":"👦","col":"#3F8A2A","car":[{"han":"哥","py":"gē","t":["heng","shu","hengzhe","heng","shu","heng","shu","hengzhe","heng","shugou"],"s":["M 675 764 Q 682 767 694 768 Q 758 778 769 787 Q 779 794 774 804 Q 767 817 739 826 Q 708 833 677 824 Q 512 776 328 769 Q 291 765 316 746 Q 359 719 415 728 Q 517 743 626 758 L 675 764 Z","M 363 655 Q 353 659 326 664 Q 316 665 312 661 Q 308 655 315 642 Q 337 603 353 538 Q 357 519 369 506 Q 385 487 390 501 Q 391 508 392 517 L 389 547 Q 379 610 376 630 C 373 652 373 652 363 655 Z","M 528 570 Q 544 616 560 631 Q 581 653 560 667 Q 542 677 518 694 Q 502 704 484 694 Q 447 672 363 655 C 334 649 347 624 376 630 Q 421 639 463 647 Q 485 651 490 643 Q 491 642 480 572 C 475 542 518 542 528 570 Z","M 392 517 Q 401 516 412 519 Q 452 529 542 539 Q 552 540 553 549 Q 553 556 528 570 C 509 581 509 581 480 572 Q 431 557 389 547 C 360 540 362 518 392 517 Z","M 665 489 Q 677 510 683 578 Q 686 677 698 721 Q 707 743 687 756 Q 681 760 675 764 C 650 781 617 787 626 758 Q 650 685 622 544 Q 615 517 635 484 C 650 458 653 462 665 489 Z","M 679 439 Q 760 443 856 441 Q 943 438 951 449 Q 958 462 938 479 Q 871 531 814 513 Q 750 503 665 489 L 635 484 Q 388 454 111 426 Q 86 423 104 403 Q 135 372 203 382 Q 399 430 623 437 L 679 439 Z","M 334 332 Q 324 336 297 340 Q 285 341 283 337 Q 277 331 286 316 Q 311 270 330 192 Q 334 170 348 154 Q 366 135 370 149 Q 373 159 372 175 L 368 209 Q 353 279 351 303 C 348 327 348 327 334 332 Z","M 523 224 Q 544 287 572 306 Q 587 322 574 338 Q 510 389 457 363 Q 409 348 334 332 C 305 326 322 295 351 303 Q 361 307 469 327 Q 482 330 487 325 Q 497 315 479 234 C 473 205 513 196 523 224 Z","M 372 175 Q 379 175 387 176 Q 433 186 532 193 Q 542 194 544 204 Q 544 211 523 224 L 479 234 Q 473 234 467 232 Q 412 217 368 209 C 339 204 342 174 372 175 Z","M 580 51 Q 552 58 517 65 Q 504 68 505 60 Q 506 51 518 41 Q 594 -13 644 -57 Q 657 -67 672 -49 Q 717 11 710 97 Q 704 286 710 372 Q 717 402 710 413 Q 703 425 679 439 C 654 456 611 465 623 437 Q 624 430 630 421 Q 640 397 641 90 Q 638 63 628 50 Q 615 41 580 51 Z"],"m":[[[320,759],[391,749],[569,773],[691,798],[763,798]],[[320,656],[351,625],[380,506]],[[374,653],[383,645],[476,668],[508,667],[526,646],[510,596],[487,584]],[[397,525],[413,536],[477,551],[521,554],[544,548]],[[633,754],[666,730],[648,526],[656,498]],[[108,414],[149,405],[189,407],[461,446],[829,479],[864,478],[943,455]],[[292,330],[317,310],[325,295],[360,155]],[[344,331],[359,321],[482,350],[502,346],[522,332],[529,319],[506,250],[489,245]],[[376,204],[387,194],[477,211],[534,204]],[[630,435],[659,413],[674,392],[676,87],[670,46],[647,5],[599,17],[513,58]]]}]},{"han":"姐姐","py":"jiějie","it":"sorella maggiore","emo":"👱‍♀️","col":"#D9437A","car":[{"han":"姐","py":"jiě","t":["piedian","pie","ti","shu","hengzhe","heng","heng","heng"],"s":["M 295 461 Q 320 558 344 656 Q 354 704 372 728 Q 385 750 377 763 Q 364 781 317 808 Q 296 821 280 812 Q 267 805 277 789 Q 311 738 251 452 L 240 406 Q 231 346 199 291 Q 189 269 211 251 Q 263 226 305 192 L 340 164 Q 365 145 397 115 Q 413 102 423 100 Q 432 101 437 112 Q 443 124 436 154 Q 427 187 372 213 L 331 233 Q 301 246 263 263 Q 242 272 243 292 Q 264 355 283 419 L 295 461 Z","M 305 192 Q 299 186 294 178 Q 269 145 152 63 Q 139 54 151 52 Q 227 45 337 161 Q 338 162 340 164 L 372 213 Q 402 268 432 369 Q 447 444 464 472 Q 474 490 458 499 Q 413 535 389 527 Q 376 523 381 509 Q 387 496 390 481 L 390 452 Q 378 317 331 233 L 305 192 Z","M 390 481 Q 344 472 295 461 L 251 452 Q 187 442 119 429 Q 97 425 63 429 Q 50 429 47 420 Q 44 407 52 398 Q 73 379 103 357 Q 113 353 126 360 Q 192 399 240 406 L 283 419 Q 326 434 373 447 Q 380 450 390 452 C 419 459 419 487 390 481 Z","M 581 627 Q 562 643 543 651 Q 530 655 520 650 Q 511 646 515 634 Q 542 577 542 533 Q 543 487 541 90 C 541 60 589 65 589 95 Q 590 183 591 264 L 591 298 Q 592 362 593 421 L 593 455 Q 594 498 595 537 Q 596 589 599 592 C 602 611 602 611 581 627 Z","M 813 124 Q 812 371 822 534 Q 825 576 844 602 Q 857 618 842 637 Q 832 649 777 678 Q 759 690 697 659 Q 594 631 581 627 C 552 619 570 583 599 592 Q 606 593 618 598 Q 744 637 754 628 Q 766 606 756 115 C 755 85 813 94 813 124 Z","M 593 421 Q 656 434 703 441 Q 728 447 718 460 Q 705 475 678 477 Q 633 480 593 455 C 567 439 564 415 593 421 Z","M 591 264 Q 658 276 710 282 Q 735 286 725 300 Q 713 315 687 319 Q 648 323 591 298 C 563 286 561 259 591 264 Z","M 541 90 Q 480 86 413 78 Q 392 77 407 59 Q 420 44 439 39 Q 460 33 476 37 Q 683 88 942 68 Q 943 69 945 68 Q 964 68 970 76 Q 976 88 960 102 Q 900 150 845 130 Q 830 129 813 124 L 756 115 Q 714 111 665 104 Q 628 100 589 95 L 541 90 Z"],"m":[[[286,799],[312,780],[332,746],[267,431],[220,277],[241,255],[390,165],[406,148],[422,114]],[[391,515],[410,502],[426,478],[401,350],[376,274],[350,219],[315,167],[272,126],[220,88],[157,57]],[[61,415],[114,393],[190,418],[360,459],[385,474]],[[525,640],[558,608],[570,549],[566,117],[546,104]],[[585,622],[609,615],[626,618],[689,640],[758,655],[774,649],[799,618],[789,473],[785,148],[761,130]],[[601,427],[621,448],[683,458],[707,453]],[[599,270],[610,286],[635,293],[680,299],[715,293]],[[410,68],[460,59],[675,88],[879,104],[959,83]]]}]},{"han":"弟弟","py":"dìdi","it":"fratello minore","emo":"🧒","col":"#2E9C8F","car":[{"han":"弟","py":"dì","t":["dian","pie","hengzhe","heng","shuzhezhegou","shu","pie"],"s":["M 353 743 Q 381 719 412 691 Q 425 679 439 680 Q 449 680 453 693 Q 457 706 449 733 Q 443 752 412 767 Q 337 794 328 787 Q 324 783 325 771 Q 328 761 353 743 Z","M 614 808 Q 593 769 534 695 Q 524 677 542 681 Q 591 712 617 733 Q 695 790 701 793 Q 722 803 711 822 Q 696 838 669 852 Q 644 865 632 861 Q 619 860 624 846 Q 628 827 614 808 Z","M 712 522 Q 737 574 763 591 Q 784 613 758 631 Q 734 650 708 666 Q 695 678 641 659 Q 577 650 431 617 Q 365 604 323 600 Q 310 600 308 592 Q 305 586 327 574 Q 343 562 385 572 Q 445 587 483 595 L 520 601 Q 577 611 661 621 Q 674 622 679 616 Q 685 603 659 528 C 649 500 698 495 712 522 Z","M 542 463 Q 621 476 723 487 Q 735 488 736 498 Q 736 505 712 522 C 697 533 689 532 659 528 Q 656 529 654 528 Q 596 515 541 500 L 492 490 Q 393 471 306 457 C 276 452 288 419 318 422 Q 325 422 335 424 Q 396 440 493 455 L 542 463 Z","M 542 330 Q 608 342 697 352 Q 755 362 779 358 Q 794 357 800 344 Q 807 326 765 214 Q 759 196 741 200 Q 711 207 674 217 Q 644 226 665 198 Q 720 143 731 116 Q 738 101 753 103 Q 766 102 784 116 Q 808 141 832 201 Q 850 283 886 318 Q 905 339 892 353 Q 867 381 828 405 Q 812 417 752 401 Q 724 397 542 364 L 493 355 Q 405 340 350 325 Q 317 319 301 320 Q 292 321 295 338 Q 307 411 318 422 C 327 444 327 444 306 457 Q 290 470 268 480 Q 256 489 246 480 Q 237 473 247 455 Q 260 427 251 388 Q 235 333 219 311 Q 207 293 219 276 Q 229 248 244 241 Q 254 235 279 254 Q 330 297 450 314 L 542 330 Z","M 491 275 Q 491 109 481 22 Q 478 -20 503 -53 Q 516 -68 525 -50 Q 543 -14 544 59 Q 543 86 542 330 L 542 364 Q 542 413 542 463 L 541 500 Q 541 561 544 570 Q 547 582 538 589 Q 531 595 520 601 C 495 617 479 625 483 595 Q 486 588 492 490 L 493 455 Q 493 406 493 355 L 491 275 Z","M 450 314 Q 444 295 426 269 Q 371 194 310 143 Q 259 97 155 32 Q 136 20 153 17 Q 190 14 294 72 Q 363 121 414 175 Q 421 184 491 275 C 531 326 472 370 450 314 Z"],"m":[[[332,781],[405,738],[438,695]],[[631,852],[651,832],[660,812],[582,727],[537,688]],[[316,591],[338,585],[374,588],[520,620],[675,645],[699,638],[721,608],[695,552],[667,538]],[[314,453],[336,443],[657,504],[709,504],[727,497]],[[257,470],[276,449],[285,424],[262,322],[262,296],[290,294],[424,327],[768,383],[811,379],[827,365],[845,338],[798,205],[775,168],[760,157],[665,209]],[[489,594],[515,571],[519,316],[514,-48]],[[486,314],[414,213],[338,135],[274,84],[157,24]]]}]},{"han":"妹妹","py":"mèimei","it":"sorella minore","emo":"👧","col":"#E07A1F","car":[{"han":"妹","py":"mèi","t":["piedian","pie","ti","heng","heng","shu","pie","na"],"s":["M 299 163 Q 327 141 360 108 Q 376 95 386 93 Q 395 93 400 104 Q 407 116 401 146 Q 392 177 331 210 L 288 231 Q 263 244 230 258 Q 211 268 211 288 Q 232 349 251 413 L 262 454 Q 284 539 305 624 Q 314 672 332 696 Q 345 718 338 731 Q 323 749 277 776 Q 256 789 240 780 Q 227 773 237 756 Q 270 707 217 446 L 207 401 Q 203 389 201 375 Q 189 326 167 287 Q 157 265 179 247 Q 225 223 263 192 L 299 163 Z","M 263 192 Q 187 116 174 106 Q 170 105 167 101 Q 161 97 104 60 Q 91 51 103 48 Q 116 47 152 59 Q 207 80 250 116 Q 278 138 299 163 L 331 210 Q 376 292 389 351 Q 410 450 428 478 Q 438 496 423 506 Q 377 545 351 536 Q 336 532 342 517 Q 352 495 352 470 L 350 440 Q 349 431 348 420 Q 341 321 288 231 L 263 192 Z","M 352 470 Q 307 463 262 454 L 217 446 Q 81 428 52 431 Q 39 431 37 422 Q 33 410 41 401 Q 60 383 89 361 Q 98 357 110 363 Q 155 387 207 401 L 251 413 Q 299 428 350 440 C 379 447 382 475 352 470 Z","M 644 565 Q 783 604 788 607 Q 797 616 792 624 Q 785 636 754 642 Q 726 646 645 616 L 598 601 Q 550 591 496 582 Q 459 575 487 559 Q 526 538 599 555 L 644 565 Z","M 643 416 Q 710 429 816 436 Q 865 440 870 447 Q 874 459 858 470 Q 798 509 758 488 Q 712 475 643 457 L 598 447 Q 522 432 434 413 Q 415 410 430 395 Q 445 383 461 380 Q 482 376 496 382 Q 530 395 572 402 L 643 416 Z","M 643 457 Q 643 509 644 565 L 645 616 Q 646 698 664 758 Q 674 774 670 787 Q 663 797 605 833 Q 580 851 559 834 Q 553 828 560 813 Q 594 761 596 710 Q 597 658 598 601 L 599 555 Q 599 483 598 447 L 596 347 Q 592 172 580 117 Q 561 33 578 -10 Q 581 -19 586 -29 Q 593 -48 601 -51 Q 608 -58 616 -49 Q 623 -45 634 -23 Q 644 4 643 36 Q 642 78 642 372 L 643 457 Z","M 642 412 Q 642 413 643 416 C 657 443 585 429 572 402 Q 529 309 415 165 Q 409 155 420 154 Q 426 153 435 161 Q 534 239 596 347 L 642 412 Z","M 642 372 Q 709 269 796 156 Q 814 137 843 137 Q 945 137 977 142 Q 987 143 988 149 Q 989 153 976 162 Q 835 222 761 291 Q 704 345 642 412 C 622 434 626 397 642 372 Z"],"m":[[[247,767],[272,748],[292,714],[244,467],[211,341],[189,284],[190,268],[207,251],[341,169],[368,144],[385,108]],[[352,524],[374,507],[389,482],[361,339],[315,229],[277,173],[231,128],[178,88],[107,54]],[[49,418],[100,397],[325,449],[345,463]],[[488,572],[542,568],[602,578],[743,618],[783,616]],[[432,404],[485,401],[789,465],[863,452]],[[573,825],[616,785],[626,761],[619,262],[606,48],[607,-37]],[[635,407],[589,380],[541,301],[496,241],[422,162]],[[647,405],[654,379],[685,339],[744,269],[825,189],[875,171],[980,149]]]}]},{"han":"爷爷","py":"yéye","it":"nonno","emo":"👴","col":"#7A4FB0","car":[{"han":"爷","py":"yé","t":["pie","dian","pie","na","hengzhegou","shu"],"s":["M 361 800 Q 351 725 233 646 Q 217 640 172 611 Q 160 599 176 599 Q 222 592 326 658 Q 407 724 425 738 Q 438 747 429 765 Q 396 810 374 814 Q 364 815 361 800 Z","M 608 793 Q 677 745 762 675 Q 780 659 794 656 Q 803 656 809 667 Q 819 680 801 720 Q 783 771 605 822 Q 595 826 595 814 Q 596 801 608 793 Z","M 557 577 Q 587 613 624 648 Q 634 654 632 665 Q 629 677 606 702 Q 590 721 580 721 Q 567 722 563 707 Q 550 656 518 608 L 495 577 Q 398 465 229 390 Q 181 371 113 345 Q 103 341 109 335 Q 115 331 127 331 Q 212 340 293 372 Q 411 414 529 545 L 557 577 Z","M 529 545 Q 709 374 783 376 Q 847 376 955 400 Q 967 404 970 413 Q 973 422 952 423 Q 895 436 833 445 Q 713 464 557 577 L 518 608 Q 434 677 373 660 Q 363 656 368 646 Q 375 639 386 638 Q 423 635 495 577 L 529 545 Z","M 507 319 Q 579 331 642 334 Q 675 335 680 325 Q 687 315 684 289 Q 680 216 665 183 Q 646 149 616 154 Q 591 158 567 166 Q 542 173 561 149 Q 606 110 627 80 Q 642 62 657 75 Q 708 109 735 226 Q 745 302 765 324 Q 780 337 773 349 Q 764 361 711 387 Q 690 397 669 384 Q 633 366 501 348 Q 368 326 256 327 Q 237 328 234 319 Q 231 310 255 296 Q 280 277 303 284 Q 451 314 457 304 C 487 302 477 314 507 319 Z","M 475 -40 Q 479 -64 486 -73 Q 492 -80 499 -78 Q 526 -62 526 68 Q 525 102 531 236 Q 531 243 538 281 Q 541 297 528 307 Q 516 314 507 319 C 481 334 446 332 457 304 Q 472 289 471 63 Q 472 -13 475 -40 Z"],"m":[[[374,801],[388,757],[353,715],[304,671],[244,631],[181,607]],[[606,811],[753,726],[778,700],[794,671]],[[579,705],[589,666],[559,621],[494,540],[419,473],[373,439],[303,400],[193,357],[115,339]],[[377,651],[428,643],[468,622],[606,510],[741,428],[812,412],[961,413]],[[243,316],[281,305],[314,305],[665,357],[688,359],[705,351],[722,331],[712,261],[696,186],[675,144],[647,118],[560,159]],[[466,302],[502,276],[495,-68]]]}]},{"han":"奶奶","py":"nǎinai","it":"nonna","emo":"👵","col":"#B07A00","car":[{"han":"奶","py":"nǎi","t":["piedian","pie","ti","hengzhezhezhegou","pie"],"s":["M 310 498 Q 328 574 344 652 Q 353 700 370 726 Q 382 748 375 760 Q 360 778 313 804 Q 292 816 275 807 Q 263 800 273 783 Q 304 740 264 489 L 255 444 Q 240 368 219 327 Q 210 303 232 287 Q 278 265 316 235 L 355 206 Q 425 149 431 148 Q 440 149 445 160 Q 452 172 444 202 Q 435 235 384 257 L 341 276 Q 316 288 283 300 Q 262 309 263 328 Q 282 392 299 457 L 310 498 Z","M 316 235 Q 255 154 170 107 Q 154 98 149 93 Q 146 87 157 85 Q 172 81 194 90 Q 240 106 269 125 Q 329 164 355 206 L 384 257 Q 435 369 462 465 Q 471 483 475 493 Q 485 511 468 525 Q 429 558 415 559 Q 396 560 405 536 Q 406 529 408 518 L 408 491 Q 378 344 341 276 L 316 235 Z","M 408 518 Q 360 509 310 498 L 264 489 Q 197 479 127 465 Q 106 461 72 465 Q 59 465 56 456 Q 52 443 60 434 Q 81 415 111 393 Q 121 389 134 396 Q 191 430 255 444 L 299 457 Q 339 470 384 483 Q 396 487 408 491 C 436 500 437 524 408 518 Z","M 614 583 Q 704 613 764 626 Q 785 630 791 621 Q 800 614 784 562 Q 753 462 719 429 Q 709 417 710 408 Q 713 398 724 388 Q 734 381 747 388 Q 790 415 826 406 Q 847 396 847 351 Q 844 212 783 121 Q 762 88 731 96 Q 698 106 664 118 Q 640 122 657 101 Q 699 55 727 13 Q 739 -12 762 2 Q 832 41 862 129 Q 881 192 902 328 Q 906 353 919 371 Q 932 389 918 403 Q 903 418 859 438 Q 841 444 788 429 Q 775 428 774 437 Q 775 455 815 523 Q 857 592 876 606 Q 900 621 895 637 Q 886 656 829 681 Q 813 687 787 676 Q 754 658 594 615 Q 548 602 510 603 Q 489 603 494 590 Q 498 580 532 569 Q 553 566 581 572 L 614 583 Z","M 581 572 Q 593 545 583 482 Q 582 479 582 475 Q 561 342 515 245 Q 467 152 401 76 Q 395 70 393 65 Q 390 55 400 56 Q 430 56 516 165 Q 522 177 531 188 Q 597 300 643 495 Q 658 541 657 546 Q 656 547 656 548 Q 644 563 614 583 C 589 600 573 601 581 572 Z"],"m":[[[284,794],[308,775],[329,742],[291,511],[240,316],[248,302],[272,285],[399,212],[421,188],[432,156]],[[414,546],[442,503],[404,366],[367,274],[325,205],[287,167],[222,119],[156,92]],[[70,451],[122,429],[213,457],[386,498],[402,511]],[[505,593],[527,586],[571,589],[787,650],[817,647],[835,626],[750,422],[781,417],[834,422],[857,412],[882,383],[866,265],[840,163],[829,132],[801,85],[756,51],[658,110]],[[588,569],[610,556],[621,532],[599,422],[566,314],[546,261],[494,165],[430,88],[402,65]]]}]}];
+
+// crea una slide per ogni carattere
+const CARS=[];
+PAROLE.forEach((p,pi)=>p.car.forEach((c,ci)=>{ c.parola=p; c.pi=pi; c.ci=ci; c.col=p.col; CARS.push(c) }));
+CARS.forEach((c,k)=>{ const s=document.createElement('section'); s.className='slide car'; s.dataset.car=k; s.dataset.titolo=`${c.han} ${c.py} · ${c.parola.it}`; stage.appendChild(s); c.slide=k+1 });
+const slides=[...stage.querySelectorAll('.slide')];
+let cur=0;
+
+function fit(){ const vp=document.getElementById('viewport').getBoundingClientRect();
+  stage.style.transform=`translate(-50%,-50%) scale(${Math.min(vp.width/1600,vp.height/900)*0.97})`; }
+addEventListener('resize',fit); fit();
+
+const uscita={}; let pronto=false;
+function vai(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  if(pronto&&i===cur) return;
+  if(uscita[cur]) uscita[cur]();
+  slides[cur].classList.remove('on'); cur=i; const s=slides[cur]; s.classList.add('on');
+  document.getElementById('conta').textContent=`${cur+1} / ${slides.length}`;
+  document.getElementById('titolo-slide').textContent=s.dataset.titolo||'';
+  try{history.replaceState(null,'','#s'+(cur+1))}catch(e){}
+  if(pronto&&cur===0) loopIntro();
+}
+document.getElementById('prec').onclick=()=>vai(cur-1);
+document.getElementById('succ').onclick=()=>vai(cur+1);
+document.getElementById('schermo').onclick=()=>{try{ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(()=>{}); }catch(e){}};
+addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='PageDown') vai(cur+1); if(e.key==='ArrowLeft'||e.key==='PageUp') vai(cur-1); });
+let sx=null;
+stage.addEventListener('touchstart',e=>{ if(e.target.closest('button,.traccia')){sx=null;return} sx=e.touches[0].clientX },{passive:true});
+stage.addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>60) vai(cur+(dx<0?1:-1)); sx=null });
+
+function dici(t){ try{ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t); u.lang='zh-CN'; u.rate=.72;
+  const v=speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang)); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){} }
+
+const NS='http://www.w3.org/2000/svg';
+const GUIDA=`<rect x="10" y="10" width="1004" height="1004" rx="20" fill="none" stroke="#C8102E" stroke-width="12"/>
+  <path d="M512 10 V1014 M10 512 H1014" stroke="#E3CFC0" stroke-width="7" stroke-dasharray="25 25"/>
+  <path d="M10 10 L1014 1014 M1014 10 L10 1014" stroke="#EADFD3" stroke-width="6" stroke-dasharray="25 25"/>`;
+const PENNELLO=150;
+let uid=0;
+const mediana=m=>'M'+m.map(([x,y])=>x+' '+y).join(' L');
+// griglia: ombra del carattere + tratti che si disegnano (ognuno ritagliato sulla sua forma)
+function griglia(c){
+  const id='g'+(uid++);
+  const svg=document.createElementNS(NS,'svg'); svg.setAttribute('viewBox','0 0 1024 1024'); svg.setAttribute('class','griglia');
+  svg.innerHTML=GUIDA
+    +`<defs>${c.s.map((d,k)=>`<clipPath id="${id}c${k}"><path d="${d}"/></clipPath>`).join('')}</defs>`
+    +`<g transform="translate(0,900) scale(1,-1)"><g class="ombra">${c.s.map(d=>`<path d="${d}" fill="#EADFD3"/>`).join('')}</g>`
+    +`<g class="pennello">${c.m.map((m,k)=>`<g clip-path="url(#${id}c${k})"><path class="linea" d="${mediana(m)}" stroke="${c.col}" stroke-width="${PENNELLO}"/></g>`).join('')}</g></g>`
+    +`<g class="numeri"></g><g class="miei"></g>`;
+  const paths=[...svg.querySelectorAll('.pennello .linea')];
+  return {svg,paths};
+}
+
+// ---- animazione di un singolo tratto
+function lung(p){ try{return p.getTotalLength()}catch(e){return 500} }
+function nascondi(p){ if(p._anim){p._anim.cancel(); p._anim=null} const L=lung(p)+PENNELLO; p.style.strokeDasharray=L+' '+L; p.style.strokeDashoffset=L; p.style.visibility='hidden'; }
+function mostra(p){ p.style.strokeDasharray='none'; p.style.strokeDashoffset=0; p.style.visibility='visible'; }
+function anima(p,velocita=1){
+  return new Promise(ok=>{
+    const L=lung(p)+PENNELLO; if(riduci){mostra(p); return setTimeout(ok,150)}
+    p.style.strokeDasharray=L+' '+L; p.style.strokeDashoffset=L; p.style.visibility='visible';
+    const dur=Math.max(450,L*1.6)/velocita;
+    const a=p.animate([{strokeDashoffset:L},{strokeDashoffset:0}],{duration:dur,easing:'ease-in-out',fill:'forwards'});
+    a.onfinish=()=>{mostra(p); a.cancel(); p._anim=null; ok()}; a.oncancel=()=>ok(); p._anim=a;
+  });
+}
+const attesa=ms=>new Promise(r=>setTimeout(r,ms));
+
+// ---- 1 intro: ogni carta scrive la sua parola da sola, in loop
+const giri=[];
+(function(){
+  const box=document.getElementById('intro-carte');
+  PAROLE.forEach(p=>{
+    const b=document.createElement('button'); b.className='carta-c'; b.setAttribute('aria-label',`Vai a ${p.han}, ${p.it}`);
+    const riga=document.createElement('div'); riga.style.cssText='display:flex;gap:12px';
+    const gr=[];
+    p.car.forEach(c=>{ const area=document.createElement('div'); area.style.cssText='width:150px;height:150px';
+      const g=griglia(c); g.svg.style.width='100%'; g.svg.style.height='100%'; area.appendChild(g.svg); riga.appendChild(area); gr.push(g) });
+    b.appendChild(riga);
+    b.insertAdjacentHTML('beforeend',`<span style="font-size:34px;font-weight:600;color:${p.col}">${p.py} <span style="font-size:34px">${p.emo}</span></span><span style="font-size:28px">${p.it} <span style="font-size:22px;font-weight:600;color:var(--grigio)">· ${p.car.reduce((n,c)=>n+c.s.length,0)} tratti</span></span>`);
+    b.onclick=()=>vai(p.car[0].slide); box.appendChild(b);
+    giri.push(gr);
+  });
+})();
+let introVivo=0;
+async function loopIntro(){
+  const io=++introVivo;
+  while(io===introVivo){
+    giri.forEach(gr=>gr.forEach(g=>g.paths.forEach(nascondi)));
+    await Promise.all(giri.map(async gr=>{ for(const g of gr) for(const p of g.paths){ if(io!==introVivo) return; await anima(p,2.2); await attesa(80) } }));
+    if(io!==introVivo) return;
+    await attesa(1800);
+  }
+}
+
+// ---- slide dei caratteri
+stage.querySelectorAll('.slide.car').forEach(s=>{
+  const c=CARS[+s.dataset.car], p=c.parola, n=c.s.length;
+  s.innerHTML=`<div class="cornice"></div>
+    <svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
+    <div class="abs cornice-han" style="left:70px;top:70px;width:760px;height:760px;box-sizing:border-box;padding:28px"><div class="area" style="width:100%;height:100%;position:relative"></div></div>
+    <div class="abs" style="left:880px;top:62px;width:560px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:26px">
+        <span class="han" style="font-size:136px;color:${c.col}">${c.han}</span>
+        <span style="display:flex;flex-direction:column;gap:8px"><span style="font-size:58px;font-weight:600">${c.py}</span>
+        <button class="btn" data-dici="${c.han}" style="font-size:24px;padding:6px 18px;align-self:flex-start">🔊 Ascolta</button></span>
+      </div>
+      <div class="parola">
+        ${p.car.map((x,i)=>`<button class="pc han" data-vai="${x.slide}" aria-label="${x.han}" style="${i===c.ci?`background:${c.col}`:''}" ${i===c.ci?'aria-current="true"':''}>${x.han}</button>`).join('')}
+        <span style="display:flex;flex-direction:column;margin-left:6px"><span style="font-size:32px;font-weight:600;color:${c.col}">${p.py} ${p.emo}</span><span style="font-size:28px">${p.it}</span></span>
+        ${p.han.length>1?`<button class="btn" data-dici="${p.han}" style="font-size:22px;padding:4px 14px;margin-left:auto">🔊 ${p.han}</button>`:''}
+      </div>
+      <div class="info cornice-han" style="padding:20px 28px;min-height:140px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:8px">
+        <span class="info-n" style="font-size:28px;font-weight:600;color:var(--grigio)">Premete ▶ e guardate il pennello!</span>
+        <span class="info-t" style="font-size:40px;font-weight:700"></span>
+      </div>
+      <div class="chips" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+      <button class="btn b-cancella" hidden style="align-self:center">🧽 Cancella il mio disegno</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px">
+        <button class="btn oro b-tutto">▶ Guarda tutto</button>
+        <button class="btn oro b-uno">👆 Un tratto</button>
+        <button class="btn b-ricomincia">↺ Ricomincia</button>
+        <button class="btn b-prova">✏️ Prova tu</button>
+      </div>
+    </div>`;
+  const area=s.querySelector('.area'), gr=griglia(c); area.appendChild(gr.svg);
+  gr.svg.style.width='100%'; gr.svg.style.height='100%';
+  const chips=s.querySelector('.chips'), infoN=s.querySelector('.info-n'), infoT=s.querySelector('.info-t');
+  const numG=gr.svg.querySelector('.numeri'), mieiG=gr.svg.querySelector('.miei');
+  c.t.forEach((t,k)=>{const x=document.createElement('span');x.className='chip';x.textContent=k+1;x.title=T[t].it;chips.appendChild(x)});
+  if(n>8) chips.querySelectorAll('.chip').forEach(x=>{x.style.minWidth='48px';x.style.height='48px';x.style.fontSize='22px'});
+  let fatti=0, corsa=0, occupato=false;
+
+  // posizioni dei numeri: vicino all'inizio del tratto, senza sovrapporsi
+  const R=n>10?32:40, POS=[];
+  c.m.forEach(m=>{
+    const a=m[0], b=m[Math.min(1,m.length-1)];
+    const ax=a[0], ay=900-a[1], bx=b[0], by=900-b[1];
+    let dx=ax-bx, dy=ay-by; const l=Math.hypot(dx,dy)||1; dx/=l; dy/=l;
+    const prove=[[dx*(R+22),dy*(R+22)],[dx*(R*2+30),dy*(R*2+30)],[-dy*(R+30),dx*(R+30)],[dy*(R+30),-dx*(R+30)],[dx*(R*3+30),dy*(R*3+30)]]
+      .map(([ox,oy])=>[Math.min(1014-R,Math.max(10+R,ax+ox)),Math.min(1014-R,Math.max(10+R,ay+oy))]);
+    POS.push(prove.find(([x,y])=>POS.every(([u,v])=>Math.hypot(x-u,y-v)>R*2+6))||prove[0]);
+  });
+  function numero(k){
+    const [x,y]=POS[k];
+    const g=document.createElementNS(NS,'g');
+    g.innerHTML=`<circle cx="${x}" cy="${y}" r="${R}" fill="#E9B949" stroke="#2B1B17" stroke-width="7"/><text class="num" x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" fill="#2B1B17" style="font-size:${R*1.45}px">${k+1}</text>`;
+    numG.appendChild(g);
+  }
+  function stato(k){
+    [...chips.children].forEach((x,i)=>{x.classList.toggle('fatto',i<fatti); x.classList.toggle('ora',i===k)});
+    if(k==null){ infoN.textContent=fatti===n?`Finito! ${n} tratti`:'Premete ▶ e guardate il pennello!'; infoT.innerHTML=fatti===n?`<span class="han" style="color:${c.col}">${c.han}</span> ${c.py} ✅`:''; return }
+    const t=T[c.t[k]];
+    infoN.textContent=`Tratto ${k+1} di ${n}`;
+    infoT.innerHTML=`<span class="han" style="color:${c.col}">${t.han}</span> ${t.py} · <span style="font-weight:500;font-size:30px">${t.it}</span>`;
+  }
+  function azzera(){ corsa++; occupato=false; fatti=0; gr.paths.forEach(nascondi); numG.innerHTML=''; stato(null) }
+  async function uno(){
+    if(occupato||fatti>=n) return false;
+    occupato=true; const k=fatti, io=corsa; stato(k); numero(k);
+    await anima(gr.paths[k]); if(io!==corsa) return false;
+    fatti++; occupato=false;
+    if(fatti===n){ stato(null); dici(c.han) } return true;
+  }
+  s.querySelector('.b-tutto').onclick=async()=>{ azzera(); const io=corsa; await attesa(250);
+    while(io===corsa&&fatti<n){ await uno(); await attesa(300) } };
+  s.querySelector('.b-uno').onclick=()=>{ if(fatti>=n) azzera(); uno() };
+  s.querySelector('.b-ricomincia').onclick=azzera;
+  s.querySelectorAll('[data-dici]').forEach(b=>b.onclick=()=>dici(b.dataset.dici));
+  s.querySelectorAll('[data-vai]').forEach(b=>b.onclick=()=>vai(+b.dataset.vai));
+
+  // prova tu: il bambino ripassa con il dito sull'ombra
+  const bProva=s.querySelector('.b-prova'), bCanc=s.querySelector('.b-cancella');
+  let prova=false, linea=null;
+  bProva.onclick=()=>{ prova=!prova; bProva.classList.toggle('attivo',prova); bCanc.hidden=!prova; chips.hidden=prova; gr.svg.classList.toggle('traccia',prova);
+    if(prova){ azzera(); infoN.textContent='Tocca a voi!'; infoT.innerHTML='<span style="font-size:32px">Ripassate l\'ombra con il dito, nell\'ordine dei numeri.</span>'; c.m.forEach((_,k)=>numero(k)) }
+    else { mieiG.innerHTML=''; azzera() } };
+  bCanc.onclick=()=>{ mieiG.innerHTML='' };
+  function punto(e){ const q=gr.svg.createSVGPoint(); q.x=e.clientX; q.y=e.clientY; const m=gr.svg.getScreenCTM(); return m?q.matrixTransform(m.inverse()):q }
+  gr.svg.addEventListener('pointerdown',e=>{ if(!prova) return; e.preventDefault(); try{gr.svg.setPointerCapture(e.pointerId)}catch(_){}
+    const q=punto(e); linea=document.createElementNS(NS,'path'); linea.setAttribute('class','linea'); linea.setAttribute('stroke','#2B1B17'); linea.setAttribute('stroke-width',48);
+    linea._d=`M${q.x.toFixed(0)} ${q.y.toFixed(0)}`; linea.setAttribute('d',linea._d+' l0 0'); mieiG.appendChild(linea) });
+  gr.svg.addEventListener('pointermove',e=>{ if(!prova||!linea) return; const q=punto(e); linea._d+=` L${q.x.toFixed(0)} ${q.y.toFixed(0)}`; linea.setAttribute('d',linea._d) });
+  const fine=()=>{ linea=null }; gr.svg.addEventListener('pointerup',fine); gr.svg.addEventListener('pointercancel',fine);
+
+  uscita[c.slide]=()=>{ if(prova) bProva.onclick(); azzera() };
+  azzera();
+});
+
+uscita[0]=()=>{ introVivo++ };
+const m=/^#s(\d+)$/.exec(location.hash); vai(m?(+m[1]-1):0);
+pronto=true; if(cur===0) loopIntro();
+})();
+</script>
+
+</body></html>
