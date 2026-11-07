@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Le nazionalità 我是意大利人</title>
+<title>Le nazionalità 意大利人 中国人 英国人 法国人</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&display=swap">
@@ -98,15 +98,16 @@ button{font-family:inherit;color:inherit}
 <div class="stage" id="stage" role="region" aria-label="Presentazione sulle nazionalità in cinese">
 
 <!-- 1 TITOLO -->
-<section class="slide" data-titolo="Di dove sei?">
+<section class="slide" data-titolo="Paesi e nazionalità">
   <div class="cornice"></div>
   <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg><svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
-  <h1 class="abs" style="left:0;right:0;top:64px;margin:0;text-align:center;font-size:92px;color:var(--rosso)">Di dove sei? 🌍</h1>
+  <h1 class="abs" style="left:0;right:0;top:64px;margin:0;text-align:center;font-size:92px;color:var(--rosso)">Paesi e nazionalità 🌍</h1>
   <div class="abs cornice-han" style="left:430px;top:200px;width:740px;height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-    <span class="han" style="font-size:104px;white-space:nowrap">你是哪国人？</span>
-    <span style="font-size:56px;font-weight:600;color:var(--rosso)">Nǐ shì nǎ guó rén?</span>
+    <span class="han" style="font-size:96px;white-space:nowrap">中国 <span style="font-family:var(--f-body);font-size:70px">➜</span> 中国<span style="color:var(--verde)">人</span></span>
+    <span style="font-size:46px;font-weight:600;color:var(--rosso)">Zhōngguó ➜ Zhōngguó rén</span>
+    <span style="font-size:36px;font-weight:600;color:var(--grigio)">Cina ➜ cinese</span>
   </div>
-  <div class="abs" style="left:430px;top:560px;width:740px;display:flex;justify-content:center"><button class="btn oro" data-dici="你是哪国人？">🔊 Ascolta</button></div>
+  <div class="abs" style="left:430px;top:560px;width:740px;display:flex;justify-content:center;gap:16px"><button class="btn oro" data-dici="中国">🔊 中国</button><button class="btn oro" data-dici="中国人">🔊 中国人</button></div>
   <div class="abs" id="tit-bandiere" style="left:430px;top:670px;width:740px;display:flex;justify-content:center;gap:30px"></div>
   <div class="abs" id="tit-sx" style="left:150px;top:220px;width:240px;height:240px"></div>
   <div class="abs" id="tit-dx" style="left:1210px;top:220px;width:240px;height:240px"></div>
@@ -140,64 +141,46 @@ button{font-family:inherit;color:inherit}
   </div>
 </section>
 
-<!-- 4 PAROLA NUOVA 是 -->
-<section class="slide" data-titolo="是 shì">
+<!-- 4 PAESE O PERSONA -->
+<section class="slide" data-titolo="Paese o persona?" data-entra="pp">
   <div class="cornice"></div>
-  <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg>
-  <span class="abs pill" style="left:1240px;top:40px;font-size:28px;border-color:var(--oro);animation:none">⭐ Parola nuova!</span>
-  <div class="abs" id="shi-disegno" style="left:120px;top:150px;width:600px;height:600px"></div>
-  <div class="abs cornice-han" style="left:820px;top:110px;width:640px;height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
-    <span class="han" style="font-size:220px;color:var(--viola)">是</span>
-    <span style="font-size:84px;font-weight:600">shì</span>
-  </div>
-  <div class="abs" style="left:760px;top:570px;width:760px;display:flex;flex-direction:column;align-items:center;gap:16px">
-    <div style="display:flex;gap:14px"><button class="btn oro" data-dici="是">🔊 Ascolta</button><button class="btn" data-rivela="shi-vuol">Che cosa vuol dire?</button></div>
-    <span class="pill" id="shi-vuol" hidden style="text-align:center;font-size:30px;border-radius:28px;line-height:1.35;border-color:var(--viola)">是 = <b>essere</b> (sono, sei, è…)<br><span class="han">我是意大利人</span> = Io sono italiano/a <button class="btn oro" style="padding:2px 14px;font-size:24px" data-dici="我是意大利人">🔊</button></span>
-  </div>
-</section>
-
-<!-- 5 很 O 是? -->
-<section class="slide" data-titolo="很 o 是?" data-entra="hs">
-  <div class="cornice"></div>
-  <h2 class="titolo">⚠️ <span class="han" style="font-size:76px">很</span> o <span class="han" style="font-size:76px">是</span>?</h2>
-  <p class="sotto"><b style="color:#B07A00">很</b> per com'è e come mi sento · <b style="color:var(--viola)">是</b> per chi sono e da dove vengo</p>
+  <h2 class="titolo">Paese o persona? 🤔</h2>
+  <p class="sotto">Leggete la parola: è un <b style="color:var(--rosso)">paese</b> 🗺️ o una <b style="color:var(--verde)">persona</b> 🚶?</p>
   <div class="abs cornice-han" style="left:120px;top:205px;width:1360px;height:600px;display:grid;grid-template-columns:380px 1fr;gap:30px;align-items:center;padding:30px 50px">
-    <div id="hs-disegno" style="width:360px;height:360px"></div>
+    <div id="pp-disegno" style="width:360px;height:360px;display:flex;align-items:center;justify-content:center"></div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:26px">
-      <p id="hs-conta" style="margin:0;font-size:26px;font-weight:600;color:var(--grigio)"></p>
-      <div id="hs-frase" style="display:flex;gap:16px;align-items:center"></div>
-      <div style="display:flex;gap:30px" id="hs-scelte"></div>
-      <p id="hs-esito" aria-live="polite" style="margin:0;font-size:38px;font-weight:700;min-height:50px;text-align:center"></p>
-      <button class="btn" id="hs-next">Nuova frase ▶</button>
+      <p id="pp-conta" style="margin:0;font-size:26px;font-weight:600;color:var(--grigio)"></p>
+      <div id="pp-parola"></div>
+      <div style="display:flex;gap:30px">
+        <button class="btn" id="pp-paese" style="font-size:36px;background:var(--rosso-chiaro)">🗺️ Paese</button>
+        <button class="btn" id="pp-persona" style="font-size:36px;background:var(--verde-chiaro)">🚶 Persona</button>
+      </div>
+      <p id="pp-esito" aria-live="polite" style="margin:0;font-size:36px;font-weight:700;min-height:50px;text-align:center"></p>
+      <button class="btn oro" id="pp-next">Nuova parola ▶</button>
     </div>
   </div>
 </section>
 
-<!-- 6 COSTRUISCI LA FRASE -->
-<section class="slide" data-titolo="Costruisci la frase">
+<!-- 5 CHE NAZIONALITA -->
+<section class="slide" data-titolo="Che nazionalità?" data-entra="cn">
   <div class="cornice"></div>
-  <h2 class="titolo">Costruisci la frase!</h2>
-  <p class="sotto">Scegliete <b style="color:var(--azzurro)">chi</b> e <b style="color:var(--rosso)">il paese</b>. 是 e 人 ci sono sempre!</p>
-  <div class="abs" style="left:70px;top:195px;width:660px;display:flex;flex-direction:column;gap:12px">
-    <p style="margin:0;font-size:30px;font-weight:700;color:var(--azzurro)">Chi?</p>
-    <div id="cf-chi" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"></div>
-    <p style="margin:8px 0 0;font-size:30px;font-weight:700;color:var(--rosso)">Che paese?</p>
-    <div id="cf-paese" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px"></div>
-  </div>
-  <div class="abs cornice-han" style="left:760px;top:190px;width:770px;height:650px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
-    <div id="cf-disegno" style="width:300px;height:300px"></div>
-    <div id="cf-frase" style="display:flex;gap:10px;align-items:center"></div>
-    <p id="cf-it" style="margin:0;font-size:40px;font-weight:600"></p>
-    <button class="btn oro" id="cf-ascolta">🔊 Ascolta la frase</button>
+  <h2 class="titolo">Che nazionalità? 🧒</h2>
+  <p class="sotto">Guardate la bandiera e toccate la parola giusta.</p>
+  <div class="abs" id="cn-disegno" style="left:110px;top:220px;width:400px;height:400px"></div>
+  <p class="abs" id="cn-conta" style="left:60px;top:650px;width:500px;margin:0;text-align:center;font-size:30px;font-weight:600;color:var(--grigio)"></p>
+  <div class="abs" id="cn-opz" style="left:600px;top:215px;width:900px;display:grid;grid-template-columns:repeat(2,1fr);gap:26px"></div>
+  <div class="abs" style="left:600px;top:745px;width:900px;display:flex;justify-content:center;gap:24px;align-items:center">
+    <p id="cn-esito" aria-live="polite" style="margin:0;font-size:36px;font-weight:700"></p>
+    <button class="btn oro" id="cn-next" hidden>Prossima ▶</button>
   </div>
 </section>
 
-<!-- 7 METTI IN ORDINE -->
+<!-- 6 METTI IN ORDINE -->
 <section class="slide" data-titolo="Metti in ordine" data-entra="ordine">
   <div class="cornice"></div>
   <h2 class="titolo">Metti in ordine!</h2>
-  <p class="sotto">Guardate il disegno e toccate i pezzi nell'ordine giusto.</p>
-  <div class="abs" id="mo-disegno" style="left:110px;top:220px;width:340px;height:340px"></div>
+  <p class="sotto">Guardate la bandiera e toccate i caratteri nell'ordine giusto. Attenti a 人!</p>
+  <div class="abs" id="mo-disegno" style="left:110px;top:220px;width:340px;height:340px;display:flex;align-items:center;justify-content:center"></div>
   <p class="abs" id="mo-conta" style="left:60px;top:590px;width:440px;margin:0;text-align:center;font-size:30px;font-weight:600;color:var(--grigio)"></p>
   <div class="abs" style="left:500px;top:220px;width:1030px;display:flex;flex-direction:column;gap:40px;align-items:center">
     <div id="mo-slot" style="display:flex;gap:14px"></div>
@@ -207,50 +190,18 @@ button{font-family:inherit;color:inherit}
   </div>
 </section>
 
-<!-- 8 LEGGI E SCEGLI -->
-<section class="slide" data-titolo="Leggi e scegli" data-entra="leggi">
-  <div class="cornice"></div>
-  <h2 class="titolo">Leggi e scegli! 👀</h2>
-  <p class="sotto">Leggete la frase: quale disegno è?</p>
-  <div class="abs" style="left:0;right:0;top:200px;display:flex;justify-content:center"><div id="ls-frase" class="cornice-han" style="padding:16px 40px;display:flex;gap:12px;align-items:center"></div></div>
-  <div class="abs" id="ls-opz" style="left:160px;top:400px;width:1280px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px"></div>
-  <div class="abs" style="left:0;right:0;top:790px;display:flex;justify-content:center;gap:24px;align-items:center">
-    <p id="ls-esito" aria-live="polite" style="margin:0;font-size:36px;font-weight:700"></p>
-    <button class="btn oro" id="ls-next" hidden>Prossima ▶</button>
-  </div>
-</section>
-
-<!-- 9 DOMANDA E RISPOSTA -->
-<section class="slide" data-titolo="Domanda e risposta" data-entra="dr">
-  <div class="cornice"></div>
-  <h2 class="titolo">Fate la domanda! 💬</h2>
-  <p class="sotto"><span class="han">哪</span> nǎ = quale? · <span class="han">哪国人</span> = di quale paese?</p>
-  <div class="abs" id="dr-a" style="left:110px;top:330px;width:340px;height:340px"></div>
-  <div class="abs" id="dr-b" style="left:1150px;top:330px;width:340px;height:340px"></div>
-  <div class="abs fumetto" style="left:300px;top:200px;width:560px">
-    <span class="han" style="font-size:70px">你是<span style="color:var(--rosso)">哪</span>国人？</span>
-    <span style="font-size:30px;font-weight:600">Nǐ shì nǎ guó rén?</span>
-    <button class="btn oro" style="padding:4px 18px;font-size:24px" data-dici="你是哪国人？">🔊</button>
-  </div>
-  <div class="abs fumetto" id="dr-risp" style="left:740px;top:520px;width:560px;min-height:200px;justify-content:center"></div>
-  <div class="abs" style="left:0;right:0;top:770px;display:flex;justify-content:center;gap:20px">
-    <button class="btn oro" id="dr-rispondi">💬 Rispondi</button>
-    <button class="btn" id="dr-next">Altro bambino ▶</button>
-  </div>
-</section>
-
-<!-- 10 QUIZ -->
+<!-- 7 QUIZ -->
 <section class="slide" data-titolo="Quiz!" data-entra="quiz">
   <div class="cornice"></div>
   <svg class="lanterna" style="left:60px"><use href="#lanterna"/></svg><svg class="lanterna" style="left:1450px"><use href="#lanterna"/></svg>
   <div class="abs cornice-han" id="quiz" style="left:200px;top:90px;width:1200px;height:720px;padding:50px 70px;display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center"></div>
 </section>
 
-<!-- 11 FINE -->
+<!-- 8 FINE -->
 <section class="slide" data-titolo="Gioco e 再见!">
   <div class="cornice"></div>
-  <h2 class="abs" style="left:0;right:0;top:50px;margin:0;text-align:center;font-size:60px;color:var(--rosso)">Gioco: <span class="han" style="font-size:80px">你是哪国人？</span></h2>
-  <p class="abs" style="left:0;right:0;top:160px;margin:0;text-align:center;font-size:32px;font-weight:600">Pescate una bandiera: chi risponde per primo <span class="han">我是…人</span> vince un punto!</p>
+  <h2 class="abs" style="left:0;right:0;top:50px;margin:0;text-align:center;font-size:60px;color:var(--rosso)">Gioco delle bandiere! 🚩</h2>
+  <p class="abs" style="left:0;right:0;top:160px;margin:0;text-align:center;font-size:32px;font-weight:600">Pescate una bandiera: chi dice per primo la nazionalità in cinese vince un punto!</p>
   <div class="abs" style="left:90px;top:220px;width:1420px;display:grid;grid-template-columns:400px 1fr;gap:36px;align-items:start">
     <div style="display:flex;flex-direction:column;gap:20px;align-items:center">
       <button class="btn oro" id="fine-pesca" style="font-size:36px">🎲 Pesca una bandiera</button>
@@ -270,7 +221,7 @@ button{font-family:inherit;color:inherit}
 
 <nav class="nav" aria-label="Navigazione">
   <button id="prec" aria-label="Slide precedente">◀</button>
-  <span class="conta" id="conta">1 / 11</span>
+  <span class="conta" id="conta">1 / 8</span>
   <button id="succ" aria-label="Slide successiva">▶</button>
   <span class="titolo-slide" id="titolo-slide"></span>
   <button id="schermo" aria-label="Schermo intero">⛶</button>
@@ -301,6 +252,8 @@ const CHI=[
 const P=k=>PAESI.find(p=>p.k===k), Q=k=>CHI.find(c=>c.k===k);
 const PY={'是':'shì','人':'rén','很':'hěn','国':'guó','哪':'nǎ','高兴':'gāoxìng','大':'dà','冷':'lěng','小':'xiǎo','热':'rè'};
 PAESI.forEach(p=>PY[p.han]=p.py); CHI.forEach(c=>PY[c.han]=c.py);
+PAESI.forEach(p=>PY[p.han+'人']=p.py+' rén');
+Object.assign(PY,{'意':'yì','大':'dà','利':'lì','中':'zhōng','英':'yīng','法':'fǎ'});
 const va=(c,p)=>!c.solo||c.solo===p.k;
 const naz=(c,p)=>c.g==='f'?p.f:c.g==='m'?p.m:p.x;
 const italiano=(c,p)=>`${c.it} ${c.e} ${naz(c,p)}`;
@@ -406,10 +359,13 @@ const fraseHTML=(c,p,picc)=>{const s=picc?' piccolo':'';return blocco(c.han,'b-c
 const mescola=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
 const conHan=(s,px)=>s.replace(/([一-鿿]+)/g,`<span class="han"${px?` style="font-size:${px}px"`:''}>$1</span>`);
 
+const senzaNome=x=>x.replace(/<circle cx="70" cy="340"[\s\S]*<\/text>/,'');
+const disegnoN=(ck,pk,anim=false)=>svg(ck==='panda'?panda():senzaNome(persona(ck,pk)),anim?'anim-salta':'');
+
 // ---------- 1 TITOLO ----------
 document.getElementById('tit-bandiere').innerHTML=PAESI.map(p=>`<button class="carta-c" style="padding:8px" data-dici="${p.han}" aria-label="${p.it}">${flagIcon(p.k,120)}</button>`).join('');
-document.getElementById('tit-sx').innerHTML=disegno('wo','it',true);
-document.getElementById('tit-dx').innerHTML=disegno('panda','cn',true);
+document.getElementById('tit-sx').innerHTML=disegnoN('wo','it',true);
+document.getElementById('tit-dx').innerHTML=disegnoN('panda','cn',true);
 
 // ---------- 2 QUATTRO PAESI ----------
 (function(){
@@ -432,132 +388,75 @@ document.getElementById('tit-dx').innerHTML=disegno('panda','cn',true);
     box.appendChild(r)});
 })();
 
-// ---------- 4 是 ----------
-document.getElementById('shi-disegno').innerHTML=disegno('wo','it',true);
-
-// ---------- 5 很 O 是 ----------
+// ---------- 4 PAESE O PERSONA ----------
 (function(){
-  const giri=[
-    {chi:'我',dopo:'高兴',ok:'很',it:'Io sono felice',dis:()=>semplice('felice')},
-    {chi:'我',dopo:'意大利人',ok:'是',it:'Io sono italiano/a',dis:()=>disegno('wo','it')},
-    {chi:'熊猫',dopo:'中国人',ok:'是',it:'Il panda è cinese',dis:()=>disegno('panda','cn')},
-    {chi:'你',dopo:'冷',ok:'很',it:'Tu hai freddo',dis:()=>semplice('freddo')},
-    {chi:'她',dopo:'法国人',ok:'是',it:'Lei è francese',dis:()=>disegno('ta2','fr')},
-    {chi:'他',dopo:'热',ok:'很',it:'Lui ha caldo',dis:()=>semplice('caldo')},
-    {chi:'他',dopo:'英国人',ok:'是',it:'Lui è inglese',dis:()=>disegno('ta','gb')},
-    {chi:'老师',dopo:'意大利人',ok:'是',it:'La maestra è italiana',dis:()=>disegno('laoshi','it')}
-  ];
-  PY['意大利人']='Yìdàlì rén';PY['中国人']='Zhōngguó rén';PY['法国人']='Fǎguó rén';PY['英国人']='Yīngguó rén';
+  const giri=[['cn',false],['it',true],['fr',false],['gb',true],['it',false],['cn',true],['gb',false],['fr',true]];
   let g=0, fatto=false;
-  const dis=document.getElementById('hs-disegno'), fr=document.getElementById('hs-frase'), sc=document.getElementById('hs-scelte'), es=document.getElementById('hs-esito');
-  function giro(){ const x=giri[g]; fatto=false; es.textContent='';
-    document.getElementById('hs-conta').textContent=`Frase ${g+1} di ${giri.length} · ${x.it}`;
-    dis.innerHTML=x.dis();
-    fr.innerHTML=blocco(x.chi,'b-chi')+`<div class="slot" id="hs-slot"><span style="font-size:80px;font-weight:700;color:#CDB9A6">?</span></div>`+blocco(x.dopo,x.ok==='是'?'b-paese':'b-hen');
-    sc.innerHTML='';
-    [['很','b-hen'],['是','b-shi']].forEach(([h,cl])=>{const b=document.createElement('button'); b.className='blocco '+cl; b.innerHTML=`<span class="han">${h}</span><span class="py">${PY[h]}</span>`;
-      b.onclick=()=>{ if(fatto) return;
-        if(h===x.ok){ fatto=true; document.getElementById('hs-slot').outerHTML=blocco(h,cl,'id="hs-ok"'); scintille(document.getElementById('hs-ok'),14);
-          es.innerHTML='✅ '+conHan(x.chi+h+x.dopo)+' · '+x.it+'!'; es.style.color='var(--verde)'; dici(x.chi+h+x.dopo); }
-        else { b.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'none'}],{duration:350});
-          es.textContent=x.ok==='是'?'❌ Qui diciamo chi è o da dove viene: serve 是!':'❌ Qui diciamo com\'è o come si sente: serve 很!'; es.style.color='var(--rosso)'; } };
-      sc.appendChild(b)});
+  const dis=document.getElementById('pp-disegno'), par=document.getElementById('pp-parola'), es=document.getElementById('pp-esito');
+  function giro(){ const [pk,ren]=giri[g], p=P(pk), w=p.han+(ren?'人':''); fatto=false; es.textContent='';
+    document.getElementById('pp-conta').textContent=`Parola ${g+1} di ${giri.length}`;
+    dis.innerHTML=`<span style="font-size:200px;font-weight:700;color:#CDB9A6">?</span>`;
+    par.innerHTML=blocco(w,'',`data-dici="${w}"`);
   }
-  document.getElementById('hs-next').onclick=()=>{g=(g+1)%giri.length;giro()};
-  entra.hs=()=>{ if(!fatto&&!sc.children.length) giro() }; giro();
+  function scegli(dice){ if(fatto) return; const [pk,ren]=giri[g], p=P(pk), w=p.han+(ren?'人':'');
+    if(dice===ren){ fatto=true;
+      dis.innerHTML=ren?disegnoN(['wo','ni','ta','ta2'][g%4],pk,true):`<div class="anim-salta">${flagIcon(pk,340)}</div>`;
+      es.innerHTML=ren?`✅ ${conHan(w)} = ${p.x}: c'è 人, è una persona!`:`✅ ${conHan(w)} = ${p.it}: è un paese!`; es.style.color='var(--verde)';
+      dici(w); scintille(par.firstElementChild,12); }
+    else { es.textContent=ren?'❌ Guardate bene la fine della parola: c\'è 人!':'❌ Guardate bene: c\'è 人? No! Allora è…'; es.style.color='var(--rosso)';
+      par.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'none'}],{duration:350}); }
+  }
+  document.getElementById('pp-paese').onclick=()=>scegli(false);
+  document.getElementById('pp-persona').onclick=()=>scegli(true);
+  document.getElementById('pp-next').onclick=()=>{g=(g+1)%giri.length;giro()};
+  entra.pp=()=>{ if(!par.innerHTML) giro() }; giro();
 })();
 
-// ---------- 6 COSTRUISCI LA FRASE ----------
+// ---------- 5 CHE NAZIONALITA ----------
 (function(){
-  let chi=Q('wo'), paese=P('it');
-  const bc=document.getElementById('cf-chi'), bp=document.getElementById('cf-paese');
-  function aggiorna(){
-    [...bc.children].forEach((x,k)=>x.style.outline=CHI[k]===chi?'6px solid #2F7FB8':'');
-    [...bp.children].forEach((x,k)=>{x.style.outline=PAESI[k]===paese?'6px solid #C8102E':''; x.classList.toggle('spento',!va(chi,PAESI[k]))});
-    document.getElementById('cf-disegno').innerHTML=disegno(chi.k,paese.k,true);
-    document.getElementById('cf-frase').innerHTML=fraseHTML(chi,paese,true);
-    document.getElementById('cf-it').textContent=italiano(chi,paese);
+  const giri=[['ta','fr'],['wo','cn'],['ta2','gb'],['ni','it'],['laoshi','it'],['panda','cn'],['ta','gb'],['ta2','fr']];
+  let g=0;
+  const opz=document.getElementById('cn-opz'), es=document.getElementById('cn-esito'), nx=document.getElementById('cn-next');
+  function giro(){ const [ck,pk]=giri[g], p=P(pk); es.textContent=''; nx.hidden=true;
+    document.getElementById('cn-disegno').innerHTML=disegnoN(ck,pk,true);
+    document.getElementById('cn-conta').textContent=`${g+1} di ${giri.length} · Di che paese è?`;
+    opz.innerHTML=''; let fatto=false;
+    mescola(PAESI).forEach(q=>{ const b=document.createElement('button'); b.className='carta-c'; b.style.height='240px';
+      b.innerHTML=`<span class="han" style="font-size:${q.han.length>2?70:84}px">${q.han}人</span><span style="font-size:30px;font-weight:600">${q.py} rén</span>`;
+      b.onclick=()=>{ if(fatto) return; dici(q.han+'人');
+        if(q.k===pk){ fatto=true; b.classList.add('ok'); es.innerHTML=`✅ ${conHan(p.han+'人')} · ${naz(Q(ck),p)}!`; es.style.color='var(--verde)'; nx.hidden=false; scintille(b,12) }
+        else { b.classList.add('no'); es.textContent='❌ Guardate bene la bandiera!'; es.style.color='var(--rosso)' } };
+      opz.appendChild(b)});
   }
-  CHI.forEach(c=>{const b=document.createElement('button');b.className='blocco b-chi piccolo';b.style.justifyContent='center';
-    b.innerHTML=`<span class="han">${c.han}</span><span class="py">${c.py}</span>`;
-    b.onclick=()=>{chi=c; if(!va(c,paese)) paese=P(c.solo); aggiorna(); dici(c.han)}; bc.appendChild(b)});
-  PAESI.forEach(p=>{const b=document.createElement('button');b.className='blocco b-paese piccolo';b.style.flexDirection='row';b.style.gap='12px';b.style.justifyContent='center';
-    b.innerHTML=`${flagIcon(p.k,60)}<span style="display:flex;flex-direction:column;align-items:center"><span class="han">${p.han}</span><span class="py">${p.py}</span></span>`;
-    b.onclick=()=>{ if(!va(chi,p)){ b.animate([{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'none'}],{duration:300}); return }
-      paese=p; aggiorna(); dici(p.han)}; bp.appendChild(b)});
-  document.getElementById('cf-ascolta').onclick=()=>dici(cinese(chi,paese));
-  aggiorna();
+  nx.onclick=()=>{g=(g+1)%giri.length;giro()};
+  entra.cn=()=>{ if(!opz.children.length) giro() }; giro();
 })();
 
-// ---------- 7 METTI IN ORDINE ----------
+// ---------- 6 METTI IN ORDINE ----------
 (function(){
-  const giri=[['wo','it'],['panda','cn'],['ni','fr'],['ta','gb'],['ta2','cn'],['laoshi','it'],['wo','gb'],['ta2','fr']];
+  const giri=[['it',true],['cn',false],['gb',true],['fr',false],['cn',true],['it',false],['fr',true],['gb',false]];
   let g=0, presi=[];
   const slot=document.getElementById('mo-slot'), pezzi=document.getElementById('mo-pezzi'), esito=document.getElementById('mo-esito');
   function giro(){
-    const [ck,pk]=giri[g], c=Q(ck), p=P(pk); presi=[]; esito.textContent='';
-    document.getElementById('mo-disegno').innerHTML=disegno(ck,pk,true);
-    document.getElementById('mo-conta').textContent=`Frase ${g+1} di ${giri.length} · ${italiano(c,p)}`;
-    slot.innerHTML='<div class="slot"></div>'.repeat(4);
+    const [pk,ren]=giri[g], p=P(pk), w=p.han+(ren?'人':''), n=[...w].length; presi=[]; esito.textContent='';
+    document.getElementById('mo-disegno').innerHTML=`<div class="anim-salta">${flagIcon(pk,320)}</div>`;
+    document.getElementById('mo-conta').textContent=`Parola ${g+1} di ${giri.length} · ${ren?p.x:p.it}`;
+    slot.innerHTML='<div class="slot"></div>'.repeat(n);
+    const car=[...p.han,'人'];
+    let ord; do{ ord=mescola(car) }while(ord.join('')===car.join('') || ord.slice(0,n).join('')===w);
     pezzi.innerHTML='';
-    mescola([[c.han,'b-chi'],['是','b-shi'],[p.han,'b-paese'],['人','b-ren']]).forEach(([h,cl])=>{
+    ord.forEach(h=>{ const cl=h==='人'?'b-ren':'b-paese';
       const b=document.createElement('button'); b.className='blocco '+cl; b.innerHTML=`<span class="han">${h}</span><span class="py">${PY[h]}</span>`;
-      b.onclick=()=>{ if(presi.length>=4) return; b.classList.add('usato'); presi.push(h);
+      b.onclick=()=>{ if(presi.length>=n) return; b.classList.add('usato'); presi.push(h);
         slot.children[presi.length-1].innerHTML=blocco(h,cl); dici(h);
-        if(presi.length===4){ const ok=presi.join('')===cinese(c,p);
-          if(ok){esito.innerHTML='✅ Bravissimi! '+conHan(presi.join('')); esito.style.color='var(--verde)'; setTimeout(()=>dici(presi.join('')),500); coriandoli(40)}
-          else{esito.textContent='❌ Quasi! Ricordate: chi → 是 → paese → 人'; esito.style.color='var(--rosso)'; slot.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'none'}],{duration:350})}}};
+        if(presi.length===n){ const ok=presi.join('')===w;
+          if(ok){esito.innerHTML='✅ Bravissimi! '+conHan(w)+' · '+(ren?p.x:p.it); esito.style.color='var(--verde)'; setTimeout(()=>dici(w),500); coriandoli(40)}
+          else{esito.textContent=ren?'❌ Quasi! Prima il paese, poi 人':'❌ Quasi! Qui vogliamo il paese: niente 人!'; esito.style.color='var(--rosso)'; slot.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'none'}],{duration:350})}}};
       pezzi.appendChild(b)});
   }
   document.getElementById('mo-reset').onclick=giro;
   document.getElementById('mo-next').onclick=()=>{g=(g+1)%giri.length; giro()};
   entra.ordine=()=>{ if(!slot.children.length) giro() }; giro();
-})();
-
-// ---------- 8 LEGGI E SCEGLI ----------
-(function(){
-  const giri=[['wo','cn'],['ta2','it'],['ni','gb'],['ta','fr'],['panda','cn'],['wo','fr'],['laoshi','it'],['ta2','gb']];
-  let g=0;
-  const fr=document.getElementById('ls-frase'), opz=document.getElementById('ls-opz'), es=document.getElementById('ls-esito'), nx=document.getElementById('ls-next');
-  const persone=['wo','ni','ta','ta2'];
-  function giro(){
-    const [ck,pk]=giri[g], c=Q(ck), p=P(pk);
-    fr.innerHTML=fraseHTML(c,p,true); es.textContent=''; nx.hidden=true;
-    const altroPaese=mescola(PAESI.filter(x=>x.k!==pk))[0].k;
-    let scelte;
-    if(c.solo){ // panda o maestra: cambia la persona
-      const o=mescola(persone).slice(0,2); scelte=[[ck,pk,true],[o[0],pk,false],[o[1],altroPaese,false]];
-    } else {
-      const altro=mescola(persone.filter(x=>x!==ck))[0];
-      scelte=[[ck,pk,true],[ck,altroPaese,false],[altro,pk,false]];
-    }
-    opz.innerHTML=''; let fatto=false;
-    mescola(scelte).forEach(([cc,pp,ok])=>{const b=document.createElement('button');b.className='carta-c';b.style.height='360px';
-      b.innerHTML=`<div style="width:300px;height:300px">${disegno(cc,pp)}</div>`; b.setAttribute('aria-label',italiano(Q(cc),P(pp)));
-      b.onclick=()=>{ if(fatto) return;
-        if(ok){fatto=true;b.classList.add('ok');b.querySelector('svg').classList.add('anim-salta');es.textContent='✅ '+italiano(c,p)+'!';es.style.color='var(--verde)';nx.hidden=false;dici(cinese(c,p))}
-        else{b.classList.add('no');es.textContent='❌ Guardate bene: '+(cc!==ck?'è la persona giusta? Guardate il cerchio giallo!':'guardate la bandiera!');es.style.color='var(--rosso)'}};
-      opz.appendChild(b)});
-  }
-  nx.onclick=()=>{g=(g+1)%giri.length;giro()};
-  entra.leggi=()=>{ if(!opz.children.length) giro() }; giro();
-})();
-
-// ---------- 9 DOMANDA E RISPOSTA ----------
-(function(){
-  const giri=[['ta','it'],['ta2','cn'],['wo','fr'],['ta','gb'],['ta2','it'],['wo','cn']];
-  let g=0;
-  const risp=document.getElementById('dr-risp');
-  function giro(){ const [ck,pk]=giri[g];
-    document.getElementById('dr-a').innerHTML=disegno('ni',['it','cn','gb','fr'][g%4]);
-    document.getElementById('dr-b').innerHTML=svg(persona(ck,pk).replace(/<circle cx="70" cy="340"[\s\S]*<\/text>/,''));
-    risp.innerHTML=`<span style="font-size:90px;font-weight:700;color:#CDB9A6">?</span>`;
-  }
-  document.getElementById('dr-rispondi').onclick=()=>{ const p=P(giri[g][1]), c=Q('wo');
-    risp.innerHTML=`<span class="han" style="font-size:64px">我是<span style="color:${p.col}">${p.han}</span>人</span><span style="font-size:28px;font-weight:600">${pinyin(c,p)}</span><span style="font-size:26px;color:var(--grigio)">Io sono ${p.x}</span>`;
-    risp.animate([{transform:'scale(.6)',opacity:0},{transform:'none',opacity:1}],{duration:400}); dici(cinese(c,p)); };
-  document.getElementById('dr-next').onclick=()=>{g=(g+1)%giri.length;giro()};
-  entra.dr=()=>{ if(!risp.innerHTML) giro() }; giro();
 })();
 
 // ---------- 10 QUIZ ----------
@@ -566,11 +465,11 @@ document.getElementById('shi-disegno').innerHTML=disegno('wo','it',true);
     ['中国 è…',['la Cina','l\'Italia','la Francia'],0,'中国 Zhōngguó = Cina 🇨🇳'],
     ['Come si dice “Italia”?',['英国','意大利','法国'],1,'意大利 Yìdàlì = Italia 🇮🇹'],
     ['人 vuol dire…',['persona','paese','grande'],0,'人 rén = persona 🚶'],
-    ['“Io sono italiano/a” si dice…',['我很意大利人','我是意大利人','我意大利是人'],1,'Chi → 是 → paese → 人'],
-    ['法国人 vuol dire…',['inglese','cinese','francese'],2,'法国 = Francia, 法国人 = francese'],
-    ['Quale parola manca? 熊猫 _ 中国人',['很','是','人'],1,'熊猫是中国人 = Il panda è cinese'],
-    ['Quale parola manca? 我 _ 高兴',['很','是','国'],0,'高兴 è un\'emozione: 我很高兴!'],
-    ['你是哪国人？ vuol dire…',['Come stai?','Di dove sei?','Come ti chiami?'],1,'哪国人 = di quale paese?']
+    ['“italiano” si dice…',['意大利','意大利人','人意大利'],1,'Paese + 人 = nazionalità!'],
+    ['法国人 vuol dire…',['inglese','cinese','francese'],2,'法国 = Francia · 法国人 = francese'],
+    ['英国 è…',['l\'Inghilterra','la Francia','la Cina'],0,'英国 Yīngguó = Inghilterra'],
+    ['“cinese” si dice…',['中国人','中国','人中国'],0,'中国 + 人 = 中国人'],
+    ['Quale parola è un paese?',['法国人','法国','人'],1,'法国 = Francia: senza 人 è il paese!']
   ];
   const el=document.getElementById('quiz'); let i=0,punti=0;
   const isHan=s=>/^[一-鿿]+$/.test(s);
@@ -608,12 +507,12 @@ document.getElementById('shi-disegno').innerHTML=disegno('wo','it',true);
 (function(){
   const mostra=document.getElementById('fine-mostra'), box=document.getElementById('fine-carte'), sv=document.getElementById('fine-svela'); let ultimo=-1, attuale=-1;
   function scegli(n){ attuale=n; const p=PAESI[n];
-    mostra.innerHTML=`${flagIcon(p.k,240)}<span class="han" style="font-size:44px">你是哪国人？</span>`;
-    [...box.children].forEach((x,k)=>x.classList.toggle('scelta',k===n)); sv.hidden=false; dici('你是哪国人？');
+    mostra.innerHTML=`${flagIcon(p.k,240)}<span style="font-size:40px;font-weight:600">Che nazionalità? 🤔</span>`;
+    [...box.children].forEach((x,k)=>x.classList.toggle('scelta',k===n)); sv.hidden=false; 
   }
   sv.onclick=()=>{ if(attuale<0) return; const p=PAESI[attuale];
-    mostra.innerHTML=`${flagIcon(p.k,160)}<span class="han" style="font-size:64px;color:${p.col}">我是${p.han}人</span><span style="font-size:28px;font-weight:600">wǒ shì ${p.py} rén</span>`;
-    dici('我是'+p.han+'人'); coriandoli(30); };
+    mostra.innerHTML=`${flagIcon(p.k,160)}<span class="han" style="font-size:76px;color:${p.col}">${p.han}人</span><span style="font-size:30px;font-weight:600">${p.py} rén · ${p.x}</span>`;
+    dici(p.han+'人'); coriandoli(30); };
   document.getElementById('fine-pesca').onclick=()=>{let n; do{n=Math.floor(Math.random()*PAESI.length)}while(n===ultimo); ultimo=n; scegli(n)};
   PAESI.forEach((p,n)=>{const b=document.createElement('button');b.className='carta-c';b.style.height='240px';
     b.innerHTML=`${flagIcon(p.k,150)}<span class="han" style="font-size:46px;color:${p.col}">${p.han}人</span><span style="font-size:24px;font-weight:600">${p.py} rén · ${p.x}</span>`;
