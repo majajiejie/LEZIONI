@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mini dettato lezione 13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;700&family=Figtree:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#F3F5F2;--surface:#FFFFFF;--fg:#1D2421;--muted:#5E6A64;--line:#DCE2DD;--seal:#B8382A;--seal-soft:#F6E3DF;--jade:#2F7A63;--jade-soft:#DFF0E9;--gold:#C9971C;--gold-soft:#FBF1D6;
+--hanzi:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;--brush:"Ma Shan Zheng","KaiTi",serif;--body:"Figtree",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151A18;--surface:#1E2522;--fg:#E8EDEA;--muted:#9AA8A1;--line:#2F3934;--seal:#E2705F;--seal-soft:#3A2420;--jade:#6CC3A5;--jade-soft:#1C3329;--gold:#E8BE52;--gold-soft:#3A3120;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151A18;--surface:#1E2522;--fg:#E8EDEA;--muted:#9AA8A1;--line:#2F3934;--seal:#E2705F;--seal-soft:#3A2420;--jade:#6CC3A5;--jade-soft:#1C3329;--gold:#E8BE52;--gold-soft:#3A3120;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:clamp(18px,2.2vw,26px);line-height:1.4}
+.screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 16px;gap:2vh}
+[hidden]{display:none!important}
+.zh{font-family:var(--hanzi)}
+.seal{width:clamp(70px,9vw,120px);height:clamp(70px,9vw,120px);border-radius:14px;background:var(--seal);color:#fff;display:grid;place-items:center;font-family:var(--brush);font-size:clamp(40px,6vw,80px);transform:rotate(-4deg)}
+h1{margin:0;font-size:clamp(2rem,5vw,4rem);line-height:1.1}
+.sub{color:var(--muted);font-size:clamp(1.1rem,2.6vw,2rem)}
+.rules{text-align:left;max-width:900px;margin:0;padding-left:1.3em;font-size:clamp(1.1rem,2.4vw,1.9rem);display:grid;gap:.4em}
+.btn{font:inherit;font-weight:800;border:2px solid var(--line);background:var(--surface);color:var(--fg);border-radius:14px;padding:.5em 1.1em;cursor:pointer}
+.btn.main{background:var(--seal);border-color:var(--seal);color:#fff;font-size:clamp(1.3rem,3vw,2.4rem)}
+.btn:focus-visible{outline:3px solid var(--jade);outline-offset:3px}
+.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;align-items:center}
+.opt{font-size:clamp(1rem,2vw,1.5rem);color:var(--muted);display:flex;gap:10px;align-items:center}
+.opt select{font:inherit;font-size:inherit;padding:4px 10px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--fg)}
+.opt input{width:1.3em;height:1.3em}
+
+.top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:14px 20px;font-weight:800;font-size:clamp(1.2rem,2.8vw,2.2rem);color:var(--muted);pointer-events:none}
+.phase{font-weight:800;font-size:clamp(2rem,6vw,5rem);line-height:1.05}
+.clock{font-weight:800;font-size:clamp(9rem,30vw,22rem);line-height:.9;font-variant-numeric:tabular-nums}
+.bar{width:min(90vw,1000px);height:clamp(14px,2vh,26px);border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--seal);width:0;transition:width .2s linear}
+.hint{font-size:clamp(1.6rem,4.5vw,3.6rem);color:var(--muted);min-height:1.2em}
+
+#show{background:var(--seal);color:#fff}
+#show .phase{font-size:clamp(3rem,10vw,9rem)}
+#show .clock{color:#fff;font-size:clamp(7rem,22vw,16rem)}
+.cam{font-size:clamp(5rem,14vw,11rem);line-height:1}
+
+.sol-h{font-family:var(--hanzi);font-weight:700;font-size:clamp(7rem,24vw,18rem);line-height:1}
+.sol-p{color:var(--jade);font-weight:800;font-size:clamp(2.4rem,7vw,6rem);line-height:1.1}
+.sol-i{color:var(--muted);font-size:clamp(1.4rem,3.6vw,3rem)}
+.kids{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.kid{font:inherit;font-weight:800;font-size:clamp(1.2rem,2.8vw,2.2rem);border:3px solid var(--line);background:var(--surface);color:var(--fg);border-radius:14px;padding:.35em .8em;cursor:pointer}
+.kid[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.small{font-size:clamp(.9rem,1.8vw,1.3rem);color:var(--muted)}
+
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;width:min(95vw,1100px)}
+.card{background:var(--surface);border:3px solid var(--line);border-radius:18px;padding:18px}
+.card b{display:block;font-size:clamp(1.6rem,3.6vw,3rem)}
+.card .sc{font-size:clamp(3rem,8vw,6rem);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.card .st{font-size:clamp(2.5rem,6vw,5rem);min-height:1.2em}
+.card.win{background:var(--gold-soft);border-color:var(--gold)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+
+<section class="screen" id="start">
+  <div class="seal" aria-hidden="true">听</div>
+  <h1>Mini dettato · 第十三课</h1>
+  <div class="sub zh">我是走回来的</div>
+  <ol class="rules">
+    <li>Libro e appunti <b>chiusi</b>, un foglio bianco e un <b>pennarello</b>.</li>
+    <li>Senti la parola: scrivi <b>caratteri e pinyin</b>, grandi.</li>
+    <li>Quando lo schermo diventa rosso: <b>alzate subito il foglio</b> 📷</li>
+  </ol>
+  <div class="row">
+    <label class="opt">Secondi per scrivere
+      <select id="secs"><option>6</option><option>8</option><option selected>10</option><option>12</option><option>15</option></select></label>
+    <label class="opt">Secondi per mostrare
+      <select id="show-secs"><option>5</option><option>8</option><option>10</option><option selected>15</option><option>20</option></select></label>
+    <label class="opt">Voce <select id="voiceSel" style="font:inherit;max-width:260px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)"></select></label>
+    <label class="opt"><input type="checkbox" id="showIt"> indizio in italiano</label>
+  </div>
+  <button class="btn main" id="go">Inizia ▶</button>
+  <div class="small">L'ordine delle parole cambia ogni volta · Tasto spazio = avanti</div>
+</section>
+
+<section class="screen" id="write" hidden>
+  <div class="top"><span id="countW">1 / 7</span><span>✍️</span></div>
+  <div class="phase">Scrivi!</div>
+  <div class="clock" id="clockW">10</div>
+  <div class="bar"><i id="fillW"></i></div>
+  <div class="hint" id="hint"></div>
+  <button class="btn" id="say">▶ Riascolta</button>
+</section>
+
+<section class="screen" id="show" hidden>
+  <div class="cam" aria-hidden="true">📷</div>
+  <div class="phase">ALZATE IL FOGLIO!</div>
+  <div class="clock" id="clockS">5</div>
+</section>
+
+<section class="screen" id="sol" hidden>
+  <div class="top"><span id="countS">1 / 7</span><span>✅</span></div>
+  <div class="sol-h" id="solH"></div>
+  <div class="sol-p" id="solP"></div>
+  <div class="sol-i" id="solI"></div>
+  <div class="small">Tocca chi l'ha scritta giusta</div>
+  <div class="kids" id="kids"></div>
+  <button class="btn main" id="next">Prossima parola →</button>
+</section>
+
+<section class="screen" id="end" hidden>
+  <h1>Risultati 🏁</h1>
+  <div class="board" id="board"></div>
+  <div class="row">
+    <button class="btn" id="list">Rivedi tutte le parole</button>
+    <button class="btn" id="again">Ricomincia</button>
+  </div>
+  <div class="sub zh" id="allWords" hidden></div>
+</section>
+
+<script src="../voce.js"></script>
+<script>
+const W=[["上去","shàngqu","salire, andare su"],["下来","xiàlai","scendere, venire giù"],["进去","jìnqu","entrare, andare dentro"],["出来","chūlai","uscire, venire fuori"],["起来","qǐlai","alzarsi, tirarsi su"],["过来","guòlai","venire qui, avvicinarsi"],["终于","zhōngyú","finalmente"]];
+const KIDS=["Sveva","Sofia","Sofy","Leo"];
+const $=id=>document.getElementById(id);
+let order=[],idx=0,tid=null,score={},hit={},state="start";
+
+let zhVoice=null;
+function rankV(x){const n=(x.name||"").toLowerCase();let s=0;if(/natural|online|neural/.test(n))s+=50;if(/xiaoxiao|xiaoyi|yunxi|yunjian|xiaohan|xiaomo/.test(n))s+=40;if(/google/.test(n))s+=35;if(/tingting|ting-ting|lili|meijia|yu-shu|shanshan/.test(n))s+=25;if(/huihui|kangkang|yaoyao/.test(n))s-=20;if(/zh[-_]cn/i.test(x.lang))s+=10;return s}
+function zhList(){if(!("speechSynthesis" in window))return[];return speechSynthesis.getVoices().filter(x=>/^zh|cmn/i.test(x.lang)&&!/hk|yue|cantonese/i.test(x.lang+x.name)).sort((a,b)=>rankV(b)-rankV(a))}
+function fillVoices(){const sel=document.getElementById("voiceSel");if(!sel)return;const L=zhList();if(!L.length)return;let saved=null;try{saved=localStorage.getItem("zh-voice")}catch(e){}
+  sel.innerHTML=L.map(v=>`<option value="${v.name}">${v.name}</option>`).join("");if(saved&&L.some(v=>v.name===saved))sel.value=saved;
+  sel.onchange=()=>{try{localStorage.setItem("zh-voice",sel.value)}catch(e){};pickVoice()}}
+function pickVoice(){const L=zhList();const sel=document.getElementById("voiceSel");zhVoice=(sel&&L.find(v=>v.name===sel.value))||L[0]||null}
+if("speechSynthesis" in window){fillVoices();pickVoice();speechSynthesis.onvoiceschanged=()=>{fillVoices();pickVoice()}}
+const pick=pickVoice;
+function speak(t){if(!("speechSynthesis" in window))return;pick();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;u.rate=.85;speechSynthesis.speak(u)}
+function beep(){try{const c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=.15;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.25)}catch(e){}}
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function screen(s){state=s;["start","write","show","sol","end"].forEach(x=>$(x).hidden=x!==s)}
+function countdown(sec,clock,fill,onTick,done){
+  clearInterval(tid);let left=sec;clock.textContent=left;if(fill)fill.style.width="0";
+  tid=setInterval(()=>{left--;clock.textContent=Math.max(left,0);if(fill)fill.style.width=((sec-left)/sec*100)+"%";if(onTick)onTick(left);if(left<=0){clearInterval(tid);done()}},1000);
+}
+
+function writePhase(){
+  const w=order[idx],sec=parseInt($("secs").value);
+  screen("write");$("countW").textContent=(idx+1)+" / "+order.length;
+  $("hint").textContent=$("showIt").checked?"💡 "+w[2]:"";
+  speak(w[0]);
+  countdown(sec,$("clockW"),$("fillW"),left=>{if(left===sec-3)speak(w[0])},showPhase);
+}
+function showPhase(){
+  screen("show");beep();try{speechSynthesis.cancel()}catch(e){}
+  countdown(parseInt($("show-secs").value),$("clockS"),null,null,solPhase);
+}
+function solPhase(){
+  clearInterval(tid);const w=order[idx];screen("sol");
+  $("countS").textContent=(idx+1)+" / "+order.length;
+  $("solH").textContent=w[0];$("solP").textContent=w[1];$("solI").textContent=w[2];
+  hit={};$("kids").innerHTML="";
+  KIDS.forEach(k=>{const b=document.createElement("button");b.className="kid";b.textContent=k;b.setAttribute("aria-pressed","false");
+    b.onclick=()=>{hit[k]=!hit[k];b.setAttribute("aria-pressed",hit[k])};$("kids").appendChild(b)});
+  $("next").textContent=idx<order.length-1?"Prossima parola →":"Vedi i risultati 🏁";
+}
+function nextWord(){
+  KIDS.forEach(k=>{if(hit[k])score[k]++});
+  idx++;if(idx>=order.length)endPhase();else writePhase();
+}
+function endPhase(){
+  screen("end");$("allWords").hidden=true;
+  $("board").innerHTML=KIDS.map(k=>`<div class="card"><b>${k}</b><div class="sc">${score[k]}/${W.length}</div></div>`).join("");
+  $("allWords").innerHTML=order.map(w=>`${w[0]} <span style="color:var(--jade)">${w[1]}</span>`).join(" · ");
+}
+
+$("go").onclick=()=>{order=shuffle(W);idx=0;score={};KIDS.forEach(k=>score[k]=0);writePhase()};
+$("say").onclick=()=>speak(order[idx][0]);
+$("next").onclick=nextWord;
+$("again").onclick=()=>{clearInterval(tid);screen("start")};
+$("list").onclick=()=>{$("allWords").hidden=!$("allWords").hidden};
+document.addEventListener("keydown",e=>{if(e.code!=="Space"&&e.code!=="ArrowRight")return;
+  if(state==="sol"){e.preventDefault();nextWord()}
+  else if(state==="write"){e.preventDefault();showPhase()}
+  else if(state==="show"){e.preventDefault();solPhase()}});
+</script>
+</body></html>
