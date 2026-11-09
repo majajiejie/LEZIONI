@@ -224,6 +224,15 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 .tile.j{border-color:#f7b9b5;background:#fdeceb}
 .rcans.ok{border-color:var(--green);background:#e8f8ef}
 .rcans.no{border-color:var(--red);animation:shake .3s}
+/* gioco 2 */
+.qtype{display:inline-block;background:#e6f7f4;color:#16a394;border-radius:30px;padding:6px 18px;font-size:24px;font-weight:700}
+.g2q{margin:16px 0 6px;min-height:130px;display:flex;align-items:center;justify-content:center}
+.g2q .big{font-size:110px;line-height:1}
+.g2q .itq{font-size:48px;font-weight:700;color:var(--blue)}
+.g2q .pyq{font-size:64px;color:var(--red)}
+.g2o{min-width:170px}
+.g2rev{display:flex;gap:14px;justify-content:center;align-items:center;margin-top:14px;min-height:10px}
+.g2rev .py{font-size:28px}.g2rev .zh{font-size:44px}.g2rev .it{color:var(--soft);font-size:26px}
 </style>
 </head>
 <body>
@@ -239,7 +248,7 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
   <button data-s="8">🃏 有 e parole jolly <small>8'</small></button>
   <button data-s="3">Leggiamo <small>6'</small></button>
   <button data-s="4">Gioco 1 🎯 <small>5'</small></button>
-  <button data-s="5">Gioco 2 👂 <small>5'</small></button>
+  <button data-s="5">Gioco 2 🧠 <small>8'</small></button>
   <button data-s="9">🧩 Ricostruisci <small>6'</small></button>
   <button data-s="6">Parliamo <small>4'</small></button>
 </nav>
@@ -350,12 +359,13 @@ footer{text-align:center;color:var(--soft);font-size:18px;padding:12px}
 </section>
 
 <section id="s5">
-  <h2>Ascolta e scegli 👂</h2>
-  <p class="hint">Premi 🔊, ascolta la parola e clicca il carattere giusto!</p>
-  <div class="tools"><button class="btn ghost" onclick="togglePy()">Pinyin sì / no</button></div>
+  <h2>Ti ricordi? 🧠</h2>
+  <p class="hint">Leggi bene la domanda: a volte c'è il carattere, a volte l'italiano, a volte il pinyin!</p>
   <div class="stage">
-    <button class="spk" id="g2spk" style="width:90px;height:90px;font-size:44px">🔊</button>
-    <div class="opts" id="g2opts" style="margin-top:20px"></div>
+    <div class="qtype" id="g2type"></div>
+    <div class="g2q" id="g2q"></div>
+    <div class="opts" id="g2opts"></div>
+    <div class="g2rev" id="g2rev"></div>
     <div class="feedback" id="g2fb"></div>
     <div class="dots" id="g2dots"></div>
     <div style="margin-top:14px"><button class="btn" id="g2next" style="display:none">Avanti ➜</button></div>
@@ -484,12 +494,29 @@ game({p:'g1',rounds:D.g1,draw:d=>{
  const s=document.getElementById('g1spk');s.style.display=/[一-鿿]/.test(d.q)?'inline-block':'none';s.dataset.say=d.q;
 }});
 
-/* gioco 2: ascolta e scegli */
-const pool=vocab.filter(v=>!v[4]);
-const g2=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(8,pool.length)).map(v=>{
- const others=pool.filter(x=>x[0]!==v[0]).sort(()=>Math.random()-.5).slice(0,2);
- return {a:v[0],opts:[[v[0],v[1]],...others.map(x=>[x[0],x[1]])]};});
-game({p:'g2',rounds:g2,draw:d=>{document.getElementById('g2spk').dataset.say=d.a;setTimeout(()=>{if(document.getElementById('s5').classList.contains('on'))say(d.a)},300)}});
+/* gioco 2: ti ricordi? */
+const G2W=[["爸爸","bàba","papà"],["妈妈","māma","mamma"],["家","jiā","casa, famiglia"],["哥哥","gēge","fratello maggiore"],["姐姐","jiějie","sorella maggiore"],["妹妹","mèimei","sorella minore"],["有","yǒu","avere"],["没有","méiyǒu","non avere"],["几","jǐ","quanti?"],["和","hé","e"],["口","kǒu","parola jolly della famiglia"],["个","gè","parola jolly (persone e cose)"],["本","běn","parola jolly dei libri"],["只","zhī","parola jolly degli animali"]];
+const G2T={zh2it:"🀄 Che cosa vuol dire?",it2zh:"🇮🇹 Qual è il carattere?",py2zh:"🔤 Qual è il carattere di questo pinyin?"};
+const mix=a=>[...a].sort(()=>Math.random()-.5);
+let g2R=[],g2i=0,g2tried=false;
+function g2Make(){const types=['zh2it','it2zh','py2zh'];
+ g2R=mix(G2W).slice(0,12).map((w,i)=>({w,t:types[i%3],o:mix([w,...mix(G2W.filter(x=>x[0]!==w[0])).slice(0,3)])}));g2R=mix(g2R);g2i=0}
+function g2Draw(){const R=g2R[g2i],w=R.w;g2tried=false;
+ document.getElementById('g2type').textContent=G2T[R.t];
+ document.getElementById('g2q').innerHTML=R.t==='zh2it'?`<span class="zh big">${w[0]}</span>`:R.t==='it2zh'?`<span class="itq">${w[2]}</span>`:`<span class="pyf pyq">${w[1]}</span>`;
+ document.getElementById('g2opts').innerHTML=R.o.map(o=>`<button class="pick g2o" data-o="${esc(o[0])}">${R.t==='zh2it'?`<span class="itq" style="font-size:28px">${o[2]}</span>`:`<span class="zh">${o[0]}</span>`}</button>`).join('');
+ document.querySelectorAll('#g2opts .pick').forEach(b=>b.onclick=()=>g2Pick(b));
+ document.getElementById('g2rev').innerHTML='';document.getElementById('g2fb').textContent='';document.getElementById('g2next').style.display='none';
+ document.getElementById('g2dots').innerHTML=g2R.map((_,i)=>`<span class="${i<g2i?'done':i===g2i?'cur':''}"></span>`).join('');}
+function g2Pick(b){const w=g2R[g2i].w;
+ if(b.dataset.o===w[0]){b.classList.add('ok');if(!g2tried)star();say(w[0]);
+  document.querySelectorAll('#g2opts .pick').forEach(x=>x.disabled=true);
+  document.getElementById('g2fb').innerHTML='🎉 <span class="zh">对！</span> Bravissimi!';
+  document.getElementById('g2rev').innerHTML=`<span class="py">${w[1]}</span><span class="zh">${w[0]}</span><span class="it">${w[2]}</span>${spk(w[0])}`;
+  const n=document.getElementById('g2next');n.style.display='inline-block';n.textContent=g2i<g2R.length-1?'Avanti ➜':'Finito! 🌟';}
+ else{b.classList.add('no');g2tried=true;document.getElementById('g2fb').innerHTML='🤔 Riprova!'}}
+document.getElementById('g2next').onclick=()=>{if(g2i<g2R.length-1){g2i++;g2Draw()}else{document.getElementById('g2fb').innerHTML='🌟 <span class="zh">太棒了！</span> Gioco finito! <button class="btn ghost" onclick="g2Make();g2Draw()">↺ Rigioca</button>';document.getElementById('g2next').style.display='none';document.getElementById('g2rev').innerHTML='';document.getElementById('g2dots').innerHTML=g2R.map(()=>'<span class="done"></span>').join('')}};
+g2Make();g2Draw();
 
 
 /* ordine dei tratti: sezione dedicata */
