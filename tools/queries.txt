@@ -1,6 +1,8 @@
-f2|pajamas China street
-f2b|Shanghai longtang residents
-f3|Temple of Heaven park elderly
-f3b|mahjong park China elderly
-f4|handing over with both hands
-f4b|Chinese tea ceremony serving cup
+g2|cat:Pajamas in China
+g2b|cat:Pyjamas in Shanghai
+g2c|睡衣
+g3|cat:Elderly people in Beijing
+g3b|cat:Xiangqi players in China
+g3c|老人 下棋
+g4|cat:Hongbao
+g4b|双手

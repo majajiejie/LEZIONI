@@ -1,14 +1,22 @@
 import json, os, urllib.request, urllib.parse, time
 UA = {"User-Agent": "LibroCineseFoto/1.0 (educational children book)"}
 os.makedirs("foto", exist_ok=True)
-meta = {}
+meta = json.load(open("foto/meta.json")) if os.path.exists("foto/meta.json") else {}
 for line in open("tools/queries.txt", encoding="utf8"):
     line = line.strip()
     if not line: continue
     key, q = line.split("|", 1)
-    params = {"action": "query", "format": "json", "generator": "search", "gsrnamespace": "6",
-              "gsrsearch": q + " filetype:bitmap", "gsrlimit": "6", "prop": "imageinfo",
-              "iiprop": "url|extmetadata|mime", "iiurlwidth": "1200"}
+    if q.startswith("cat:"):
+        params = {"action": "query", "format": "json", "generator": "categorymembers", "gcmtype": "file",
+                  "gcmtitle": "Category:" + q[4:], "gcmlimit": "8", "prop": "imageinfo",
+                  "iiprop": "url|extmetadata|mime", "iiurlwidth": "1200"}
+    elif q.startswith("file:"):
+        params = {"action": "query", "format": "json", "titles": "File:" + q[5:], "prop": "imageinfo",
+                  "iiprop": "url|extmetadata|mime", "iiurlwidth": "1600"}
+    else:
+        params = {"action": "query", "format": "json", "generator": "search", "gsrnamespace": "6",
+                  "gsrsearch": q + " filetype:bitmap", "gsrlimit": "6", "prop": "imageinfo",
+                  "iiprop": "url|extmetadata|mime", "iiurlwidth": "1200"}
     url = "https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(params)
     try:
         data = json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60))
