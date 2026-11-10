@@ -1,9 +1,6 @@
-e2|people in pajamas Shanghai
-e2b|睡衣 上海
-e2c|pyjama Shanghai lane
-e3|elderly Chinese playing chess street
-e3b|old people park Beijing morning
-e4|offering tea with both hands
-e4b|business card both hands Asia
-e6|Chinesische.Zahl.Sieben
-e6b|Chinesische.Zahl.Neun
+f2|pajamas China street
+f2b|Shanghai longtang residents
+f3|Temple of Heaven park elderly
+f3b|mahjong park China elderly
+f4|handing over with both hands
+f4b|Chinese tea ceremony serving cup
