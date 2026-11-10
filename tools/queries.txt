@@ -1,13 +1,9 @@
-d1|印章
-d1b|Chinese seal carving name chop
-d2|pyjamas Shanghai
-d2b|pajamas street China man
-d3|elderly people chatting park China
-d3b|old men Beijing hutong
-d4|business card exchange two hands
-d4b|red envelope hongbao giving
-d5|elevator buttons China floor
-d5b|lift button panel Hong Kong
-d6|Chinesische Zahl
-d7|thermos flask China
-d7b|boiling water room China train
+e2|people in pajamas Shanghai
+e2b|睡衣 上海
+e2c|pyjama Shanghai lane
+e3|elderly Chinese playing chess street
+e3b|old people park Beijing morning
+e4|offering tea with both hands
+e4b|business card both hands Asia
+e6|Chinesische.Zahl.Sieben
+e6b|Chinesische.Zahl.Neun
