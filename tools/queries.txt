@@ -1,10 +1,13 @@
-c1|Chinese name seal stamp chop
-c2|Shanghai pajamas street
-c3|elderly men chatting hutong Beijing
-c4|giving gift with both hands China
-c5|elevator buttons no fourth floor
-c6|Chinese number gestures hand
-c7|hot water dispenser China station
-c8|Sun Wukong Peking opera
-c9|CR400AF Fuxing train
-c10|stinky tofu stall
+d1|印章
+d1b|Chinese seal carving name chop
+d2|pyjamas Shanghai
+d2b|pajamas street China man
+d3|elderly people chatting park China
+d3b|old men Beijing hutong
+d4|business card exchange two hands
+d4b|red envelope hongbao giving
+d5|elevator buttons China floor
+d5b|lift button panel Hong Kong
+d6|Chinesische Zahl
+d7|thermos flask China
+d7b|boiling water room China train
