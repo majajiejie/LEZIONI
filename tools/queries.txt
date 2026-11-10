@@ -1,13 +1,6 @@
-k1|file:Chinese seal and paste.JPG
-k3|Curly Rice Noodles with Spicy Soup Laomeng
-k4|file:The Lucky Red Envelopes or Packets in Lunar New Year.jpg
-k5|file:ShanghaiMissingFloors (cropped).jpg
-k6a|file:Chinesische.Zahl.Sechs.jpg
-k6b|file:Chinesische.Zahl.Sieben.jpg
-k6c|file:Chinesische.Zahl.Acht.jpg
-k6d|file:Chinesische.Zahl.Neun.jpg
 k6e|file:Chinesische.Zahl.Zehn.jpg
 k7|file:VM 5557 hot water dispenser inside the Lanzhou Bus Station.jpg
 k8|file:Sun Wukong at Beijing opera - Journey to the West.jpg
 k9|file:CR400AF-2007 at Guangnan (20181107092901).jpg
 k10|file:Stinky tofu stall.JPG
+k2|file:HK SKD TKO 將軍澳 Tseung Kwan O 富康花園 Beverly Garden 街市 market shop clothing January 2021 SS2.jpg

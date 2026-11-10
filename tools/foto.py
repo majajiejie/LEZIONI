@@ -38,5 +38,5 @@ for line in open("tools/queries.txt", encoding="utf8"):
             print("ok", name, p.get("title"))
         except Exception as ex:
             print("ERR img", name, ex)
-        time.sleep(1)
+        time.sleep(4)
 json.dump(meta, open("foto/meta.json", "w"), ensure_ascii=False, indent=1)
