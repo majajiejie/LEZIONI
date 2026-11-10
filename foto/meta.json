@@ -1,205 +1,51 @@
 {
- "d1_0.jpg": {
-  "title": "File:Arctocephalus pusillus 2.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Arctocephalus_pusillus_2.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Biopics\" title=\"User:Biopics\">Hans Hillewaert</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "<b>Cape fur seal</b> (<i><a href=\"https://en.wikipedia.org/wiki/Arctocephalus_pusillus\" class=\"extiw\" title=\"en:Arctocephalus pusillus\">Arctocephalus pusillus</a></i>) at Cape Cross, Namibia"
- },
- "d1_1.jpg": {
-  "title": "File:Chinese seal and paste.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Chinese_seal_and_paste.JPG",
-  "artist": "No machine-readable author provided. <a href=\"//commons.wikimedia.org/wiki/User:Jiang\" title=\"User:Jiang\">Jiang</a> assumed (based on copyright claims).",
+ "e4_0.jpg": {
+  "title": "File:TEA-MAKING. (1910) - illustration - page 260.png",
+  "page": "https://commons.wikimedia.org/wiki/File:TEA-MAKING._(1910)_-_illustration_-_page_260.png",
+  "artist": "Unknown author<span style=\"display: none;\">Unknown author</span>",
   "license": "Public domain",
-  "desc": "Photo taken by <a href=\"//commons.wikimedia.org/wiki/User:Jiang\" title=\"User:Jiang\">User:Jiang</a>."
+  "desc": "Illustration from page 260 of <i><a href=\"https://en.wikisource.org/wiki/en:Index:Home_Life_in_Tokyo_1910_by_Jukichi_Inouye.pdf\" class=\"extiw\" title=\"s:en:Index:Home Life in Tokyo 1910 by Jukichi Inouye.pdf\">TEA-MAKING.</a></i>. \n<br><b>Caption:</b> \"TEA-MAKING. Quote:\"The tea-ceremony is, perhaps, "
  },
- "d1_2.jpg": {
-  "title": "File:Page de garde (détail du blason du couple Charles Forbes, comte de Montalembert (1810-1870) et Marie-Anne Henriette, comtesse de Mérode) tirée des Heures de la famille Berbisey (dernier quart du XVe siècle).png",
-  "page": "https://commons.wikimedia.org/wiki/File:Page_de_garde_(d%C3%A9tail_du_blason_du_couple_Charles_Forbes,_comte_de_Montalembert_(1810-1870)_et_Marie-Anne_Henriette,_comtesse_de_M%C3%A9rode)_tir%C3%A9e_des_Heures_de_la_famille_Berbisey_(dernier_quart_du_XVe_si%C3%A8cle).png",
-  "artist": "Atelier Changenet - Maître des Prélats bourguignons",
-  "license": "Public domain",
-  "desc": "Page de garde (détail du blason du couple Charles Forbes, comte de Montalembert (1810-1870) et Marie-Anne Henriette, comtesse de Mérode) tirée des Heures de la famille Berbisey (dernier quart du XVe siècle)"
- },
- "d1_4.jpg": {
-  "title": "File:Seal of Náchod town from 1570 (big).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Seal_of_N%C3%A1chod_town_from_1570_(big).jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Kozuch\" title=\"User:Kozuch\">Kozuch</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "Seal of Náchod town from 1570"
- },
- "d1b_0.jpg": {
-  "title": "File:HK Admiralty 香港公園 Hong Kong Park 香港茶具文物館 Museum of Tea ware 羅桂祥茶藝館 Dr SK Lo Gallery exhibition Chinese seal art 圖章紅印 藝術 red chop print July 2022 Px3 059.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_Admiralty_%E9%A6%99%E6%B8%AF%E5%85%AC%E5%9C%92_Hong_Kong_Park_%E9%A6%99%E6%B8%AF%E8%8C%B6%E5%85%B7%E6%96%87%E7%89%A9%E9%A4%A8_Museum_of_Tea_ware_%E7%BE%85%E6%A1%82%E7%A5%A5%E8%8C%B6%E8%97%9D%E9%A4%A8_Dr_SK_Lo_Gallery_exhibition_Chinese_seal_art_%E5%9C%96%E7%AB%A0%E7%B4%85%E5%8D%B0_%E8%97%9D%E8%A1%93_red_chop_print_July_2022_Px3_059.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:NAU_JAG_202_HWOAM\" title=\"User:NAU JAG 202 HWOAM\">NAU JAG 202 HWOAM</a>",
-  "license": "CC BY-SA 4.0",
-  "desc": "HK Admiralty <a href=\"https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E5%85%AC%E5%9C%92\" class=\"extiw\" title=\"zh:香港公園\">zh:香港公園</a> Hong Kong Park <a href=\"https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E8%8C%B6%E5%85%B7%E6%96%87%E7%89%A9%E9%A4%A8\" class=\"extiw\" title=\"zh:香港茶具文物館\">zh:香港茶具文物館</a> M"
- },
- "d1b_1.jpg": {
-  "title": "File:HK Admiralty 香港公園 Hong Kong Park 香港茶具文物館 Museum of Tea ware 羅桂祥茶藝館 Dr SK Lo Gallery exhibition Chinese seal art 圖章紅印 藝術 red chop print July 2022 Px3 058.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_Admiralty_%E9%A6%99%E6%B8%AF%E5%85%AC%E5%9C%92_Hong_Kong_Park_%E9%A6%99%E6%B8%AF%E8%8C%B6%E5%85%B7%E6%96%87%E7%89%A9%E9%A4%A8_Museum_of_Tea_ware_%E7%BE%85%E6%A1%82%E7%A5%A5%E8%8C%B6%E8%97%9D%E9%A4%A8_Dr_SK_Lo_Gallery_exhibition_Chinese_seal_art_%E5%9C%96%E7%AB%A0%E7%B4%85%E5%8D%B0_%E8%97%9D%E8%A1%93_red_chop_print_July_2022_Px3_058.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:NAU_JAG_202_HWOAM\" title=\"User:NAU JAG 202 HWOAM\">NAU JAG 202 HWOAM</a>",
-  "license": "CC BY-SA 4.0",
-  "desc": "HK Admiralty <a href=\"https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E5%85%AC%E5%9C%92\" class=\"extiw\" title=\"zh:香港公園\">zh:香港公園</a> Hong Kong Park <a href=\"https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E8%8C%B6%E5%85%B7%E6%96%87%E7%89%A9%E9%A4%A8\" class=\"extiw\" title=\"zh:香港茶具文物館\">zh:香港茶具文物館</a> M"
- },
- "d4_0.jpg": {
-  "title": "File:That-accounts-for-it-1799-caricature-Isaac-Cruikshank.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:That-accounts-for-it-1799-caricature-Isaac-Cruikshank.jpg",
-  "artist": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Isaac_Cruikshank\" class=\"extiw\" title=\"w:en:Isaac Cruikshank\"><span title=\"Scottish painter and caricaturist (1764-1811)\">Isaac Cruikshank</span></a></bdi>",
-  "license": "Public domain",
-  "desc": "Print shows a number of men and women each with a particular problem that seems to be troubling them, they contrive a solution which leads to the remark, \"that accounts for it.\"<br><br>\n\"That Accounts for it\", a January 15th 1799 caricature by Isaac Cruikshank on various human foibles, as exemplifie"
- },
- "d4_1.jpg": {
-  "title": "File:The American florist - a weekly journal for the trade (1886) (18123377371).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:The_American_florist_-_a_weekly_journal_for_the_trade_(1886)_(18123377371).jpg",
+ "e4_1.jpg": {
+  "title": "File:Captain Cook's original voyages round the world, performed by royal authority - containing the whole of his discoveries in geography, navigation, astronomy, &c., with memoirs of his life, and (14768274871).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Captain_Cook%27s_original_voyages_round_the_world,_performed_by_royal_authority_-_containing_the_whole_of_his_discoveries_in_geography,_navigation,_astronomy,_%26c.,_with_memoirs_of_his_life,_and_(14768274871).jpg",
   "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/126377022@N07\">Internet Archive Book Images</a>",
   "license": "No restrictions",
-  "desc": "<br>\n<p><b>Title</b>: The American florist : a weekly journal for the trade<br>\n<b>Identifier</b>: americanfloristw00amer (<a class=\"external text\" href=\"https://commons.wikimedia.org/w/index.php?title=Special%3ASearch&amp;profile=default&amp;fulltext=Search&amp;search=insource%3A%2Famericanfloristw"
+  "desc": "<br>\n<p><b>Identifier</b>: captaincooksorig00cook (<a class=\"external text\" href=\"https://commons.wikimedia.org/w/index.php?title=Special%3ASearch&amp;profile=default&amp;fulltext=Search&amp;search=insource%3A%2Fcaptaincooksorig00cook%2F\">find matches</a>)<br>\n<b>Title</b>: <a rel=\"nofollow\" class=\""
  },
- "d4_2.jpg": {
-  "title": "File:Breeder and sportsman (1905) (20401949132).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Breeder_and_sportsman_(1905)_(20401949132).jpg",
-  "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/126377022@N07\">Internet Archive Book Images</a>",
-  "license": "No restrictions",
-  "desc": "<br>\n<p><b>Title</b>: Breeder and sportsman<br>\n<b>Identifier</b>: breedersportsma471905sanf (<a class=\"external text\" href=\"https://commons.wikimedia.org/w/index.php?title=Special%3ASearch&amp;profile=default&amp;fulltext=Search&amp;search=insource%3A%2Fbreedersportsma471905sanf%2F\">find matches</a"
+ "e4_3.jpg": {
+  "title": "File:High life at noon LCCN2002719534.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:High_life_at_noon_LCCN2002719534.jpg",
+  "artist": "British Cartoon  Prints Collection",
+  "license": "Public domain",
+  "desc": "<i>Title:</i> High life at noon\n<p><i>Abstract:</i> Print shows an interior view of a room in which two men and two women are taking tea; on the left, a man with an extremely long ponytail attempts to prevent the entrance of a messenger carrying a bill from \"Lord Rakish to Jere' Buckram - To Sundry "
  },
- "d4b_0.jpg": {
-  "title": "File:The Lucky Red Envelopes or Packets in Lunar New Year.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:The_Lucky_Red_Envelopes_or_Packets_in_Lunar_New_Year.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:AH-LOD&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:AH-LOD (page does not exist)\">AH-LOD</a>",
+ "e4_4.jpg": {
+  "title": "File:Muthapan 4.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Muthapan_4.jpg",
+  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Lightframer007&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Lightframer007 (page does not exist)\">Lightframer007</a>",
   "license": "CC BY-SA 4.0",
-  "desc": "The Lucky Red Envelopes/Packets (Hongbao) In Lunar New Year with texts:\n<hr>\n<p>Give you this red envelope.\nWish you good health.\nLive strong and healthy until at least 120 years old.\n</p><p>May you be happy and prosperous.\nHappy New Year.\n</p>\n<hr>\nDuring the Lunar New Year, the younger generation "
+  "desc": "The rudiments of piety were meditation, young and yajna.But with the advent of kali Yuga, temples and images constitutions became a part of worship. Theyyam can be envisaged as a symbol of Dravidian Culture that existed in kerala prior to the Aryan culture.Theyyam or Kolam worship is a subtier mode "
  },
- "d4b_1.jpg": {
-  "title": "File:Red envelope giving Jing Quan Francisco Moreno Domagoso.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Red_envelope_giving_Jing_Quan_Francisco_Moreno_Domagoso.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:P1898&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:P1898 (page does not exist)\">P1898</a>",
-  "license": "CC BY 4.0",
-  "desc": "Jing Quan, Francisco \"Isko\" Moreno Domagoso, Federation of Filipino-Chinese Chamber of Commerce and Industry, Inc. 26th President, Mr. Victor Lim; Cecilio Kwok Pedro"
- },
- "d4b_2.jpg": {
-  "title": "File:Jing Quan red envelope giving CNY Manila float one.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Jing_Quan_red_envelope_giving_CNY_Manila_float_one.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:P1898&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:P1898 (page does not exist)\">P1898</a>",
-  "license": "CC BY 4.0",
-  "desc": "Jing Quan, Francisco \"Isko\" Moreno Domagoso, Federation of Filipino-Chinese Chamber of Commerce and Industry, Inc. 26th President, Mr. Victor Lim; Cecilio Kwok Pedro"
- },
- "d4b_3.jpg": {
-  "title": "File:Fulushouhongbao.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Fulushouhongbao.JPG",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Helanhuaren&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Helanhuaren (page does not exist)\">Helanhuaren</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "Hongbao"
- },
- "d4b_4.jpg": {
-  "title": "File:Huakaifugui.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Huakaifugui.JPG",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Helanhuaren&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Helanhuaren (page does not exist)\">Helanhuaren</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "hongbao"
- },
- "d4b_5.jpg": {
-  "title": "File:Chinese new years good luck procession in Maxwell food centre.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Chinese_new_years_good_luck_procession_in_Maxwell_food_centre.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Aaaatu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Aaaatu (page does not exist)\">Aaaatu</a>",
+ "e4_5.jpg": {
+  "title": "File:Muthapan 3.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Muthapan_3.jpg",
+  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Lightframer007&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Lightframer007 (page does not exist)\">Lightframer007</a>",
   "license": "CC BY-SA 4.0",
-  "desc": "Chinese New Years good luck procession in Maxwell food centre. As a part of the tradition the dragon goes to wish luck and prosper to each business in the food court. The entrepreneur hands over a hongbao, a red envelope to the dragon."
+  "desc": "The rudiments of piety were meditation, young and yajna.But with the advent of kali Yuga, temples and images constitutions became a part of worship. Theyyam can be envisaged as a symbol of Dravidian Culture that existed in kerala prior to the Aryan culture.Theyyam or Kolam worship is a subtier mode "
  },
- "d5_0.jpg": {
-  "title": "File:No 4th Floor (3760622276).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:No_4th_Floor_(3760622276).jpg",
-  "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/41894171246@N01\">Nam-ho Park</a> from Seoul, Korea",
-  "license": "CC BY 2.0",
-  "desc": "The 4th floor in Korea has the same status as the 13th floor does in the US. The pronunciation for \"4\" is \"sa\" which is the same as the Chinese character for \"death\", hence the \"F\" instead of \"4\" in elevators. Quite silly really."
- },
- "d5_1.jpg": {
-  "title": "File:ShanghaiMissingFloors.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:ShanghaiMissingFloors.jpg",
-  "artist": "<a href=\"https://en.wikipedia.org/wiki/User:Chrisobyrne\" class=\"extiw\" title=\"wikipedia:User:Chrisobyrne\">Chrisobyrne</a> at <a href=\"https://en.wikipedia.org/wiki/\" class=\"extiw\" title=\"wikipedia:\">English Wikipedia</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "A picture taken in an OTIS elevator in a residential apartment block in Shanghai. Floors 0, 4, 13 and 14 are missing."
- },
- "d5_2.jpg": {
-  "title": "File:ShanghaiMissingFloors (cropped).jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:ShanghaiMissingFloors_(cropped).jpg",
-  "artist": "<a href=\"https://en.wikipedia.org/wiki/User:Chrisobyrne\" class=\"extiw\" title=\"wikipedia:User:Chrisobyrne\">Chrisobyrne</a> at <a href=\"https://en.wikipedia.org/wiki/\" class=\"extiw\" title=\"wikipedia:\">English Wikipedia</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "A picture taken in an elevator in a residential apartment block in Shanghai. Floors 0, 4, 13 and 14 are missing."
- },
- "d5b_0.jpg": {
-  "title": "File:HK 灣仔 Wan Chai 香港藝術中心 Hong Kong Arts Centre lift OTIS control button panel October 2018 IX2.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_%E7%81%A3%E4%BB%94_Wan_Chai_%E9%A6%99%E6%B8%AF%E8%97%9D%E8%A1%93%E4%B8%AD%E5%BF%83_Hong_Kong_Arts_Centre_lift_OTIS_control_button_panel_October_2018_IX2.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Lou_Is_Cool_wc_AC1\" title=\"User:Lou Is Cool wc AC1\">Lou Is Cool wc AC1</a>",
-  "license": "CC BY-SA 4.0",
-  "desc": "HK 灣仔 Wan Chai 香港藝術中心 Hong Kong Arts Centre lift OTIS control button panel October 2018"
- },
- "d5b_1.jpg": {
-  "title": "File:HK CWB 柏寧酒店 The Park Lane Hong Kong Hotel lift button control panel key smart card Dec-2015 DSC.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_CWB_%E6%9F%8F%E5%AF%A7%E9%85%92%E5%BA%97_The_Park_Lane_Hong_Kong_Hotel_lift_button_control_panel_key_smart_card_Dec-2015_DSC.JPG",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Lams_Soma_Mingsingea&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Lams Soma Mingsingea (page does not exist)\">Lams Soma Mingsingea</a>",
-  "license": "CC BY-SA 4.0",
-  "desc": "CWB 柏寧酒店 The Park Lane Hong Kong Hotel lift interior"
- },
- "d5b_2.jpg": {
-  "title": "File:HK CWB 柏寧酒店 The Park Lane Hong Kong Hotel lift button control panel n sign No Smoking Dec-2015 DSC.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_CWB_%E6%9F%8F%E5%AF%A7%E9%85%92%E5%BA%97_The_Park_Lane_Hong_Kong_Hotel_lift_button_control_panel_n_sign_No_Smoking_Dec-2015_DSC.JPG",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Lams_Soma_Mingsingea&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Lams Soma Mingsingea (page does not exist)\">Lams Soma Mingsingea</a>",
-  "license": "CC BY-SA 4.0",
-  "desc": "CWB 柏寧酒店 The Park Lane Hong Kong Hotel lift interior"
- },
- "d5b_3.jpg": {
-  "title": "File:HK Land Tai Hang 上林 Serenade Towers lift button panel June-2011.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_Land_Tai_Hang_%E4%B8%8A%E6%9E%97_Serenade_Towers_lift_button_panel_June-2011.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:ApollosumHO&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:ApollosumHO (page does not exist)\">ApollosumHO</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "​<a href=\"https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%9D%91\" class=\"extiw\" title=\"zh:大坑\">zh:大坑</a><a href=\"https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%9E%97_(%E9%A6%99%E6%B8%AF)\" class=\"extiw\" title=\"zh:上林 (香港)\">上林</a>"
- },
- "d5b_4.jpg": {
-  "title": "File:HK Admiralty Island Shangri-La Hotel lift control button panel Mar-2014.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_Admiralty_Island_Shangri-La_Hotel_lift_control_button_panel_Mar-2014.JPG",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Borlawmensaorkong&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Borlawmensaorkong (page does not exist)\">Borlawmensaorkong</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "Island Shangri-la Hotel, Admiralty, Queensway, Hong Kong"
- },
- "d5b_5.jpg": {
-  "title": "File:HK Wan Chai 尚匯 The Gloucester lift button control panel March 2016 DSC.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:HK_Wan_Chai_%E5%B0%9A%E5%8C%AF_The_Gloucester_lift_button_control_panel_March_2016_DSC.JPG",
-  "artist": "<a href=\"//commons.wikimedia.org/wiki/User:ShmaIA_MaiIe_Lpos\" title=\"User:ShmaIA MaiIe Lpos\">ShmaIA MaiIe Lpos</a>",
-  "license": "CC BY-SA 4.0",
-  "desc": "Visit of The Gloucester <a href=\"https://zh.wikipedia.org/wiki/%E5%B0%9A%E5%8C%AF\" class=\"extiw\" title=\"zh:尚匯\">zh:尚匯</a>, Gloucester Road, Wan Chai, Hong Kong"
- },
- "d6_0.jpg": {
-  "title": "File:Chinesische.Zahl.Acht.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Chinesische.Zahl.Acht.jpg",
+ "e6_0.jpg": {
+  "title": "File:Chinesische.Zahl.Sieben.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Chinesische.Zahl.Sieben.jpg",
   "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ningling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ningling (page does not exist)\">Ningling</a>",
   "license": "CC BY-SA 3.0",
-  "desc": "Chinesische Zahl Acht"
+  "desc": "Chinesische Zahl Sieben"
  },
- "d6_1.jpg": {
-  "title": "File:Chinesische.Zahl.Zehn.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Chinesische.Zahl.Zehn.jpg",
+ "e6b_0.jpg": {
+  "title": "File:Chinesische.Zahl.Neun.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Chinesische.Zahl.Neun.jpg",
   "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ningling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ningling (page does not exist)\">Ningling</a>",
   "license": "CC BY-SA 3.0",
-  "desc": "Chinesische Zahl Zehn"
- },
- "d6_3.jpg": {
-  "title": "File:Chinesische.Zahl.Eins.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Chinesische.Zahl.Eins.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ningling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ningling (page does not exist)\">Ningling</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "Chinesische Zahl Eins"
- },
- "d6_4.jpg": {
-  "title": "File:Chinesische.Zahl.Sechs.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Chinesische.Zahl.Sechs.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ningling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ningling (page does not exist)\">Ningling</a>",
-  "license": "CC BY-SA 3.0",
-  "desc": "Chinesische Zahl Sechs"
- },
- "d7_0.jpg": {
-  "title": "File:SM70 portable evacuated tube solar cooker at Porthtowan Beach, Cornwall, UK, in 2015.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:SM70_portable_evacuated_tube_solar_cooker_at_Porthtowan_Beach,_Cornwall,_UK,_in_2015.jpg",
-  "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:OxfordDave&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:OxfordDave (page does not exist)\">OxfordDave</a>",
-  "license": "CC0",
-  "desc": "This is an evacuated tube solar cooker produced in China, imported into the UK in 2015.  The tube is a glass Dewey vessel - like a Thermos flask, there is a vacuum between the two layers of glass.  Sunlight is concentrated by the reflective parabolic trough shaped wings and strikes the cooking tube."
+  "desc": "Chinesische Zahl Neun"
  }
 }
