@@ -97,6 +97,7 @@ a.mat:after{content:"→";color:var(--rosso)}
       <div class="lanterne" id="lanterne" aria-hidden="true"></div>
     </div>
     <div class="agg" id="agg"></div>
+    <div class="agg" id="credito" hidden></div>
   </div>
   <div id="avviso"></div>
 
@@ -161,10 +162,11 @@ const DATI_APERTI = {
   "pacchetti": [
    {
     "lezioni": 10,
-    "prezzo": null
+    "prezzo": 150
    }
   ]
- }
+ },
+ "credito": 12
 };
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
@@ -175,6 +177,7 @@ $("num").textContent = r;
 $("sub").textContent = (r === 1 ? "lezione" : "lezioni") + (DATI.durata ? " da " + DATI.durata + " minuti" : "");
 $("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
 $("agg").textContent = "Aggiornata il " + DATI.aggiornata;
+if (DATI.credito) { $("credito").textContent = "Credito: € " + String(DATI.credito).replace(".", ",") + " (verrà scalato dal prossimo pacchetto)"; $("credito").hidden = false; }
 if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
 else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🏮</div>'; }
 const P = DATI.pagamento;
