@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tesserina · Chinese Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--rosso:#c8102e;--rosso-scuro:#8f0c21;--oro:#e8b04a;--crema:#fff8ec;--carta:#ffffff;--testo:#3a2a22;--tenue:#8a7466;--linea:#f0dfc6;--verde:#2f8f5b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--testo);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:520px;margin:0 auto;padding:24px 16px 48px}
+.card{background:var(--rosso);color:#fff;border-radius:22px;padding:26px 22px 22px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(143,12,33,.25)}
+.card:before{content:"学";position:absolute;right:-18px;top:-30px;font-size:170px;opacity:.09;font-weight:700}
+.scuola{font-family:Fredoka,sans-serif;font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.nome{font-family:Fredoka,sans-serif;font-size:36px;font-weight:700;margin:4px 0 18px}
+.cuore{background:#fff;color:var(--rosso);border-radius:18px;padding:18px;text-align:center}
+.cuore .label{font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--tenue)}
+.num{font-family:Fredoka,sans-serif;font-size:76px;font-weight:700;line-height:1;margin:6px 0 2px}
+.sub{font-weight:600}
+.lanterne{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.lanterne span{width:22px;height:26px;border-radius:45% 45% 40% 40%;background:var(--rosso);position:relative}
+.lanterne span:after{content:"";position:absolute;left:8px;right:8px;bottom:-5px;height:5px;background:var(--oro);border-radius:2px}
+.agg{margin-top:14px;font-size:13px;opacity:.9;text-align:center}
+.avviso{margin-top:18px;border-radius:16px;padding:14px 16px;font-weight:600;background:#fff1d6;border:2px solid var(--oro)}
+.avviso.zero{background:#ffe3e3;border-color:var(--rosso)}
+h2{font-family:Fredoka,sans-serif;font-size:22px;margin:30px 0 10px;color:var(--rosso-scuro)}
+.box{background:var(--carta);border:1px solid var(--linea);border-radius:16px;padding:16px}
+.pacchetti{display:grid;gap:10px}
+.pac{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px solid var(--linea);border-radius:14px;padding:12px 14px;cursor:pointer;background:#fff;font:inherit;color:inherit;text-align:left;width:100%}
+.pac.sel{border-color:var(--rosso);background:#fff5f6}
+.pac b{font-family:Fredoka,sans-serif;font-size:18px}
+.prezzo{font-weight:700;color:var(--rosso)}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:14px;font:700 16px Nunito,sans-serif;cursor:pointer;margin-top:12px}
+.btn.pp{background:#ffc439;color:#1d2a4d}
+.btn.pp[aria-disabled=true]{opacity:.45;pointer-events:none}
+.iban{margin-top:14px;font-size:15px}
+.iban div{margin:2px 0}
+.mono{font-family:ui-monospace,Menlo,monospace;background:var(--crema);padding:2px 6px;border-radius:6px;word-break:break-all}
+.copia{background:none;border:1px solid var(--linea);border-radius:8px;padding:2px 8px;font:600 12px Nunito,sans-serif;color:var(--tenue);cursor:pointer;margin-left:4px}
+.nota{color:var(--tenue);font-size:14px;margin-top:10px}
+ul.storico{list-style:none;margin:0;padding:0}
+ul.storico li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--linea)}
+ul.storico li:last-child{border:0}
+footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
+.compito{font-size:17px;font-weight:600;white-space:pre-line}
+.compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
+.btn.wa{background:#25d366;color:#fff}
+.btn.cr{background:#1e8e3e;color:#fff}
+.btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
+.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+ul.diario{list-style:none;margin:0;padding:0}
+ul.diario li{padding:12px 0;border-bottom:1px dashed var(--linea)}
+ul.diario li:last-child{border:0}
+ul.diario .d{font-family:Fredoka,sans-serif;font-weight:600;color:var(--rosso-scuro)}
+ul.diario .c{color:var(--tenue);font-size:14px;margin-top:2px}
+.and h3{font-family:Fredoka,sans-serif;font-size:16px;margin:0 0 6px}
+.and ul{margin:0 0 14px;padding-left:20px}
+.and .bene h3{color:var(--verde)}
+.and .rip h3{color:#b7791f}
+a.mat{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;color:var(--testo);font-weight:700;padding:12px 14px;border:2px solid var(--linea);border-radius:14px;margin-bottom:8px;background:#fff}
+a.mat:after{content:"→";color:var(--rosso)}
+.vuoto{color:var(--tenue)}
+[hidden]{display:none!important}
+.hero{display:block;width:100%;height:auto;border-radius:22px;margin-bottom:-36px;position:relative;z-index:0;box-shadow:0 10px 30px rgba(143,12,33,.25)}
+.card{z-index:1;background:#a92e2b}
+.pin .hero{margin-bottom:-30px}
+.pin{max-width:360px;margin:12vh auto 0;padding:0 16px;text-align:center}
+.pin .card{text-align:left}
+.pin input{width:100%;font:700 30px Fredoka,sans-serif;letter-spacing:.35em;text-align:center;padding:12px;border:2px solid var(--linea);border-radius:14px;margin-top:18px;background:#fff;color:var(--testo)}
+.pin input:focus{outline:none;border-color:var(--rosso)}
+.pin .btn{background:var(--rosso);color:#fff}
+.errore{color:var(--rosso);font-weight:700;min-height:24px;margin-top:10px}
+.esci{background:none;border:0;color:var(--tenue);font:600 13px Nunito,sans-serif;text-decoration:underline;cursor:pointer;display:block;margin:10px auto 0}
+</style>
+</head>
+<body>
+<form class="pin" id="pinbox" hidden>
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
+  <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
+  <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
+  <input id="pin" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" aria-label="PIN">
+  <button class="btn" type="submit">Apri</button>
+  <div class="errore" id="errore"></div>
+</form>
+<div class="wrap" id="app" hidden>
+  <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
+  <div class="card">
+    <div class="scuola">Chinese Academy · Maja Jiejie</div>
+    <div class="nome" id="nome"></div>
+    <div class="cuore">
+      <div class="label">Lezioni rimanenti</div>
+      <div class="num" id="num"></div>
+      <div class="sub" id="sub"></div>
+      <div class="lanterne" id="lanterne" aria-hidden="true"></div>
+    </div>
+    <div class="agg" id="agg"></div>
+  </div>
+  <div id="avviso"></div>
+
+  <h2>Compiti da fare</h2>
+  <div class="box"><div id="compiti"></div>
+    <a class="btn cr" id="classroom" target="_blank" rel="noopener" hidden>📚 Apri Classroom</a>
+    <a class="btn wa" id="mandacompiti" target="_blank" rel="noopener">📷 Manda i compiti a Maja</a></div>
+
+  <h2>Diario delle lezioni</h2>
+  <div class="box"><ul class="diario" id="diario"></ul></div>
+
+  <div id="secmat" hidden><h2>Materiali</h2>
+  <div id="materiali"></div></div>
+
+
+  <h2>Contatti</h2>
+  <div class="box">
+    <a class="btn wa chiaro" id="scrivi" target="_blank" rel="noopener">💬 Scrivi a Maja su WhatsApp</a>
+    <a class="btn wa chiaro" id="concorso" target="_blank" rel="noopener" hidden>🏆 Entra nel gruppo del concorso</a>
+  </div>
+
+
+  <div id="secrin">
+  <h2>Rinnova il pacchetto</h2>
+  <div class="box">
+    <div class="pacchetti" id="pacchetti"></div>
+    <a class="btn pp" id="paypal" target="_blank" rel="noopener">Paga con PayPal</a>
+    <p class="nota" id="ppnota"></p>
+    <div class="iban" id="bonifico"></div>
+    <p class="nota">Dopo il pagamento scrivimi un messaggio: aggiorno la tesserina e trovi subito le nuove lezioni qui.</p>
+  </div>
+  </div>
+
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
+</div>
+<script>
+/*DATI-INIZIO*/
+const DATI_APERTI = {
+ "nome": "Edo",
+ "rimanenti": 1,
+ "aggiornata": "11 novembre 2026",
+ "compiti": {
+  "data": "11/11/2026",
+  "testo": "Scrivi almeno 3 volte ogni parola nuova. Qui sotto, nei Materiali, trovi l’ordine dei tratti di 冷 热 很."
+ },
+ "storico": [
+  {
+   "data": "28/10/2026",
+   "assente": true,
+   "fatto": "Lezione sugli aggettivi: è stata registrata, da guardare a casa."
+  },
+  {
+   "data": "04/11/2026",
+   "fatto": "Lezione fatta: le emozioni."
+  },
+  {
+   "data": "11/11/2026",
+   "fatto": "Lezione fatta",
+   "compiti": "Scrivi almeno 3 volte ogni parola nuova."
+  }
+ ],
+ "materiali": [
+  {
+   "titolo": "Ordine dei tratti: 冷 热 很 (freddo, caldo, molto)",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/tratti-freddo-caldo-hen.html"
+  },
+  {
+   "titolo": "Ordine dei tratti: le emozioni",
+   "url": "https://majajiejie.github.io/LEZIONI/lessico/tratti-emozioni.html"
+  },
+  {
+   "titolo": "Ordine dei tratti: gli aggettivi 大 小 长 短",
+   "url": "https://majajiejie.github.io/LEZIONI/tratti-da-xiao-chang-duan.html"
+  }
+ ],
+ "contatti": {
+  "whatsapp": "393398768166",
+  "gruppo_concorso": "https://chat.whatsapp.com/LS9SCsDbxkRJFPOI2XaGN6",
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
+ },
+ "durata": null,
+ "compiti_fisso": null,
+ "classroom": null,
+ "pagamento": {
+  "paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL",
+  "iban": "IT33W0306968053100000007993",
+  "intestatario": "Maja Fabbri (Intesa Sanpaolo)",
+  "pacchetti": [
+   {
+    "lezioni": 10,
+    "prezzo": 150
+   }
+  ]
+ }
+};
+/*DATI-FINE*/
+const $ = id => document.getElementById(id);
+function mostra(DATI){
+const r = DATI.rimanenti;
+$("nome").textContent = DATI.nome;
+$("num").textContent = r;
+$("sub").textContent = (r === 1 ? "lezione" : "lezioni") + (DATI.durata ? " da " + DATI.durata + " minuti" : "");
+$("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
+$("agg").textContent = "Aggiornata il " + DATI.aggiornata;
+if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
+else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🏮</div>'; }
+const P = DATI.pagamento;
+let scelto = 0;
+function euro(v){ return v ? "€ " + String(v).replace(".", ",") : "prezzo in arrivo"; }
+function disegna(){
+  $("pacchetti").innerHTML = P.pacchetti.map((p,i)=>
+    '<button class="pac'+(i===scelto?' sel':'')+'" data-i="'+i+'"><b>'+p.lezioni+' lezioni</b><span class="prezzo">'+euro(p.prezzo)+'</span></button>').join("");
+  document.querySelectorAll(".pac").forEach(b=>b.onclick=()=>{scelto=+b.dataset.i;disegna();});
+  const p = P.pacchetti[scelto];
+  const causale = "Pacchetto " + p.lezioni + " lezioni - " + DATI.nome;
+  const pp = $("paypal");
+  if (P.paypal && p.prezzo) { pp.href = P.paypal.startsWith("http") ? P.paypal : "https://paypal.me/" + P.paypal + "/" + p.prezzo + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(p.prezzo) + " con PayPal"; }
+  else { pp.removeAttribute("href"); pp.setAttribute("aria-disabled","true"); pp.textContent = "PayPal (in arrivo)"; }
+  $("ppnota").textContent = (P.paypal && p.prezzo && P.paypal.startsWith("http")) ? "Su PayPal inserisci l'importo di " + euro(p.prezzo) + ", seleziona l'opzione Amici e parenti e nella nota scrivi il nome: " + DATI.nome + "." : "";
+  $("bonifico").innerHTML = P.iban
+    ? '<div><b>Oppure con bonifico</b></div><div>Intestato a: '+P.intestatario+'</div><div>IBAN: <span class="mono" id="ib">'+P.iban+'</span><button class="copia" data-c="'+P.iban+'">copia</button></div><div>Importo: '+euro(p.prezzo)+'</div><div>Causale: <span class="mono">'+causale+'</span><button class="copia" data-c="'+causale+'">copia</button></div>'
+    : '<div><b>Oppure con bonifico</b> (dati in arrivo)</div>';
+  document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
+}
+disegna();
+if (r > 2) $("secrin").hidden = true;
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const C = DATI.contatti || {};
+const wa = (testo) => C.whatsapp ? "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(testo) : null;
+function link(el, url){ if (url) { el.href = url; el.removeAttribute("aria-disabled"); } else { el.removeAttribute("href"); el.setAttribute("aria-disabled","true"); } }
+const cp = DATI.compiti;
+$("compiti").innerHTML = DATI.compiti_fisso
+  ? '<div class="compito">' + esc(DATI.compiti_fisso) + '</div>'
+  : cp && cp.testo
+  ? '<div class="compito">' + (cp.data ? '<small>Dalla lezione del ' + esc(cp.data) + '</small>' : '') + esc(cp.testo) + '</div>'
+  : '<div class="vuoto">Nessun compito per ora 🎉</div>';
+link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
+if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
+const st = DATI.storico || [];
+$("diario").innerHTML = st.length
+  ? st.slice().reverse().map(s => '<li><div class="d">' + esc(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + esc(s.fatto || s.nota || "") + '</div>' + (s.compiti ? '<div class="c">Compiti: ' + esc(s.compiti) + '</div>' : '') + '</li>').join("")
+  : '<li class="vuoto">Qui trovi cosa abbiamo fatto a ogni lezione.</li>';
+const M = DATI.materiali || [];
+if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
+link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));
+if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
+$("pinbox").hidden = true; $("app").hidden = false;
+}
+mostra(DATI_APERTI);
+</script>
+</body>
+</html>
