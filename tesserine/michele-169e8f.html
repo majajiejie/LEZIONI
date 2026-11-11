@@ -149,7 +149,7 @@ const DATI_APERTI = {
  "contatti": {
   "whatsapp": "393398768166",
   "gruppo_concorso": null,
-  "gruppo_compiti": null
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
  },
  "durata": 45,
  "compiti_fisso": null,
@@ -208,7 +208,7 @@ $("compiti").innerHTML = DATI.compiti_fisso
   ? '<div class="compito">' + (cp.data ? '<small>Dalla lezione del ' + esc(cp.data) + '</small>' : '') + esc(cp.testo) + '</div>'
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
-if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+if (!C.gruppo_compiti && (!(cp && cp.testo) || DATI.compiti_fisso)) $("mandacompiti").hidden = true;
 if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
