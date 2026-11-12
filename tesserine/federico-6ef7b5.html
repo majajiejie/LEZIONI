@@ -77,7 +77,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 </style>
 </head>
 <body>
-<form class="pin" id="pinbox">
+<form class="pin" id="pinbox" hidden>
   <img class="hero" src="maja-jiejie.jpg" alt="Maja Jiejie">
   <div class="card"><div class="scuola">Chinese Academy · Maja Jiejie</div><div class="nome" style="font-size:26px;margin:6px 0 0">La tua tesserina</div></div>
   <p class="nota">Inserisci il PIN che ti ha dato Maja</p>
@@ -130,11 +130,50 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
   </div>
 
-  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it<button class="esci" id="esci" type="button">Esci da questo telefono</button></footer>
+  <footer>Chinese Academy · Maja Jiejie · www.majajiejie.it</footer>
 </div>
 <script>
 /*DATI-INIZIO*/
-const CIFRATO = "csnbq1AGFMypkKSU9Q5p9Q==.DpBtX8S/zA2mMyIA.KZsttMgEP4cyQ5INsX4GVRZnZr3q8Caz0QJljOa2ImcKztzOpbnRaw+Gb/VIpC6pHb/0XG88MA6mYFfq7/hRUbkJ50c6dbkVx8Pc3JI4VRb2rcEeSkVYbz0sqpBtfwSDNn5GKO2UGSsdyhyORGi7cbwopgdX1OR+Ew9s0Bifm4NCWUuE3IJ58J25cFek5uIFtr9DUrCBpP+GcjRRhBYhkUstomB7UoebXtENIU1VbFJD7VjwGUxXYdUK6q6XPopWtOgBAEBQoBKlKjZNUF3CljbPXdzy/0wljtpIyWtCwao4TmgEnb2UxBFEmFJU/TxwEoKvckyncLrmIPEMNVpvTG5LpDwVrcNbSdfxEDNlVhJvD72BW1myUbGarOAiQjuwbFqvYoB0smS2WJQwPShmd73+GuFH8Ugsn9o/iIu3Lmkp8x+74ZvE0eEZrEVI/4378saCAbBsj4O3vGdk7uergkMuGYV/xzuAgBb9Z47yGjG9kBxao+alb3Z3tMWd/1t95Tu5xyGAWzT8c4e38VhcId0oW48YVe7nOSzugsFW8yaTkxBx9vuDV/bl3xFd+gIUWMf0veazVdcWXwtwB6LRfoAWdSDVSk70R6A402DpJI40d3jNXh8x7TXzKT5cYZ5Ed1aZicF3un5l/P4GjE/yWkLNjRLJ7XTHTf74lat07BytNdDlJc+73XuwNWFGoeu0dPImLT6HAm/udvO606ntcetXEYYjx67S5nRFIckyPkVQMYpH9uC5+v8Ri5dfAuY4KGjuKGvrhaE9M0gEEEcHI16HQbcDcTNt5eAmMNBX/ayf8DyRUAFm5VYrngooUxqL7uX2YUXKaAqAFn3ZAFoeJJ2KldqMm+McGB+bqQdrtysKa64dFaDff2QYTYWuquFGsnVQlet4uclejyZkgi2ZhQL5OcSlqkFcFqh6fuXvAxrSdtLwTM8mWBiXFHcGJY4AMu0ULVIhyDTl1368JsIc7MIGTow42brRqvqnjIvdasnxyGxISEF9w2+URsbvI4E1LDsJS/4FE9RoWlUklbF4jSxVq/Zu5Z+To0TYsHjhzPt1u5NDOYMrSI5xJa51aZDzYiVqYHscibMH/TJNgDgKhZg7nYkH0jD0MDo3GN0SproEB17W3erzQvmV3RME4lignQwq2QeQDuNroxgIKP4HwY+QNXipyxU6HErR8CX0utcZLc9jR6j0p7YcFrz4cCCvVvYsTgsBRLWUq0Hkr3Wen7WWPl5MhqjMbFZ5GoSFFGLJpqaEw7biUC1Z+yE9qs2qghtFhxqasYZSNulRz3CUOOtPJrC9O/FVrv78J2YzNGL0g0v4CRpneHs9u+iOrCbYTfijwh86okAeDTZLzxTT3T6Wy4/Q4DfJqeDcQ7xKXUTTIKlzgfQmh3ULgbN2ReSVz6RdZSHTOyEBfCXK8cdJA5eM8SLxRB+HIe8UZNhY/DTcsD2+sqciomXCAvcb9m07bMrY+fNouwiv5Vddcvmn38nWGJKWhENJNoV8jadCxMjPyoeVilLv9f2Lzoi9AaT0Vg8OufSCCzEa+n615ad0H2zvUIjKzqO5vV2o+1bxBAyIBDUSkmdlRT5jHM7uda0X4hzLvx4RRQvU9cDbs2AnztyZR0xA+NahJA==";
+const DATI_APERTI = {
+ "nome": "Federico",
+ "rimanenti": 7,
+ "aggiornata": "12 novembre 2026",
+ "compiti": {
+  "data": "12/11/2026",
+  "testo": "➡️ Allenarsi nella scrittura dei caratteri della lezione 6, seguendo l'ordine dei tratti (file nei Materiali)"
+ },
+ "storico": [
+  {
+   "data": "12/11/2026",
+   "fatto": "Lezione 6: ordine dei tratti e scrittura dei caratteri."
+  }
+ ],
+ "materiali": [
+  {
+   "titolo": "Lezione 6 · Ordine dei tratti",
+   "url": "https://majajiejie.github.io/LEZIONI/materiali/yct1-lezione-6-ordine-dei-tratti.pdf"
+  }
+ ],
+ "contatti": {
+  "whatsapp": "393398768166",
+  "gruppo_concorso": "https://chat.whatsapp.com/LS9SCsDbxkRJFPOI2XaGN6",
+  "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
+ },
+ "durata": 30,
+ "compiti_fisso": null,
+ "classroom": null,
+ "pagamento": {
+  "paypal": "https://www.paypal.com/qrcodes/p2pqrc/8GDYLVXVX3ABL",
+  "iban": "IT33W0306968053100000007993",
+  "intestatario": "Maja Fabbri (Intesa Sanpaolo)",
+  "pacchetti": [
+   {
+    "lezioni": 10,
+    "prezzo": 200
+   }
+  ]
+ }
+};
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
 function mostra(DATI){
@@ -189,24 +228,7 @@ link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". ")
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
-const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function apri(pin){
-  const [sale, iv, ct] = CIFRATO.split('.').map(b64);
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
-  const k = await crypto.subtle.deriveKey({name:'PBKDF2', salt:sale, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
-  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv}, k, ct)));
-}
-const CHIAVE = 'pin:' + location.pathname;
-function salva(p){ try{ localStorage.setItem(CHIAVE, p); }catch(e){} }
-function ricorda(){ try{ return localStorage.getItem(CHIAVE); }catch(e){ return null; } }
-async function prova(pin, silenzioso){
-  try{ const d = await apri(pin); salva(pin); mostra(d); }
-  catch(e){ if(!silenzioso) $("errore").textContent = 'PIN non corretto, riprova'; try{ localStorage.removeItem(CHIAVE); }catch(_){} }
-}
-$("pinbox").onsubmit = ev => { ev.preventDefault(); $("errore").textContent = ''; prova($("pin").value.trim(), false); };
-$("esci").onclick = () => { try{ localStorage.removeItem(CHIAVE); }catch(e){} location.reload(); };
-const dalLink = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
-const gia = dalLink || ricorda(); if (gia) prova(gia, !dalLink);
+mostra(DATI_APERTI);
 </script>
 </body>
 </html>
