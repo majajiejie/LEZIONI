@@ -195,18 +195,22 @@ else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 le
 const P = DATI.pagamento;
 let scelto = 0;
 function euro(v){ return v ? "€ " + String(v).replace(".", ",") : "prezzo in arrivo"; }
+const CR = +DATI.credito || 0;
+function netto(p){ return p.prezzo ? Math.max(p.prezzo - CR, 0) : p.prezzo; }
 function disegna(){
   $("pacchetti").innerHTML = P.pacchetti.map((p,i)=>
-    '<button class="pac'+(i===scelto?' sel':'')+'" data-i="'+i+'"><b>'+p.lezioni+' lezioni</b><span class="prezzo">'+euro(p.prezzo)+'</span></button>').join("");
+    '<button class="pac'+(i===scelto?' sel':'')+'" data-i="'+i+'"><b>'+p.lezioni+' lezioni</b>'+(CR&&p.prezzo?'<span style="text-decoration:line-through;color:var(--tenue);font-size:13px">'+euro(p.prezzo)+'</span> ':'')+'<span class="prezzo">'+euro(netto(p))+'</span></button>').join("");
   document.querySelectorAll(".pac").forEach(b=>b.onclick=()=>{scelto=+b.dataset.i;disegna();});
   const p = P.pacchetti[scelto];
   const causale = "Pacchetto " + p.lezioni + " lezioni - " + DATI.nome;
+  const imp = netto(p);
   const pp = $("paypal");
-  if (P.paypal && p.prezzo) { pp.href = P.paypal.startsWith("http") ? P.paypal : "https://paypal.me/" + P.paypal + "/" + p.prezzo + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(p.prezzo) + " con PayPal"; }
+  if (P.paypal && p.prezzo) { pp.href = P.paypal.startsWith("http") ? P.paypal : "https://paypal.me/" + P.paypal + "/" + imp + "EUR"; pp.removeAttribute("aria-disabled"); pp.textContent = "Paga " + euro(imp) + " con PayPal"; }
   else { pp.removeAttribute("href"); pp.setAttribute("aria-disabled","true"); pp.textContent = "PayPal (in arrivo)"; }
-  $("ppnota").textContent = (P.paypal && p.prezzo && P.paypal.startsWith("http")) ? "Su PayPal inserisci l'importo di " + euro(p.prezzo) + ", seleziona l'opzione Amici e parenti e nella nota scrivi il nome: " + DATI.nome + "." : "";
+  $("ppnota").textContent = (P.paypal && p.prezzo && P.paypal.startsWith("http")) ? "Su PayPal inserisci l'importo di " + euro(imp) + ", seleziona l'opzione Amici e parenti e nella nota scrivi il nome: " + DATI.nome + "." : "";
+  if (CR && p.prezzo) $("ppnota").textContent = "Prezzo del pacchetto " + euro(p.prezzo) + " meno il tuo credito di " + euro(CR) + ": da pagare " + euro(imp) + ". " + $("ppnota").textContent;
   $("bonifico").innerHTML = P.iban
-    ? '<div><b>Oppure con bonifico</b></div><div>Intestato a: '+P.intestatario+'</div><div>IBAN: <span class="mono" id="ib">'+P.iban+'</span><button class="copia" data-c="'+P.iban+'">copia</button></div><div>Importo: '+euro(p.prezzo)+'</div><div>Causale: <span class="mono">'+causale+'</span><button class="copia" data-c="'+causale+'">copia</button></div>'
+    ? '<div><b>Oppure con bonifico</b></div><div>Intestato a: '+P.intestatario+'</div><div>IBAN: <span class="mono" id="ib">'+P.iban+'</span><button class="copia" data-c="'+P.iban+'">copia</button></div><div>Importo: '+euro(imp)+'</div><div>Causale: <span class="mono">'+causale+'</span><button class="copia" data-c="'+causale+'">copia</button></div>'
     : '<div><b>Oppure con bonifico</b> (dati in arrivo)</div>';
   document.querySelectorAll(".copia").forEach(b=>b.onclick=()=>{ try{navigator.clipboard.writeText(b.dataset.c); b.textContent="copiato!";}catch(e){} });
 }
