@@ -74,6 +74,11 @@ a.mat:after{content:"→";color:var(--rosso)}
 .pin .btn{background:var(--rosso);color:#fff}
 .errore{color:var(--rosso);font-weight:700;min-height:24px;margin-top:10px}
 .esci{background:none;border:0;color:var(--tenue);font:600 13px Nunito,sans-serif;text-decoration:underline;cursor:pointer;display:block;margin:10px auto 0}
+.consiglio{display:flex;gap:12px;align-items:flex-start;text-decoration:none;color:var(--testo);padding:12px 14px;border:2px solid var(--linea);border-radius:14px;margin-bottom:8px;background:#fff}
+.consiglio .ic{font-size:26px;line-height:1}
+.consiglio b{font-family:Fredoka,sans-serif;font-size:17px;display:block}
+.consiglio .desc{color:var(--tenue);font-size:14px;margin-top:2px}
+.consiglio .liv{display:inline-block;background:#fff5f6;color:var(--rosso);font-weight:700;font-size:12px;border-radius:8px;padding:1px 8px;margin-top:4px}
 </style>
 </head>
 <body>
@@ -110,6 +115,10 @@ a.mat:after{content:"→";color:var(--rosso)}
 
   <div id="secmat" hidden><h2>Materiali</h2>
   <div id="materiali"></div></div>
+
+  <div id="seccons" hidden><h2>I consigli di Maja</h2>
+  <p class="nota" style="margin-top:-4px">Podcast e altre risorse per ascoltare il cinese anche fuori dalla lezione.</p>
+  <div id="consigli"></div></div>
 
 
   <h2>Contatti</h2>
@@ -172,7 +181,8 @@ const DATI_APERTI = {
     "prezzo": 210
    }
   ]
- }
+ },
+ "consigli": []
 };
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
@@ -224,6 +234,9 @@ $("diario").innerHTML = st.length
   : '<li class="vuoto">Qui trovi cosa abbiamo fatto a ogni lezione.</li>';
 const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
+const ICONE = {podcast:"🎧", video:"📺", app:"📱", libro:"📖", sito:"🌐"};
+const K = DATI.consigli || [];
+if (K.length) { $("consigli").innerHTML = K.map(k => '<a class="consiglio" target="_blank" rel="noopener" href="' + esc(k.url) + '"><span class="ic">' + (ICONE[k.tipo] || "🎧") + '</span><span><b>' + esc(k.titolo) + '</b>' + (k.descrizione ? '<div class="desc">' + esc(k.descrizione) + '</div>' : '') + (k.livello ? '<span class="liv">' + esc(k.livello) + '</span>' : '') + '</span></a>').join(""); $("seccons").hidden = false; }
 link($("scrivi"), wa("Ciao Maja, sono " + DATI.nome + ". "));
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
