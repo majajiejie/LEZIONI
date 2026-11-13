@@ -136,7 +136,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 /*DATI-INIZIO*/
 const DATI_APERTI = {
  "nome": "Liam",
- "rimanenti": 0,
+ "rimanenti": -1,
  "aggiornata": "13 novembre 2026",
  "compiti": {
   "data": "13/11/2026",
@@ -211,7 +211,8 @@ $("num").textContent = r;
 $("sub").textContent = (r === 1 ? "lezione" : "lezioni") + (DATI.durata ? " da " + DATI.durata + " minuti" : "");
 $("lanterne").innerHTML = "<span></span>".repeat(Math.max(0, Math.min(r, 20)));
 $("agg").textContent = "Aggiornata il " + DATI.aggiornata;
-if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
+if (r < 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite e ' + (r === -1 ? 'c\'è 1 lezione già fatta' : 'ci sono ' + (-r) + ' lezioni già fatte') + ' da scalare dal prossimo pacchetto: in fondo alla pagina trovi come rinnovare 🧧</div>'; }
+else if (r <= 0) { $("avviso").innerHTML = '<div class="avviso zero">Le lezioni del pacchetto sono finite: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🧧</div>'; }
 else if (r === 1) { $("avviso").innerHTML = '<div class="avviso">Resta solo 1 lezione: se vuoi continuare, in fondo alla pagina trovi come rinnovare 🏮</div>'; }
 const P = DATI.pagamento;
 let scelto = 0;
