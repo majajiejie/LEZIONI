@@ -102,6 +102,12 @@ ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;
 .strada .arr{position:absolute;right:0;top:22px;font-size:34px}
 .estremi{display:flex;justify-content:space-between;font-size:13px;color:var(--tenue);font-weight:600}
 .estremi b{color:var(--rosso-scuro)}
+.tappe{margin-top:12px;border-top:1px dashed var(--linea);padding-top:10px}
+.tappe summary{cursor:pointer;font-weight:700;color:var(--rosso-scuro);list-style:none}
+.tappe summary::-webkit-details-marker{display:none}
+.tappe summary:after{content:" ▾";color:var(--tenue)}
+.tappe[open] summary:after{content:" ▴"}
+.tappe ul{margin-top:8px}
 .prova{background:#333;color:#fff;text-align:center;font-weight:700;padding:6px;font-size:13px}
 </style>
 </head>
@@ -130,17 +136,12 @@ ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;
   </div>
   <div id="avviso"></div>
 
-  <h2>Il mio percorso 🗺️</h2>
-  <div class="box">
-    <div class="nota" id="percnota" style="margin:0 0 2px"></div>
+  <div class="box" style="margin-top:18px">
+    <div style="font-family:Fredoka,sans-serif;font-weight:700;color:var(--rosso-scuro);font-size:18px">Il mio percorso 🐼</div>
     <div class="strada" aria-hidden="true"><div class="via"></div><div class="fatto" id="fatto"></div><div class="pd" id="pd">🐼</div><div class="arr">🏆</div></div>
     <div class="estremi"><span>Partenza</span><b id="traguardo"></b></div>
-    <h3 style="font-family:Fredoka,sans-serif;font-size:17px;margin:18px 0 4px;color:var(--rosso-scuro)">Le tappe già raggiunte</h3>
-    <div class="percorso" id="percorso"></div>
+    <details class="tappe"><summary id="riass"></summary><ul class="sofare" id="sofare"></ul></details>
   </div>
-
-  <h2>Ora so… 🌟</h2>
-  <div class="box"><ul class="sofare" id="sofare"></ul></div>
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
@@ -319,18 +320,13 @@ const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
 if($("scrivi"))link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));
 if (C.gruppo_concorso && $("concorso")) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
-const PC = DATI.percorso || [];
-if (PC.length) {
-  const fatte = PC.filter(t=>t.stato==="fatta").length;
-  const T = DATI.traguardo || {};
-  const av = Math.max(.04, Math.min(.96, T.avanzamento || 0));
-  $("percnota").textContent = T.frase || "";
-  $("traguardo").textContent = T.nome || "Primo traguardo";
-  $("fatto").style.width = "calc(" + (av*100) + "% - " + (av*34) + "px)";
-  $("pd").style.left = "calc(" + (av*100) + "% - " + (av*34) + "px)";
-  $("percorso").innerHTML = PC.map(t => '<div class="tappa '+(t.stato||"")+'"><div class="bollo">'+(/fatta/.test(t.stato||"")?"🐼":esc(t.hz).slice(0,1))+'</div><div><div class="t"><ruby>'+esc(t.hz)+'<rt>'+esc(t.py)+'</rt></ruby> '+esc(t.titolo)+'</div></div></div>').join("");
-}
+const T = DATI.traguardo || {};
+const av = Math.max(.04, Math.min(.96, T.avanzamento || 0));
+$("traguardo").textContent = T.nome || "Primo traguardo";
+$("fatto").style.width = "calc(" + (av*100) + "% - " + (av*34) + "px)";
+$("pd").style.left = "calc(" + (av*100) + "% - " + (av*34) + "px)";
 const SF = DATI.so_fare || [];
+$("riass").textContent = "🐼".repeat(Math.min(SF.length,10)) + "  Ora so… (" + SF.length + ")";
 $("sofare").innerHTML = SF.map(s=>'<li>'+esc(s)+'</li>').join("");
 $("pinbox").hidden = true; $("app").hidden = false;
 }
