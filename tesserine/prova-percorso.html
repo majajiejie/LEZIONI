@@ -79,13 +79,13 @@ a.mat:after{content:"→";color:var(--rosso)}
 .tappa:not(:last-child):after{content:"";position:absolute;left:23px;top:52px;height:calc(100% - 44px);border-left:3px dotted var(--linea)}
 .tappa.fatta:not(:last-child):after{border-left:3px solid var(--oro)}
 .bollo{flex:0 0 48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 22px Fredoka,sans-serif;background:#f3ece2;color:#c9b8a6;border:3px solid var(--linea)}
-.fatta .bollo{background:var(--rosso);color:#fff;border-color:var(--oro);transform:rotate(-8deg)}
-.qui .bollo{background:#fff;color:var(--rosso);border:3px solid var(--rosso);animation:pulsa 1.6s infinite}
+.fatta .bollo{background:#fff;border-color:var(--rosso);transform:rotate(-10deg);font-size:26px;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 4px rgba(200,16,46,.35)}
+.qui .bollo{animation:pulsa 1.6s infinite}
 @keyframes pulsa{0%,100%{box-shadow:0 0 0 0 rgba(200,16,46,.35)}50%{box-shadow:0 0 0 8px rgba(200,16,46,0)}}
 .tappa .t{font-family:Fredoka,sans-serif;font-weight:600;font-size:17px}
 .tappa .s{font-size:13px;color:var(--tenue)}
 .tappa:not(.fatta):not(.qui) .t{color:#b9a898}
-.qui .t:after{content:" · sei qui!";color:var(--rosso);font-size:13px}
+.qui .t:after{content:" · ultima tappa";color:var(--rosso);font-size:13px}
 ruby{ruby-position:over}rt{font-size:11px;color:var(--tenue);font-family:Nunito,sans-serif}
 .barra{height:14px;background:#f3ece2;border-radius:10px;overflow:hidden;margin:6px 0 4px}
 .barra i{display:block;height:100%;background:linear-gradient(90deg,var(--oro),var(--rosso));border-radius:10px}
@@ -94,6 +94,14 @@ ul.sofare li{padding:7px 0 7px 30px;position:relative;font-weight:600}
 ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--verde);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
 .prossima{background:#fff5f6;border:2px dashed var(--rosso);border-radius:14px;padding:12px 14px;margin-bottom:12px}
 .prossima b{font-family:Fredoka,sans-serif;color:var(--rosso-scuro)}
+.strada{position:relative;height:74px;margin:6px 4px 2px}
+.strada .via{position:absolute;left:0;right:34px;top:44px;height:12px;border-radius:8px;background:repeating-linear-gradient(90deg,#f0e4d2 0 14px,#f7efe3 14px 22px)}
+.strada .fatto{position:absolute;left:0;top:44px;height:12px;border-radius:8px;background:linear-gradient(90deg,var(--oro),var(--rosso))}
+.strada .pd{position:absolute;top:4px;font-size:32px;transform:translateX(-50%);animation:salta 2.4s ease-in-out infinite}
+@keyframes salta{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+.strada .arr{position:absolute;right:0;top:22px;font-size:34px}
+.estremi{display:flex;justify-content:space-between;font-size:13px;color:var(--tenue);font-weight:600}
+.estremi b{color:var(--rosso-scuro)}
 .prova{background:#333;color:#fff;text-align:center;font-weight:700;padding:6px;font-size:13px}
 </style>
 </head>
@@ -124,8 +132,10 @@ ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;
 
   <h2>Il mio percorso 🗺️</h2>
   <div class="box">
-    <div class="nota" id="percnota" style="margin:0 0 4px"></div>
-    <div class="barra"><i id="barra"></i></div>
+    <div class="nota" id="percnota" style="margin:0 0 2px"></div>
+    <div class="strada" aria-hidden="true"><div class="via"></div><div class="fatto" id="fatto"></div><div class="pd" id="pd">🐼</div><div class="arr">🏆</div></div>
+    <div class="estremi"><span>Partenza</span><b id="traguardo"></b></div>
+    <h3 style="font-family:Fredoka,sans-serif;font-size:17px;margin:18px 0 4px;color:var(--rosso-scuro)">Le tappe già raggiunte</h3>
     <div class="percorso" id="percorso"></div>
   </div>
 
@@ -187,29 +197,34 @@ const DATI_APERTI = {
    "url": "https://majajiejie.github.io/LEZIONI/lessico/tratti-emozioni.html"
   }
  ],
+ "traguardo": {
+  "nome": "Primo traguardo 🏆",
+  "avanzamento": 0.31,
+  "frase": "Ecco a che punto siamo del viaggio verso il primo traguardo!"
+ },
  "percorso": [
   {
    "hz": "你好",
    "py": "nǐ hǎo",
-   "titolo": "Saluti e presentazioni",
+   "titolo": "Saluti e il mio nome",
    "stato": "fatta"
   },
   {
    "hz": "数字",
    "py": "shùzì",
-   "titolo": "I numeri",
+   "titolo": "I numeri fino a 10",
    "stato": "fatta"
   },
   {
-   "hz": "颜色",
-   "py": "yánsè",
-   "titolo": "I colori",
+   "hz": "我你他",
+   "py": "wǒ nǐ tā",
+   "titolo": "I pronomi",
    "stato": "fatta"
   },
   {
-   "hz": "家",
-   "py": "jiā",
-   "titolo": "La famiglia",
+   "hz": "熊猫",
+   "py": "xióngmāo",
+   "titolo": "Laboratorio del panda",
    "stato": "fatta"
   },
   {
@@ -219,31 +234,27 @@ const DATI_APERTI = {
    "stato": "fatta"
   },
   {
+   "hz": "冷热",
+   "py": "lěng rè",
+   "titolo": "Freddo e caldo",
+   "stato": "fatta"
+  },
+  {
    "hz": "心情",
    "py": "xīnqíng",
    "titolo": "Le emozioni",
-   "stato": "qui"
-  },
-  {
-   "hz": "动物",
-   "py": "dòngwù",
-   "titolo": "Gli animali"
-  },
-  {
-   "hz": "吃",
-   "py": "chī",
-   "titolo": "Il cibo"
+   "stato": "fatta qui"
   }
  ],
  "so_fare": [
-  "Salutare e dire come mi chiamo",
+  "Dire il mio nome",
   "Contare fino a 10",
-  "Dire i colori",
-  "Presentare la mia famiglia",
-  "Dire se una cosa è grande o piccola",
-  "Dire come mi sento"
+  "Usare i pronomi io, tu, lui (我 你 他)",
+  "Descrivere con gli aggettivi (大 小 长 短)",
+  "Dire se ho freddo o caldo",
+  "Dire se sono felice, triste o arrabbiato"
  ],
- "prossima_tappa": "Nel prossimo pacchetto: gli animali e il cibo! 🐼🥟",
+ "prossima_tappa": "Nel prossimo pacchetto: la famiglia! 👨‍👩‍👧",
  "contatti": {
   "whatsapp": "393398768166",
   "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
@@ -318,9 +329,13 @@ if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").h
 const PC = DATI.percorso || [];
 if (PC.length) {
   const fatte = PC.filter(t=>t.stato==="fatta").length;
-  $("percnota").textContent = "Tappe completate: " + fatte + " su " + PC.length;
-  $("barra").style.width = Math.round(fatte/PC.length*100) + "%";
-  $("percorso").innerHTML = PC.map(t => '<div class="tappa '+(t.stato||"")+'"><div class="bollo">'+(t.stato==="fatta"?"印":esc(t.hz).slice(0,1))+'</div><div><div class="t"><ruby>'+esc(t.hz)+'<rt>'+esc(t.py)+'</rt></ruby> '+esc(t.titolo)+'</div></div></div>').join("");
+  const T = DATI.traguardo || {};
+  const av = Math.max(.04, Math.min(.96, T.avanzamento || 0));
+  $("percnota").textContent = T.frase || "";
+  $("traguardo").textContent = T.nome || "Primo traguardo";
+  $("fatto").style.width = "calc(" + (av*100) + "% - " + (av*34) + "px)";
+  $("pd").style.left = "calc(" + (av*100) + "% - " + (av*34) + "px)";
+  $("percorso").innerHTML = PC.map(t => '<div class="tappa '+(t.stato||"")+'"><div class="bollo">'+(/fatta/.test(t.stato||"")?"🐼":esc(t.hz).slice(0,1))+'</div><div><div class="t"><ruby>'+esc(t.hz)+'<rt>'+esc(t.py)+'</rt></ruby> '+esc(t.titolo)+'</div></div></div>').join("");
 }
 const SF = DATI.so_fare || [];
 $("sofare").innerHTML = SF.map(s=>'<li>'+esc(s)+'</li>').join("");
