@@ -1,0 +1,350 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HSKK lezione 13 · 2</title>
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;600&family=Figtree:wght@400;600;700&display=swap">
+<style>
+/* Layout: un "foglio d'esame" centrale, schede per le 3 parti, ogni frase è una riga da ascoltare-ripetere-verificare */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --fg:#1D2421; --muted:#5E6A64; --line:#DCE2DD;
+  --seal:#B8382A; --seal-soft:#F6E3DF; --jade:#2F7A63; --jade-soft:#DFF0E9;
+  --hanzi:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --brush:"Ma Shan Zheng","KaiTi","STKaiti",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A18; --surface:#1E2522; --fg:#E8EDEA; --muted:#9AA8A1; --line:#2F3934;
+  --seal:#E2705F; --seal-soft:#3A2420; --jade:#6CC3A5; --jade-soft:#1C3329; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151A18; --surface:#1E2522; --fg:#E8EDEA; --muted:#9AA8A1; --line:#2F3934;
+  --seal:#E2705F; --seal-soft:#3A2420; --jade:#6CC3A5; --jade-soft:#1C3329; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.seal{flex:none;width:68px;height:68px;border-radius:10px;background:var(--seal);color:#fff;display:grid;place-items:center;font-family:var(--brush);font-size:38px;line-height:1;transform:rotate(-4deg)}
+header h1{margin:0;font-size:1.75rem;line-height:1.15;text-wrap:balance}
+header p{margin:2px 0 0;color:var(--muted)}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--seal);font-weight:700}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 18px;border-bottom:1px solid var(--line)}
+nav button{font:inherit;font-weight:600;border:0;background:none;color:var(--muted);padding:10px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav button[aria-selected="true"]{color:var(--fg);border-color:var(--seal)}
+nav button:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.zh{font-family:var(--hanzi)}
+h2{font-size:1.3rem;margin:0 0 4px}
+.lead{color:var(--muted);margin:0 0 18px;max-width:65ch}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-size:.9rem;color:var(--muted)}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;background:var(--jade-soft);color:var(--jade);font-weight:600;font-size:.85rem;font-variant-numeric:tabular-nums}
+.list{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.item.done{border-color:var(--jade)}
+.num{grid-row:span 3;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;min-width:1.6em}
+.item .ctrl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.btn.play{background:var(--seal);border-color:var(--seal);color:#fff}
+.btn.ok[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.reveal{min-width:0}
+.reveal .h{font-family:var(--hanzi);font-size:1.35rem;line-height:1.4}
+.reveal .py{color:var(--jade);font-size:.95rem}
+.reveal .it{color:var(--muted);font-size:.9rem}
+.model{margin-top:6px;padding:8px 12px;border-radius:8px;background:var(--jade-soft)}
+.hidden-text{filter:blur(6px);user-select:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.timer{font-variant-numeric:tabular-nums;font-size:2.6rem;font-weight:700;line-height:1}
+.timer.prep{color:var(--muted)} .timer.speak{color:var(--seal)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:10px 0 14px}
+.bar i{display:block;height:100%;background:var(--seal);width:0;transition:width .3s linear}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.phr{display:flex;flex-wrap:wrap;gap:8px}
+.phr button{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 10px;cursor:pointer;text-align:left}
+.phr button small{display:block;color:var(--muted);font-size:.78rem}
+.note{font-size:.85rem;color:var(--muted)}
+.warn{background:var(--seal-soft);color:var(--fg);padding:8px 12px;border-radius:8px;font-size:.88rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.blk{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);margin-top:8px}
+.blk .bn{grid-row:span 3;width:28px;height:28px;border-radius:50%;background:var(--seal);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.blk .bl{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.blk .bz{font-family:var(--hanzi);font-size:1.1rem;line-height:1.6}
+.blk .bp{color:var(--jade);font-size:.9rem}
+.blk .bi{color:var(--muted);font-size:.85rem}
+.five{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:10px 0 0}
+.five div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px}
+.five b{color:var(--seal)}
+.who{grid-column:2;display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.who .wl{font-size:.75rem;color:var(--muted);font-weight:600;margin-right:2px}
+.who button{font:inherit;font-size:.82rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:999px;padding:3px 10px;cursor:pointer}
+.who button[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.card .who{grid-column:auto;margin-top:10px}
+.res td,.res th{text-align:center}.res td:first-child,.res th:first-child{text-align:left;font-weight:700}
+.res tr.win td{background:var(--jade-soft)}
+.res .tot{font-weight:800;font-size:1.15rem}
+.winner{margin:16px 0 0;padding:14px 16px;border-radius:12px;background:var(--seal-soft);font-size:1.05rem}
+.winner b{color:var(--seal)}
+.meet{background:var(--jade-soft);border:2px solid var(--jade);border-radius:14px;padding:12px 16px;margin:20px 0 0}
+.meet summary{cursor:pointer;font-weight:700;color:var(--jade);font-size:1.05rem}
+.meet ol{margin:8px 0;padding-left:22px}.meet li{margin:3px 0}
+.meet .tab{display:inline-block;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:0 6px;font-weight:600}
+.chip.warnc{background:var(--seal-soft);color:var(--seal)}
+.grp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="seal" aria-hidden="true">说</div>
+    <div>
+      <div class="eyebrow">HSKK · Lezione 13 · seconda parte · 我是走回来的</div>
+      <h1>HSKK con Maja Jiejie · Su, giù, dentro e fuori</h1>
+      <p>Sveva, Sofia, Sofy e Leo: ripeti, rispondi e parla con i 5 blocchi. Frasi nuove con 是……的 e 上去, 下来, 进去, 出来, 起来, 过来.</p>
+    </div>
+  </header>
+
+  <details class="meet" id="meet" open>
+    <summary>🎧 Prima di iniziare: fai sentire l'audio su Meet</summary>
+    <ol>
+      <li>Apri questa pagina in <b>Chrome</b>.</li>
+      <li>In Meet clicca <span class="tab">Presenta</span> e scegli <span class="tab">Una scheda</span> → questa pagina.</li>
+      <li>Controlla che sia attivo <span class="tab">Condividi anche l'audio della scheda</span> e clicca <span class="tab">Condividi</span>.</li>
+      <li>Premi <b>🔊 Prova audio</b> e chiedi ai ragazzi se sentono.</li>
+    </ol>
+    <div class="ctrl" style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn play" id="testBtn2" type="button">🔊 Prova audio</button>
+      <button class="btn" id="copyBtn" type="button">📋 Copia il link (piano B)</button>
+      <button class="btn" type="button" onclick="document.getElementById('meet').open=false">✅ Si sente, chiudi</button>
+    </div>
+    <p class="note" style="margin:10px 0 0">L'audio è un file che suona <b>dentro la pagina</b>, quindi passa nella condivisione della scheda (serve internet). Se in alto compare <b>⚠️ Voce del computer</b>, quella voce su Meet non si sente: <b>piano B</b> → condividi <b>Intero schermo</b> con "Condividi anche l'audio di sistema", oppure copia il link nella chat di Meet e i ragazzi premono ▶ sul loro dispositivo.</p>
+  </details>
+
+  <nav role="tablist">
+    <button role="tab" data-tab="p1" aria-selected="true">1 · Ripeti</button>
+    <button role="tab" data-tab="p2" aria-selected="false">2 · Rispondi</button>
+    <button role="tab" data-tab="p3" aria-selected="false">3 · Parla con i 5 blocchi</button>
+    <button role="tab" data-tab="p4" aria-selected="false">🏆 Risultati</button>
+  </nav>
+
+  <div class="toolbar">
+    <label for="srcSel">Audio</label><select id="srcSel" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)">
+      <option value="net">🔊 Voce cinese online (si sente su Meet)</option><option value="dev">Voce del dispositivo (su Meet non si sente)</option></select>
+    <select id="voiceSel" hidden style="font:inherit;max-width:220px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)"></select>
+    <button class="btn" id="testBtn" type="button">🔈 Prova audio</button>
+    <label for="rate">Velocità</label>
+    <input id="rate" type="range" min="0.6" max="1.1" step="0.1" value="0.9">
+    <span id="rateLbl">0.9×</span>
+    <span class="chip" id="audioStat" title="Da dove arriva l'audio">🎧 Audio in pagina</span>
+    <span class="chip" id="score">0 / 18 completate</span>
+  </div>
+  <p class="warn" id="noVoice" hidden>L'audio non parte: controlla il volume e la connessione, oppure prova l'altra opzione nel menu "Audio". In videochiamata, condividi la scheda con "Condividi anche l'audio della scheda".</p>
+
+  <section id="p1" role="tabpanel">
+    <h2 class="zh">第一部分 · 听后重复</h2>
+    <p class="lead">Ascolta la frase una sola volta e ripetila subito, uguale. Poi controlla il testo.</p>
+    <div class="list" id="list1"></div>
+  </section>
+
+  <section id="p2" role="tabpanel" hidden>
+    <h2 class="zh">第二部分 · 听后回答</h2>
+    <p class="lead">Ascolta la domanda e rispondi con una frase completa, riprendendo le parole della domanda.</p>
+    <div class="list" id="list2"></div>
+  </section>
+
+  <section id="p3" role="tabpanel" hidden>
+    <h2 class="zh">第三部分 · 回答问题</h2>
+    <p class="lead">Scegli una domanda, prepara la risposta con i 5 blocchi, poi parla per 1 minuto e mezzo senza fermarti.</p>
+    <div class="five">
+      <div><b>①</b> 我觉得…<br><span class="note">la tua opinione</span></div>
+      <div><b>②</b> 比…<br><span class="note">il confronto</span></div>
+      <div><b>③</b> 因为…<br><span class="note">il perché</span></div>
+      <div><b>④</b> 比如…<br><span class="note">un esempio</span></div>
+      <div><b>⑤</b> 所以… / 总之…<br><span class="note">la conclusione</span></div>
+    </div>
+    <div class="grid2" id="q3" style="margin-top:14px"></div>
+    <div class="card" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+        <div><div class="eyebrow" id="phase">Pronti?</div><div class="zh" id="curQ" style="font-size:1.2rem">Scegli una domanda qui sopra</div></div>
+        <div class="timer prep" id="clock">1:30</div>
+      </div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="prepBtn">Preparazione (1:30)</button>
+        <button class="btn play" id="speakBtn">Parla ora (1:30)</button>
+        <button class="btn" id="stopBtn">Ferma</button>
+      </div>
+    </div>
+    <h2 style="margin-top:22px;font-size:1.05rem">Parole e strutture utili della lezione 13</h2>
+    <p class="note">Tocca per ascoltare.</p>
+    <div class="phr" id="phr"></div>
+  </section>
+
+  <section id="p4" role="tabpanel" hidden>
+    <h2>🏆 Risultati della lezione</h2>
+    <p class="lead">Ogni risposta giusta vale 1 punto: nelle attività tocca il nome di chi ha risposto bene. Qui vedi i punti di tutte le attività insieme.</p>
+    <div class="grp">
+      <button class="btn" id="resetPts">Azzera i punti</button></div>
+    <div class="tbl card" style="padding:6px 10px"><table class="res"><thead><tr><th>Nome</th><th>1 · Ripeti</th><th>2 · Rispondi</th><th>3 · Parla</th><th>Totale</th></tr></thead><tbody id="resBody"></tbody></table></div>
+    <div class="winner" id="winner"></div>
+  </section>
+</div>
+
+<script src="../voce.js"></script>
+<script>
+const P1=[
+ ["他是坐地铁来的。","Tā shì zuò dìtiě lái de.","Lui è venuto in metropolitana."],
+ ["我是昨天晚上回来的。","Wǒ shì zuótiān wǎnshang huílai de.","Sono tornato/a ieri sera."],
+ ["校长从办公室走出来了。","Xiàozhǎng cóng bàngōngshì zǒu chūlai le.","Il preside è uscito dall'ufficio."],
+ ["你快下来吧，我们要走了。","Nǐ kuài xiàlai ba, wǒmen yào zǒu le.","Scendi, dai, che dobbiamo andare."],
+ ["外面太冷了，我们进去吧。","Wàimian tài lěng le, wǒmen jìnqu ba.","Fuori fa troppo freddo, entriamo."],
+ ["爷爷慢慢地站起来了。","Yéye mànmàn de zhàn qǐlai le.","Il nonno si è alzato piano piano."],
+ ["我一叫，小狗就跑过来了。","Wǒ yí jiào, xiǎo gǒu jiù pǎo guòlai le.","Appena l'ho chiamato, il cagnolino è corso da me."],
+ ["我终于找到我的礼物了。","Wǒ zhōngyú zhǎodào wǒ de lǐwù le.","Finalmente ho trovato il mio regalo."],
+ ["奶奶一边做饭，一边唱歌。","Nǎinai yìbiān zuò fàn, yìbiān chàng gē.","La nonna cucina e intanto canta."],
+ ["我的电脑坏了，你能帮我看看吗？","Wǒ de diànnǎo huài le, nǐ néng bāng wǒ kànkan ma?","Il mio computer si è rotto, puoi darci un'occhiata?"]
+];
+const P2=[
+ ["你是哪一年开始学汉语的？","Nǐ shì nǎ yì nián kāishǐ xué Hànyǔ de?","In che anno hai cominciato a studiare cinese?","我是二〇二二年开始学汉语的。","Wǒ shì èr líng èr èr nián kāishǐ xué Hànyǔ de."],
+ ["你昨天是几点回家的？","Nǐ zuótiān shì jǐ diǎn huí jiā de?","Ieri a che ora sei tornato/a a casa?","我昨天是下午五点回家的。","Wǒ zuótiān shì xiàwǔ wǔ diǎn huí jiā de."],
+ ["你是在哪儿认识你的好朋友的？","Nǐ shì zài nǎr rènshi nǐ de hǎo péngyou de?","Dove hai conosciuto il tuo migliore amico / la tua migliore amica?","我是在学校认识她的。","Wǒ shì zài xuéxiào rènshi tā de."],
+ ["老师走进教室的时候，你们站起来吗？","Lǎoshī zǒu jìn jiàoshì de shíhou, nǐmen zhàn qǐlai ma?","Quando l'insegnante entra in classe, vi alzate?","站起来，我们都站起来说“老师好”。","Zhàn qǐlai, wǒmen dōu zhàn qǐlai shuō “lǎoshī hǎo”."],
+ ["你家住在几楼？你一般是走上去的吗？","Nǐ jiā zhù zài jǐ lóu? Nǐ yìbān shì zǒu shàngqu de ma?","A che piano abiti? Di solito sali a piedi?","我家住在三楼，我一般是走上去的。","Wǒ jiā zhù zài sān lóu, wǒ yìbān shì zǒu shàngqu de."],
+ ["你最喜欢的礼物是什么？是谁送给你的？","Nǐ zuì xǐhuan de lǐwù shì shénme? Shì shéi sòng gěi nǐ de?","Qual è il regalo che ti piace di più? Chi te l'ha regalato?","是一只小狗，是爸爸送给我的。","Shì yì zhī xiǎo gǒu, shì bàba sòng gěi wǒ de."],
+ ["你会一边吃饭一边看手机吗？","Nǐ huì yìbiān chī fàn yìbiān kàn shǒujī ma?","Ti capita di guardare il cellulare mentre mangi?","有时候会，可是妈妈说不应该这样。","Yǒu shíhou huì, kěshì māma shuō bù yīnggāi zhèyàng."],
+ ["你一般跟谁一起过生日？","Nǐ yìbān gēn shéi yìqǐ guò shēngrì?","Di solito con chi festeggi il compleanno?","我一般跟家人和朋友一起过生日。","Wǒ yìbān gēn jiārén hé péngyou yìqǐ guò shēngrì."]
+];
+const P3=[
+ {q:"你觉得走路去学校好还是坐车去学校好？为什么？",py:"Nǐ juéde zǒulù qù xuéxiào hǎo háishi zuò chē qù xuéxiào hǎo? Wèishénme?",it:"Secondo te è meglio andare a scuola a piedi o in macchina/autobus? Perché?",
+  b:[["我觉得走路去学校更好。","Wǒ juéde zǒulù qù xuéxiào gèng hǎo.","Secondo me è meglio andare a scuola a piedi."],
+     ["走路比坐车慢一点儿，可是比坐车健康多了。","Zǒulù bǐ zuò chē màn yìdiǎnr, kěshì bǐ zuò chē jiànkāng duō le.","Andare a piedi è un po' più lento, ma è molto più sano."],
+     ["因为走路的时候可以运动，还可以一边走一边跟朋友聊天。","Yīnwèi zǒulù de shíhou kěyǐ yùndòng, hái kěyǐ yìbiān zǒu yìbiān gēn péngyou liáotiān.","Perché camminando fai movimento e puoi anche chiacchierare con gli amici."],
+     ["比如，上个星期我的自行车坏了，我每天都是走回来的。路上我遇到了我的同学，我们一边走一边说，很快就到家了。","Bǐrú, shàng ge xīngqī wǒ de zìxíngchē huài le, wǒ měi tiān dōu shì zǒu huílai de. Lù shang wǒ yùdào le wǒ de tóngxué, wǒmen yìbiān zǒu yìbiān shuō, hěn kuài jiù dào jiā le.","Per esempio, la settimana scorsa mi si è rotta la bici e ogni giorno sono tornato/a a piedi. Per strada ho incontrato un compagno, abbiamo chiacchierato camminando e siamo arrivati a casa in un attimo."],
+     ["所以我觉得，如果学校不太远，我们应该经常走路去。","Suǒyǐ wǒ juéde, rúguǒ xuéxiào bú tài yuǎn, wǒmen yīnggāi jīngcháng zǒulù qù.","Quindi penso che, se la scuola non è troppo lontana, dovremmo andarci spesso a piedi."]]},
+ {q:"你觉得自己做的礼物好还是买的礼物好？为什么？",py:"Nǐ juéde zìjǐ zuò de lǐwù hǎo háishi mǎi de lǐwù hǎo? Wèishénme?",it:"Secondo te è meglio un regalo fatto da te o un regalo comprato? Perché?",
+  b:[["我觉得自己做的礼物更好。","Wǒ juéde zìjǐ zuò de lǐwù gèng hǎo.","Secondo me è meglio un regalo fatto da sé."],
+     ["自己做的礼物比买的礼物有意思多了。","Zìjǐ zuò de lǐwù bǐ mǎi de lǐwù yǒu yìsi duō le.","Un regalo fatto da sé è molto più interessante di uno comprato."],
+     ["因为做礼物要用很多时间，收到礼物的人一定会很高兴。","Yīnwèi zuò lǐwù yào yòng hěn duō shíjiān, shōudào lǐwù de rén yídìng huì hěn gāoxìng.","Perché per fare un regalo ci vuole tanto tempo, e chi lo riceve sarà sicuramente felice."],
+     ["比如，去年奶奶过生日的时候，我给她画了一张画。奶奶拿出来给爷爷看，一边看一边笑。现在那张画还在她的房间里。","Bǐrú, qùnián nǎinai guò shēngrì de shíhou, wǒ gěi tā huà le yì zhāng huà. Nǎinai ná chūlai gěi yéye kàn, yìbiān kàn yìbiān xiào. Xiànzài nà zhāng huà hái zài tā de fángjiān li.","Per esempio, l'anno scorso per il compleanno della nonna le ho fatto un disegno. La nonna l'ha tirato fuori per farlo vedere al nonno, e intanto rideva. Adesso quel disegno è ancora nella sua stanza."],
+     ["总之，我觉得自己做的礼物最好。","Zǒngzhī, wǒ juéde zìjǐ zuò de lǐwù zuì hǎo.","Insomma, penso che il regalo migliore sia quello fatto da sé."]]}
+];
+const LBL=["① Opinione","② Confronto","③ Perché","④ Esempio","⑤ Conclusione"];
+const PHR=[["是……的","shì… de","come / quando / dove è successo"],["走回来","zǒu huílai","tornare a piedi"],["上去","shàngqu","salire, andare su"],["下来","xiàlai","scendere, venire giù"],["进去","jìnqu","entrare, andare dentro"],["出来","chūlai","uscire, venire fuori"],["站起来","zhàn qǐlai","alzarsi in piedi"],["跑过来","pǎo guòlai","correre qui"],["拿出来","ná chūlai","tirare fuori"],["终于","zhōngyú","finalmente"],["礼物","lǐwù","regalo"],["遇到","yùdào","incontrare per caso"],["一边……一边……","yìbiān… yìbiān…","mentre…, intanto…"],["一般","yìbān","di solito"],["应该","yīnggāi","dovere"],["经常","jīngcháng","spesso"],["坏了","huài le","si è rotto"],["校长","xiàozhǎng","preside"]];
+
+let done={};try{done=JSON.parse(localStorage.getItem("hskk-l13b-done")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("hskk-l13b-done",JSON.stringify(done))}catch(e){};updScore()}
+const GRUPPI=[["Sveva","Sofia","Sofy","Leo"]];
+let grp=0;
+let pts={};try{pts=JSON.parse(localStorage.getItem("hskk-l13b-pts")||"{}")}catch(e){}
+function nomi(){return GRUPPI[grp]||GRUPPI[0]}
+function savePts(){try{localStorage.setItem("hskk-l13b-pts",JSON.stringify(pts))}catch(e){};renderRes()}
+function whoRow(key){const w=document.createElement("div");w.className="who";w.dataset.key=key;fillWho(w);return w}
+function fillWho(w){const key=w.dataset.key;w.innerHTML='<span class="wl">Risposta giusta:</span>';
+  nomi().forEach(n=>{const b=document.createElement("button");b.textContent=n;const on=(pts[key]||[]).includes(n);b.setAttribute("aria-pressed",on);
+    b.onclick=()=>{const a=pts[key]||[];pts[key]=a.includes(n)?a.filter(x=>x!==n):a.concat(n);b.setAttribute("aria-pressed",pts[key].includes(n));savePts()};w.appendChild(b)})}
+function renderRes(){const body=document.getElementById("resBody");if(!body)return;
+  const rows=nomi().map(n=>{const c={p1:0,p2:0,p3:0};Object.keys(pts).forEach(k=>{if((pts[k]||[]).includes(n))c[k.split("-")[0]]++});return{n,c,t:c.p1+c.p2+c.p3}});
+  const max=Math.max(0,...rows.map(r=>r.t));
+  body.innerHTML=rows.map(r=>`<tr class="${max>0&&r.t===max?"win":""}"><td>${r.n}</td><td>${r.c.p1}</td><td>${r.c.p2}</td><td>${r.c.p3}</td><td class="tot">${r.t}</td></tr>`).join("");
+  const w=rows.filter(r=>max>0&&r.t===max).map(r=>r.n);
+  document.getElementById("winner").innerHTML=!w.length?"Ancora nessun punto assegnato.":
+    w.length===1?`Più risposte corrette: <b>${w[0]}</b> con ${max} punti 🎉`:`Pareggio a ${max} punti tra <b>${w.join("</b> e <b>")}</b>`}
+function updScore(){const n=Object.values(done).filter(Boolean).length;document.getElementById("score").textContent=n+" / 18 completate"}
+
+/* Audio: di base usa un file audio con voce cinese online (si sente su ogni dispositivo e anche condividendo la scheda in videochiamata);
+   se non si carica, passa da solo alla voce del dispositivo. */
+let zhVoice=null,src="net";try{src=localStorage.getItem("hskk-audio-src")||"net"}catch(e){}
+const player=new Audio();player.preload="auto";let queue=[],playId=0;
+function rankV(x){const n=(x.name||"").toLowerCase();let s=0;if(/natural|online|neural/.test(n))s+=50;if(/xiaoxiao|xiaoyi|yunxi|yunjian|xiaohan|xiaomo/.test(n))s+=40;if(/google/.test(n))s+=35;if(/tingting|ting-ting|lili|meijia|yu-shu|shanshan/.test(n))s+=25;if(/huihui|kangkang|yaoyao/.test(n))s-=20;if(/zh[-_]cn/i.test(x.lang))s+=10;return s}
+function zhList(){if(!("speechSynthesis" in window))return[];return speechSynthesis.getVoices().filter(x=>/^zh|cmn/i.test(x.lang)&&!/hk|yue|cantonese/i.test(x.lang+x.name)).sort((a,b)=>rankV(b)-rankV(a))}
+function fillVoices(){const sel=document.getElementById("voiceSel");if(!sel)return;const L=zhList();if(!L.length)return;let saved=null;try{saved=localStorage.getItem("zh-voice")}catch(e){}
+  sel.innerHTML=L.map(v=>`<option value="${v.name}">${v.name}</option>`).join("");if(saved&&L.some(v=>v.name===saved))sel.value=saved;
+  sel.onchange=()=>{try{localStorage.setItem("zh-voice",sel.value)}catch(e){};pickVoice()}}
+function pickVoice(){const L=zhList();const sel=document.getElementById("voiceSel");zhVoice=(sel&&L.find(v=>v.name===sel.value))||L[0]||null}
+if("speechSynthesis" in window){fillVoices();pickVoice();speechSynthesis.onvoiceschanged=()=>{fillVoices();pickVoice()}}
+function rateVal(){return parseFloat(document.getElementById("rate").value)}
+function stopAll(){playId++;queue=[];try{player.pause()}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
+function chunks(t){const parts=t.match(/[^。！？；，,!?;]+[。！？；，,!?;]*/g)||[t];const out=[];let cur="";
+  parts.forEach(p=>{if((cur+p).length>150&&cur){out.push(cur);cur=p}else cur+=p});if(cur)out.push(cur);return out}
+const FONTI=[t=>"https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&q="+encodeURIComponent(t),
+             t=>"https://dict.youdao.com/dictvoice?le=zh&audio="+encodeURIComponent(t)];
+let fonte=0;
+function stato(ok){const c=document.getElementById("audioStat");if(!c)return;
+  c.textContent=ok?"🎧 Audio in pagina: si sente su Meet":"⚠️ Voce del computer: su Meet non si sente";c.classList.toggle("warnc",!ok)}
+function speakDev(t){
+  if(!("speechSynthesis" in window)){document.getElementById("noVoice").hidden=false;return}
+  stato(false);pickVoice();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;
+  u.rate=rateVal();u.onerror=()=>{document.getElementById("noVoice").hidden=false};speechSynthesis.speak(u)}
+function playNext(id,f){if(id!==playId)return;const t=queue.shift();if(!t)return;playChunk(id,t,f==null?fonte:f)}
+function playChunk(id,t,f){
+  let failed=false;
+  const fail=()=>{if(failed||id!==playId)return;failed=true;
+    if(f+1<FONTI.length){playChunk(id,t,f+1);return}          // prova l'altra voce online
+    const rest=[t].concat(queue).join("");stopAll();speakDev(rest)};  // ultima possibilità: voce del dispositivo
+  player.onended=()=>{fonte=f;stato(true);playNext(id,f)};
+  player.onerror=fail;
+  player.src=FONTI[f](t);player.playbackRate=rateVal();try{player.preservesPitch=true}catch(e){}
+  const p=player.play();if(p&&p.then)p.then(()=>stato(true)).catch(e=>{if(e&&e.name==="AbortError")return;fail()})}
+function speak(t){stopAll();document.getElementById("noVoice").hidden=true;
+  if(src==="dev"){speakDev(t);return}
+  queue=chunks(t);playNext(playId,fonte)}
+const srcSel=document.getElementById("srcSel");srcSel.value=src;document.getElementById("voiceSel").hidden=src!=="dev";
+srcSel.onchange=()=>{src=srcSel.value;stato(src!=="dev");try{localStorage.setItem("hskk-audio-src",src)}catch(e){};document.getElementById("voiceSel").hidden=src!=="dev";stopAll()};
+document.getElementById("testBtn").onclick=()=>speak("你好！我们开始吧。");
+document.getElementById("testBtn2").onclick=()=>speak("你们好！你们听到了吗？");
+document.getElementById("copyBtn").onclick=()=>{const u=location.href;const b=document.getElementById("copyBtn");
+  (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{b.textContent="✅ Link copiato: incollalo nella chat di Meet"}).catch(()=>{prompt("Copia questo link:",u)})};
+const rate=document.getElementById("rate");rate.oninput=()=>{document.getElementById("rateLbl").textContent=rate.value+"×";player.playbackRate=rateVal()};
+
+function buildList(el,data,part){
+  data.forEach((d,i)=>{
+    const key=part+"-"+i,it=document.createElement("div");it.className="item"+(done[key]?" done":"");
+    const ans=part==="p2"?`<div class="model"><div class="h" style="font-size:1.15rem">${d[3]}</div><div class="py">${d[4]}</div></div>`:"";
+    it.innerHTML=`<div class="num">${i+1}</div>
+      <div class="ctrl"><button class="btn play">▶ Ascolta</button><button class="btn sh">Mostra</button><button class="btn ok" aria-pressed="${!!done[key]}">✓ Fatto</button>${part==="p2"?'<button class="btn ma">▶ Risposta</button>':""}</div>
+      <div class="reveal hidden-text" aria-hidden="true"><div class="h">${d[0]}</div><div class="py">${d[1]}</div><div class="it">${d[2]}</div>${ans}</div>`;
+    const rv=it.querySelector(".reveal"),sh=it.querySelector(".sh");
+    it.querySelector(".play").onclick=()=>speak(d[0]);
+    sh.onclick=()=>{const h=rv.classList.toggle("hidden-text");rv.setAttribute("aria-hidden",h);sh.textContent=h?"Mostra":"Nascondi"};
+    if(part==="p2")it.querySelector(".ma").onclick=()=>speak(d[3]);
+    const ok=it.querySelector(".ok");ok.onclick=()=>{done[key]=!done[key];ok.setAttribute("aria-pressed",done[key]);it.classList.toggle("done",done[key]);save()};
+    it.appendChild(whoRow(key));
+    el.appendChild(it)})
+}
+buildList(document.getElementById("list1"),P1,"p1");buildList(document.getElementById("list2"),P2,"p2");updScore();
+
+const q3=document.getElementById("q3");
+P3.forEach((d,i)=>{const c=document.createElement("div");c.className="card";
+  c.innerHTML=`<div class="eyebrow">Domanda ${i+1}</div><div class="zh" style="font-size:1.2rem;margin:4px 0">${d.q}</div><div class="py" style="color:var(--jade)">${d.py}</div><div class="note">${d.it}</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn play sel">Scegli</button><button class="btn nb">Mostra il blocco 1</button><button class="btn lm">▶ Tutto insieme</button></div>
+  <div class="blocks"></div>`;
+  let shown=0;const box=c.querySelector(".blocks"),nb=c.querySelector(".nb");
+  nb.onclick=()=>{if(shown>=5){box.innerHTML="";shown=0;nb.textContent="Mostra il blocco 1";return}
+    const b=d.b[shown],e=document.createElement("div");e.className="blk";
+    e.innerHTML=`<div class="bn">${shown+1}</div><div class="bl">${LBL[shown]}</div><div class="bz">${b[0]}</div><div><div class="bp">${b[1]}</div><div class="bi">${b[2]}</div></div>`;
+    e.onclick=()=>speak(b[0]);box.appendChild(e);shown++;nb.textContent=shown<5?"Mostra il blocco "+(shown+1):"Nascondi i blocchi"};
+  c.querySelector(".sel").onclick=()=>{document.getElementById("curQ").textContent=d.q;speak(d.q)};
+  c.querySelector(".lm").onclick=()=>speak(d.b.map(x=>x[0]).join(""));c.insertBefore(whoRow("p3-"+i),box);q3.appendChild(c)});
+
+const phr=document.getElementById("phr");
+PHR.forEach(p=>{const b=document.createElement("button");b.innerHTML=`<span class="zh">${p[0]}</span><small>${p[1]} · ${p[2]}</small>`;b.onclick=()=>speak(p[0].replace(/……/g,""));phr.appendChild(b)});
+
+let tid=null;const clock=document.getElementById("clock"),fill=document.getElementById("barFill"),phase=document.getElementById("phase");
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function run(total,label,cls){clearInterval(tid);let left=total;phase.textContent=label;clock.className="timer "+cls;clock.textContent=fmt(left);fill.style.width="0";
+  tid=setInterval(()=>{left--;clock.textContent=fmt(Math.max(left,0));fill.style.width=((total-left)/total*100)+"%";
+    if(left<=0){clearInterval(tid);phase.textContent=cls==="prep"?"Tempo di preparazione finito":"Tempo scaduto · 好！";if(cls==="prep")run(90,"Parla adesso","speak")}},1000)}
+document.getElementById("prepBtn").onclick=()=>run(90,"Preparazione","prep");
+document.getElementById("speakBtn").onclick=()=>run(90,"Parla adesso","speak");
+document.getElementById("stopBtn").onclick=()=>{clearInterval(tid);phase.textContent="Fermato"};
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  document.querySelectorAll("[role=tabpanel]").forEach(s=>s.hidden=s.id!==b.dataset.tab);
+  stopAll()});
+const rb=document.getElementById("resetPts");rb.onclick=()=>{if(rb.dataset.arm!=="1"){rb.dataset.arm="1";rb.textContent="Sicura? Tocca ancora";setTimeout(()=>{rb.dataset.arm="";rb.textContent="Azzera i punti"},3000);return}
+  pts={};rb.dataset.arm="";rb.textContent="Azzera i punti";document.querySelectorAll(".who").forEach(fillWho);savePts()};
+renderRes();
+</script>
+</body></html>
