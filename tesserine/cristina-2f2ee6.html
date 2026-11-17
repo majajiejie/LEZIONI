@@ -109,6 +109,7 @@ ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;
 .tappe[open] summary:after{content:" ▴"}
 .tappe ul{margin-top:8px}
 .prova{background:#333;color:#fff;text-align:center;font-weight:700;padding:6px;font-size:13px}
+.tappe.conc summary{background:#2f8f5b;color:#fff}.tappe.conc li:before{content:"🏆";background:none;font-size:15px}
 </style>
 </head>
 <body>
@@ -139,7 +140,7 @@ ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;
     <div style="font-family:Fredoka,sans-serif;font-weight:700;color:var(--rosso-scuro);font-size:18px">Il mio percorso 🐼</div>
     <div class="strada" aria-hidden="true"><div class="via"></div><div class="fatto" id="fatto"></div><div class="pd" id="pd">🐼</div><div class="arr">🏆</div></div>
     <div class="estremi"><span>Partenza</span><b id="traguardo"></b></div>
-    <div class="bottoni"><details class="tappe"><summary id="riass"></summary><ul class="sofare" id="sofare"></ul></details><details class="tappe lab" id="boxlab" hidden><summary>🎨 Laboratori</summary><ul class="sofare" id="lab"></ul></details></div>
+    <div class="bottoni"><details class="tappe"><summary id="riass"></summary><ul class="sofare" id="sofare"></ul></details><details class="tappe lab" id="boxlab" hidden><summary>🎨 Laboratori</summary><ul class="sofare" id="lab"></ul></details><details class="tappe conc" id="boxconc" hidden><summary>🏆 Concorsi</summary><ul class="sofare" id="conc"></ul></details></div>
   </div>
 
   <h2>Compiti da fare</h2>
@@ -237,15 +238,19 @@ const DATI_APERTI = {
   "avanzamento": 0.28
  },
  "so_fare": [
+  "Salutare",
   "Dire il mio nome",
   "Contare fino a 10",
-  "Usare i pronomi io, tu, lui (我 你 他)",
-  "Descrivere con gli aggettivi (大 小 长 短)",
+  "Usare i pronomi io, tu, lui",
+  "Descrivere con gli aggettivi",
   "Dire se ho freddo o caldo",
   "Dire se sono felice, triste o arrabbiato"
  ],
  "laboratori": [
   "Disegniamo un panda e il bambù"
+ ],
+ "concorsi": [
+  "Caccia alla Cina (concorso fotografico)"
  ]
 };
 /*DATI-FINE*/
@@ -308,6 +313,8 @@ $("pd").style.left = "calc(" + (av*100) + "% - " + (av*34) + "px)";
 const SF = DATI.so_fare || [];
 $("riass").textContent = "🌟 Cosa so fare";
 $("sofare").innerHTML = SF.map(s=>'<li>'+esc(s)+'</li>').join("");
+const CO = DATI.concorsi || [];
+if (CO.length) { $("conc").innerHTML = CO.map(s=>'<li>'+esc(s)+'</li>').join(""); $("boxconc").hidden = false; }
 const LB = DATI.laboratori || [];
 if (LB.length) { $("lab").innerHTML = LB.map(s=>'<li>'+esc(s)+'</li>').join(""); $("boxlab").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
