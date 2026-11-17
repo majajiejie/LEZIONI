@@ -102,10 +102,10 @@ ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;
 .strada .arr{position:absolute;right:0;top:22px;font-size:34px}
 .estremi{display:flex;justify-content:space-between;font-size:13px;color:var(--tenue);font-weight:600}
 .estremi b{color:var(--rosso-scuro)}
-.tappe{margin-top:12px;border-top:1px dashed var(--linea);padding-top:10px}
-.tappe summary{cursor:pointer;font-weight:700;color:var(--rosso-scuro);list-style:none}
+.tappe{margin-top:12px;text-align:center}.tappe ul{text-align:left}
+.tappe summary{cursor:pointer;font-weight:700;list-style:none;display:inline-block;background:var(--rosso);color:#fff;border-radius:999px;padding:8px 18px}
 .tappe summary::-webkit-details-marker{display:none}
-.tappe summary:after{content:" ▾";color:var(--tenue)}
+.tappe summary:after{content:" ▾"}
 .tappe[open] summary:after{content:" ▴"}
 .tappe ul{margin-top:8px}
 .prova{background:#333;color:#fff;text-align:center;font-weight:700;padding:6px;font-size:13px}
@@ -326,7 +326,7 @@ $("traguardo").textContent = T.nome || "Primo traguardo";
 $("fatto").style.width = "calc(" + (av*100) + "% - " + (av*34) + "px)";
 $("pd").style.left = "calc(" + (av*100) + "% - " + (av*34) + "px)";
 const SF = DATI.so_fare || [];
-$("riass").textContent = "🐼".repeat(Math.min(SF.length,10)) + "  Ora so… (" + SF.length + ")";
+$("riass").textContent = "🌟 Cosa so fare";
 $("sofare").innerHTML = SF.map(s=>'<li>'+esc(s)+'</li>').join("");
 $("pinbox").hidden = true; $("app").hidden = false;
 }
