@@ -74,6 +74,41 @@ a.mat:after{content:"→";color:var(--rosso)}
 .pin .btn{background:var(--rosso);color:#fff}
 .errore{color:var(--rosso);font-weight:700;min-height:24px;margin-top:10px}
 .esci{background:none;border:0;color:var(--tenue);font:600 13px Nunito,sans-serif;text-decoration:underline;cursor:pointer;display:block;margin:10px auto 0}
+.percorso{position:relative;padding:4px 0}
+.tappa{display:flex;align-items:center;gap:12px;padding:8px 0;position:relative}
+.tappa:not(:last-child):after{content:"";position:absolute;left:23px;top:52px;height:calc(100% - 44px);border-left:3px dotted var(--linea)}
+.tappa.fatta:not(:last-child):after{border-left:3px solid var(--oro)}
+.bollo{flex:0 0 48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 22px Fredoka,sans-serif;background:#f3ece2;color:#c9b8a6;border:3px solid var(--linea)}
+.fatta .bollo{background:#fff;border-color:var(--rosso);transform:rotate(-10deg);font-size:26px;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 4px rgba(200,16,46,.35)}
+.qui .bollo{animation:pulsa 1.6s infinite}
+@keyframes pulsa{0%,100%{box-shadow:0 0 0 0 rgba(200,16,46,.35)}50%{box-shadow:0 0 0 8px rgba(200,16,46,0)}}
+.tappa .t{font-family:Fredoka,sans-serif;font-weight:600;font-size:17px}
+.tappa .s{font-size:13px;color:var(--tenue)}
+.tappa:not(.fatta):not(.qui) .t{color:#b9a898}
+.qui .t:after{content:" · ultima tappa";color:var(--rosso);font-size:13px}
+ruby{ruby-position:over}rt{font-size:11px;color:var(--tenue);font-family:Nunito,sans-serif}
+.barra{height:14px;background:#f3ece2;border-radius:10px;overflow:hidden;margin:6px 0 4px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--oro),var(--rosso));border-radius:10px}
+ul.sofare{list-style:none;margin:0;padding:0}
+ul.sofare li{padding:7px 0 7px 30px;position:relative;font-weight:600}
+ul.sofare li:before{content:"✓";position:absolute;left:4px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--verde);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
+.prossima{background:#fff5f6;border:2px dashed var(--rosso);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.prossima b{font-family:Fredoka,sans-serif;color:var(--rosso-scuro)}
+.strada{position:relative;height:74px;margin:6px 4px 2px}
+.strada .via{position:absolute;left:0;right:34px;top:44px;height:12px;border-radius:8px;background:repeating-linear-gradient(90deg,#f0e4d2 0 14px,#f7efe3 14px 22px)}
+.strada .fatto{position:absolute;left:0;top:44px;height:12px;border-radius:8px;background:linear-gradient(90deg,var(--oro),var(--rosso))}
+.strada .pd{position:absolute;top:4px;font-size:32px;transform:translateX(-50%);animation:salta 2.4s ease-in-out infinite}
+@keyframes salta{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+.strada .arr{position:absolute;right:0;top:22px;font-size:34px}
+.estremi{display:flex;justify-content:space-between;font-size:13px;color:var(--tenue);font-weight:600}
+.estremi b{color:var(--rosso-scuro)}
+.bottoni{text-align:center;margin-top:12px}.tappe{display:inline-block;margin:4px;vertical-align:top}.tappe[open]{display:block;margin:8px 0}.tappe.lab summary{background:var(--oro);color:#3a2a22}.tappe.lab li:before{content:"🎨";background:none;font-size:15px}.tappe ul{text-align:left}
+.tappe summary{cursor:pointer;font-weight:700;list-style:none;display:inline-block;background:var(--rosso);color:#fff;border-radius:999px;padding:8px 18px}
+.tappe summary::-webkit-details-marker{display:none}
+.tappe summary:after{content:" ▾"}
+.tappe[open] summary:after{content:" ▴"}
+.tappe ul{margin-top:8px}
+.prova{background:#333;color:#fff;text-align:center;font-weight:700;padding:6px;font-size:13px}
 </style>
 </head>
 <body>
@@ -99,6 +134,13 @@ a.mat:after{content:"→";color:var(--rosso)}
     <div class="agg" id="agg"></div>
   </div>
   <div id="avviso"></div>
+
+  <div class="box" style="margin-top:18px">
+    <div style="font-family:Fredoka,sans-serif;font-weight:700;color:var(--rosso-scuro);font-size:18px">Il mio percorso 🐼</div>
+    <div class="strada" aria-hidden="true"><div class="via"></div><div class="fatto" id="fatto"></div><div class="pd" id="pd">🐼</div><div class="arr">🏆</div></div>
+    <div class="estremi"><span>Partenza</span><b id="traguardo"></b></div>
+    <div class="bottoni"><details class="tappe"><summary id="riass"></summary><ul class="sofare" id="sofare"></ul></details><details class="tappe lab" id="boxlab" hidden><summary>🎨 Laboratori</summary><ul class="sofare" id="lab"></ul></details></div>
+  </div>
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
@@ -137,7 +179,7 @@ a.mat:after{content:"→";color:var(--rosso)}
 const DATI_APERTI = {
  "nome": "Cristina",
  "rimanenti": 2,
- "aggiornata": "11 novembre 2026",
+ "aggiornata": "17 novembre 2026",
  "compiti": {
   "data": "11/11/2026",
   "testo": "Scrivi almeno 3 volte ogni parola nuova. Qui sotto, nei Materiali, trovi l’ordine dei tratti di 冷 热 很."
@@ -190,7 +232,22 @@ const DATI_APERTI = {
     "prezzo": 150
    }
   ]
- }
+ },
+ "traguardo": {
+  "nome": "Panda apprendista 🏆",
+  "avanzamento": 0.28
+ },
+ "so_fare": [
+  "Dire il mio nome",
+  "Contare fino a 10",
+  "Usare i pronomi io, tu, lui (我 你 他)",
+  "Descrivere con gli aggettivi (大 小 长 短)",
+  "Dire se ho freddo o caldo",
+  "Dire se sono felice, triste o arrabbiato"
+ ],
+ "laboratori": [
+  "Disegniamo un panda e il bambù"
+ ]
 };
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
@@ -244,6 +301,16 @@ const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
 link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
+const T = DATI.traguardo || {};
+const av = Math.max(.04, Math.min(.96, T.avanzamento || 0));
+$("traguardo").textContent = T.nome || "Primo traguardo";
+$("fatto").style.width = "calc(" + (av*100) + "% - " + (av*34) + "px)";
+$("pd").style.left = "calc(" + (av*100) + "% - " + (av*34) + "px)";
+const SF = DATI.so_fare || [];
+$("riass").textContent = "🌟 Cosa so fare";
+$("sofare").innerHTML = SF.map(s=>'<li>'+esc(s)+'</li>').join("");
+const LB = DATI.laboratori || [];
+if (LB.length) { $("lab").innerHTML = LB.map(s=>'<li>'+esc(s)+'</li>').join(""); $("boxlab").hidden = false; }
 $("pinbox").hidden = true; $("app").hidden = false;
 }
 mostra(DATI_APERTI);
