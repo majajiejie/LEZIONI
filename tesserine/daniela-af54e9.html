@@ -49,6 +49,7 @@ footer{text-align:center;color:var(--tenue);font-size:13px;margin-top:34px}
 .compito small{display:block;color:var(--tenue);font-weight:600;font-size:13px;margin-bottom:4px}
 .btn.wa{background:#25d366;color:#fff}
 .btn.cr{background:#1e8e3e;color:#fff}
+.btn.meet{background:#1a73e8;color:#fff;margin:14px 0 4px}
 .btn.wa.chiaro{background:#fff;color:#128c4a;border:2px solid #25d366}
 .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
 ul.diario{list-style:none;margin:0;padding:0}
@@ -104,6 +105,7 @@ a.mat:after{content:"→";color:var(--rosso)}
     <div class="agg" id="agg"></div>
     <div class="agg" id="credito" hidden></div>
   </div>
+  <a class="btn meet" id="meet" target="_blank" rel="noopener" hidden>🎥 Entra in lezione (Google Meet)</a>
   <div id="avviso"></div>
 
   <h2>Compiti da fare</h2>
@@ -224,7 +226,8 @@ const DATI_APERTI = {
    "livello": "Episodio in cinese · ascolto",
    "url": "https://open.spotify.com/episode/4Ewn2qkEVpoia1FwHsrrOK"
   }
- ]
+ ],
+ "meet": "https://meet.google.com/kzf-iazd-xkr"
 };
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
@@ -274,6 +277,7 @@ $("compiti").innerHTML = DATI.compiti_fisso
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!C.gruppo_compiti && (!(cp && cp.testo) || DATI.compiti_fisso)) $("mandacompiti").hidden = true;
+if (DATI.meet) { $("meet").href = DATI.meet; $("meet").hidden = false; }
 if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
