@@ -84,6 +84,12 @@ h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
 .target .tok{background:var(--blu)}
 .ordhint{font-size:1.1rem;color:#555}
 .ordok{background:#e7f7ea}
+.gq .o button.sol{border:2px solid var(--bordeaux);border-radius:20px;padding:6px 14px;font-weight:700;cursor:pointer;background:var(--crema);color:var(--bordeaux);font-size:.9rem;font-family:"Montserrat","Segoe UI",sans-serif;margin-left:auto}
+.gq .o{align-items:center}
+.btn.sol2{background:var(--crema);color:var(--bordeaux)}
+.solbox{margin-top:10px;background:var(--crema);border-radius:12px;padding:10px 14px;font-size:1.7rem;display:none}
+.solbox.show{display:block}
+.solbox small{display:block;font-size:.9rem;color:#666;font-family:"Montserrat","Segoe UI",sans-serif}
 footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:.9}
 </style>
 </head>
@@ -109,7 +115,7 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
   <p class="istr">Gira due carte: trova la coppia <b>carattere ↔ significato</b>.</p>
   <div class="grid" id="memGrid"></div>
   <div class="fb" id="memFb"></div>
-  <p class="center" style="margin-top:12px"><button class="btn light" onclick="initMemory()">🔄 Nuova partita</button></p>
+  <p class="center" style="margin-top:12px"><button class="btn sol2" onclick="solveMemory()">👀 Soluzione</button> <button class="btn light" onclick="initMemory()">🔄 Nuova partita</button></p>
 </section>
 
 <!-- 2 QUIZ -->
@@ -128,7 +134,7 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
   <div class="tabs" id="fillTabs"></div>
   <div class="bank cn" id="fillBank"></div>
   <div id="fillList"></div>
-  <p class="center"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn light" onclick="renderFill()">🔄 Ricomincia</button></p>
+  <p class="center"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button> <button class="btn light" onclick="renderFill()">🔄 Ricomincia</button></p>
   <div class="fb" id="fillFb"></div>
 </section>
 
@@ -165,7 +171,7 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
     <div class="ordhint" id="oHint"></div>
     <div class="target cn" id="oTarget"></div>
     <div class="pool cn" id="oPool"></div>
-    <p class="center" style="margin-top:14px"><button class="btn" onclick="checkOrder()">✔ Controlla</button> <button class="btn light" id="oNext" onclick="nextOrder()">Avanti ➜</button></p>
+    <p class="center" style="margin-top:14px"><button class="btn" onclick="checkOrder()">✔ Controlla</button> <button class="btn sol2" onclick="solveOrder()">👀 Soluzione</button> <button class="btn light" id="oNext" onclick="nextOrder()">Avanti ➜</button></p>
   </div>
   <div class="fb" id="oFb"></div>
 </section>
@@ -205,9 +211,9 @@ document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
  window.scrollTo({top:$("nav").offsetTop-10,behavior:"smooth"})});
 
 /* ---------- 1 MEMORY ---------- */
-let memOpen=[],memLock=false,memPairs=0;
+let memOpen=[],memLock=false,memPairs=0,memPick=[];
 function initMemory(){
- const pick=shuffle(W).slice(0,8);memPairs=0;memOpen=[];
+ const pick=shuffle(W).slice(0,8);memPick=pick;memPairs=0;memOpen=[];
  const cards=shuffle(pick.flatMap((w,i)=>[{id:i,t:w[0],cn:1,w},{id:i,t:w[2],cn:0,w}]));
  $("memGrid").innerHTML="";$("memFb").textContent="";
  cards.forEach(c=>{const d=document.createElement("div");d.className="card";d.innerHTML='<span class="back">?</span>';
@@ -221,6 +227,9 @@ function initMemory(){
      setTimeout(()=>{[a,b].forEach(x=>{x.d.className="card";x.d.innerHTML='<span class="back">?</span>'});memOpen=[];memLock=false},900)}}};
   $("memGrid").appendChild(d)})}
 initMemory();
+function solveMemory(){
+ $("memGrid").querySelectorAll(".card").forEach(d=>{if(!d.classList.contains("done")){d.className="card";d.innerHTML='<span class="back">?</span>'}});memOpen=[];
+ $("memFb").innerHTML=memPick.map(w=>`<span class="cn">${w[0]}</span> ${py(w)} = ${w[2]}`).join("<br>")}
 
 /* ---------- 2 QUIZ ---------- */
 const tones={a:"āáǎà",e:"ēéěè",i:"īíǐì",o:"ōóǒò",u:"ūúǔù",ü:"ǖǘǚǜ"};
@@ -278,6 +287,11 @@ function checkFill(){const L=FILL[fillKey];let ok=0;
   if(!fillAns[i])return;if(fillAns[i].w===L[i][1]){s.classList.add("ok");ok++}else s.classList.add("no")});
  const full=ok===L.length;if(full)addStar(2);
  $("fillFb").innerHTML=full?`<span class="cn">${rnd(bravo)}</span> ${ok}/${L.length} — perfetto! 🎉`:`${ok}/${L.length} giuste. Tocca le parole rosse per cambiarle.`}
+function solveFill(){const L=FILL[fillKey];
+ $("fillList").querySelectorAll(".slot").forEach(s=>{const i=s.dataset.i;s.classList.remove("no");
+  if(!(fillAns[i]&&fillAns[i].w===L[i][1])){s.textContent=L[i][1];s.classList.add("ok")}});
+ $("fillBank").querySelectorAll(".chip").forEach(c=>c.classList.add("used"));
+ $("fillFb").textContent="Ecco la soluzione: leggi le frasi ad alta voce! 📖"}
 renderTabs();renderFill();
 
 /* ---------- 4 GRAMMATICA ---------- */
@@ -293,8 +307,11 @@ const GQ=[
  ["＿＿你去不去，我都要去参加招聘会。",["不管","首先","挺"],"不管","不管 + V不V: «che tu vada o no, io ci vado comunque»."],
  ["不管是上课还是上班，＿＿都非常重要。",["准时","正式","材料"],"准时","准时 = puntuale / essere puntuali."]
 ];
-$("gramList").innerHTML=GQ.map((q,i)=>`<div class="gq"><div class="s cn">${i+1}. ${q[0]}</div><div class="o cn">${shuffle(q[1]).map(o=>`<button data-q="${i}">${o}</button>`).join("")}</div><div class="exp" id="gexp${i}">${q[3]}</div></div>`).join("");
-$("gramList").querySelectorAll("button").forEach(b=>b.onclick=()=>{const q=GQ[b.dataset.q],box=b.parentElement;
+$("gramList").innerHTML=GQ.map((q,i)=>`<div class="gq"><div class="s cn">${i+1}. ${q[0]}</div><div class="o cn">${shuffle(q[1]).map(o=>`<button data-q="${i}">${o}</button>`).join("")}<button class="sol" data-g="${i}">👀 Soluzione</button></div><div class="exp" id="gexp${i}">${q[3]}</div></div>`).join("");
+$("gramList").querySelectorAll(".sol").forEach(b=>b.onclick=()=>{const q=GQ[b.dataset.g],box=b.parentElement;box.dataset.done=1;
+ box.querySelectorAll("button[data-q]").forEach(x=>{x.classList.remove("no");if(x.textContent===q[2])x.classList.add("ok")});
+ $("gexp"+b.dataset.g).classList.add("show");say(q[0].replace("＿＿",q[2]))});
+$("gramList").querySelectorAll("button[data-q]").forEach(b=>b.onclick=()=>{const q=GQ[b.dataset.q],box=b.parentElement;
  if(box.dataset.done)return;
  if(b.textContent===q[2]){b.classList.add("ok");box.dataset.done=1;addStar();$("gexp"+b.dataset.q).classList.add("show");say(q[0].replace("＿＿",q[2]))}
  else{b.classList.add("no");setTimeout(()=>b.classList.remove("no"),700)}});
@@ -310,8 +327,11 @@ const LQ=[
  ["要多休息，＿＿，还要多喝水。",["另外","另"],["另外"],"Congiunzione a inizio frase con la virgola: <b>另外，……</b>"],
  ["这个人不合适，你还是＿＿找别人吧。",["另外","另"],["另"],"另 + verbo monosillabico: <b>另找</b>."]
 ];
-$("lingList").innerHTML=LQ.map((q,i)=>`<div class="gq"><div class="s cn">${i+1}. ${q[0]}</div><div class="o cn">${q[1].map(o=>`<button data-q="${i}">${o}</button>`).join("")}</div><div class="exp" id="lexp${i}">${q[3]}</div></div>`).join("");
-$("lingList").querySelectorAll("button").forEach(b=>b.onclick=()=>{const q=LQ[b.dataset.q],box=b.parentElement;
+$("lingList").innerHTML=LQ.map((q,i)=>`<div class="gq"><div class="s cn">${i+1}. ${q[0]}</div><div class="o cn">${q[1].map(o=>`<button data-q="${i}">${o}</button>`).join("")}<button class="sol" data-l="${i}">👀 Soluzione</button></div><div class="exp" id="lexp${i}">${q[3]}</div></div>`).join("");
+$("lingList").querySelectorAll(".sol").forEach(b=>b.onclick=()=>{const q=LQ[b.dataset.l],box=b.parentElement;box.dataset.done=1;
+ box.querySelectorAll("button[data-q]").forEach(x=>{x.classList.remove("no");if(q[2].includes(x.textContent))x.classList.add("ok")});
+ $("lexp"+b.dataset.l).classList.add("show")});
+$("lingList").querySelectorAll("button[data-q]").forEach(b=>b.onclick=()=>{const q=LQ[b.dataset.q],box=b.parentElement;
  if(box.dataset.done)return;
  if(q[2].includes(b.textContent)){b.classList.add("ok");box.dataset.done=1;addStar();$("lexp"+b.dataset.q).classList.add("show");
   if(q[2].length>1)box.querySelectorAll("button").forEach(x=>x.classList.add("ok"))}
@@ -344,6 +364,9 @@ function checkOrder(){const q=OQ[oOrder[oi]];
  if(q.a.some(a=>a.join()===oSeq.join())){if(!oDone)addStar();oDone=true;$("oTarget").classList.add("ordok");
   $("oFb").innerHTML=`<span class="cn">${rnd(bravo)}</span> ✅`;say(oSeq.map(i=>q.t[i]).join(""))}
  else $("oFb").textContent="Non ancora… riprova! 💪"}
+function solveOrder(){const q=OQ[oOrder[oi]];oDone=true;
+ $("oPool").innerHTML="";$("oTarget").innerHTML=q.a[0].map(i=>`<span class="tok">${q.t[i]}</span>`).join("");$("oTarget").classList.add("ordok");
+ $("oFb").textContent=q.a.length>1?"Ecco la soluzione (si può dire anche in un altro ordine).":"Ecco la soluzione!";say(q.a[0].map(i=>q.t[i]).join(""))}
 function nextOrder(){oi=(oi+1)%OQ.length;renderOrder()}
 renderOrder();
 </script>
