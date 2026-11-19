@@ -31,7 +31,7 @@ h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
 /* memory */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 @media(max-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
-.card{aspect-ratio:1.2;border-radius:14px;background:var(--blu);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;font-weight:700;padding:6px;font-size:1.05rem;user-select:none;transition:transform .15s}
+.card{aspect-ratio:1.7;border-radius:14px;background:var(--blu);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;font-weight:700;padding:6px;font-size:1.05rem;user-select:none;transition:transform .15s}
 .card .back{font-size:1.8rem;color:#fff}
 .card.open{background:#fff}
 .card.open.cnc{font-size:3rem}
@@ -86,7 +86,7 @@ h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
 .ordok{background:#e7f7ea}
 .gq .o button.sol{border:2px solid var(--bordeaux);border-radius:20px;padding:6px 14px;font-weight:700;cursor:pointer;background:var(--crema);color:var(--bordeaux);font-size:.9rem;font-family:"Montserrat","Segoe UI",sans-serif;margin-left:auto}
 .gq .o{align-items:center}
-.btn.sol2{background:var(--crema);color:var(--bordeaux)}
+.btn.sol2{background:var(--giallo);color:#222;font-size:1.05rem;padding:11px 22px}
 .solbox{margin-top:10px;background:var(--crema);border-radius:12px;padding:10px 14px;font-size:1.7rem;display:none}
 .solbox.show{display:block}
 .solbox small{display:block;font-size:.9rem;color:#666;font-family:"Montserrat","Segoe UI",sans-serif}
@@ -113,9 +113,9 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
 <section id="s1" class="on">
   <h2>Memory delle parole</h2>
   <p class="istr">Gira due carte: trova la coppia <b>carattere ↔ significato</b>.</p>
+  <p class="center" style="margin-bottom:14px"><button class="btn sol2" onclick="solveMemory()">👀 Soluzione</button> <button class="btn light" onclick="initMemory()">🔄 Nuova partita</button></p>
   <div class="grid" id="memGrid"></div>
   <div class="fb" id="memFb"></div>
-  <p class="center" style="margin-top:12px"><button class="btn sol2" onclick="solveMemory()">👀 Soluzione</button> <button class="btn light" onclick="initMemory()">🔄 Nuova partita</button></p>
 </section>
 
 <!-- 2 QUIZ -->
@@ -133,6 +133,7 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
   <p class="istr">Tocca una parola, poi tocca lo spazio vuoto. Poi premi «Controlla».</p>
   <div class="tabs" id="fillTabs"></div>
   <div class="bank cn" id="fillBank"></div>
+  <p class="center" style="margin-bottom:14px"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button></p>
   <div id="fillList"></div>
   <p class="center"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button> <button class="btn light" onclick="renderFill()">🔄 Ricomincia</button></p>
   <div class="fb" id="fillFb"></div>
