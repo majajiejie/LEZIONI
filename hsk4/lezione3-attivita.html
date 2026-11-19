@@ -63,6 +63,9 @@ h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
 .slot{display:inline-block;min-width:100px;border-bottom:3px dashed var(--bordeaux);text-align:center;cursor:pointer;padding:0 6px;margin:0 3px;font-weight:700;color:var(--blu-scuro)}
 .slot.ok{border-bottom:3px solid var(--verde);color:var(--verde)}
 .slot.no{border-bottom:3px solid var(--rosso);color:var(--rosso)}
+.pyl{display:block;font-size:1.05rem;color:var(--bordeaux);line-height:1.4;margin-left:1.6rem}
+.pyslot{font-weight:700;color:var(--blu-scuro)}
+.nopy .pyl{display:none}
 .trad{display:block;font-size:.95rem;color:#666;line-height:1.3;font-family:inherit}
 /* grammar */
 .gq{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px}
@@ -133,7 +136,7 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
   <p class="istr">Tocca una parola, poi tocca lo spazio vuoto. Poi premi «Controlla».</p>
   <div class="tabs" id="fillTabs"></div>
   <div class="bank cn" id="fillBank"></div>
-  <p class="center" style="margin-bottom:14px"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button></p>
+  <p class="center" style="margin-bottom:14px"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button> <button class="btn light" id="pyBtn" onclick="togglePy()">🔤 Nascondi pinyin</button></p>
   <div id="fillList"></div>
   <p class="center"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button> <button class="btn light" onclick="renderFill()">🔄 Ricomincia</button></p>
   <div class="fb" id="fillFb"></div>
@@ -273,13 +276,24 @@ const FILL={
  "Testo 3":[["我一毕业就去上海当","律师","了。","Appena laureata sono andata a Shanghai a fare l'avvocato."],["我学的就是法律","专业","。","Ho studiato proprio giurisprudenza."],["","另外","，收入也不错。","Inoltre anche lo stipendio è buono."],["这份工作的","收入","很高。","Il reddito di questo lavoro è alto."],["星期天","咱们","同学聚会。","Domenica noi compagni di classe ci ritroviamo."],["这次来北京，时间","安排","得很紧张。","Questa volta a Pechino ho un programma molto fitto."]],
  "Testi 4 e 5":[["面试要穿","正式","的衣服。","Al colloquio bisogna vestirsi in modo formale."],["这会给面试者","留","下一个好的印象。","Questo lascia una buona impressione a chi fa il colloquio."],["最重要的是回答问题要","诚实","。","La cosa più importante è rispondere con sincerità."],["第一印象会影响他们对你的","判断","。","La prima impressione influenza il loro giudizio su di te."],["给第一次见面的","顾客","留下好的印象。","Lasciare una buona impressione al cliente che incontri per la prima volta."],["不管是上课还是上班，","准时","都非常重要。","Che sia a lezione o al lavoro, essere puntuali è importantissimo."],["他今天晚上有个","约会","。","Stasera ha un appuntamento."],["第一印象如果不好，想","改变","却很困难。","Se la prima impressione è negativa, cambiarla è difficile."]]
 };
+const FPY={
+ "Testo 1":[["Tāmen wèn de wèntí dōu","róngyì de."],["Jiùshì wǒ yǒudiǎnr","."],["Miànshì de shíhou, yídìng yào duì zìjǐ yǒu","."],["Yào xiāngxìn zìjǐ de","."],["Xuéxiào tǐyùguǎn hái yǒu yí ge","huì."],["Zhè cì zhāopìnhuì","de gōngzuò jīhuì hěn duō."]],
+ "Testo 2":[["Zhè cì zhāopìn bú shì Xiǎo Lǐ","ma?"],["","shì Xiǎo Lǐ fùzé de."],["Zhè cì","de rén duō ma?"],["Zhè shì tāmen de",", nín kànkan."],["Tāmen de nénglì dōu bǐjiào","wǒmen de yāoqiú."],["Nǐ","tāmen xià zhōuyī lái wǒ bàngōngshì ba."]],
+ "Testo 3":[["Wǒ yí bìyè jiù qù Shànghǎi dāng","le."],["Wǒ xué de jiù shì fǎlǜ","."],["",", shōurù yě búcuò."],["Zhè fèn gōngzuò de","hěn gāo."],["Xīngqītiān","tóngxué jùhuì."],["Zhè cì lái Běijīng, shíjiān","de hěn jǐnzhāng."]],
+ "Testi 4 e 5":[["Miànshì yào chuān","de yīfu."],["Zhè huì gěi miànshìzhě","xià yí ge hǎo de yìnxiàng."],["Zuì zhòngyào de shì huídá wèntí yào","."],["Dì-yī yìnxiàng huì yǐngxiǎng tāmen duì nǐ de","."],["Gěi dì-yī cì jiànmiàn de","liúxià hǎo de yìnxiàng."],["Bùguǎn shì shàngkè háishi shàngbān,","dōu fēicháng zhòngyào."],["Tā jīntiān wǎnshang yǒu ge","."],["Dì-yī yìnxiàng rúguǒ bù hǎo, xiǎng","què hěn kùnnan."]]
+};
+let fillPy=true;
+const wordPy=(w,first)=>{const x=W.find(v=>v[0]===w);let r=x?py(x):"";return first?r.charAt(0).toUpperCase()+r.slice(1):r};
+function pyLine(i){const [a,b]=FPY[fillKey][i];return `${a}${a?" ":""}<span class="pyslot" data-i="${i}">＿＿</span>${/^[.,?!]/.test(b)?"":" "}${b}`}
+function showPy(i){const el=$("fillList").querySelector(`.pyslot[data-i="${i}"]`);if(el)el.textContent=wordPy(FILL[fillKey][i][1],!FPY[fillKey][i][0])}
+function togglePy(){fillPy=!fillPy;$("fillList").classList.toggle("nopy",!fillPy);$("pyBtn").textContent=fillPy?"🔤 Nascondi pinyin":"🔤 Mostra pinyin"}
 let fillKey="Testo 1",fillSel=null,fillAns={};
 function renderTabs(){$("fillTabs").innerHTML=Object.keys(FILL).map(k=>`<button class="${k===fillKey?"on":""}" data-k="${k}">${k}</button>`).join("");
  $("fillTabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{fillKey=b.dataset.k;renderTabs();renderFill()})}
 function renderFill(){
  fillSel=null;fillAns={};$("fillFb").textContent="";const L=FILL[fillKey];
  $("fillBank").innerHTML=shuffle(L.map((x,i)=>({w:x[1],i}))).map(o=>`<span class="chip" data-w="${o.w}">${o.w}</span>`).join("");
- $("fillList").innerHTML=L.map((x,i)=>`<div class="frase"><span class="cn">${i+1}. ${x[0]}<span class="slot" data-i="${i}">&nbsp;</span>${x[2]}</span><span class="trad">${x[3]}</span></div>`).join("");
+ $("fillList").innerHTML=L.map((x,i)=>`<div class="frase"><span class="pyl">${pyLine(i)}</span><span class="cn">${i+1}. ${x[0]}<span class="slot" data-i="${i}">&nbsp;</span>${x[2]}</span><span class="trad">${x[3]}</span></div>`).join("");
  $("fillBank").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{if(c.classList.contains("used"))return;
   $("fillBank").querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");fillSel=c;say(c.dataset.w)});
  $("fillList").querySelectorAll(".slot").forEach(s=>s.onclick=()=>{const i=s.dataset.i;s.classList.remove("ok","no");
@@ -287,12 +301,12 @@ function renderFill(){
   if(fillSel){fillAns[i]={w:fillSel.dataset.w,chip:fillSel};s.textContent=fillSel.dataset.w;fillSel.classList.remove("sel");fillSel.classList.add("used");fillSel=null}})}
 function checkFill(){const L=FILL[fillKey];let ok=0;
  $("fillList").querySelectorAll(".slot").forEach(s=>{const i=s.dataset.i;s.classList.remove("ok","no");
-  if(!fillAns[i])return;if(fillAns[i].w===L[i][1]){s.classList.add("ok");ok++}else s.classList.add("no")});
+  if(!fillAns[i])return;if(fillAns[i].w===L[i][1]){s.classList.add("ok");ok++;showPy(i)}else s.classList.add("no")});
  const full=ok===L.length;if(full)addStar(2);
  $("fillFb").innerHTML=full?`<span class="cn">${rnd(bravo)}</span> ${ok}/${L.length} — perfetto! 🎉`:`${ok}/${L.length} giuste. Tocca le parole rosse per cambiarle.`}
 function solveFill(){const L=FILL[fillKey];
  $("fillList").querySelectorAll(".slot").forEach(s=>{const i=s.dataset.i;s.classList.remove("no");
-  if(!(fillAns[i]&&fillAns[i].w===L[i][1])){s.textContent=L[i][1];s.classList.add("ok")}});
+  if(!(fillAns[i]&&fillAns[i].w===L[i][1])){s.textContent=L[i][1];s.classList.add("ok")}showPy(i)});
  $("fillBank").querySelectorAll(".chip").forEach(c=>c.classList.add("used"));
  $("fillFb").textContent="Ecco la soluzione: leggi le frasi ad alta voce! 📖"}
 renderTabs();renderFill();
