@@ -256,8 +256,10 @@ function showQ(){
  else{label="Qual è il pinyin giusto?";main=`<div class="qmain cn">${w[0]}</div>`;correct=py(w);
   const s=new Set([correct]);let g=0;while(s.size<4&&g<60){const r=wrongTone(w[1]);if(r)s.add(r);g++}
   W.filter(x=>x!==w).forEach(x=>{if(s.size<4)s.add(py(x))});opts=shuffle([...s]);cnOpts=false}
- $("qBox").innerHTML=`<div class="qtype">${label}</div>${main}<div class="opts">${opts.map(o=>`<button class="opt ${cnOpts?"cnc cn":""}">${o}</button>`).join("")}</div>`;
- $("qBox").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+ $("qBox").innerHTML=`<div class="qtype">${label}</div>${main}<div class="opts">${opts.map(o=>`<button class="opt ${cnOpts?"cnc cn":""}">${o}</button>`).join("")}</div><p style="margin-top:16px"><button class="btn sol2" id="qSol">👀 Soluzione</button></p>`;
+ $("qSol").onclick=()=>{$("qSol").disabled=true;$("qBox").querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===correct)x.classList.add("ok")});
+  $("qFb").innerHTML=`<span class="cn">${w[0]}</span> = ${py(w)} · ${w[2]}`;say(w[0]);setTimeout(()=>{qi++;showQ()},2600)};
+ $("qBox").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{$("qSol").disabled=true;
   $("qBox").querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===correct)x.classList.add("ok")});
   if(b.textContent===correct){qScore++;addStar();$("qFb").innerHTML=`<span class="cn">${rnd(bravo)}</span>`}
   else{b.classList.add("no");$("qFb").innerHTML=`<span class="cn">${w[0]}</span> = ${py(w)} · ${w[2]}`}
