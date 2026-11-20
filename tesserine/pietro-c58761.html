@@ -74,6 +74,14 @@ a.mat:after{content:"→";color:var(--rosso)}
 .pin .btn{background:var(--rosso);color:#fff}
 .errore{color:var(--rosso);font-weight:700;min-height:24px;margin-top:10px}
 .esci{background:none;border:0;color:var(--tenue);font:600 13px Nunito,sans-serif;text-decoration:underline;cursor:pointer;display:block;margin:10px auto 0}
+.corso{margin:-12px 0 16px;font-weight:700;font-size:15px;opacity:.95}
+.extra{margin-top:30px}
+.extra .card2{background:#fff;border:2px solid var(--rosso);border-radius:20px;padding:18px}
+.extra .titolo{font-family:Fredoka,sans-serif;font-size:21px;font-weight:700;color:var(--rosso-scuro)}
+.extra .riga{display:flex;align-items:baseline;gap:10px;margin:6px 0 4px}
+.extra .n2{font-family:Fredoka,sans-serif;font-size:52px;font-weight:700;color:var(--rosso);line-height:1}
+.extra h3{font-family:Fredoka,sans-serif;font-size:16px;color:var(--rosso-scuro);margin:16px 0 6px}
+.extra .agg2{color:var(--tenue);font-size:13px}
 </style>
 </head>
 <body>
@@ -90,6 +98,7 @@ a.mat:after{content:"→";color:var(--rosso)}
   <div class="card">
     <div class="scuola">Chinese Academy · Maja Jiejie</div>
     <div class="nome" id="nome"></div>
+    <div class="corso" id="corso" hidden></div>
     <div class="cuore">
       <div class="label">Lezioni rimanenti</div>
       <div class="num" id="num"></div>
@@ -99,6 +108,7 @@ a.mat:after{content:"→";color:var(--rosso)}
     <div class="agg" id="agg"></div>
   </div>
   <div id="avviso"></div>
+  <div id="extra"></div>
 
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
@@ -173,7 +183,34 @@ const DATI_APERTI = {
     "prezzo": 510
    }
   ]
- }
+ },
+ "corso": "One-to-one · HSKK",
+ "corsi_extra": [
+  {
+   "titolo": "HSK2 3.0 · corso di gruppo",
+   "rimanenti": 24,
+   "durata": 45,
+   "aggiornata": "20 novembre 2026",
+   "compiti": {
+    "data": "20/11/2026",
+    "testo": "Libro HSK2 3.0, pagina 16 – testo sull'Università di Pechino:\n1. ascoltare l'audio del testo;\n2. ricopiare il testo sul quaderno solo in caratteri (senza pinyin);\n3. imparare a leggerlo e provare a esporlo a voce senza l'aiuto del pinyin."
+   },
+   "storico": [
+    {
+     "data": "20/11/2026",
+     "fatto": "Lezione 10: finita la lezione 2 del libro HSK2 3.0, fatti tutti i dialoghi.",
+     "assente": false
+    }
+   ],
+   "materiali": [],
+   "pacchetti": [
+    {
+     "lezioni": 34,
+     "prezzo": 342
+    }
+   ]
+  }
+ ]
 };
 /*DATI-FINE*/
 const $ = id => document.getElementById(id);
@@ -227,6 +264,20 @@ const M = DATI.materiali || [];
 if (M.length) { $("materiali").innerHTML = M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + esc(m.url) + '">' + esc(m.titolo) + '</a>').join(""); $("secmat").hidden = false; }
 link($("scrivi"), wa("Ciao Maja, sono la mamma/il papà di " + DATI.nome + ". "));
 if (C.gruppo_concorso) { $("concorso").href = C.gruppo_concorso; $("concorso").hidden = false; }
+if (DATI.corso) { $("corso").textContent = DATI.corso; $("corso").hidden = false; }
+const XE = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+$("extra").innerHTML = (DATI.corsi_extra || []).map(k => {
+  const n = k.rimanenti, cp = k.compiti || {}, st = k.storico || [], M = k.materiali || [];
+  let av = n <= 0 ? '<div class="avviso zero">Le lezioni di questo corso sono finite: scrivimi se vuoi rinnovare 🧧</div>' : n === 1 ? '<div class="avviso">Resta solo 1 lezione di questo corso 🏮</div>' : '';
+  const rin = (n <= 2 && k.pacchetti && k.pacchetti.length) ? '<h3>Rinnova il pacchetto</h3>' + k.pacchetti.map(p => '<div>' + p.lezioni + ' lezioni · <b class="prezzo">€ ' + String(p.prezzo).replace(".", ",") + '</b></div>').join("") + '<p class="nota">Puoi pagare con PayPal o bonifico come indicato in fondo alla pagina (causale: ' + XE(k.titolo) + ' - ' + XE(DATI.nome) + ').</p>' : '';
+  return '<div class="extra"><div class="card2"><div class="titolo">' + XE(k.titolo) + '</div>' +
+    '<div class="riga"><span class="n2">' + n + '</span><span class="sub">' + (n === 1 ? "lezione rimanente" : "lezioni rimanenti") + (k.durata ? " da " + k.durata + " minuti" : "") + '</span></div>' +
+    '<div class="agg2">Aggiornata il ' + XE(k.aggiornata || DATI.aggiornata) + '</div>' + av +
+    '<h3>Compiti da fare</h3>' + (cp.testo ? '<div class="compito">' + (cp.data ? '<small>Dalla lezione del ' + XE(cp.data) + '</small>' : '') + XE(cp.testo) + '</div>' : '<div class="vuoto">Nessun compito per ora 🎉</div>') +
+    '<h3>Ultima lezione</h3><ul class="diario">' + st.slice().reverse().map(s => '<li><div class="d">' + XE(s.data) + (s.assente ? ' · assente' : '') + '</div><div>' + XE(s.fatto || "") + '</div></li>').join("") + '</ul>' +
+    (M.length ? '<h3>Materiali</h3>' + M.map(m => '<a class="mat" target="_blank" rel="noopener" href="' + XE(m.url) + '">' + XE(m.titolo) + '</a>').join("") : '') + rin +
+    '</div></div>';
+}).join("");
 $("pinbox").hidden = true; $("app").hidden = false;
 }
 mostra(DATI_APERTI);
