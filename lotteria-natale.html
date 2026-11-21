@@ -94,17 +94,23 @@
   .covers.q{grid-template-columns:repeat(3,1fr)}
 
   /* prezzi */
-  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .ticket{position:relative;background:linear-gradient(160deg,#fff8ec,#f5e6c8);color:var(--ink);border-radius:14px;padding:16px 6px;text-align:center;cursor:pointer;transition:transform .2s;border:3px solid transparent}
+  .prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .ticket{position:relative;background:linear-gradient(160deg,#fff8ec,#f5e6c8);color:var(--ink);border-radius:14px;padding:16px 4px 12px;text-align:center;transition:transform .2s;border:3px solid transparent}
   .ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--bg);transform:translateY(-50%)}
   .ticket::before{left:-10px}.ticket::after{right:-10px}
-  .ticket:hover{transform:translateY(-3px)}
-  .ticket .n{font-family:'Fredoka';font-weight:700;font-size:clamp(30px,7vw,42px);color:var(--red);line-height:1}
+    .ticket .n{font-family:'Fredoka';font-weight:700;font-size:clamp(30px,7vw,42px);color:var(--red);line-height:1}
   .ticket .w{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
   .ticket .p{margin-top:8px;border-top:2px dashed #d8c6a0;padding-top:8px;font-family:'Fredoka';font-size:22px;font-weight:600}
   .ticket .save{font-size:11px;color:#2b8a3e;font-weight:800;min-height:14px}
   .ticket.best{border-color:var(--gold)}
 
+  .qrow{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:10px}
+  .qrow button{width:30px;height:30px;flex:0 0 30px;padding:0;border-radius:50%;border:0;background:var(--red);color:#fff;font-size:20px;font-weight:800;cursor:pointer;line-height:1;box-shadow:0 3px 0 var(--red2)}
+  .qrow button:active{transform:translateY(2px);box-shadow:none}
+  .qrow .qm{background:#cfc3a8;box-shadow:0 3px 0 #a99c80;color:var(--ink)}
+  .qrow output{font-family:'Fredoka';font-size:24px;font-weight:700;min-width:26px}
+  .ticket.sel{border-color:#25d366;transform:translateY(-3px)}
+  .btn.off{opacity:.45;pointer-events:none}
   /* calcolatore */
   .calc{margin-top:20px;text-align:center}
   .stepper{display:inline-flex;align-items:center;gap:14px;margin:10px 0}
@@ -222,21 +228,20 @@
 
   <h2 class="sec">🎟️ I biglietti</h2>
   <p class="hint">Più biglietti, più possibilità di vincere!</p>
+  <p class="hint" style="margin-top:-6px">Scegli quanti ne vuoi con <b>−</b> e <b>+</b></p>
   <div class="prices">
-    <div class="ticket" data-n="1"><div class="n">1</div><div class="w">biglietto</div><div class="p">2 €</div><div class="save"></div></div>
-    <div class="ticket" data-n="3"><div class="n">3</div><div class="w">biglietti</div><div class="p">5 €</div><div class="save">risparmi 1 €</div></div>
-    <div class="ticket best" data-n="10"><div class="n">10</div><div class="w">biglietti</div><div class="p">12 €</div><div class="save">risparmi 8 €</div></div>
+    <div class="ticket" data-n="1" data-p="2"><div class="n">1</div><div class="w">biglietto</div><div class="p">2 €</div><div class="save"></div>
+      <div class="qrow"><button class="qm" aria-label="meno">−</button><output class="qv">0</output><button class="qp" aria-label="più">+</button></div></div>
+    <div class="ticket" data-n="3" data-p="5"><div class="n">3</div><div class="w">biglietti</div><div class="p">5 €</div><div class="save">risparmi 1 €</div>
+      <div class="qrow"><button class="qm" aria-label="meno">−</button><output class="qv">0</output><button class="qp" aria-label="più">+</button></div></div>
+    <div class="ticket best" data-n="10" data-p="12"><div class="n">10</div><div class="w">biglietti</div><div class="p">12 €</div><div class="save">risparmi 8 €</div>
+      <div class="qrow"><button class="qm" aria-label="meno">−</button><output class="qv">0</output><button class="qp" aria-label="più">+</button></div></div>
   </div>
 
   <section class="card calc">
-    <div class="fred" style="font-size:20px">Quanti biglietti vuoi?</div>
-    <div class="stepper">
-      <button id="minus" aria-label="meno">−</button>
-      <output id="qty">1</output>
-      <button id="plus" aria-label="più">+</button>
-    </div>
-    <div class="total">Totale: <b id="tot">2 €</b></div>
-    <div class="combo" id="combo"></div>
+    <div class="fred" style="font-size:20px">🛒 Il tuo ordine</div>
+    <div class="combo" id="combo" style="margin:8px 0;font-size:16px;color:var(--cream)">Nessun biglietto scelto: usa il + qui sopra</div>
+    <div class="total">Biglietti: <b id="qty">0</b> &nbsp;·&nbsp; Totale: <b id="tot">0 €</b></div>
 
     <div class="name">
       <label for="nome">Il tuo nome (o il nome dello studente)</label>
@@ -251,7 +256,7 @@
 
   <h2 class="sec">✨ Come partecipare</h2>
   <ol class="steps">
-    <li><div>Scegli quanti biglietti vuoi e scrivi a <b>Maja Jiejie</b>.</div></li>
+    <li><div>Scegli quanti biglietti vuoi e invia l'ordine a <b>Maja Jiejie</b> su WhatsApp.</div></li>
     <li><div>Maja ti chiede come preferisci pagare e ti manda i <b>numeri dei tuoi biglietti</b>.</div></li>
     <li><div>Il <b>20 dicembre alle ore 20</b> segui l'estrazione in diretta online e incrocia le dita! 🤞</div></li>
   </ol>
@@ -311,29 +316,31 @@ document.querySelectorAll('.covers img').forEach(i=>i.addEventListener('click',(
 lb.addEventListener('click',()=>lb.classList.remove('show'));
 
 const NUMERO_WA=''; // numero WhatsApp di Maja (solo cifre, con 39)
-// calcolatore: prezzo migliore combinando 10/3/1
-let q=1;
-function best(n){const c=[0];const ch=[[0,0,0]];
-  for(let i=1;i<=n;i++){let opts=[[c[i-1]+2,i-1,[1,0,0]]];
-    if(i>=3)opts.push([c[i-3]+5,i-3,[0,1,0]]);if(i>=10)opts.push([c[i-10]+12,i-10,[0,0,1]]);
-    opts.sort((a,b)=>a[0]-b[0]);c[i]=opts[0][0];const pr=ch[opts[0][1]];ch[i]=pr.map((v,k)=>v+opts[0][2][k]);}
-  return {tot:c[n],mix:ch[n]};}
+// ordine: quantità per ogni tipo di biglietto
+const ord={1:0,3:0,10:0},PR={1:2,3:5,10:12};
+function totals(){let b=0,e=0;for(const k in ord){b+=k*ord[k];e+=PR[k]*ord[k]}return{b,e}}
+function desc(){const L=[];
+  if(ord[10])L.push(ord[10]+(ord[10]>1?' pacchetti':' pacchetto')+' da 10');
+  if(ord[3])L.push(ord[3]+(ord[3]>1?' pacchetti':' pacchetto')+' da 3');
+  if(ord[1])L.push(ord[1]+(ord[1]>1?' biglietti singoli':' biglietto singolo'));
+  return L.join(' + ');}
 function upd(){
-  const b=best(q);document.getElementById('qty').textContent=q;
-  document.getElementById('tot').textContent=b.tot+' €';
-  const parts=[];if(b.mix[2])parts.push(b.mix[2]+'× pacchetto da 10');if(b.mix[1])parts.push(b.mix[1]+'× pacchetto da 3');if(b.mix[0])parts.push(b.mix[0]+'× biglietto singolo');
-  document.getElementById('combo').textContent=q>1?parts.join(' + '):'';
-  document.querySelectorAll('.ticket').forEach(t=>t.style.outline=+t.dataset.n===q?'3px solid #25d366':'');
+  const t=totals();
+  document.querySelectorAll('.ticket').forEach(c=>{const n=c.dataset.n;c.querySelector('.qv').textContent=ord[n];c.classList.toggle('sel',ord[n]>0)});
+  document.getElementById('qty').textContent=t.b;
+  document.getElementById('tot').textContent=t.e+' €';
+  document.getElementById('combo').textContent=t.b?desc():'Nessun biglietto scelto: usa il + qui sopra';
   document.getElementById('wa').href='https://wa.me/'+NUMERO_WA+'?text='+encodeURIComponent(msg());
+  ['wa','copy'].forEach(id=>document.getElementById(id).classList.toggle('off',!t.b));
 }
 function msg(){
-  const n=document.getElementById('nome').value.trim();
-  return `Ciao Maja Jiejie! 🎄 Vorrei ${q} ${q===1?'biglietto':'biglietti'} della Lotteria di Natale (${best(q).tot} €)`+(n?` per ${n}`:'')+'.';
+  const n=document.getElementById('nome').value.trim(),t=totals();
+  return `Ciao Maja Jiejie! 🎄 Vorrei partecipare alla Lotteria di Natale`+(n?` (${n})`:'')+`: ${desc()} = ${t.b} ${t.b===1?'biglietto':'biglietti'}, totale ${t.e} €.`;
 }
-document.getElementById('plus').onclick=()=>{if(q<50){q++;upd()}};
-document.getElementById('minus').onclick=()=>{if(q>1){q--;upd()}};
-document.querySelectorAll('.ticket').forEach(t=>t.onclick=()=>{q=+t.dataset.n;upd();document.querySelector('.calc').scrollIntoView({behavior:'smooth',block:'center'})});
-['nome'].forEach(id=>document.getElementById(id).addEventListener('input',upd));
+document.querySelectorAll('.ticket').forEach(c=>{const n=c.dataset.n;
+  c.querySelector('.qp').onclick=()=>{if(ord[n]<20){ord[n]++;upd()}};
+  c.querySelector('.qm').onclick=()=>{if(ord[n]>0){ord[n]--;upd()}};});
+document.getElementById('nome').addEventListener('input',upd);
 document.getElementById('copy').onclick=async()=>{
   try{await navigator.clipboard.writeText(msg())}catch(e){const t=document.createElement('textarea');t.value=msg();document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
   const to=document.getElementById('toast');to.classList.add('show');setTimeout(()=>to.classList.remove('show'),1800);
