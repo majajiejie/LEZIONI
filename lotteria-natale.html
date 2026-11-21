@@ -259,7 +259,7 @@
       <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">💬 Prenota su WhatsApp</a>
       <button class="btn cp" id="copy">📋 Copia il messaggio</button>
     </div>
-    <p class="note">Si apre WhatsApp con il messaggio già pronto: scegli la chat di Maja Jiejie e invia!</p>
+    <p class="note">Si apre la chat WhatsApp di Maja Jiejie (+39 353 480 4451) con il messaggio già pronto: basta premere invia!</p>
   </section>
 
   <h2 class="sec">💳 Come pagare</h2>
@@ -332,7 +332,7 @@ const lb=document.getElementById('lb');
 document.querySelectorAll('.covers img').forEach(i=>i.addEventListener('click',()=>{lb.querySelector('img').src=i.src;lb.classList.add('show')}));
 lb.addEventListener('click',()=>lb.classList.remove('show'));
 
-const NUMERO_WA=''; // numero WhatsApp di Maja (solo cifre, con 39)
+const NUMERO_WA='393534804451'; // numero WhatsApp di Maja (solo cifre, con 39)
 // ordine: quantità per ogni tipo di biglietto
 const ord={1:0,3:0,10:0},PR={1:2,3:5,10:12};
 function totals(){let b=0,e=0;for(const k in ord){b+=k*ord[k];e+=PR[k]*ord[k]}return{b,e}}
