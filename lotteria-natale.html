@@ -111,6 +111,14 @@
   .qrow output{font-family:'Fredoka';font-size:24px;font-weight:700;min-width:26px}
   .ticket.sel{border-color:#25d366;transform:translateY(-3px)}
   .btn.off{opacity:.45;pointer-events:none}
+  .pays{display:grid;gap:12px}
+  .pay{display:flex;align-items:center;gap:14px;background:var(--cream);color:var(--ink);border-radius:16px;padding:14px;text-decoration:none}
+  .pay .pi{font-size:30px}
+  .pay>span:nth-child(2){flex:1;min-width:0}
+  .pay b{display:block;font-family:'Fredoka';font-size:19px}
+  .pay small{display:block;color:#666;font-size:13px}
+  .pay code{display:block;font-size:13px;font-weight:700;margin-top:4px;word-break:break-all;color:var(--red2)}
+  .pay .go{background:var(--red);color:#fff;border:0;border-radius:999px;padding:9px 14px;font:inherit;font-weight:800;font-size:14px;cursor:pointer;white-space:nowrap}
   /* calcolatore */
   .calc{margin-top:20px;text-align:center}
   .stepper{display:inline-flex;align-items:center;gap:14px;margin:10px 0}
@@ -254,10 +262,19 @@
     <p class="note">Si apre WhatsApp con il messaggio già pronto: scegli la chat di Maja Jiejie e invia!</p>
   </section>
 
+  <h2 class="sec">💳 Come pagare</h2>
+  <p class="hint">Scegli il metodo che preferisci. Nella causale scrivi <b>"Lotteria di Natale"</b> e il tuo nome.</p>
+  <div class="pays">
+    <a class="pay" id="pp" href="https://www.paypal.me/majafabbri" target="_blank" rel="noopener"><span class="pi">🅿️</span><span><b>PayPal</b><small>paypal.me/majafabbri</small></span><span class="go">Paga ›</span></a>
+    <a class="pay" href="https://revolut.me/majafabbri" target="_blank" rel="noopener"><span class="pi">💠</span><span><b>Revolut</b><small>revolut.me/majafabbri</small></span><span class="go">Paga ›</span></a>
+    <div class="pay"><span class="pi">🏦</span><span><b>Bonifico</b><small>Intestato a Maja Fabbri</small><code id="iban">IT97H0366901600564373768337</code></span><button class="go" id="cpiban">Copia IBAN</button></div>
+  </div>
+  <p class="note" id="paynote">Prima scegli i biglietti qui sopra: il link PayPal si compila da solo con l'importo.</p>
+
   <h2 class="sec">✨ Come partecipare</h2>
   <ol class="steps">
     <li><div>Scegli quanti biglietti vuoi e invia l'ordine a <b>Maja Jiejie</b> su WhatsApp.</div></li>
-    <li><div>Maja ti chiede come preferisci pagare e ti manda i <b>numeri dei tuoi biglietti</b>.</div></li>
+    <li><div>Paga con PayPal, Revolut o bonifico: Maja ti manda i <b>numeri dei tuoi biglietti</b>.</div></li>
     <li><div>Il <b>20 dicembre alle ore 20</b> segui l'estrazione in diretta online e incrocia le dita! 🤞</div></li>
   </ol>
 
@@ -331,6 +348,8 @@ function upd(){
   document.getElementById('tot').textContent=t.e+' €';
   document.getElementById('combo').textContent=t.b?desc():'Nessun biglietto scelto: usa il + qui sopra';
   document.getElementById('wa').href='https://wa.me/'+NUMERO_WA+'?text='+encodeURIComponent(msg());
+  document.getElementById('pp').href='https://www.paypal.me/majafabbri'+(t.e?'/'+t.e+'EUR':'');
+  document.getElementById('paynote').textContent=t.e?`Totale da pagare: ${t.e} € — il link PayPal ha già l'importo.`:"Prima scegli i biglietti qui sopra: il link PayPal si compila da solo con l'importo.";
   ['wa','copy'].forEach(id=>document.getElementById(id).classList.toggle('off',!t.b));
 }
 function msg(){
@@ -345,6 +364,9 @@ document.getElementById('copy').onclick=async()=>{
   try{await navigator.clipboard.writeText(msg())}catch(e){const t=document.createElement('textarea');t.value=msg();document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
   const to=document.getElementById('toast');to.classList.add('show');setTimeout(()=>to.classList.remove('show'),1800);
 };
+document.getElementById('cpiban').onclick=async()=>{const v='IT97H0366901600564373768337';
+  try{await navigator.clipboard.writeText(v)}catch(e){const t=document.createElement('textarea');t.value=v;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
+  const to=document.getElementById('toast');to.textContent='IBAN copiato! ✅';to.classList.add('show');setTimeout(()=>{to.classList.remove('show');to.textContent='Messaggio copiato! ✅'},1800);};
 upd();
 </script>
 </body>
