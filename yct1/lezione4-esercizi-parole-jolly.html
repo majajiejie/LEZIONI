@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YCT 1 · 第4课 · Le parole jolly 🃏</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ef; --card:#ffffff; --ink:#3a2e2a; --soft:#7a6a62;
+  --red:#e0524a; --orange:#f39a3d; --yellow:#ffd65c; --green:#3fa874; --blue:#3a8fd0; --purple:#9a7bd1;
+  --line:#f0e2d2; --teal:#16a394;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Baloo 2',system-ui,sans-serif;font-size:24px}
+.zh{font-family:'Noto Sans SC',sans-serif}
+.py,.pyf{font-family:'Noto Sans','Segoe UI',Arial,sans-serif !important;font-weight:500;letter-spacing:.3px;line-height:1.5}
+.py{color:var(--red);font-size:24px;display:block}
+.hide-py .py{visibility:hidden}
+header{background:linear-gradient(135deg,#16a394,#5fd1b9);color:#fff;padding:24px 16px 18px;text-align:center}
+header h1{margin:0;font-size:48px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700}
+header p{margin:4px 0 0;font-size:24px}
+.stars{position:fixed;top:10px;right:12px;background:#fff;color:var(--teal);border-radius:30px;padding:4px 16px;font-weight:700;font-size:26px;box-shadow:0 3px 10px #0002;z-index:10}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 16px;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;border-radius:30px;padding:8px 16px;font:inherit;font-size:20px;background:var(--line);color:var(--ink);cursor:pointer}
+nav button.on{background:var(--teal);color:#fff}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 60px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+h2{margin:0 0 10px;font-size:44px;font-family:'Noto Sans',Arial,sans-serif;font-weight:700;text-align:center}
+.hint{color:var(--soft);margin:0 0 22px;font-size:24px;text-align:center}
+.btn{border:0;border-radius:16px;padding:10px 22px;font:inherit;font-size:24px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.ghost{background:var(--line);color:var(--ink)}
+.spk{border:0;background:var(--yellow);border-radius:50%;width:54px;height:54px;font-size:26px;cursor:pointer;flex:none}
+.tools{display:flex;justify-content:center;gap:10px;margin-bottom:16px}
+
+/* carte jolly */
+.jgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.jc{background:#fff;border:3px solid var(--line);border-radius:26px;padding:18px;text-align:center;position:relative}
+.jc .big{font-size:96px;line-height:1.1;color:var(--red)}
+.jc .use{font-size:24px;font-weight:700}
+.jc .pic{font-size:44px}
+.jc .ex{margin-top:10px;font-size:32px}
+.jc .ex .it{color:var(--soft);font-size:20px}
+.jc .spk{position:absolute;top:10px;right:10px;width:44px;height:44px;font-size:22px}
+.struct{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 24px}
+.blk{border-radius:20px;padding:12px 20px;text-align:center;color:#fff;min-width:130px}
+.blk .t{font-size:44px;font-family:'Noto Sans SC',sans-serif}
+.blk .s{font-size:20px}
+.plus{align-self:center;font-size:40px;color:var(--soft)}
+.cA{background:var(--blue)} .cL{background:var(--red)} .cB{background:var(--green)}
+
+/* giochi */
+.game{background:#fff;border:3px solid var(--line);border-radius:30px;padding:26px 18px;text-align:center}
+.prog{display:flex;justify-content:center;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.prog i{width:16px;height:16px;border-radius:50%;background:var(--line);display:block}
+.prog i.ok{background:var(--green)} .prog i.cur{background:var(--orange)}
+.gpic{font-size:72px;line-height:1.2;margin:6px 0 10px}
+.gq .py{font-size:30px}
+.gq .zh{font-size:64px}
+.slot{display:inline-block;min-width:80px;border-bottom:5px dashed var(--orange);color:var(--red)}
+.opts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.opt{border:3px solid var(--line);background:#fff;border-radius:22px;padding:10px 22px;cursor:pointer;font:inherit;min-width:120px}
+.opt .py{font-size:22px}
+.opt .zh{font-size:52px;display:block}
+.opt.wide .zh{font-size:40px}
+.opt.ok{background:#e5f7ec;border-color:var(--green)}
+.opt.no{background:#fde8e6;border-color:var(--red);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fb{min-height:44px;font-size:28px;margin-top:14px;font-weight:700}
+.fb.ok{color:var(--green)} .fb.no{color:var(--red)}
+.it{color:var(--soft)}
+.end{font-size:40px;padding:30px 0}
+
+/* giusto o sbagliato */
+.tf{display:flex;justify-content:center;gap:20px;margin-top:22px}
+.tf button{border:0;border-radius:24px;font:inherit;font-size:34px;padding:12px 30px;cursor:pointer;color:#fff}
+.tf .y{background:var(--green)} .tf .n{background:var(--red)}
+.fix{margin-top:12px;font-size:30px}
+.fix .zh{font-size:44px}
+
+/* parliamo */
+.talk{display:flex;align-items:center;gap:16px;background:#fff;border:3px solid var(--line);border-radius:24px;padding:18px;margin-bottom:16px;flex-wrap:wrap}
+.talk .q{flex:1;min-width:260px}
+.talk .zh{font-size:44px}
+.talk .a{margin-top:8px;background:#f2fbf6;border-radius:16px;padding:8px 14px}
+.talk .a .zh{font-size:34px;color:var(--green)}
+.talk .pics{font-size:54px;width:110px;text-align:center}
+
+/* quaderno */
+.quad{background:#fffdf5;border:3px dashed var(--orange);border-radius:26px;padding:22px}
+.quad table{width:100%;border-collapse:collapse}
+.quad td{padding:12px 8px;border-bottom:2px solid var(--line);vertical-align:middle;font-size:24px}
+.quad td.j{font-size:60px;color:var(--red);text-align:center;width:120px}
+.quad td.j .py{font-size:22px}
+.quad td.e .zh{font-size:32px}
+.quad .rule{margin-top:18px;background:#fde8e6;border-radius:18px;padding:14px 18px;font-size:26px}
+footer{text-align:center;color:var(--soft);padding:20px;font-size:20px}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <h1>Le parole jolly 🃏</h1>
+  <p>YCT 1 · Lezione 4 · <span class="zh">我家有四口人</span> · Esercizi</p>
+</header>
+<nav id="nav">
+  <button data-s="1" class="on">🃏 Le 4 parole jolly</button>
+  <button data-s="2">🎯 Scegli il jolly</button>
+  <button data-s="3">🔢 Conta!</button>
+  <button data-s="4">✅❌ Giusto o sbagliato?</button>
+  <button data-s="5">🗣️ Tocca a te</button>
+  <button data-s="6">📒 Quaderno delle regole</button>
+</nav>
+<main>
+
+<section id="s1" class="on">
+  <h2>Le 4 parole jolly 🃏</h2>
+  <p class="hint">Quando diciamo QUANTE cose abbiamo, tra il numero e la cosa c'è sempre una parola jolly!</p>
+  <div class="struct">
+    <div class="blk cA"><div class="s pyf">sān</div><div class="t">三</div><div class="s">numero</div></div><div class="plus">+</div>
+    <div class="blk cL"><div class="s pyf">zhī</div><div class="t">只</div><div class="s">parola jolly 🃏</div></div><div class="plus">+</div>
+    <div class="blk cB"><div class="s pyf">māo</div><div class="t">猫</div><div class="s">la cosa</div></div>
+  </div>
+  <div id="jolly" class="jgrid"></div>
+</section>
+
+<section id="s2">
+  <h2>Scegli il jolly giusto 🎯</h2>
+  <p class="hint">Guarda il disegno e scegli la parola jolly che manca.</p>
+  <div class="tools"><button class="btn ghost" onclick="togglePy()">👀 Pinyin sì / no</button></div>
+  <div class="game" id="g1"></div>
+</section>
+
+<section id="s3">
+  <h2>Conta! 🔢</h2>
+  <p class="hint">Conta i disegni e scegli la frase giusta.</p>
+  <div class="game" id="g2"></div>
+</section>
+
+<section id="s4">
+  <h2>Giusto o sbagliato? ✅❌</h2>
+  <p class="hint">Leggi la frase. La parola jolly è giusta?</p>
+  <div class="game" id="g3"></div>
+</section>
+
+<section id="s5">
+  <h2>Tocca a te! 🗣️</h2>
+  <p class="hint">Fai la domanda a un compagno. Lui risponde con la parola jolly giusta!</p>
+  <div id="talk"></div>
+</section>
+
+<section id="s6">
+  <h2>Quaderno delle regole 📒</h2>
+  <p class="hint">Copia questa tabella sul quaderno delle regole ✏️</p>
+  <div class="quad">
+    <table id="quad"></table>
+    <div class="rule">⚠️ <b>Regola:</b> numero + <b>parola jolly</b> + cosa.<br>
+      <span class="zh">三<b style="color:var(--red)">本</b>书</span> ✅ &nbsp;&nbsp; <s class="zh">三书</s> ❌</div>
+  </div>
+</section>
+
+</main>
+<footer>Maja Jiejie · Chinese Academy</footer>
+
+<script src="../voce.js"></script>
+<script>
+let stars=0;
+function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
+function togglePy(){document.body.classList.toggle('hide-py')}
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* voce cinese */
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if('speechSynthesis' in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(zhVoice)u.voice=zhVoice;u.rate=.75;speechSynthesis.speak(u)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-say]');if(b){e.stopPropagation();say(b.dataset.say)}},true);
+const spk=t=>`<button class="spk" data-say="${esc(t)}">🔊</button>`;
+
+/* nav */
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+/* 1 · le quattro parole jolly */
+const JOLLY=[
+ ["个","gè","Per le persone e per tante cose","🙋 🧑‍🏫 👧",["我有一个妹妹。","Wǒ yǒu yí ge mèimei.","Ho una sorellina."]],
+ ["口","kǒu","Per le persone della famiglia","👨‍👩‍👧",["我家有三口人。","Wǒ jiā yǒu sān kǒu rén.","In famiglia siamo in tre."]],
+ ["本","běn","Per i libri","📚",["我有一本书。","Wǒ yǒu yì běn shū.","Ho un libro."]],
+ ["只","zhī","Per gli animali","🐶 🐱 🐦",["我有一只狗。","Wǒ yǒu yì zhī gǒu.","Ho un cane."]]];
+document.getElementById('jolly').innerHTML=JOLLY.map(j=>`<div class="jc">${spk(j[0])}
+ <span class="py">${j[1]}</span><div class="big zh">${j[0]}</div><div class="use">${j[2]}</div><div class="pic">${j[3]}</div>
+ <div class="ex" data-say="${esc(j[4][0])}" style="cursor:pointer"><span class="py">${j[4][1]}</span><div class="zh">${j[4][0].replace(j[0],'<b style="color:var(--red)">'+j[0]+'</b>')}</div><div class="it">${j[4][2]}</div></div></div>`).join('');
+
+/* 2 · scegli il jolly: [prima, dopo, py prima, py dopo, risposta, disegno, frase intera] */
+const G1=[
+ ["三","猫","sān","māo","只","🐱🐱🐱"],
+ ["五","书","wǔ","shū","本","📚📚📚📚📚"],
+ ["我家有四","人。","Wǒ jiā yǒu sì","rén.","口","👨‍👩‍👧‍👦"],
+ ["我有一","妹妹。","Wǒ yǒu yí","mèimei.","个","👧"],
+ ["六","狗","liù","gǒu","只","🐶🐶🐶🐶🐶🐶"],
+ ["我有八","汉语书。","Wǒ yǒu bā","Hànyǔ shū.","本","📕📗📘📙📕📗📘📙"],
+ ["我们有七","人。","Wǒmen yǒu qī","rén.","个","🙋🙋🙋🙋🙋🙋🙋"],
+ ["一","鸟","yì","niǎo","只","🐦"],
+ ["他家有三","人。","Tā jiā yǒu sān","rén.","口","👨👩👦"],
+ ["我有一","哥哥。","Wǒ yǒu yí","gēge.","个","👦"]];
+const JPY={"个":"ge","口":"kǒu","本":"běn","只":"zhī"};
+let g1i=0,g1list=shuffle(G1),g1miss=false;
+function g1draw(){
+  const el=document.getElementById('g1');
+  if(g1i>=g1list.length){el.innerHTML=`<div class="end">🎉 太棒了！<br>Hai finito!</div><button class="btn" onclick="g1i=0;g1list=shuffle(G1);g1draw()">🔁 Ancora</button>`;return}
+  const q=g1list[g1i];
+  el.innerHTML=`<div class="prog">${g1list.map((_,k)=>`<i class="${k<g1i?'ok':k===g1i?'cur':''}"></i>`).join('')}</div>
+   <div class="gpic">${q[5]}</div>
+   <div class="gq"><span class="py">${q[2]} <span id="g1p">___</span> ${q[3]}</span>
+   <span class="zh">${q[0]}<span class="slot" id="g1s">&nbsp;</span>${q[1]}</span></div>
+   <div class="opts">${shuffle(["个","口","本","只"]).map(o=>`<button class="opt" data-o="${o}"><span class="py">${o==="个"?"gè":JPY[o]}</span><span class="zh">${o}</span></button>`).join('')}</div>
+   <div class="fb" id="g1fb"></div>`;
+  g1miss=false;
+  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(b.dataset.o===q[4]){
+      b.classList.add('ok');document.getElementById('g1s').textContent=q[4];document.getElementById('g1p').textContent=JPY[q[4]];
+      const fb=document.getElementById('g1fb');fb.className='fb ok';fb.textContent='对！ 👏';
+      if(!g1miss)star();say(q[0]+q[4]+q[1]);
+      el.querySelectorAll('.opt').forEach(x=>x.onclick=null);
+      setTimeout(()=>{g1i++;g1draw()},1600);
+    }else{
+      b.classList.add('no');g1miss=true;const fb=document.getElementById('g1fb');fb.className='fb no';fb.textContent='Riprova! 🤔';
+    }});
+}
+g1draw();
+
+/* 3 · conta: [disegno, giusta, py giusta, sbagliate..., italiano] */
+const G2=[
+ ["🐶🐶🐶",["三只狗","sān zhī gǒu"],[["三本狗","sān běn gǒu"],["三狗","sān gǒu"]],"tre cani"],
+ ["📚📚📚📚",["四本书","sì běn shū"],[["四只书","sì zhī shū"],["四书","sì shū"]],"quattro libri"],
+ ["👨‍👩‍👧",["三口人","sān kǒu rén"],[["三只人","sān zhī rén"],["三本人","sān běn rén"]],"tre persone (in famiglia)"],
+ ["🐦🐦🐦🐦🐦",["五只鸟","wǔ zhī niǎo"],[["五本鸟","wǔ běn niǎo"],["五鸟","wǔ niǎo"]],"cinque uccellini"],
+ ["🐱",["一只猫","yì zhī māo"],[["一口猫","yì kǒu māo"],["一猫","yī māo"]],"un gatto"],
+ ["🙋🙋🙋🙋🙋🙋",["六个人","liù ge rén"],[["六本人","liù běn rén"],["六只人","liù zhī rén"]],"sei persone"],
+ ["📗📗📗📗📗📗📗📗📗",["九本书","jiǔ běn shū"],[["九个书","jiǔ ge shū"],["九书","jiǔ shū"]],"nove libri"]];
+let g2i=0,g2list=shuffle(G2),g2miss=false;
+function g2draw(){
+  const el=document.getElementById('g2');
+  if(g2i>=g2list.length){el.innerHTML=`<div class="end">🎉 太棒了！<br>Hai finito!</div><button class="btn" onclick="g2i=0;g2list=shuffle(G2);g2draw()">🔁 Ancora</button>`;return}
+  const q=g2list[g2i];
+  const opts=shuffle([q[1],...q[2]]);
+  el.innerHTML=`<div class="prog">${g2list.map((_,k)=>`<i class="${k<g2i?'ok':k===g2i?'cur':''}"></i>`).join('')}</div>
+   <div class="gpic">${q[0]}</div>
+   <div class="opts">${opts.map(o=>`<button class="opt wide" data-o="${esc(o[0])}"><span class="py">${o[1]}</span><span class="zh">${o[0]}</span></button>`).join('')}</div>
+   <div class="fb" id="g2fb"></div>`;
+  g2miss=false;
+  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const fb=document.getElementById('g2fb');
+    if(b.dataset.o===q[1][0]){
+      b.classList.add('ok');fb.className='fb ok';fb.innerHTML='对！ 👏 <span class="it">('+q[3]+')</span>';
+      if(!g2miss)star();say(q[1][0]);
+      el.querySelectorAll('.opt').forEach(x=>x.onclick=null);
+      setTimeout(()=>{g2i++;g2draw()},1800);
+    }else{b.classList.add('no');g2miss=true;fb.className='fb no';fb.textContent='Riprova! 🤔'}
+  });
+}
+g2draw();
+
+/* 4 · giusto o sbagliato: [frase, pinyin, giusta?, correzione, py correzione, disegno] */
+const G3=[
+ ["我有三本书。","Wǒ yǒu sān běn shū.",true,"","","📚📚📚"],
+ ["我有三只书。","Wǒ yǒu sān zhī shū.",false,"我有三本书。","Wǒ yǒu sān běn shū.","📚📚📚"],
+ ["我家有五口人。","Wǒ jiā yǒu wǔ kǒu rén.",true,"","","👨‍👩‍👧‍👦👶"],
+ ["我有一本狗。","Wǒ yǒu yì běn gǒu.",false,"我有一只狗。","Wǒ yǒu yì zhī gǒu.","🐶"],
+ ["我有一个妹妹。","Wǒ yǒu yí ge mèimei.",true,"","","👧"],
+ ["我有四猫。","Wǒ yǒu sì māo.",false,"我有四只猫。","Wǒ yǒu sì zhī māo.","🐱🐱🐱🐱"],
+ ["你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?",true,"","","🏠❓"],
+ ["他有三只鸟。","Tā yǒu sān zhī niǎo.",true,"","","🐦🐦🐦"],
+ ["我家有三本人。","Wǒ jiā yǒu sān běn rén.",false,"我家有三口人。","Wǒ jiā yǒu sān kǒu rén.","👨👩👧"]];
+let g3i=0,g3list=shuffle(G3);
+function g3draw(){
+  const el=document.getElementById('g3');
+  if(g3i>=g3list.length){el.innerHTML=`<div class="end">🎉 太棒了！<br>Hai finito!</div><button class="btn" onclick="g3i=0;g3list=shuffle(G3);g3draw()">🔁 Ancora</button>`;return}
+  const q=g3list[g3i];
+  el.innerHTML=`<div class="prog">${g3list.map((_,k)=>`<i class="${k<g3i?'ok':k===g3i?'cur':''}"></i>`).join('')}</div>
+   <div class="gpic">${q[5]}</div>
+   <div class="gq" data-say="${esc(q[0])}" style="cursor:pointer"><span class="py">${q[1]}</span><span class="zh">${q[0]}</span></div>
+   <div class="tf"><button class="y" data-v="1">✅ 对</button><button class="n" data-v="0">❌ 不对</button></div>
+   <div class="fb" id="g3fb"></div><div class="fix" id="g3fix"></div>`;
+  el.querySelectorAll('.tf button').forEach(b=>b.onclick=()=>{
+    const ans=b.dataset.v==='1',fb=document.getElementById('g3fb');
+    el.querySelectorAll('.tf button').forEach(x=>x.onclick=null);
+    if(ans===q[2]){fb.className='fb ok';fb.textContent='对！ 👏';star()}
+    else{fb.className='fb no';fb.textContent=q[2]?'Era giusta! 😉':'Era sbagliata! 😉'}
+    if(!q[2])document.getElementById('g3fix').innerHTML=`Si dice: <span class="py">${q[4]}</span><span class="zh">${q[3]}</span>`;
+    setTimeout(()=>{g3i++;g3draw()},q[2]?1600:3200);
+  });
+}
+g3draw();
+
+/* 5 · tocca a te */
+const TALK=[
+ ["🏠❓","你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","我家有 ___ 口人。","Wǒ jiā yǒu ___ kǒu rén."],
+ ["🐶❓","你有狗吗？","Nǐ yǒu gǒu ma?","有，我有一只狗。/ 没有。","Yǒu, wǒ yǒu yì zhī gǒu. / Méiyǒu."],
+ ["🐱❓","你有猫吗？","Nǐ yǒu māo ma?","有，我有 ___ 只猫。/ 没有。","Yǒu, wǒ yǒu ___ zhī māo. / Méiyǒu."],
+ ["📚❓","你有几本汉语书？","Nǐ yǒu jǐ běn Hànyǔ shū?","我有 ___ 本汉语书。","Wǒ yǒu ___ běn Hànyǔ shū."],
+ ["👧❓","你有妹妹吗？","Nǐ yǒu mèimei ma?","有，我有一个妹妹。/ 没有。","Yǒu, wǒ yǒu yí ge mèimei. / Méiyǒu."]];
+document.getElementById('talk').innerHTML=TALK.map(t=>`<div class="talk"><div class="pics">${t[0]}</div>
+ <div class="q"><span class="py">${t[2]}</span><div class="zh">${t[1]}</div>
+ <div class="a"><span class="py">${t[4]}</span><div class="zh">${t[3]}</div></div></div>${spk(t[1])}</div>`).join('');
+
+/* 6 · quaderno delle regole */
+const QUAD=[
+ ["个","gè","persone e tante cose","一个妹妹","yí ge mèimei"],
+ ["口","kǒu","le persone della famiglia","四口人","sì kǒu rén"],
+ ["本","běn","libri","三本书","sān běn shū"],
+ ["只","zhī","animali","五只猫","wǔ zhī māo"]];
+document.getElementById('quad').innerHTML=QUAD.map(q=>`<tr><td class="j"><span class="py">${q[1]}</span><span class="zh">${q[0]}</span></td>
+ <td><b>${q[2]}</b></td><td class="e" data-say="${esc(q[3])}" style="cursor:pointer"><span class="py">${q[4]}</span><span class="zh">${q[3]}</span></td></tr>`).join('');
+</script>
+</body>
+</html>
