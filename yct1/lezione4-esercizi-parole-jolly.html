@@ -96,6 +96,34 @@ h2{margin:0 0 10px;font-size:44px;font-family:'Noto Sans',Arial,sans-serif;font-
 .quad td.j .py{font-size:22px}
 .quad td.e .zh{font-size:32px}
 .quad .rule{margin-top:18px;background:#fde8e6;border-radius:18px;padding:14px 18px;font-size:26px}
+/* spiegazione */
+.step{display:none;background:#fff;border:3px solid var(--line);border-radius:30px;padding:28px 22px;text-align:center;min-height:430px}
+.step.on{display:block;animation:fade .3s}
+.step h3{font-size:40px;margin:0 0 14px;color:var(--teal);font-family:'Noto Sans',Arial,sans-serif}
+.step p{font-size:30px;margin:10px 0}
+.step .mega{font-size:110px;line-height:1.1}
+.step .emo{font-size:60px;line-height:1.3}
+.step .ita{font-size:34px;font-weight:700}
+.step .ita b{color:var(--red)}
+.qrow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:16px 0;background:#fffaf0;border-radius:22px;padding:12px}
+.qrow .emo{font-size:48px}
+.qrow .py{font-size:28px}
+.qrow .zh{font-size:54px}
+.qrow .zh b{color:var(--red)}
+.qrow .it{font-size:24px}
+.jhead{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;margin-bottom:10px}
+.jhead .ch .py{font-size:34px}
+.jhead .ch .zh{font-size:120px;color:var(--red);line-height:1.05}
+.jhead .use{font-size:32px;font-weight:700;max-width:340px}
+.wbox{display:flex;flex-direction:column;align-items:center;gap:6px}
+.wbox .tz{width:170px;height:170px;border:3px solid var(--line);border-radius:18px;background:
+ linear-gradient(var(--line),var(--line)) center/100% 2px no-repeat,linear-gradient(var(--line),var(--line)) center/2px 100% no-repeat,#fff}
+.wbox button{border:0;border-radius:14px;background:var(--teal);color:#fff;font:inherit;font-size:20px;padding:6px 14px;cursor:pointer}
+.stepnav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:20px}
+.stepnav .dots{display:flex;gap:6px}
+.stepnav .dots i{width:16px;height:16px;border-radius:50%;background:var(--line);display:block;cursor:pointer}
+.stepnav .dots i.cur{background:var(--teal)}
+.card3{display:inline-block;background:linear-gradient(135deg,#ffd65c,#f39a3d);border-radius:22px;padding:18px 30px;font-size:90px;box-shadow:0 6px 0 #e0a43a;transform:rotate(-6deg);margin:10px}
 footer{text-align:center;color:var(--soft);padding:20px;font-size:20px}
 </style>
 </head>
@@ -106,7 +134,8 @@ footer{text-align:center;color:var(--soft);padding:20px;font-size:20px}
   <p>YCT 1 · Lezione 4 · <span class="zh">我家有四口人</span> · Esercizi</p>
 </header>
 <nav id="nav">
-  <button data-s="1" class="on">🃏 Le 4 parole jolly</button>
+  <button data-s="0" class="on">❓ Cosa sono?</button>
+  <button data-s="1">🃏 Le 4 parole jolly</button>
   <button data-s="2">🎯 Scegli il jolly</button>
   <button data-s="3">🔢 Conta!</button>
   <button data-s="4">✅❌ Giusto o sbagliato?</button>
@@ -115,7 +144,14 @@ footer{text-align:center;color:var(--soft);padding:20px;font-size:20px}
 </nav>
 <main>
 
-<section id="s1" class="on">
+<section id="s0" class="on">
+  <h2>Cosa sono le parole jolly? 🃏</h2>
+  <p class="hint">Leggiamo insieme, una pagina alla volta.</p>
+  <div id="steps"></div>
+  <div class="stepnav"><button class="btn ghost" onclick="goStep(-1)">⬅️ Indietro</button><div class="dots" id="sdots"></div><button class="btn" onclick="goStep(1)">Avanti ➡️</button></div>
+</section>
+
+<section id="s1">
   <h2>Le 4 parole jolly 🃏</h2>
   <p class="hint">Quando diciamo QUANTE cose abbiamo, tra il numero e la cosa c'è sempre una parola jolly!</p>
   <div class="struct">
@@ -165,6 +201,7 @@ footer{text-align:center;color:var(--soft);padding:20px;font-size:20px}
 <footer>Maja Jiejie · Chinese Academy</footer>
 
 <script src="../voce.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 <script>
 let stars=0;
 function star(n=1){stars+=n;document.getElementById('stars').textContent=stars}
@@ -185,6 +222,68 @@ document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
   document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
   document.getElementById('s'+b.dataset.s).classList.add('on');window.scrollTo(0,0)});
+
+/* 0 · cosa sono le parole jolly */
+const Q=(emo,zh,py,it,j)=>`<div class="qrow" data-say="${esc(zh)}" style="cursor:pointer"><span class="emo">${emo}</span><div><span class="py">${py}</span><div class="zh">${j?zh.replace(j,'<b>'+j+'</b>'):zh}</div><div class="it">${it}</div></div>${spk(zh)}</div>`;
+const JH=(c,py,use,k)=>`<div class="jhead"><div class="ch"><span class="py">${py}</span><div class="zh">${c}</div></div><div class="use">${use}</div>
+ <div class="wbox"><div class="tz" id="w${k}"></div><button onclick="drawW('${c}','w${k}')">✍️ Come si scrive</button></div></div>`;
+const STEPS=[
+ `<h3>Le quantità</h3>
+  <p>Quando diciamo <b>QUANTE</b> cose ci sono…</p>
+  <div class="emo">🐶 🐶 🐶 &nbsp; 📚 📚 &nbsp; 👨‍👩‍👧</div>
+  <p class="ita">3 cani · 2 libri · 3 persone in famiglia</p>
+  <p>…in cinese usiamo le</p>
+  <div class="card3">🃏</div>
+  <p class="ita" style="font-size:44px;color:var(--red)">PAROLE JOLLY!</p>`,
+ `<h3>Dove stanno le parole jolly?</h3>
+  <p>La parola jolly sta <b>in mezzo</b>: dopo il <b style="color:var(--blue)">numero</b> e prima della <b style="color:var(--green)">cosa</b>.</p>
+  <div class="struct">
+    <div class="blk cA"><div class="s pyf">sān</div><div class="t">三</div><div class="s">numero</div></div><div class="plus">+</div>
+    <div class="blk cL"><div class="s pyf">zhī</div><div class="t">只</div><div class="s">parola jolly 🃏</div></div><div class="plus">+</div>
+    <div class="blk cB"><div class="s pyf">mǎ</div><div class="t">马</div><div class="s">cavallo</div></div>
+  </div>
+  ${Q('🐴🐴🐴','三只马','sān zhī mǎ','tre cavalli','只')}
+  ${Q('🐦🐦🐦🐦','四只鸟','sì zhī niǎo','quattro uccellini','只')}`,
+ `<h3>只 · il jolly degli animali</h3>
+  ${JH('只','zhī','Si usa con gli <b style="color:var(--red)">ANIMALI</b> 🐶🐱🐦🐴',1)}
+  ${Q('🐶','我有一只狗。','Wǒ yǒu yì zhī gǒu.','Ho un cane.','只')}
+  ${Q('🐴🐴🐴','三只马','sān zhī mǎ','tre cavalli','只')}`,
+ `<h3>口 · il jolly della famiglia</h3>
+  ${JH('口','kǒu','Si usa con le <b style="color:var(--red)">PERSONE della FAMIGLIA</b> 👨‍👩‍👧',2)}
+  ${Q('👨👩👶','我家有三口人。','Wǒ jiā yǒu sān kǒu rén.','Nella mia famiglia siamo in tre.','口')}
+  ${Q('👨👩👦👧','我家有四口人。','Wǒ jiā yǒu sì kǒu rén.','Nella mia famiglia siamo in quattro.','口')}`,
+ `<h3>本 · il jolly dei libri</h3>
+  ${JH('本','běn','Si usa con i <b style="color:var(--red)">LIBRI</b> 📚',3)}
+  ${Q('📕','我有一本书。','Wǒ yǒu yì běn shū.','Ho un libro.','本')}
+  ${Q('📕📗📘','我有三本书。','Wǒ yǒu sān běn shū.','Ho tre libri.','本')}
+  ${Q('🔟📚','我有十本汉语书。','Wǒ yǒu shí běn Hànyǔ shū.','Ho dieci libri di cinese.','本')}`,
+ `<h3>个 · il jolly delle parole jolly! 👑</h3>
+  ${JH('个','gè','Il più usato di tutti: per le <b style="color:var(--red)">PERSONE</b> e per <b style="color:var(--red)">TANTE COSE</b> 🙋',4)}
+  ${Q('7️⃣🙋','有七个人。','Yǒu qī ge rén.','Ci sono sette persone.','个')}
+  ${Q('1️⃣2️⃣🙋','有十二个人。','Yǒu shí\'èr ge rén.','Ci sono dodici persone.','个')}
+  ${Q('👧','我有一个妹妹。','Wǒ yǒu yí ge mèimei.','Ho una sorellina.','个')}`,
+ `<h3>Attenzione! ⚠️</h3>
+  <p>Senza la parola jolly la frase <b>non funziona</b>!</p>
+  <div class="qrow"><div><span class="py">sān shū</span><div class="zh"><s>三书</s></div></div><span class="emo">❌</span></div>
+  <div class="qrow" data-say="三本书" style="cursor:pointer"><div><span class="py">sān běn shū</span><div class="zh">三<b>本</b>书</div></div><span class="emo">✅</span>${spk('三本书')}</div>
+  <p class="ita">Numero + 🃏 + cosa</p>
+  <button class="btn" style="font-size:30px;margin-top:10px" onclick="document.querySelector('#nav button[data-s=\'2\']').click()">🎯 Ora giochiamo!</button>`];
+let st=0;
+document.getElementById('steps').innerHTML=STEPS.map((h,i)=>`<div class="step${i?'':' on'}">${h}</div>`).join('');
+function goStep(d,abs){st=abs!==undefined?abs:Math.max(0,Math.min(STEPS.length-1,st+d));
+ document.querySelectorAll('.step').forEach((x,i)=>x.classList.toggle('on',i===st));
+ document.getElementById('sdots').innerHTML=STEPS.map((_,i)=>`<i class="${i===st?'cur':''}" onclick="goStep(0,${i})"></i>`).join('')
+ const tz=document.querySelectorAll('.step')[st].querySelector('.tz');if(tz)initW(tz.id)}
+const WR={};
+goStep(0,0);
+const WCH={w1:'只',w2:'口',w3:'本',w4:'个'};
+function initW(id){if(WR[id]||typeof HanziWriter==='undefined')return;const box=document.getElementById(id);box.innerHTML='';
+ WR[id]=HanziWriter.create(id,WCH[id],{width:164,height:164,padding:12,showOutline:true,showCharacter:true,strokeColor:'#e0524a',outlineColor:'#eee3da',strokeAnimationSpeed:.7,delayBetweenStrokes:500})}
+function drawW(c,id){
+ const box=document.getElementById(id);
+ if(typeof HanziWriter==='undefined'){box.innerHTML='<p style="font-size:18px">Serve internet per l\'animazione.</p>';return}
+ if(!WR[id]){box.innerHTML='';WR[id]=HanziWriter.create(id,c,{width:164,height:164,padding:12,showOutline:true,showCharacter:false,strokeColor:'#e0524a',outlineColor:'#eee3da',strokeAnimationSpeed:.7,delayBetweenStrokes:500})}
+ WR[id].hideCharacter();WR[id].animateCharacter();say(c)}
 
 /* 1 · le quattro parole jolly */
 const JOLLY=[
