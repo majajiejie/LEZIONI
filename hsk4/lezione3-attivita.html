@@ -340,6 +340,8 @@ const GQ=[
  ["＿＿你去不去，我都要去参加招聘会。",["不管","首先","挺"],"不管","不管 + V不V: «che tu vada o no, io ci vado comunque»."],
  ["不管是上课还是上班，＿＿都非常重要。",["准时","正式","材料"],"准时","准时 = puntuale / essere puntuali."]
 ];
+const GIT=["Oggi fa piuttosto caldo, non c'è bisogno di metterti tutti questi vestiti.","Quella stanza è silenziosa e pulita, è piuttosto comoda.","In origine volevo andare in montagna, ma è piovuto e quindi non ci sono andato.","A: La banca chiude già alle cinque! B: Allora non ci vado, tanto non avevo niente di urgente.","Per imparare bene il cinese, innanzitutto bisogna ascoltare e parlare molto, in secondo luogo bisogna ripassare spesso.","Non sono d'accordo che tu lo faccia: innanzitutto non lo conosci, in secondo luogo è una cosa troppo pericolosa.","Che ci sia vento o pioggia, lui va a giocare a basket tutti i giorni.","Stai tranquillo, per quanto sia difficile, ti aiuterò comunque.","Che tu vada o no, io andrò comunque alla fiera del lavoro.","Che sia a lezione o al lavoro, essere puntuali è importantissimo."];
+const LIT=["Lui si chiama Mark, un altro compagno si chiama Anna.","Il mese scorso il direttore è andato a Shanghai per partecipare a un'altra riunione importante.","Aspetta un attimo, prima guardo il menù. Inoltre, mi porti un tè verde.","La camicia va bene, ma il colore dei pantaloni non è un granché: cambiali con un altro paio.","Prendi l'altra bici, questa è rotta.","Ho finito di leggere questo libro, per favore dammene un altro.","Devi riposarti molto, inoltre devi anche bere tanta acqua.","Questa persona non va bene, è meglio che tu cerchi qualcun altro."];
 const OPY={"挺":"tǐng","本来":"běnlái","其次":"qícì","首先":"shǒuxiān","另外":"lìngwài","不管":"bùguǎn","都":"dōu","也是":"yě shì","就":"jiù","准时":"zhǔnshí","正式":"zhèngshì","材料":"cáiliào","另":"lìng"};
 const GPY=["Jīntiān tiānqì __ nuǎnhuo de, nǐ búyòng chuān zhème duō yīfu.","Nàge fángjiān yòu ānjìng yòu gānjìng, __ shūfu de.","Wǒ __ xiǎng qù pá shān, kěshì xià yǔ le, jiù méi qù.","A: Yínháng wǔ diǎn jiù xiàbān le! B: Nà wǒ bú qù le, __ yě méi shénme jíshì.","Yào xiǎng xuéhǎo Hànyǔ, __ yào duō tīng duō shuō, qícì, yīnggāi chángcháng fùxí.","Wǒ bù tóngyì nǐ zhème zuò, shǒuxiān nǐ bù liǎojiě tā, __ zhè jiàn shì tài wēixiǎn le.","__ guā fēng háishi xià yǔ, tā měi tiān dōu qù dǎ lánqiú.","Fàngxīn ba, bùguǎn duō nán, wǒ __ huì bāng nǐ.","__ nǐ qù bu qù, wǒ dōu yào qù cānjiā zhāopìnhuì.","Bùguǎn shì shàngkè háishi shàngbān, __ dōu fēicháng zhòngyào."];
 const cap=(t,first)=>first?t.charAt(0).toUpperCase()+t.slice(1):t;
@@ -351,7 +353,7 @@ function showG(i,silent){const q=GQ[i],box=$("gramList").querySelector(`.o[data-
  box.querySelectorAll("button[data-q]").forEach(x=>{x.classList.remove("no");if(x.dataset.v===q[2])x.classList.add("ok")});
  $("gexp"+i).classList.add("show");fillPySlot("gpy"+i,GPY[i],[q[2]]);if(!silent)say(q[0].replace("＿＿",q[2]))}
 function renderGram(){
- $("gramList").innerHTML=GQ.map((q,i)=>`<div class="gq">${pyTpl(GPY[i],"gpy"+i)}<div class="s cn">${i+1}. ${q[0]}</div><div class="o cn" data-i="${i}">${shuffle(q[1]).map(o=>optBtn(o,i)).join("")}<button class="sol" data-g="${i}">👀 Soluzione</button></div><div class="exp" id="gexp${i}">${q[3]}</div></div>`).join("");
+ $("gramList").innerHTML=GQ.map((q,i)=>`<div class="gq">${pyTpl(GPY[i],"gpy"+i)}<div class="s cn">${i+1}. ${q[0]}</div><span class="trad" style="margin:-4px 0 10px">🇮🇹 ${GIT[i]}</span><div class="o cn" data-i="${i}">${shuffle(q[1]).map(o=>optBtn(o,i)).join("")}<button class="sol" data-g="${i}">👀 Soluzione</button></div><div class="exp" id="gexp${i}">${q[3]}</div></div>`).join("");
  $("gramList").querySelectorAll(".sol").forEach(b=>b.onclick=()=>showG(+b.dataset.g));
  $("gramList").querySelectorAll("button[data-q]").forEach(b=>b.onclick=()=>{const q=GQ[b.dataset.q],box=b.parentElement;
   if(box.dataset.done)return;
@@ -376,7 +378,7 @@ function showL(i){const q=LQ[i],box=$("lingList").querySelector(`.o[data-i="${i}
  box.querySelectorAll("button[data-q]").forEach(x=>{x.classList.remove("no");if(q[2].includes(x.dataset.v))x.classList.add("ok")});
  $("lexp"+i).classList.add("show");fillPySlot("lpy"+i,/(^|\. )__/.test(LPY[i])?"__":LPY[i],q[2])}
 function renderLing(){
- $("lingList").innerHTML=LQ.map((q,i)=>`<div class="gq">${pyTpl(LPY[i],"lpy"+i)}<div class="s cn">${i+1}. ${q[0]}</div><div class="o cn" data-i="${i}">${q[1].map(o=>optBtn(o,i)).join("")}<button class="sol" data-l="${i}">👀 Soluzione</button></div><div class="exp" id="lexp${i}">${q[3]}</div></div>`).join("");
+ $("lingList").innerHTML=LQ.map((q,i)=>`<div class="gq">${pyTpl(LPY[i],"lpy"+i)}<div class="s cn">${i+1}. ${q[0]}</div><span class="trad" style="margin:-4px 0 10px">🇮🇹 ${LIT[i]}</span><div class="o cn" data-i="${i}">${q[1].map(o=>optBtn(o,i)).join("")}<button class="sol" data-l="${i}">👀 Soluzione</button></div><div class="exp" id="lexp${i}">${q[3]}</div></div>`).join("");
  $("lingList").querySelectorAll(".sol").forEach(b=>b.onclick=()=>showL(+b.dataset.l));
  $("lingList").querySelectorAll("button[data-q]").forEach(b=>b.onclick=()=>{const q=LQ[b.dataset.q],box=b.parentElement;
   if(box.dataset.done)return;
