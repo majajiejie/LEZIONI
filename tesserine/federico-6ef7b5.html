@@ -100,6 +100,10 @@ a.mat:after{content:"→";color:var(--rosso)}
   </div>
   <div id="avviso"></div>
 
+  <div id="secvideo" hidden><h2>Lezione online</h2>
+  <div class="box"><div class="compito" id="videoquando"></div>
+    <a class="btn cr" id="videochiamata" target="_blank" rel="noopener">🎥 Entra nella videochiamata</a></div></div>
+
   <h2>Compiti da fare</h2>
   <div class="box"><div id="compiti"></div>
     <a class="btn cr" id="classroom" target="_blank" rel="noopener" hidden>📚 Apri Classroom</a>
@@ -161,6 +165,10 @@ const DATI_APERTI = {
   "gruppo_compiti": "https://chat.whatsapp.com/GIjd8ThkzdVD7cmGmRcoNH"
  },
  "durata": 30,
+ "videochiamata": {
+  "url": "https://meet.google.com/fxj-etvf-jbj",
+  "quando": "Ogni giovedì alle 17:30"
+ },
  "compiti_fisso": null,
  "classroom": null,
  "pagamento": {
@@ -218,6 +226,8 @@ $("compiti").innerHTML = DATI.compiti_fisso
   : '<div class="vuoto">Nessun compito per ora 🎉</div>';
 link($("mandacompiti"), C.gruppo_compiti || wa("Ciao Maja! Ecco i compiti di " + DATI.nome + (cp && cp.data ? " (lezione del " + cp.data + ")" : "") + " 📷"));
 if (!(cp && cp.testo) || DATI.compiti_fisso) $("mandacompiti").hidden = true;
+const V = DATI.videochiamata;
+if (V && V.url) { $("videochiamata").href = V.url; $("videoquando").textContent = V.quando || ""; $("videoquando").hidden = !V.quando; $("secvideo").hidden = false; }
 if (DATI.classroom) { $("classroom").href = DATI.classroom; $("classroom").hidden = false; }
 const st = DATI.storico || [];
 $("diario").innerHTML = st.length
