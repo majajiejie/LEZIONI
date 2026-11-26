@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSK 4 · Lezione 4 · Attività – Maja Jiejie</title>
+<style>
+:root{--blu:#6ec3f4;--bordeaux:#922b3e;--arancio:#fb7d24;--giallo:#f4f420;--blu-scuro:#2f5aa8;--marrone:#4a3517;--crema:#fdf6ec;--verde:#3fae5a;--rosso:#e04848}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Montserrat","Segoe UI",system-ui,sans-serif;background:var(--blu);color:#222;min-height:100vh}
+.cn{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei","Heiti SC",sans-serif}
+header{text-align:center;padding:26px 16px 14px}
+header .lez{color:#fff;font-size:1.6rem;font-weight:300;letter-spacing:1px}
+header h1{display:inline-block;background:var(--blu-scuro);color:#fff;font-size:2.8rem;padding:8px 26px;margin:8px 0;transform:rotate(-1deg)}
+header .it{display:block;color:var(--blu-scuro);background:var(--crema);font-weight:800;font-size:1.15rem;padding:6px 18px;margin:4px auto 0;max-width:460px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 12px 18px}
+nav button{border:none;border-radius:30px;padding:10px 16px;font-weight:700;font-size:.92rem;cursor:pointer;background:#fff;color:var(--bordeaux);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+nav button.on{background:var(--giallo);color:#222}
+.stars{position:fixed;top:12px;right:14px;background:var(--giallo);border-radius:30px;padding:6px 14px;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.2);z-index:5}
+section{display:none;max-width:900px;margin:0 auto 40px;padding:22px 18px 28px;border-radius:22px}
+section.on{display:block}
+#s1{background:var(--bordeaux)}#s2{background:var(--arancio)}#s3{background:var(--bordeaux)}#s4{background:var(--arancio)}#s5{background:var(--bordeaux)}#s6{background:var(--arancio)}
+h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
+.istr{color:#fff;text-align:center;margin-bottom:18px;opacity:.95}
+.pill{background:var(--giallo);border-radius:18px;padding:14px 18px;font-size:1.15rem}
+.btn{border:none;border-radius:30px;padding:10px 20px;font-weight:700;cursor:pointer;background:var(--marrone);color:#fff;font-size:.95rem}
+.btn.light{background:#fff;color:var(--marrone)}
+.center{text-align:center}
+.fb{min-height:28px;text-align:center;color:#fff;font-weight:700;margin-top:12px;font-size:1.2rem}
+.fb .cn{font-size:1.6rem}
+/* memory */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{aspect-ratio:1.7;border-radius:14px;background:var(--blu);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;font-weight:700;padding:6px;font-size:1.05rem;user-select:none;transition:transform .15s}
+.card .back{font-size:1.8rem;color:#fff}
+.card.open{background:#fff}
+.card.open.cnc{font-size:3rem}
+.card.done{background:var(--giallo);cursor:default}
+.card.wrong{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* quiz */
+.qbox{background:#fff;border-radius:20px;padding:22px;text-align:center}
+.qtype{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--bordeaux);font-weight:800}
+.qmain{font-size:4.2rem;margin:10px 0 4px}
+.qmain.it{font-size:1.5rem;font-weight:800;color:var(--blu-scuro)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.opt{border:3px solid transparent;border-radius:16px;background:var(--giallo);padding:12px;font-size:1.3rem;cursor:pointer;font-weight:600}
+.opt.cnc{font-size:2.6rem}
+.opt.ok{background:var(--verde);color:#fff}
+.opt.no{background:var(--rosso);color:#fff}
+.opt:disabled{cursor:default}
+.prog{color:#fff;text-align:center;margin-bottom:10px;font-weight:700}
+.audio{border:none;background:var(--blu);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:1.1rem;vertical-align:middle}
+/* fill */
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:none;border-radius:20px;padding:7px 14px;font-weight:700;cursor:pointer;background:var(--marrone);color:#fff}
+.tabs button.on{background:var(--giallo);color:#222}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+.chip{background:#fff;border-radius:22px;padding:10px 18px;font-size:1.9rem;cursor:pointer;border:3px solid transparent}
+.chip.sel{border-color:var(--giallo);background:var(--giallo)}
+.chip.used{opacity:.35;cursor:default}
+.frase{background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:12px;font-size:1.85rem;line-height:2}
+.slot{display:inline-block;min-width:100px;border-bottom:3px dashed var(--bordeaux);text-align:center;cursor:pointer;padding:0 6px;margin:0 3px;font-weight:700;color:var(--blu-scuro)}
+.slot.ok{border-bottom:3px solid var(--verde);color:var(--verde)}
+.slot.no{border-bottom:3px solid var(--rosso);color:var(--rosso)}
+.pyl{display:block;font-size:1.05rem;color:var(--bordeaux);line-height:1.4;margin-left:1.6rem}
+.pyslot{font-weight:700;color:var(--blu-scuro)}
+.nopy .pyl{display:none}
+.trad{display:block;font-size:.95rem;color:#666;line-height:1.3;font-family:inherit}
+/* grammar */
+.gq{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px}
+.gq .s{font-size:1.85rem;line-height:1.6;margin-bottom:10px}
+.gq .o{display:flex;gap:8px;flex-wrap:wrap}
+.gq .o button{border:none;border-radius:22px;padding:10px 24px;font-size:1.8rem;cursor:pointer;background:var(--giallo)}
+.gq .o button.ok{background:var(--verde);color:#fff}
+.gq .o button.no{background:var(--rosso);color:#fff}
+.gq .exp{display:none;margin-top:10px;background:var(--crema);border-left:5px solid var(--arancio);padding:8px 12px;font-size:.95rem;border-radius:6px}
+.gq .exp.show{display:block}
+.regola{background:var(--giallo);border-radius:16px;padding:16px 18px;margin-bottom:16px;font-size:1.1rem;line-height:1.8}
+.regola .cn{font-size:1.35rem}
+.regola b.cn{font-size:1.45rem}
+/* order */
+.ordbox{background:#fff;border-radius:18px;padding:18px}
+.target{min-height:80px;border:3px dashed var(--arancio);border-radius:14px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:50px}
+.tok{background:var(--giallo);border-radius:14px;padding:10px 18px;font-size:2rem;cursor:pointer;user-select:none}
+.target .tok{background:var(--blu)}
+.ordhint{font-size:1.1rem;color:#555}
+.ordok{background:#e7f7ea}
+.gq .o button.sol{border:2px solid var(--bordeaux);border-radius:20px;padding:6px 14px;font-weight:700;cursor:pointer;background:var(--crema);color:var(--bordeaux);font-size:.9rem;font-family:"Montserrat","Segoe UI",sans-serif;margin-left:auto}
+.gq .o{align-items:center}
+.btn.sol2{background:var(--giallo);color:#222;font-size:1.05rem;padding:11px 22px}
+.solbox{margin-top:10px;background:var(--crema);border-radius:12px;padding:10px 14px;font-size:1.7rem;display:none}
+.solbox.show{display:block}
+.solbox small{display:block;font-size:.9rem;color:#666;font-family:"Montserrat","Segoe UI",sans-serif}
+.ob{display:inline-block;text-align:center;line-height:1.15}
+.ob .tp{display:block;font-size:.85rem;color:var(--bordeaux);font-family:"Montserrat","Segoe UI",sans-serif}
+.gq .o button.ok .tp,.gq .o button.no .tp{color:#fff}
+.tok .tp{display:block;font-size:.9rem;color:var(--bordeaux);text-align:center;font-family:"Montserrat","Segoe UI",sans-serif;line-height:1.2}
+.nopy .tp{display:none}
+.regola2{line-height:1.5}
+.caso{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.2)}
+.caso:last-child{border-bottom:none}
+.caso .num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bordeaux);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.caso small{color:#555;font-size:.9rem}
+footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:.9}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <div class="lez">HSK 4 · Lezione 4</div>
+  <h1 class="cn">不要太着急赚钱</h1>
+  <span class="it">Non avere troppa fretta di guadagnare</span>
+</header>
+<nav id="nav">
+  <button data-s="s1" class="on">🃏 Memory</button>
+  <button data-s="s2">⚡ Quiz dei caratteri</button>
+  <button data-s="s3">✍️ Completa le frasi</button>
+  <button data-s="s4">📐 Grammatica</button>
+  <button data-s="s5">🔀 原来 o 本来?</button>
+  <button data-s="s6">🧩 Metti in ordine</button>
+</nav>
+
+<!-- 1 MEMORY -->
+<section id="s1" class="on">
+  <h2>Memory delle parole</h2>
+  <p class="istr">Gira due carte: trova la coppia <b>carattere ↔ significato</b>.</p>
+  <p class="center" style="margin-bottom:14px"><button class="btn sol2" onclick="solveMemory()">👀 Soluzione</button> <button class="btn light" onclick="initMemory()">🔄 Nuova partita</button></p>
+  <div class="grid" id="memGrid"></div>
+  <div class="fb" id="memFb"></div>
+</section>
+
+<!-- 2 QUIZ -->
+<section id="s2">
+  <h2>Quiz dei caratteri</h2>
+  <p class="istr">Significato, carattere e toni giusti: 12 domande. Premi 🔊 per ascoltare.</p>
+  <div class="prog" id="qProg"></div>
+  <div class="qbox" id="qBox"></div>
+  <div class="fb" id="qFb"></div>
+</section>
+
+<!-- 3 COMPLETA -->
+<section id="s3">
+  <h2>Completa le frasi dei testi</h2>
+  <p class="istr">Tocca una parola, poi tocca lo spazio vuoto. Poi premi «Controlla».</p>
+  <div class="tabs" id="fillTabs"></div>
+  <div class="bank cn" id="fillBank"></div>
+  <p class="center" style="margin-bottom:14px"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button> <button class="btn light" id="pyBtn" onclick="togglePy()">🔤 Nascondi pinyin</button></p>
+  <div id="fillList"></div>
+  <p class="center"><button class="btn" onclick="checkFill()">✔ Controlla</button> <button class="btn sol2" onclick="solveFill()">👀 Soluzione</button> <button class="btn light" onclick="renderFill()">🔄 Ricomincia</button></p>
+  <div class="fb" id="fillFb"></div>
+</section>
+
+<!-- 4 GRAMMATICA -->
+<section id="s4">
+  <h2>Le regole della lezione</h2>
+  <p class="istr">以为 · 原来 · 并 · 按照 · 甚至 — scegli la parola giusta.</p>
+  <div class="regola">
+    <b class="cn">以为</b> = credere (sbagliando): pensavi una cosa, ma non era vera · <span class="cn">我以为他是中国人</span><br>
+    <b class="cn">原来 + 的 + nome</b> = originale, di prima · <span class="cn">按原来的计划应该是两周</span><br>
+    <b class="cn">原来……</b> = ecco che…, si scopre che… (scopri una cosa che non sapevi) · <span class="cn">原来是你啊！</span><br>
+    <b class="cn">并 + 不 / 没(有)</b> = non… affatto (smentisce un'idea) · <span class="cn">做生意并不容易</span><br>
+    <b class="cn">按照 + nome</b> = secondo, in base a · <span class="cn">我们按照计划完成了工作</span><br>
+    <b class="cn">A，甚至 B</b> = perfino (B è il caso più estremo) · <span class="cn">他忙得甚至没有时间吃饭</span>
+  </div>
+  <p class="center" style="margin-bottom:14px"><button class="btn sol2" onclick="solveAllG()">👀 Soluzione</button> <button class="btn light" id="pyBtnG" onclick="togglePyS('s4','pyBtnG')">🔤 Nascondi pinyin</button></p>
+  <div id="gramList"></div>
+  <p class="center"><button class="btn sol2" onclick="solveAllG()">👀 Soluzione</button> <button class="btn light" onclick="renderGram()">🔄 Ricomincia</button></p>
+</section>
+
+<!-- 5 原来 / 本来 -->
+<section id="s5">
+  <h2>原来 o 本来?</h2>
+  <p class="istr">Tutte e due possono voler dire <b>«in origine, prima»</b>. Ma ognuna ha anche un significato suo: guarda <b>cosa vuole dire la frase</b>.</p>
+  <div class="regola regola2">
+    <div class="caso"><span class="num">1</span><div><b>Scopri una cosa che non sapevi</b> («ecco che…», «allora era…») → solo <b class="cn">原来</b><br><span class="cn">原来是你啊！</span> <small>Yuánlái shì nǐ a! · Ah, eri tu!</small></div></div>
+    <div class="caso"><span class="num">2</span><div><b>«Di regola, logicamente, è ovvio che»</b> (spesso con <span class="cn">就、应该</span>) → solo <b class="cn">本来</b><br><span class="cn">本来就应该这样。</span> <small>Běnlái jiù yīnggāi zhèyàng · Dovrebbe essere così, è ovvio.</small></div></div>
+    <div class="caso"><span class="num">3</span><div><b>«In origine, prima»</b> (prima era così, poi è cambiato) → vanno bene <b>tutti e due</b><br><span class="cn">他原来 / 本来不会开车。</span> <small>Prima non sapeva guidare.</small></div></div>
+  </div>
+  <p class="center" style="margin-bottom:14px"><button class="btn sol2" onclick="solveAllL()">👀 Soluzione</button> <button class="btn light" id="pyBtnL" onclick="togglePyS('s5','pyBtnL')">🔤 Nascondi pinyin</button></p>
+  <div id="lingList"></div>
+  <p class="center"><button class="btn sol2" onclick="solveAllL()">👀 Soluzione</button> <button class="btn light" onclick="renderLing()">🔄 Ricomincia</button></p>
+</section>
+
+<!-- 6 ORDINE -->
+<section id="s6">
+  <h2>Metti in ordine la frase</h2>
+  <p class="istr">Tocca i blocchi nell'ordine giusto. Tocca un blocco in alto per toglierlo.</p>
+  <div class="prog" id="oProg"></div>
+  <div class="ordbox">
+    <div class="ordhint" id="oHint"></div>
+    <div class="target cn" id="oTarget"></div>
+    <div class="pool cn" id="oPool"></div>
+    <p class="center" style="margin-top:14px"><button class="btn" onclick="checkOrder()">✔ Controlla</button> <button class="btn sol2" onclick="solveOrder()">👀 Soluzione</button> <button class="btn light" id="pyBtnO" onclick="togglePyS('s6','pyBtnO')">🔤 Nascondi pinyin</button> <button class="btn light" id="oNext" onclick="nextOrder()">Avanti ➜</button></p>
+  </div>
+  <div class="fb" id="oFb"></div>
+</section>
+
+<footer>Maja Jiejie · 加油！</footer>
+
+<script>
+/* ---------- DATI ---------- */
+const W=[["提", "tí", "menzionare, parlare di"], ["以为", "yǐ wéi", "credere (sbagliando)"], ["份", "fèn", "classificatore (lavori, documenti)"], ["完全", "wán quán", "completamente"], ["赚", "zhuàn", "guadagnare"], ["调查", "diào chá", "indagine; indagare"], ["原来", "yuán lái", "originale; ecco che…"], ["计划", "jì huà", "piano; programmare"], ["提前", "tí qián", "in anticipo; anticipare"], ["保证", "bǎo zhèng", "garantire, promettere"], ["提醒", "tí xǐng", "ricordare (a qualcuno)"], ["乱", "luàn", "disordinato, confuso"], ["生意", "shēng yi", "affari, commercio"], ["谈", "tán", "parlare, discutere"], ["并", "bìng", "affatto (+ negazione)"], ["积累", "jī lěi", "accumulare"], ["经验", "jīng yàn", "esperienza"], ["一切", "yí qiè", "tutto, ogni cosa"], ["按照", "àn zhào", "secondo, in base a"], ["成功", "chéng gōng", "successo; riuscire"], ["顺利", "shùn lì", "senza intoppi"], ["感谢", "gǎn xiè", "ringraziare"], ["消息", "xiāo xi", "notizia"], ["按时", "àn shí", "puntualmente, in tempo"], ["奖金", "jiǎng jīn", "premio in denaro, bonus"], ["工资", "gōng zī", "stipendio"], ["方法", "fāng fǎ", "metodo"], ["知识", "zhī shi", "conoscenza"], ["不得不", "bù dé bù", "dover per forza"], ["甚至", "shèn zhì", "perfino"], ["责任", "zé rèn", "responsabilità"]];
+const py=w=>w[1].replace(/ /g,"");
+
+/* ---------- UTIL ---------- */
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let stars=0;const addStar=(n=1)=>{stars+=n;$("stars").textContent=stars};
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if("speechSynthesis" in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+const bravo=["太好了！","很好！","对了！","真棒！","不错！"];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("on"));$(b.dataset.s).classList.add("on");
+ window.scrollTo({top:$("nav").offsetTop-10,behavior:"smooth"})});
+
+/* ---------- 1 MEMORY ---------- */
+let memOpen=[],memLock=false,memPairs=0,memPick=[];
+function initMemory(){
+ const pick=shuffle(W).slice(0,8);memPick=pick;memPairs=0;memOpen=[];
+ const cards=shuffle(pick.flatMap((w,i)=>[{id:i,t:w[0],cn:1,w},{id:i,t:w[2],cn:0,w}]));
+ $("memGrid").innerHTML="";$("memFb").textContent="";
+ cards.forEach(c=>{const d=document.createElement("div");d.className="card";d.innerHTML='<span class="back">?</span>';
+  d.onclick=()=>{if(memLock||d.classList.contains("open")||d.classList.contains("done"))return;
+   d.classList.add("open");if(c.cn){d.classList.add("cnc","cn");say(c.t)}d.textContent=c.t;memOpen.push({d,c});
+   if(memOpen.length===2){const[a,b]=memOpen;
+    if(a.c.id===b.c.id){a.d.classList.add("done");b.d.classList.add("done");memOpen=[];memPairs++;addStar();
+     $("memFb").innerHTML=`<span class="cn">${a.c.w[0]}</span> ${a.c.w[1]} = ${a.c.w[2]} ✅`;
+     if(memPairs===8)$("memFb").innerHTML='<span class="cn">太棒了！</span> Tutte le coppie trovate! 🎉'}
+    else{memLock=true;a.d.classList.add("wrong");b.d.classList.add("wrong");
+     setTimeout(()=>{[a,b].forEach(x=>{x.d.className="card";x.d.innerHTML='<span class="back">?</span>'});memOpen=[];memLock=false},900)}}};
+  $("memGrid").appendChild(d)})}
+initMemory();
+function solveMemory(){
+ $("memGrid").querySelectorAll(".card").forEach(d=>{if(!d.classList.contains("done")){d.className="card";d.innerHTML='<span class="back">?</span>'}});memOpen=[];
+ $("memFb").innerHTML=memPick.map(w=>`<span class="cn">${w[0]}</span> ${py(w)} = ${w[2]}`).join("<br>")}
+
+/* ---------- 2 QUIZ ---------- */
+const tones={a:"āáǎà",e:"ēéěè",i:"īíǐì",o:"ōóǒò",u:"ūúǔù",ü:"ǖǘǚǜ"};
+function wrongTone(p){
+ const syl=p.split(" ");
+ for(let k=0;k<20;k++){
+  const s=[...syl];const i=Math.floor(Math.random()*s.length);let x=s[i],done=false;
+  for(const [b,t] of Object.entries(tones)){const idx=[...t].findIndex(c=>x.includes(c));
+   if(idx>=0){const n=shuffle([0,1,2,3].filter(z=>z!==idx))[0];x=x.replace(t[idx],t[n]);done=true;break}}
+  if(!done)continue;s[i]=x;const r=s.join("");if(r!==p.replace(/ /g,""))return r}
+ return null}
+let qList=[],qi=0,qScore=0;
+function initQuiz(){qList=shuffle(W).slice(0,12).map((w,i)=>({w,type:i%3}));qi=0;qScore=0;showQ()}
+function showQ(){
+ $("qFb").textContent="";
+ if(qi>=qList.length){$("qProg").textContent="";$("qBox").innerHTML=`<div class="qmain cn">加油！</div><p style="font-size:1.2rem">Hai fatto <b>${qScore}/${qList.length}</b></p><p style="margin-top:14px"><button class="btn" onclick="initQuiz()">🔄 Gioca ancora</button></p>`;return}
+ const {w,type}=qList[qi];$("qProg").textContent=`Domanda ${qi+1} / ${qList.length}`;
+ let label,main,opts,correct,cnOpts;
+ if(type===0){label="Che cosa significa?";main=`<div class="qmain cn">${w[0]} <button class="audio" onclick="say('${w[0]}')">🔊</button></div>`;
+  correct=w[2];opts=shuffle([w[2],...shuffle(W.filter(x=>x!==w)).slice(0,3).map(x=>x[2])]);cnOpts=false}
+ else if(type===1){label="Qual è il carattere?";main=`<div class="qmain it">${w[2]}</div>`;
+  correct=w[0];opts=shuffle([w[0],...shuffle(W.filter(x=>x!==w)).slice(0,3).map(x=>x[0])]);cnOpts=true}
+ else{label="Qual è il pinyin giusto?";main=`<div class="qmain cn">${w[0]}</div>`;correct=py(w);
+  const s=new Set([correct]);let g=0;while(s.size<4&&g<60){const r=wrongTone(w[1]);if(r)s.add(r);g++}
+  W.filter(x=>x!==w).forEach(x=>{if(s.size<4)s.add(py(x))});opts=shuffle([...s]);cnOpts=false}
+ $("qBox").innerHTML=`<div class="qtype">${label}</div>${main}<div class="opts">${opts.map(o=>`<button class="opt ${cnOpts?"cnc cn":""}">${o}</button>`).join("")}</div><p style="margin-top:16px"><button class="btn sol2" id="qSol">👀 Soluzione</button></p>`;
+ $("qSol").onclick=()=>{$("qSol").disabled=true;$("qBox").querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===correct)x.classList.add("ok")});
+  $("qFb").innerHTML=`<span class="cn">${w[0]}</span> = ${py(w)} · ${w[2]}`;say(w[0]);setTimeout(()=>{qi++;showQ()},2600)};
+ $("qBox").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{$("qSol").disabled=true;
+  $("qBox").querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===correct)x.classList.add("ok")});
+  if(b.textContent===correct){qScore++;addStar();$("qFb").innerHTML=`<span class="cn">${rnd(bravo)}</span>`}
+  else{b.classList.add("no");$("qFb").innerHTML=`<span class="cn">${w[0]}</span> = ${py(w)} · ${w[2]}`}
+  say(w[0]);setTimeout(()=>{qi++;showQ()},1600)})}
+initQuiz();
+
+/* ---------- 3 COMPLETA ---------- */
+const FILL={"Testo 1": [["上次那", "份", "工作他只做了两个月。", "Il lavoro precedente l'ha fatto solo per due mesi."], ["他", "以为", "新工作比以前的好，没想到还没有以前好。", "Credeva che il nuovo lavoro fosse migliore, invece è peggio di prima."], ["不要太着急", "赚", "钱，多学习才是最重要的。", "Non avere troppa fretta di guadagnare: imparare tanto è la cosa più importante."], ["别", "提", "了，我不想再说这件事。", "Lascia perdere, non voglio più parlarne."], ["我", "完全", "不明白他的意思。", "Non capisco per niente cosa vuole dire."]], "Testo 2": [["那份", "调查", "还要多长时间才能做完？", "Quanto tempo ci vuole ancora per finire quell'indagine?"], ["按", "原来", "的计划应该是两周。", "Secondo il piano originale dovevano essere due settimane."], ["我们可以", "提前", "完成。", "Possiamo finire in anticipo."], ["我", "保证", "周末做完。", "Prometto che lo finisco entro il fine settimana."], ["他把当天", "计划", "要做的事情写在笔记本上。", "Scrive sul quaderno le cose che ha in programma di fare quel giorno."], ["这样可以", "提醒", "自己安排好时间。", "Così si ricorda di organizzare bene il tempo."], ["我的房间太", "乱", "了。", "La mia camera è troppo in disordine."]], "Testo 3": [["他在上海做", "生意", "。", "Fa affari a Shanghai."], ["我们和那个公司的生意终于", "谈", "成了。", "L'affare con quella società finalmente è andato in porto."], ["做生意", "并", "不容易。", "Fare affari non è affatto facile."], ["万事开头难，重要的是要多", "积累", "经验。", "Ogni inizio è difficile: l'importante è accumulare esperienza."], ["他有很多工作", "经验", "。", "Ha molta esperienza di lavoro."], ["别担心，", "一切", "都会好的。", "Non preoccuparti, andrà tutto bene."]], "Testi 4 e 5": [["我们今年的工作都已经", "按照", "计划完成了。", "Abbiamo già finito tutto il lavoro di quest'anno secondo il piano."], ["因为大家", "按时", "完成了工作，公司很高兴。", "Siccome tutti hanno finito il lavoro in tempo, l'azienda è contenta."], ["公司决定这个月给每人多发三千元", "奖金", "。", "L'azienda ha deciso di dare a ognuno un bonus di 3000 yuan questo mese."], ["他的", "工资", "不太高。", "Il suo stipendio non è molto alto."], ["要学习与同事交流的", "方法", "。", "Bisogna imparare il modo di comunicare con i colleghi."], ["读书可以积累", "知识", "。", "Leggendo si accumulano conoscenze."], ["下大雨了，我", "不得不", "坐出租车。", "Piove forte, devo per forza prendere il taxi."], ["他忙得", "甚至", "没有时间吃饭。", "È così impegnato che non ha nemmeno il tempo di mangiare."], ["最需要的就是对工作的", "责任", "心。", "La cosa più necessaria è il senso di responsabilità verso il lavoro."], ["祝你一切", "顺利", "！", "Ti auguro che tutto vada bene!"], ["非常", "感谢", "大家的帮助。", "Grazie mille a tutti per l'aiuto."], ["我告诉你一个好", "消息", "。", "Ti do una bella notizia."]]};
+const FPY={"Testo 1": [["Shàng cì nà", "gōngzuò tā zhǐ zuò le liǎng ge yuè."], ["Tā", "xīn gōngzuò bǐ yǐqián de hǎo, méi xiǎngdào hái méiyǒu yǐqián hǎo."], ["Búyào tài zháojí", "qián, duō xuéxí cái shì zuì zhòngyào de."], ["Bié", "le, wǒ bù xiǎng zài shuō zhè jiàn shì."], ["Wǒ", "bù míngbai tā de yìsi."]], "Testo 2": [["Nà fèn", "hái yào duō cháng shíjiān cái néng zuòwán?"], ["Àn", "de jìhuà yīnggāi shì liǎng zhōu."], ["Wǒmen kěyǐ", "wánchéng."], ["Wǒ", "zhōumò zuòwán."], ["Tā bǎ dàngtiān", "yào zuò de shìqing xiě zài bǐjìběn shang."], ["Zhèyàng kěyǐ", "zìjǐ ānpái hǎo shíjiān."], ["Wǒ de fángjiān tài", "le."]], "Testo 3": [["Tā zài Shànghǎi zuò", "."], ["Wǒmen hé nàge gōngsī de shēngyi zhōngyú", "chéng le."], ["Zuò shēngyi", "bù róngyì."], ["Wànshì kāitóu nán, zhòngyào de shì yào duō", "jīngyàn."], ["Tā yǒu hěn duō gōngzuò", "."], ["Bié dānxīn,", "dōu huì hǎo de."]], "Testi 4 e 5": [["Wǒmen jīnnián de gōngzuò dōu yǐjīng", "jìhuà wánchéng le."], ["Yīnwèi dàjiā", "wánchéng le gōngzuò, gōngsī hěn gāoxìng."], ["Gōngsī juédìng zhège yuè gěi měi rén duō fā sānqiān yuán", "."], ["Tā de", "bú tài gāo."], ["Yào xuéxí yǔ tóngshì jiāoliú de", "."], ["Dúshū kěyǐ jīlěi", "."], ["Xià dà yǔ le, wǒ", "zuò chūzūchē."], ["Tā máng de", "méiyǒu shíjiān chī fàn."], ["Zuì xūyào de jiù shì duì gōngzuò de", "xīn."], ["Zhù nǐ yíqiè", "!"], ["Fēicháng", "dàjiā de bāngzhù."], ["Wǒ gàosu nǐ yí ge hǎo", "."]]};
+let fillPy=true;
+const wordPy=(w,first)=>{const x=W.find(v=>v[0]===w);let r=x?py(x):"";return first?r.charAt(0).toUpperCase()+r.slice(1):r};
+function pyLine(i){const [a,b]=FPY[fillKey][i];return `${a}${a?" ":""}<span class="pyslot" data-i="${i}">＿＿</span>${/^[.,?!]/.test(b)?"":" "}${b}`}
+function showPy(i){const el=$("fillList").querySelector(`.pyslot[data-i="${i}"]`);if(el)el.textContent=wordPy(FILL[fillKey][i][1],!FPY[fillKey][i][0])}
+function togglePy(){fillPy=!fillPy;$("fillList").classList.toggle("nopy",!fillPy);$("pyBtn").textContent=fillPy?"🔤 Nascondi pinyin":"🔤 Mostra pinyin"}
+let fillKey="Testo 1",fillSel=null,fillAns={};
+function renderTabs(){$("fillTabs").innerHTML=Object.keys(FILL).map(k=>`<button class="${k===fillKey?"on":""}" data-k="${k}">${k}</button>`).join("");
+ $("fillTabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{fillKey=b.dataset.k;renderTabs();renderFill()})}
+function renderFill(){
+ fillSel=null;fillAns={};$("fillFb").textContent="";const L=FILL[fillKey];
+ $("fillBank").innerHTML=shuffle(L.map((x,i)=>({w:x[1],i}))).map(o=>`<span class="chip" data-w="${o.w}">${o.w}</span>`).join("");
+ $("fillList").innerHTML=L.map((x,i)=>`<div class="frase"><span class="pyl">${pyLine(i)}</span><span class="cn">${i+1}. ${x[0]}<span class="slot" data-i="${i}">&nbsp;</span>${x[2]}</span><span class="trad">${x[3]}</span></div>`).join("");
+ $("fillBank").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{if(c.classList.contains("used"))return;
+  $("fillBank").querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");fillSel=c;say(c.dataset.w)});
+ $("fillList").querySelectorAll(".slot").forEach(s=>s.onclick=()=>{const i=s.dataset.i;s.classList.remove("ok","no");
+  if(fillAns[i]){fillAns[i].chip.classList.remove("used");delete fillAns[i];s.innerHTML="&nbsp;"}
+  if(fillSel){fillAns[i]={w:fillSel.dataset.w,chip:fillSel};s.textContent=fillSel.dataset.w;fillSel.classList.remove("sel");fillSel.classList.add("used");fillSel=null}})}
+function checkFill(){const L=FILL[fillKey];let ok=0;
+ $("fillList").querySelectorAll(".slot").forEach(s=>{const i=s.dataset.i;s.classList.remove("ok","no");
+  if(!fillAns[i])return;if(fillAns[i].w===L[i][1]){s.classList.add("ok");ok++;showPy(i)}else s.classList.add("no")});
+ const full=ok===L.length;if(full)addStar(2);
+ $("fillFb").innerHTML=full?`<span class="cn">${rnd(bravo)}</span> ${ok}/${L.length} — perfetto! 🎉`:`${ok}/${L.length} giuste. Tocca le parole rosse per cambiarle.`}
+function solveFill(){const L=FILL[fillKey];
+ $("fillList").querySelectorAll(".slot").forEach(s=>{const i=s.dataset.i;s.classList.remove("no");
+  if(!(fillAns[i]&&fillAns[i].w===L[i][1])){s.textContent=L[i][1];s.classList.add("ok")}showPy(i)});
+ $("fillBank").querySelectorAll(".chip").forEach(c=>c.classList.add("used"));
+ $("fillFb").textContent="Ecco la soluzione: leggi le frasi ad alta voce! 📖"}
+renderTabs();renderFill();
+
+/* ---------- 4 GRAMMATICA ---------- */
+const GQ=[["我＿＿你已经走了，原来你还在这儿！", ["以为", "原来", "按照"], "以为", "以为 = credere una cosa che poi si scopre sbagliata."], ["她汉语说得那么好，我还＿＿她是中国人。", ["以为", "并", "甚至"], "以为", "以为: avevo un'idea sbagliata (in realtà non è cinese)."], ["我还以为是谁呢，＿＿是你啊！", ["原来", "按照", "并"], "原来", "原来 = «ecco che…, si scopre che…»: scopri una cosa che prima non sapevi."], ["按＿＿的计划应该是两周。", ["原来", "以为", "甚至"], "原来", "原来 + 的 + nome = originale, di prima: il piano originale."], ["这个问题＿＿不难，你别担心。", ["并", "甚至", "按照"], "并", "并 + 不 rafforza la negazione: «non è affatto difficile»."], ["我原来以为做生意很简单，其实＿＿不容易。", ["并", "以为", "原来"], "并", "并不 smentisce l'idea di prima: «in realtà non è affatto facile»."], ["我们今年的工作都已经＿＿计划完成了。", ["按照", "甚至", "并"], "按照", "按照 + nome = secondo, in base a (计划, 要求…)."], ["请＿＿老师的要求写作业。", ["按照", "以为", "原来"], "按照", "按照 + 要求: «secondo le indicazioni dell'insegnante»."], ["他忙得＿＿没有时间吃饭。", ["甚至", "并", "按照"], "甚至", "A，甚至 B = perfino: non avere tempo di mangiare è il caso più estremo."], ["她们俩长得太像了，＿＿她们的妈妈也常常认错。", ["甚至", "并", "原来"], "甚至", "甚至……也/都 = perfino: perfino la loro mamma le confonde."]];
+const GIT=["Pensavo che te ne fossi già andato, e invece sei ancora qui!", "Parla così bene il cinese che credevo fosse cinese.", "Mi chiedevo chi fosse… ah, sei tu!", "Secondo il piano originale dovevano essere due settimane.", "Questo problema non è affatto difficile, non preoccuparti.", "Credevo che fare affari fosse semplice, in realtà non è affatto facile.", "Abbiamo già finito tutto il lavoro di quest'anno secondo il piano.", "Fate i compiti secondo le indicazioni dell'insegnante.", "È così impegnato che non ha nemmeno il tempo di mangiare.", "Si somigliano così tanto che perfino la loro mamma le confonde spesso."];
+const LIT=["Ah, sei tu! Per poco non ti riconoscevo.", "All'università studiavo cinese, solo che poi sono diventato avvocato.", "Dovevo tornare già martedì, ma l'azienda mi ha chiesto di indagare ancora.", "Quando le sono arrivato vicino, ho scoperto che avevo sbagliato persona.", "Questo libro avrei dovuto restituirtelo ieri.", "Gli studenti, di regola, dovrebbero fare i compiti in tempo.", "Ecco perché fa così freddo: sta nevicando!", "Prima non sapeva guidare, ora guida benissimo."];
+const OPY={"以为": "yǐwéi", "原来": "yuánlái", "按照": "ànzhào", "并": "bìng", "甚至": "shènzhì", "本来": "běnlái"};
+const GPY=["Wǒ __ nǐ yǐjīng zǒu le, yuánlái nǐ hái zài zhèr!", "Tā Hànyǔ shuō de nàme hǎo, wǒ hái __ tā shì Zhōngguó rén.", "Wǒ hái yǐwéi shì shéi ne, __ shì nǐ a!", "Àn __ de jìhuà yīnggāi shì liǎng zhōu.", "Zhège wèntí __ bù nán, nǐ bié dānxīn.", "Wǒ yuánlái yǐwéi zuò shēngyi hěn jiǎndān, qíshí __ bù róngyì.", "Wǒmen jīnnián de gōngzuò dōu yǐjīng __ jìhuà wánchéng le.", "Qǐng __ lǎoshī de yāoqiú xiě zuòyè.", "Tā máng de __ méiyǒu shíjiān chī fàn.", "Tāmen liǎ zhǎng de tài xiàng le, __ tāmen de māma yě chángcháng rèncuò."];
+const cap=(t,first)=>first?t.charAt(0).toUpperCase()+t.slice(1):t;
+const pyTpl=(t,pre)=>`<span class="pyl">${t.replace("__",`<span class="pyslot" id="${pre}">＿＿</span>`)}</span>`;
+function fillPySlot(id,tpl,ans){const el=$(id);if(el)el.textContent=ans.map(w=>cap(OPY[w]||"",tpl.startsWith("__"))).join(" / ")}
+const optBtn=(o,i)=>`<button data-q="${i}" data-v="${o}"><span class="ob"><span class="tp">${OPY[o]||""}</span>${o}</span></button>`;
+function togglePyS(sec,btn){const on=$(sec).classList.toggle("nopy");$(btn).textContent=on?"🔤 Mostra pinyin":"🔤 Nascondi pinyin"}
+function showG(i,silent){const q=GQ[i],box=$("gramList").querySelector(`.o[data-i="${i}"]`);box.dataset.done=1;
+ box.querySelectorAll("button[data-q]").forEach(x=>{x.classList.remove("no");if(x.dataset.v===q[2])x.classList.add("ok")});
+ $("gexp"+i).classList.add("show");fillPySlot("gpy"+i,GPY[i],[q[2]]);if(!silent)say(q[0].replace("＿＿",q[2]))}
+function renderGram(){
+ $("gramList").innerHTML=GQ.map((q,i)=>`<div class="gq">${pyTpl(GPY[i],"gpy"+i)}<div class="s cn">${i+1}. ${q[0]}</div><span class="trad" style="margin:-4px 0 10px">🇮🇹 ${GIT[i]}</span><div class="o cn" data-i="${i}">${shuffle(q[1]).map(o=>optBtn(o,i)).join("")}<button class="sol" data-g="${i}">👀 Soluzione</button></div><div class="exp" id="gexp${i}">${q[3]}</div></div>`).join("");
+ $("gramList").querySelectorAll(".sol").forEach(b=>b.onclick=()=>showG(+b.dataset.g));
+ $("gramList").querySelectorAll("button[data-q]").forEach(b=>b.onclick=()=>{const q=GQ[b.dataset.q],box=b.parentElement;
+  if(box.dataset.done)return;
+  if(b.dataset.v===q[2]){addStar();showG(+b.dataset.q)}
+  else{b.classList.add("no");setTimeout(()=>b.classList.remove("no"),700)}})}
+function solveAllG(){GQ.forEach((_,i)=>showG(i,true))}
+renderGram();
+
+/* ---------- 5 原来 / 本来 ---------- */
+const LQ=[["＿＿是你啊，我差点儿没认出来。", ["原来", "本来"], ["原来"], "<b>Regola 1.</b> Scopri una cosa che non sapevi (è una persona che conosci!) → solo <b>原来</b>."], ["我＿＿大学是学中文专业的，只是后来当了律师。", ["原来", "本来"], ["原来", "本来"], "<b>Regola 3.</b> «In origine» studiavo cinese, poi è cambiato → vanno bene <b>tutti e due</b>."], ["我＿＿星期二就能回来，但是公司让我再调查一下。", ["原来", "本来"], ["原来", "本来"], "<b>Regola 3.</b> Prima era previsto così, poi è cambiato → vanno bene <b>tutti e due</b>."], ["等到了她身边，才发现＿＿我认错人了。", ["原来", "本来"], ["原来"], "<b>Regola 1.</b> 发现 + scoperta di una cosa che non sapevi → solo <b>原来</b>."], ["这本书＿＿应该昨天还你。", ["原来", "本来"], ["本来"], "<b>Regola 2.</b> «Di regola avrei dovuto» (con 应该) → solo <b>本来</b>."], ["学生＿＿就应该按时完成作业。", ["原来", "本来"], ["本来"], "<b>Regola 2.</b> «È ovvio che, di regola» (本来就应该) → solo <b>本来</b>."], ["怪不得这么冷，＿＿下雪了！", ["原来", "本来"], ["原来"], "<b>Regola 1.</b> Capisci all'improvviso il motivo (怪不得 = ecco perché) → solo <b>原来</b>."], ["他＿＿不会开车，现在开得特别好。", ["原来", "本来"], ["原来", "本来"], "<b>Regola 3.</b> Prima non sapeva guidare, poi è cambiato → vanno bene <b>tutti e due</b>."]];
+const LPY=["__ shì nǐ a, wǒ chàdiǎnr méi rèn chūlai.", "Wǒ __ dàxué shì xué Zhōngwén zhuānyè de, zhǐshì hòulái dāng le lǜshī.", "Wǒ __ xīngqī'èr jiù néng huílai, dànshì gōngsī ràng wǒ zài diàochá yíxià.", "Děng dào le tā shēnbiān, cái fāxiàn __ wǒ rèncuò rén le.", "Zhè běn shū __ yīnggāi zuótiān huán nǐ.", "Xuésheng __ jiù yīnggāi ànshí wánchéng zuòyè.", "Guàibude zhème lěng, __ xià xuě le!", "Tā __ bú huì kāichē, xiànzài kāi de tèbié hǎo."];
+function showL(i){const q=LQ[i],box=$("lingList").querySelector(`.o[data-i="${i}"]`);box.dataset.done=1;
+ box.querySelectorAll("button[data-q]").forEach(x=>{x.classList.remove("no");if(q[2].includes(x.dataset.v))x.classList.add("ok")});
+ $("lexp"+i).classList.add("show");fillPySlot("lpy"+i,/(^|\. )__/.test(LPY[i])?"__":LPY[i],q[2])}
+function renderLing(){
+ $("lingList").innerHTML=LQ.map((q,i)=>`<div class="gq">${pyTpl(LPY[i],"lpy"+i)}<div class="s cn">${i+1}. ${q[0]}</div><span class="trad" style="margin:-4px 0 10px">🇮🇹 ${LIT[i]}</span><div class="o cn" data-i="${i}">${q[1].map(o=>optBtn(o,i)).join("")}<button class="sol" data-l="${i}">👀 Soluzione</button></div><div class="exp" id="lexp${i}">${q[3]}</div></div>`).join("");
+ $("lingList").querySelectorAll(".sol").forEach(b=>b.onclick=()=>showL(+b.dataset.l));
+ $("lingList").querySelectorAll("button[data-q]").forEach(b=>b.onclick=()=>{const q=LQ[b.dataset.q],box=b.parentElement;
+  if(box.dataset.done)return;
+  if(q[2].includes(b.dataset.v)){addStar();showL(+b.dataset.q)}
+  else{b.classList.add("no");$("lexp"+b.dataset.q).classList.add("show")}})}
+function solveAllL(){LQ.forEach((_,i)=>showL(i))}
+renderLing();
+
+/* ---------- 6 ORDINE ---------- */
+const OQ=[{"p": ["wǒ yǐwéi", "tā shì Zhōngguó rén,", "yuánlái", "tā shì Rìběn rén"], "t": ["我以为", "他是中国人，", "原来", "他是日本人"], "a": [[0, 1, 2, 3]], "it": "Pensavo che fosse cinese, invece è giapponese."}, {"p": ["àn", "yuánlái de", "jìhuà", "yīnggāi shì", "liǎng zhōu"], "t": ["按", "原来的", "计划", "应该是", "两周"], "a": [[0, 1, 2, 3, 4]], "it": "Secondo il piano originale dovevano essere due settimane."}, {"p": ["zhège wèntí", "bìng", "bù", "nán"], "t": ["这个问题", "并", "不", "难"], "a": [[0, 1, 2, 3]], "it": "Questo problema non è affatto difficile."}, {"p": ["wǒmen", "yǐjīng", "ànzhào jìhuà", "wánchéng le", "gōngzuò"], "t": ["我们", "已经", "按照计划", "完成了", "工作"], "a": [[0, 1, 2, 3, 4], [0, 2, 1, 3, 4]], "it": "Abbiamo già finito il lavoro secondo il piano."}, {"p": ["tā", "máng de", "shènzhì", "méiyǒu shíjiān", "chī fàn"], "t": ["他", "忙得", "甚至", "没有时间", "吃饭"], "a": [[0, 1, 2, 3, 4]], "it": "È così impegnato che non ha nemmeno il tempo di mangiare."}, {"p": ["niánqīng rén", "yào", "duō", "jīlěi", "jīngyàn"], "t": ["年轻人", "要", "多", "积累", "经验"], "a": [[0, 1, 2, 3, 4]], "it": "I giovani devono accumulare molta esperienza."}, {"p": ["qǐng", "tíxǐng wǒ", "míngtiān", "gěi māma", "dǎ diànhuà"], "t": ["请", "提醒我", "明天", "给妈妈", "打电话"], "a": [[0, 1, 2, 3, 4]], "it": "Ricordami di telefonare alla mamma domani."}, {"p": ["wǒ", "bǎozhèng", "zhōumò", "zuòwán"], "t": ["我", "保证", "周末", "做完"], "a": [[0, 1, 2, 3]], "it": "Prometto che lo finisco entro il fine settimana."}, {"p": ["xià dà yǔ le,", "wǒ", "bù dé bù", "zuò", "chūzūchē"], "t": ["下大雨了，", "我", "不得不", "坐", "出租车"], "a": [[0, 1, 2, 3, 4]], "it": "Piove forte, devo per forza prendere il taxi."}, {"p": ["bié dānxīn,", "yíqiè", "dōu", "huì hǎo de"], "t": ["别担心，", "一切", "都", "会好的"], "a": [[0, 1, 2, 3]], "it": "Non preoccuparti, andrà tutto bene."}];
+let oi=0,oSeq=[],oDone=false;const oOrder=shuffle(OQ.map((_,i)=>i));
+function renderOrder(){const q=OQ[oOrder[oi]];oSeq=[];oDone=false;$("oFb").textContent="";
+ $("oProg").textContent=`Frase ${oi+1} / ${OQ.length}`;$("oHint").innerHTML="🇮🇹 "+q.it;$("oTarget").classList.remove("ordok");
+ let idx=shuffle(q.t.map((_,i)=>i));if(idx.every((v,i)=>v===i))idx=idx.reverse();
+ $("oPool").innerHTML=idx.map(i=>`<span class="tok" data-i="${i}"><span class="tp">${q.p[i]}</span>${q.t[i]}</span>`).join("");$("oTarget").innerHTML="";
+ $("oPool").querySelectorAll(".tok").forEach(t=>t.onclick=()=>moveTok(t))}
+function moveTok(t){if(oDone)return;
+ if(t.parentElement.id==="oPool"){$("oTarget").appendChild(t);oSeq.push(+t.dataset.i)}
+ else{$("oPool").appendChild(t);oSeq=oSeq.filter(x=>x!==+t.dataset.i)}}
+function checkOrder(){const q=OQ[oOrder[oi]];
+ if(oSeq.length<q.t.length){$("oFb").textContent="Usa tutti i blocchi!";return}
+ if(q.a.some(a=>a.join()===oSeq.join())){if(!oDone)addStar();oDone=true;$("oTarget").classList.add("ordok");
+  $("oFb").innerHTML=`<span class="cn">${rnd(bravo)}</span> ✅`;say(oSeq.map(i=>q.t[i]).join(""))}
+ else $("oFb").textContent="Non ancora… riprova! 💪"}
+function solveOrder(){const q=OQ[oOrder[oi]];oDone=true;
+ $("oPool").innerHTML="";$("oTarget").innerHTML=q.a[0].map(i=>`<span class="tok"><span class="tp">${q.p[i]}</span>${q.t[i]}</span>`).join("");$("oTarget").classList.add("ordok");
+ $("oFb").textContent=q.a.length>1?"Ecco la soluzione (si può dire anche in un altro ordine).":"Ecco la soluzione!";say(q.a[0].map(i=>q.t[i]).join(""))}
+function nextOrder(){oi=(oi+1)%OQ.length;renderOrder()}
+renderOrder();
+</script>
+<script src="../voce.js"></script>
+</body>
+</html>
