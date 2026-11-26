@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSK 4 · Lezione 4 · Parole 1–10 – Maja Jiejie</title>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script>
+<style>
+:root{--crema:#FBF3E4;--carta:#FFFDF7;--rosso:#C8102E;--oro:#E9B949;--oro-chiaro:#FBEBC0;--verde:#3F8A2A;--verde-chiaro:#CDE8BC;--azzurro:#2F7FB8;--ink:#2B1B17;--grigio:#6A5A55;--fondo:#E8D9C4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--ink);font-family:"Montserrat","Segoe UI",system-ui,sans-serif}
+.cn{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei","Heiti SC",sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:18px 14px 50px}
+header{text-align:center;background:var(--crema);border:4px solid var(--rosso);border-radius:22px;padding:18px 14px;box-shadow:inset 0 0 0 6px var(--crema),inset 0 0 0 9px var(--oro)}
+header .lez{color:var(--grigio);font-weight:600;letter-spacing:1px}
+header h1{margin:6px 0;font-size:2.4rem;color:var(--rosso)}
+header .it{font-weight:700;color:var(--azzurro)}
+header p{margin:10px auto 0;max-width:620px;line-height:1.5}
+.indice{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.indice a{text-decoration:none;color:var(--ink);background:var(--carta);border:3px solid var(--ink);border-radius:999px;padding:4px 12px 4px 6px;font-weight:600;box-shadow:0 3px 0 var(--ink);display:inline-flex;gap:6px;align-items:center}
+.indice a .n{background:var(--oro);border-radius:999px;min-width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem}
+.indice a .h{font-size:1.2rem}
+.parola{background:var(--carta);border:4px solid var(--ink);border-radius:22px;margin-top:24px;padding:18px;box-shadow:0 6px 0 var(--ink);scroll-margin-top:12px}
+.testa{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
+.num{background:var(--rosso);color:#fff;font-weight:800;font-size:1.3rem;border-radius:14px;padding:4px 12px;align-self:flex-start}
+.caselle{display:flex;gap:10px;flex-wrap:wrap}
+.casella{width:150px;height:150px;background:#fff;border:3px solid var(--rosso);border-radius:10px;position:relative}
+.casella svg.g{position:absolute;inset:0;width:100%;height:100%}
+.casella .hw{position:absolute;inset:0}
+.casella .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:110px}
+.info{flex:1;min-width:220px}
+.pinyin{font-size:2rem;font-weight:700;color:var(--rosso)}
+.trad{font-size:1.3rem;font-weight:700;margin-top:2px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{border:3px solid var(--ink);background:var(--carta);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 4px 0 var(--ink);font-family:inherit;color:var(--ink)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn.oro{background:var(--oro)}
+.btn.verde{background:var(--verde-chiaro)}
+.msg{min-height:1.4em;margin-top:8px;font-weight:700;color:var(--verde)}
+.frase{margin-top:14px;background:var(--crema);border-left:6px solid var(--oro);border-radius:10px;padding:10px 14px}
+.frase .fpy{color:var(--rosso);font-size:1rem}
+.frase .fcn{font-size:1.6rem;line-height:1.5}
+.frase .fit{color:var(--grigio)}
+.frase button{margin-left:6px;border:none;background:var(--oro-chiaro);border-radius:50%;width:34px;height:34px;cursor:pointer;vertical-align:middle}
+/* quiz */
+.quiz{background:var(--carta);border:4px solid var(--ink);border-radius:22px;margin-top:30px;padding:20px;box-shadow:0 6px 0 var(--ink);text-align:center}
+.quiz h2{margin:0 0 6px;color:var(--rosso)}
+.qtipo{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--grigio);font-weight:800;margin-top:10px}
+.qmain{font-size:2.6rem;margin:8px 0;font-weight:700}
+.qmain.it{font-size:1.5rem;color:var(--azzurro)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.opt{border:3px solid var(--ink);border-radius:16px;background:var(--oro-chiaro);padding:10px;font-size:1.25rem;cursor:pointer;font-weight:700;font-family:inherit;color:var(--ink)}
+.opt.cnc{font-size:2rem}
+.opt.ok{background:var(--verde);color:#fff}
+.opt.no{background:var(--rosso);color:#fff}
+.qfb{min-height:1.6em;margin-top:12px;font-weight:700}
+footer{text-align:center;color:var(--grigio);margin-top:30px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="lez">HSK 4 · LEZIONE 4 · PAROLE NUOVE 1–10</div>
+  <h1 class="cn">不要太着急赚钱</h1>
+  <div class="it">Non avere troppa fretta di guadagnare</div>
+  <p>Per ogni parola: guarda l'<b>ordine dei tratti</b>, poi premi <b>«✍️ Scrivi tu»</b> e scrivila col dito o col mouse. Ascolta la frase e leggila ad alta voce. In fondo c'è un <b>quiz</b> per vedere se te le ricordi!</p>
+  <div class="indice" id="indice"></div>
+</header>
+<div id="lista"></div>
+
+<section class="quiz" id="quiz">
+  <h2>🏆 Quiz finale</h2>
+  <div id="qProg" style="font-weight:700;color:var(--grigio)"></div>
+  <div id="qBox"></div>
+  <div class="qfb" id="qFb"></div>
+</section>
+<footer>Maja Jiejie · 加油！</footer>
+</div>
+
+<script>
+const P=[
+ {h:"提",py:"tí",it:"menzionare, parlare di",f:["别提了，我不想再说这件事。","Bié tí le, wǒ bù xiǎng zài shuō zhè jiàn shì.","Lascia perdere, non voglio più parlarne."]},
+ {h:"以为",py:"yǐwéi",it:"credere (sbagliando)",f:["我以为他是中国人。","Wǒ yǐwéi tā shì Zhōngguó rén.","Credevo che fosse cinese (e invece no)."]},
+ {h:"份",py:"fèn",it:"classificatore per lavori, documenti",f:["我找到了一份新工作。","Wǒ zhǎodào le yí fèn xīn gōngzuò.","Ho trovato un nuovo lavoro."]},
+ {h:"完全",py:"wánquán",it:"completamente",f:["我完全不明白他的意思。","Wǒ wánquán bù míngbai tā de yìsi.","Non capisco per niente cosa vuole dire."]},
+ {h:"赚",py:"zhuàn",it:"guadagnare",f:["他工作很努力，赚了很多钱。","Tā gōngzuò hěn nǔlì, zhuàn le hěn duō qián.","Lavora sodo e ha guadagnato molti soldi."]},
+ {h:"调查",py:"diàochá",it:"indagine; indagare",f:["那份调查还要多长时间才能做完？","Nà fèn diàochá hái yào duō cháng shíjiān cái néng zuòwán?","Quanto tempo ci vuole ancora per finire quell'indagine?"]},
+ {h:"原来",py:"yuánlái",it:"originale; in origine",f:["按原来的计划应该是两周。","Àn yuánlái de jìhuà yīnggāi shì liǎng zhōu.","Secondo il piano originale dovevano essere due settimane."]},
+ {h:"计划",py:"jìhuà",it:"piano, programma; programmare",f:["这个周末你有什么计划？","Zhège zhōumò nǐ yǒu shénme jìhuà?","Che programmi hai per questo fine settimana?"]},
+ {h:"提前",py:"tíqián",it:"in anticipo; anticipare",f:["我们可以提前完成。","Wǒmen kěyǐ tíqián wánchéng.","Possiamo finire in anticipo."]},
+ {h:"保证",py:"bǎozhèng",it:"garantire, promettere",f:["我保证周末做完。","Wǒ bǎozhèng zhōumò zuòwán.","Prometto di finirlo entro il fine settimana."]}
+];
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let zhV=null;function lv(){const v=speechSynthesis.getVoices();zhV=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if("speechSynthesis" in window){lv();speechSynthesis.onvoiceschanged=lv}
+function say(t){try{if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhV)u.voice=zhV;u.rate=.75;speechSynthesis.speak(u)}catch(e){}}
+const GRID='<svg class="g" viewBox="0 0 100 100"><path d="M50 0V100M0 50H100" stroke="#E3CFC0" stroke-width="1" stroke-dasharray="4 4"/><path d="M0 0L100 100M100 0L0 100" stroke="#EADFD3" stroke-width="1" stroke-dasharray="4 4"/></svg>';
+const OK=typeof HanziWriter!=="undefined";
+const W={};
+
+$("indice").innerHTML=P.map((p,i)=>`<a href="#p${i}"><span class="n">${i+1}</span><span class="h cn">${p.h}</span></a>`).join("");
+$("lista").innerHTML=P.map((p,i)=>`<article class="parola" id="p${i}">
+ <div class="testa"><span class="num">${i+1}</span>
+  <div class="caselle">${[...p.h].map((c,k)=>`<div class="casella">${GRID}<div class="hw" id="hw${i}_${k}"></div>${OK?"":`<div class="fallback cn">${c}</div>`}</div>`).join("")}</div>
+  <div class="info"><div class="pinyin">${p.py}</div><div class="trad">${p.it}</div>
+   <div class="btns"><button class="btn oro" onclick="anima(${i})">▶ Guarda i tratti</button><button class="btn verde" onclick="scrivi(${i})">✍️ Scrivi tu</button><button class="btn" onclick="say('${p.h}')">🔊 Ascolta</button></div>
+   <div class="msg" id="msg${i}"></div></div>
+ </div>
+ <div class="frase"><div class="fpy">${p.f[1]}</div><div class="fcn cn">${p.f[0]}<button onclick="say('${p.f[0]}')" aria-label="Ascolta la frase">🔊</button></div><div class="fit">🇮🇹 ${p.f[2]}</div></div>
+</article>`).join("");
+
+if(OK){P.forEach((p,i)=>[...p.h].forEach((c,k)=>{
+ W[i+"_"+k]=HanziWriter.create("hw"+i+"_"+k,c,{width:144,height:144,padding:10,strokeColor:"#C8102E",radicalColor:"#2F7FB8",outlineColor:"#EADFD3",showOutline:true,showCharacter:true,strokeAnimationSpeed:1,delayBetweenStrokes:300,drawingWidth:24,highlightColor:"#3F8A2A"})}))}
+
+async function anima(i){if(!OK)return;$("msg"+i).textContent="";const n=[...P[i].h].length;
+ for(let k=0;k<n;k++){W[i+"_"+k].hideCharacter()}
+ for(let k=0;k<n;k++){await new Promise(r=>W[i+"_"+k].animateCharacter({onComplete:r}))}}
+async function scrivi(i){if(!OK)return;const n=[...P[i].h].length;$("msg"+i).textContent="✍️ Scrivi il primo carattere…";
+ for(let k=0;k<n;k++){await new Promise(r=>W[i+"_"+k].quiz({showHintAfterMisses:2,onComplete:r}));
+  if(k<n-1)$("msg"+i).textContent="✍️ Bene! Ora il carattere successivo…"}
+ $("msg"+i).textContent="太棒了！ Hai scritto "+P[i].h+" 🎉";say(P[i].h)}
+
+/* QUIZ */
+let Q=[],qi=0,qs=0;
+function startQuiz(){Q=shuffle(P).map((p,i)=>({p,t:i%3}));qi=0;qs=0;showQ()}
+function showQ(){$("qFb").textContent="";
+ if(qi>=Q.length){$("qProg").textContent="";$("qBox").innerHTML=`<div class="qmain cn">加油！</div><p style="font-size:1.2rem">Hai fatto <b>${qs}/${Q.length}</b></p><button class="btn oro" onclick="startQuiz()">🔄 Ancora</button>`;return}
+ const {p,t}=Q[qi];$("qProg").textContent=`Domanda ${qi+1} / ${Q.length}`;
+ const altri=shuffle(P.filter(x=>x!==p)).slice(0,3);let lab,main,ok,opts,cn=false;
+ if(t===0){lab="Che cosa significa?";main=`<div class="qmain cn">${p.h}</div>`;ok=p.it;opts=[p,...altri].map(x=>x.it)}
+ else if(t===1){lab="Qual è la parola giusta?";main=`<div class="qmain it">${p.it}</div>`;ok=p.h;opts=[p,...altri].map(x=>x.h);cn=true}
+ else{lab="Qual è il pinyin giusto?";main=`<div class="qmain cn">${p.h}</div>`;ok=p.py;opts=[p,...altri].map(x=>x.py)}
+ $("qBox").innerHTML=`<div class="qtipo">${lab}</div>${main}<div class="opts">${shuffle(opts).map(o=>`<button class="opt ${cn?"cnc cn":""}">${o}</button>`).join("")}</div>`;
+ $("qBox").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{$("qBox").querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===ok)x.classList.add("ok")});
+  if(b.textContent===ok){qs++;$("qFb").textContent="对了！ ✅"}else{b.classList.add("no");$("qFb").textContent=`${p.h} = ${p.py} · ${p.it}`}
+  say(p.h);setTimeout(()=>{qi++;showQ()},1700)})}
+startQuiz();
+</script>
+</body>
+</html>
