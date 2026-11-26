@@ -35,6 +35,7 @@ main{max-width:900px;margin:0 auto;padding:24px 16px 60px}
 <script>
 /* ELENCO LEZIONI: per aggiungerne una, aggiungere una riga qui */
 const LEZIONI=[
+ {corso:'Parliamo cinese 3',titolo:'Lezione 1D · 博客：美丽的中国 · Testo 4 中国的交通情况 (testo con pinyin e traduzione, comprensione, completa, metti in ordine, grammatica, parliamo)',file:'parliamo-cinese-3/lezione-1d-testo4.html',data:'2026-11-26'},
  {corso:'YCT 2',titolo:'Lezione 3 · 你的铅笔呢？ (Melissa Sara)',file:'yct2/lezione3-melissa.html',data:'2026-10-22'},
  {corso:'YCT 2',titolo:'Lezione 4 · 书包里有两本书 (Melissa)',file:'yct2/lezione4-shubao-li-you-liang-ben-shu.html',data:'2026-11-04'},
  {corso:'YCT 2',titolo:'Ordine dei tratti · Lezione 4 书包里有两本书',file:'yct2/tratti-lezione4.html',data:'2026-11-12'},
@@ -127,7 +128,7 @@ const LEZIONI=[
 {corso:'Tesserine',titolo:'Tesserina di Andrea',file:'tesserine/andrea-23ac84.html',data:''},
 {corso:'Tesserine',titolo:'Tesserina di Belinda',file:'tesserine/belinda-3dcb2a.html',data:''},
 ];
-const ORDINE=['Tesserine','YCT 1','YCT 2','YCT 3 libro 4','HSK 2','HSK 3','HSK 4','HSK 5','HSKK',"Il Linguaggio dell'Energia",'Lessico','Parole magiche','Cultura','Grammatica','Scrittura'];
+const ORDINE=['Tesserine','YCT 1','YCT 2','YCT 3 libro 4','HSK 2','HSK 3','HSK 4','HSK 5','Parliamo cinese 3','HSKK',"Il Linguaggio dell'Energia",'Lessico','Parole magiche','Cultura','Grammatica','Scrittura'];
 function fmt(d){if(!d)return'';const[y,m,g]=d.split('-');return g+'/'+m+'/'+y}
 function draw(){
  const q=document.getElementById('q').value.toLowerCase().trim();

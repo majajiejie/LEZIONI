@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Parliamo cinese 3 · Lezione 1D · Testo 4 – Maja Jiejie</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--blu:#6ec3f4;--bordeaux:#922b3e;--arancio:#fb7d24;--giallo:#f4f420;--blu-scuro:#2f5aa8;--marrone:#4a3517;--crema:#fdf6ec;--verde:#3fae5a;--rosso:#e04848}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Montserrat","Segoe UI",system-ui,sans-serif;background:var(--blu);color:#222;min-height:100vh}
+.cn{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei","Heiti SC",sans-serif}
+header{text-align:center;padding:26px 16px 14px}
+header .lez{color:#fff;font-size:1.5rem;font-weight:300;letter-spacing:1px}
+header h1{display:inline-block;background:var(--blu-scuro);color:#fff;font-size:2.6rem;padding:8px 26px;margin:8px 0;transform:rotate(-1deg)}
+header .it{display:block;color:var(--blu-scuro);background:var(--crema);font-weight:800;font-size:1.1rem;padding:6px 18px;margin:4px auto 0;max-width:520px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 12px 18px}
+nav button{border:none;border-radius:30px;padding:10px 16px;font-weight:700;font-size:.92rem;cursor:pointer;background:#fff;color:var(--bordeaux);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+nav button.on{background:var(--giallo);color:#222}
+.stars{position:fixed;top:12px;right:14px;background:var(--giallo);border-radius:30px;padding:6px 14px;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.2);z-index:5}
+section{display:none;max-width:920px;margin:0 auto 40px;padding:22px 18px 28px;border-radius:22px}
+section.on{display:block}
+section:nth-of-type(odd){background:var(--bordeaux)}section:nth-of-type(even){background:var(--arancio)}
+h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
+.istr{color:#fff;text-align:center;margin-bottom:18px;opacity:.95}
+.btn{border:none;border-radius:30px;padding:10px 18px;font-weight:700;cursor:pointer;background:var(--marrone);color:#fff;font-size:.92rem;margin:3px}
+.btn.light{background:#fff;color:var(--marrone)}
+.btn.on{background:var(--giallo);color:#222}
+.center{text-align:center}
+.fb{min-height:28px;text-align:center;color:#fff;font-weight:700;margin-top:12px;font-size:1.15rem}
+.audio{border:none;background:var(--blu);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;vertical-align:middle;flex:none}
+.py{display:none;color:var(--bordeaux);font-size:1.05rem;line-height:1.5;margin-top:4px}
+.tr{display:none;color:var(--blu-scuro);font-weight:600;font-size:1.02rem;line-height:1.5;margin-top:4px}
+.showpy .py,.py.vis{display:block}.showtr .tr,.tr.vis{display:block}
+/* testo */
+.testo{background:var(--crema);border-radius:20px;padding:18px}
+.titolo{text-align:center;color:var(--bordeaux);font-size:1.9rem;font-weight:700;margin-bottom:6px}
+.frase{display:flex;gap:10px;align-items:flex-start;padding:10px 6px;border-bottom:1px dashed #e3cfb5}
+.frase:last-child{border-bottom:none}
+.frase .zh{font-size:1.55rem;line-height:1.7;cursor:pointer}
+.parola{color:var(--verde);font-weight:700}
+.nota{background:#fff;border-radius:14px;padding:12px 16px;margin-top:14px;font-size:.98rem;line-height:1.5}
+/* parole */
+.wlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.w{background:#fff;border-radius:16px;padding:12px;text-align:center}
+.w .c{font-size:1.9rem}.w .p{color:var(--bordeaux);font-weight:600}.w .i{font-size:.9rem;color:#555}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{aspect-ratio:1.6;border-radius:14px;background:var(--blu);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;font-weight:700;padding:6px;font-size:1rem;user-select:none}
+.card .back{font-size:1.6rem;color:#fff}
+.card.open{background:#fff}.card.open.cnc{font-size:1.9rem}
+.card.done{background:var(--giallo);cursor:default}
+.wrong{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* domande */
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:none;border-radius:20px;padding:7px 14px;font-weight:700;cursor:pointer;background:var(--marrone);color:#fff}
+.tabs button.on{background:var(--giallo);color:#222}
+.q{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.q .zh{font-size:1.45rem;line-height:1.6}
+.q .num{display:inline-block;background:var(--bordeaux);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-weight:800;margin-right:8px;font-size:.9rem}
+.q .tools{margin-top:8px}
+.q .tools button{border:none;border-radius:16px;padding:5px 12px;margin:2px;cursor:pointer;font-weight:700;background:var(--crema);color:var(--marrone);font-size:.85rem}
+.ans{display:none;margin-top:8px;background:#eaf7ee;border-radius:12px;padding:10px 12px}
+.ans .zh{font-size:1.3rem;color:var(--verde)}
+.ans.vis{display:block}
+.vf{display:flex;gap:8px;margin-top:8px}
+.vf button{border:none;border-radius:14px;padding:8px 22px;font-size:1.3rem;cursor:pointer;background:var(--giallo);font-weight:700}
+.vf button.ok{background:var(--verde);color:#fff}.vf button.no{background:var(--rosso);color:#fff}
+/* completa */
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+.chip{background:#fff;border-radius:22px;padding:8px 16px;font-size:1.6rem;cursor:pointer;border:3px solid transparent}
+.chip.sel{border-color:var(--marrone);background:var(--giallo)}
+.chip.used{opacity:.35;cursor:default}
+.fr{background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.fr .zh{font-size:1.5rem;line-height:2}
+.slot{display:inline-block;min-width:90px;border-bottom:3px dashed var(--bordeaux);text-align:center;cursor:pointer;padding:0 6px;margin:0 3px;font-weight:700;color:var(--blu-scuro)}
+.slot.ok{border-bottom:3px solid var(--verde);color:var(--verde);cursor:default}
+/* ordine */
+.ord{background:#fff;border-radius:18px;padding:18px;text-align:center}
+.ord .hint{color:var(--blu-scuro);font-weight:700;margin-bottom:12px}
+.line{min-height:66px;border:3px dashed var(--arancio);border-radius:14px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;margin-bottom:12px}
+.pz{background:var(--giallo);border-radius:12px;padding:8px 14px;font-size:1.5rem;cursor:pointer}
+.line .pz{background:var(--blu);color:#fff}
+.line.ok{border-color:var(--verde);background:#eaf7ee}
+/* grammatica */
+.rule{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px;line-height:1.55}
+.rule h3{color:var(--bordeaux);font-size:1.15rem;margin-bottom:4px}
+.rule .es{font-size:1.3rem;margin-top:6px}
+.qbox{background:#fff;border-radius:20px;padding:20px;text-align:center}
+.qtxt{font-size:1.6rem;margin:6px 0 4px}
+.qtxt.it{font-size:1.2rem;font-weight:700;color:var(--blu-scuro)}
+.opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:14px}
+.opt{border:none;border-radius:14px;background:var(--giallo);padding:11px;font-size:1.15rem;cursor:pointer;font-weight:600}
+.opt.ok{background:var(--verde);color:#fff}.opt.no{background:var(--rosso);color:#fff}
+.spieg{margin-top:12px;color:var(--marrone);font-size:.98rem;min-height:22px}
+.prog{color:#fff;text-align:center;margin-bottom:10px;font-weight:700}
+.aiuti{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0 14px}
+.aiuti span{background:var(--crema);border-radius:14px;padding:6px 12px;font-size:1.1rem}
+footer{text-align:center;color:#fff;padding:0 0 30px;font-size:.9rem;opacity:.9}
+</style>
+</head>
+<body>
+<div class="stars">⭐ <span id="stars">0</span></div>
+<header>
+  <div class="lez">Parliamo cinese 3 · Lezione 1D · Testo 4</div>
+  <h1 class="cn">中国的交通情况</h1>
+  <span class="it">I trasporti in Cina · 博客：美丽的中国</span>
+</header>
+<nav id="nav">
+  <button data-s="s1" class="on">📖 Il testo</button>
+  <button data-s="s2">🃏 Parole nuove</button>
+  <button data-s="s3">❓ Comprensione</button>
+  <button data-s="s4">✍️ Completa le frasi</button>
+  <button data-s="s5">🧩 Metti in ordine</button>
+  <button data-s="s6">📐 Grammatica e modi di dire</button>
+  <button data-s="s7">🗣️ Parliamo</button>
+</nav>
+
+<section id="s1" class="on">
+  <h2>课文4 · Leggiamo il testo</h2>
+  <p class="istr">Leggete a turno una frase e traducetela. Clic sulla frase = pinyin e traduzione solo di quella.</p>
+  <div class="center" style="margin-bottom:14px">
+    <button class="btn light" id="bPy">Mostra tutto il pinyin</button>
+    <button class="btn light" id="bTr">Mostra tutta la traduzione</button>
+    <button class="btn" onclick="say(TESTO.map(f=>f[0]).join(''))">🔊 Ascolta tutto</button>
+  </div>
+  <div class="testo" id="testo"></div>
+  <div class="nota"><b>Note culturali.</b> <span class="cn">黄金周</span> Huángjīn zhōu, la "Settimana d'oro": le due settimane di ferie nazionali in Cina, intorno al <span class="cn">国庆节</span> (1° ottobre) e al <span class="cn">春节</span> (Capodanno cinese). <span class="cn">平遥</span> Píngyáo, nello <span class="cn">山西</span> Shānxī: antica città murata, patrimonio UNESCO, famosa per le sue case tradizionali (<span class="cn">传统民居</span>).</div>
+</section>
+
+<section id="s2">
+  <h2>生词 · Parole nuove del testo 4</h2>
+  <p class="istr">Ripassate le parole (🔊 per ascoltarle), poi giocate al memory: carattere ↔ significato.</p>
+  <div class="wlist" id="wlist"></div>
+  <div class="grid" id="mem"></div>
+  <div class="fb" id="memFb"></div>
+  <div class="center" style="margin-top:10px"><button class="btn light" onclick="initMem()">🔄 Nuova partita</button></div>
+</section>
+
+<section id="s3">
+  <h2>Comprensione del testo 4</h2>
+  <p class="istr">Rispondete in cinese con frasi complete. "Risposta" mostra una risposta possibile.</p>
+  <div class="tabs" id="tabsC"><button class="on" data-t="dom">Domande</button><button data-t="vf">对 o 错?</button></div>
+  <div id="cDom"></div>
+  <div id="cVf" style="display:none"></div>
+</section>
+
+<section id="s4">
+  <h2>Completa le frasi · tutta la lezione 1D</h2>
+  <p class="istr">Scegli una parola, poi clicca sullo spazio giusto. Il pinyin e la traduzione aiutano (ma provate prima senza!).</p>
+  <div class="tabs" id="tabsF"></div>
+  <div class="center" style="margin-bottom:12px"><button class="btn light" id="fPy">Pinyin</button><button class="btn light" id="fTr">Traduzione</button></div>
+  <div class="bank cn" id="bank"></div>
+  <div id="frasi"></div>
+  <div class="fb" id="fillFb"></div>
+</section>
+
+<section id="s5">
+  <h2>Metti in ordine la frase</h2>
+  <p class="istr">Clicca sui pezzi nell'ordine giusto. Clic su un pezzo già messo per toglierlo.</p>
+  <div class="prog" id="ordProg"></div>
+  <div class="ord">
+    <div class="hint" id="ordHint"></div>
+    <div class="line cn" id="ordLine"></div>
+    <div class="bank cn" id="ordBank"></div>
+    <button class="btn" onclick="checkOrd()">Controlla</button>
+    <button class="btn light" onclick="solOrd()">Soluzione</button>
+    <button class="btn light" onclick="nextOrd()">Avanti ➜</button>
+    <div class="spieg" id="ordFb"></div>
+  </div>
+</section>
+
+<section id="s6">
+  <h2>Grammatica e modi di dire della lezione 1D</h2>
+  <p class="istr">Prima rivediamo le regole, poi il quiz.</p>
+  <div id="rules"></div>
+  <div class="prog" id="gProg" style="margin-top:18px"></div>
+  <div class="qbox">
+    <div class="qtxt" id="gQ"></div>
+    <div class="opts" id="gOpts"></div>
+    <div class="spieg" id="gSp"></div>
+    <button class="btn" style="margin-top:10px" onclick="nextG()">Avanti ➜</button>
+  </div>
+</section>
+
+<section id="s7">
+  <h2>说一说 · Parliamo!</h2>
+  <p class="istr">Ognuno risponde con almeno 3–4 frasi. Usate le parole della lezione!</p>
+  <div class="aiuti cn" id="aiuti"></div>
+  <div id="parl"></div>
+</section>
+
+<footer>Maja Jiejie · Chinese Academy</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let stars=0;const addStar=()=>{stars++;$("stars").textContent=stars};
+const bravo=["太好了！","很好！","对了！","真棒！","不错！"];const rnd=a=>a[Math.floor(Math.random()*a.length)];
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if("speechSynthesis" in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("on"));$(b.dataset.s).classList.add("on");window.scrollTo({top:0,behavior:"smooth"})});
+function toggleBtn(btn,box,cls,on,off){btn.onclick=()=>{const v=box.classList.toggle(cls);btn.classList.toggle("on",v);btn.textContent=v?off:on}}
+
+/* ---------- 1. TESTO ---------- */
+const NUOVE=["三轮车","了解","普通","电动","共享单车","成为","离开","传统","期间","人山人海"];
+const TESTO=[
+["在北京旅游的时候，我乘坐了不同的交通工具：公共汽车、电车、地铁和三轮车。","Zài Běijīng lǚyóu de shíhou, wǒ chéngzuòle bùtóng de jiāotōng gōngjù: gōnggòng qìchē, diànchē, dìtiě hé sānlúnchē.","Quando ero in viaggio a Pechino ho preso diversi mezzi di trasporto: autobus, filobus, metropolitana e risciò a tre ruote."],
+["我觉得在北京坐出租车最有意思，司机特别可爱，他们很喜欢跟客人聊天儿，对意大利很感兴趣，他们很了解意大利的足球。","Wǒ juéde zài Běijīng zuò chūzūchē zuì yǒu yìsi, sījī tèbié kě'ài, tāmen hěn xǐhuan gēn kèrén liáotiānr, duì Yìdàlì hěn gǎn xìngqù, tāmen hěn liǎojiě Yìdàlì de zúqiú.","Secondo me a Pechino la cosa più divertente è prendere il taxi: i tassisti sono simpaticissimi, amano chiacchierare con i clienti, si interessano molto all'Italia e conoscono bene il calcio italiano."],
+["在北京，自行车还是一个很重要的交通工具，有普通自行车，也有电动自行车；","Zài Běijīng, zìxíngchē háishi yí ge hěn zhòngyào de jiāotōng gōngjù, yǒu pǔtōng zìxíngchē, yě yǒu diàndòng zìxíngchē;","A Pechino la bicicletta è ancora un mezzo di trasporto molto importante: ci sono biciclette normali e anche biciclette elettriche;"],
+["另外，共享单车已经成为北京和其他大城市的一道新风景。","Lìngwài, gòngxiǎng dānchē yǐjīng chéngwéi Běijīng hé qítā dà chéngshì de yí dào xīn fēngjǐng.","inoltre, il bike-sharing è ormai diventato un elemento nuovo del paesaggio di Pechino e delle altre grandi città."],
+["离开北京以后，我去了山西省的平遥，那也是我这次旅行的最后一站。","Líkāi Běijīng yǐhòu, wǒ qùle Shānxī Shěng de Píngyáo, nà yě shì wǒ zhè cì lǚxíng de zuìhòu yí zhàn.","Dopo aver lasciato Pechino sono andato a Pingyao, nella provincia dello Shanxi: è stata anche l'ultima tappa di questo viaggio."],
+["平遥的游客不太多，我可以好好地参观那些古老的传统民居。","Píngyáo de yóukè bú tài duō, wǒ kěyǐ hǎohǎo de cānguān nàxiē gǔlǎo de chuántǒng mínjū.","A Pingyao i turisti non sono tanti, così ho potuto visitare con calma quelle antiche abitazioni tradizionali."],
+["对了，如果你打算去中国，一定不要在“黄金周”的时候去。","Duì le, rúguǒ nǐ dǎsuàn qù Zhōngguó, yídìng búyào zài “Huángjīn zhōu” de shíhou qù.","Ah, a proposito: se pensi di andare in Cina, non andarci assolutamente durante la “Settimana d'oro”."],
+["中国每年有两个“黄金周”，一个是在10月1日的“国庆节”期间，一个是在春节期间。","Zhōngguó měi nián yǒu liǎng ge “Huángjīn zhōu”, yí ge shì zài shí yuè yī rì de “Guóqìng jié” qījiān, yí ge shì zài Chūn jié qījiān.","In Cina ogni anno ci sono due “Settimane d'oro”: una nel periodo della Festa della Repubblica, il 1° ottobre, e una durante la Festa di Primavera."],
+["在黄金周期间，很多中国人去度假，所以那个时候在中国旅行，买火车票不容易，景点更是人山人海。","Zài Huángjīn zhōu qījiān, hěn duō Zhōngguórén qù dùjià, suǒyǐ nà ge shíhou zài Zhōngguó lǚxíng, mǎi huǒchēpiào bù róngyì, jǐngdiǎn gèng shì rén shān rén hǎi.","Durante la Settimana d'oro moltissimi cinesi vanno in vacanza, quindi se viaggi in Cina in quel periodo non è facile comprare i biglietti del treno, e le attrazioni turistiche sono addirittura un mare di gente."],
+["二十天的旅行很快就结束了，但是一个美好的中国永远留在了我的心里。","Èrshí tiān de lǚxíng hěn kuài jiù jiéshù le, dànshì yí ge měihǎo de Zhōngguó yǒngyuǎn liú zài le wǒ de xīn li.","I venti giorni di viaggio sono finiti in fretta, ma una Cina meravigliosa è rimasta per sempre nel mio cuore."]
+];
+function evidenzia(s){NUOVE.forEach(w=>{s=s.split(w).join('<span class="parola">'+w+'</span>')});return s}
+(function(){
+ const t=$("testo");
+ t.innerHTML='<div class="titolo cn">中国的交通情况 <button class="audio" onclick="say(\'中国的交通情况\')">🔊</button></div><div class="center" style="color:var(--bordeaux)">Zhōngguó de jiāotōng qíngkuàng · <i>I trasporti in Cina</i></div>'+
+ TESTO.map((f,i)=>`<div class="frase"><button class="audio" onclick="say(TESTO[${i}][0])">🔊</button><div><div class="zh cn" onclick="this.parentNode.querySelectorAll('.py,.tr').forEach(e=>e.classList.toggle('vis'))">${evidenzia(f[0])}</div><div class="py">${f[1]}</div><div class="tr">${f[2]}</div></div></div>`).join("");
+ toggleBtn($("bPy"),t,"showpy","Mostra tutto il pinyin","Nascondi il pinyin");
+ toggleBtn($("bTr"),t,"showtr","Mostra tutta la traduzione","Nascondi la traduzione");
+})();
+
+/* ---------- 2. PAROLE + MEMORY ---------- */
+const PAROLE=[["三轮车","sānlúnchē","triciclo, risciò a tre ruote"],["了解","liǎojiě","conoscere bene, comprendere"],["普通","pǔtōng","comune, normale"],["电动","diàndòng","elettrico"],["共享单车","gòngxiǎng dānchē","bike-sharing"],["成为","chéngwéi","diventare"],["离开","líkāi","lasciare, partire da"],["传统","chuántǒng","tradizionale"],["期间","qījiān","periodo, durante"],["人山人海","rén shān rén hǎi","un mare di persone"],["黄金周","Huángjīn zhōu","Settimana d'oro"],["国庆节","Guóqìng jié","Festa della Repubblica"]];
+$("wlist").innerHTML=PAROLE.map((w,i)=>`<div class="w"><div class="c cn">${w[0]} <button class="audio" onclick="say(PAROLE[${i}][0])">🔊</button></div><div class="p">${w[1]}</div><div class="i">${w[2]}</div></div>`).join("");
+let memOpen=[],memDone=0,memLock=false;
+function initMem(){
+ const pick=shuffle(PAROLE).slice(0,8);memOpen=[];memDone=0;memLock=false;$("memFb").textContent="";
+ const cards=shuffle(pick.flatMap((w,i)=>[{id:i,t:w[0],cn:true},{id:i,t:w[2].split(",")[0]}]));
+ const g=$("mem");g.innerHTML="";
+ cards.forEach(c=>{const d=document.createElement("div");d.className="card";d.innerHTML='<span class="back">？</span>';
+  d.onclick=()=>{if(memLock||d.classList.contains("open")||d.classList.contains("done"))return;
+   d.classList.add("open");if(c.cn){d.classList.add("cnc","cn");say(c.t)}d.textContent=c.t;memOpen.push({d,c});
+   if(memOpen.length===2){memLock=true;const[a,b]=memOpen;
+    if(a.c.id===b.c.id){setTimeout(()=>{a.d.classList.add("done");b.d.classList.add("done");memOpen=[];memLock=false;memDone++;addStar();$("memFb").textContent=rnd(bravo);if(memDone===8)$("memFb").textContent="🎉 完成了！Tutte le coppie trovate!"},350)}
+    else{setTimeout(()=>{[a,b].forEach(x=>{x.d.classList.add("wrong");setTimeout(()=>{x.d.className="card";x.d.innerHTML='<span class="back">？</span>'},350)});memOpen=[];setTimeout(()=>memLock=false,400)},800)}}};
+  g.appendChild(d)});
+}
+initMem();
+
+/* ---------- 3. COMPRENSIONE ---------- */
+const DOM=[
+["在北京时，“我”最喜欢的交通工具是什么？为什么？","Zài Běijīng shí, “wǒ” zuì xǐhuan de jiāotōng gōngjù shì shénme? Wèishénme?","A Pechino, qual era il mezzo di trasporto preferito dell'autore? Perché?","出租车，因为司机特别可爱，喜欢跟客人聊天儿，还很了解意大利的足球。"],
+["“我”在北京乘坐了哪些交通工具？","“Wǒ” zài Běijīng chéngzuòle nǎxiē jiāotōng gōngjù?","Quali mezzi di trasporto ha preso a Pechino?","公共汽车、电车、地铁、三轮车，还有出租车。"],
+["在北京有几种自行车？","Zài Běijīng yǒu jǐ zhǒng zìxíngchē?","Quanti tipi di bicicletta ci sono a Pechino?","有两种：普通自行车和电动自行车。另外，还有共享单车。"],
+["为什么说共享单车是一道新风景？","Wèishénme shuō gòngxiǎng dānchē shì yí dào xīn fēngjǐng?","Perché si dice che il bike-sharing è un elemento nuovo del paesaggio?","因为在北京和其他大城市，到处都能看到共享单车，这是最近几年才有的。"],
+["“我”这次旅行的最后一站是哪儿？","“Wǒ” zhè cì lǚxíng de zuìhòu yí zhàn shì nǎr?","Qual è stata l'ultima tappa del viaggio?","最后一站是山西省的平遥。"],
+["平遥主要景点是什么？为什么“我”可以好好地参观？","Píngyáo zhǔyào jǐngdiǎn shì shénme? Wèishénme “wǒ” kěyǐ hǎohǎo de cānguān?","Qual è l'attrazione principale di Pingyao? Perché ha potuto visitarla con calma?","平遥主要景点是古老的传统民居。因为平遥的游客不太多。"],
+["中国每年有几个“黄金周”？在什么时候？","Zhōngguó měi nián yǒu jǐ ge “Huángjīn zhōu”? Zài shénme shíhou?","Quante “Settimane d'oro” ci sono ogni anno in Cina? Quando?","有两个：一个在10月1日国庆节期间，一个在春节期间。"],
+["为什么“黄金周”期间买火车票不容易？","Wèishénme “Huángjīn zhōu” qījiān mǎi huǒchēpiào bù róngyì?","Perché durante la Settimana d'oro non è facile comprare i biglietti del treno?","因为在黄金周期间，很多中国人去度假。"],
+["“我”的旅行一共多长时间？旅行结束以后，“我”有什么感觉？","“Wǒ” de lǚxíng yígòng duō cháng shíjiān? Lǚxíng jiéshù yǐhòu, “wǒ” yǒu shénme gǎnjué?","Quanto è durato il viaggio? Come si sente l'autore alla fine?","二十天。旅行很快就结束了，但是一个美好的中国永远留在了“我”的心里。"]
+];
+$("cDom").innerHTML=DOM.map((q,i)=>`<div class="q"><div class="zh cn"><span class="num">${i+1}</span>${q[0]} <button class="audio" onclick="say(DOM[${i}][0])">🔊</button></div><div class="py">${q[1]}</div><div class="tr">${q[2]}</div><div class="ans"><div class="zh cn">${q[3]}</div></div>
+<div class="tools"><button onclick="tg(this,'.py')">Pinyin</button><button onclick="tg(this,'.tr')">Traduzione</button><button onclick="tg(this,'.ans')">✅ Risposta</button></div></div>`).join("");
+function tg(b,sel){b.closest(".q").querySelector(sel).classList.toggle("vis")}
+const VF=[
+["北京的出租车司机不喜欢跟客人聊天儿。","Běijīng de chūzūchē sījī bù xǐhuan gēn kèrén liáotiānr.",false],
+["出租车司机很了解意大利的足球。","Chūzūchē sījī hěn liǎojiě Yìdàlì de zúqiú.",true],
+["现在在北京已经没有人骑自行车了。","Xiànzài zài Běijīng yǐjīng méiyǒu rén qí zìxíngchē le.",false],
+["平遥是“我”这次旅行的第一站。","Píngyáo shì “wǒ” zhè cì lǚxíng de dì-yī zhàn.",false],
+["平遥的游客非常多。","Píngyáo de yóukè fēicháng duō.",false],
+["春节期间也有一个“黄金周”。","Chūn jié qījiān yě yǒu yí ge “Huángjīn zhōu”.",true],
+["黄金周的时候，景点人山人海。","Huángjīn zhōu de shíhou, jǐngdiǎn rén shān rén hǎi.",true],
+["“我”在中国旅行了一个月。","“Wǒ” zài Zhōngguó lǚxíngle yí ge yuè.",false]
+];
+$("cVf").innerHTML=VF.map((q,i)=>`<div class="q"><div class="zh cn"><span class="num">${i+1}</span>${q[0]}</div><div class="py">${q[1]}</div><div class="vf cn"><button onclick="vf(this,${i},true)">对</button><button onclick="vf(this,${i},false)">错</button><button style="background:var(--crema);font-size:.85rem" onclick="tg(this,'.py')">Pinyin</button></div></div>`).join("");
+function vf(b,i,v){const box=b.parentNode;if(box.dataset.done)return;if(VF[i][2]===v){b.classList.add("ok");box.dataset.done=1;addStar()}else{b.classList.add("no","wrong");setTimeout(()=>b.classList.remove("no","wrong"),600)}}
+document.querySelectorAll("#tabsC button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#tabsC button").forEach(x=>x.classList.remove("on"));b.classList.add("on");$("cDom").style.display=b.dataset.t==="dom"?"":"none";$("cVf").style.display=b.dataset.t==="vf"?"":"none"});
+
+/* ---------- 4. COMPLETA ---------- */
+const FILL={
+"Testo 1":[
+["你想去一个既能给你＿、又让你难忘的地方度假吗？","惊喜","Nǐ xiǎng qù yí ge jì néng gěi nǐ ___, yòu ràng nǐ nánwàng de dìfang dùjià ma?","Vuoi andare in vacanza in un posto che ti sorprenda e che sia anche indimenticabile?"],
+["＿你来说，最理想的地方是哪里呢？","对","___ nǐ lái shuō, zuì lǐxiǎng de dìfang shì nǎlǐ ne?","Secondo te, qual è il posto ideale?"],
+["我发现，＿应该去中国大使馆签证中心办L类的签证。","首先","Wǒ fāxiàn, ___ yīnggāi qù Zhōngguó dàshǐguǎn qiānzhèng zhōngxīn bàn L lèi de qiānzhèng.","Ho scoperto che per prima cosa bisogna andare al centro visti dell'ambasciata cinese a fare il visto di tipo L."],
+["申请手续很简单：可以从网上下载＿。","表格","Shēnqǐng shǒuxù hěn jiǎndān: kěyǐ cóng wǎng shang xiàzài ___.","Le pratiche per la richiesta sono semplici: si può scaricare il modulo da internet."],
+["当然也需要交一份护照的＿。","复印件","Dāngrán yě xūyào jiāo yí fèn hùzhào de ___.","Naturalmente bisogna anche consegnare una fotocopia del passaporto."],
+["拿着护照、＿着一只行李箱，我出发了！","拉","Názhe hùzhào, ___zhe yì zhī xínglixiāng, wǒ chūfā le!","Con il passaporto in mano e trascinando una valigia, sono partito!"]],
+"Testi 2 e 3":[
+["＿上海浦东机场后，我乘坐世界上最快的火车去市中心。","到达","___ Shànghǎi Pǔdōng jīchǎng hòu, wǒ chéngzuò shìjiè shang zuì kuài de huǒchē qù shì zhōngxīn.","Arrivato all'aeroporto di Pudong, ho preso il treno più veloce del mondo per andare in centro."],
+["中国有句＿：“上有天堂，下有苏杭。”","熟语","Zhōngguó yǒu jù ___: “Shàng yǒu tiāntáng, xià yǒu Sū Háng.”","In Cina c'è un detto: “In cielo c'è il paradiso, in terra ci sono Suzhou e Hangzhou.”"],
+["在苏州我参观了有名的＿。","园林","Zài Sūzhōu wǒ cānguānle yǒumíng de ___.","A Suzhou ho visitato i famosi giardini."],
+["在杭州我坐游船＿了西湖美丽的景色。","欣赏","Zài Hángzhōu wǒ zuò yóuchuán ___le Xī Hú měilì de jǐngsè.","A Hangzhou, in battello, ho ammirato il bellissimo paesaggio del Lago dell'Ovest."],
+["为了＿时间，我决定请一位导游。","节省","Wèile ___ shíjiān, wǒ juédìng qǐng yí wèi dǎoyóu.","Per risparmiare tempo ho deciso di prendere una guida."],
+["在天坛公园每天都有很多北京市民＿身体、打太极拳。","锻炼","Zài Tiāntán gōngyuán měi tiān dōu yǒu hěn duō Běijīng shìmín ___ shēntǐ, dǎ tàijíquán.","Al parco del Tempio del Cielo ogni giorno molti pechinesi fanno esercizio e praticano il taiji."],
+["到北京不能不去爬＿。","长城","Dào Běijīng bù néng bú qù pá ___.","Se vai a Pechino non puoi non salire sulla Grande Muraglia."]],
+"Testo 4":[
+["出租车司机特别可爱，他们很＿意大利的足球。","了解","Chūzūchē sījī tèbié kě'ài, tāmen hěn ___ Yìdàlì de zúqiú.","I tassisti sono simpaticissimi e conoscono bene il calcio italiano."],
+["在北京，有＿自行车，也有电动自行车。","普通","Zài Běijīng, yǒu ___ zìxíngchē, yě yǒu diàndòng zìxíngchē.","A Pechino ci sono biciclette normali e anche biciclette elettriche."],
+["共享单车已经＿北京和其他大城市的一道新风景。","成为","Gòngxiǎng dānchē yǐjīng ___ Běijīng hé qítā dà chéngshì de yí dào xīn fēngjǐng.","Il bike-sharing è ormai diventato un elemento nuovo del paesaggio di Pechino e delle altre grandi città."],
+["＿北京以后，我去了山西省的平遥。","离开","___ Běijīng yǐhòu, wǒ qùle Shānxī Shěng de Píngyáo.","Dopo aver lasciato Pechino sono andato a Pingyao, nello Shanxi."],
+["我可以好好地参观那些古老的＿民居。","传统","Wǒ kěyǐ hǎohǎo de cānguān nàxiē gǔlǎo de ___ mínjū.","Ho potuto visitare con calma quelle antiche abitazioni tradizionali."],
+["在黄金周＿，很多中国人去度假。","期间","Zài Huángjīn zhōu ___, hěn duō Zhōngguórén qù dùjià.","Durante la Settimana d'oro moltissimi cinesi vanno in vacanza."],
+["黄金周的时候，景点更是＿。","人山人海","Huángjīn zhōu de shíhou, jǐngdiǎn gèng shì ___.","Durante la Settimana d'oro le attrazioni turistiche sono addirittura un mare di gente."]]
+};
+let fSel=null,fSet="Testo 1",fOk=0;
+$("tabsF").innerHTML=Object.keys(FILL).map((k,i)=>`<button class="${i?'':'on'}" data-k="${k}">${k}</button>`).join("");
+document.querySelectorAll("#tabsF button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#tabsF button").forEach(x=>x.classList.remove("on"));b.classList.add("on");fSet=b.dataset.k;initFill()});
+toggleBtn($("fPy"),$("frasi"),"showpy","Pinyin","Nascondi pinyin");
+toggleBtn($("fTr"),$("frasi"),"showtr","Traduzione","Nascondi traduzione");
+function initFill(){
+ const L=FILL[fSet];fSel=null;fOk=0;$("fillFb").textContent="";
+ $("bank").innerHTML=shuffle(L.map(f=>f[1])).map(w=>`<span class="chip" data-w="${w}">${w}</span>`).join("");
+ $("frasi").innerHTML=L.map((f,i)=>`<div class="fr"><div class="zh cn">${f[0].replace("＿",`<span class="slot" data-i="${i}">　</span>`)}</div><div class="py">${f[2]}</div><div class="tr">${f[3]}</div></div>`).join("");
+ document.querySelectorAll("#bank .chip").forEach(c=>c.onclick=()=>{if(c.classList.contains("used"))return;document.querySelectorAll("#bank .chip").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");fSel=c});
+ document.querySelectorAll("#frasi .slot").forEach(s=>s.onclick=()=>{
+  if(s.classList.contains("ok"))return;if(!fSel){$("fillFb").textContent="Prima scegli una parola in alto 👆";return}
+  const f=L[s.dataset.i];
+  if(fSel.dataset.w===f[1]){s.textContent=f[1];s.classList.add("ok");fSel.classList.remove("sel");fSel.classList.add("used");fSel=null;fOk++;addStar();say(f[0].replace("＿",f[1]));
+   $("fillFb").textContent=fOk===L.length?"🎉 全对了！Tutte giuste!":rnd(bravo)}
+  else{s.classList.add("wrong");setTimeout(()=>s.classList.remove("wrong"),400);$("fillFb").textContent="再试试！Riprova."}});
+}
+initFill();
+
+/* ---------- 5. METTI IN ORDINE ---------- */
+const ORD=[
+[["对我来说，","最理想的地方","是","农村。"],"Per me il posto ideale è la campagna."],
+[["苏州","既","美丽","又","安静。"],"Suzhou è bella e anche tranquilla.",["苏州既安静又美丽。"]],
+[["我","上网","查了","所有","去中国旅行的","信息。"],"Ho cercato in rete tutte le informazioni sui viaggi in Cina."],
+[["我","决定","在中国","待","二十天。"],"Ho deciso di stare in Cina venti giorni."],
+[["为了","节省时间，","我","请了","一位导游。"],"Per risparmiare tempo ho preso una guida."],
+[["到北京","不能不去","爬","长城。"],"Se vai a Pechino non puoi non salire sulla Grande Muraglia."],
+[["共享单车","已经","成为","北京的","一道新风景。"],"Il bike-sharing è ormai diventato un elemento nuovo del paesaggio di Pechino."],
+[["平遥的","游客","不太","多。"],"A Pingyao i turisti non sono tanti."],
+[["黄金周的时候，","景点","更是","人山人海。"],"Durante la Settimana d'oro le attrazioni sono un mare di gente."],
+[["一个美好的中国","永远","留在了","我的心里。"],"Una Cina meravigliosa è rimasta per sempre nel mio cuore."]
+];
+let oi=0,oDone=false;
+function drawOrd(){const o=ORD[oi];oDone=false;$("ordProg").textContent=`Frase ${oi+1} di ${ORD.length}`;$("ordHint").textContent="🇮🇹 "+o[1];$("ordFb").textContent="";
+ $("ordLine").innerHTML="";$("ordLine").classList.remove("ok");$("ordBank").innerHTML="";
+ let pezzi=shuffle(o[0]);while(o[0].length>2&&pezzi.join("")===o[0].join(""))pezzi=shuffle(o[0]);
+ pezzi.forEach(p=>{const s=document.createElement("span");s.className="pz";s.textContent=p;
+  s.onclick=()=>{if(oDone)return;(s.parentNode.id==="ordBank"?$("ordLine"):$("ordBank")).appendChild(s)};$("ordBank").appendChild(s)})}
+function checkOrd(){if(oDone)return;const o=ORD[oi];const t=[...$("ordLine").children].map(x=>x.textContent).join("");
+ if($("ordBank").children.length){$("ordFb").textContent="Mancano ancora dei pezzi!";return}
+ if(t===o[0].join("")||(o[2]||[]).includes(t)){oDone=true;$("ordLine").classList.add("ok");$("ordFb").textContent=rnd(bravo);addStar();say(t)}
+ else{$("ordLine").classList.add("wrong");setTimeout(()=>$("ordLine").classList.remove("wrong"),400);$("ordFb").textContent="Non ancora… riprova!"}}
+function solOrd(){const o=ORD[oi];oDone=true;$("ordBank").innerHTML="";$("ordLine").innerHTML=o[0].map(p=>`<span class="pz">${p}</span>`).join("");$("ordLine").classList.add("ok");say(o[0].join(""))}
+function nextOrd(){oi=(oi+1)%ORD.length;drawOrd()}
+drawOrd();
+
+/* ---------- 6. GRAMMATICA ---------- */
+const RULES=[
+["既……又……","Due qualità o condizioni presenti <b>insieme</b>, riferite allo stesso soggetto (“sia… sia…”, “è… e anche…”).","这个地方既美丽又安静。","Zhège dìfang jì měilì yòu ānjìng. · Questo posto è bello e anche tranquillo."],
+["对……来说","“Per…”, “secondo…”, dal punto di vista di qualcuno.","对我来说，最理想的地方是农村。","Duì wǒ lái shuō, zuì lǐxiǎng de dìfang shì nóngcūn. · Per me il posto ideale è la campagna."],
+["……化","Suffisso che indica una trasformazione: 现代 → 现代化 (modernizzazione), 国际 → 国际化, 意大利化, 西化.","上海是一座现代化的国际化大城市。","Shànghǎi shì yí zuò xiàndàihuà de guójìhuà dà chéngshì. · Shanghai è una grande città moderna e internazionale."],
+["不能不","Doppia negazione = <b>bisogna per forza</b>, “non si può non…”.","到北京不能不去爬长城。","Dào Běijīng bù néng bú qù pá Chángchéng. · A Pechino non si può non salire sulla Grande Muraglia."],
+["熟语 · modi di dire","人山人海 un mare di persone · 上有天堂，下有苏杭 la bellezza di Suzhou e Hangzhou · 走马看花 visitare in fretta e in modo superficiale · 百闻不如一见 vedere una volta vale più che sentire cento volte.","黄金周的时候，景点人山人海。","Huángjīn zhōu de shíhou, jǐngdiǎn rén shān rén hǎi."]
+];
+$("rules").innerHTML=RULES.map((r,i)=>`<div class="rule"><h3 class="cn">${r[0]}</h3>${r[1]}<div class="es cn">${r[2]} <button class="audio" onclick="say(RULES[${i}][2])">🔊</button></div><div style="color:var(--bordeaux);font-size:.95rem">${r[3]}</div></div>`).join("");
+const GQ=[
+["苏州＿美丽＿安静。",["既……又……","又……既……","因为……所以……"],0,"既 viene sempre prima, 又 dopo: 既美丽又安静."],
+["＿我来说，旅行是一件美好的事情。",["对","跟","给"],0,"La struttura è 对……来说 = per me, secondo me."],
+["上海是一座现代＿的大城市。",["化","的","了"],0,"现代 + 化 = 现代化, “moderno, modernizzato”."],
+["Che cosa significa 西化?",["occidentalizzazione","andare a ovest","cultura occidentale"],0,"西 (occidente) + 化 = diventare occidentale."],
+["到北京不能不去爬长城。Che cosa vuol dire?",["Bisogna assolutamente salire sulla Grande Muraglia","Non si può salire sulla Grande Muraglia","Non vale la pena salire sulla Grande Muraglia"],0,"不能不 = doppia negazione: è una cosa che si deve fare."],
+["黄金周的时候，景点＿。",["人山人海","走马看花","百闻不如一见"],0,"人山人海 = un mare di persone, pienissimo."],
+["Una persona che visita un museo in 10 minuti, senza guardare niente con attenzione:",["走马看花","人山人海","上有天堂，下有苏杭"],0,"走马看花 = ammirare i fiori andando a cavallo: in modo rapido e superficiale."],
+["“Devi andarci di persona, raccontarlo non basta!” In cinese:",["百闻不如一见","走马看花","人山人海"],0,"百闻不如一见 = sentire cento volte non vale vedere una volta."],
+["这个城市既有古迹，＿有现代化的建筑。",["又","也是","就"],0,"既……又……: due caratteristiche insieme."],
+["在北京我坐了很多交通工具，＿，共享单车也很方便。",["另外","首先","然后"],0,"另外 = inoltre, in più (come nel testo 4)."]
+];
+let gi=0,gOrder=[],gFirst=true;
+function drawG(){if(!gOrder.length||gi>=gOrder.length){gOrder=shuffle(GQ.map((_,i)=>i));gi=0}
+ const q=GQ[gOrder[gi]];gFirst=true;$("gProg").textContent=`Domanda ${gi+1} di ${GQ.length}`;
+ const isIt=/^[A-Za-zÀ-ú“]/.test(q[0]);$("gQ").className="qtxt "+(isIt?"it":"cn");
+ $("gQ").innerHTML=q[0].replace("＿","<u>　　</u>").replace("＿","<u>　　</u>");$("gSp").textContent="";
+ const opts=shuffle(q[1].map((t,i)=>({t,ok:i===q[2]})));
+ $("gOpts").innerHTML="";opts.forEach(o=>{const b=document.createElement("button");b.className="opt cn";b.textContent=o.t;
+  b.onclick=()=>{if(b.disabled)return;if(o.ok){b.classList.add("ok");if(gFirst)addStar();$("gSp").textContent="✅ "+q[3];$("gOpts").querySelectorAll("button").forEach(x=>x.disabled=true)}
+   else{gFirst=false;b.classList.add("no");b.disabled=true}};$("gOpts").appendChild(b)})}
+function nextG(){gi++;drawG()}
+drawG();
+
+/* ---------- 7. PARLIAMO ---------- */
+$("aiuti").innerHTML=["对我来说……","既……又……","首先……然后……","另外……","我觉得……","因为……所以……","人山人海","走马看花","百闻不如一见","不能不……"].map(w=>`<span>${w}</span>`).join("");
+const PARL=[
+["你想去哪儿旅行？你打算怎么安排你的旅行？","Nǐ xiǎng qù nǎr lǚxíng? Nǐ dǎsuàn zěnme ānpái nǐ de lǚxíng?","Dove vorresti andare in viaggio? Come pensi di organizzarlo?"],
+["你知道去中国旅行要做什么准备吗？","Nǐ zhīdào qù Zhōngguó lǚxíng yào zuò shénme zhǔnbèi ma?","Sai che preparativi bisogna fare per un viaggio in Cina?"],
+["在你的城市，最重要的交通工具是什么？你平时怎么出门？","Zài nǐ de chéngshì, zuì zhòngyào de jiāotōng gōngjù shì shénme? Nǐ píngshí zěnme chūmén?","Nella tua città qual è il mezzo di trasporto più importante? Tu di solito come ti sposti?"],
+["你用过共享单车吗？你觉得怎么样？","Nǐ yòngguo gòngxiǎng dānchē ma? Nǐ juéde zěnmeyàng?","Hai mai usato il bike-sharing? Com'è stato?"],
+["你觉得10月去中国旅行怎么样？为什么？","Nǐ juéde shí yuè qù Zhōngguó lǚxíng zěnmeyàng? Wèishénme?","Che ne pensi di andare in Cina a ottobre? Perché?"],
+["在意大利，什么时候景点也人山人海？","Zài Yìdàlì, shénme shíhou jǐngdiǎn yě rén shān rén hǎi?","In Italia, quando anche le attrazioni turistiche sono un mare di gente?"],
+["你旅行的时候喜欢“走马看花”，还是好好地参观一个地方？","Nǐ lǚxíng de shíhou xǐhuan “zǒu mǎ kàn huā”, háishi hǎohǎo de cānguān yí ge dìfang?","Quando viaggi preferisci vedere tutto di corsa o visitare un posto con calma?"],
+["有没有一次旅行永远留在了你的心里？说一说。","Yǒu méiyǒu yí cì lǚxíng yǒngyuǎn liú zài le nǐ de xīn li? Shuō yi shuō.","C'è un viaggio che ti è rimasto per sempre nel cuore? Raccontalo."]
+];
+$("parl").innerHTML=PARL.map((q,i)=>`<div class="q"><div class="zh cn"><span class="num">${i+1}</span>${q[0]} <button class="audio" onclick="say(PARL[${i}][0])">🔊</button></div><div class="py">${q[1]}</div><div class="tr">${q[2]}</div><div class="tools"><button onclick="tg(this,'.py')">Pinyin</button><button onclick="tg(this,'.tr')">Traduzione</button></div></div>`).join("");
+</script>
+<script src="../voce.js"></script>
+</body>
+</html>
