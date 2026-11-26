@@ -98,6 +98,11 @@ h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
 .gq .o button.ok .tp,.gq .o button.no .tp{color:#fff}
 .tok .tp{display:block;font-size:.9rem;color:var(--bordeaux);text-align:center;font-family:"Montserrat","Segoe UI",sans-serif;line-height:1.2}
 .nopy .tp{display:none}
+.regola2{line-height:1.5}
+.caso{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.2)}
+.caso:last-child{border-bottom:none}
+.caso .num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bordeaux);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.caso small{color:#555;font-size:.9rem}
 footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:.9}
 </style>
 </head>
@@ -165,10 +170,12 @@ footer{text-align:center;color:#fff;padding:10px 0 30px;font-weight:600;opacity:
 <!-- 5 另外 / 另 -->
 <section id="s5">
   <h2>另外 o 另?</h2>
-  <p class="istr">Scegli la parola giusta e leggi la spiegazione.</p>
-  <div class="regola">
-    <b class="cn">另外</b> → pronome (<span class="cn">另外的 + nome</span>), avverbio e <b>congiunzione</b> (<span class="cn">另外，……</span> = inoltre)<br>
-    <b class="cn">另</b> → <span class="cn">另 + numero + nome</span> (<span class="cn">另一本书</span>) oppure <span class="cn">另 + verbo monosillabico</span> (<span class="cn">另找、另换</span>); <b>non</b> è una congiunzione e non si dice <span class="cn">另的</span>.
+  <p class="istr">Tutte e due vogliono dire <b>«altro»</b>. Per scegliere, guarda <b>cosa c'è subito dopo lo spazio</b>.</p>
+  <div class="regola regola2">
+    <div class="caso"><span class="num">1</span><div>Dopo c'è <b class="cn">的</b> → solo <b class="cn">另外</b><br><span class="cn">另外的车</span> <small>lìngwài de chē · l'altra bici</small> &nbsp; <span class="cn">另的车</span> ❌</div></div>
+    <div class="caso"><span class="num">2</span><div>Vuol dire <b>«inoltre»</b> (a inizio frase, con la virgola) → solo <b class="cn">另外</b><br><span class="cn">另外，还要多喝水。</span> <small>Lìngwài, hái yào duō hē shuǐ · Inoltre bisogna bere molta acqua.</small></div></div>
+    <div class="caso"><span class="num">3</span><div>Dopo c'è un <b>verbo di un solo carattere</b> (<span class="cn">找、换、买</span>) → solo <b class="cn">另</b><br><span class="cn">另找一个人</span> <small>lìng zhǎo yí ge rén · cercare un'altra persona</small></div></div>
+    <div class="caso"><span class="num">4</span><div>Dopo c'è <b>numero + classificatore</b> (<span class="cn">一个、一本</span>) → vanno bene <b>tutti e due</b><br><span class="cn">另一本书 = 另外一本书</span> <small>un altro libro</small></div></div>
   </div>
   <p class="center" style="margin-bottom:14px"><button class="btn sol2" onclick="solveAllL()">👀 Soluzione</button> <button class="btn light" id="pyBtnL" onclick="togglePyS('s5','pyBtnL')">🔤 Nascondi pinyin</button></p>
   <div id="lingList"></div>
@@ -355,14 +362,14 @@ renderGram();
 
 /* ---------- 5 另外 / 另 ---------- */
 const LQ=[
- ["他叫马克，＿＿一个同学叫安娜。",["另外","另"],["另外","另"],"Qui vanno bene tutti e due: <b>另外一个同学</b> e <b>另一个同学</b> (另 + numero + nome)."],
- ["上个月经理去上海参加了＿＿的一个重要会议。",["另外","另"],["另外"],"Davanti a <b>的</b> si usa solo <b>另外</b>: 另外的 + nome. «另的» non esiste."],
- ["等一会儿吧，我先看看菜单。＿＿，给我来杯绿茶。",["另外","另"],["另外"],"Qui serve una <b>congiunzione</b> (= inoltre): solo <b>另外</b>."],
- ["衬衫没问题，但是裤子颜色不太好，你＿＿换一条吧。",["另外","另"],["另"],"<b>另 + verbo monosillabico</b>: 另换 (cambiarne un altro)."],
- ["你骑＿＿的车吧，这辆坏了。",["另外","另"],["另外"],"Ancora 的: 另外的车."],
- ["这本书我看完了，请给我＿＿一本。",["另外","另"],["另外","另"],"Con numero + nome vanno bene entrambi, ma <b>另一本</b> è la forma più comune."],
- ["要多休息，＿＿，还要多喝水。",["另外","另"],["另外"],"Congiunzione a inizio frase con la virgola: <b>另外，……</b>"],
- ["这个人不合适，你还是＿＿找别人吧。",["另外","另"],["另"],"另 + verbo monosillabico: <b>另找</b>."]
+ ["他叫马克，＿＿一个同学叫安娜。",["另外","另"],["另外","另"],"<b>Regola 4.</b> Dopo lo spazio c'è <b>一个</b> (numero + classificatore) → vanno bene <b>tutti e due</b>: 另外一个同学 = 另一个同学 (un altro compagno)."],
+ ["上个月经理去上海参加了＿＿的一个重要会议。",["另外","另"],["另外"],"<b>Regola 1.</b> Dopo lo spazio c'è <b>的</b> → solo <b>另外</b>. «另的» non esiste."],
+ ["等一会儿吧，我先看看菜单。＿＿，给我来杯绿茶。",["另外","另"],["另外"],"<b>Regola 2.</b> Qui vuol dire «<b>inoltre</b>» (inizio frase + virgola) → solo <b>另外</b>. 另 non può mai significare «inoltre»."],
+ ["衬衫没问题，但是裤子颜色不太好，你＿＿换一条吧。",["另外","另"],["另"],"<b>Regola 3.</b> Dopo lo spazio c'è <b>换</b>, un verbo di un solo carattere → solo <b>另</b>: 另换 = cambiarne con un altro."],
+ ["你骑＿＿的车吧，这辆坏了。",["另外","另"],["另外"],"<b>Regola 1.</b> Dopo lo spazio c'è <b>的</b> → solo <b>另外</b>: 另外的车 (l'altra bici)."],
+ ["这本书我看完了，请给我＿＿一本。",["另外","另"],["另外","另"],"<b>Regola 4.</b> Dopo lo spazio c'è <b>一本</b> (numero + classificatore) → vanno bene <b>tutti e due</b>. 另一本 è il più usato."],
+ ["要多休息，＿＿，还要多喝水。",["另外","另"],["另外"],"<b>Regola 2.</b> Vuol dire «<b>inoltre</b>» ed è seguito dalla virgola → solo <b>另外</b>."],
+ ["这个人不合适，你还是＿＿找别人吧。",["另外","另"],["另"],"<b>Regola 3.</b> Dopo lo spazio c'è <b>找</b>, un verbo di un solo carattere → solo <b>另</b>: 另找 = cercare qualcun altro."]
 ];
 const LPY=["Tā jiào Mǎkè, __ yí ge tóngxué jiào Ānnà.","Shàng ge yuè jīnglǐ qù Shànghǎi cānjiā le __ de yí ge zhòngyào huìyì.","Děng yíhuìr ba, wǒ xiān kànkan càidān. __, gěi wǒ lái bēi lǜchá.","Chènshān méi wèntí, dànshì kùzi yánsè bú tài hǎo, nǐ __ huàn yì tiáo ba.","Nǐ qí __ de chē ba, zhè liàng huài le.","Zhè běn shū wǒ kànwán le, qǐng gěi wǒ __ yì běn.","Yào duō xiūxi, __, hái yào duō hē shuǐ.","Zhège rén bù héshì, nǐ háishi __ zhǎo biérén ba."];
 function showL(i){const q=LQ[i],box=$("lingList").querySelector(`.o[data-i="${i}"]`);box.dataset.done=1;
