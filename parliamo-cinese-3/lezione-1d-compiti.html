@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Parliamo cinese 3 · Lezione 1D · Compiti – Maja Jiejie</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--blu:#6ec3f4;--bordeaux:#922b3e;--arancio:#fb7d24;--giallo:#f4f420;--blu-scuro:#2f5aa8;--marrone:#4a3517;--crema:#fdf6ec;--verde:#3fae5a;--rosso:#e04848}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Montserrat","Segoe UI",system-ui,sans-serif;background:var(--blu);color:#222;min-height:100vh}
+.cn{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei","Heiti SC",sans-serif}
+header{text-align:center;padding:26px 16px 14px}
+header .lez{color:#fff;font-size:1.4rem;font-weight:300;letter-spacing:1px}
+header h1{display:inline-block;background:var(--blu-scuro);color:#fff;font-size:2.3rem;padding:8px 26px;margin:8px 0;transform:rotate(-1deg)}
+header .it{display:block;color:var(--blu-scuro);background:var(--crema);font-weight:800;font-size:1.05rem;padding:6px 18px;margin:4px auto 0;max-width:560px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 12px 18px}
+nav button{border:none;border-radius:30px;padding:10px 18px;font-weight:700;font-size:.95rem;cursor:pointer;background:#fff;color:var(--bordeaux);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+nav button.on{background:var(--giallo);color:#222}
+.score{position:fixed;top:12px;right:14px;background:var(--giallo);border-radius:30px;padding:6px 14px;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.2);z-index:5}
+section{display:none;max-width:880px;margin:0 auto 40px;padding:22px 18px 28px;border-radius:22px}
+section.on{display:block}
+#s1{background:var(--bordeaux)}#s2{background:var(--arancio)}
+h2{color:#fff;text-align:center;font-size:1.4rem;margin-bottom:4px}
+.istr{color:#fff;text-align:center;margin-bottom:16px;opacity:.95;line-height:1.5}
+.btn{border:none;border-radius:30px;padding:10px 18px;font-weight:700;cursor:pointer;background:var(--marrone);color:#fff;font-size:.92rem;margin:3px}
+.btn.light{background:#fff;color:var(--marrone)}
+.btn.on{background:var(--giallo);color:#222}
+.center{text-align:center}
+.prog{color:#fff;text-align:center;margin-bottom:10px;font-weight:700}
+.box{background:#fff;border-radius:20px;padding:20px;text-align:center}
+.frase{font-size:1.7rem;line-height:1.8;margin:6px 0}
+.blank{display:inline-block;min-width:90px;border-bottom:3px dashed var(--bordeaux);color:var(--verde);font-weight:700;padding:0 6px}
+.py{display:none;color:var(--bordeaux);font-size:1.05rem;margin-top:4px}
+.tr{display:none;color:var(--blu-scuro);font-weight:600;margin-top:4px}
+.py.vis,.tr.vis{display:block}
+.tools{margin:10px 0 4px}
+.tools button{border:none;border-radius:16px;padding:6px 14px;margin:2px;cursor:pointer;font-weight:700;background:var(--crema);color:var(--marrone);font-size:.88rem}
+.tools button.on{background:var(--giallo)}
+.opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+.opt{border:none;border-radius:16px;background:var(--giallo);padding:10px 22px;font-size:1.6rem;cursor:pointer}
+.opt.ok{background:var(--verde);color:#fff}.opt.no{background:var(--rosso);color:#fff}
+.fb{min-height:26px;margin-top:12px;font-weight:700;color:var(--marrone)}
+.line{min-height:70px;border:3px dashed var(--arancio);border-radius:14px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;margin:10px 0 12px}
+.line.ok{border-color:var(--verde);background:#eaf7ee}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+.pz{background:var(--giallo);border-radius:12px;padding:8px 14px;font-size:1.5rem;cursor:pointer;text-align:center}
+.pz small{display:none;font-family:Montserrat,sans-serif;font-size:.8rem;color:var(--bordeaux)}
+.showpy .pz small{display:block}
+.line .pz{background:var(--blu);color:#fff}.line .pz small{color:#fff}
+.wrong{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.fine{display:none;background:var(--crema);border-radius:20px;padding:22px;text-align:center;font-size:1.2rem;line-height:1.6}
+footer{text-align:center;color:#fff;padding:0 0 30px;font-size:.9rem;opacity:.9}
+</style>
+</head>
+<body>
+<div class="score">✅ <span id="score">0</span></div>
+<header>
+  <div class="lez">Parliamo cinese 3 · Lezione 1D</div>
+  <h1 class="cn">博客：美丽的中国</h1>
+  <span class="it">Compiti · esercizi di ripasso di tutta la lezione</span>
+</header>
+<nav id="nav">
+  <button data-s="s1" class="on">1️⃣ Scegli la parola giusta</button>
+  <button data-s="s2">2️⃣ Ricostruisci la frase</button>
+</nav>
+
+<section id="s1" class="on">
+  <h2>1. Scegli la parola giusta</h2>
+  <p class="istr">Leggi la frase e scegli la parola che completa lo spazio.<br>Prova prima da solo/a: pinyin e traduzione sono lì solo se ti servono.</p>
+  <div class="prog" id="cProg"></div>
+  <div class="box" id="cBox">
+    <div class="frase cn" id="cFr"></div>
+    <div class="py" id="cPy"></div>
+    <div class="tr" id="cTr"></div>
+    <div class="tools"><button onclick="tgl(this,'cPy')">Pinyin</button><button onclick="tgl(this,'cTr')">Traduzione</button><button onclick="say(cFull())">🔊 Ascolta</button></div>
+    <div class="opts cn" id="cOpts"></div>
+    <div class="fb" id="cFb"></div>
+    <button class="btn" onclick="nextC()">Avanti ➜</button>
+  </div>
+  <div class="fine" id="cFine"></div>
+</section>
+
+<section id="s2">
+  <h2>2. Ricostruisci la frase</h2>
+  <p class="istr">Clicca sui pezzi nell'ordine giusto (clic su un pezzo già messo per toglierlo), poi "Controlla".<br>"Pinyin" mostra il pinyin sotto ogni pezzo, "Traduzione" la frase in italiano.</p>
+  <div class="prog" id="oProg"></div>
+  <div class="box" id="oBox">
+    <div class="tools"><button id="oPyB" onclick="oPy()">Pinyin</button><button onclick="tgl(this,'oTr')">Traduzione</button></div>
+    <div class="tr" id="oTr"></div>
+    <div class="line cn" id="oLine"></div>
+    <div class="bank cn" id="oBank"></div>
+    <button class="btn" onclick="checkO()">Controlla</button>
+    <button class="btn light" onclick="solO()">Soluzione</button>
+    <button class="btn light" onclick="nextO()">Avanti ➜</button>
+    <div class="fb" id="oFb"></div>
+  </div>
+  <div class="fine" id="oFine"></div>
+</section>
+
+<footer>Maja Jiejie · Chinese Academy</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const bravo=["太好了！","很好！","对了！","真棒！","不错！"];const rnd=a=>a[Math.floor(Math.random()*a.length)];
+let score=0;const addPt=()=>{score++;$("score").textContent=score};
+let zhVoice=null;
+function loadVoice(){const v=speechSynthesis.getVoices();zhVoice=v.find(x=>/zh[-_]CN/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}
+if("speechSynthesis" in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(zhVoice)u.voice=zhVoice;u.rate=.8;speechSynthesis.speak(u)}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("on"));$(b.dataset.s).classList.add("on")});
+function tgl(b,id){const v=$(id).classList.toggle("vis");b.classList.toggle("on",v)}
+function resetTools(box){box.querySelectorAll(".tools button").forEach(b=>b.classList.remove("on"));box.querySelectorAll(".py,.tr").forEach(e=>e.classList.remove("vis"))}
+
+/* ---------- 1. SCEGLI ---------- */
+const CH=[
+["这个周末我想去一个既安静＿漂亮的地方。",["又","也","还"],"Zhège zhōumò wǒ xiǎng qù yí ge jì ānjìng ___ piàoliang de dìfang.","Questo fine settimana voglio andare in un posto tranquillo e anche bello."],
+["＿我来说，坐火车比坐飞机舒服。",["对","给","跟"],"___ wǒ lái shuō, zuò huǒchē bǐ zuò fēijī shūfu.","Per me viaggiare in treno è più comodo che in aereo."],
+["去中国旅行以前，＿要办签证。",["首先","最后","另外"],"Qù Zhōngguó lǚxíng yǐqián, ___ yào bàn qiānzhèng.","Prima di un viaggio in Cina, per prima cosa bisogna fare il visto."],
+["请你先＿好这张表格，然后交给我。",["填","拉","打"],"Qǐng nǐ xiān ___ hǎo zhè zhāng biǎogé, ránhòu jiāo gěi wǒ.","Per favore, prima compila questo modulo, poi consegnamelo."],
+["申请签证的时候，需要交一份护照的＿。",["复印件","表格","手续"],"Shēnqǐng qiānzhèng de shíhou, xūyào jiāo yí fèn hùzhào de ___.","Quando si chiede il visto bisogna consegnare una fotocopia del passaporto."],
+["他每天早上在公园＿身体。",["锻炼","欣赏","节省"],"Tā měi tiān zǎoshang zài gōngyuán ___ shēntǐ.","Ogni mattina fa esercizio fisico al parco."],
+["为了＿时间，我们坐出租车去机场吧。",["节省","离开","了解"],"Wèile ___ shíjiān, wǒmen zuò chūzūchē qù jīchǎng ba.","Per risparmiare tempo, andiamo all'aeroporto in taxi."],
+["我对中国文化很感兴趣，我想多＿一下中国的历史。",["了解","成为","到达"],"Wǒ duì Zhōngguó wénhuà hěn gǎn xìngqù, wǒ xiǎng duō ___ yíxià Zhōngguó de lìshǐ.","Mi interessa molto la cultura cinese: vorrei conoscere meglio la storia della Cina."],
+["春节＿，火车站总是人山人海。",["期间","中间","一起"],"Chūn jié ___, huǒchēzhàn zǒngshì rén shān rén hǎi.","Durante la Festa di Primavera la stazione è sempre un mare di gente."],
+["在苏州，我们参观了很多有名的＿。",["园林","签证","熟语"],"Zài Sūzhōu, wǒmen cānguānle hěn duō yǒumíng de ___.","A Suzhou abbiamo visitato molti giardini famosi."],
+["晚上我们坐游船＿了西湖的美景。",["欣赏","拉","填"],"Wǎnshang wǒmen zuò yóuchuán ___le Xī Hú de měijǐng.","La sera, in battello, abbiamo ammirato il bel paesaggio del Lago dell'Ovest."],
+["十月一日去北京？那时候景点都＿！",["人山人海","走马看花","百闻不如一见"],"Shí yuè yī rì qù Běijīng? Nà shíhou jǐngdiǎn dōu ___!","Andare a Pechino il 1° ottobre? In quel periodo le attrazioni sono un mare di gente!"],
+["只有一天时间参观故宫，我们只能＿了。",["走马看花","人山人海","上有天堂"],"Zhǐ yǒu yì tiān shíjiān cānguān Gùgōng, wǒmen zhǐ néng ___ le.","Abbiamo un giorno solo per la Città Proibita: potremo vederla solo di corsa."],
+["来到北京，你不能不去＿长城。",["爬","坐","拉"],"Láidào Běijīng, nǐ bù néng bú qù ___ Chángchéng.","Se vieni a Pechino, non puoi non salire sulla Grande Muraglia."],
+["这里的咖啡很＿，跟意大利的一样好喝。",["地道","普通","传统"],"Zhèlǐ de kāfēi hěn ___, gēn Yìdàlì de yíyàng hǎohē.","Il caffè qui è autentico, buono come quello italiano."],
+["共享单车已经＿了我们生活的一部分。",["成为","离开","到达"],"Gòngxiǎng dānchē yǐjīng ___le wǒmen shēnghuó de yí bùfen.","Il bike-sharing è ormai diventato una parte della nostra vita."]
+];
+let ci=0,cFirst=true,cDone=false,cOk=0;
+const cFull=()=>CH[ci][0].replace("＿",CH[ci][1][0]);
+function drawC(){
+ const q=CH[ci];cFirst=true;cDone=false;resetTools($("cBox"));
+ $("cProg").textContent=`Frase ${ci+1} di ${CH.length}`;
+ $("cFr").innerHTML=q[0].replace("＿",'<span class="blank" id="cBl">　</span>');
+ $("cPy").textContent=q[2];$("cTr").textContent=q[3];$("cFb").textContent="";
+ $("cOpts").innerHTML="";
+ shuffle(q[1].map((t,i)=>({t,ok:i===0}))).forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o.t;
+  b.onclick=()=>{if(cDone||b.disabled)return;
+   if(o.ok){b.classList.add("ok");$("cBl").textContent=o.t;cDone=true;if(cFirst){addPt();cOk++}$("cFb").textContent=rnd(bravo);say(cFull())}
+   else{cFirst=false;b.classList.add("no","wrong");b.disabled=true;$("cFb").textContent="再试试！Riprova."}};
+  $("cOpts").appendChild(b)});
+}
+function nextC(){if(ci<CH.length-1){ci++;drawC()}else{$("cBox").style.display="none";$("cFine").style.display="block";
+ $("cFine").innerHTML=`🎉 <b>完成了！</b><br>Giuste al primo tentativo: <b>${cOk} su ${CH.length}</b><br><br><button class="btn" onclick="ci=0;cOk=0;$('cFine').style.display='none';$('cBox').style.display='block';drawC()">🔄 Ricomincia</button> <button class="btn light" onclick="document.querySelector('[data-s=s2]').click()">Vai all'esercizio 2 ➜</button>`}}
+drawC();
+
+/* ---------- 2. RICOSTRUISCI ---------- */
+const OR=[
+[[["对他来说，","Duì tā lái shuō,"],["最理想的","zuì lǐxiǎng de"],["度假地方","dùjià dìfang"],["是","shì"],["海边。","hǎibiān."]],"Per lui il posto ideale per le vacanze è il mare."],
+[[["这家饭馆的菜","Zhè jiā fànguǎn de cài"],["既","jì"],["便宜","piányi"],["又","yòu"],["地道。","dìdao."]],"I piatti di questo ristorante sono economici e anche autentici.",["这家饭馆的菜既地道又便宜"]],
+[[["我","Wǒ"],["从网上","cóng wǎng shang"],["下载了","xiàzàile"],["申请表格。","shēnqǐng biǎogé."]],"Ho scaricato da internet il modulo di richiesta."],
+[[["首先","Shǒuxiān"],["你","nǐ"],["应该","yīnggāi"],["去大使馆","qù dàshǐguǎn"],["办签证。","bàn qiānzhèng."]],"Per prima cosa devi andare all'ambasciata a fare il visto.",["你首先应该去大使馆办签证"]],
+[[["我们","Wǒmen"],["请了","qǐngle"],["一位导游","yí wèi dǎoyóu"],["带我们","dài wǒmen"],["参观故宫。","cānguān Gùgōng."]],"Abbiamo preso una guida che ci ha portato a visitare la Città Proibita."],
+[[["离开上海以后，","Líkāi Shànghǎi yǐhòu,"],["我们","wǒmen"],["去了","qùle"],["杭州。","Hángzhōu."]],"Dopo aver lasciato Shanghai siamo andati a Hangzhou.",["我们离开上海以后去了杭州"]],
+[[["在上海，","Zài Shànghǎi,"],["我们","wǒmen"],["乘坐了","chéngzuòle"],["世界上最快的","shìjiè shang zuì kuài de"],["火车。","huǒchē."]],"A Shanghai abbiamo preso il treno più veloce del mondo.",["我们在上海乘坐了世界上最快的火车"]],
+[[["黄金周期间，","Huángjīn zhōu qījiān,"],["火车票","huǒchēpiào"],["很不容易","hěn bù róngyì"],["买。","mǎi."]],"Durante la Settimana d'oro è molto difficile comprare i biglietti del treno.",["火车票黄金周期间很不容易买"]],
+[[["我","Wǒ"],["对","duì"],["平遥的传统民居","Píngyáo de chuántǒng mínjū"],["很","hěn"],["感兴趣。","gǎn xìngqù."]],"Mi interessano molto le case tradizionali di Pingyao."],
+[[["那次旅行","Nà cì lǚxíng"],["永远","yǒngyuǎn"],["留在了","liú zài le"],["我的心里。","wǒ de xīn li."]],"Quel viaggio è rimasto per sempre nel mio cuore."]
+];
+let oi=0,oDone=false,oFirst=true,oOk=0;
+const clean=s=>s.replace(/[，。,.\s]/g,"");
+function oPy(){const v=$("oBox").classList.toggle("showpy");$("oPyB").classList.toggle("on",v)}
+function pz(c){const s=document.createElement("span");s.className="pz";const py=c[1].replace(/[.,]$/,"").replace(/^./,x=>/^Huáng/.test(c[1])?x:x.toLowerCase());s.innerHTML=`${c[0].replace(/[，。]/g,"")}<small>${py}</small>`;s.dataset.t=c[0];
+ s.onclick=()=>{if(oDone)return;(s.parentNode.id==="oBank"?$("oLine"):$("oBank")).appendChild(s)};return s}
+function drawO(){const o=OR[oi];oDone=false;oFirst=true;
+ $("oBox").classList.remove("showpy");resetTools($("oBox"));
+ $("oProg").textContent=`Frase ${oi+1} di ${OR.length}`;$("oTr").textContent="🇮🇹 "+o[1];$("oFb").textContent="";
+ $("oLine").innerHTML="";$("oLine").classList.remove("ok");$("oBank").innerHTML="";
+ let p=shuffle(o[0]);while(p.map(x=>x[0]).join("")===o[0].map(x=>x[0]).join(""))p=shuffle(o[0]);
+ p.forEach(c=>$("oBank").appendChild(pz(c)))}
+function checkO(){if(oDone)return;const o=OR[oi];
+ if($("oBank").children.length){$("oFb").textContent="Mancano ancora dei pezzi!";return}
+ const t=clean([...$("oLine").children].map(x=>x.dataset.t).join(""));
+ if(t===clean(o[0].map(x=>x[0]).join(""))||(o[2]||[]).map(clean).includes(t)){oDone=true;$("oLine").classList.add("ok");if(oFirst){addPt();oOk++}$("oFb").textContent=rnd(bravo);say(t)}
+ else{oFirst=false;$("oLine").classList.add("wrong");setTimeout(()=>$("oLine").classList.remove("wrong"),400);$("oFb").textContent="Non ancora… riprova!"}}
+function solO(){const o=OR[oi];oDone=true;oFirst=false;$("oBank").innerHTML="";$("oLine").innerHTML="";o[0].forEach(c=>$("oLine").appendChild(pz(c)));$("oLine").classList.add("ok");$("oFb").textContent="Ecco la soluzione: leggila ad alta voce!";say(o[0].map(x=>x[0]).join(""))}
+function nextO(){if(oi<OR.length-1){oi++;drawO()}else{$("oBox").style.display="none";$("oFine").style.display="block";
+ $("oFine").innerHTML=`🎉 <b>完成了！</b><br>Frasi giuste al primo tentativo: <b>${oOk} su ${OR.length}</b><br><br><button class="btn" onclick="oi=0;oOk=0;$('oFine').style.display='none';$('oBox').style.display='block';drawO()">🔄 Ricomincia</button>`}}
+drawO();
+</script>
+<script src="../voce.js"></script>
+</body>
+</html>
